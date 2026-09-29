@@ -39,8 +39,18 @@
   },
   "dependencies": {
     "@nuxt/ui": "^4.0.0",
+    "@vueuse/core": "^14.4.0",
     "defu": "^6.1.4",
+    "embla-carousel-auto-height": "^8.6.0",
+    "embla-carousel-auto-scroll": "^8.6.0",
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-class-names": "^8.6.0",
+    "embla-carousel-fade": "^8.6.0",
+    "embla-carousel-vue": "^8.6.0",
+    "embla-carousel-wheel-gestures": "^8.1.0",
     "motion-v": "^1.7.2",
+    "reka-ui": "2.10.4",
+    "shiki": "^3.0.0",
     "simplex-noise": "^4.0.3"
   },
   "devDependencies": {
