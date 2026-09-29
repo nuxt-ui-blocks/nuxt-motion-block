@@ -1,13 +1,13 @@
 ---
 title: Mask Container
-description: Interactive mask reveal effect that follows cursor movement with customizable size.
+description: Dims its content behind a configurable overlay driven by a show prop.
 navigation:
   icon: i-lucide-eye
 ---
 
 # Mask Container
 
-The MaskContainer component creates an interactive mask reveal effect that follows cursor movement. It features customizable mask sizes and smooth transitions between states.
+The MaskContainer component dims the content you put in it behind a configurable overlay. You control the overlay with the `show` prop, so the masked content stays mounted and interactive state is preserved across toggles.
 
 ## Usage
 
@@ -21,56 +21,80 @@ label: Preview
 #code
 ```vue
 <template>
-  <MMaskContainer
-    :size="5"
-    :reveal-size="800"
-    class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800"
-  >
-    <template #content>
-      <span class="text-black dark:text-white">Hover to Reveal</span>
-    </template>
+  <div class="space-y-4">
+    <UButton
+      :label="show ? 'Hide mask' : 'Show mask'"
+      @click="show = !show"
+    />
 
-    <template #reveal>
-      <div class="text-center">
-        <h2 class="text-5xl font-bold text-black dark:text-white mb-6">
+    <MMaskContainer
+      :show="show"
+      class="relative rounded-lg border bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800"
+    >
+      <div class="flex h-96 flex-col items-center justify-center gap-4 p-8 text-center">
+        <h2 class="text-3xl font-bold text-black dark:text-white">
           Mask Reveal Effect
         </h2>
-        <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-          Move your cursor around to reveal the content behind the mask. 
-          The mask follows your cursor position with a smooth animation.
+        <p class="max-w-2xl text-lg text-slate-600 dark:text-slate-300">
+          Drive the mask with the <code>show</code> prop.
         </p>
       </div>
-    </template>
-  </MMaskContainer>
+
+      <template #mask>
+        <div class="text-center">
+          <h2 class="text-5xl font-bold text-white mb-6">
+            Masked
+          </h2>
+          <p class="text-lg text-white/80">
+            The content behind is dimmed.
+          </p>
+        </div>
+      </template>
+    </MMaskContainer>
+  </div>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const show = ref(true)
+</script>
 ```
 ::
 
 ## Props
 
 ::field-group
-  ::field{name="size" type="number" default="10"}
-  Initial size of the mask in pixels.
+  ::field{name="show" type="boolean" default="false"}
+  Whether the mask is covering the content. When `false` the overlay fades out and stops intercepting pointer events.
   ::
-  
-  ::field{name="revealSize" type="number" default="600"}
-  Size of the mask when revealed in pixels.
+
+  ::field{name="color" type="string" default="'rgba(0,0,0,0.5)'"}
+  Background colour of the overlay. Any CSS colour value.
   ::
-  
+
+  ::field{name="icon" type="string" default="''"}
+  Icon name rendered in the default mask content. Requires a `label` to be visible.
+  ::
+
+  ::field{name="label" type="string" default="''"}
+  Text rendered under the `icon` in the default mask content.
+  ::
+
   ::field{name="class" type="string" default="''"}
-  CSS classes to apply to the container.
+  CSS classes to apply to the container. Give it a height, since the overlay is positioned against the container.
   ::
 ::
 
 ## Slots
 
 ::field-group
-  ::field{name="content" type="slot"}
-  Content to display behind the mask.
+  ::field{name="default" type="slot"}
+  The content to mask. Always mounted, regardless of `show`.
   ::
-  
-  ::field{name="reveal" type="slot"}
-  Content to reveal through the mask.
+
+  ::field{name="mask" type="slot"}
+  Content rendered inside the overlay. Falls back to the `icon` and `label` props.
   ::
 ::
 
@@ -88,27 +112,21 @@ label: Preview
 #code
 ```vue
 <template>
-  <MMaskContainer class="bg-gray-100 dark:bg-gray-900">
-    <template #content>
-      <span class="text-black dark:text-white">Mask Container</span>
-    </template>
-
-    <template #reveal>
-      <div class="text-center p-8">
-        <h3 class="text-2xl font-bold text-black dark:text-white mb-2">
-          Basic Mask
-        </h3>
-        <p class="text-gray-600 dark:text-gray-400">
-          Move your cursor to reveal content
-        </p>
-      </div>
-    </template>
+  <MMaskContainer
+    :show="show"
+    icon="i-lucide-eye"
+    label="Interactive Reveal"
+    class="relative h-64 rounded-xl border"
+  >
+    <div class="flex h-full items-center justify-center">
+      <span class="text-3xl font-bold text-primary">Masked Content</span>
+    </div>
   </MMaskContainer>
 </template>
 ```
 ::
 
-### Custom Mask Size
+### Custom Mask Colour
 
 ::code-preview
 ---
@@ -121,24 +139,17 @@ label: Preview
 ```vue
 <template>
   <MMaskContainer
-    :size="20"
-    :reveal-size="1000"
-    class="bg-gradient-to-br from-purple-50 to-pink-100 dark:from-slate-900 dark:to-slate-800 min-h-96"
+    :show="show"
+    color="rgba(76, 29, 149, 0.75)"
+    icon="i-lucide-lock"
+    label="Members Only"
+    class="relative min-h-96 rounded-lg"
   >
-    <template #content>
-      <span class="text-black dark:text-white">Large Reveal Area</span>
-    </template>
-
-    <template #reveal>
-      <div class="text-center p-8">
-        <h3 class="text-3xl font-bold text-black dark:text-white mb-4">
-          Custom Mask Size
-        </h3>
-        <p class="text-lg text-slate-600 dark:text-slate-300 max-w-md mx-auto">
-          Larger initial mask with bigger reveal area for more content visibility
-        </p>
-      </div>
-    </template>
+    <div class="flex min-h-96 items-center justify-center p-8 text-center">
+      <h3 class="text-3xl font-bold text-black dark:text-white">
+        Custom Mask Colour
+      </h3>
+    </div>
   </MMaskContainer>
 </template>
 ```

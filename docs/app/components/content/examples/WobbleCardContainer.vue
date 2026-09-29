@@ -1,10 +1,10 @@
 <template>
-  <MWobbleCard container-class="bg-primary w-full h-full">
+  <MWobbleCard class="bg-primary w-full h-48">
     <template #header>
       <h3 class="text-lg font-semibold">
-        Custom Container
+        Custom Styling
       </h3>
     </template>
-    <p>This card has a custom container class.</p>
+    <p>This card applies a custom class to the card surface.</p>
   </MWobbleCard>
 </template>

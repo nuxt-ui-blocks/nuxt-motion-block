@@ -1,81 +1,67 @@
 <template>
   <motion.div
-    ref="containerRef"
-    :class="['relative h-screen', props.class]"
-    :animate="{
-      backgroundColor: isHovered ? 'rgb(15 23 42)' : 'rgb(255 255 255)',
-    }"
-    :transition="{
-      backgroundColor: { duration: 0.3 },
-    }"
-    @mousemove="updateMousePosition"
+    class="relative overflow-hidden"
+    :class="props.class"
+    :initial="false"
   >
+    <slot />
+
     <motion.div
-      class="absolute flex h-full w-full items-center justify-center bg-black text-6xl [mask-image:url(/mask.svg)] [mask-repeat:no-repeat] [mask-size:40px] dark:bg-white"
+      class="absolute inset-0 z-10 flex items-center justify-center"
+      :style="maskStyle"
+      :initial="{ opacity: 1, scale: 1 }"
       :animate="{
-        maskPosition: `${mousePosition.x - maskSize / 2}px ${mousePosition.y - maskSize / 2}px`,
-        maskSize: `${maskSize}px`,
+        opacity: show ? 0 : 1,
+        scale: show ? 1.05 : 1,
+        pointerEvents: show ? 'none' : 'auto',
       }"
       :transition="{
-        maskSize: { duration: 0.3, ease: 'easeInOut' },
-        maskPosition: { duration: 0.15, ease: 'linear' },
+        duration: 0.3,
+        ease: 'easeInOut',
       }"
     >
-      <div class="absolute inset-0 z-0 h-full w-full bg-black opacity-50 dark:bg-white" />
-      <div
-        class="relative z-20 mx-auto max-w-4xl text-center text-4xl font-bold cursor-pointer"
-        @mouseenter="isHovered = true"
-        @mouseleave="isHovered = false"
-      >
-        <slot name="content" />
-      </div>
+      <slot name="mask">
+        <div class="text-center p-6">
+          <div
+            v-if="icon"
+            class="mb-4"
+          >
+            <UIcon
+              :name="icon"
+              class="w-12 h-12 mx-auto text-white"
+            />
+          </div>
+          <p
+            v-if="label"
+            class="text-white text-lg font-medium"
+          >
+            {{ label }}
+          </p>
+        </div>
+      </slot>
     </motion.div>
-
-    <div class="flex h-full w-full items-center justify-center">
-      <slot name="reveal" />
-    </div>
   </motion.div>
 </template>
 
 <script setup lang="ts">
-import { motion } from 'motion-v'
-import { computed, onMounted, ref } from 'vue'
+import { computed } from 'vue'
 
-interface MaskContainerProps {
-  size?: number
-  revealSize?: number
+interface Props {
+  show?: boolean
+  color?: string
+  icon?: string
+  label?: string
   class?: string
 }
 
-const props = withDefaults(defineProps<MaskContainerProps>(), {
-  size: 10,
-  revealSize: 600,
+const props = withDefaults(defineProps<Props>(), {
+  show: false,
+  color: 'rgba(0,0,0,0.5)',
+  icon: '',
+  label: '',
 })
 
-const containerRef = ref<HTMLElement | null>(null)
-const isHovered = ref(false)
-const mousePosition = ref({ x: 0, y: 0 })
-
-const maskSize = computed(() => isHovered.value ? props.revealSize : props.size)
-
-const updateMousePosition = (e: MouseEvent) => {
-  if (!containerRef.value) return
-
-  const rect = containerRef.value.$el.getBoundingClientRect()
-  mousePosition.value = {
-    x: e.clientX - rect.left,
-    y: e.clientY - rect.top,
-  }
-}
-
-// Initialize mouse position to center
-onMounted(() => {
-  if (containerRef.value) {
-    const rect = containerRef.value.$el.getBoundingClientRect()
-    mousePosition.value = {
-      x: rect.width / 2,
-      y: rect.height / 2,
-    }
-  }
-})
+const maskStyle = computed(() => ({
+  backgroundColor: props.color,
+}))
 </script>

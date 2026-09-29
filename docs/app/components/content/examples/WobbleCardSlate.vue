@@ -1,5 +1,5 @@
 <template>
-  <MWobbleCard container-class="bg-slate-800 w-full h-full">
+  <MWobbleCard class="bg-slate-800 w-full h-48">
     <template #header>
       <h3 class="text-lg font-semibold text-white">
         Slate Background

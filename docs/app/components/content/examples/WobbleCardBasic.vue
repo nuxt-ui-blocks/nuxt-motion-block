@@ -11,7 +11,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <MWobbleCard container-class="h-64">
+        <MWobbleCard class="h-64">
           <template #header>
             <div class="flex items-center">
               <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center mr-3">
@@ -38,7 +38,7 @@
           </template>
         </MWobbleCard>
 
-        <MWobbleCard container-class="h-64">
+        <MWobbleCard class="h-64">
           <template #header>
             <div class="flex items-center">
               <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center mr-3">
@@ -65,7 +65,7 @@
           </template>
         </MWobbleCard>
 
-        <MWobbleCard container-class="h-64">
+        <MWobbleCard class="h-64">
           <template #header>
             <div class="flex items-center">
               <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center mr-3">

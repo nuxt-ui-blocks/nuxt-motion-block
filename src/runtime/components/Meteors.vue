@@ -1,66 +1,72 @@
 <template>
-  <motion.div
-    :initial="{ opacity: 0 }"
-    :animate="{ opacity: 1 }"
-    :transition="{ duration: 0.5 }"
-    class="relative w-full h-full"
+  <div
+    class="relative h-full w-full overflow-hidden"
+    :class="props.class"
   >
-    <span
-      v-for="(el, idx) in meteors"
-      :key="`meteor-${idx}`"
-      :class="[
-        'animate-meteor-effect absolute h-0.5 w-0.5 rotate-[45deg] rounded-[9999px] bg-slate-500 shadow-[0_0_0_1px_#ffffff10]',
-        'before:absolute before:top-1/2 before:h-[1px] before:w-[50px] before:-translate-y-[50%] before:transform before:bg-gradient-to-r before:from-[#64748b] before:to-transparent before:content-[\'\']',
-        props.class,
-      ]"
-      :style="getMeteorStyle(idx)"
+    <div
+      v-for="meteor in meteors"
+      :key="meteor.id"
+      class="meteor"
+      :style="{
+        left: `${meteor.x}%`,
+        animationDuration: `${meteor.duration}s`,
+        animationDelay: `${meteor.delay}s`,
+      }"
     />
-  </motion.div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { motion } from 'motion-v'
+import { computed } from 'vue'
 
 interface Props {
-  number?: number
+  count?: number
+  speed?: number
   class?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  number: 20,
+  count: 10,
+  speed: 1,
 })
 
-const meteors = Array.from({ length: props.number }, () => true)
-
-const getMeteorStyle = (idx: number) => {
-  const meteorCount = props.number
-  const position = idx * (800 / meteorCount) - 400
-
-  return {
-    top: '-40px',
-    left: `${position}px`,
-    animationDelay: `${Math.random() * 5}s`,
-    animationDuration: `${Math.floor(Math.random() * (10 - 5) + 5)}s`,
-  }
-}
+const meteors = computed(() =>
+  Array.from({ length: props.count }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    duration: (2 / props.speed) + Math.random() * 2,
+    delay: Math.random() * 5,
+  })),
+)
 </script>
 
 <style scoped>
-@keyframes meteor {
+.meteor {
+  position: absolute;
+  top: -20px;
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.8), rgba(255,255,255,0));
+  transform: rotate(215deg);
+  animation: meteor-fall linear infinite;
+  opacity: 0;
+}
+
+@keyframes meteor-fall {
   0% {
+    opacity: 0;
     transform: rotate(215deg) translateX(0);
+  }
+  10% {
     opacity: 1;
   }
   70% {
     opacity: 1;
   }
   100% {
-    transform: rotate(215deg) translateX(-500px);
     opacity: 0;
+    transform: rotate(215deg) translateX(-300px);
+    top: 100%;
   }
-}
-
-.animate-meteor-effect {
-  animation: meteor 5s linear infinite;
 }
 </style>
