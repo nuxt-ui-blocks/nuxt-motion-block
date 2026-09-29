@@ -1,0 +1,5 @@
+export { default as MAccordion } from './Accordion.vue'
+export { default as MAccordionItem } from './AccordionItem.vue'
+export { default as MAccordionTrigger } from './AccordionTrigger.vue'
+export { default as MAccordionContent } from './AccordionContent.vue'
+export { injectAccordion, provideAccordion, injectAccordionItem, provideAccordionItem } from './useAccordion'
