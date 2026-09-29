@@ -61,3 +61,8 @@ Temporary Items
 .qodo
 #.examples
 .examples
+
+# Scratch artifacts
+playground/.screenshots/
+playground/*.cjs
+playground/package-lock.json
