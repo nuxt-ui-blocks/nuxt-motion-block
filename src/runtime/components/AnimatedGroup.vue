@@ -2,6 +2,7 @@
 import { defineComponent, h, useSlots, computed, type PropType, type VNode, Comment, Text, Fragment } from 'vue'
 import { Motion } from 'motion-v'
 import type { Variant } from 'motion-v'
+import { useAccessibility } from '../composables/useAccessibility'
 
 // Defines a type for a variants object that holds multiple animation states.
 type Variants = Record<string, Variant>
@@ -17,6 +18,19 @@ export type PresetType
     | 'bounce'
     | 'rotate'
     | 'swing'
+
+/**
+ * Where the stagger radiates from.
+ *
+ * `start` keeps the original container-level `staggerChildren` transition, so
+ * existing demos behave exactly as before. `center` and `edges` cannot be
+ * expressed with a container transition — a container stagger is linear by
+ * definition — so those modes hand each child its own positive delay instead.
+ */
+export type StaggerFrom
+  = | 'start'
+    | 'center'
+    | 'edges'
 
 export default defineComponent({
   name: 'AnimatedGroup',
@@ -47,6 +61,10 @@ export default defineComponent({
     staggerDirection: {
       type: Number,
       default: 1,
+    },
+    staggerFrom: {
+      type: String as PropType<StaggerFrom>,
+      default: 'start',
     },
   },
   setup(props) {
@@ -153,7 +171,8 @@ export default defineComponent({
           ...(baseVariants.visible || {}),
           transition: {
             ...baseTransition,
-            staggerChildren: props.staggerChildren,
+            staggerChildren:
+              props.staggerFrom === 'start' ? props.staggerChildren : 0,
             staggerDirection: props.staggerDirection,
           },
         },
@@ -168,6 +187,52 @@ export default defineComponent({
       const preset = props.preset ? presetVariants[props.preset] : undefined
       return preset ? addDefaultVariants(preset) : defaultItemVariants
     })
+
+    const { prefersReducedMotion } = useAccessibility()
+
+    // Reduced motion lands the group directly on its final state rather than
+    // animating into it, so the content is still present, just static.
+    const initialState = computed(() =>
+      prefersReducedMotion.value ? props.animate : props.initial,
+    )
+
+    const usesPerChildStagger = computed(
+      () => props.staggerFrom !== 'start' && !prefersReducedMotion.value,
+    )
+
+    /**
+     * Delay for one child in a non-linear stagger mode.
+     *
+     * Distances are measured from the origin and multiplied by
+     * `staggerChildren`, which keeps every delay positive — a negative delay
+     * gets clamped against `duration` in motion-v, so symmetric pairs would
+     * stop landing together. The ripple still reads as one wave travelling out
+     * from the middle, or in from both edges at once.
+     */
+    function childDelay(index: number, count: number): number {
+      const step = Math.max(props.staggerChildren, 0)
+      if (step === 0 || count <= 1) {
+        return 0
+      }
+      if (props.staggerFrom === 'center') {
+        return Math.abs(index - (count - 1) / 2) * step
+      }
+      // 'edges' leads from both ends, so the centre is the last to arrive.
+      return Math.min(index, count - 1 - index) * step
+    }
+
+    /** A copy of the item variants carrying this child's delay. */
+    function withDelay(variants: Variants, delay: number): Variants {
+      const visible
+        = variants.visible && typeof variants.visible === 'object'
+          ? (variants.visible as Record<string, unknown>)
+          : {}
+      const transition = (visible.transition as object | undefined) ?? {}
+      return {
+        ...variants,
+        visible: { ...visible, transition: { ...transition, delay } },
+      }
+    }
 
     // Helper function to flatten children and extract only the actual items
     function flattenChildren(nodes: VNode[]): VNode[] {
@@ -216,13 +281,17 @@ export default defineComponent({
       const children = flattenChildren(slots.default ? slots.default() : [])
 
       // Create motion children with proper stagger handling
-      const motionChildren = children.map((child) => {
+      const motionChildren = children.map((child, index) => {
+        const variants = usesPerChildStagger.value
+          ? withDelay(itemVariants.value, childDelay(index, children.length))
+          : itemVariants.value
+
         return h(
           // @ts-ignore
           Motion,
           {
             as: props.asChild,
-            variants: itemVariants.value,
+            variants,
           },
           () => [child],
         )
@@ -234,7 +303,7 @@ export default defineComponent({
         {
           as: props.as,
           class: props.class,
-          initial: props.initial,
+          initial: initialState.value,
           animate: props.animate,
           variants: containerVariants.value,
         },
