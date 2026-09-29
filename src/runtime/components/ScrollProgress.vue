@@ -6,14 +6,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, withDefaults, defineProps, type Ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { Motion, useScroll, useSpring, useMotionValueEvent } from 'motion-v'
+import type { MaybeComputedElementRef } from '@vueuse/core'
 import type { SpringOptions } from 'motion-v'
 
 const props = withDefaults(defineProps<{
   class?: string
   springOptions?: SpringOptions
-  containerRef?: Ref<HTMLElement | null>
+  /**
+   * Scrollable ancestor to track instead of the window. Pass a getter —
+   * `:container-ref="() => panelRef"` — not the element: a plain binding is
+   * unwrapped by the template and captured as `null` during `setup`, after
+   * which nothing re-reads it and `useScroll` falls back to the window.
+   */
+  containerRef?: MaybeComputedElementRef
 }>(), {
   springOptions: undefined,
   containerRef: undefined,
@@ -27,6 +34,9 @@ const DEFAULT_SPRING_OPTIONS: SpringOptions = {
 
 // Use scroll tracking
 const { scrollYProgress } = useScroll({
+  // Straight through, never `props.containerRef?.value`: `useScroll` resolves the
+  // getter via `unrefElement` inside its own `flush: 'post'` effect, so
+  // unwrapping here would strip the reactive source.
   container: props.containerRef,
 })
 
