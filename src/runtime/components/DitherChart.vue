@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 
-interface Props {
+export interface Props {
   animate?: boolean
   caption?: string
   data: DitherChartSeries[]

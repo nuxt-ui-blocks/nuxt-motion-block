@@ -190,7 +190,7 @@ const customVariants = {
 }
 
 const customTransition = {
-  type: 'spring',
+  type: 'spring' as const,
   bounce: 0.2,
   duration: 0.5,
 }

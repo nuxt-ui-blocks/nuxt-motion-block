@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import { defineShortcuts } from '#imports'
 import { motion, AnimatePresence } from 'motion-v'
 
 interface PinnedListItem {

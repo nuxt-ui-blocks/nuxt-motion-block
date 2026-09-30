@@ -17,7 +17,7 @@ export function useThrottle<T extends (...args: any[]) => any>(
     const currentTime = Date.now()
 
     if (currentTime - lastExecTime > delay) {
-      func.apply(this, args)
+      func(...args)
       lastExecTime = currentTime
     }
     else {
@@ -26,7 +26,7 @@ export function useThrottle<T extends (...args: any[]) => any>(
       }
 
       timeoutId = setTimeout(() => {
-        func.apply(this, args)
+        func(...args)
         lastExecTime = Date.now()
       }, delay - (currentTime - lastExecTime))
     }

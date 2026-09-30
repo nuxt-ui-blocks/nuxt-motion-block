@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
 import { computed, ref, watch } from 'vue'
+import type { PinInputProps } from '#ui/components/PinInput.vue'
 
 const props = withDefaults(
   defineProps<{
@@ -13,9 +14,9 @@ const props = withDefaults(
     required?: boolean
     autofocus?: boolean
     autofocusDelay?: number
-    variant?: string
-    size?: string
-    color?: string
+    variant?: PinInputProps['variant']
+    size?: PinInputProps['size']
+    color?: PinInputProps['color']
   }>(),
   {
     length: 6,

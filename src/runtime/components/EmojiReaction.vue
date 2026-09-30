@@ -158,23 +158,6 @@ interface BurstParticle {
   y: number
 }
 
-interface Props {
-  /** When false (default), reacting to one item clears any other active reaction. */
-  allowMultiple?: boolean
-  /** Emits a particle burst when a reaction is selected. */
-  burst?: boolean
-  burstCount?: number
-  class?: string
-  /** Renders the picker popover already open. Useful for docs and screenshots. */
-  defaultPickerOpen?: boolean
-  /** Extra emojis offered by the picker popover. */
-  pickerEmojis?: string[]
-  reactions: EmojiReactionItem[]
-  /** Shows a hover/focus popover with extra reaction options. */
-  showPicker?: boolean
-  size?: EmojiReactionSize
-}
-
 const BURST_ANGLE_JITTER_DEG = 22
 const BURST_DISTANCE_MIN_PX = 22
 const BURST_DISTANCE_RANGE_PX = 18
@@ -635,5 +618,22 @@ export type EmojiReactionItem = {
   id: string
   label: string
   reacted?: boolean
+}
+
+export interface Props {
+  /** When false (default), reacting to one item clears any other active reaction. */
+  allowMultiple?: boolean
+  /** Emits a particle burst when a reaction is selected. */
+  burst?: boolean
+  burstCount?: number
+  class?: string
+  /** Renders the picker popover already open. Useful for docs and screenshots. */
+  defaultPickerOpen?: boolean
+  /** Extra emojis offered by the picker popover. */
+  pickerEmojis?: string[]
+  reactions: EmojiReactionItem[]
+  /** Shows a hover/focus popover with extra reaction options. */
+  showPicker?: boolean
+  size?: EmojiReactionSize
 }
 </script>

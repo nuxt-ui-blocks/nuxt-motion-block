@@ -45,6 +45,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { motion } from 'motion-v'
 
 interface Props {
   show?: boolean

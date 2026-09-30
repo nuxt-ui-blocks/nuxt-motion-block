@@ -3,7 +3,7 @@
     aria-label="Loading"
     role="status"
     class="inline-grid grid-cols-3"
-    :class="$attrs.class"
+    :class="attrClass"
     :style="{
       filter: blur ? `blur(${blur}px)` : undefined,
       gap: `${gap}px`,
@@ -34,7 +34,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, useAttrs } from 'vue'
+import type { HTMLAttributes } from 'vue'
 import { motion } from 'motion-v'
 
 type GridMatrix = [
@@ -92,6 +93,9 @@ const props = withDefaults(defineProps<Props>(), {
   speed: 'normal',
   static: false,
 })
+
+const attrs = useAttrs()
+const attrClass = computed<HTMLAttributes['class']>(() => attrs.class)
 
 const PATTERNS: Record<PresetPattern, GridMatrix> = {
   'solo-center': [[0, 0, 0], [0, 1, 0], [0, 0, 0]],

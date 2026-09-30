@@ -1,9 +1,9 @@
-import type { useMotionValue, type SpringOptions } from 'motion-v'
+import type { MotionValue, SpringOptions } from 'motion-v'
 
 import { inject, provide } from 'vue'
 
 export interface DockContext {
-  mouseX: ReturnType<typeof useMotionValue>
+  mouseX: MotionValue<number>
   spring: SpringOptions
   magnification: number
   distance: number

@@ -31,13 +31,14 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { motion } from 'motion-v'
+import type { ButtonProps } from '#ui/components/Button.vue'
 
 const props = withDefaults(defineProps<{
-  color?: string
+  color?: ButtonProps['color']
   dotColor?: string
   label?: string
-  size?: string
-  variant?: string
+  size?: ButtonProps['size']
+  variant?: ButtonProps['variant']
 }>(), {
   color: 'primary',
   dotColor: 'primary',

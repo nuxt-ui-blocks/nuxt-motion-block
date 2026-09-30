@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    :aria-expanded="String(isExpanded)"
+    :aria-expanded="isExpanded"
     :data-expanded="isExpanded ? '' : undefined"
     :data-closed="!isExpanded ? '' : undefined"
     :class="rootClasses"

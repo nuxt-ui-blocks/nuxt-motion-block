@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick, type ComponentPublicInstance } from 'vue'
 import { useMotionValue, useSpring, AnimatePresence, Motion } from 'motion-v'
 
 // Types
@@ -59,7 +59,7 @@ const props = withDefaults(defineProps<CursorProps>(), {
 })
 
 // Refs
-const cursorRef = ref<InstanceType<typeof Motion> | null>(null)
+const cursorRef = ref<ComponentPublicInstance | HTMLElement | null>(null)
 const isVisible = ref(!props.attachToParent)
 const parentElement = ref<HTMLElement | null>(null)
 const isInsideParent = ref(false)
@@ -87,11 +87,11 @@ const getDomElement = () => {
   // Try to get the DOM element from the Motion component
   // This might vary depending on the motion-v version
   if ('$el' in cursorRef.value) {
-    return (cursorRef.value as any).$el as HTMLElement
+    return cursorRef.value.$el as HTMLElement
   }
 
   // Fallback: try to get the first child element
-  if (cursorRef.value && 'firstElementChild' in cursorRef.value) {
+  if ('firstElementChild' in cursorRef.value) {
     return cursorRef.value.firstElementChild as HTMLElement
   }
 

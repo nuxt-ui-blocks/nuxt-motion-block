@@ -4,7 +4,12 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
 
 defineOptions({ inheritAttrs: false })
 
-type AnimatedListItem = { id?: string | number, label?: string, [key: string]: any } | string | number
+/**
+ * Declared here and exported from here: a second `<script>` block would land in
+ * the same module scope and redeclare it, which is a parse error rather than a
+ * shadow.
+ */
+export type AnimatedListItem = { id?: string | number, label?: string, [key: string]: any } | string | number
 
 interface Props {
   items?: AnimatedListItem[]
@@ -204,7 +209,3 @@ defineExpose({ add, remove, clear })
     </AnimatePresence>
   </ul>
 </template>
-
-<script lang="ts">
-export type AnimatedListItem = { id?: string | number, label?: string, [key: string]: any } | string | number
-</script>

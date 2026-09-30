@@ -1,11 +1,17 @@
 import { defineNuxtModule, addPlugin, createResolver, addComponentsDir } from '@nuxt/kit'
+import type { NuxtModule } from '@nuxt/schema'
 
 // Module options TypeScript interface definition
 export interface ModuleOptions {
   prefix: string
 }
 
-export default defineNuxtModule<ModuleOptions>({
+/**
+ * Annotated rather than left to inference: the inferred type drags `NuxtOptions`
+ * in from `@nuxt/schema` by way of the pnpm store path, and the declaration
+ * bundler cannot name that, so the build fails on a portable-type error.
+ */
+const module: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'nuxt-motion-block',
     configKey: 'motionBlock',
@@ -19,24 +25,16 @@ export default defineNuxtModule<ModuleOptions>({
   },
   moduleDependencies: {
     '@nuxt/ui': {
-      version: '>=4.0.0',
+      version: '>=4.11.2',
       optional: false,
     },
     'motion-v': {
-      version: '>=1.7.2',
+      version: '>=2.4.4',
       optional: false,
     },
   },
   setup(options, nuxt) {
     const resolver = createResolver(import.meta.url)
-    const publicDir = resolver.resolve('./runtime/public')
-
-    // Register the public directory to be served as static assets
-    nuxt.options.nitro.publicAssets = nuxt.options.nitro.publicAssets || []
-    nuxt.options.nitro.publicAssets.push({
-      dir: publicDir,
-      baseURL: '/',
-    })
 
     // Add all components from the runtime/components directory
     addComponentsDir({
@@ -57,3 +55,5 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.css.push(resolver.resolve('./runtime/tailwind.css'))
   },
 })
+
+export default module

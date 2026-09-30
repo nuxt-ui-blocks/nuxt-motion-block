@@ -2,7 +2,7 @@
   <div
     role="button"
     tabindex="0"
-    :aria-expanded="String(open)"
+    :aria-expanded="open"
     :class="rootClasses"
     @click="toggle"
     @keydown.enter="toggle"

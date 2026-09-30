@@ -64,6 +64,7 @@
 import { ref, computed, watch } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
 import type { Variant, Transition } from 'motion-v'
+import type { PopoverProps } from '#ui/components/Popover.vue'
 
 interface Variants {
   initial?: Variant
@@ -73,7 +74,7 @@ interface Variants {
 
 interface Props {
   mode?: 'click' | 'hover'
-  content?: object
+  content?: PopoverProps['content']
   arrow?: boolean | object
   portal?: string | boolean | HTMLElement
   dismissible?: boolean
@@ -198,7 +199,7 @@ const contentClasses = computed(() => {
 
 const contentProps = computed(() => {
   return {
-    side: 'bottom',
+    side: 'bottom' as const,
     sideOffset: 8,
     collisionPadding: 8,
     ...props.content,

@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UCardProps } from '#ui/types'
+import type { CardProps } from '#ui/components/Card.vue'
 
 interface Card {
   title: string
@@ -60,7 +60,7 @@ interface Props {
   card: Card
   index: number
   hovered: number | null
-  ui?: UCardProps['ui']
+  ui?: CardProps['ui']
 }
 
 defineProps<Props>()

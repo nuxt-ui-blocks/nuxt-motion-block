@@ -24,10 +24,12 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useColorMode } from '#imports'
 import { motion, AnimatePresence } from 'motion-v'
+import type { ButtonProps } from '#ui/components/Button.vue'
 
 interface Props {
-  size?: string
+  size?: ButtonProps['size']
 }
 
 withDefaults(defineProps<Props>(), {

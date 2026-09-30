@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { defineComponent, h, ref, onMounted, nextTick, watch, computed } from 'vue'
-import { Motion, motionValue, useSpring, useTransform } from 'motion-v'
+import { motion, motionValue, useSpring, useTransform } from 'motion-v'
+import type { MotionValue, SpringOptions } from 'motion-v'
 
 /** Spring config (same feel as original) */
 const TRANSITION = {
-  type: 'spring',
   stiffness: 280,
   damping: 18,
   mass: 0.3,
-}
+} satisfies SpringOptions
 
 type Props = {
   value: number
@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
 const DigitGlyph = defineComponent({
   name: 'DigitGlyph',
   props: {
-    mv: { type: Object as () => ReturnType<typeof motionValue>, required: true }, // animated digit (0..9)
+    mv: { type: Object as () => MotionValue<number>, required: true }, // animated digit (0..9)
     number: { type: Number, required: true }, // this glyph (0..9)
     height: { type: Number, required: true }, // measured per-place height
   },
@@ -37,20 +37,19 @@ const DigitGlyph = defineComponent({
     watch(() => p.height, nv => hMV.set(nv))
 
     /** y depends on BOTH: animated digit value AND measured height */
-    const y = useTransform([p.mv, hMV], ([latest, h]) => {
-      if (!h) return 0
+    const y = useTransform<number, number>([p.mv, hMV], ([latest, height]) => {
+      if (!height) return 0
       const placeValue = latest % 10
       const offset = (10 + p.number - placeValue) % 10
-      let memo = offset * h
-      if (offset > 5) memo -= 10 * h
+      let memo = offset * height
+      if (offset > 5) memo -= 10 * height
       return memo
     })
 
     return () =>
       h(
-        Motion,
+        motion.span,
         {
-          as: 'span',
           style: { y },
           transition: TRANSITION,
           class: 'absolute inset-0 flex items-center justify-center',

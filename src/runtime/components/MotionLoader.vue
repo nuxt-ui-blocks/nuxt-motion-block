@@ -285,7 +285,7 @@ import { computed } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { motion } from 'motion-v'
 
-type MotionLoaderVariant
+export type MotionLoaderVariant
   = | 'orbit'
     | 'newton-cradle'
     | 'pendulum'

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { KineticTypeScrollAlign } from '../../../src/runtime/components/KineticTypeScroll.vue'
 
 useHead({
   link: [
@@ -10,7 +11,7 @@ useHead({
   ],
 })
 
-const align = ref<'left' | 'center' | 'right'>('center')
+const align = ref<KineticTypeScrollAlign>('center')
 const stagger = ref(0.12)
 
 const phrase = [
@@ -71,7 +72,7 @@ const short = ['Scroll', 'to', 'animate']
           </p>
           <div class="flex gap-2">
             <UButton
-              v-for="option in (['left', 'center', 'right'] as const)"
+              v-for="option in (['start', 'center', 'end'] as const)"
               :key="option"
               :label="option"
               :color="align === option ? 'primary' : 'neutral'"
@@ -141,7 +142,7 @@ const short = ['Scroll', 'to', 'animate']
         style="font-optical-sizing: auto"
       >
         <MKineticTypeScroll
-          align="left"
+          align="start"
           class="text-3xl leading-snug font-medium"
           :words="['Every', 'word', 'here', 'has', 'its', 'own', 'window']"
         />

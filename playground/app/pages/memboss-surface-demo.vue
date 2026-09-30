@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const variant = ref<'emboss' | 'deboss' | 'plaster' | 'metal-stamp'>('emboss')
+type EmbossVariant = 'emboss' | 'deboss' | 'plaster' | 'metal-stamp'
+
+const variant = ref<EmbossVariant>('emboss')
 const depth = ref(2)
 const softness = ref(0.5)
 const lightAngle = ref(135)
 const interactive = ref(true)
 
-const variants = [
+const variants: Array<{ label: string, value: EmbossVariant }> = [
   { label: 'Emboss', value: 'emboss' },
   { label: 'Deboss', value: 'deboss' },
   { label: 'Plaster', value: 'plaster' },
   { label: 'Metal stamp', value: 'metal-stamp' },
-] as const
+]
 
 // The reference passes no `color` at all, so the surfaces sit on the background
 // token and blend into the page — the relief reads purely from the shadows. Give

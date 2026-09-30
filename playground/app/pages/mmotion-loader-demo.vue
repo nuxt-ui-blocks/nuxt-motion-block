@@ -143,7 +143,10 @@
 </template>
 
 <script setup lang="ts">
-const allVariants = [
+import { ref } from 'vue'
+import type { MotionLoaderVariant } from '../../../src/runtime/components/MotionLoader.vue'
+
+const allVariants: MotionLoaderVariant[] = [
   'orbit',
   'newton-cradle',
   'pendulum',
@@ -156,9 +159,9 @@ const allVariants = [
   'wave-bars',
   'breathing-glow',
   'dot-ring',
-] as const
+]
 
-const activeVariant = ref(allVariants[0])
+const activeVariant = ref<MotionLoaderVariant>('orbit')
 
 const sizePresets = [
   { label: 'sm (24)', size: 24 },

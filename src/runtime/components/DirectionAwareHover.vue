@@ -49,9 +49,9 @@
                 Description of the project
               </p>
               <UButton
-                color="white"
                 variant="solid"
                 size="sm"
+                class="bg-white text-black hover:bg-white/90"
               >
                 View Project
               </UButton>

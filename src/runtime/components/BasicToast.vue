@@ -46,7 +46,7 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
 
-interface Props {
+export interface Props {
   class?: string
   duration?: number
   isVisible?: boolean

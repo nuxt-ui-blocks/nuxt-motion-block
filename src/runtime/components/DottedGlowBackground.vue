@@ -21,6 +21,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch, type StyleValue } from 'vue'
+import { useColorMode } from '#imports'
 
 interface DottedGlowBackgroundProps {
   class?: string

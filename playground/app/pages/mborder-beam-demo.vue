@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import type { BorderBeamRadius } from '../../../src/runtime/components/BorderBeam.vue'
 
 const beams = ref(1)
 const duration = ref(6)
@@ -10,9 +11,11 @@ const reverse = ref(false)
 const active = ref(true)
 const radius = ref<string>('16')
 
-const numericRadius = computed(() => {
+// The input is free text, but the component only understands a pixel number or
+// the `squircle` keyword, so anything unparseable falls back to its default.
+const numericRadius = computed<BorderBeamRadius>(() => {
   const parsed = Number.parseFloat(radius.value)
-  return Number.isNaN(parsed) ? radius.value : parsed
+  return Number.isNaN(parsed) ? 16 : parsed
 })
 
 const beamCounts = [1, 2, 3, 4]

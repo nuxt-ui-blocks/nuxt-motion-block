@@ -79,10 +79,10 @@
           </p>
         </div>
 
-        <!-- Multiple Mode -->
+        <!-- Item-driven -->
         <div>
           <h2 class="text-lg font-semibold mb-4">
-            Multiple Mode (multiple items can be open)
+            Item-driven (value bound to the data)
           </h2>
           <MAccordion
             :expanded-value="multipleValue"
@@ -174,7 +174,7 @@
 
 <script setup lang="ts">
 const singleValue = ref<string | number | null>('item-1')
-const multipleValue = ref<string | number | null>(['color-1'])
+const multipleValue = ref<string | number | null>('color-1')
 
 const multipleItems = [
   {

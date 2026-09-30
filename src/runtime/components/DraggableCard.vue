@@ -55,13 +55,13 @@
 
 <script setup lang="ts">
 import { motion, useMotionValue, useSpring, useTransform, animate, useVelocity, useAnimationControls } from 'motion-v'
-import type { UCardProps } from '#ui/types'
+import type { CardProps } from '#ui/components/Card.vue'
 import { onMounted, onUnmounted, ref } from 'vue'
 
 interface Props {
   class?: string
   containerClass?: string
-  ui?: UCardProps['ui']
+  ui?: CardProps['ui']
 }
 
 const props = withDefaults(defineProps<Props>(), {

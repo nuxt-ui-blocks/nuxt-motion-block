@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
-import { onMounted } from 'vue'
+import { computed, onMounted, ref, unref, watch } from 'vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -32,7 +32,7 @@ const isMounted = ref(false)
 const shouldReduce = computed(() => isMounted.value && Boolean(unref(reduce)))
 
 const stepperItems = computed(() =>
-  props.items.map(item => ({ ...item, title: item.title ?? item.label })),
+  props.items.map((item, i) => ({ ...item, value: i, title: item.title ?? item.label })),
 )
 
 const currentIndex = computed(() => {
@@ -41,8 +41,9 @@ const currentIndex = computed(() => {
   return Number.isFinite(value) ? Math.min(Math.max(Math.trunc(value), 0), last) : 0
 })
 
-function handleUpdate(value: number) {
-  emit('update:modelValue', value)
+function handleUpdate(value: string | number | undefined) {
+  const index = Number(value)
+  emit('update:modelValue', Number.isFinite(index) ? index : props.modelValue)
 }
 
 watch(
@@ -67,7 +68,7 @@ onMounted(() => {
       :default-value="props.defaultValue"
       :ui="props.ui"
       v-bind="$attrs"
-      @update:model-value="(v: number) => handleUpdate(v)"
+      @update:model-value="(v: string | number | undefined) => handleUpdate(v)"
     >
       <template #content="{ item }">
         <AnimatePresence mode="wait">

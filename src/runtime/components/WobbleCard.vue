@@ -29,8 +29,7 @@
 </template>
 
 <script setup lang="ts">
-// @ts-ignore
-import type { UCardProps } from '#ui/types'
+import type { CardProps } from '#ui/components/Card.vue'
 import { ref, computed } from 'vue'
 import { motion } from 'motion-v'
 
@@ -38,7 +37,7 @@ defineOptions({ inheritAttrs: false })
 
 interface Props {
   class?: string
-  ui?: UCardProps['ui']
+  ui?: CardProps['ui']
   intensity?: number
   speed?: number
 }

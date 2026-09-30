@@ -2,6 +2,7 @@ import type { MotionValue } from 'motion-v'
 import { motionValue } from 'motion-v'
 import type { MaybeRefOrGetter, Ref } from 'vue'
 import { onBeforeUnmount, ref, shallowRef, toValue, watch } from 'vue'
+import type { AiChatStatus } from '../types/ai'
 
 /**
  * The six states an AI surface can be in.
@@ -168,16 +169,49 @@ export const AI_ACCENT_COLORS: Record<'success' | 'danger', string> = {
 }
 
 /**
+ * The accent token, when the state carries one.
+ *
+ * A class-safe counterpart to `getAIStateAccentColor`, for the places that
+ * theme through a class rather than an inline colour — most of them, since
+ * components that forward unknown attributes to an inner element cannot take a
+ * style binding for the box itself.
+ */
+export const getAIStateAccent = (state: AIState | undefined): AIStateAccent =>
+  AI_STATE_MOTION[state ?? 'idle']?.accent ?? null
+
+/**
  * The state needs a colour, and that colour is the caller's own unless the
  * state carries an accent of its own. Most states deliberately do not.
  */
 export const getAIStateAccentColor = (state: AIState | undefined, fallback: string): string => {
-  const accent = AI_STATE_MOTION[state ?? 'idle']?.accent
+  const accent = getAIStateAccent(state)
   return accent ? AI_ACCENT_COLORS[accent] : fallback
 }
 
 export const getAIStateMotion = (state: AIState | undefined): AIStateMotion =>
   AI_STATE_MOTION[state ?? 'idle'] ?? AI_STATE_MOTION.idle
+
+/**
+ * A state, expressed the way a submit button talks.
+ *
+ * `ChatPromptSubmit` only understands four of these, and it draws a very
+ * different button for each — so the translation has to collapse a six-state
+ * machine onto four answers. The two collapses are the interesting ones:
+ * `listening` still accepts input, so it stays `ready`, and `done` has returned
+ * to a resting surface, so it does too. Only `thinking` and `streaming` are
+ * genuinely "a turn is in flight".
+ */
+const AI_STATE_CHAT_STATUS: Record<AIState, AiChatStatus> = {
+  idle: 'ready',
+  listening: 'ready',
+  thinking: 'submitted',
+  streaming: 'streaming',
+  done: 'ready',
+  error: 'error',
+}
+
+export const getAIChatStatus = (state: AIState | undefined): AiChatStatus =>
+  AI_STATE_CHAT_STATUS[state ?? 'idle'] ?? 'ready'
 
 /**
  * A live amplitude, 0–1.

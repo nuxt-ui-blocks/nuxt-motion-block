@@ -1,32 +1,18 @@
 {
+  "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "baseUrl": ".",
-    "types": [
-      "nuxt",
-      "node"
-    ],
-    "paths": {
-      "#imports": [
-        ".nuxt/imports"
-      ],
-      "#app": [
-        "node_modules/nuxt/dist/app"
-      ]
-    }
+    "noUncheckedIndexedAccess": false
   },
+  "include": [
+    "src/**/*",
+    "test/**/*",
+    "*.ts"
+  ],
   "exclude": [
     "dist",
     "node_modules",
     "playground",
-    ".nuxt",
-    ".output"
+    ".output",
+    "docs"
   ]
 }

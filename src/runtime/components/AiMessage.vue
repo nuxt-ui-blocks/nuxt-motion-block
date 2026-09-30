@@ -1,238 +1,208 @@
-<template>
-  <div :class="rootClass">
-    <div
-      v-if="slots.avatar"
-      class="mt-0.5 shrink-0"
-    >
-      <slot name="avatar" />
-    </div>
-
-    <div :class="columnClass">
-      <!--
-        `bubble` is opt-out on purpose: an assistant turn that already carries
-        its own surfaces (a reasoning trace, a tool call, a diff) should not be
-        wrapped again, because a bubble around a stack of cards reads as a box
-        inside a box.
-      -->
-      <div :class="bubbleClass">
-        <slot />
-      </div>
-
-      <!--
-        The action row is always mounted and only faded. Mounting it on hover
-        changed this row's height, which made every message below it jump as the
-        pointer travelled down a thread.
-      -->
-      <div :class="actionRowClass">
-        <span
-          v-if="props.timestamp"
-          class="text-muted text-xs tabular-nums"
-        >
-          {{ props.timestamp }}
-        </span>
-
-        <button
-          v-for="(action, index) in actions"
-          :key="action.key"
-          :aria-label="action.label"
-          :aria-pressed="action.active"
-          :class="[
-            'ai-message-action cursor-pointer rounded-lg p-1.5',
-            isUser ? 'ai-message-action-user' : 'ai-message-action-agent',
-            action.active
-              ? 'text-default'
-              : 'text-muted hover:bg-muted hover:text-default',
-          ]"
-          :style="{ transitionDelay: `${index * ACTION_STAGGER_MS}ms` }"
-          type="button"
-          @click="action.onClick"
-        >
-          <!-- The key flip is what re-runs the pop keyframe on every copy. -->
-          <UIcon
-            :key="action.key === 'copy' && hasCopied ? 'copied' : 'idle'"
-            :class="action.key === 'copy' && hasCopied ? 'ai-message-pop' : undefined"
-            :name="action.icon"
-            aria-hidden="true"
-            size="14"
-          />
-        </button>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, useSlots } from 'vue'
 import { useClipboard } from '@vueuse/core'
+import { computed, onBeforeUnmount, ref } from 'vue'
+import type { AiMessageAction, AiMessagePart, AiMessageRole } from '../types/ai'
+import { getAiMessageText } from '../utils/ai-chat'
 
-export type AiMessageVote = 'up' | 'down'
-
-export interface AiMessageProps {
+interface Props {
+  /** Stable identity for the turn. Required, because React keys messages on it. */
+  id: string
+  role: AiMessageRole
   /**
-   * `from`, not `role` — `role` is an ARIA attribute, and overloading it would
-   * put a presentational value into the accessibility tree.
+   * The turn's content, split into typed pieces.
+   *
+   * A plain structural array rather than the AI SDK's `UIMessage['parts']`:
+   * `ai` is only an optional peer of Nuxt UI, so depending on its types here
+   * would make every consumer of this module install the SDK just to typecheck.
    */
-  from?: 'user' | 'assistant'
+  parts: AiMessagePart[]
+  metadata?: unknown
+  side?: 'left' | 'right'
+  variant?: 'solid' | 'outline' | 'soft' | 'subtle' | 'naked'
+  color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
+  /**
+   * Wrap the turn in a bubble. Defaults to `true`.
+   *
+   * Opt out when the turn already carries its own surfaces — a reasoning trace, a
+   * tool call, a diff. A bubble around a stack of cards reads as a box inside a
+   * box, and the double border is what makes chat UIs feel heavy.
+   */
   bubble?: boolean
+  /** Offer a copy action when the turn has text. Defaults to `true`. */
+  copyable?: boolean
+  /** Extra actions, rendered after the copy button. */
+  actions?: AiMessageAction[]
   class?: string
-  /** Omit to hide the copy action entirely. */
-  copyText?: string
-  onRetry?: () => void
-  onVote?: (vote: AiMessageVote) => void
-  timestamp?: string
 }
 
-const props = withDefaults(defineProps<AiMessageProps>(), {
+const props = withDefaults(defineProps<Props>(), {
   bubble: true,
   class: '',
-  copyText: '',
-  from: 'assistant',
-  timestamp: '',
+  copyable: true,
+  metadata: undefined,
+  side: undefined,
+  variant: undefined,
+  color: undefined,
+  actions: () => [],
 })
+
+defineSlots<{
+  actions?: (props: { actions: AiMessageAction[] }) => unknown
+  body?: (props: { id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
+  content?: (props: { content?: string, id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
+  files?: (props: { id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
+  header?: (props: { id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
+  leading?: (props: { id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
+}>()
 
 const COPIED_RESET_MS = 1600
 const ACTION_STAGGER_MS = 30
 
-interface Action {
-  active: boolean
-  icon: string
-  key: string
-  label: string
-  onClick: () => void
-}
+const isUser = computed(() => props.role === 'user')
 
-const slots = useSlots()
-const isUser = computed(() => props.from === 'user')
-const hasCopied = ref(false)
-const vote = ref<AiMessageVote | null>(null)
+const side = computed(() => props.side ?? (isUser.value ? 'right' : 'left'))
 
+/**
+ * A user turn is the one thing that reads as a bubble by default — solid
+ * inverted, the way a sent message reads everywhere. An assistant turn stays soft
+ * so it does not fight the cards it usually contains.
+ */
+const variant = computed(() => props.variant ?? (props.bubble ? (isUser.value ? 'solid' : 'soft') : 'naked'))
+
+const text = computed(() => getAiMessageText(props))
 const { copy } = useClipboard()
+const hasCopied = ref(false)
+let copyTimer: ReturnType<typeof setTimeout> | undefined
 
-let copyTimer: ReturnType<typeof setTimeout> | null = null
-onBeforeUnmount(() => {
-  if (copyTimer) {
-    clearTimeout(copyTimer)
-  }
-})
+onBeforeUnmount(() => clearTimeout(copyTimer))
 
 const copyMessage = async () => {
   try {
-    await copy(props.copyText)
+    await copy(text.value)
   }
   catch {
-    // A blocked or denied clipboard is not worth interrupting a conversation
-    // over, so the acknowledgement is simply withheld.
+    // A refused clipboard is not worth interrupting the reader over.
     return
   }
+
   hasCopied.value = true
-  if (copyTimer) {
-    clearTimeout(copyTimer)
-  }
+  clearTimeout(copyTimer)
   copyTimer = setTimeout(() => {
     hasCopied.value = false
   }, COPIED_RESET_MS)
 }
 
-const actions = computed<Action[]>(() => {
-  const list: Action[] = []
+const actions = computed<AiMessageAction[]>(() => {
+  if (!props.copyable || !text.value) return props.actions
 
-  if (props.copyText) {
-    list.push({
-      active: hasCopied.value,
-      icon: hasCopied.value ? 'i-lucide-check' : 'i-lucide-copy',
+  return [
+    {
       key: 'copy',
-      label: 'Copy message',
+      icon: hasCopied.value ? 'i-lucide-check' : 'i-lucide-copy',
+      label: hasCopied.value ? 'copied' : 'copy message',
       onClick: copyMessage,
-    })
-  }
-
-  if (props.onRetry) {
-    list.push({
-      active: false,
-      icon: 'i-lucide-rotate-ccw',
-      key: 'retry',
-      label: 'Retry',
-      onClick: () => props.onRetry?.(),
-    })
-  }
-
-  // Voting on your own message makes no sense.
-  if (props.onVote && !isUser.value) {
-    list.push({
-      active: vote.value === 'up',
-      icon: 'i-lucide-thumbs-up',
-      key: 'up',
-      label: 'Good response',
-      onClick: () => {
-        vote.value = 'up'
-        props.onVote?.('up')
-      },
-    })
-    list.push({
-      active: vote.value === 'down',
-      icon: 'i-lucide-thumbs-down',
-      key: 'down',
-      label: 'Bad response',
-      onClick: () => {
-        vote.value = 'down'
-        props.onVote?.('down')
-      },
-    })
-  }
-
-  return list
+    },
+    ...props.actions,
+  ]
 })
-
-const rootClass = computed(() => [
-  'ai-message-root flex w-full gap-2.5',
-  isUser.value ? 'flex-row-reverse' : 'flex-row',
-  props.class,
-])
-
-const columnClass = computed(() => [
-  'flex min-w-0 flex-col gap-1',
-  isUser.value && 'items-end',
-])
-
-const bubbleClass = computed(() => {
-  const classes = ['w-fit max-w-prose text-sm leading-relaxed']
-  if (props.bubble) {
-    classes.push('rounded-2xl px-3.5 py-2.5')
-    classes.push(isUser.value
-      ? 'rounded-br-md bg-foreground text-background'
-      : 'rounded-bl-md bg-muted text-default')
-  }
-  else {
-    classes.push('text-default')
-  }
-  return classes
-})
-
-const actionRowClass = computed(() => [
-  'flex items-center gap-1 px-1',
-  isUser.value ? 'flex-row-reverse' : 'flex-row',
-])
 </script>
+
+<template>
+  <UChatMessage
+    :id="props.id"
+    class="ai-message-root"
+    :role="props.role"
+    :parts="props.parts"
+    :metadata="props.metadata"
+    :side="side"
+    :variant="variant"
+    :color="props.color"
+    :class="props.class"
+  >
+    <template #header="slotProps">
+      <slot
+        name="header"
+        v-bind="slotProps"
+      />
+    </template>
+
+    <template #leading="slotProps">
+      <slot
+        name="leading"
+        v-bind="slotProps"
+      />
+    </template>
+
+    <template #files="slotProps">
+      <slot
+        name="files"
+        v-bind="slotProps"
+      />
+    </template>
+
+    <template #body="slotProps">
+      <slot
+        name="body"
+        v-bind="slotProps"
+      />
+    </template>
+
+    <template #content="slotProps">
+      <slot
+        name="content"
+        v-bind="slotProps"
+      />
+    </template>
+
+    <template #actions="slotProps">
+      <slot
+        name="actions"
+        v-bind="slotProps"
+      />
+
+      <button
+        v-for="(action, index) in actions"
+        :key="action.key"
+        type="button"
+        :aria-label="action.label"
+        :aria-pressed="action.active === true"
+        class="ai-message-action cursor-pointer rounded-lg p-1.5 text-muted hover:bg-muted hover:text-default aria-pressed:bg-muted aria-pressed:text-default"
+        :class="[isUser ? 'ai-message-action-user' : 'ai-message-action-agent', action.active ? 'text-default' : '']"
+        :style="{ transitionDelay: `${index * ACTION_STAGGER_MS}ms` }"
+        @click="action.onClick()"
+      >
+        <UIcon
+          :key="action.key === 'copy' && hasCopied ? 'copied' : 'idle'"
+          :name="action.icon"
+          class="ai-message-pop"
+          aria-hidden="true"
+          size="14"
+        />
+      </button>
+    </template>
+  </UChatMessage>
+</template>
 
 <style scoped>
 /*
- * The whole reveal is CSS. The row is always in the document, so there is no
- * state to keep in sync, no listeners to leak, and no way for the row to be
- * stranded half-revealed. The selector is scoped to `.ai-message-root` rather
- * than a Tailwind `group`, so an unrelated `group` ancestor cannot reveal every
- * row on the page at once.
+ * Nuxt UI already fades the whole action row in on hover. This owns the second
+ * half of the reveal: each button arrives on its own, sliding in from the side it
+ * belongs to, one frame apart. One property per owner — the row owns opacity,
+ * these own transform — so the two never fight over the same fade.
  */
-.ai-message-action {
-  opacity: 0;
-  transform: translateX(var(--ai-message-slide)) scale(0.9);
-  transition:
-    opacity 200ms cubic-bezier(0.23, 1, 0.32, 1),
-    transform 200ms cubic-bezier(0.23, 1, 0.32, 1),
-    background-color 150ms ease,
-    color 150ms ease;
+@media (hover: hover) {
+  .ai-message-action {
+    transform: translateX(var(--ai-message-slide)) scale(0.9);
+    transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1), background-color 150ms ease-out, color 150ms ease-out;
+  }
+
+  .ai-message-root:hover .ai-message-action,
+  .ai-message-root:focus-within .ai-message-action {
+    transform: translateX(0) scale(1);
+  }
 }
 
-/* The actions slide out of the edge the bubble is anchored to. */
+/* Buttons slide in from the side of the message they belong to. */
 .ai-message-action-agent {
   --ai-message-slide: -6px;
 }
@@ -241,27 +211,36 @@ const actionRowClass = computed(() => [
   --ai-message-slide: 6px;
 }
 
-.ai-message-root:hover .ai-message-action,
-.ai-message-root:focus-within .ai-message-action {
+/*
+ * The row is hover-only by design, which would hide it from anyone tabbing
+ * through the page. Focus counts as intent.
+ */
+.ai-message-root:focus-within :deep([data-slot='actions']) {
   opacity: 1;
-  transform: translateX(0) scale(1);
 }
 
 .ai-message-pop {
-  animation: ai-message-pop 250ms cubic-bezier(0.23, 1, 0.32, 1);
+  animation: ai-message-pop 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes ai-message-pop {
-  0% { scale: 1; }
-  45% { scale: 1.25; }
-  100% { scale: 1; }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .ai-message-action {
-    transition-duration: 0ms;
-    transition-delay: 0ms !important;
     transform: none;
+    transition: none;
   }
 
   .ai-message-pop {

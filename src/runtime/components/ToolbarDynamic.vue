@@ -32,7 +32,12 @@ const toolbarWidth = computed(() => (isOpen.value ? props.width : props.collapse
 
 function toggle() {
   isOpen.value = !isOpen.value
-  emit(isOpen.value ? 'open' : 'close')
+  if (isOpen.value) {
+    emit('open')
+  }
+  else {
+    emit('close')
+  }
 }
 
 function handleClickOutside(event: MouseEvent) {

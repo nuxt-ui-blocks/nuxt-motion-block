@@ -21,7 +21,7 @@
           <div class="mx-auto w-full max-w-3xl px-4 py-8">
             <MCoverflowCarousel
               autoplay
-              autoplay-delay="4000"
+              :autoplay-delay="4000"
               :items="items"
               loop
             />

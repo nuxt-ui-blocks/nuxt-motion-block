@@ -149,6 +149,7 @@
 
 <script setup lang="ts">
 import { nextTick, ref } from 'vue'
+import type { ButtonProps } from '#ui/components/Button.vue'
 
 type ToastType = 'success' | 'error' | 'info' | 'warning'
 
@@ -170,7 +171,7 @@ const SEEDS: Record<string, Omit<DemoToast, 'key' | 'visible'>> = {
   sticky: { message: 'Sticky toast — no timer, close me with the X button.', type: 'warning', duration: 0 },
 }
 
-const typeButtons: Array<{ key: string, type: string, color: string }> = [
+const typeButtons: Array<{ key: string, type: string, color: ButtonProps['color'] }> = [
   { key: 'success', type: 'Success', color: 'success' },
   { key: 'error', type: 'Error', color: 'error' },
   { key: 'warning', type: 'Warning', color: 'warning' },

@@ -4,12 +4,10 @@
       <span class="font-bold text-lg">{{ title }}</span>
     </template>
 
-    <template #nav>
-      <UNavigationMenu
-        :items="desktopItems"
-        class="hidden lg:flex"
-      />
-    </template>
+    <UNavigationMenu
+      :items="desktopItems"
+      class="hidden lg:flex"
+    />
 
     <template #body>
       <div class="lg:hidden p-4">

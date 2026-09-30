@@ -1,23 +1,26 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const shape = ref<'blob' | 'arch' | 'diamond' | 'wave'>('blob')
-const animate = ref<'none' | 'morph' | 'scroll' | 'hover'>('morph')
+type ClipShape = 'blob' | 'arch' | 'diamond' | 'wave'
+type ClipAnimate = 'none' | 'morph' | 'scroll' | 'hover'
+
+const shape = ref<ClipShape>('blob')
+const animate = ref<ClipAnimate>('morph')
 const duration = ref(0.5)
 
-const shapes = [
+const shapes: Array<{ label: string, value: ClipShape }> = [
   { label: 'Blob', value: 'blob' },
   { label: 'Arch', value: 'arch' },
   { label: 'Diamond', value: 'diamond' },
   { label: 'Wave', value: 'wave' },
-] as const
+]
 
-const modes = [
+const modes: Array<{ label: string, value: ClipAnimate }> = [
   { label: 'None', value: 'none' },
   { label: 'Morph loop', value: 'morph' },
   { label: 'Scroll', value: 'scroll' },
   { label: 'Hover', value: 'hover' },
-] as const
+]
 
 const swatches = [
   'var(--color-brand)',

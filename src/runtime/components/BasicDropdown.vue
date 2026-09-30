@@ -106,13 +106,6 @@ const DROPDOWN_OFFSET = 4
 // of at `USelect`'s `value`/`label` defaults. Nothing has to be remapped in either direction.
 const VALUE_KEY = 'id'
 
-interface Props {
-  class?: string
-  items: DropdownItem[]
-  label: string
-  modelValue?: DropdownItem | null
-}
-
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<Props>(), {
@@ -220,6 +213,13 @@ export interface DropdownItem {
   id: string | number
   icon?: string
   label: string
+}
+
+export interface Props {
+  class?: string
+  items: DropdownItem[]
+  label: string
+  modelValue?: DropdownItem | null
 }
 </script>
 

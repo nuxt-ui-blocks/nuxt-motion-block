@@ -45,15 +45,14 @@
 </template>
 
 <script setup lang="ts">
-// @ts-ignore
-import type { UCardProps } from '#ui/types'
+import type { CardProps } from '#ui/components/Card.vue'
 import { motion, AnimatePresence } from 'motion-v'
 
 defineOptions({ inheritAttrs: false })
 
 interface Props {
   class?: string
-  ui?: UCardProps['ui']
+  ui?: CardProps['ui']
   flipped?: boolean
   flipDuration?: number
 }

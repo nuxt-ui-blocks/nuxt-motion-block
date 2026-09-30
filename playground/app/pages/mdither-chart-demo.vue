@@ -266,7 +266,7 @@
 </template>
 
 <script setup lang="ts">
-import type { DitherChartSeries } from '~/components/DitherChart.vue'
+import type { DitherChartSeries } from '../../../src/runtime/components/DitherChart.vue'
 
 const lineData: DitherChartSeries[] = [
   {

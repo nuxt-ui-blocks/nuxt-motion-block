@@ -90,8 +90,7 @@
 import { ref, computed, watch } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
 import type { Variant, Transition } from 'motion-v'
-// @ts-ignore
-import type { ButtonProps } from '#ui/types'
+import type { ButtonProps } from '#ui/components/Button.vue'
 
 interface Variants {
   initial?: Variant
