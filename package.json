@@ -10,6 +10,10 @@
       "types": "./dist/types.d.mts",
       "import": "./dist/module.mjs",
       "style": "./dist/runtime/tailwind.css"
+    },
+    "./types": {
+      "types": "./dist/runtime/types/index.d.ts",
+      "import": "./dist/runtime/types/index.js"
     }
   },
   "main": "./dist/module.mjs",
@@ -17,6 +21,9 @@
     "*": {
       ".": [
         "./dist/types.d.mts"
+      ],
+      "types": [
+        "./dist/runtime/types/index.d.ts"
       ]
     }
   },
