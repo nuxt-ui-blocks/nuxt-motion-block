@@ -75,7 +75,14 @@ const status = computed(() => getAIChatStatus(props.state))
  * A user turn is the one thing that reads as a bubble by default. Assistant turns
  * stay soft rather than solid, so a turn that carries its own surfaces — a
  * reasoning trace, a tool call — is not boxed twice.
+ *
+ * The defaults are `as const` on purpose: an object literal in a computed widens
+ * `side`, `variant` and `color` to `string`, which no longer matches the union
+ * `ChatMessage` expects.
  */
-const user = computed(() => ({ side: 'right', variant: 'solid', color: 'neutral', ...props.user }))
-const assistant = computed(() => ({ side: 'left', variant: 'soft', ...props.assistant }))
+const USER_DEFAULTS = { side: 'right', variant: 'solid', color: 'neutral' } as const
+const ASSISTANT_DEFAULTS = { side: 'left', variant: 'soft' } as const
+
+const user = computed(() => ({ ...USER_DEFAULTS, ...props.user }))
+const assistant = computed(() => ({ ...ASSISTANT_DEFAULTS, ...props.assistant }))
 </script>

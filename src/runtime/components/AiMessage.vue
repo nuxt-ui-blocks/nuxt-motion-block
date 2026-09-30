@@ -70,6 +70,23 @@ const side = computed(() => props.side ?? (isUser.value ? 'right' : 'left'))
 const variant = computed(() => props.variant ?? (props.bubble ? (isUser.value ? 'solid' : 'soft') : 'naked'))
 
 const text = computed(() => getAiMessageText(props))
+
+/**
+ * What the message-level slots receive.
+ *
+ * Forwarding the upstream slot payload would tie this component's public slot
+ * types to `ChatMessage`, whose `files` payload collapses into an index
+ * signature — `Omit<UIMessage, 'parts'>` over a type that has one. The props
+ * already carry everything the slots are declared to receive, so hand them that
+ * instead and let the contract stay this module's.
+ */
+const messageProps = computed(() => ({
+  id: props.id,
+  role: props.role,
+  parts: props.parts,
+  metadata: props.metadata,
+}))
+
 const { copy } = useClipboard()
 const hasCopied = ref(false)
 let copyTimer: ReturnType<typeof setTimeout> | undefined
@@ -119,38 +136,38 @@ const actions = computed<AiMessageAction[]>(() => {
     :color="props.color"
     :class="props.class"
   >
-    <template #header="slotProps">
+    <template #header>
       <slot
         name="header"
-        v-bind="slotProps"
+        v-bind="messageProps"
       />
     </template>
 
-    <template #leading="slotProps">
+    <template #leading>
       <slot
         name="leading"
-        v-bind="slotProps"
+        v-bind="messageProps"
       />
     </template>
 
-    <template #files="slotProps">
+    <template #files>
       <slot
         name="files"
-        v-bind="slotProps"
+        v-bind="messageProps"
       />
     </template>
 
-    <template #body="slotProps">
+    <template #body>
       <slot
         name="body"
-        v-bind="slotProps"
+        v-bind="messageProps"
       />
     </template>
 
-    <template #content="slotProps">
+    <template #content>
       <slot
         name="content"
-        v-bind="slotProps"
+        v-bind="{ ...messageProps, content: text }"
       />
     </template>
 
