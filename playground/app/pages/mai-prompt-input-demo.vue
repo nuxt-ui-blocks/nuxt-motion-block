@@ -139,7 +139,8 @@
 </template>
 
 <script setup lang="ts">
-import type { AIState, AIPromptAttachment } from '../../../src/runtime/composables/useAiState'
+import type { AIState } from '../../../src/runtime/composables/useAiState'
+import type { AIPromptAttachment } from '../../../src/runtime/components/AiPromptInput.vue'
 
 const states: AIState[] = ['idle', 'listening', 'thinking', 'streaming', 'done', 'error']
 

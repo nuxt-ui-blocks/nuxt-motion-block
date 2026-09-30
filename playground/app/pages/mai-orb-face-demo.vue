@@ -89,7 +89,7 @@
             @click="source = 'simulated'"
           />
           <UButton
-            :label="microphone.status === 'active' ? 'stop microphone' : 'microphone'"
+            :label="microphoneActive ? 'stop microphone' : 'microphone'"
             :variant="source === 'microphone' ? 'solid' : 'outline'"
             data-testid="source-microphone"
             @click="toggleMicrophone"
@@ -220,13 +220,22 @@ import { useMotionValue, useTransform } from 'motion-v'
 import type { AIState } from '../../../src/runtime/composables/useAiState'
 import { getAIStateMotion, useAudioAmplitude, useSimulatedAmplitude } from '../../../src/runtime/composables/useAiState'
 import { AI_ORB_FACE_EXPRESSIONS } from '../../../src/runtime/components/AiOrbFace.vue'
+import type { AiOrbFaceExpressionName } from '../../../src/runtime/components/AiOrbFace.vue'
+
+/**
+ * `'state'` is a sentinel, not an expression: it means "let the AI state pick the
+ * face". Keeping it in the same ref as the real expressions is what makes the
+ * preview honest, but it must never reach the `expression` prop, whose type has
+ * no room for it.
+ */
+type ExpressionChoice = AiOrbFaceExpressionName | 'state'
 
 const states: AIState[] = ['idle', 'listening', 'thinking', 'streaming', 'done', 'error']
-const expressionNames = Object.keys(AI_ORB_FACE_EXPRESSIONS)
+const expressionNames = Object.keys(AI_ORB_FACE_EXPRESSIONS) as AiOrbFaceExpressionName[]
 
 const state = ref<AIState>('idle')
 const gaze = ref(true)
-const expression = ref<string>('state')
+const expression = ref<ExpressionChoice>('state')
 const source = ref<'simulated' | 'microphone'>('simulated')
 const gainAmount = ref(0.8)
 
@@ -239,11 +248,20 @@ watchEffect(() => gain.set(gainAmount.value))
 const stateMotion = computed(() => getAIStateMotion(state.value))
 
 /**
+ * `useAudioAmplitude` hands back a ref, and a ref nested inside a plain object
+ * is not unwrapped by the template. Reading it through a computed keeps both the
+ * button label and the toggle below looking at the same derived boolean.
+ */
+const microphoneActive = computed(() => microphone.status.value === 'active')
+
+/**
  * Amplitude is a motion value, so the slider and the face read the same signal
  * without the face re-rendering on every audio frame. `useTransform` is what
  * keeps that true: it subscribes to every input and writes a single value.
+ * The generics are load-bearing: with three inputs the callback parameters
+ * cannot be inferred, so they arrive as `unknown`.
  */
-const amplitude = useTransform(
+const amplitude = useTransform<number, number>(
   [simulated, microphone.amplitude, gain],
   ([sim, mic, g]) => (source.value === 'microphone' ? mic : sim) * g,
 )
@@ -251,7 +269,7 @@ const amplitude = useTransform(
 onBeforeUnmount(() => microphone.stop())
 
 async function toggleMicrophone() {
-  if (source.value === 'microphone' && microphone.status === 'active') {
+  if (source.value === 'microphone' && microphoneActive.value) {
     microphone.stop()
     source.value = 'simulated'
     return
