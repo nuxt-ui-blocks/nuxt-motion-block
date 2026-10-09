@@ -47,7 +47,7 @@
             Automatic page view simulation
           </div>
         </div>
-        <UToggle
+        <USwitch
           v-model="isAutoUpdating"
           @update:model-value="toggleAutoUpdate"
         />

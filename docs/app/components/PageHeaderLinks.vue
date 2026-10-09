@@ -4,7 +4,7 @@ import { useClipboard } from '@vueuse/core'
 const route = useRoute()
 const toast = useToast()
 const { copy, copied } = useClipboard()
-const site = useSiteConfig()
+const site = useAppConfig().site
 const isCopying = ref(false)
 
 const mdPath = computed(() => `${site.url}/raw${route.path}.md`)

@@ -70,7 +70,7 @@
             Automatic styling
           </div>
         </div>
-        <UToggle
+        <USwitch
           v-model="liveUpdates"
           @update:model-value="toggleLiveUpdates"
         />

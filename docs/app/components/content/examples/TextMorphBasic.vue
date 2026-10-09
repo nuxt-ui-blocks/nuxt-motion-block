@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
 // Categories that rotate
 const categories = ['Modern', 'Innovative', 'Beautiful', 'Interactive']
@@ -78,15 +78,25 @@ const currentFeature = computed(() => features[featureIndex.value])
 const currentStat = computed(() => stats[statIndex.value])
 
 // Rotate through values periodically
-setInterval(() => {
-  categoryIndex.value = (categoryIndex.value + 1) % categories.length
-}, 2000)
+let categoryTimer, featureTimer, statTimer
 
-setInterval(() => {
-  featureIndex.value = (featureIndex.value + 1) % features.length
-}, 2500)
+onMounted(() => {
+  categoryTimer = setInterval(() => {
+    categoryIndex.value = (categoryIndex.value + 1) % categories.length
+  }, 2000)
 
-setInterval(() => {
-  statIndex.value = (statIndex.value + 1) % stats.length
-}, 3000)
+  featureTimer = setInterval(() => {
+    featureIndex.value = (featureIndex.value + 1) % features.length
+  }, 2500)
+
+  statTimer = setInterval(() => {
+    statIndex.value = (statIndex.value + 1) % stats.length
+  }, 3000)
+})
+
+onBeforeUnmount(() => {
+  clearInterval(categoryTimer)
+  clearInterval(featureTimer)
+  clearInterval(statTimer)
+})
 </script>

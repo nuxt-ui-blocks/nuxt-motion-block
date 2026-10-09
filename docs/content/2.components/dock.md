@@ -195,3 +195,130 @@ const addApp = () => {
 }
 </script>
 ::
+
+## Props
+
+### Dock
+
+::field-group
+  ::field{name="distance" type="number" default="150"}
+  How far the pointer travels from an item before its magnification falls back
+  to normal, in pixels.
+  ::
+  ::field{name="panelHeight" type="number" default="64"}
+  Height of the dock panel in pixels.
+  ::
+  ::field{name="magnification" type="number" default="80"}
+  Peak size the icons grow to as the pointer approaches, as a percentage of the
+  base size. `size` overrides this with its own value (`sm` 60, `md` 80, `lg`
+  100).
+  ::
+  ::field{name="spring" type="SpringOptions" default="{ mass: 0.1, stiffness: 150, damping: 12 }"}
+  Spring options used when `animation="spring"`.
+  ::
+  ::field{name="variant" type="'bottom' | 'top' | 'left' | 'right' | 'floating' | 'compact'" default="'bottom'"}
+  Where the dock is fixed and how it is laid out. `left` and `right` orient the
+  dock vertically; the rest are horizontal.
+  ::
+  ::field{name="size" type="'sm' | 'md' | 'lg'" default="'md'"}
+  Preset for gap, padding and magnification.
+  ::
+  ::field{name="ariaLabel" type="string" default="'Application dock'"}
+  Accessible name for the toolbar element.
+  ::
+  ::field{name="showLabels" type="boolean" default="true"}
+  Reserved for suppressing `DockLabel` tooltips; currently labels follow each
+  item's hover state regardless of this flag.
+  ::
+  ::field{name="background" type="'glass' | 'solid' | 'none'" default="'glass'"}
+  Panel background: frosted glass, opaque, or nothing.
+  ::
+  ::field{name="animation" type="'spring' | 'ease' | 'none'" default="'spring'"}
+  Declared for the resize behaviour, but sizing currently always runs through
+  the rAF loop described under Performance.
+  ::
+  ::field{name="class" type="string"}
+  Merged onto the root container.
+  ::
+::
+
+### DockItem
+
+::field-group
+  ::field{name="ariaLabel" type="string"}
+  Accessible name for the item.
+  ::
+  ::field{name="class" type="string"}
+  Merged onto the item wrapper.
+  ::
+::
+
+### DockIcon
+
+::field-group
+  ::field{name="width" type="number" default="48"}
+  Current magnified width, supplied by the item. Icon size derives from it.
+  ::
+  ::field{name="scale" type="number" default="1"}
+  Current magnification scale.
+  ::
+  ::field{name="name" type="string" default="'i-lucide-home'"}
+  Nuxt UI icon name.
+  ::
+  ::field{name="class" type="string"}
+  Merged onto the icon.
+  ::
+::
+
+### DockLabel
+
+::field-group
+  ::field{name="isHovered" type="boolean" default="false"}
+  Whether the tooltip is visible. Passed in by the item's scoped slot.
+  ::
+  ::field{name="class" type="string"}
+  Merged onto the tooltip.
+  ::
+::
+
+## Events
+
+::field-group
+  ::field{name="click" type="() => void"}
+  Emitted by `DockItem` when it is activated by pointer or keyboard.
+  ::
+::
+
+## Slots
+
+::field-group
+  ::field{name="default"}
+  The dock's items — `DockItem` elements, each typically wrapping a
+  `DockLabel` and a `DockIcon`.
+  ::
+  ::field{name="default (DockItem)" type="{ width: number, isHovered: boolean, scale: number }"}
+  Scoped slot on `DockItem`, exposing the live magnified `width`, `isHovered`
+  and `scale` so the label and icon can track the animation.
+  ::
+::
+
+## Accessibility
+
+The panel renders as `role="toolbar"` with `aria-orientation` derived from
+`variant`. Arrow keys move focus between items (respecting orientation),
+Home and End jump to the first and last item, and Escape clears the focused
+item and blurs the dock — all through the shared `useKeyboardNavigation`
+composable. Every `DockItem` should carry an `ariaLabel`.
+
+Magnification is pointer-driven only: keyboard focus highlights an item
+without resizing the dock, so the interaction never depends on the animation.
+
+## Performance
+
+- The dock's `mousemove` handler is throttled to 16ms (one frame at 60fps),
+  so magnification recomputes at most once per frame regardless of pointer
+  event rate.
+- Each `DockItem` sizes itself inside its own `requestAnimationFrame` loop
+  that starts when the pointer (or keyboard focus) reaches it and subscribes
+  to the shared mouse-motion value — items outside `distance` settle at the
+  minimum size without touching layout.

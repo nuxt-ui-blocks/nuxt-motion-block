@@ -12,7 +12,7 @@
     <!-- Auto Toggle -->
     <div class="flex items-center justify-between bg-gray-100 dark:bg-gray-800 p-2 rounded">
       <span class="text-sm">Auto Update:</span>
-      <UToggle
+      <USwitch
         v-model="isAutoUpdating"
         @update:model-value="toggleTimer"
       />
