@@ -300,7 +300,6 @@ export type MotionLoaderVariant
     | 'dot-ring'
 
 interface Props {
-  className?: string
   color?: string
   label?: string
   size?: number
@@ -309,7 +308,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  className: '',
   color: '',
   label: 'Loading',
   size: 40,

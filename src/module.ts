@@ -1,4 +1,4 @@
-import { defineNuxtModule, addPlugin, createResolver, addComponentsDir } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, addComponentsDir } from '@nuxt/kit'
 import type { NuxtModule } from '@nuxt/schema'
 
 // Module options TypeScript interface definition
@@ -43,9 +43,6 @@ const module: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
       global: false,
       watch: false,
     })
-
-    // Add plugin
-    addPlugin(resolver.resolve('./runtime/plugin'))
 
     // Add composables
     nuxt.hook('imports:dirs', (dirs) => {

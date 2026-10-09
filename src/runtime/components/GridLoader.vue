@@ -70,7 +70,6 @@ type PresetPattern
 
 interface Props {
   blur?: number
-  className?: string
   color?: 'white' | 'red' | 'blue' | 'green' | 'amber' | string
   gap?: number
   mode?: 'pulse' | 'sequence' | 'stagger'
