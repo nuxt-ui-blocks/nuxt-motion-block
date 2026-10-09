@@ -58,7 +58,8 @@
     "motion-v": "^2.4.4",
     "reka-ui": "2.10.4",
     "shiki": "^3.0.0",
-    "simplex-noise": "^4.0.3"
+    "simplex-noise": "^4.0.3",
+    "tailwind-variants": "^3.2.2"
   },
   "devDependencies": {
     "@nuxt/devtools": "^3.4.2",
