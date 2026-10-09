@@ -473,7 +473,7 @@ function layoutIdFor(appId: number) {
                   v-if="isSelected(app.id)"
                   class="z-[1] h-3 w-3"
                   fill="none"
-                  stroke="white"
+                  stroke="currentColor"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
@@ -515,7 +515,7 @@ function layoutIdFor(appId: number) {
 
           <button
             type="button"
-            class="mt-4 w-full cursor-pointer rounded-lg bg-primary px-4 py-2 font-semibold text-white shadow transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+            class="mt-4 w-full cursor-pointer rounded-lg bg-primary px-4 py-2 font-semibold text-inverted shadow transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
             :disabled="selected.length === 0"
             data-ads-download
             @click="handleDownload"

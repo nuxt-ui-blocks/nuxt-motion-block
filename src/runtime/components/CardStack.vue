@@ -20,7 +20,7 @@
       <!-- Using Nuxt UI UCard with proper styling -->
       <UCard
         :ui="{
-          root: 'h-full rounded-3xl shadow-xl border border-neutral-200 dark:border-white/[0.1] shadow-black/[0.1] dark:shadow-white/[0.05] flex flex-col justify-between',
+          root: 'h-full rounded-3xl shadow-xl border border-default dark:border-default/10 shadow-black/[0.1] dark:shadow-white/[0.05] flex flex-col justify-between',
           body: 'flex-1 flex flex-col',
           header: 'pb-2',
           footer: 'pt-2',
@@ -34,7 +34,7 @@
             :index="index"
           >
             <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-neutral-700 dark:text-neutral-200">
+              <h3 class="text-lg font-semibold text-highlighted">
                 {{ card.title || `Card ${card.id}` }}
               </h3>
             </div>
@@ -42,7 +42,7 @@
         </template>
 
         <!-- Content Slot -->
-        <div class="flex-1 font-normal text-neutral-700 dark:text-neutral-200">
+        <div class="flex-1 font-normal text-default">
           <slot
             name="content"
             :card="card"
@@ -67,10 +67,10 @@
                 class="rounded-full"
               />
               <div>
-                <p class="text-neutral-500 font-medium dark:text-white">
+                <p class="text-muted font-medium dark:text-inverted">
                   {{ card.name }}
                 </p>
-                <p class="text-neutral-400 font-normal dark:text-neutral-200 text-sm">
+                <p class="text-muted font-normal dark:text-default text-sm">
                   {{ card.designation }}
                 </p>
               </div>

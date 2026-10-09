@@ -13,7 +13,7 @@
         }"
         class="flex items-center justify-center gap-3 px-4 py-2
                backdrop-blur-xl
-               border border-black/10 dark:border-white/10
+               border border-default
                rounded-2xl
                shadow-2xl shadow-black/20
                transition-transform duration-300 ease-out"
@@ -117,8 +117,8 @@ const containerClasses = computed(() => {
 // Background classes
 const backgroundClasses = computed(() => {
   const backgrounds = {
-    glass: 'bg-white/80 dark:bg-black/80',
-    solid: 'bg-white dark:bg-black',
+    glass: 'bg-default/80',
+    solid: 'bg-default',
     none: 'bg-transparent',
   }
   return backgrounds[props.background]
@@ -144,7 +144,7 @@ const dockClasses = computed(() => {
   const baseClasses = [
     'flex items-center justify-center gap-3 px-4 py-2',
     'backdrop-blur-xl',
-    'border border-black/10 dark:border-white/10',
+    'border border-default',
     'rounded-2xl',
     'shadow-2xl shadow-black/20',
     'transition-transform duration-300 ease-out',

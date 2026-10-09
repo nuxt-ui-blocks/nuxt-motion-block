@@ -63,7 +63,7 @@ onUnmounted(() => {
     <Motion
       ref="toolbarRef"
       :style="{ width: toolbarWidth }"
-      class="relative flex items-center h-12 rounded-2xl bg-white/80 dark:bg-black/80 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-2xl shadow-black/20 overflow-hidden"
+      class="relative flex items-center h-12 rounded-2xl bg-default/80 dark:bg-default/80 backdrop-blur-xl border border-default/10 dark:border-default/10 shadow-2xl shadow-black/20 overflow-hidden"
       :class="props.class"
       layout
     >

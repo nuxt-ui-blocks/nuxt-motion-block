@@ -46,7 +46,7 @@
           repeat: Infinity,
           repeatDelay: Math.random() * 1,
         }"
-        class="absolute bg-white/20 h-px left-0 right-0"
+        class="absolute bg-(--ui-bg-inverted)/20 h-px left-0 right-0"
         :style="{ top: `${line}%` }"
       />
     </div>

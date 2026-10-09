@@ -4,7 +4,7 @@
     :ui="{
       root: [
         'relative overflow-hidden h-60 md:h-96 w-full transition-all duration-300 ease-out cursor-pointer group',
-        'bg-gray-100 dark:bg-neutral-900',
+        'bg-default',
         hovered !== null && hovered !== index && 'blur-sm scale-[0.98]',
       ],
       body: 'p-0 h-full',

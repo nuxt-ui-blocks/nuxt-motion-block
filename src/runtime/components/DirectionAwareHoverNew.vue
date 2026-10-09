@@ -47,14 +47,14 @@
             duration: 0.5,
             ease: 'easeOut',
           }"
-          :class="['text-white absolute bottom-4 left-4 z-30', childrenClass]"
+          :class="['text-inverted absolute bottom-4 left-4 z-30', childrenClass]"
         >
           <slot name="content">
             <div class="space-y-2">
               <h3 class="text-xl font-bold">
                 Project Title
               </h3>
-              <p class="text-white/80">
+              <p class="text-inverted/80">
                 Project description goes here
               </p>
             </div>

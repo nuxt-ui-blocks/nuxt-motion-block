@@ -47,7 +47,7 @@
             }"
           >
             <span
-              class="flex flex-row items-center rounded-full bg-black/30 font-medium text-white backdrop-blur-xl"
+              class="flex flex-row items-center rounded-full bg-default/30 font-medium text-inverted backdrop-blur-xl"
               :style="{
                 fontSize: `${metrics.badgeFontSize}px`,
                 gap: `${metrics.badgeGap}px`,
@@ -70,7 +70,7 @@
           </div>
 
           <div
-            class="absolute bottom-0 z-3 w-full rounded-b-3xl text-white"
+            class="absolute bottom-0 z-3 w-full rounded-b-3xl text-inverted"
             :style="{ padding: `${metrics.contentPadding}px` }"
           >
             <div

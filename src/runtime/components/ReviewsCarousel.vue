@@ -55,7 +55,7 @@
       @click="scroll(-1)"
     >
       <svg
-        class="w-4 h-4 text-highlighted"
+        class="w-4 h-4 text-inverted"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -73,7 +73,7 @@
       @click="scroll(1)"
     >
       <svg
-        class="w-4 h-4 text-highlighted"
+        class="w-4 h-4 text-inverted"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"

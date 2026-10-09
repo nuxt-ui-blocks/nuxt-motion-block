@@ -12,7 +12,7 @@
         :animate="{
           boxShadow: scrollProgress > 0 ? 'none' : 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
         }"
-        class="border-neutral-200 ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm"
+        class="border-default ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm"
       >
         <motion.div
           :transition="{
@@ -23,7 +23,7 @@
             backgroundColor: scrollProgress > 0 ? 'rgb(255, 255, 255)' : 'rgb(16, 185, 129)',
             borderColor: scrollProgress > 0 ? 'rgb(255, 255, 255)' : 'rgb(5, 150, 105)',
           }"
-          class="h-2 w-2 rounded-full border border-neutral-300 bg-white"
+          class="h-2 w-2 rounded-full border border-default bg-default"
         />
       </motion.div>
       <svg

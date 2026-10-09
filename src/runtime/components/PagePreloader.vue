@@ -7,7 +7,7 @@
         :animate="{ opacity: 1 }"
         :exit="{ opacity: 0 }"
         :transition="{ duration: 0.25 }"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-(--ui-bg-inverted)/50 backdrop-blur-sm"
         @click.self="onOverlayClick"
       >
         <div class="flex flex-col items-center gap-4 p-6 rounded-xl bg-background/80 backdrop-blur-sm shadow-xl">

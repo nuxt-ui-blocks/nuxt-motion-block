@@ -7,7 +7,7 @@
       :variants="containerVariants"
       class="relative overflow-hidden rounded-lg border border-default bg-[#0d1117] text-sm"
     >
-      <div class="flex items-center justify-between px-4 py-2 border-b border-white/10">
+      <div class="flex items-center justify-between px-4 py-2 border-b border-default">
         <span class="text-xs text-gray-400 font-mono">{{ language }}</span>
         <button
           class="text-gray-400 hover:text-white transition-colors"
@@ -40,7 +40,7 @@
       <div class="relative">
         <div
           v-if="showLineNumbers && highlightedLines.length"
-          class="absolute left-0 top-0 bottom-0 w-12 flex flex-col items-end pr-3 pt-4 text-gray-600 text-xs font-mono select-none border-r border-white/5"
+          class="absolute left-0 top-0 bottom-0 w-12 flex flex-col items-end pr-3 pt-4 text-gray-600 text-xs font-mono select-none border-r border-default"
         >
           <span
             v-for="(_, i) in highlightedLines"
@@ -64,7 +64,7 @@
       :variants="containerVariants"
       class="relative overflow-hidden rounded-lg border border-default bg-[#0d1117] text-sm"
     >
-      <div class="flex items-center justify-between px-4 py-2 border-b border-white/10">
+      <div class="flex items-center justify-between px-4 py-2 border-b border-default">
         <span class="text-xs text-gray-400 font-mono">{{ language }}</span>
         <button
           class="text-gray-400 hover:text-white transition-colors"

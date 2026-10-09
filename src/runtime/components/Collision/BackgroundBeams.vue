@@ -109,7 +109,7 @@ const containerRef = ref<HTMLDivElement | null>(null)
 
     <div
       ref="containerRef"
-      class="absolute bottom-0 bg-neutral-100 dark:bg-neutral-800 w-full inset-x-0 pointer-events-none"
+      class="absolute bottom-0 bg-muted w-full inset-x-0 pointer-events-none"
       style="
         box-shadow: 0 0 24px rgba(34, 42, 53, 0.06),
           0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04),

@@ -57,6 +57,6 @@ const motionStyle = computed(() => ({
 }))
 
 const trailClass = computed(() => {
-  return props.class || 'bg-zinc-500'
+  return props.class || 'bg-accented'
 })
 </script>

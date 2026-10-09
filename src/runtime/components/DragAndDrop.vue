@@ -30,7 +30,7 @@
         :is-over="dragState.dropTarget === index"
         :is-selected="isSelected(item)"
       >
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div class="p-4 bg-default rounded-lg border border-default">
           {{ item.label || item.name || item.id }}
         </div>
       </slot>
@@ -43,7 +43,7 @@
       >
         <UIcon
           name="i-lucide-grip-vertical"
-          class="w-4 h-4 text-gray-400"
+          class="w-4 h-4 text-dimmed"
         />
       </div>
     </Motion>
@@ -60,7 +60,7 @@
     >
       <div
         v-if="dragState.isDragging"
-        class="text-center text-gray-500 dark:text-gray-400"
+        class="text-center text-muted"
       >
         <UIcon
           name="i-lucide-plus"
@@ -219,8 +219,8 @@ const getDropZoneClasses = (index: number) => {
     'min-h-24',
     'border-2',
     'border-dashed',
-    'border-gray-300',
-    'dark:border-gray-600',
+    'border-default',
+    'dark:border-default',
     'rounded-lg',
     'flex',
     'items-center',

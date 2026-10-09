@@ -70,7 +70,7 @@ onUnmounted(() => {
       :class="props.class"
     >
       <div
-        class="flex items-center gap-1 h-12 px-2 rounded-2xl bg-white/80 dark:bg-black/80 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-2xl shadow-black/20"
+        class="flex items-center gap-1 h-12 px-2 rounded-2xl bg-default/80 dark:bg-default/80 backdrop-blur-xl border border-default/10 dark:border-default/10 shadow-2xl shadow-black/20"
       >
         <UButton
           v-for="item in items"
@@ -80,7 +80,7 @@ onUnmounted(() => {
           class="flex items-center justify-center w-10 h-10 rounded-xl"
           :class="[
             activeItemId === item.id
-              ? 'bg-black/10 dark:bg-white/10'
+              ? 'bg-muted/10 dark:bg-muted/10'
               : '',
           ]"
           @click="handleItemClick(item)"
@@ -97,7 +97,7 @@ onUnmounted(() => {
         <Motion
           v-if="activeItem"
           :key="activeItem.id"
-          class="w-full rounded-2xl bg-white/90 dark:bg-black/90 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-2xl shadow-black/20 overflow-hidden"
+          class="w-full rounded-2xl bg-default/90 dark:bg-default/90 backdrop-blur-xl border border-default/10 dark:border-default/10 shadow-2xl shadow-black/20 overflow-hidden"
           :initial="{ opacity: 0, height: 0, scale: 0.95 }"
           :animate="{ opacity: 1, height: 'auto', scale: 1 }"
           :exit="{ opacity: 0, height: 0, scale: 0.95 }"
@@ -110,7 +110,7 @@ onUnmounted(() => {
             >
               <div
                 v-if="activeItem.content"
-                class="text-sm text-gray-700 dark:text-gray-300"
+                class="text-sm text-muted dark:text-muted"
               >
                 {{ activeItem.content }}
               </div>

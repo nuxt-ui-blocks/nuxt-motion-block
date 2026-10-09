@@ -39,19 +39,19 @@
           ease: 'easeOut',
         }"
       >
-        <div :class="[childrenClass, 'text-white w-full']">
+        <div :class="[childrenClass, 'text-inverted w-full']">
           <slot name="content">
             <div class="space-y-2">
               <h3 class="text-xl font-bold">
                 Project Title
               </h3>
-              <p class="text-white/80">
+              <p class="text-inverted/80">
                 Description of the project
               </p>
               <UButton
                 variant="solid"
                 size="sm"
-                class="bg-white text-black hover:bg-white/90"
+                class="bg-default text-default hover:bg-default/90"
               >
                 View Project
               </UButton>
