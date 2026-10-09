@@ -14,103 +14,48 @@
             Single Mode (only one open at a time)
           </h2>
           <MAccordion
-            :expanded-value="singleValue"
-            @value-change="singleValue = $event"
+            v-model="singleValue"
+            :items="singleItems"
+          />
+          <p class="text-sm text-muted mt-2">
+            Current value: {{ singleValue }}
+          </p>
+        </div>
+
+        <!-- Custom trigger -->
+        <div>
+          <h2 class="text-lg font-semibold mb-4">
+            Custom trigger via the default slot
+          </h2>
+          <MAccordion
+            v-model="singleValue"
+            :items="singleItems"
           >
-            <MAccordionItem value="item-1">
-              <MAccordionTrigger class="w-full">
-                <template #default="{ expanded }">
-                  <div class="flex items-center justify-between w-full py-3 px-4 text-left font-medium">
-                    <span>What is Nuxt Motion Block?</span>
-                    <UIcon
-                      :name="expanded ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
-                      class="w-5 h-5 transition-transform"
-                    />
-                  </div>
-                </template>
-              </MAccordionTrigger>
-              <MAccordionContent>
-                <div class="px-4 pb-4 text-muted">
-                  <p>Nuxt Motion Block is a Vue/Nuxt component library providing animated UI primitives built on motion-v. It offers 60+ ready-made animated components for building modern web applications.</p>
-                </div>
-              </MAccordionContent>
-            </MAccordionItem>
-
-            <MAccordionItem value="item-2">
-              <MAccordionTrigger class="w-full">
-                <template #default="{ expanded }">
-                  <div class="flex items-center justify-between w-full py-3 px-4 text-left font-medium">
-                    <span>How do I install it?</span>
-                    <UIcon
-                      :name="expanded ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
-                      class="w-5 h-5 transition-transform"
-                    />
-                  </div>
-                </template>
-              </MAccordionTrigger>
-              <MAccordionContent>
-                <div class="px-4 pb-4 text-muted">
-                  <p>Install via npm: npm install nuxt-motion-block. Then add the module to your nuxt.config.ts modules array.</p>
-                </div>
-              </MAccordionContent>
-            </MAccordionItem>
-
-            <MAccordionItem value="item-3">
-              <MAccordionTrigger class="w-full">
-                <template #default="{ expanded }">
-                  <div class="flex items-center justify-between w-full py-3 px-4 text-left font-medium">
-                    <span>What animations are supported?</span>
-                    <UIcon
-                      :name="expanded ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
-                      class="w-5 h-5 transition-transform"
-                    />
-                  </div>
-                </template>
-              </MAccordionTrigger>
-              <MAccordionContent>
-                <div class="px-4 pb-4 text-muted">
-                  <p>All animations are powered by motion-v and support spring physics, easing curves, stagger effects, scroll-linked animations, layout animations, and gesture-based interactions.</p>
-                </div>
-              </MAccordionContent>
-            </MAccordionItem>
+            <template #default="{ open, item }">
+              <div class="flex items-center justify-between w-full py-3 px-4 text-left font-medium">
+                <span>{{ item.label }}</span>
+                <UIcon
+                  :name="open ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
+                  class="w-5 h-5 transition-transform"
+                />
+              </div>
+            </template>
           </MAccordion>
           <p class="text-sm text-muted mt-2">
             Current value: {{ singleValue }}
           </p>
         </div>
 
-        <!-- Item-driven -->
+        <!-- Multiple Mode -->
         <div>
           <h2 class="text-lg font-semibold mb-4">
-            Item-driven (value bound to the data)
+            Multiple Mode (several open at once)
           </h2>
           <MAccordion
-            :expanded-value="multipleValue"
-            @value-change="multipleValue = $event"
-          >
-            <MAccordionItem
-              v-for="item in multipleItems"
-              :key="item.value"
-              :value="item.value"
-            >
-              <MAccordionTrigger class="w-full">
-                <template #default="{ expanded }">
-                  <div class="flex items-center justify-between w-full py-3 px-4 text-left font-medium">
-                    <span>{{ item.label }}</span>
-                    <UIcon
-                      :name="expanded ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
-                      class="w-5 h-5 transition-transform"
-                    />
-                  </div>
-                </template>
-              </MAccordionTrigger>
-              <MAccordionContent>
-                <div class="px-4 pb-4 text-muted">
-                  <p>{{ item.content }}</p>
-                </div>
-              </MAccordionContent>
-            </MAccordionItem>
-          </MAccordion>
+            v-model="multipleValue"
+            type="multiple"
+            :items="multipleItems"
+          />
           <p class="text-sm text-muted mt-2">
             Current value: {{ multipleValue }}
           </p>
@@ -119,53 +64,21 @@
         <!-- Default Open -->
         <div>
           <h2 class="text-lg font-semibold mb-4">
-            Default Open
+            Default Open (uncontrolled)
           </h2>
-          <MAccordion expanded-value="default-1">
-            <MAccordionItem value="default-1">
-              <MAccordionTrigger class="w-full">
-                <template #default="{ expanded }">
-                  <div class="flex items-center justify-between w-full py-3 px-4 text-left font-medium">
-                    <span>This one starts open</span>
-                    <UIcon
-                      :name="expanded ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
-                      class="w-5 h-5 transition-transform"
-                    />
-                  </div>
-                </template>
-              </MAccordionTrigger>
-              <MAccordionContent>
-                <div class="px-4 pb-4 text-muted">
-                  <p>This accordion item has its content visible by default using the expandedValue prop.</p>
-                </div>
-              </MAccordionContent>
-            </MAccordionItem>
-
-            <MAccordionItem value="default-2">
-              <MAccordionTrigger class="w-full">
-                <template #default="{ expanded }">
-                  <div class="flex items-center justify-between w-full py-3 px-4 text-left font-medium">
-                    <span>This one starts closed</span>
-                    <UIcon
-                      :name="expanded ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
-                      class="w-5 h-5 transition-transform"
-                    />
-                  </div>
-                </template>
-              </MAccordionTrigger>
-              <MAccordionContent>
-                <div class="px-4 pb-4 text-muted">
-                  <p>This accordion item starts collapsed and can be expanded by clicking the trigger.</p>
-                </div>
-              </MAccordionContent>
-            </MAccordionItem>
-          </MAccordion>
+          <MAccordion
+            default-value="item-1"
+            :items="singleItems"
+          />
+          <p class="text-sm text-muted mt-2">
+            Starts open with <code>default-value="item-1"</code> and manages its own state.
+          </p>
         </div>
       </div>
 
       <template #footer>
         <p class="text-sm text-muted">
-          Component: MAccordion (compound components with motion-v)
+          Component: MAccordion (composes Nuxt UI's UAccordion)
         </p>
       </template>
     </UCard>
@@ -173,8 +86,26 @@
 </template>
 
 <script setup lang="ts">
-const singleValue = ref<string | number | null>('item-1')
-const multipleValue = ref<string | number | null>('color-1')
+const singleValue = ref<string | string[]>('item-1')
+const multipleValue = ref<string | string[]>(['color-1'])
+
+const singleItems = [
+  {
+    label: 'What is Nuxt Motion Block?',
+    value: 'item-1',
+    content: 'Nuxt Motion Block is a Vue/Nuxt component library providing animated UI primitives built on motion-v. It offers 60+ ready-made animated components for building modern web applications.',
+  },
+  {
+    label: 'How do I install it?',
+    value: 'item-2',
+    content: 'Install via npm: npm install nuxt-motion-block. Then add the module to your nuxt.config.ts modules array.',
+  },
+  {
+    label: 'What animations are supported?',
+    value: 'item-3',
+    content: 'All animations are powered by motion-v and support spring physics, easing curves, stagger effects, scroll-linked animations, layout animations, and gesture-based interactions.',
+  },
+]
 
 const multipleItems = [
   {
