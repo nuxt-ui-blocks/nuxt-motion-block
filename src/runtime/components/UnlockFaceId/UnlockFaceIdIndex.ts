@@ -1,0 +1,5 @@
+export { default as MUnlockFaceId } from './UnlockFaceId.vue'
+export { default as MUnlockFaceIdFaceGlyph } from './UnlockFaceIdFaceGlyph.vue'
+export { default as MUnlockFaceIdCheckGlyph } from './UnlockFaceIdCheckGlyph.vue'
+export type { UnlockFaceIdProps } from './UnlockFaceId.vue'
+export type { UnlockStatus } from './constants'
