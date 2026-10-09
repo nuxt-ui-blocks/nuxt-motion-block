@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['relative inline-flex items-center justify-center align-baseline', className]"
+    :class="cn('relative inline-flex items-center justify-center align-baseline', className)"
     :style="{ height: containerHeight, display: 'inline-flex', verticalAlign: 'baseline' }"
   >
     <AnimatePresence mode="wait">
@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { Motion, AnimatePresence } from 'motion-v'
+import { cn } from '../utils/merge'
 
 interface TextLoopProps {
   items?: any[]

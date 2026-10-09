@@ -23,6 +23,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, h } from 'vue'
 import { useRafFn } from '@vueuse/core'
+import { cn } from '../utils/merge'
 
 interface VelocityMapping {
   input: [number, number]
@@ -177,18 +178,18 @@ const VelocityText = {
       for (let i = 0; i < props.numCopies; i++) {
         spans.push(
           h('span', {
-            class: `flex-shrink-0 ${props.class}`,
+            class: cn('flex-shrink-0', props.class),
             ref: i === 0 ? copyRef : undefined,
           }, slots.default?.()),
         )
       }
 
       return h('div', {
-        class: `${props.parallaxClass} relative overflow-hidden`,
+        class: cn('relative overflow-hidden', props.parallaxClass),
         style: props.parallaxStyle,
       }, [
         h('div', {
-          class: `${props.scrollerClass} flex whitespace-nowrap text-center font-sans text-4xl font-bold tracking-[-0.02em] drop-shadow md:text-[5rem] md:leading-[5rem]`,
+          class: cn('flex whitespace-nowrap text-center font-sans text-4xl font-bold tracking-[-0.02em] drop-shadow md:text-[5rem] md:leading-[5rem]', props.scrollerClass),
           style: {
             transform: `translateX(${x.value})`,
             ...props.scrollerStyle,

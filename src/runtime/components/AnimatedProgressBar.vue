@@ -1,8 +1,7 @@
 <template>
   <div
     ref="rootRef"
-    class="relative w-full"
-    :class="className"
+    :class="cn('relative w-full', className)"
   >
     <div
       v-if="label"
@@ -77,6 +76,7 @@
 <script setup lang="ts">
 import { motion, useReducedMotion } from 'motion-v'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, unref, watch } from 'vue'
+import { cn } from '../utils/merge'
 
 const MIN_PROGRESS_VALUE = 0
 const MAX_PROGRESS_VALUE = 100

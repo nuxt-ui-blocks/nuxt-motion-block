@@ -1,9 +1,9 @@
 <template>
   <div
-    :class="[
+    :class="cn(
       'absolute inset-0 flex h-full w-full items-center justify-center [mask-repeat:no-repeat] [mask-size:40px]',
       className,
-    ]"
+    )"
   >
     <svg
       class="pointer-events-none absolute z-0 h-full w-full"
@@ -103,6 +103,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { motion } from 'motion-v'
+import { cn } from '../utils/merge'
 
 interface Props {
   className?: string

@@ -1,7 +1,6 @@
 <template>
   <Motion
-    class="relative"
-    :class="className"
+    :class="cn('relative', className)"
     :style="containerStyle"
     initial="hidden"
     animate="visible"
@@ -25,6 +24,7 @@
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 import { computed } from 'vue'
+import { cn } from '../utils/merge'
 
 // Types
 interface Transition {

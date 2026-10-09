@@ -35,6 +35,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
+import { cn } from '../utils/merge'
 
 interface Props {
   items: any[]
@@ -55,15 +56,24 @@ const emit = defineEmits<{
   remove: [index: number]
 }>()
 
+const GRID_COLUMNS: Record<number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-2',
+  3: 'grid-cols-3',
+  4: 'grid-cols-4',
+  5: 'grid-cols-5',
+  6: 'grid-cols-6',
+  12: 'grid-cols-12',
+}
+
 const containerClasses = computed(() => {
-  const base = 'relative'
   if (props.direction === 'grid') {
-    return `${base} grid grid-cols-${props.columns} gap-4`
+    return cn('relative grid gap-4', GRID_COLUMNS[props.columns] ?? GRID_COLUMNS[3])
   }
   if (props.direction === 'row') {
-    return `${base} flex flex-wrap gap-4`
+    return cn('relative flex flex-wrap gap-4')
   }
-  return `${base} space-y-4`
+  return cn('relative space-y-4')
 })
 
 function getKey(item: any): string | number {

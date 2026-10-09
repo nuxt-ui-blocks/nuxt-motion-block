@@ -1,8 +1,7 @@
 <template>
   <div class="w-full overflow-hidden">
     <div
-      class="infinite-slider-content"
-      :class="className"
+      :class="cn('infinite-slider-content', className)"
       :style="style"
     >
       <slot />
@@ -13,6 +12,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { cn } from '../utils/merge'
 
 type Props = {
   className?: string
