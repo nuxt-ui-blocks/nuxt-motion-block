@@ -2,6 +2,9 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
 import { computed, ref, watch } from 'vue'
 import type { PinInputProps } from '#ui/components/PinInput.vue'
+import { cn } from '../utils/merge'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(
   defineProps<{
@@ -17,6 +20,7 @@ const props = withDefaults(
     variant?: PinInputProps['variant']
     size?: PinInputProps['size']
     color?: PinInputProps['color']
+    class?: string
   }>(),
   {
     length: 6,
@@ -31,6 +35,7 @@ const props = withDefaults(
     variant: 'outline',
     size: 'lg',
     color: 'primary',
+    class: undefined,
   },
 )
 
@@ -159,9 +164,10 @@ const groups = computed(() => {
 
 <template>
   <motion.div
+    v-bind="$attrs"
     :animate="{ boxShadow: glowColor }"
     :initial="false"
-    class="relative inline-block rounded-md"
+    :class="cn('relative inline-block rounded-md', props.class)"
     :transition="{ type: 'spring', stiffness: 300, damping: 20 }"
   >
     <div

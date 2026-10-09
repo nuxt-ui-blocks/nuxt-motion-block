@@ -2,8 +2,7 @@
   <motion.div
     v-bind="$attrs"
     :ref="setRoot"
-    class="relative overflow-hidden"
-    :class="props.class"
+    :class="cn('relative overflow-hidden', props.class)"
     :style="rootStyle"
     :transition="rootTransition"
     :while-hover="tracksPointer ? LIFT : undefined"
@@ -95,6 +94,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, useId } from 'vue'
 import { motion, useReducedMotion, useSpring } from 'motion-v'
 import type { CSSProperties } from 'vue'
+import { cn } from '../utils/merge'
 
 defineOptions({ inheritAttrs: false })
 

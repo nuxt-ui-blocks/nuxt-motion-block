@@ -1,14 +1,13 @@
 <template>
   <div
     ref="cardRef"
-    class="relative overflow-hidden"
-    :class="props.class"
+    :class="cn('relative overflow-hidden', props.class)"
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
     <UCard
       :ui="props.ui"
-      class="relative z-10 backdrop-blur-md bg-white/10 dark:bg-black/30 border border-white/20 dark:border-white/10"
+      class="relative z-10 backdrop-blur-md bg-default/10 dark:bg-default/30 border border-default/20 dark:border-default/10"
     >
       <template
         v-if="$slots.header"
@@ -44,6 +43,7 @@
 <script setup lang="ts">
 import type { CardProps } from '#ui/components/Card.vue'
 import { ref, computed } from 'vue'
+import { cn } from '../utils/merge'
 
 defineOptions({ inheritAttrs: false })
 

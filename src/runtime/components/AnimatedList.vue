@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
+import { cn } from '../utils/merge'
 
 defineOptions({ inheritAttrs: false })
 
@@ -23,6 +24,7 @@ interface Props {
   pauseOnHover?: boolean
   onItemClick?: (item: AnimatedListItem, index: number) => void
   ui?: Record<string, any>
+  class?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -158,7 +160,7 @@ defineExpose({ add, remove, clear })
   <ul
     v-bind="$attrs"
     aria-live="polite"
-    :class="['flex flex-col gap-2 m-animated-list']"
+    :class="cn('flex flex-col gap-2 m-animated-list', props.class)"
     @mouseenter="pauseOnHover && (isPaused = true)"
     @mouseleave="pauseOnHover && (isPaused = false)"
   >

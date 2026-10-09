@@ -2,7 +2,7 @@
   <div
     ref="rootEl"
     v-bind="$attrs"
-    :class="['inline-flex items-center gap-3', props.class, props.className]"
+    :class="cn('inline-flex items-center gap-3', props.class, props.className)"
   >
     <div
       :style="recordFrameStyle"
@@ -151,6 +151,7 @@
 import type { CSSProperties } from 'vue'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
+import { cn } from '../utils/merge'
 
 defineOptions({ inheritAttrs: false })
 

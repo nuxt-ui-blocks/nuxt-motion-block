@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, useId } from 'vue'
 import { motion } from 'motion-v'
+import { cn } from '../utils/merge'
 
 const props = withDefaults(defineProps<{
   modelValue?: string
@@ -9,6 +10,7 @@ const props = withDefaults(defineProps<{
   icon?: string
   label: string
   placeholder?: string
+  class?: string
   inputClassName?: string
   labelClassName?: string
 }>(), {
@@ -17,6 +19,7 @@ const props = withDefaults(defineProps<{
   disabled: false,
   icon: undefined,
   placeholder: '',
+  class: undefined,
   inputClassName: '',
   labelClassName: '',
 })
@@ -97,7 +100,7 @@ onUnmounted(() => {
 <template>
   <div
     v-bind="$attrs"
-    class="relative flex items-center"
+    :class="cn('relative flex items-center', props.class)"
   >
     <span
       v-if="icon || $slots.icon"

@@ -3,8 +3,7 @@
     :initial="{ opacity: 0, y: 40 }"
     :animate="{ opacity: 1, y: 0 }"
     :transition="{ type: 'spring', stiffness: 300, damping: 30 }"
-    class="relative overflow-hidden"
-    :class="props.class"
+    :class="cn('relative overflow-hidden', props.class)"
     @mouseenter="showShine = true"
     @mouseleave="showShine = false"
   >
@@ -57,6 +56,7 @@
 import type { CardProps } from '#ui/components/Card.vue'
 import { ref, computed } from 'vue'
 import { motion } from 'motion-v'
+import { cn } from '../utils/merge'
 
 defineOptions({ inheritAttrs: false })
 
