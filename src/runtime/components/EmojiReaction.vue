@@ -149,6 +149,7 @@
 import type { ComponentPublicInstance } from 'vue'
 import { computed, onBeforeUnmount, onMounted, reactive, ref, useId, watch } from 'vue'
 import { AnimatePresence, motion, useAnimate, useReducedMotion } from 'motion-v'
+import { useHoverCapable } from '../composables/useHoverCapable'
 
 interface BurstParticle {
   id: string
@@ -418,12 +419,10 @@ function handlePickerSelect(emoji: string): void {
 const menuId = useId()
 const isPickerOpen = ref(props.defaultPickerOpen)
 const activeIndex = ref(0)
-const isHoverCapable = ref(false)
+const isHoverCapable = useHoverCapable()
 const pickerContainer = ref<HTMLElement | null>(null)
 const pickerTrigger = ref<HTMLElement | null>(null)
 const pickerItemElements: (HTMLElement | null)[] = []
-
-let hoverMediaQuery: MediaQueryList | null = null
 let closeTimer: ReturnType<typeof setTimeout> | null = null
 let shouldFocusAfterOpen = false
 
@@ -565,10 +564,6 @@ function handleDocumentKeydown(event: globalThis.KeyboardEvent): void {
   }
 }
 
-function handleHoverChange(event: MediaQueryListEvent): void {
-  isHoverCapable.value = event.matches
-}
-
 function addDocumentListeners(): void {
   document.addEventListener('pointerdown', handleDocumentPointerDown)
   document.addEventListener('keydown', handleDocumentKeydown)
@@ -590,16 +585,12 @@ function syncDocumentListeners(): void {
 watch(isPickerOpen, syncDocumentListeners)
 
 onMounted(() => {
-  hoverMediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
-  isHoverCapable.value = hoverMediaQuery.matches
-  hoverMediaQuery.addEventListener('change', handleHoverChange)
   syncDocumentListeners()
 })
 
 onBeforeUnmount(() => {
   clearCloseTimer()
   clearAllBursts()
-  hoverMediaQuery?.removeEventListener('change', handleHoverChange)
   removeDocumentListeners()
 })
 </script>

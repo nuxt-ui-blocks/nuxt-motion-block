@@ -30,6 +30,7 @@ import { useMotionValue, useReducedMotion, useScroll, useSpring } from 'motion-v
 import type { MaybeRef } from 'vue'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { SPRING_POINTER, SPRING_SCROLL } from '../../utils/motion-tokens'
+import { useHoverCapable } from '../../composables/useHoverCapable'
 import ParallaxLayer from './ParallaxLayer.vue'
 import type { ParallaxDirection, ParallaxLayerConfig } from './types'
 
@@ -47,8 +48,6 @@ const CENTER_RATIO = 0.5
  * full enter-to-exit range most of the layer separation is spent off-view.
  */
 const DEFAULT_OFFSET = ['start 0.95', 'end 0.6'] as unknown as ScrollOffset
-
-const HOVER_CAPABLE_QUERY = '(hover: hover) and (pointer: fine)'
 
 const props = withDefaults(
   defineProps<{
@@ -114,32 +113,7 @@ watch([() => props.direction, reducedMotion], ([direction, reduced]) => {
 
 // Pointer parallax is only wired up on devices that actually have a hovering
 // cursor, so a touch drag does not leave a layer stranded mid-transition.
-const hoverCapable = ref(false)
-let hoverQuery: MediaQueryList | undefined
-
-function onHoverChange(event: MediaQueryListEvent) {
-  hoverCapable.value = event.matches
-}
-
-function syncHoverCapable() {
-  hoverQuery?.removeEventListener('change', onHoverChange)
-  hoverQuery = undefined
-
-  if (!props.pointerParallax || typeof window === 'undefined') {
-    hoverCapable.value = false
-    return
-  }
-
-  hoverQuery = window.matchMedia(HOVER_CAPABLE_QUERY)
-  hoverQuery.addEventListener('change', onHoverChange)
-  hoverCapable.value = hoverQuery.matches
-}
-
-watch(() => props.pointerParallax, syncHoverCapable, { immediate: true })
-
-onBeforeUnmount(() => {
-  hoverQuery?.removeEventListener('change', onHoverChange)
-})
+const hoverCapable = useHoverCapable()
 
 function onPointerMove(event: PointerEvent) {
   const node = root.value

@@ -93,6 +93,7 @@ import {
 } from 'motion-v'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { SPRING_TILT } from '../../utils/motion-tokens'
+import { useHoverCapable } from '../../composables/useHoverCapable'
 import {
   AXIS_MAX,
   AXIS_MIN,
@@ -106,7 +107,6 @@ import {
   GLARE_DRIFT,
   GLARE_GRADIENT,
   GLARE_OPACITY_RATIO,
-  HOVER_QUERY,
   LINEAR_EASE,
   MATERIALS,
   MAX_TILT_DEG,
@@ -245,26 +245,7 @@ const foilOpacity = computed(
 
 // ------------------------------------------------------------------- liveness
 
-const isHoverDevice = ref(false)
-let hoverQuery: MediaQueryList | undefined
-
-function onHoverChange(event: MediaQueryListEvent) {
-  isHoverDevice.value = event.matches
-}
-
-function syncHoverDevice() {
-  hoverQuery?.removeEventListener('change', onHoverChange)
-  hoverQuery = undefined
-
-  if (typeof window === 'undefined') {
-    isHoverDevice.value = false
-    return
-  }
-
-  hoverQuery = window.matchMedia(HOVER_QUERY)
-  hoverQuery.addEventListener('change', onHoverChange)
-  isHoverDevice.value = hoverQuery.matches
-}
+const isHoverDevice = useHoverCapable()
 
 // ------------------------------------------------------- device orientation
 
@@ -433,15 +414,12 @@ const sheenTransition = computed(() =>
 // ------------------------------------------------------------------- lifecycle
 
 onMounted(() => {
-  syncHoverDevice()
   syncOrientationAccess()
   window.addEventListener('scroll', onWindowScroll, { passive: true })
   window.addEventListener('deviceorientation', onDeviceOrientation)
 })
 
 onBeforeUnmount(() => {
-  hoverQuery?.removeEventListener('change', onHoverChange)
-  hoverQuery = undefined
   window.removeEventListener('scroll', onWindowScroll)
   window.removeEventListener('deviceorientation', onDeviceOrientation)
 })

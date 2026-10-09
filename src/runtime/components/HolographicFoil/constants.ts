@@ -6,9 +6,6 @@
  * below already carry their own alpha.
  */
 
-/** Only devices with a real hovering cursor get pointer tilt. */
-export const HOVER_QUERY = '(hover: hover) and (pointer: fine)'
-
 /** Peak rotation, in degrees, at the extremes of the pointer range. */
 export const MAX_TILT_DEG = 9
 

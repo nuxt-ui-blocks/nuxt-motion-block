@@ -19,8 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useReducedMotion } from 'motion-v'
+import { useHoverCapable } from '../composables/useHoverCapable'
 
 export interface DrawingCursorProps {
   /** Canvas composite operation used for every stroke. */
@@ -96,7 +97,7 @@ const getPointerCoordinates = (event: PointerEvent, rect: DOMRect) => {
 const shouldReduceMotion = useReducedMotion()
 const containerRef = ref<HTMLElement | null>(null)
 const canvasRef = ref<HTMLCanvasElement | null>(null)
-const isPointerCapable = ref(false)
+const isPointerCapable = useHoverCapable()
 
 const strokes: Stroke[] = []
 let activeStroke: Stroke | null = null
@@ -349,15 +350,5 @@ watch(
 onBeforeUnmount(() => {
   teardown?.()
   teardown = null
-})
-
-onMounted(() => {
-  const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
-  isPointerCapable.value = mediaQuery.matches
-  const handleChange = (event: MediaQueryListEvent) => {
-    isPointerCapable.value = event.matches
-  }
-  mediaQuery.addEventListener('change', handleChange)
-  onBeforeUnmount(() => mediaQuery.removeEventListener('change', handleChange))
 })
 </script>

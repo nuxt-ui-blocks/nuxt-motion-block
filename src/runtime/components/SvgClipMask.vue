@@ -45,6 +45,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue'
 import { useMotionValueEvent, useReducedMotion, useScroll } from 'motion-v'
 import { useRafFn } from '@vueuse/core'
+import { useHoverCapable } from '../composables/useHoverCapable'
 import type { MaybeComputedElementRef } from '@vueuse/core'
 import type { ScrollOffset } from 'motion-v'
 
@@ -177,7 +178,7 @@ const clipId = `svg-clip-mask-${useId()}`
 const shouldReduceMotion = useReducedMotion()
 const frameRef = ref<HTMLElement | null>(null)
 const isHovered = ref(false)
-const isHoverCapable = ref(false)
+const isHoverCapable = useHoverCapable()
 const scrollIndex = ref(0)
 const morphProgress = ref(0)
 const isVisible = ref(true)
@@ -351,16 +352,5 @@ onMounted(() => {
     observer.observe(frame)
     onBeforeUnmount(() => observer.disconnect())
   }
-
-  if (props.animate !== 'hover') {
-    return
-  }
-  const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
-  isHoverCapable.value = mediaQuery.matches
-  const handleChange = (event: MediaQueryListEvent) => {
-    isHoverCapable.value = event.matches
-  }
-  mediaQuery.addEventListener('change', handleChange)
-  onBeforeUnmount(() => mediaQuery.removeEventListener('change', handleChange))
 })
 </script>

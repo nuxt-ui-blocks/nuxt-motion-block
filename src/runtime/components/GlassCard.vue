@@ -95,10 +95,10 @@ import { computed, onBeforeUnmount, onMounted, ref, useId } from 'vue'
 import { motion, useReducedMotion, useSpring } from 'motion-v'
 import type { CSSProperties } from 'vue'
 import { cn } from '../utils/merge'
+import { useHoverCapable } from '../composables/useHoverCapable'
 
 defineOptions({ inheritAttrs: false })
 
-const HOVER_QUERY = '(hover: hover) and (pointer: fine)'
 const SPECULAR_SIZE = 260
 const SPECULAR_BASE_X = 0.3
 const SPECULAR_BASE_Y = 0.28
@@ -171,7 +171,7 @@ function ringMask(width: number): CSSProperties {
 
 const shouldReduceMotion = useReducedMotion()
 const filterId = `glass-refraction-${useId().replace(/:/g, '')}`
-const isHoverDevice = ref(false)
+const isHoverDevice = useHoverCapable()
 const canDisplace = ref(false)
 
 const specularX = useSpring(0, SPRING)
@@ -220,7 +220,6 @@ const tracksPointer = computed(
   () => props.interactive && isHoverDevice.value && !shouldReduceMotion.value,
 )
 
-let hoverMedia: MediaQueryList | undefined
 let paintFrame = 0
 
 function paint() {
@@ -243,19 +242,9 @@ function paint() {
   paintFrame = requestAnimationFrame(paint)
 }
 
-function handleHoverChange(event: MediaQueryListEvent) {
-  isHoverDevice.value = event.matches
-}
-
 onMounted(() => {
   if (props.interactive) {
     paintFrame = requestAnimationFrame(paint)
-  }
-
-  if (typeof window.matchMedia === 'function') {
-    hoverMedia = window.matchMedia(HOVER_QUERY)
-    isHoverDevice.value = hoverMedia.matches
-    hoverMedia.addEventListener('change', handleHoverChange)
   }
 
   // Only Chromium composites an SVG displacement inside `backdrop-filter`.
@@ -273,7 +262,6 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   cancelAnimationFrame(paintFrame)
-  hoverMedia?.removeEventListener('change', handleHoverChange)
 
   if (listening) {
     rootEl?.removeEventListener('pointermove', handlePointerMove)

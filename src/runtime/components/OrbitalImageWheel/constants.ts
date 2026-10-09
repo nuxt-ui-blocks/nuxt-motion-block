@@ -28,9 +28,6 @@ export const STEP_DURATION = 250
 /** Horizontal pixels a pointer must travel before a gesture counts as a drag. */
 export const DRAG_MOVE_THRESHOLD = 4
 
-/** Media query that reports a mouse-like pointer, used to gate hover pause. */
-export const HOVER_CAPABLE_QUERY = '(hover: hover) and (pointer: fine)'
-
 /** Wraps any angle into the `[0, 360)` range. */
 export const normalizeAngle = (angle: number): number => {
   const wrapped = angle % 360

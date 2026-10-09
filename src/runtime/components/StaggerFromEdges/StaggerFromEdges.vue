@@ -21,8 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import { Motion, useInView, useReducedMotion } from 'motion-v'
-import { computed, ref } from 'vue'
+import { Motion } from 'motion-v'
+import { computed } from 'vue'
 import {
   STAGGER_EDGES_DEFAULT_DELAY,
   STAGGER_EDGES_DEFAULT_STAGGER,
@@ -32,6 +32,8 @@ import {
   STAGGER_EDGES_START_BLUR,
   STAGGER_EDGES_START_Y,
 } from './constants'
+
+import { useStaggeredReveal } from '../../composables/useStaggeredReveal'
 
 /**
  * Props for StaggerFromEdges.
@@ -60,14 +62,6 @@ const props = withDefaults(defineProps<StaggerFromEdgesProps>(), {
   triggerOnView: false,
 })
 
-const shouldReduceMotion = useReducedMotion()
-
-const containerRef = ref<HTMLElement | null>(null)
-
-// Observing is unconditional: a hook has to run every render, and the observer
-// is idle until something scrolls, so gating it would add a branch for no gain.
-const inView = useInView(containerRef, { once: true })
-
 // Stable object identity matters here. motion-v compares `initial` against
 // `animate` by reference (`state/animation-state.mjs`) to decide whether there
 // is anything to animate, so freshly-built literals each render would defeat
@@ -84,28 +78,15 @@ const shownState = {
   y: 0,
 }
 
-// `initial` is the hidden state on the server and the client alike. Deriving it
-// from the motion preference would strand hidden styles: the server cannot know
-// the preference, and `initial` is only read when the visual element is created,
-// so a client that changed its mind could never clear the SSR attributes.
-// Suppressing the *transition* instead keeps one identical server/client tree.
-const initialState = hiddenState
+const { containerRef, animateState, initialState, transitionCollapsed } = useStaggeredReveal({
+  triggerOnView: () => props.triggerOnView,
+  hiddenState,
+  shownState,
+})
 
 const characters = computed(() => Array.from(props.text))
 
 const lastIndex = computed(() => characters.value.length - 1)
-
-// Reduced motion skips the wait too: with a zero-length transition the resolved
-// state commits immediately, so there is nothing to defer. Excluding it here
-// keeps reduced-motion text from sitting invisible until a scroll that a
-// preference-driven user may never perform.
-const waitingForView = computed(() =>
-  !shouldReduceMotion.value && props.triggerOnView && !inView.value,
-)
-
-// Referencing the same object as `initial` is intentional: motion-v skips the
-// animation entirely when the two match, which is exactly the waiting case.
-const animateState = computed(() => waitingForView.value ? hiddenState : shownState)
 
 // Distance to the *nearest* edge, not the linear index: the first and last
 // characters leave together and the cascade converges inward to the centre.
@@ -118,7 +99,7 @@ function distanceFromEdge(index: number) {
 // animate" as "write nothing" and would leave the hidden styles stranded; a
 // zero-length transition still commits the resolved values within one frame.
 function charTransition(index: number) {
-  if (shouldReduceMotion.value || waitingForView.value) {
+  if (transitionCollapsed.value) {
     return { duration: 0 }
   }
 

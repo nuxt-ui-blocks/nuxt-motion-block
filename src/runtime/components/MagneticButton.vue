@@ -36,8 +36,9 @@
 </template>
 
 <script setup lang="ts">
-import { cloneVNode, computed, onBeforeUnmount, onMounted, ref, useAttrs, useSlots } from 'vue'
+import { cloneVNode, computed, ref, useAttrs, useSlots, watch } from 'vue'
 import { motion, useReducedMotion } from 'motion-v'
+import { useHoverCapable } from '../composables/useHoverCapable'
 import type { ButtonProps } from '#ui/components/Button.vue'
 import { cn } from '../utils/merge'
 
@@ -80,8 +81,6 @@ const props = withDefaults(defineProps<MagneticButtonProps>(), {
   class: undefined,
   className: undefined,
 })
-
-const HOVER_QUERY = '(hover: hover) and (pointer: fine)'
 
 // The React reference builds its buttons with `cva`. The default branch of the
 // port delegates the whole button to `UButton` (Nuxt UI owns the base / size /
@@ -165,7 +164,7 @@ const zoneStyle = computed(() => ({
 }))
 
 const shouldReduceMotion = useReducedMotion()
-const isHoverDevice = ref(false)
+const isHoverDevice = useHoverCapable()
 const offsetX = ref(0)
 const offsetY = ref(0)
 
@@ -216,7 +215,6 @@ function renderChild() {
 }
 
 let buttonEl: HTMLElement | undefined
-let hoverMedia: MediaQueryList | undefined
 
 function setButtonEl(el: unknown) {
   const candidate
@@ -278,25 +276,10 @@ function handleMouseLeave() {
   reset()
 }
 
-function handleHoverChange(event: MediaQueryListEvent) {
-  isHoverDevice.value = event.matches
-
-  if (!event.matches) {
+// Reset any lingering offset when the device loses a hovering cursor mid-session.
+watch(isHoverDevice, (hovering) => {
+  if (!hovering) {
     reset()
   }
-}
-
-onMounted(() => {
-  if (typeof window.matchMedia !== 'function') {
-    return
-  }
-
-  hoverMedia = window.matchMedia(HOVER_QUERY)
-  isHoverDevice.value = hoverMedia.matches
-  hoverMedia.addEventListener('change', handleHoverChange)
-})
-
-onBeforeUnmount(() => {
-  hoverMedia?.removeEventListener('change', handleHoverChange)
 })
 </script>

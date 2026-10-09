@@ -32,6 +32,7 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { motion } from 'motion-v'
 import type { ButtonProps } from '#ui/components/Button.vue'
+import { useHoverCapable } from '../composables/useHoverCapable'
 
 const props = withDefaults(defineProps<{
   color?: ButtonProps['color']
@@ -48,18 +49,14 @@ const props = withDefaults(defineProps<{
 })
 
 const isHovered = ref(false)
-const isHoverDevice = ref(false)
+const isHoverDevice = useHoverCapable()
 const shouldReduceMotion = ref(false)
 const wrapperEl = ref<HTMLElement | null>(null)
 const maxPillH = ref(28)
 
-let hoverQuery: MediaQueryList | undefined
 let motionQuery: MediaQueryList | undefined
 let resizeObserver: ResizeObserver | undefined
 
-const onHoverChange = (e: MediaQueryListEvent) => {
-  isHoverDevice.value = e.matches
-}
 const onMotionChange = (e: MediaQueryListEvent) => {
   shouldReduceMotion.value = e.matches
 }
@@ -97,10 +94,6 @@ function onMouseEnter() {
 }
 
 onMounted(() => {
-  hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
-  isHoverDevice.value = hoverQuery.matches
-  hoverQuery.addEventListener('change', onHoverChange)
-
   motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
   shouldReduceMotion.value = motionQuery.matches
   motionQuery.addEventListener('change', onMotionChange)
@@ -113,7 +106,6 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  hoverQuery?.removeEventListener('change', onHoverChange)
   motionQuery?.removeEventListener('change', onMotionChange)
   resizeObserver?.disconnect()
 })

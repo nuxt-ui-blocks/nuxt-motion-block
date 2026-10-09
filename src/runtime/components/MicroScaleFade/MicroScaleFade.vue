@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import { Motion, useInView, useReducedMotion } from 'motion-v'
-import { computed, ref } from 'vue'
+import { Motion } from 'motion-v'
+import { computed } from 'vue'
 import {
   MICRO_SCALE_FADE_DEFAULT_DELAY,
   MICRO_SCALE_FADE_DURATION_S,
@@ -27,6 +27,8 @@ import {
   MICRO_SCALE_FADE_MS,
   MICRO_SCALE_FADE_START_SCALE,
 } from './constants'
+
+import { useStaggeredReveal } from '../../composables/useStaggeredReveal'
 
 /**
  * Props for MicroScaleFade.
@@ -53,40 +55,23 @@ const props = withDefaults(defineProps<MicroScaleFadeProps>(), {
   triggerOnView: false,
 })
 
-const shouldReduceMotion = useReducedMotion()
-
-const containerRef = ref<HTMLElement | null>(null)
-
-const inView = useInView(containerRef, { once: true })
-
 // Stable object identity matters here. motion-v compares `initial` against
 // `animate` by reference to decide whether there is anything to animate, so
 // freshly-built literals each render would defeat the "still waiting" case.
 const hiddenState = { opacity: 0, scale: MICRO_SCALE_FADE_START_SCALE }
 const shownState = { opacity: 1, scale: 1 }
 
-// `initial` is the hidden state on the server and the client alike. Deriving it
-// from the motion preference would strand hidden styles: the server cannot know
-// the preference, and `initial` is only read when the visual element is created,
-// so a client that changed its mind could never clear the SSR attributes.
-// Suppressing the *transition* instead keeps one identical server/client tree.
-const initialState = hiddenState
-
-// Reduced motion skips the wait too: with a zero-length transition the resolved
-// state commits immediately, so there is nothing to defer.
-const waitingForView = computed(() =>
-  !shouldReduceMotion.value && props.triggerOnView && !inView.value,
-)
-
-// Referencing the same object as `initial` is intentional: motion-v skips the
-// animation entirely when the two match, which is exactly the waiting case.
-const animateState = computed(() => waitingForView.value ? hiddenState : shownState)
+const { containerRef, animateState, initialState, transitionCollapsed } = useStaggeredReveal({
+  triggerOnView: () => props.triggerOnView,
+  hiddenState,
+  shownState,
+})
 
 // Zero duration rather than no animation at all. motion-v treats "nothing to
 // animate" as "write nothing" and would leave the hidden styles stranded; a
 // zero-length transition still commits the resolved values within one frame.
 const transition = computed(() => {
-  if (shouldReduceMotion.value || waitingForView.value) {
+  if (transitionCollapsed.value) {
     return { duration: 0 }
   }
 

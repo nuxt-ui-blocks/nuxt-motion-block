@@ -118,6 +118,9 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue'
 import { useReducedMotion } from 'motion-v'
+import { useHoverCapable } from '../composables/useHoverCapable'
+
+const hoverCapable = useHoverCapable()
 
 export type BorderBeamRadius = number | 'squircle'
 
@@ -474,9 +477,8 @@ onMounted(() => {
   })
   intersectionObserver.observe(wrapper)
 
-  const hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
   const onEnter = () => {
-    if (props.pauseOnHover && hoverQuery.matches) {
+    if (props.pauseOnHover && hoverCapable.value) {
       paused = true
     }
   }

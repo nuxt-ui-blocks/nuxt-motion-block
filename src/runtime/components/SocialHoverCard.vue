@@ -178,8 +178,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
+import { useHoverCapable } from '../composables/useHoverCapable'
 
 export interface SocialProfileStat {
   label: string
@@ -240,7 +241,7 @@ const shouldReduceMotion = useReducedMotion()
 
 const isOpen = ref(false)
 const openedVia = ref<OpenedVia>('hover')
-const isHoverDevice = ref(false)
+const isHoverDevice = useHoverCapable()
 const resolvedPlacement = ref<ResolvedPlacement>(props.placement === 'top' ? 'top' : 'bottom')
 const internalFollowing = ref(props.following ?? false)
 
@@ -250,7 +251,6 @@ const triggerRef = ref<HTMLButtonElement | null>(null)
 let openTimeout: ReturnType<typeof setTimeout> | undefined
 let closeTimeout: ReturnType<typeof setTimeout> | undefined
 let countFrame = 0
-let hoverMedia: MediaQueryList | undefined
 let skipFocusOpen = false
 
 const isFollowingControlled = computed(() => props.following !== undefined)
@@ -479,20 +479,8 @@ watch(isOpen, (open) => {
   }
 })
 
-onMounted(() => {
-  hoverMedia = window.matchMedia('(hover: hover) and (pointer: fine)')
-  isHoverDevice.value = hoverMedia.matches
-
-  hoverMedia.addEventListener('change', handleHoverChange)
-})
-
-function handleHoverChange(event: MediaQueryListEvent) {
-  isHoverDevice.value = event.matches
-}
-
 onBeforeUnmount(() => {
   clearTimers()
   stopCountUp()
-  hoverMedia?.removeEventListener('change', handleHoverChange)
 })
 </script>

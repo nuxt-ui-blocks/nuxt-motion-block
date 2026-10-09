@@ -48,13 +48,13 @@
 
 <script setup lang="ts">
 import { useReducedMotion } from 'motion-v'
+import { useHoverCapable } from '../../composables/useHoverCapable'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import {
   DEFAULT_AUTO_ROTATE_SPEED,
   DEFAULT_RADIUS,
   DRAG_MOVE_THRESHOLD,
   easeInOutCubic,
-  HOVER_CAPABLE_QUERY,
   ITEM_SIZE,
   MOMENTUM_EPSILON,
   MOMENTUM_FRICTION,
@@ -128,7 +128,7 @@ let justDragged = false
 let pointerDownPosition: number | null = null
 const pauseReasons = { focus: false, hidden: false, hover: false }
 
-const isHoverDevice = ref(false)
+const isHoverDevice = useHoverCapable()
 const isPaused = ref(false)
 
 const itemAngle = computed(() =>
@@ -458,21 +458,12 @@ watch(currentRotation, (value) => {
   rotationRef = value
 }, { flush: 'sync' })
 
-let mediaQuery: MediaQueryList | null = null
-
-function updateHover() {
-  isHoverDevice.value = mediaQuery?.matches ?? false
-}
-
 const handleVisibilityChange = () => {
   pauseReasons.hidden = document.hidden
   recomputePause()
 }
 
 onMounted(() => {
-  mediaQuery = window.matchMedia(HOVER_CAPABLE_QUERY)
-  updateHover()
-  mediaQuery.addEventListener('change', updateHover)
   document.addEventListener('visibilitychange', handleVisibilityChange)
   startAutoRotate()
 })
@@ -493,7 +484,6 @@ watch(
 onBeforeUnmount(() => {
   cancelSnapFrame()
   stopAutoRotate()
-  mediaQuery?.removeEventListener('change', updateHover)
   document.removeEventListener('visibilitychange', handleVisibilityChange)
 })
 </script>

@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import { Motion, useInView, useReducedMotion } from 'motion-v'
-import { computed, ref } from 'vue'
+import { Motion } from 'motion-v'
+import { computed } from 'vue'
 import {
   FOCUS_BLUR_DURATION_S,
   FOCUS_BLUR_EASE,
@@ -27,6 +27,8 @@ import {
   FOCUS_BLUR_START_SCALE,
   FOCUS_BLUR_START_Y,
 } from './constants'
+
+import { useStaggeredReveal } from '../../composables/useStaggeredReveal'
 
 /**
  * Props for FocusBlurResolve.
@@ -52,15 +54,6 @@ const props = withDefaults(defineProps<FocusBlurResolveProps>(), {
   triggerOnView: false,
 })
 
-const shouldReduceMotion = useReducedMotion()
-
-const containerRef = ref<HTMLElement | null>(null)
-
-// Observing is unconditional rather than gated on `triggerOnView`. A hook has
-// to be called on every render, and the observer is idle until something
-// actually scrolls, so gating it would save nothing but add a branch.
-const inView = useInView(containerRef, { once: true })
-
 // These are module constants rather than computeds so their object identity is
 // stable. motion-v compares `initial` against `animate` by reference
 // (`state/animation-state.mjs`: `props.initial === props.animate`) to decide
@@ -80,27 +73,14 @@ const shownState = {
   y: 0,
 }
 
-// `initial` is always the hidden state, on the server and on the client alike.
-// Two earlier approaches tried to re-derive it per motion preference and both
-// were wrong: the server cannot know the user's preference, so SSR baked the
-// hidden styles into the HTML, and `initial` is only read once when the visual
-// element is created — so a client that decided "actually, show it resolved"
-// could never clear them. Reduced-motion users ended up staring at invisible
-// text. Leaving `initial` alone and suppressing the *transition* instead gives
-// one identical server and client tree, with no hydration mismatch, and still
-// lands on the resolved state.
-const initialState = hiddenState
-
-// With `triggerOnView` the animate target stays on the hidden state until the
-// element is seen, then flips to the resolved state and the ramp plays from
-// there. Referencing the same object as `initial` is intentional: motion-v
-// skips the animation entirely when the two match, which is exactly the
-// "waiting" case.
-const waitingForView = computed(() => props.triggerOnView && !inView.value)
-
-// The wrapper's `aria-label` is what keeps the string available to assistive
-// technology while the visual copy is still hidden.
-const animateState = computed(() => waitingForView.value ? hiddenState : shownState)
+const { containerRef, animateState, initialState, transitionCollapsed } = useStaggeredReveal({
+  triggerOnView: () => props.triggerOnView,
+  hiddenState,
+  shownState,
+  // FocusBlurResolve intentionally keeps its single element hidden until it is
+  // scrolled into view even under reduced motion, so the wait is not skipped.
+  skipWaitOnReducedMotion: false,
+})
 
 // `will-change` is deliberately not declared here. motion-v sets and clears it
 // itself for whichever values it animates, and an inline `will-change` from Vue
@@ -114,7 +94,7 @@ const animateState = computed(() => waitingForView.value ? hiddenState : shownSt
 // "write nothing", which is what left the hidden styles stranded in the first
 // place. A zero-length transition still runs and still commits the resolved
 // values — it just does it within one frame, with no interpolation to watch.
-const transition = computed(() => shouldReduceMotion.value
+const transition = computed(() => transitionCollapsed.value
   ? { duration: 0 }
   : {
       delay: props.delay / 1000,

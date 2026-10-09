@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useReducedMotion } from 'motion-v'
+import { useHoverCapable } from '../../composables/useHoverCapable'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import {
   type WebGLProgramHandle,
@@ -314,6 +315,8 @@ function onPointerLeave() {
  * here for a touch device: without it, the field latches wherever the last tap
  * landed and stays there.
  */
+const hoverCapable = useHoverCapable()
+
 function syncPointerListeners() {
   const wrapper = wrapperRef.value
   if (!wrapper) return
@@ -321,7 +324,7 @@ function syncPointerListeners() {
   const wanted
     = props.pointerInfluence
       && reducedMotion.value !== true
-      && window.matchMedia('(hover: hover) and (pointer: fine)').matches
+      && hoverCapable.value
 
   if (wanted) {
     wrapper.addEventListener('pointermove', onPointerMove)

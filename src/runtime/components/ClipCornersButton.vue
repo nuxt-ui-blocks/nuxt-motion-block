@@ -94,6 +94,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { motion } from 'motion-v'
+import { useHoverCapable } from '../composables/useHoverCapable'
 
 interface Props {
   triangleColor?: string
@@ -114,7 +115,7 @@ const inset = computed(() => props.triangleInset)
 const move = computed(() => Math.round(s.value * 0.5))
 
 const isHovered = ref(false)
-const isHoverDevice = ref(false)
+const isHoverDevice = useHoverCapable()
 const shouldReduceMotion = ref(false)
 
 const springTransition = {
@@ -124,12 +125,6 @@ const springTransition = {
 }
 
 onMounted(() => {
-  const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
-  isHoverDevice.value = mediaQuery.matches
-  mediaQuery.addEventListener('change', (e) => {
-    isHoverDevice.value = e.matches
-  })
-
   const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
   shouldReduceMotion.value = motionQuery.matches
   motionQuery.addEventListener('change', (e) => {

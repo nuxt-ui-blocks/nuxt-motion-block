@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Motion, useInView, useReducedMotion } from 'motion-v'
-import { computed, ref } from 'vue'
+import { Motion } from 'motion-v'
+import { computed } from 'vue'
 import {
   MASK_REVEAL_UP_DEFAULT_DELAY,
   MASK_REVEAL_UP_DEFAULT_STAGGER,
@@ -11,6 +11,8 @@ import {
   MASK_REVEAL_UP_START_BLUR,
   MASK_REVEAL_UP_START_Y,
 } from './constants'
+
+import { useStaggeredReveal } from '../../composables/useStaggeredReveal'
 
 export interface MaskRevealUpProps {
   /** Extra classes for the root element. */
@@ -36,10 +38,6 @@ const props = withDefaults(defineProps<MaskRevealUpProps>(), {
   stagger: MASK_REVEAL_UP_DEFAULT_STAGGER,
   triggerOnView: false,
 })
-
-const shouldReduceMotion = useReducedMotion()
-const containerRef = ref<HTMLElement | null>(null)
-const inView = useInView(containerRef, { once: true })
 
 const resolvedLines = computed(() => {
   if (props.lines) {
@@ -70,28 +68,14 @@ const shownState = {
   y: 0,
 }
 
-// The hidden state is the initial state on the server too. The server has no way
-// to know the visitor's motion preference, and `initial` is only read when the
-// visual element is created - so a client that wanted the reduced-motion
-// starting state could never clear the attributes the server already wrote, and
-// the tree would disagree. Reduced motion is handled by collapsing the
-// transition instead, which keeps one identical server/client tree.
-const initialState = hiddenState
-
-const waitingForView = computed(() => {
-  return !shouldReduceMotion.value && props.triggerOnView && !inView.value
-})
-
-const animateState = computed(() => {
-  if (waitingForView.value) {
-    return hiddenState
-  }
-
-  return shownState
+const { containerRef, animateState, initialState, transitionCollapsed } = useStaggeredReveal({
+  triggerOnView: () => props.triggerOnView,
+  hiddenState,
+  shownState,
 })
 
 function lineTransition(index: number) {
-  if (shouldReduceMotion.value || waitingForView.value) {
+  if (transitionCollapsed.value) {
     return { duration: 0 }
   }
 

@@ -60,9 +60,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, useId } from 'vue'
+import { computed, ref, useId } from 'vue'
 import { useReducedMotion } from 'motion-v'
 import { EASE_IN_OUT } from '../utils/motion-tokens'
+import { useHoverCapable } from '../composables/useHoverCapable'
 
 export type EmbossSurfaceVariant = 'emboss' | 'deboss' | 'plaster' | 'metal-stamp'
 
@@ -112,7 +113,6 @@ interface VariantSpec {
   specular: boolean
 }
 
-const HOVER_QUERY = '(hover: hover) and (pointer: fine)'
 const SOFTNESS_SCALE = 2.4
 const MIN_BLUR = 0.25
 const DEGREES_PER_TURN = 360
@@ -155,17 +155,7 @@ const shouldReduceMotion = useReducedMotion()
 // hydration; `useId` is stable across server and client, a random string is not.
 const filterId = `es-${useId()}`
 const surfaceRef = ref<HTMLElement | null>(null)
-const isHoverDevice = ref(false)
-
-onMounted(() => {
-  const query = window.matchMedia(HOVER_QUERY)
-  isHoverDevice.value = query.matches
-  const handleChange = (event: MediaQueryListEvent) => {
-    isHoverDevice.value = event.matches
-  }
-  query.addEventListener('change', handleChange)
-  onBeforeUnmount(() => query.removeEventListener('change', handleChange))
-})
+const isHoverDevice = useHoverCapable()
 
 const spec = computed(() => VARIANTS[props.variant])
 
