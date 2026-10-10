@@ -1,23 +1,31 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import radioGroup from '../theme/radio-group'
 
 defineOptions({ inheritAttrs: false })
 
 interface Props {
+  class?: string
   ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  ui: () => ({}),
+  class: undefined,
+  ui: undefined,
 })
 
-const motionUi = computed(() => {
-  return {
-    ...props.ui,
-    root: [props.ui?.root, 'm-radio-group'],
-    indicator: [props.ui?.indicator, 'm-radio-indicator'],
-  }
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'radioGroup',
+  props,
+  theme: radioGroup,
 })
+
+const motionUi = computed(() => ({
+  ...uiProps.ui,
+  root: ui.value.root({ class: [uiProps.ui?.root, uiProps.class] }),
+  indicator: ui.value.indicator({ class: uiProps.ui?.indicator }),
+}))
 </script>
 
 <template>

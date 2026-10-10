@@ -7,14 +7,14 @@
         :animate="{ opacity: 1 }"
         :exit="{ opacity: 0 }"
         :transition="{ duration: 0.25 }"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-(--ui-bg-inverted)/50 backdrop-blur-sm"
+        :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
         @click.self="onOverlayClick"
       >
-        <div class="flex flex-col items-center gap-4 p-6 rounded-xl bg-background/80 backdrop-blur-sm shadow-xl">
+        <div :class="ui.panel({ class: uiProps.ui?.panel })">
           <UProgress
             v-if="variant === 'bar'"
             :model-value="progress"
-            class="w-48"
+            :class="ui.progress({ class: uiProps.ui?.progress })"
           />
           <motion.div
             v-else
@@ -23,10 +23,10 @@
           >
             <UIcon
               name="i-lucide-loader-2"
-              class="w-8 h-8 text-primary"
+              :class="ui.spinnerIcon({ class: uiProps.ui?.spinnerIcon })"
             />
           </motion.div>
-          <span class="text-sm text-muted">{{ Math.round(progress) }}%</span>
+          <span :class="ui.label({ class: uiProps.ui?.label })">{{ Math.round(progress) }}%</span>
         </div>
       </motion.div>
     </AnimatePresence>
@@ -35,16 +35,24 @@
 
 <script setup lang="ts">
 import { motion, AnimatePresence } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import pagePreloader from '../theme/page-preloader'
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
+  class?: string
   loading?: boolean
   progress?: number
   variant?: 'bar' | 'spinner'
+  ui?: Record<string, any>
 }>(), {
+  class: undefined,
   loading: false,
   progress: 0,
   variant: 'bar',
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'pagePreloader', props, theme: pagePreloader })
 
 const emit = defineEmits<{
   'update:loading': [value: boolean]

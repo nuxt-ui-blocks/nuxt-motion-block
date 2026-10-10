@@ -1,19 +1,18 @@
 <template>
   <div
-    class="flex items-center gap-0.5 font-mono"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     role="img"
     :aria-label="ariaLabel"
   >
     <div
       aria-hidden="true"
-      class="relative flex items-center gap-0.5"
+      :class="ui.inner({ class: uiProps.ui?.inner })"
     >
       <span
         v-if="props.prefix"
-        class="text-lg text-muted mr-0.5"
+        :class="ui.prefix({ class: uiProps.ui?.prefix })"
       >{{ props.prefix }}</span>
-      <span class="text-3xl font-bold text-highlighted">{{ props.currency }}</span>
+      <span :class="ui.currency({ class: uiProps.ui?.currency })">{{ props.currency }}</span>
       <AnimatePresence mode="popLayout">
         <motion.span
           v-for="(digit, index) in digits"
@@ -22,7 +21,7 @@
           :animate="{ y: 0, opacity: 1 }"
           :exit="{ y: -20, opacity: 0, transition: { type: 'tween', duration: 0.07 } }"
           :transition="{ type: 'spring', stiffness: 300, damping: 30 }"
-          class="inline-block text-3xl font-bold text-highlighted"
+          :class="ui.digit({ class: uiProps.ui?.digit })"
         >
           {{ digit }}
         </motion.span>
@@ -34,6 +33,8 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { AnimatePresence, motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import priceFlow from '../theme/price-flow'
 
 defineOptions({ inheritAttrs: false })
 
@@ -42,12 +43,20 @@ interface Props {
   currency?: string
   prefix?: string
   class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   currency: '$',
   prefix: undefined,
   class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'priceFlow',
+  props,
+  theme: priceFlow,
 })
 
 const currentValue = ref(props.value)

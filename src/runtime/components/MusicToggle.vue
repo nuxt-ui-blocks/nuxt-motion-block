@@ -2,11 +2,11 @@
   <div
     ref="rootEl"
     v-bind="$attrs"
-    :class="cn('inline-flex items-center gap-3', props.class, props.className)"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class, uiProps.className] })"
   >
     <div
       :style="recordFrameStyle"
-      class="relative shrink-0"
+      :class="ui.recordFrame({ class: uiProps.ui?.recordFrame })"
     >
       <div
         :aria-label="seekLabel"
@@ -14,16 +14,16 @@
         :aria-valuemin="0"
         :aria-valuenow="Math.round(progress * 100)"
         :tabindex="seekable ? 0 : -1"
-        class="pointer-events-none absolute inset-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default"
+        :class="ui.seek({ class: uiProps.ui?.seek })"
         role="slider"
         @keydown="handleSeekKeyDown"
       >
         <svg
-          class="h-full w-full -rotate-90"
+          :class="ui.ring({ class: uiProps.ui?.ring })"
           :viewBox="`0 0 ${RING_VIEWBOX} ${RING_VIEWBOX}`"
         >
           <circle
-            class="text-dimmed"
+            :class="ui.ringTrack({ class: uiProps.ui?.ringTrack })"
             cx="50"
             cy="50"
             fill="none"
@@ -34,7 +34,7 @@
           <motion.circle
             :animate="{ strokeDashoffset: circumference * (1 - progress) }"
             :transition="ringTransition"
-            class="text-primary"
+            :class="ui.ringProgress({ class: uiProps.ui?.ringProgress })"
             cx="50"
             cy="50"
             fill="none"
@@ -49,26 +49,26 @@
 
       <motion.div
         aria-hidden="true"
-        class="absolute inset-[10%] overflow-hidden rounded-full border border-default bg-muted"
+        :class="ui.disc({ class: uiProps.ui?.disc })"
         data-music-record=""
       >
         <img
           v-if="props.cover"
           :src="props.cover"
           alt=""
-          class="h-full w-full object-cover"
+          :class="ui.cover({ class: uiProps.ui?.cover })"
         >
         <div
           v-else
-          class="h-full w-full bg-gradient-to-br from-primary/40 to-primary/10"
+          :class="ui.coverFallback({ class: uiProps.ui?.coverFallback })"
         />
-        <div class="absolute inset-[38%] rounded-full bg-default" />
+        <div :class="ui.discCenter({ class: uiProps.ui?.discCenter })" />
       </motion.div>
 
       <button
         :aria-label="toggleLabel"
         :aria-pressed="playing"
-        class="absolute inset-[38%] z-10 flex items-center justify-center rounded-full bg-default text-highlighted shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default"
+        :class="ui.toggle({ class: uiProps.ui?.toggle })"
         type="button"
         @click="handleToggle"
       >
@@ -80,11 +80,11 @@
             :exit="iconExit"
             :initial="iconPauseInitial"
             :transition="iconTransition"
-            class="absolute inset-0 flex items-center justify-center"
+            :class="ui.iconWrapper({ class: uiProps.ui?.iconWrapper })"
           >
             <UIcon
               aria-hidden="true"
-              class="size-4 fill-current"
+              :class="ui.icon({ class: uiProps.ui?.icon })"
               name="i-lucide-pause"
             />
           </motion.span>
@@ -96,11 +96,11 @@
             :exit="iconExit"
             :initial="iconPlayInitial"
             :transition="iconTransition"
-            class="absolute inset-0 flex items-center justify-center"
+            :class="ui.iconWrapper({ class: uiProps.ui?.iconWrapper })"
           >
             <UIcon
               aria-hidden="true"
-              class="size-4 fill-current"
+              :class="ui.icon({ class: uiProps.ui?.icon })"
               name="i-lucide-play"
             />
           </motion.span>
@@ -108,30 +108,30 @@
       </button>
     </div>
 
-    <div class="flex flex-col gap-1.5">
+    <div :class="ui.info({ class: uiProps.ui?.info })">
       <div
         v-if="props.title || props.artist"
-        class="flex flex-col"
+        :class="ui.text({ class: uiProps.ui?.text })"
       >
         <span
           v-if="props.title"
-          class="text-sm font-medium text-highlighted"
+          :class="ui.title({ class: uiProps.ui?.title })"
         >{{ props.title }}</span>
         <span
           v-if="props.artist"
-          class="text-xs text-muted"
+          :class="ui.artist({ class: uiProps.ui?.artist })"
         >{{ props.artist }}</span>
       </div>
       <div
         aria-hidden="true"
-        class="flex h-5 items-end gap-[2px]"
+        :class="ui.bars({ class: uiProps.ui?.bars })"
       >
         <motion.span
           v-for="(bar, index) in bars"
           :key="index"
           :animate="bar.animate"
           :transition="bar.transition"
-          class="w-[2px] rounded-full bg-inverted/70"
+          :class="ui.bar({ class: uiProps.ui?.bar })"
           style="height: 100%; transform-origin: bottom"
         />
       </div>
@@ -151,7 +151,8 @@
 import type { CSSProperties } from 'vue'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
-import { cn } from '../utils/merge'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import musicToggle from '../theme/music-toggle'
 
 defineOptions({ inheritAttrs: false })
 
@@ -169,7 +170,10 @@ const props = withDefaults(defineProps<MusicToggleProps>(), {
   progress: 0,
   size: DEFAULT_SIZE,
   src: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'musicToggle', props, theme: musicToggle })
 
 const emit = defineEmits<{
   'update:playing': [value: boolean]
@@ -433,6 +437,8 @@ export interface MusicToggleProps {
    * caller drives `playing` externally.
    */
   src?: string
+  /** Theme slots for the component */
+  ui?: Record<string, any>
   /** Track artist, shown under the title */
   artist?: string
   /** Track title, shown above the artist and read by assistive tech */

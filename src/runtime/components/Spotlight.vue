@@ -1,7 +1,7 @@
 <template>
   <div
     ref="containerRef"
-    :class="spotlightClasses"
+    :class="ui.root({ visible: isHovered, class: [uiProps.ui?.root, uiProps.class] })"
     :style="spotlightStyle"
   />
 </template>
@@ -10,15 +10,25 @@
 import { ref, computed, watch } from 'vue'
 import { useSpring, useTransform } from 'motion-v'
 import type { SpringOptions } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import spotlight from '../theme/spotlight'
 
 const props = withDefaults(defineProps<{
   class?: string
+  ui?: Record<string, any>
   size?: number
   springOptions?: SpringOptions
 }>(), {
   class: 'bg-primary-300/20 dark:bg-primary-600/20',
+  ui: undefined,
   size: 200,
   springOptions: () => ({ bounce: 0 }),
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'spotlight',
+  props,
+  theme: spotlight,
 })
 
 const containerRef = ref<HTMLElement | null>(null)
@@ -75,12 +85,6 @@ watch(containerRef, (el, prevEl, onCleanup) => {
     unsubscribeTop()
   })
 })
-
-const spotlightClasses = computed(() => [
-  'pointer-events-none absolute rounded-full blur-xl transition-opacity duration-200',
-  isHovered.value ? 'opacity-100' : 'opacity-0',
-  props.class,
-])
 
 const spotlightStyle = computed(() => ({
   width: `${props.size}px`,

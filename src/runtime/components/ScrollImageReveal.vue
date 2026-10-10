@@ -3,7 +3,7 @@
   <Motion
     ref="frameRef"
     as="div"
-    :class="['relative overflow-hidden', props.rounded, props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class, props.rounded] })"
     :style="{ clipPath, maskImage, WebkitMaskImage: maskImage }"
   >
     <!-- @vue-ignore -->
@@ -11,7 +11,7 @@
       as="img"
       :alt="props.alt"
       :src="props.src"
-      class="absolute inset-x-0 w-full object-cover"
+      :class="ui.image({ class: uiProps.ui?.image })"
       decoding="async"
       :style="{
         height: `calc(100% + ${overscan * 2}px)`,
@@ -28,6 +28,8 @@
 import { computed, ref } from 'vue'
 import { useReducedMotion, useScroll, useSpring, useTransform, Motion } from 'motion-v'
 import type { ScrollOffset } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import scrollImageReveal from '../theme/scroll-image-reveal'
 
 export type ScrollImageRevealMask = 'wipe' | 'curtain' | 'circle' | 'blinds' | 'scale'
 
@@ -37,6 +39,7 @@ export interface ScrollImageRevealProps {
   /** Accessible description of the image. Required. */
   alt: string
   class?: string
+  ui?: Record<string, any>
   /** Reveal direction. Only left/right apply to "wipe" and "blinds"; only up/down apply to "curtain". */
   direction?: ScrollImageRevealDirection
   mask?: ScrollImageRevealMask
@@ -52,7 +55,8 @@ export interface ScrollImageRevealProps {
 }
 
 const props = withDefaults(defineProps<ScrollImageRevealProps>(), {
-  class: '',
+  class: undefined,
+  ui: undefined,
   direction: 'left',
   mask: 'wipe',
   // The payoff has to land while the frame is still comfortably in view. Running
@@ -62,6 +66,12 @@ const props = withDefaults(defineProps<ScrollImageRevealProps>(), {
   once: false,
   parallax: 60,
   rounded: 'rounded-2xl',
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'scrollImageReveal',
+  props,
+  theme: scrollImageReveal,
 })
 
 const DEFAULT_PARALLAX_PX = 60

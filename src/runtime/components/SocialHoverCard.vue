@@ -1,7 +1,7 @@
 <template>
   <div
     ref="wrapperRef"
-    class="relative inline-block"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @focusout="handleWrapperBlur"
     @mouseenter="handleWrapperMouseEnter"
     @mouseleave="handleWrapperMouseLeave"
@@ -11,7 +11,7 @@
       type="button"
       aria-haspopup="dialog"
       :aria-expanded="isOpen"
-      :class="['rounded font-medium text-primary text-sm underline-offset-2 hover:underline', props.class]"
+      :class="ui.trigger({ class: uiProps.ui?.trigger })"
       @click="handleTriggerClick"
       @focus="handleTriggerFocus"
       @keydown="handleTriggerKeyDown"
@@ -32,28 +32,25 @@
         :exit="cardExit"
         :transition="cardTransition"
         :style="{ transformOrigin }"
-        :class="[
-          'absolute left-1/2 z-30 w-80 -translate-x-1/2 overflow-hidden rounded-2xl border border-default bg-default shadow-xl',
-          resolvedPlacement === 'top' ? 'bottom-full mb-2' : 'top-full mt-2',
-        ]"
+        :class="ui.card({ placement: resolvedPlacement, class: uiProps.ui?.card })"
         @mouseenter="handleCardMouseEnter"
         @mouseleave="handleCardMouseLeave"
       >
         <div
           v-if="props.loading"
           aria-hidden="true"
-          class="animate-pulse p-4"
+          :class="ui.loading({ class: uiProps.ui?.loading })"
         >
-          <div class="h-16 rounded-lg bg-muted" />
-          <div class="mt-3 flex items-center gap-3">
-            <div class="size-12 rounded-full bg-muted" />
-            <div class="flex-1 space-y-2">
-              <div class="h-3 w-2/3 rounded bg-muted" />
-              <div class="h-3 w-1/3 rounded bg-muted" />
+          <div :class="ui.loadingBanner({ class: uiProps.ui?.loadingBanner })" />
+          <div :class="ui.loadingBody({ class: uiProps.ui?.loadingBody })">
+            <div :class="ui.loadingAvatar({ class: uiProps.ui?.loadingAvatar })" />
+            <div :class="ui.loadingText({ class: uiProps.ui?.loadingText })">
+              <div :class="ui.loadingLineWide({ class: uiProps.ui?.loadingLineWide })" />
+              <div :class="ui.loadingLineNarrow({ class: uiProps.ui?.loadingLineNarrow })" />
             </div>
           </div>
-          <div class="mt-4 h-3 w-full rounded bg-muted" />
-          <div class="mt-2 h-3 w-4/5 rounded bg-muted" />
+          <div :class="ui.loadingLineFull({ class: uiProps.ui?.loadingLineFull })" />
+          <div :class="ui.loadingLineShort({ class: uiProps.ui?.loadingLineShort })" />
         </div>
 
         <div v-else>
@@ -61,55 +58,55 @@
             v-if="props.profile.banner"
             :src="props.profile.banner"
             alt=""
-            class="h-16 w-full object-cover"
+            :class="ui.banner({ class: uiProps.ui?.banner })"
             height="64"
             width="320"
           >
           <div
             v-else
-            class="h-16 w-full bg-gradient-to-r from-primary/40 to-primary/10"
+            :class="ui.bannerFallback({ class: uiProps.ui?.bannerFallback })"
           />
 
-          <div class="p-4">
-            <div class="flex items-start justify-between gap-3">
-              <div class="flex items-center gap-3">
+          <div :class="ui.body({ class: uiProps.ui?.body })">
+            <div :class="ui.header({ class: uiProps.ui?.header })">
+              <div :class="ui.identity({ class: uiProps.ui?.identity })">
                 <img
                   :src="props.profile.avatar"
                   :alt="props.profile.name"
-                  class="size-12 shrink-0 rounded-full border-2 border-default object-cover"
+                  :class="ui.avatar({ class: uiProps.ui?.avatar })"
                   height="48"
                   width="48"
                 >
-                <div class="min-w-0">
-                  <div class="flex items-center gap-1">
+                <div :class="ui.info({ class: uiProps.ui?.info })">
+                  <div :class="ui.nameRow({ class: uiProps.ui?.nameRow })">
                     <a
                       v-if="props.profile.url"
                       :href="props.profile.url"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="truncate font-semibold text-highlighted text-sm hover:underline"
+                      :class="ui.nameLink({ class: uiProps.ui?.nameLink })"
                     >
                       {{ props.profile.name }}
                     </a>
                     <p
                       v-else
-                      class="truncate font-semibold text-highlighted text-sm"
+                      :class="ui.name({ class: uiProps.ui?.name })"
                     >
                       {{ props.profile.name }}
                     </p>
                     <UIcon
                       v-if="props.profile.verified"
                       name="i-heroicons-check-badge-solid"
-                      class="size-4 shrink-0 text-primary"
+                      :class="ui.verifiedIcon({ class: uiProps.ui?.verifiedIcon })"
                     />
                     <span
                       v-if="props.profile.verified"
-                      class="sr-only"
+                      :class="ui.verifiedLabel({ class: uiProps.ui?.verifiedLabel })"
                     >
                       Verified account
                     </span>
                   </div>
-                  <p class="truncate text-muted text-xs">
+                  <p :class="ui.handle({ class: uiProps.ui?.handle })">
                     @{{ props.profile.handle }}
                   </p>
                 </div>
@@ -117,13 +114,13 @@
 
               <motion.div
                 layout
-                class="shrink-0"
+                :class="ui.action({ class: uiProps.ui?.action })"
               >
                 <UButton
                   :variant="isFollowing ? 'soft' : 'solid'"
                   :color="isFollowing ? 'neutral' : 'primary'"
                   :aria-pressed="isFollowing"
-                  class="rounded-full"
+                  :class="ui.followButton({ class: uiProps.ui?.followButton })"
                   @click="toggleFollow"
                 >
                   <AnimatePresence
@@ -132,7 +129,7 @@
                   >
                     <motion.span
                       :key="isFollowing ? 'following' : 'follow'"
-                      class="inline-block"
+                      :class="ui.followLabel({ class: uiProps.ui?.followLabel })"
                       :initial="{ opacity: 0 }"
                       :animate="{ opacity: 1 }"
                       :exit="{ opacity: 0 }"
@@ -147,25 +144,25 @@
 
             <p
               v-if="props.profile.bio"
-              class="mt-3 text-highlighted/80 text-sm leading-relaxed"
+              :class="ui.bio({ class: uiProps.ui?.bio })"
             >
               {{ props.profile.bio }}
             </p>
 
             <ul
               v-if="props.profile.stats?.length"
-              class="mt-4 flex items-center gap-4"
+              :class="ui.stats({ class: uiProps.ui?.stats })"
             >
               <li
                 v-for="stat in props.profile.stats"
                 :key="stat.label"
-                class="flex flex-col"
+                :class="ui.stat({ class: uiProps.ui?.stat })"
               >
-                <span class="font-semibold text-highlighted text-sm">
+                <span :class="ui.statValue({ class: uiProps.ui?.statValue })">
                   <span v-if="typeof stat.value === 'number'">{{ formatStat(stat.label) }}</span>
                   <span v-else>{{ stat.value }}</span>
                 </span>
-                <span class="text-muted text-xs">
+                <span :class="ui.statLabel({ class: uiProps.ui?.statLabel })">
                   {{ stat.label }}
                 </span>
               </li>
@@ -181,6 +178,8 @@
 import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
 import { useHoverCapable } from '../composables/useHoverCapable'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import socialHoverCard from '../theme/social-hover-card'
 
 export interface SocialProfileStat {
   label: string
@@ -205,6 +204,7 @@ type OpenedVia = 'focus' | 'hover'
 
 interface Props {
   class?: string
+  ui?: Record<string, any>
   closeDelay?: number
   /** Controlled follow state. Leave undefined for uncontrolled. */
   following?: boolean
@@ -226,11 +226,18 @@ const easeOutCubic = (progress: number) => 1 - (1 - progress) ** 3
 
 const props = withDefaults(defineProps<Props>(), {
   class: undefined,
+  ui: undefined,
   closeDelay: DEFAULT_CLOSE_DELAY,
   following: undefined,
   loading: false,
   openDelay: DEFAULT_OPEN_DELAY,
   placement: 'auto',
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'socialHoverCard',
+  props,
+  theme: socialHoverCard,
 })
 
 const emit = defineEmits<{

@@ -1,6 +1,6 @@
 <template>
   <motion.div
-    class="group w-full"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :initial="cardInitial"
     :while-in-view="cardWhileInView"
     :transition="cardTransition"
@@ -11,15 +11,14 @@
       role="article"
       :aria-label="`${props.title} - ${props.currency}${props.price}`"
       :ui="cardUi"
-      :class="props.class"
     >
-      <div class="relative aspect-square overflow-hidden bg-muted">
+      <div :class="ui.media({ class: uiProps.ui?.media })">
         <img
           :src="props.image"
           :alt="props.title"
           :draggable="false"
-          class="h-full w-full object-cover"
           :class="[
+            ui.image({ class: uiProps.ui?.image }),
             !shouldReduceMotion && 'transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]',
             isHoverDevice && !shouldReduceMotion && 'group-hover:scale-105',
           ]"
@@ -27,14 +26,16 @@
 
         <div
           data-slot="overlay"
-          class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 transition-opacity duration-300"
-          :class="isHoverDevice && 'group-hover:opacity-100'"
+          :class="[
+            ui.overlay({ class: uiProps.ui?.overlay }),
+            isHoverDevice && 'group-hover:opacity-100',
+          ]"
         />
 
         <motion.span
           v-if="props.badge"
           role="status"
-          class="absolute top-3 left-3"
+          :class="ui.badgeWrapper({ class: uiProps.ui?.badgeWrapper })"
           :initial="badgeInitial"
           :animate="badgeAnimate"
           :transition="badgeTransition"
@@ -44,7 +45,7 @@
             :color="badgeColor"
             variant="solid"
             size="xs"
-            class="px-2.5 py-1 font-semibold shadow-sm"
+            :class="ui.badge({ class: uiProps.ui?.badge })"
           />
         </motion.span>
 
@@ -53,16 +54,17 @@
           :aria-label="isWishlisted
             ? `Remove ${props.title} from wishlist`
             : `Add ${props.title} to wishlist`"
-          class="absolute top-3 right-3 flex size-8 cursor-pointer items-center justify-center rounded-full bg-default/80 backdrop-blur-sm transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          :class="isHoverDevice ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'"
+          :class="[
+            ui.wishlistButton({ class: uiProps.ui?.wishlistButton }),
+            isHoverDevice ? 'opacity-0 group-hover:opacity-100' : 'opacity-100',
+          ]"
           :while-press="tapTransition"
           @click="handleWishlist"
         >
           <svg
             aria-hidden="true"
             viewBox="0 0 24 24"
-            class="size-4"
-            :class="isWishlisted ? 'text-error' : 'text-highlighted'"
+            :class="[ui.wishlistIcon({ class: uiProps.ui?.wishlistIcon }), isWishlisted ? 'text-error' : 'text-highlighted']"
             :fill="isWishlisted ? 'currentColor' : 'none'"
             stroke="currentColor"
             :stroke-width="isWishlisted ? 0 : 2"
@@ -76,15 +78,15 @@
         </motion.button>
       </div>
 
-      <div class="flex flex-1 flex-col gap-2 p-4">
-        <h3 class="line-clamp-1 text-sm font-semibold tracking-tight text-highlighted">
+      <div :class="ui.content({ class: uiProps.ui?.content })">
+        <h3 :class="ui.title({ class: uiProps.ui?.title })">
           {{ props.title }}
         </h3>
 
         <div
           v-if="props.rating !== undefined"
           :aria-label="`${props.rating} out of 5 stars`"
-          class="flex items-center gap-0.5"
+          :class="ui.rating({ class: uiProps.ui?.rating })"
         >
           <template
             v-for="star in stars"
@@ -94,7 +96,7 @@
               v-if="star.half"
               aria-hidden="true"
               viewBox="0 0 24 24"
-              class="size-3.5 text-warning"
+              :class="ui.starHalf({ class: uiProps.ui?.starHalf })"
             >
               <defs>
                 <linearGradient :id="halfStarId(star.index)">
@@ -121,8 +123,7 @@
               v-else
               aria-hidden="true"
               viewBox="0 0 24 24"
-              class="size-3.5"
-              :class="star.filled ? 'text-warning' : 'text-muted/30'"
+              :class="[ui.star({ class: uiProps.ui?.star }), star.filled ? 'text-warning' : 'text-muted/30']"
               :fill="star.filled ? 'currentColor' : 'none'"
               stroke="currentColor"
               :stroke-width="star.filled ? 0 : 1.5"
@@ -134,24 +135,24 @@
               />
             </svg>
           </template>
-          <span class="ml-1 text-xs font-medium text-muted">{{ props.rating }}</span>
+          <span :class="ui.ratingValue({ class: uiProps.ui?.ratingValue })">{{ props.rating }}</span>
         </div>
 
-        <div class="flex items-baseline gap-2">
-          <span class="text-xl font-bold tracking-tight text-highlighted">
+        <div :class="ui.priceRow({ class: uiProps.ui?.priceRow })">
+          <span :class="ui.price({ class: uiProps.ui?.price })">
             {{ props.currency }}{{ props.price }}
           </span>
           <template v-if="hasDiscount">
-            <span class="text-sm text-muted line-through">
+            <span :class="ui.priceOld({ class: uiProps.ui?.priceOld })">
               {{ props.currency }}{{ props.originalPrice }}
             </span>
-            <span class="rounded-md bg-error/10 px-1.5 py-0.5 text-xs font-semibold text-error">
+            <span :class="ui.discount({ class: uiProps.ui?.discount })">
               -{{ discountPercent }}%
             </span>
           </template>
         </div>
 
-        <div class="mt-auto pt-2">
+        <div :class="ui.footer({ class: uiProps.ui?.footer })">
           <UButton
             block
             :disabled="isAdded"
@@ -167,7 +168,7 @@
               <motion.span
                 v-if="isAdded"
                 key="added"
-                class="flex items-center gap-2"
+                :class="ui.buttonLabel({ class: uiProps.ui?.buttonLabel })"
                 :initial="{ opacity: 0, transform: 'scale(0.8)' }"
                 :animate="{ opacity: 1, transform: 'scale(1)' }"
                 :exit="{ opacity: 0, transform: 'scale(0.8)' }"
@@ -192,7 +193,7 @@
               <motion.span
                 v-else
                 key="cart"
-                class="flex items-center gap-2"
+                :class="ui.buttonLabel({ class: uiProps.ui?.buttonLabel })"
                 :initial="{ opacity: 0, transform: 'scale(0.8)' }"
                 :animate="{ opacity: 1, transform: 'scale(1)' }"
                 :exit="{ opacity: 0, transform: 'scale(0.8)' }"
@@ -223,16 +224,17 @@
 </template>
 
 <script setup lang="ts">
-import type { CardProps } from '#ui/components/Card.vue'
 import { computed, onBeforeUnmount, ref, useId } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
 import { useHoverCapable } from '../composables/useHoverCapable'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import productCard from '../theme/product-card'
 
 defineOptions({ inheritAttrs: false })
 
 interface Props {
   class?: string
-  ui?: CardProps['ui']
+  ui?: Record<string, any>
   badge?: string
   currency?: string
   image: string
@@ -250,9 +252,15 @@ const props = withDefaults(defineProps<Props>(), {
   currency: '$',
   originalPrice: undefined,
   rating: undefined,
-  ui: () => ({}),
+  ui: undefined,
   onAddToCart: undefined,
   onWishlist: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'productCard',
+  props,
+  theme: productCard,
 })
 
 const shouldReduceMotion = useReducedMotion()
@@ -308,7 +316,6 @@ const cardUi = computed(() => ({
   // `overflow-hidden rounded-2xl`. The inner content div carries its own `p-4`, as in the reference,
   // so zero body padding is what keeps the image flush and the corners clipped.
   body: 'flex flex-1 flex-col divide-y-0 p-0 sm:p-0',
-  ...props.ui,
 }))
 
 // The added state is a `disabled` button, so `UButton`'s own `disabled:opacity-75` already dims it —

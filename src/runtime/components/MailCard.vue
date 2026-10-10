@@ -1,19 +1,16 @@
 <template>
-  <UCard
-    :class="props.class"
-    :ui="props.ui"
-  >
+  <UCard :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <div
-      class="flex items-start justify-between cursor-pointer"
+      :class="ui.header({ class: uiProps.ui?.header })"
       @click="toggle"
     >
-      <div class="flex-1 min-w-0">
-        <h3 class="text-lg font-semibold text-highlighted">
+      <div :class="ui.headerContent({ class: uiProps.ui?.headerContent })">
+        <h3 :class="ui.title({ class: uiProps.ui?.title })">
           {{ props.title }}
         </h3>
         <p
           v-if="!isExpanded && props.preview"
-          class="text-sm text-muted mt-1 truncate"
+          :class="ui.preview({ class: uiProps.ui?.preview })"
         >
           {{ props.preview }}
         </p>
@@ -21,10 +18,10 @@
       <motion.div
         :animate="{ rotate: isExpanded ? 180 : 0 }"
         :transition="{ type: 'spring', stiffness: 300, damping: 25 }"
-        class="ml-2 flex-shrink-0 text-muted"
+        :class="ui.chevron({ class: uiProps.ui?.chevron })"
       >
         <svg
-          class="w-5 h-5"
+          :class="ui.chevronIcon({ class: uiProps.ui?.chevronIcon })"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -46,11 +43,11 @@
         :animate="{ height: 'auto', opacity: 1 }"
         :exit="{ height: 0, opacity: 0 }"
         :transition="{ type: 'spring', stiffness: 300, damping: 30 }"
-        class="overflow-hidden"
+        :class="ui.body({ class: uiProps.ui?.body })"
       >
-        <div class="pt-4">
+        <div :class="ui.bodyInner({ class: uiProps.ui?.bodyInner })">
           <slot>
-            <p class="text-muted">
+            <p :class="ui.bodyText({ class: uiProps.ui?.bodyText })">
               {{ props.preview }}
             </p>
           </slot>
@@ -61,24 +58,29 @@
 </template>
 
 <script setup lang="ts">
-import type { CardProps } from '#ui/components/Card.vue'
 import { ref } from 'vue'
 import { AnimatePresence, motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import mailCard from '../theme/mail-card'
 
 defineOptions({ inheritAttrs: false })
 
 interface Props {
   class?: string
-  ui?: CardProps['ui']
+  ui?: Record<string, any>
   title: string
   preview?: string
   expanded?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  class: undefined,
+  ui: undefined,
   preview: '',
   expanded: false,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'mailCard', props, theme: mailCard })
 
 const emit = defineEmits<{
   'update:expanded': [value: boolean]

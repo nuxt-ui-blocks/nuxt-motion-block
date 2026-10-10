@@ -18,7 +18,7 @@
       v-if="$slots.content"
       #content
     >
-      <div class="relative overflow-hidden">
+      <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
         <AnimatePresence>
           <motion.div
             v-if="isOpen"
@@ -31,7 +31,7 @@
               damping: 25,
               bounce: 0.1,
             }"
-            class="will-change-transform"
+            :class="ui.content({ class: uiProps.ui?.content })"
           >
             <slot name="content" />
           </motion.div>
@@ -49,7 +49,7 @@
               damping: 30,
               delay: 0.05,
             }"
-            class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45 bg-default border-t border-l border-default will-change-transform"
+            :class="ui.arrow({ class: uiProps.ui?.arrow })"
           />
         </AnimatePresence>
       </div>
@@ -67,6 +67,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import richPopover from '../theme/rich-popover'
 
 interface Props {
   mode?: 'click' | 'hover'
@@ -76,6 +78,8 @@ interface Props {
   arrow?: boolean
   portal?: string | boolean | HTMLElement
   open?: boolean
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -86,6 +90,14 @@ const props = withDefaults(defineProps<Props>(), {
   arrow: false,
   portal: true,
   open: undefined,
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'richPopover',
+  props,
+  theme: richPopover,
 })
 
 const emit = defineEmits<{

@@ -1,12 +1,9 @@
 <template>
-  <div
-    class="relative h-full w-full overflow-hidden"
-    :class="props.class"
-  >
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <div
-      v-for="meteor in meteors"
+      v-for="meteor in meteorItems"
       :key="meteor.id"
-      class="meteor"
+      :class="ui.meteor({ class: uiProps.ui?.meteor })"
       :style="{
         left: `${meteor.x}%`,
         animationDuration: `${meteor.duration}s`,
@@ -18,19 +15,26 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import meteors from '../theme/meteors'
 
 interface Props {
   count?: number
   speed?: number
   class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   count: 10,
   speed: 1,
+  class: undefined,
+  ui: undefined,
 })
 
-const meteors = computed(() =>
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'meteors', props, theme: meteors })
+
+const meteorItems = computed(() =>
   Array.from({ length: props.count }, (_, i) => ({
     id: i,
     x: Math.random() * 100,

@@ -1,13 +1,12 @@
 <template>
   <motion.div
-    class="relative overflow-hidden"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :initial="false"
   >
     <slot />
 
     <motion.div
-      class="absolute inset-0 z-10 flex items-center justify-center"
+      :class="ui.mask({ class: uiProps.ui?.mask })"
       :style="maskStyle"
       :initial="{ opacity: 1, scale: 1 }"
       :animate="{
@@ -21,19 +20,19 @@
       }"
     >
       <slot name="mask">
-        <div class="text-center p-6">
+        <div :class="ui.content({ class: uiProps.ui?.content })">
           <div
             v-if="icon"
-            class="mb-4"
+            :class="ui.iconWrapper({ class: uiProps.ui?.iconWrapper })"
           >
             <UIcon
               :name="icon"
-              class="w-12 h-12 mx-auto text-white"
+              :class="ui.icon({ class: uiProps.ui?.icon })"
             />
           </div>
           <p
             v-if="label"
-            class="text-white text-lg font-medium"
+            :class="ui.label({ class: uiProps.ui?.label })"
           >
             {{ label }}
           </p>
@@ -46,6 +45,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import maskContainer from '../theme/mask-container'
 
 interface Props {
   show?: boolean
@@ -53,6 +54,7 @@ interface Props {
   icon?: string
   label?: string
   class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -60,7 +62,11 @@ const props = withDefaults(defineProps<Props>(), {
   color: 'rgba(0,0,0,0.5)',
   icon: '',
   label: '',
+  class: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'maskContainer', props, theme: maskContainer })
 
 const maskStyle = computed(() => ({
   backgroundColor: props.color,

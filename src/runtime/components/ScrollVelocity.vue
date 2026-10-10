@@ -1,17 +1,17 @@
 <template>
-  <section>
+  <section :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <VelocityText
       v-for="(text, index) in texts"
       :key="index"
       :base-velocity="index % 2 !== 0 ? -velocity : velocity"
       :scroll-container-ref="scrollContainerRef"
-      :class-name="props.class"
+      :text-class="ui.text({ class: uiProps.ui?.text })"
       :damping="damping"
       :stiffness="stiffness"
       :num-copies="numCopies"
       :velocity-mapping="velocityMapping"
-      :parallax-class-name="parallaxClass"
-      :scroller-class-name="scrollerClass"
+      :parallax-class="ui.parallax({ class: [uiProps.ui?.parallax, props.parallaxClass] })"
+      :scroller-class="ui.scroller({ class: [uiProps.ui?.scroller, props.scrollerClass] })"
       :parallax-style="parallaxStyle"
       :scroller-style="scrollerStyle"
     >
@@ -23,7 +23,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, h } from 'vue'
 import { useRafFn } from '@vueuse/core'
-import { cn } from '../utils/merge'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import scrollVelocity from '../theme/scroll-velocity'
 
 interface VelocityMapping {
   input: [number, number]
@@ -35,6 +36,7 @@ interface ScrollVelocityProps {
   texts?: string[]
   velocity?: number
   class?: string
+  ui?: Record<string, any>
   damping?: number
   stiffness?: number
   numCopies?: number
@@ -48,7 +50,8 @@ interface ScrollVelocityProps {
 const props = withDefaults(defineProps<ScrollVelocityProps>(), {
   texts: () => [],
   velocity: 100,
-  class: '',
+  class: undefined,
+  ui: undefined,
   damping: 50,
   stiffness: 400,
   numCopies: 6,
@@ -57,6 +60,12 @@ const props = withDefaults(defineProps<ScrollVelocityProps>(), {
   scrollerClass: '',
   parallaxStyle: () => ({}),
   scrollerStyle: () => ({}),
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'scrollVelocity',
+  props,
+  theme: scrollVelocity,
 })
 
 // Element width hook equivalent
@@ -86,7 +95,7 @@ const VelocityText = {
   props: {
     baseVelocity: { type: Number, default: 100 },
     scrollContainerRef: { type: Object, default: null },
-    class: { type: String, default: '' },
+    textClass: { type: String, default: '' },
     damping: { type: Number, default: 50 },
     stiffness: { type: Number, default: 400 },
     numCopies: { type: Number, default: 6 },
@@ -178,18 +187,18 @@ const VelocityText = {
       for (let i = 0; i < props.numCopies; i++) {
         spans.push(
           h('span', {
-            class: cn('flex-shrink-0', props.class),
+            class: props.textClass,
             ref: i === 0 ? copyRef : undefined,
           }, slots.default?.()),
         )
       }
 
       return h('div', {
-        class: cn('relative overflow-hidden', props.parallaxClass),
+        class: props.parallaxClass,
         style: props.parallaxStyle,
       }, [
         h('div', {
-          class: cn('flex whitespace-nowrap text-center font-sans text-4xl font-bold tracking-[-0.02em] drop-shadow md:text-[5rem] md:leading-[5rem]', props.scrollerClass),
+          class: props.scrollerClass,
           style: {
             transform: `translateX(${x.value})`,
             ...props.scrollerStyle,

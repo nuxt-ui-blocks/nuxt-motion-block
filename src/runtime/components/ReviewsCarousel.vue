@@ -1,12 +1,12 @@
 <template>
   <div
-    class="relative"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @mouseenter="pauseAutoScroll = true"
     @mouseleave="pauseAutoScroll = false"
   >
     <div
       ref="scrollContainer"
-      class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
+      :class="ui.scroller({ class: uiProps.ui?.scroller })"
       style="-ms-overflow-style: none; scrollbar-width: none;"
     >
       <motion.div
@@ -15,26 +15,25 @@
         :initial="{ opacity: 0, y: 30 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ type: 'spring', stiffness: 300, damping: 25, delay: index * 0.1 }"
-        class="snap-start shrink-0 w-80"
+        :class="ui.card({ class: uiProps.ui?.card })"
       >
         <UCard>
-          <div class="flex items-center gap-3 mb-3">
+          <div :class="ui.cardHeader({ class: uiProps.ui?.cardHeader })">
             <img
               v-if="review.avatar"
               :src="review.avatar"
               :alt="review.author"
-              class="w-10 h-10 rounded-full object-cover"
+              :class="ui.avatar({ class: uiProps.ui?.avatar })"
             >
-            <div>
-              <p class="font-semibold text-highlighted">
+            <div :class="ui.authorInfo({ class: uiProps.ui?.authorInfo })">
+              <p :class="ui.authorName({ class: uiProps.ui?.authorName })">
                 {{ review.author }}
               </p>
-              <div class="flex gap-0.5">
+              <div :class="ui.stars({ class: uiProps.ui?.stars })">
                 <svg
                   v-for="star in 5"
                   :key="star"
-                  class="w-4 h-4"
-                  :class="star <= review.rating ? 'text-yellow-500' : 'text-default-300'"
+                  :class="[ui.star({ class: uiProps.ui?.star }), star <= review.rating ? 'text-yellow-500' : 'text-default-300']"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -43,7 +42,7 @@
               </div>
             </div>
           </div>
-          <p class="text-sm text-muted leading-relaxed">
+          <p :class="ui.content({ class: uiProps.ui?.content })">
             {{ review.content }}
           </p>
         </UCard>
@@ -51,11 +50,11 @@
     </div>
 
     <button
-      class="absolute left-0 top-1/2 -translate-y-1/2 -ml-3 w-8 h-8 rounded-full bg-default border border-default shadow-md flex items-center justify-center hover:bg-muted transition-colors"
+      :class="ui.prevButton({ class: uiProps.ui?.prevButton })"
       @click="scroll(-1)"
     >
       <svg
-        class="w-4 h-4 text-inverted"
+        :class="ui.chevron({ class: uiProps.ui?.chevron })"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -69,11 +68,11 @@
       </svg>
     </button>
     <button
-      class="absolute right-0 top-1/2 -translate-y-1/2 -mr-3 w-8 h-8 rounded-full bg-default border border-default shadow-md flex items-center justify-center hover:bg-muted transition-colors"
+      :class="ui.nextButton({ class: uiProps.ui?.nextButton })"
       @click="scroll(1)"
     >
       <svg
-        class="w-4 h-4 text-inverted"
+        :class="ui.chevron({ class: uiProps.ui?.chevron })"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -90,9 +89,10 @@
 </template>
 
 <script setup lang="ts">
-import type { CardProps } from '#ui/components/Card.vue'
 import { ref, onMounted, onUnmounted } from 'vue'
 import { motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import reviewsCarousel from '../theme/reviews-carousel'
 
 defineOptions({ inheritAttrs: false })
 
@@ -105,11 +105,20 @@ interface Review {
 
 interface Props {
   class?: string
-  ui?: CardProps['ui']
+  ui?: Record<string, any>
   reviews: Review[]
 }
 
-defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'reviewsCarousel',
+  props,
+  theme: reviewsCarousel,
+})
 
 const scrollContainer = ref<HTMLElement>()
 const pauseAutoScroll = ref(false)

@@ -2,6 +2,8 @@
 import { computed, ref, watch } from 'vue'
 import { defineShortcuts } from '#imports'
 import { motion, AnimatePresence } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import pinnedList from '../theme/pinned-list'
 
 interface PinnedListItem {
   id: string
@@ -18,6 +20,8 @@ interface Props {
   emptyPinnedMessage?: string
   label?: string
   showDivider?: boolean
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -25,6 +29,14 @@ const props = withDefaults(defineProps<Props>(), {
   emptyPinnedMessage: 'Pin an item to keep it at the top.',
   label: 'Pinnable items',
   showDivider: true,
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'pinnedList',
+  props,
+  theme: pinnedList,
 })
 
 const emit = defineEmits<{ 'update:pinned': [ids: string[]] }>()
@@ -99,10 +111,10 @@ defineExpose({ togglePin, focusedIndex, pinned, pinnedItems, unpinnedItems })
 </script>
 
 <template>
-  <div class="flex flex-col">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <ul
       :aria-label="label"
-      class="flex flex-col gap-0.5 p-1"
+      :class="ui.list({ class: uiProps.ui?.list })"
     >
       <AnimatePresence :initial="false">
         <motion.li
@@ -112,12 +124,12 @@ defineExpose({ togglePin, focusedIndex, pinned, pinnedItems, unpinnedItems })
           :animate="{ opacity: 1 }"
           :exit="{ opacity: 0 }"
           :transition="{ duration: 0.15 }"
-          class="list-none"
+          :class="ui.item({ class: uiProps.ui?.item })"
         >
           <UBadge
             variant="soft"
             color="neutral"
-            class="w-full justify-center border border-dashed"
+            :class="ui.emptyBadge({ class: uiProps.ui?.emptyBadge })"
           >
             {{ emptyPinnedMessage }}
           </UBadge>
@@ -130,21 +142,21 @@ defineExpose({ togglePin, focusedIndex, pinned, pinnedItems, unpinnedItems })
           :key="item.id"
           layout
           :transition="{ type: 'spring', bounce: 0.3, duration: 0.4, delay: groupIndex * 0.025 }"
-          class="list-none"
+          :class="ui.item({ class: uiProps.ui?.item })"
         >
           <motion.div
-            class="relative"
+            :class="ui.pinnedInner({ class: uiProps.ui?.pinnedInner })"
             :animate="justPinnedId === item.id ? { scale: [1, 0.985, 0.997, 1] } : { scale: 1 }"
             :transition="{ duration: 0.34 }"
           >
             <motion.span
-              class="absolute left-0 h-5 w-[3px] rounded-r-full z-10"
+              :class="ui.rail({ class: uiProps.ui?.rail })"
               style="top: 50%; transform: translateY(-50%)"
               :animate="{ opacity: 1, scaleY: 1 }"
               :initial="{ opacity: 0, scaleY: 0.2 }"
               :transition="{ bounce: 0.32, duration: 0.2, type: 'spring' }"
             >
-              <div class="h-full w-full rounded-r-full bg-primary" />
+              <div :class="ui.railFill({ class: uiProps.ui?.railFill })" />
             </motion.span>
 
             <UButton
@@ -155,37 +167,36 @@ defineExpose({ togglePin, focusedIndex, pinned, pinnedItems, unpinnedItems })
               role="button"
               :aria-pressed="true"
               :aria-label="`Unpin ${item.title}`"
-              class="relative justify-start gap-3 rounded-xl border shadow-sm"
-              :class="focusedIndex === orderedItems.indexOf(item) ? 'ring-2 ring-primary' : ''"
+              :class="[ui.pinnedButton({ class: uiProps.ui?.pinnedButton }), focusedIndex === orderedItems.indexOf(item) ? 'ring-2 ring-primary' : '']"
               @click="togglePin(item.id)"
             >
               <template #leading>
                 <UIcon
                   v-if="item.icon"
                   :name="item.icon"
-                  class="w-4 h-4 text-highlighted"
+                  :class="ui.pinIcon({ class: uiProps.ui?.pinIcon })"
                 />
               </template>
-              <div class="min-w-0 flex-1 text-left">
-                <p class="truncate font-medium text-sm text-highlighted">
+              <div :class="ui.content({ class: uiProps.ui?.content })">
+                <p :class="ui.title({ class: uiProps.ui?.title })">
                   {{ item.title }}
                 </p>
                 <p
                   v-if="item.meta"
-                  class="truncate text-xs text-muted"
+                  :class="ui.meta({ class: uiProps.ui?.meta })"
                 >
                   {{ item.meta }}
                 </p>
               </div>
               <template #trailing>
                 <motion.span
-                  class="flex items-center justify-center"
+                  :class="ui.pinGlyph({ class: uiProps.ui?.pinGlyph })"
                   :animate="{ rotate: 45 }"
                   :initial="{ rotate: 0 }"
                   :transition="{ bounce: 0.32, duration: 0.2, type: 'spring' }"
                 >
                   <svg
-                    class="size-4 fill-current"
+                    :class="ui.pinGlyphIcon({ class: uiProps.ui?.pinGlyphIcon })"
                     viewBox="0 0 24 24"
                   >
                     <path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z" />
@@ -200,7 +211,7 @@ defineExpose({ togglePin, focusedIndex, pinned, pinnedItems, unpinnedItems })
       <li
         v-if="showDivider && pinnedItems.length > 0 && unpinnedItems.length > 0"
         aria-hidden="true"
-        class="my-1 list-none border-t border-default"
+        :class="ui.divider({ class: uiProps.ui?.divider })"
       />
 
       <AnimatePresence :initial="false">
@@ -209,7 +220,7 @@ defineExpose({ togglePin, focusedIndex, pinned, pinnedItems, unpinnedItems })
           :key="item.id"
           layout
           :transition="{ type: 'spring', bounce: 0.3, duration: 0.4, delay: (pinnedItems.length + groupIndex) * 0.025 }"
-          class="list-none"
+          :class="ui.item({ class: uiProps.ui?.item })"
         >
           <UButton
             variant="ghost"
@@ -220,31 +231,30 @@ defineExpose({ togglePin, focusedIndex, pinned, pinnedItems, unpinnedItems })
             role="button"
             :aria-pressed="false"
             :aria-label="`Pin ${item.title}`"
-            class="relative justify-start gap-3 rounded-xl border border-transparent"
-            :class="focusedIndex === orderedItems.indexOf(item) ? 'ring-2 ring-primary' : ''"
+            :class="[ui.unpinnedButton({ class: uiProps.ui?.unpinnedButton }), focusedIndex === orderedItems.indexOf(item) ? 'ring-2 ring-primary' : '']"
             @click="!pinDisabled && togglePin(item.id)"
           >
             <template #leading>
               <UIcon
                 v-if="item.icon"
                 :name="item.icon"
-                class="w-4 h-4 text-muted"
+                :class="ui.unpinIcon({ class: uiProps.ui?.unpinIcon })"
               />
             </template>
-            <div class="min-w-0 flex-1 text-left">
-              <p class="truncate font-medium text-sm text-highlighted">
+            <div :class="ui.content({ class: uiProps.ui?.content })">
+              <p :class="ui.title({ class: uiProps.ui?.title })">
                 {{ item.title }}
               </p>
               <p
                 v-if="item.meta"
-                class="truncate text-xs text-muted"
+                :class="ui.meta({ class: uiProps.ui?.meta })"
               >
                 {{ item.meta }}
               </p>
             </div>
             <template #trailing>
               <svg
-                class="size-4 text-muted"
+                :class="ui.unpinGlyph({ class: uiProps.ui?.unpinGlyph })"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

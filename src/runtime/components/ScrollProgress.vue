@@ -1,6 +1,6 @@
 <template>
   <Motion
-    :class="progressClasses"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="progressStyle"
   />
 </template>
@@ -10,9 +10,12 @@ import { ref, computed, onMounted } from 'vue'
 import { Motion, useScroll, useSpring, useMotionValueEvent } from 'motion-v'
 import type { MaybeComputedElementRef } from '@vueuse/core'
 import type { SpringOptions } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import scrollProgress from '../theme/scroll-progress'
 
 const props = withDefaults(defineProps<{
   class?: string
+  ui?: Record<string, any>
   springOptions?: SpringOptions
   /**
    * Scrollable ancestor to track instead of the window. Pass a getter —
@@ -22,8 +25,16 @@ const props = withDefaults(defineProps<{
    */
   containerRef?: MaybeComputedElementRef
 }>(), {
+  class: undefined,
+  ui: undefined,
   springOptions: undefined,
   containerRef: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'scrollProgress',
+  props,
+  theme: scrollProgress,
 })
 
 const DEFAULT_SPRING_OPTIONS: SpringOptions = {
@@ -53,11 +64,6 @@ onMounted(() => {
     scaleXValue.value = latest as number
   })
 })
-
-const progressClasses = computed(() => [
-  'inset-x-0 top-0 h-1 origin-left',
-  props.class,
-])
 
 const progressStyle = computed(() => ({
   scaleX: scaleXValue.value,

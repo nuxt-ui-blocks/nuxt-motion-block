@@ -3,22 +3,22 @@
     :aria-label="label"
     aria-live="polite"
     role="status"
-    class="relative inline-flex shrink-0 items-center justify-center"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="{ color: color || 'currentColor', height: `${size}px`, width: `${size}px` }"
   >
     <!-- orbit -->
     <template v-if="variant === 'orbit'">
       <span
-        class="absolute inset-0 rounded-full border border-current"
+        :class="ui.orbitTrack({ class: uiProps.ui?.orbitTrack })"
         :style="{ opacity: TRACK_OPACITY }"
       />
       <motion.span
         :animate="prefersReducedMotion ? undefined : { rotate: FULL_TURN }"
-        class="absolute inset-0"
+        :class="ui.orbitSpin({ class: uiProps.ui?.orbitSpin })"
         :transition="prefersReducedMotion ? undefined : loop(CYCLE / safeSpeed, LINEAR)"
       >
         <span
-          class="absolute top-0 left-1/2 rounded-full bg-current"
+          :class="ui.orbitDot({ class: uiProps.ui?.orbitDot })"
           :style="{
             height: `${size * DOT_RATIO}px`,
             width: `${size * DOT_RATIO}px`,
@@ -31,11 +31,11 @@
 
     <!-- newton-cradle -->
     <template v-else-if="variant === 'newton-cradle'">
-      <span class="absolute inset-0 flex items-start justify-center">
+      <span :class="ui.cradle({ class: uiProps.ui?.cradle })">
         <motion.span
           v-for="(_, index) in cradleArray"
           :key="`cradle-${index}`"
-          class="relative block"
+          :class="ui.cradleBall({ class: uiProps.ui?.cradleBall })"
           :style="{
             height: `${size}px`,
             transformOrigin: 'top center',
@@ -45,11 +45,11 @@
           :transition="prefersReducedMotion || !cradleKeyframes(index) ? undefined : { ...loop(SLOW_CYCLE / safeSpeed, EASE_IN_OUT), times: CRADLE_TIMES }"
         >
           <span
-            class="absolute top-0 bottom-0 left-1/2 w-px bg-current"
+            :class="ui.cradleRod({ class: uiProps.ui?.cradleRod })"
             :style="{ opacity: TRACK_OPACITY }"
           />
           <span
-            class="absolute bottom-0 left-1/2 rounded-full bg-current"
+            :class="ui.cradleBob({ class: uiProps.ui?.cradleBob })"
             :style="{
               height: `${size / CRADLE_BALLS}px`,
               width: `${size / CRADLE_BALLS}px`,
@@ -64,16 +64,16 @@
     <template v-else-if="variant === 'pendulum'">
       <motion.span
         :animate="prefersReducedMotion ? undefined : { rotate: [-PENDULUM_SWING_DEG, PENDULUM_SWING_DEG, -PENDULUM_SWING_DEG] }"
-        class="absolute inset-0"
+        :class="ui.pendulumSwing({ class: uiProps.ui?.pendulumSwing })"
         :style="{ transformOrigin: 'top center' }"
         :transition="prefersReducedMotion ? undefined : loop(SLOW_CYCLE / safeSpeed, EASE_IN_OUT)"
       >
         <span
-          class="absolute top-0 bottom-2 left-1/2 w-px bg-current"
+          :class="ui.pendulumRod({ class: uiProps.ui?.pendulumRod })"
           :style="{ opacity: TRACK_OPACITY }"
         />
         <span
-          class="absolute bottom-0 left-1/2 rounded-full bg-current"
+          :class="ui.pendulumBob({ class: uiProps.ui?.pendulumBob })"
           :style="{
             height: `${size * DOT_RATIO * 1.5}px`,
             width: `${size * DOT_RATIO * 1.5}px`,
@@ -87,7 +87,7 @@
     <template v-else-if="variant === 'hourglass'">
       <motion.svg
         :animate="prefersReducedMotion ? undefined : { rotate: [0, 0, HALF_TURN, HALF_TURN, FULL_TURN] }"
-        class="absolute inset-0 fill-current"
+        :class="ui.hourglass({ class: uiProps.ui?.hourglass })"
         :height="size"
         :width="size"
         viewBox="0 0 24 24"
@@ -105,7 +105,7 @@
     <template v-else-if="variant === 'morph-ring'">
       <motion.svg
         :animate="prefersReducedMotion ? undefined : { scale: [1, 0.88, 1] }"
-        class="absolute inset-0 stroke-current"
+        :class="ui.morphRing({ class: uiProps.ui?.morphRing })"
         fill="none"
         :height="size"
         :width="size"
@@ -143,7 +143,7 @@
       <span
         v-for="(_, index) in snakeArray"
         :key="`snake-${index}`"
-        class="absolute rounded-sm bg-current"
+        :class="ui.snakeCell({ class: uiProps.ui?.snakeCell })"
         :style="{
           ...snakePositions[index],
           height: `${size * SNAKE_CELL_RATIO}px`,
@@ -153,7 +153,7 @@
       />
       <motion.span
         :animate="prefersReducedMotion ? undefined : { x: [0, snakeTravel, snakeTravel, 0, 0], y: [0, 0, snakeTravel, snakeTravel, 0] }"
-        class="absolute top-0 left-0 rounded-sm bg-current"
+        :class="ui.snakeHead({ class: uiProps.ui?.snakeHead })"
         :style="{ height: `${size * SNAKE_CELL_RATIO}px`, width: `${size * SNAKE_CELL_RATIO}px` }"
         :transition="prefersReducedMotion ? undefined : { ...loop(SLOW_CYCLE / safeSpeed, EASE_IN_OUT), times: [0, 0.25, 0.5, 0.75, 1] }"
       />
@@ -163,17 +163,17 @@
     <template v-else-if="variant === 'comet'">
       <motion.span
         :animate="prefersReducedMotion ? undefined : { rotate: FULL_TURN }"
-        class="absolute inset-0"
+        :class="ui.cometSpin({ class: uiProps.ui?.cometSpin })"
         :transition="prefersReducedMotion ? undefined : loop(CYCLE / safeSpeed, LINEAR)"
       >
         <span
           v-for="(_, index) in trailArray"
           :key="`comet-${index}`"
-          class="absolute inset-0"
+          :class="ui.cometTrail({ class: uiProps.ui?.cometTrail })"
           :style="{ transform: `rotate(${-index * TRAIL_STEP_DEG}deg)` }"
         >
           <span
-            class="absolute top-0 left-1/2 rounded-full bg-current"
+            :class="ui.cometDot({ class: uiProps.ui?.cometDot })"
             :style="{
               height: `${size * SMALL_DOT_RATIO * (1 - index / (TRAIL_LENGTH * 2))}px`,
               width: `${size * SMALL_DOT_RATIO * (1 - index / (TRAIL_LENGTH * 2))}px`,
@@ -188,19 +188,19 @@
     <!-- radar -->
     <template v-else-if="variant === 'radar'">
       <span
-        class="absolute inset-0 rounded-full border border-current"
+        :class="ui.radarTrack({ class: uiProps.ui?.radarTrack })"
         :style="{ opacity: TRACK_OPACITY }"
       />
-      <span class="absolute inset-0 overflow-hidden rounded-full">
+      <span :class="ui.radarWrapper({ class: uiProps.ui?.radarWrapper })">
         <motion.span
           :animate="prefersReducedMotion ? undefined : { rotate: FULL_TURN }"
-          class="absolute inset-0"
+          :class="ui.radarSweep({ class: uiProps.ui?.radarSweep })"
           :style="{ background: 'conic-gradient(from 0deg, transparent 0deg, transparent 260deg, currentColor 360deg)' }"
           :transition="prefersReducedMotion ? undefined : loop(CYCLE / safeSpeed, LINEAR)"
         />
       </span>
       <span
-        class="absolute top-1/2 left-1/2 rounded-full bg-current"
+        :class="ui.radarDot({ class: uiProps.ui?.radarDot })"
         :style="{
           height: `${size * SMALL_DOT_RATIO}px`,
           width: `${size * SMALL_DOT_RATIO}px`,
@@ -213,12 +213,12 @@
     <!-- cube-flip -->
     <template v-else-if="variant === 'cube-flip'">
       <span
-        class="absolute inset-0"
+        :class="ui.cubePerspective({ class: uiProps.ui?.cubePerspective })"
         :style="{ perspective: `${size * 3}px` }"
       >
         <motion.span
           :animate="prefersReducedMotion ? undefined : { rotateX: [0, HALF_TURN, HALF_TURN, FULL_TURN], rotateY: [0, 0, HALF_TURN, HALF_TURN] }"
-          class="absolute inset-0 rounded-md bg-current"
+          :class="ui.cube({ class: uiProps.ui?.cube })"
           :transition="prefersReducedMotion ? undefined : { ...loop((SLOW_CYCLE * 1.5) / safeSpeed, EASE_IN_OUT), times: [0, 0.33, 0.66, 1] }"
         />
       </span>
@@ -227,13 +227,13 @@
     <!-- wave-bars -->
     <template v-else-if="variant === 'wave-bars'">
       <span
-        class="absolute inset-0 flex items-center justify-between"
+        :class="ui.waveWrapper({ class: uiProps.ui?.waveWrapper })"
         :style="{ gap: `${(size / (WAVE_BARS * 2)) * 0.5}px` }"
       >
         <motion.span
           v-for="(_, index) in waveArray"
           :key="`wave-${index}`"
-          class="flex-1 rounded-full bg-current"
+          :class="ui.waveBar({ class: uiProps.ui?.waveBar })"
           :style="{ height: `${size}px` }"
           :animate="prefersReducedMotion ? undefined : { scaleY: [WAVE_MIN_SCALE, 1, WAVE_MIN_SCALE] }"
           :transition="prefersReducedMotion ? undefined : delayedLoop(CYCLE / safeSpeed, EASE_IN_OUT, index * WAVE_STAGGER)"
@@ -245,13 +245,13 @@
     <template v-else-if="variant === 'breathing-glow'">
       <motion.span
         :animate="prefersReducedMotion ? undefined : { opacity: [GLOW_MIN_OPACITY, 0, GLOW_MIN_OPACITY], scale: [1, GLOW_SCALE, 1] }"
-        class="absolute inset-0 rounded-full bg-current blur-md"
+        :class="ui.glowRing({ class: uiProps.ui?.glowRing })"
         :style="{ opacity: GLOW_MIN_OPACITY }"
         :transition="prefersReducedMotion ? undefined : loop(SLOW_CYCLE / safeSpeed, EASE_IN_OUT)"
       />
       <motion.span
         :animate="prefersReducedMotion ? undefined : { scale: [1, GLOW_SCALE, 1] }"
-        class="rounded-full bg-current"
+        :class="ui.glowCore({ class: uiProps.ui?.glowCore })"
         :style="{ height: `${size * 0.5}px`, width: `${size * 0.5}px` }"
         :transition="prefersReducedMotion ? undefined : loop(SLOW_CYCLE / safeSpeed, EASE_OUT)"
       />
@@ -262,7 +262,7 @@
       <motion.span
         v-for="(_, index) in ringArray"
         :key="`ring-${index}`"
-        class="absolute top-1/2 left-1/2 rounded-full bg-current"
+        :class="ui.dotRingItem({ class: uiProps.ui?.dotRingItem })"
         :style="{
           height: `${size * SMALL_DOT_RATIO}px`,
           width: `${size * SMALL_DOT_RATIO}px`,
@@ -276,7 +276,7 @@
       />
     </template>
 
-    <span class="sr-only">{{ label }}</span>
+    <span :class="ui.srLabel({ class: uiProps.ui?.srLabel })">{{ label }}</span>
   </span>
 </template>
 
@@ -284,6 +284,8 @@
 import { computed } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import motionLoader from '../theme/motion-loader'
 
 export type MotionLoaderVariant
   = | 'orbit'
@@ -300,20 +302,26 @@ export type MotionLoaderVariant
     | 'dot-ring'
 
 interface Props {
+  class?: string
   color?: string
   label?: string
   size?: number
   speed?: number
+  ui?: Record<string, any>
   variant?: MotionLoaderVariant
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  class: undefined,
   color: '',
   label: 'Loading',
   size: 40,
   speed: 1,
+  ui: undefined,
   variant: 'orbit',
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'motionLoader', props, theme: motionLoader })
 
 const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
 
