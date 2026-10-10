@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { Motion, MotionConfig, AnimatePresence } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import toolbarExpandable from '../theme/toolbar-expandable'
 
 interface ToolbarItem {
   id: string
@@ -11,12 +13,20 @@ interface ToolbarItem {
 
 interface Props {
   class?: string
+  ui?: Record<string, any>
   items?: ToolbarItem[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  class: '',
+  class: undefined,
+  ui: undefined,
   items: () => [],
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'toolbarExpandable',
+  props,
+  theme: toolbarExpandable,
 })
 
 const emit = defineEmits<{
@@ -66,23 +76,17 @@ onUnmounted(() => {
   <MotionConfig :transition="springTransition">
     <div
       ref="toolbarRef"
-      class="relative inline-flex flex-col-reverse items-center gap-2"
-      :class="props.class"
+      :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     >
       <div
-        class="flex items-center gap-1 h-12 px-2 rounded-2xl bg-default/80 dark:bg-default/80 backdrop-blur-xl border border-default/10 dark:border-default/10 shadow-2xl shadow-black/20"
+        :class="ui.bar({ class: uiProps.ui?.bar })"
       >
         <UButton
           v-for="item in items"
           :key="item.id"
           variant="ghost"
           :icon="item.icon"
-          class="flex items-center justify-center w-10 h-10 rounded-xl"
-          :class="[
-            activeItemId === item.id
-              ? 'bg-muted/10 dark:bg-muted/10'
-              : '',
-          ]"
+          :class="ui.button({ active: activeItemId === item.id, class: uiProps.ui?.button })"
           @click="handleItemClick(item)"
         >
           <slot
@@ -97,20 +101,20 @@ onUnmounted(() => {
         <Motion
           v-if="activeItem"
           :key="activeItem.id"
-          class="w-full rounded-2xl bg-default/90 dark:bg-default/90 backdrop-blur-xl border border-default/10 dark:border-default/10 shadow-2xl shadow-black/20 overflow-hidden"
+          :class="ui.panel({ class: uiProps.ui?.panel })"
           :initial="{ opacity: 0, height: 0, scale: 0.95 }"
           :animate="{ opacity: 1, height: 'auto', scale: 1 }"
           :exit="{ opacity: 0, height: 0, scale: 0.95 }"
           style="transform-origin: bottom center"
         >
-          <div class="p-4">
+          <div :class="ui.panelContent({ class: uiProps.ui?.panelContent })">
             <slot
               name="item-content"
               :item="activeItem"
             >
               <div
                 v-if="activeItem.content"
-                class="text-sm text-muted dark:text-muted"
+                :class="ui.content({ class: uiProps.ui?.content })"
               >
                 {{ activeItem.content }}
               </div>

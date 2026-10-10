@@ -1,7 +1,7 @@
 <template>
   <div
     ref="containerRef"
-    :class="containerClasses"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @mouseenter="startGlitch"
     @mouseleave="stopGlitch"
   >
@@ -11,7 +11,7 @@
       :initial="{ opacity: 1 }"
       :animate="mainTextVariant"
       :transition="mainTransition"
-      :class="textClasses"
+      :class="ui.main({ class: uiProps.ui?.main })"
     >
       {{ text }}
     </Motion>
@@ -24,7 +24,7 @@
       :initial="{ opacity: 0 }"
       :animate="getLayerVariant(index)"
       :transition="getLayerTransition(index)"
-      :class="getLayerClasses(index)"
+      :class="ui.layer({ class: uiProps.ui?.layer })"
       :style="getLayerStyles(index)"
     >
       {{ text }}
@@ -33,7 +33,7 @@
     <!-- Scan lines -->
     <div
       v-if="showScanLines && isGlitching"
-      class="absolute inset-0 pointer-events-none"
+      :class="ui.scanLines({ class: uiProps.ui?.scanLines })"
     >
       <Motion
         v-for="line in scanLines"
@@ -46,7 +46,7 @@
           repeat: Infinity,
           repeatDelay: Math.random() * 1,
         }"
-        class="absolute bg-(--ui-bg-inverted)/20 h-px left-0 right-0"
+        :class="ui.scanLine({ class: uiProps.ui?.scanLine })"
         :style="{ top: `${line}%` }"
       />
     </div>
@@ -57,6 +57,8 @@
 import { Motion } from 'motion-v'
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useElementVisibility } from '@vueuse/core'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import textGlitch from '../theme/text-glitch'
 
 type GlitchTrigger = 'hover' | 'auto' | 'inView' | 'manual'
 type GlitchIntensity = 'low' | 'medium' | 'high' | 'extreme' | number
@@ -72,6 +74,7 @@ interface TextGlitchProps {
   showScanLines?: boolean
   class?: string
   autoStart?: boolean
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<TextGlitchProps>(), {
@@ -83,9 +86,12 @@ const props = withDefaults(defineProps<TextGlitchProps>(), {
   speed: 500,
   colors: () => ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'],
   showScanLines: true,
-  class: '',
+  class: undefined,
   autoStart: false,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'textGlitch', props, theme: textGlitch })
 
 const emit = defineEmits(['glitchStart', 'glitchEnd'])
 
@@ -145,36 +151,6 @@ const scanLines = computed(() => {
     Math.random() * 100,
   )
 })
-
-const containerClasses = computed(() => {
-  return [
-    'text-glitch-container',
-    'relative',
-    'inline-block',
-    'select-none',
-    props.class,
-  ].filter(Boolean).join(' ')
-})
-
-const textClasses = computed(() => {
-  return [
-    'text-glitch-main',
-    'relative',
-    'z-10',
-  ].join(' ')
-})
-
-const getLayerClasses = () => {
-  return [
-    'text-glitch-layer',
-    'absolute',
-    'top-0',
-    'left-0',
-    'w-full',
-    'h-full',
-    'pointer-events-none',
-  ].join(' ')
-}
 
 const getLayerStyles = (index: number) => {
   const color = props.colors[index % props.colors.length]

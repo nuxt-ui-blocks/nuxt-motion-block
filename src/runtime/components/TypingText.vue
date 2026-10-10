@@ -3,6 +3,8 @@ import { ref, computed, onUnmounted, watch, onMounted } from 'vue'
 import type { ExtractPropTypes } from 'vue'
 import { Motion, type MotionProps } from 'motion-v'
 import { useElementVisibility } from '@vueuse/core'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import typingText from '../theme/typing-text'
 
 // motion-v types `inViewOptions.margin` as an internal `MarginType` template-literal
 // union that it never exports, so read it off the resolved `MotionProps` rather than
@@ -31,6 +33,8 @@ interface TypingTextProps {
   pauseDuration?: number
   /** Custom class */
   class?: string
+  /** Per-slot classes resolved against the component theme. */
+  ui?: Record<string, any>
   /** Callback when typing completes */
   onComplete?: () => void
   /** Whether to start animation when component enters viewport */
@@ -52,11 +56,18 @@ const props = withDefaults(defineProps<TypingTextProps>(), {
   cursorClass: '',
   loop: false,
   pauseDuration: 2000,
-  class: '',
+  class: undefined,
+  ui: undefined,
   startOnView: true,
   once: false,
   inViewMargin: '0px' as MotionInViewMargin,
   animation: 'fadeIn',
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'typingText',
+  props,
+  theme: typingText,
 })
 
 const emit = defineEmits(['complete'])
@@ -201,11 +212,11 @@ function handleClick() {
     :initial="initialAnimationState"
     :animate="shouldStart ? targetAnimationState : initialAnimationState"
     :transition="containerTransition"
-    :class="['typing-text-container', 'whitespace-pre-wrap', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :in-view-options="{ margin: inViewMargin }"
     @click="handleClick"
   >
-    <span class="inline-flex items-center">
+    <span :class="ui.text({ class: uiProps.ui?.text })">
       {{ displayText }}
       <Motion
         v-if="showCursor"
@@ -217,7 +228,7 @@ function handleClick() {
           ease: 'linear',
           times: [0, 0.5, 0.5, 1],
         }"
-        :class="['typing-cursor', 'inline-block ms-1 font-normal select-none w-px', cursorClass]"
+        :class="ui.cursor({ class: [uiProps.ui?.cursor, cursorClass] })"
       >
         {{ cursor }}
       </Motion>

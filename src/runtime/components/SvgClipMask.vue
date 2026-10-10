@@ -1,13 +1,13 @@
 <template>
   <div
     ref="frameRef"
-    :class="['relative', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @pointerenter="isHovered = true"
     @pointerleave="isHovered = false"
   >
     <svg
       aria-hidden="true"
-      class="absolute h-0 w-0"
+      :class="ui.svg({ class: uiProps.ui?.svg })"
       focusable="false"
     >
       <defs>
@@ -33,7 +33,7 @@
     </svg>
 
     <div
-      class="h-full w-full"
+      :class="ui.content({ class: uiProps.ui?.content })"
       :style="{ clipPath: `url(#${clipId})`, WebkitClipPath: `url(#${clipId})` }"
     >
       <slot />
@@ -46,6 +46,8 @@ import { computed, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue'
 import { useMotionValueEvent, useReducedMotion, useScroll } from 'motion-v'
 import { useRafFn } from '@vueuse/core'
 import { useHoverCapable } from '../composables/useHoverCapable'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import svgClipMask from '../theme/svg-clip-mask'
 import type { MaybeComputedElementRef } from '@vueuse/core'
 import type { ScrollOffset } from 'motion-v'
 
@@ -83,14 +85,18 @@ export interface SvgClipMaskProps {
   /** Custom path data, in objectBoundingBox (0..1) coordinates. Required when shape is "custom". */
   path?: string
   shape?: SvgClipMaskShape
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<SvgClipMaskProps>(), {
   animate: 'none',
-  class: '',
+  class: undefined,
   duration: 4,
   shape: 'blob',
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'svgClipMask', props, theme: svgClipMask })
 
 // The mask has to finish opening while the frame is still in view; the full
 // enter-to-exit range parks the fully-revealed state off-screen.

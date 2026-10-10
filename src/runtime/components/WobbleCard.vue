@@ -1,15 +1,13 @@
 <template>
   <motion.div
     ref="cardRef"
-    class="relative"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="wobbleStyle"
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
     <UCard
-      :class="props.class"
-      :ui="props.ui"
-      class="h-full"
+      :class="ui.card({ class: uiProps.ui?.card })"
     >
       <template
         v-if="$slots.header"
@@ -29,15 +27,16 @@
 </template>
 
 <script setup lang="ts">
-import type { CardProps } from '#ui/components/Card.vue'
 import { ref, computed } from 'vue'
 import { motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import wobbleCard from '../theme/wobble-card'
 
 defineOptions({ inheritAttrs: false })
 
 interface Props {
   class?: string
-  ui?: CardProps['ui']
+  ui?: Record<string, any>
   intensity?: number
   speed?: number
 }
@@ -45,6 +44,14 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   intensity: 10,
   speed: 300,
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'wobbleCard',
+  props,
+  theme: wobbleCard,
 })
 
 const cardRef = ref<HTMLElement>()

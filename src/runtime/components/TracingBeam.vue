@@ -1,9 +1,9 @@
 <template>
   <motion.div
     ref="containerRef"
-    :class="['relative mx-auto h-full w-full max-w-4xl', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
-    <div class="absolute top-3 -left-4 md:-left-20">
+    <div :class="ui.beam({ class: uiProps.ui?.beam })">
       <motion.div
         :transition="{
           duration: 0.2,
@@ -12,7 +12,7 @@
         :animate="{
           boxShadow: scrollProgress > 0 ? 'none' : 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
         }"
-        class="border-default ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm"
+        :class="ui.dot({ class: uiProps.ui?.dot })"
       >
         <motion.div
           :transition="{
@@ -23,14 +23,14 @@
             backgroundColor: scrollProgress > 0 ? 'rgb(255, 255, 255)' : 'rgb(16, 185, 129)',
             borderColor: scrollProgress > 0 ? 'rgb(255, 255, 255)' : 'rgb(5, 150, 105)',
           }"
-          class="h-2 w-2 rounded-full border border-default bg-default"
+          :class="ui.dotInner({ class: uiProps.ui?.dotInner })"
         />
       </motion.div>
       <svg
         :viewBox="`0 0 20 ${svgHeight}`"
         width="20"
         :height="svgHeight"
-        class="ml-4 block"
+        :class="ui.svg({ class: uiProps.ui?.svg })"
         aria-hidden="true"
       >
         <motion.path
@@ -79,7 +79,10 @@
         </defs>
       </svg>
     </div>
-    <div ref="contentRef">
+    <div
+      ref="contentRef"
+      :class="ui.content({ class: uiProps.ui?.content })"
+    >
       <slot />
     </div>
   </motion.div>
@@ -88,14 +91,25 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
 import { onMounted, onUnmounted, ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import tracingBeam from '../theme/tracing-beam'
 
 interface TracingBeamProps {
   class?: string
+  ui?: Record<string, any>
   beamColor?: string[]
 }
 
 const props = withDefaults(defineProps<TracingBeamProps>(), {
+  class: undefined,
+  ui: undefined,
   beamColor: () => ['#18CCFC', '#6344F5', '#AE48FF'],
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'tracingBeam',
+  props,
+  theme: tracingBeam,
 })
 
 const containerRef = ref<HTMLElement | null>(null)

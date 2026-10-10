@@ -1,6 +1,7 @@
 <template>
   <UModal
     :open="open"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @update:open="onUpdateOpen"
   >
     <slot />
@@ -12,7 +13,7 @@
           :animate="{ opacity: 1, scale: 1 }"
           :exit="{ opacity: 0, scale: 0.95 }"
           :transition="{ type: 'spring', stiffness: 300, damping: 25 }"
-          class="relative"
+          :class="ui.container({ class: uiProps.ui?.container })"
         >
           <video
             ref="videoRef"
@@ -20,7 +21,7 @@
             :poster="poster"
             :autoplay="autoplay"
             controls
-            class="w-full rounded-lg"
+            :class="ui.video({ class: uiProps.ui?.video })"
           />
         </motion.div>
       </AnimatePresence>
@@ -31,18 +32,30 @@
 <script setup lang="ts">
 import { ref, watch, nextTick } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import videoModal from '../theme/video-modal'
 
 interface Props {
   src: string
   poster?: string
   autoplay?: boolean
   open?: boolean
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   poster: '',
   autoplay: false,
   open: false,
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'videoModal',
+  props,
+  theme: videoModal,
 })
 
 const emit = defineEmits<{

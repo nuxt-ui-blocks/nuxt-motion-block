@@ -1,7 +1,7 @@
 <template>
   <div
     ref="containerRef"
-    :class="containerClasses"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     role="text"
     :aria-label="accessibilityLabel"
     :aria-live="isAnimating ? 'polite' : 'off'"
@@ -11,7 +11,7 @@
     <span
       v-for="(char, index) in chars"
       :key="`${char}-${index}`"
-      :class="charClasses"
+      :class="ui.char({ class: [uiProps.ui?.char, props.charClass] })"
       aria-hidden="true"
     >
       <!-- @vue-ignore -->
@@ -19,13 +19,13 @@
         :initial="initialVariant"
         :animate="shouldAnimate ? getCharAnimateVariant(index) : initialVariant"
         :transition="getCharTransition(index)"
-        class="inline-block"
+        :class="ui.charInner({ class: uiProps.ui?.charInner })"
       >
         {{ char === ' ' ? '\u00A0' : char }}
       </Motion>
     </span>
     <!-- Screen reader accessible text -->
-    <span class="sr-only">{{ props.text }}</span>
+    <span :class="ui.srOnly({ class: uiProps.ui?.srOnly })">{{ props.text }}</span>
   </div>
 </template>
 
@@ -33,6 +33,8 @@
 import { Motion } from 'motion-v'
 import { ref, computed, watch, onMounted } from 'vue'
 import { useElementVisibility } from '@vueuse/core'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import textReveal from '../theme/text-reveal'
 
 type RevealDirection = 'up' | 'down' | 'left' | 'right' | 'random'
 type RevealEffect = 'fade' | 'slide' | 'bounce' | 'rotate' | 'scale' | 'blur'
@@ -47,6 +49,7 @@ interface TextRevealProps {
   startOnView?: boolean
   once?: boolean
   class?: string
+  ui?: Record<string, any>
   charClass?: string
   trigger?: boolean
   ariaLabel?: string
@@ -62,7 +65,8 @@ const props = withDefaults(defineProps<TextRevealProps>(), {
   delay: 0,
   startOnView: true,
   once: true,
-  class: '',
+  class: undefined,
+  ui: undefined,
   charClass: '',
   trigger: undefined,
   ariaLabel: '',
@@ -70,6 +74,12 @@ const props = withDefaults(defineProps<TextRevealProps>(), {
 })
 
 const emit = defineEmits(['complete', 'click'])
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'textReveal',
+  props,
+  theme: textReveal,
+})
 
 const containerRef = ref<HTMLElement>()
 const isVisible = useElementVisibility(containerRef, {
@@ -104,22 +114,6 @@ const shouldAnimate = computed(() => {
   }
   // If startOnView is true, animate when visible (unless already animated and once=true)
   return isVisible.value && (!props.once || !hasAnimated.value)
-})
-
-const containerClasses = computed(() => {
-  return [
-    'text-reveal-container',
-    'inline-block',
-    props.class,
-  ].filter(Boolean).join(' ')
-})
-
-const charClasses = computed(() => {
-  return [
-    'text-reveal-char',
-    'relative',
-    props.charClass,
-  ].filter(Boolean).join(' ')
 })
 
 // Base animation variants

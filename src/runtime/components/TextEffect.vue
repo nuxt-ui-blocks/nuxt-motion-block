@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Motion, AnimatePresence } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import textEffect from '../theme/text-effect'
 
 const props = withDefaults(defineProps<{
   children?: string
@@ -19,6 +21,7 @@ const props = withDefaults(defineProps<{
   containerTransition?: any
   segmentTransition?: any
   segmentWrapperClassName?: string
+  ui?: Record<string, any>
 }>(), {
   children: '',
   per: 'word',
@@ -27,7 +30,11 @@ const props = withDefaults(defineProps<{
   speedReveal: 1,
   speedSegment: 1,
   trigger: true,
+  class: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'textEffect', props, theme: textEffect })
 
 const tag = computed(() => props.as || 'p')
 
@@ -130,7 +137,7 @@ const hasAnimated = computed(() => props.trigger)
 <template>
   <component
     :is="tag"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     style="overflow: hidden; display: inline-flex; flex-wrap: wrap"
   >
     <AnimatePresence mode="popLayout">
@@ -140,6 +147,7 @@ const hasAnimated = computed(() => props.trigger)
         :initial="'hidden'"
         :animate="'visible'"
         :variants="containerVariants"
+        :class="ui.container({ class: uiProps.ui?.container })"
         :style="{ display: 'inline-flex', flexWrap: 'wrap', overflow: 'hidden' }"
         v-bind="containerTransition ? { transition: containerTransition } : {}"
       >
@@ -149,7 +157,7 @@ const hasAnimated = computed(() => props.trigger)
         >
           <span
             v-if="per === 'char'"
-            :class="segmentWrapperClassName"
+            :class="ui.segmentWrapper({ class: [segmentWrapperClassName, uiProps.ui?.segmentWrapper] })"
             style="display: inline-block; overflow: hidden"
           >
             <Motion
@@ -159,6 +167,7 @@ const hasAnimated = computed(() => props.trigger)
               :initial="'hidden'"
               :animate="'visible'"
               :variants="itemVariants"
+              :class="ui.segment({ class: uiProps.ui?.segment })"
               :style="{ display: 'inline-block', whiteSpace: 'pre' }"
               v-bind="segmentTransition ? { transition: segmentTransition } : {}"
             >
@@ -172,6 +181,7 @@ const hasAnimated = computed(() => props.trigger)
             :initial="'hidden'"
             :animate="'visible'"
             :variants="itemVariants"
+            :class="ui.segment({ class: uiProps.ui?.segment })"
             :style="{ display: 'inline-block' }"
             v-bind="segmentTransition ? { transition: segmentTransition } : {}"
           >

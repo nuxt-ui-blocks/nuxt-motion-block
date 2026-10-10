@@ -3,13 +3,12 @@
     :initial="{ opacity: 0, y: 40 }"
     :animate="{ opacity: 1, y: 0 }"
     :transition="{ type: 'spring', stiffness: 300, damping: 30 }"
-    :class="cn('relative overflow-hidden', props.class)"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @mouseenter="showShine = true"
     @mouseleave="showShine = false"
   >
     <UCard
-      :ui="props.ui"
-      class="h-full"
+      :class="ui.card({ class: uiProps.ui?.card })"
     >
       <template
         v-if="$slots.header"
@@ -18,16 +17,16 @@
         <slot name="header" />
       </template>
 
-      <div class="space-y-4">
+      <div :class="ui.body({ class: uiProps.ui?.body })">
         <div
           v-if="props.balance"
-          class="text-2xl font-bold text-highlighted"
+          :class="ui.balance({ class: uiProps.ui?.balance })"
         >
           {{ props.balance }}
         </div>
         <div
           v-if="props.cardNumber"
-          class="text-sm text-muted font-mono tracking-wider"
+          :class="ui.cardNumber({ class: uiProps.ui?.cardNumber })"
         >
           {{ maskedCardNumber }}
         </div>
@@ -44,25 +43,24 @@
 
     <div
       v-if="props.shine"
-      class="absolute inset-0 pointer-events-none z-20 transition-opacity duration-500"
-      :class="showShine ? 'opacity-100' : 'opacity-0'"
+      :class="ui.shine({ class: [showShine ? 'opacity-100' : 'opacity-0', uiProps.ui?.shine] })"
     >
-      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shine_0.8s_ease-out_forwards]" />
+      <div :class="ui.shineBeam({ class: uiProps.ui?.shineBeam })" />
     </div>
   </motion.div>
 </template>
 
 <script setup lang="ts">
-import type { CardProps } from '#ui/components/Card.vue'
 import { ref, computed } from 'vue'
 import { motion } from 'motion-v'
-import { cn } from '../utils/merge'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import walletCard from '../theme/wallet-card'
 
 defineOptions({ inheritAttrs: false })
 
 interface Props {
   class?: string
-  ui?: CardProps['ui']
+  ui?: Record<string, any>
   balance?: string
   cardNumber?: string
   shine?: boolean
@@ -72,6 +70,14 @@ const props = withDefaults(defineProps<Props>(), {
   balance: undefined,
   cardNumber: undefined,
   shine: true,
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'walletCard',
+  props,
+  theme: walletCard,
 })
 
 const showShine = ref(false)

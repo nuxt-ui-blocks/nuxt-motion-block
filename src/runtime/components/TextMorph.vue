@@ -1,7 +1,7 @@
 <template>
   <component
     :is="component"
-    :class="className"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.className, uiProps.class] })"
     :aria-label="text"
     :style="style"
   >
@@ -14,7 +14,7 @@
         v-for="character in characters"
         :key="character.id"
         :layout-id="character.id"
-        class="inline-block"
+        :class="ui.char({ class: uiProps.ui?.char })"
         aria-hidden="true"
         :initial="computedVariants.initial"
         :animate="computedVariants.animate"
@@ -30,6 +30,8 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { Motion, AnimatePresence } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import textMorph from '../theme/text-morph'
 
 interface Variant {
   [key: string]: any
@@ -48,6 +50,8 @@ interface TextMorphProps {
   style?: object
   variants?: Variants
   transition?: object
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<TextMorphProps>(), {
@@ -57,7 +61,11 @@ const props = withDefaults(defineProps<TextMorphProps>(), {
   style: () => ({}),
   variants: () => ({}),
   transition: () => ({}),
+  class: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'textMorph', props, theme: textMorph })
 
 // Use a counter to ensure unique IDs across renders
 const renderCount = ref(0)

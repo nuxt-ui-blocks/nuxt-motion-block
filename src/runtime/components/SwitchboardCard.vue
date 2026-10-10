@@ -1,7 +1,7 @@
 <template>
   <div
     v-bind="$attrs"
-    class="relative"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="{ perspective: '1000px' }"
   >
     <AnimatePresence mode="wait">
@@ -13,11 +13,10 @@
         :exit="{ rotateY: 90, opacity: 0 }"
         :transition="{ type: 'spring', stiffness: 300, damping: 30, duration: flipDuration / 1000 }"
         :style="{ backfaceVisibility: 'hidden' }"
-        class="w-full"
+        :class="ui.front({ class: uiProps.ui?.front })"
       >
         <UCard
-          :class="props.class"
-          :ui="props.ui"
+          :ui="{ root: ui.card({ class: uiProps.ui?.card }) }"
         >
           <slot name="front" />
         </UCard>
@@ -31,11 +30,10 @@
         :exit="{ rotateY: 90, opacity: 0 }"
         :transition="{ type: 'spring', stiffness: 300, damping: 30, duration: flipDuration / 1000 }"
         :style="{ backfaceVisibility: 'hidden' }"
-        class="w-full"
+        :class="ui.back({ class: uiProps.ui?.back })"
       >
         <UCard
-          :class="props.class"
-          :ui="props.ui"
+          :ui="{ root: ui.card({ class: uiProps.ui?.card }) }"
         >
           <slot name="back" />
         </UCard>
@@ -45,20 +43,25 @@
 </template>
 
 <script setup lang="ts">
-import type { CardProps } from '#ui/components/Card.vue'
 import { motion, AnimatePresence } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import switchboardCard from '../theme/switchboard-card'
 
 defineOptions({ inheritAttrs: false })
 
 interface Props {
   class?: string
-  ui?: CardProps['ui']
+  ui?: Record<string, any>
   flipped?: boolean
   flipDuration?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  class: undefined,
+  ui: undefined,
   flipped: false,
   flipDuration: 600,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'switchboardCard', props, theme: switchboardCard })
 </script>

@@ -1,17 +1,27 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { Motion, MotionConfig, AnimatePresence } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import toolbarDynamic from '../theme/toolbar-dynamic'
 
 interface Props {
   class?: string
+  ui?: Record<string, any>
   width?: string
   collapsedWidth?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  class: '',
+  class: undefined,
+  ui: undefined,
   width: '300px',
   collapsedWidth: '98px',
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'toolbarDynamic',
+  props,
+  theme: toolbarDynamic,
 })
 
 const emit = defineEmits<{
@@ -63,21 +73,20 @@ onUnmounted(() => {
     <Motion
       ref="toolbarRef"
       :style="{ width: toolbarWidth }"
-      class="relative flex items-center h-12 rounded-2xl bg-default/80 dark:bg-default/80 backdrop-blur-xl border border-default/10 dark:border-default/10 shadow-2xl shadow-black/20 overflow-hidden"
-      :class="props.class"
+      :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
       layout
     >
-      <div class="flex items-center justify-center h-full shrink-0 overflow-hidden whitespace-nowrap">
+      <div :class="ui.inner({ class: uiProps.ui?.inner })">
         <UButton
           variant="ghost"
           :icon="isOpen ? 'i-lucide-x' : 'i-lucide-menu'"
-          class="flex items-center justify-center w-12 h-full shrink-0"
+          :class="ui.toggle({ class: uiProps.ui?.toggle })"
           @click="toggle"
         />
 
         <div
           v-if="!isOpen"
-          class="flex items-center gap-1 pr-3 shrink-0"
+          :class="ui.collapsed({ class: uiProps.ui?.collapsed })"
         >
           <slot name="default" />
         </div>
@@ -86,7 +95,7 @@ onUnmounted(() => {
       <AnimatePresence>
         <Motion
           v-if="isOpen"
-          class="flex-1 flex items-center h-full px-4"
+          :class="ui.expanded({ class: uiProps.ui?.expanded })"
           :initial="{ opacity: 0, width: 0 }"
           :animate="{ opacity: 1, width: 'auto' }"
           :exit="{ opacity: 0, width: 0 }"

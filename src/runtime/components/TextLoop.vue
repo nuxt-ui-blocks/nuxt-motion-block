@@ -1,11 +1,12 @@
 <template>
   <div
-    :class="cn('relative inline-flex items-center justify-center align-baseline', className)"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.className, uiProps.class] })"
     :style="{ height: containerHeight, display: 'inline-flex', verticalAlign: 'baseline' }"
   >
     <AnimatePresence mode="wait">
       <Motion
         :key="currentIndex"
+        :class="ui.item({ class: uiProps.ui?.item })"
         :initial="computedVariants.initial"
         :animate="computedVariants.animate"
         :exit="computedVariants.exit"
@@ -27,11 +28,12 @@
     <!-- Hidden element to measure text height -->
     <div
       ref="measureRef"
-      class="invisible absolute"
+      :class="ui.measure({ class: uiProps.ui?.measure })"
     >
       <div
         v-for="(item, index) in items"
         :key="'measure-' + index"
+        :class="ui.measureItem({ class: uiProps.ui?.measureItem })"
       >
         {{ item }}
       </div>
@@ -42,7 +44,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { Motion, AnimatePresence } from 'motion-v'
-import { cn } from '../utils/merge'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import textLoop from '../theme/text-loop'
 
 interface TextLoopProps {
   items?: any[]
@@ -52,6 +55,8 @@ interface TextLoopProps {
   variants?: any
   onIndexChange?: (index: number) => void
   trigger?: boolean
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<TextLoopProps>(), {
@@ -65,7 +70,11 @@ const props = withDefaults(defineProps<TextLoopProps>(), {
     mass: 1.2,
   }),
   trigger: true,
+  class: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'textLoop', props, theme: textLoop })
 
 const emit = defineEmits(['indexChange'])
 

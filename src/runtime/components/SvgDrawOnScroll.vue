@@ -1,11 +1,11 @@
 ﻿<template>
   <div
     ref="wrapperRef"
-    :class="['relative', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
     <svg
       aria-hidden="true"
-      class="h-full w-full"
+      :class="ui.svg({ class: uiProps.ui?.svg })"
       fill="none"
       preserveAspectRatio="xMidYMid meet"
       :viewBox="props.viewBox"
@@ -36,10 +36,10 @@
     <div
       v-if="hasMarker"
       aria-hidden="true"
-      class="pointer-events-none absolute top-0 left-0"
+      :class="ui.marker({ class: uiProps.ui?.marker })"
       :style="{ transform: `translate3d(${markerX}px, ${markerY}px, 0)` }"
     >
-      <div class="-translate-x-1/2 -translate-y-1/2">
+      <div :class="ui.markerInner({ class: uiProps.ui?.markerInner })">
         <slot name="marker" />
       </div>
     </div>
@@ -49,6 +49,8 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, shallowRef, useSlots } from 'vue'
 import { motionValue, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import svgDrawOnScroll from '../theme/svg-draw-on-scroll'
 import type { MaybeComputedElementRef } from '@vueuse/core'
 import type { ScrollOffset } from 'motion-v'
 
@@ -80,10 +82,11 @@ export interface SvgDrawOnScrollProps {
   stroke?: string
   strokeWidth?: number
   viewBox?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<SvgDrawOnScrollProps>(), {
-  class: '',
+  class: undefined,
   // Finishes drawing while the artwork is still mid-viewport rather than on its
   // way out, so the completed stroke is something you actually get to look at.
   offset: () => ['start 0.9', 'end 0.6'],
@@ -91,7 +94,10 @@ const props = withDefaults(defineProps<SvgDrawOnScrollProps>(), {
   stroke: 'currentColor',
   strokeWidth: 2,
   viewBox: '0 0 100 100',
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'svgDrawOnScroll', props, theme: svgDrawOnScroll })
 
 const SPRING_CONFIG = { damping: 28, mass: 0.4, stiffness: 240 }
 const MARKER_KEY_SLICE = 8

@@ -2,13 +2,13 @@
   <!-- @vue-ignore -->
   <Motion
     :as="component"
-    :class="computedClass"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="{ color: 'var(--base-color)' }"
   >
     <Motion
       v-for="(char, i) in characters"
       :key="i"
-      :class="['inline-block whitespace-pre [transform-style:preserve-3d]']"
+      :class="ui.char({ class: uiProps.ui?.char })"
       :initial="{
         translateZ: 0,
         scale: 1,
@@ -44,11 +44,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import textShimmerWave from '../theme/text-shimmer-wave'
 
 interface TextShimmerWaveProps {
   text?: string
   as?: string
   class?: string
+  ui?: Record<string, any>
   duration?: number
   zDistance?: number
   xDistance?: number
@@ -62,7 +65,8 @@ interface TextShimmerWaveProps {
 const props = withDefaults(defineProps<TextShimmerWaveProps>(), {
   text: '',
   as: 'p',
-  class: '',
+  class: undefined,
+  ui: undefined,
   duration: 1,
   zDistance: 10,
   xDistance: 2,
@@ -73,19 +77,15 @@ const props = withDefaults(defineProps<TextShimmerWaveProps>(), {
   transition: () => ({}),
 })
 
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'textShimmerWave',
+  props,
+  theme: textShimmerWave,
+})
+
 // Split text into characters
 const characters = computed(() => {
   return props.text.split('')
-})
-
-// Compute component class
-const computedClass = computed(() => {
-  return [
-    'relative inline-block [perspective:500px]',
-    '[--base-color:#a1a1aa] [--base-gradient-color:#000]',
-    'dark:[--base-color:#71717a] dark:[--base-gradient-color:#ffffff]',
-    props.class,
-  ].join(' ')
 })
 
 // Determine the component to render
