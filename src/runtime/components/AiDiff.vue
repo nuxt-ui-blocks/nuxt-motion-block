@@ -8,20 +8,20 @@
   <Motion
     as="div"
     :animate="flashTarget"
-    :class="['w-full overflow-hidden rounded-xl border border-border bg-elevated', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :layout="!shouldReduceMotion"
     :transition="containerTransition"
   >
-    <div class="flex items-center gap-2 border-b border-border px-3 py-2">
+    <div :class="ui.header({ class: uiProps.ui?.header })">
       <span
         v-if="props.title"
-        class="min-w-0 truncate font-mono text-xs text-default"
+        :class="ui.title({ class: uiProps.ui?.title })"
       >
         {{ props.title }}
       </span>
-      <span class="ml-auto flex shrink-0 items-center gap-1.5 text-xs tabular-nums">
-        <span class="text-[oklch(58%_0.17_150)]">+{{ addedCount }}</span>
-        <span class="text-destructive">-{{ removedCount }}</span>
+      <span :class="ui.stats({ class: uiProps.ui?.stats })">
+        <span :class="ui.statAdded({ class: uiProps.ui?.statAdded })">+{{ addedCount }}</span>
+        <span :class="ui.statRemoved({ class: uiProps.ui?.statRemoved })">-{{ removedCount }}</span>
       </span>
     </div>
 
@@ -31,51 +31,42 @@
     -->
     <div
       v-if="!isRejected"
-      class="overflow-hidden"
+      :class="ui.body({ class: uiProps.ui?.body })"
       :style="bodyStyle"
     >
-      <pre class="overflow-x-auto py-1 font-mono text-xs leading-relaxed">
+      <pre :class="ui.pre({ class: uiProps.ui?.pre })">
         <Motion
           v-for="(line, index) in props.lines"
           :key="index"
           as="div"
           :animate="lineTransition(line, index)"
-          :class="[
-            'flex gap-3 px-3',
-            line.kind === 'added' && 'bg-[oklch(72%_0.17_150_/_0.12)]',
-            line.kind === 'removed' && 'bg-[oklch(63%_0.21_25_/_0.1)]',
-          ]"
+          :class="ui.line({ kind: line.kind, class: uiProps.ui?.line })"
           :initial="lineInitial(line)"
           :style="bodyStyle"
         >
           <span
             v-if="line.number !== undefined"
-            class="w-6 shrink-0 select-none text-right tabular-nums text-muted"
+            :class="ui.lineNumber({ class: uiProps.ui?.lineNumber })"
           >
             {{ line.number }}
           </span>
           <span
-            class="w-2 shrink-0 select-none"
-            :class="[
-              line.kind === 'added' && 'text-[oklch(52%_0.17_150)]',
-              line.kind === 'removed' && 'text-destructive',
-              line.kind === 'context' && 'text-muted',
-            ]"
+            :class="ui.linePrefix({ kind: line.kind, class: uiProps.ui?.linePrefix })"
           >
             {{ PREFIX[line.kind] }}
           </span>
-          <span class="whitespace-pre text-default">{{ line.content }}</span>
+          <span :class="ui.lineContent({ class: uiProps.ui?.lineContent })">{{ line.content }}</span>
         </Motion>
       </pre>
     </div>
 
     <div
       v-if="showActions"
-      class="flex items-center justify-end gap-2 border-t border-border px-3 py-2"
+      :class="ui.actions({ class: uiProps.ui?.actions })"
     >
       <button
         v-if="props.onReject"
-        class="cursor-pointer rounded-lg px-2.5 py-1 text-xs text-muted transition-colors hover:bg-muted hover:text-default"
+        :class="ui.reject({ class: uiProps.ui?.reject })"
         type="button"
         @click="reject"
       >
@@ -83,7 +74,7 @@
       </button>
       <button
         v-if="props.onAccept"
-        class="cursor-pointer rounded-lg bg-foreground px-2.5 py-1 text-xs text-background"
+        :class="ui.accept({ class: uiProps.ui?.accept })"
         type="button"
         @click="accept"
       >
@@ -96,7 +87,7 @@
       v-if="decision"
       as="p"
       :animate="{ opacity: 1 }"
-      :class="['border-t border-border px-3 py-2 text-xs capitalize text-muted', bodyStyle]"
+      :class="[ui.decision({ class: uiProps.ui?.decision }), bodyStyle]"
       :initial="shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }"
       :transition="shouldReduceMotion ? NO_MOTION : DECISION_TRANSITION"
     >
@@ -108,6 +99,8 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { Motion, useReducedMotion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { aiDiff } from '../theme'
 import { EASE_OUT, SPRING_DEFAULT } from '../utils/motion-tokens'
 
 export type AiDiffLineKind = 'added' | 'removed' | 'context'
@@ -134,6 +127,7 @@ export interface AiDiffProps {
   onReject?: () => void
   /** File path or a description of what is being changed. */
   title?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<AiDiffProps>(), {
@@ -143,6 +137,8 @@ const props = withDefaults(defineProps<AiDiffProps>(), {
   onReject: undefined,
   title: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiDiff', props, theme: aiDiff })
 
 const LINE_STAGGER = 0.02
 const WIPE_DURATION = 0.28
