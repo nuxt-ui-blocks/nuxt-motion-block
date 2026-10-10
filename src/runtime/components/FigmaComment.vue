@@ -2,7 +2,7 @@
   <div
     ref="rootEl"
     v-bind="$attrs"
-    :class="['relative', props.class, props.className]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class, uiProps.className] })"
     @click="handleToggle"
     @keydown.enter.prevent="handleToggle"
     @keydown.space.prevent="handleToggle"
@@ -13,7 +13,7 @@
       :aria-label="toggleLabel"
       :style="cardStyle"
       :transition="cardTransition"
-      class="absolute bottom-0 left-0 cursor-pointer overflow-hidden rounded-2xl rounded-bl-none bg-default shadow-[0px_0px_0.5px_0px_rgb(0_0_0/0.18),0px_3px_8px_0px_rgb(0_0_0/0.1),0px_1px_3px_0px_rgb(0_0_0/0.1)] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default"
+      :class="ui.card({ class: uiProps.ui?.card })"
       data-demo-figma-card=""
       role="button"
       tabindex="0"
@@ -22,39 +22,39 @@
         :animate="avatarAnimate"
         :style="avatarStyle"
         :transition="avatarTransition"
-        class="absolute z-10"
+        :class="ui.avatar({ class: uiProps.ui?.avatar })"
       >
         <img
           v-if="hasAvatarImage"
           ref="avatarImgEl"
           :src="props.avatarUrl"
           :alt="resolvedAvatarAlt"
-          class="size-6 rounded-full object-cover"
+          :class="ui.avatarImage({ class: uiProps.ui?.avatarImage })"
           @error="avatarFailed = true"
         >
         <span
           v-else
           aria-hidden="true"
-          class="flex size-6 items-center justify-center rounded-full bg-muted text-[10px] leading-none font-semibold text-inverted"
+          :class="ui.avatarFallback({ class: uiProps.ui?.avatarFallback })"
         >{{ fallbackInitial }}</span>
       </motion.div>
 
       <div
         ref="measureEl"
         aria-hidden="true"
-        class="pointer-events-none absolute"
+        :class="ui.measure({ class: uiProps.ui?.measure })"
         :style="measureStyle"
       >
-        <div class="flex flex-col items-start gap-0.5 py-3 pr-4 pl-11">
-          <div class="flex items-start gap-0.5">
-            <p class="text-[11px] leading-4 font-semibold text-highlighted">
+        <div :class="ui.measureInner({ class: uiProps.ui?.measureInner })">
+          <div :class="ui.meta({ class: uiProps.ui?.meta })">
+            <p :class="ui.author({ class: uiProps.ui?.author })">
               {{ props.authorName }}
             </p>
-            <p class="text-[11px] leading-4 font-medium text-muted">
+            <p :class="ui.timestamp({ class: uiProps.ui?.timestamp })">
               {{ props.timestamp }}
             </p>
           </div>
-          <p class="text-left text-[11px] leading-4 font-medium text-highlighted">
+          <p :class="ui.message({ class: uiProps.ui?.message })">
             {{ props.message }}
           </p>
         </div>
@@ -69,17 +69,17 @@
           :exit="contentExit"
           :transition="contentTransition"
           :style="contentStyle"
-          class="absolute inset-0 flex flex-col items-start gap-0.5 py-3 pr-4 pl-11"
+          :class="ui.content({ class: uiProps.ui?.content })"
         >
-          <div class="flex items-start gap-0.5">
-            <p class="text-[11px] leading-4 font-semibold text-highlighted">
+          <div :class="ui.meta({ class: uiProps.ui?.meta })">
+            <p :class="ui.author({ class: uiProps.ui?.author })">
               {{ props.authorName }}
             </p>
-            <p class="text-[11px] leading-4 font-medium text-muted">
+            <p :class="ui.timestamp({ class: uiProps.ui?.timestamp })">
               {{ props.timestamp }}
             </p>
           </div>
-          <p class="text-left text-[11px] leading-4 font-medium text-highlighted">
+          <p :class="ui.message({ class: uiProps.ui?.message })">
             {{ props.message }}
           </p>
         </motion.div>
@@ -93,6 +93,8 @@ import type { CSSProperties } from 'vue'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
 import { useClickOutside } from '../composables/useClickOutside'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import figmaComment from '../theme/figma-comment'
 
 defineOptions({ inheritAttrs: false })
 
@@ -107,6 +109,13 @@ const props = withDefaults(defineProps<FigmaCommentProps>(), {
   defaultOpen: false,
   timestamp: DEFAULT_TIMESTAMP,
   width: DEFAULT_WIDTH,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'figmaComment',
+  props,
+  theme: figmaComment,
 })
 
 const emit = defineEmits<{
@@ -383,5 +392,6 @@ export interface FigmaCommentProps {
   timestamp?: string
   /** Open card width in pixels. Also the measurement width. */
   width?: number
+  ui?: Record<string, any>
 }
 </script>

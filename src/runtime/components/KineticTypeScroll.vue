@@ -1,15 +1,11 @@
 ﻿<template>
   <div
     ref="wrapperRef"
-    :class="[
-      'relative flex flex-wrap gap-x-[0.4em] gap-y-[0.18em]',
-      alignClass[props.align],
-      props.class,
-    ]"
+    :class="ui.root({ align: props.align, class: [uiProps.ui?.root, uiProps.class] })"
   >
     <!-- Every glyph below is aria-hidden, so the readable copy lives here. An
          aria-label on this plain div would be dropped by assistive tech. -->
-    <span class="sr-only">{{ readableText }}</span>
+    <span :class="ui.srOnly({ class: uiProps.ui?.srOnly })">{{ readableText }}</span>
     <component
       :is="KineticWord"
       v-for="(entry, entryIndex) in props.words"
@@ -34,6 +30,8 @@ import { computed, defineComponent, h, ref, type Component } from 'vue'
 import { useReducedMotion, useScroll, useSpring, useTransform, Motion } from 'motion-v'
 import type { MaybeComputedElementRef } from '@vueuse/core'
 import type { MotionValue, ScrollOffset } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import kineticTypeScroll from '../theme/kinetic-type-scroll'
 
 export type KineticTypeScrollAlign = 'start' | 'center' | 'end'
 
@@ -41,6 +39,7 @@ export interface KineticTypeScrollProps {
   /** Row alignment of the wrapped phrase. */
   align?: KineticTypeScrollAlign
   class?: string
+  ui?: Record<string, any>
   /**
    * Scrollable ancestor whose progress drives the effect. Pass a getter —
    * `:container="() => panelRef"` — not the element: a plain binding is
@@ -73,6 +72,7 @@ export interface KineticTypeScrollProps {
 const props = withDefaults(defineProps<KineticTypeScrollProps>(), {
   align: 'center',
   class: '',
+  ui: undefined,
   dimRange: () => [0.45, 1],
   liftRange: () => [0, -12],
   // Motion's own default (`["start start", "end end"]`) collapses on an element
@@ -85,6 +85,8 @@ const props = withDefaults(defineProps<KineticTypeScrollProps>(), {
   trackingRange: () => [-0.5, 2.5],
   weightRange: () => [380, 800],
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'kineticTypeScroll', props, theme: kineticTypeScroll })
 
 /**
  * Head- and tail-room at both ends of the scroll range: the wave starts after
@@ -105,12 +107,6 @@ const INTENSITY_SCALE = 2
  * crest, not as each word snapping.
  */
 const SPRING_TRANSITION = { type: 'spring' as const, bounce: 0, duration: 0.32 }
-
-const alignClass = {
-  center: 'justify-center',
-  end: 'justify-end',
-  start: 'justify-start',
-}
 
 const shouldReduceMotion = useReducedMotion()
 const wrapperRef = ref<HTMLElement | null>(null)

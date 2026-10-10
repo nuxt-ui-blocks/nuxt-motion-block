@@ -2,25 +2,21 @@
   <div
     ref="cardRef"
     :style="containerStyle"
-    class="relative isolate [perspective:600px] transition-transform duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] will-change-transform"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @pointermove="handlePointerMove"
     @pointerenter="handlePointerEnter"
     @pointerleave="handlePointerLeave"
   >
-    <UCard
-      :class="props.class"
-      :ui="props.ui"
-      class="h-full will-change-transform origin-center transition-transform duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] [transform:rotateY(var(--r-x))_rotateX(var(--r-y))] hover:[--opacity:0.6] hover:[--duration:200ms] hover:[--easing:linear] hover:filter-none overflow-hidden relative"
-    >
+    <UCard :ui="{ root: ui.card({ class: uiProps.ui?.card }) }">
       <!-- Background Effects Layer -->
       <div
-        class="absolute inset-0 mix-blend-color-dodge opacity-[var(--opacity)] will-change-background transition-opacity pointer-events-none z-0 [background-blend-mode:hue_hue_hue_overlay] [background:var(--pattern),_var(--rainbow),_var(--diagonal),_var(--shade)] after:content-[''] after:absolute after:inset-0 after:mix-blend-exclusion after:[background-size:var(--foil-size),_200%_400%,_800%,_200%] after:[background-position:center,_0%_var(--bg-y),_calc(var(--bg-x)*_-1)_calc(var(--bg-y)*_-1),_var(--bg-x)_var(--bg-y)] after:[background-blend-mode:soft-light,_hue,_hard-light]"
+        :class="ui.background({ class: uiProps.ui?.background })"
         :style="backgroundStyle"
       />
 
       <!-- Glare Layer -->
       <div
-        class="absolute inset-0 mix-blend-soft-light opacity-[var(--opacity)] transition-opacity transition-background duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] will-change-background pointer-events-none z-10"
+        :class="ui.glare({ class: uiProps.ui?.glare })"
         :style="glareStyle"
       />
       <!-- Header Slot -->
@@ -28,24 +24,24 @@
         v-if="$slots.header"
         #header
       >
-        <div class="relative z-10">
+        <div :class="ui.header({ class: uiProps.ui?.header })">
           <slot name="header" />
         </div>
       </template>
 
       <!-- Default Slot -->
-      <div class="relative z-10">
+      <div :class="ui.content({ class: uiProps.ui?.content })">
         <slot>
           <!-- Default content -->
-          <div class="text-white space-y-4">
+          <div :class="ui.placeholder({ class: uiProps.ui?.placeholder })">
             <UIcon
               name="i-heroicons-sparkles"
-              class="w-12 h-12 mx-auto text-blue-400"
+              :class="ui.placeholderIcon({ class: uiProps.ui?.placeholderIcon })"
             />
-            <h3 class="text-2xl font-bold">
+            <h3 :class="ui.placeholderTitle({ class: uiProps.ui?.placeholderTitle })">
               Glare Card
             </h3>
-            <p class="text-slate-400">
+            <p :class="ui.placeholderText({ class: uiProps.ui?.placeholderText })">
               Move your cursor to see the effect
             </p>
           </div>
@@ -56,7 +52,7 @@
         v-if="$slots.footer"
         #footer
       >
-        <div class="relative z-10">
+        <div :class="ui.footer({ class: uiProps.ui?.footer })">
           <slot name="footer" />
         </div>
       </template>
@@ -65,12 +61,13 @@
 </template>
 
 <script setup lang="ts">
-import type { CardProps } from '#ui/components/Card.vue'
 import { ref, computed } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import glareCard from '../theme/glare-card'
 
 interface Props {
   class?: string
-  ui?: CardProps['ui']
+  ui?: Record<string, any>
   glareColor?: string
   glareColorInner?: string
   glareColorOuter?: string
@@ -79,6 +76,8 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  class: undefined,
+  ui: undefined,
   glareColor: 'rgba(255,255,255,0.8)',
   glareColorInner: 'rgba(255,255,255,0.65)',
   glareColorOuter: 'rgba(255,255,255,0)',
@@ -91,6 +90,12 @@ const props = withDefaults(defineProps<Props>(), {
     'rgb(216,117,255)',
     'rgb(255,119,115)',
   ],
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'glareCard',
+  props,
+  theme: glareCard,
 })
 
 // Refs

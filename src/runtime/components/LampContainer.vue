@@ -1,11 +1,8 @@
 <template>
   <div
-    :class="[
-      'relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-default w-full rounded-md z-0',
-      props.class,
-    ]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
-    <div class="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0">
+    <div :class="ui.inner({ class: uiProps.ui?.inner })">
       <!-- Left Gradient -->
       <Motion
         :initial="{ opacity: 0.5, width: '15rem' }"
@@ -16,10 +13,10 @@
           ease: 'easeInOut',
         }"
         :style="leftGradientStyle"
-        class="absolute inset-auto right-1/2 h-56 overflow-visible w-[30rem] text-highlighted [--conic-position:from_70deg_at_center_top]"
+        :class="ui.leftGradient({ class: uiProps.ui?.leftGradient })"
       >
-        <div class="absolute w-[100%] left-0 bg-default h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
-        <div class="absolute w-40 h-[100%] left-0 bg-default bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
+        <div :class="ui.leftMaskTop({ class: uiProps.ui?.leftMaskTop })" />
+        <div :class="ui.leftMaskSide({ class: uiProps.ui?.leftMaskSide })" />
       </Motion>
 
       <!-- Right Gradient -->
@@ -32,17 +29,17 @@
           ease: 'easeInOut',
         }"
         :style="rightGradientStyle"
-        class="absolute inset-auto left-1/2 h-56 w-[30rem] text-highlighted [--conic-position:from_290deg_at_center_top]"
+        :class="ui.rightGradient({ class: uiProps.ui?.rightGradient })"
       >
-        <div class="absolute w-40 h-[100%] right-0 bg-default bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]" />
-        <div class="absolute w-[100%] right-0 bg-default h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
+        <div :class="ui.rightMaskSide({ class: uiProps.ui?.rightMaskSide })" />
+        <div :class="ui.rightMaskTop({ class: uiProps.ui?.rightMaskTop })" />
       </Motion>
 
       <!-- Background Effects -->
-      <div class="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-default blur-2xl" />
-      <div class="absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md" />
+      <div :class="ui.bgBlur({ class: uiProps.ui?.bgBlur })" />
+      <div :class="ui.bgOverlay({ class: uiProps.ui?.bgOverlay })" />
       <div
-        class="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full opacity-50 blur-3xl"
+        :class="ui.centerGlow({ class: uiProps.ui?.centerGlow })"
         :style="centerColorStyle"
       />
 
@@ -55,7 +52,7 @@
           duration: 0.8,
           ease: 'easeInOut',
         }"
-        class="absolute inset-auto z-30 h-36 w-64 -translate-y-[6rem] rounded-full blur-2xl"
+        :class="ui.glow({ class: uiProps.ui?.glow })"
         :style="glowColorStyle"
       />
 
@@ -67,14 +64,14 @@
           duration: 0.8,
           ease: 'easeInOut',
         }"
-        class="absolute inset-auto z-50 h-0.5 w-[30rem] -translate-y-[7rem]"
+        :class="ui.line({ class: uiProps.ui?.line })"
         :style="lineColorStyle"
       />
 
-      <div class="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-default" />
+      <div :class="ui.cover({ class: uiProps.ui?.cover })" />
     </div>
 
-    <div class="relative z-50 flex -translate-y-80 flex-col items-center px-5">
+    <div :class="ui.content({ class: uiProps.ui?.content })">
       <slot />
     </div>
   </div>
@@ -83,9 +80,12 @@
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 import { computed } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import lampContainer from '../theme/lamp-container'
 
 interface LampContainerProps {
   class?: string
+  ui?: Record<string, any>
   fromColor?: string
   toColor?: string
   centerColor?: string
@@ -94,12 +94,16 @@ interface LampContainerProps {
 }
 
 const props = withDefaults(defineProps<LampContainerProps>(), {
+  class: undefined,
+  ui: undefined,
   fromColor: 'var(--color-primary-500, #0ea5e9)',
   toColor: 'var(--color-primary-500, #0ea5e9)',
   centerColor: 'var(--color-primary-500, #0ea5e9)',
   glowColor: 'var(--color-primary-400, #38bdf8)',
   lineColor: 'var(--color-primary-400, #38bdf8)',
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'lampContainer', props, theme: lampContainer })
 
 // Convert color prop to CSS variable or hex color
 const getColorValue = (colorProp: string): string => {

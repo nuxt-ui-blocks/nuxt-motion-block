@@ -1,5 +1,5 @@
 <template>
-  <div :class="containerClasses">
+  <div :class="ui.root({ direction: props.direction, columns: props.direction === 'grid' ? props.columns : undefined, class: [uiProps.ui?.root, uiProps.class] })">
     <AnimatePresence>
       <motion.div
         v-for="(item, index) in items"
@@ -14,7 +14,7 @@
           damping: 25,
           delay: index * 0.03,
         }"
-        class="will-change-transform"
+        :class="ui.item({ class: uiProps.ui?.item })"
       >
         <slot
           :item="item"
@@ -33,9 +33,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
-import { cn } from '../utils/merge'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import dynamicGroup from '../theme/dynamic-group'
 
 interface Props {
   items: any[]
@@ -43,6 +43,8 @@ interface Props {
   keyField?: string
   direction?: 'row' | 'column' | 'grid'
   columns?: number
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -50,31 +52,19 @@ const props = withDefaults(defineProps<Props>(), {
   keyField: 'id',
   direction: 'grid',
   columns: 3,
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'dynamicGroup',
+  props,
+  theme: dynamicGroup,
 })
 
 const emit = defineEmits<{
   remove: [index: number]
 }>()
-
-const GRID_COLUMNS: Record<number, string> = {
-  1: 'grid-cols-1',
-  2: 'grid-cols-2',
-  3: 'grid-cols-3',
-  4: 'grid-cols-4',
-  5: 'grid-cols-5',
-  6: 'grid-cols-6',
-  12: 'grid-cols-12',
-}
-
-const containerClasses = computed(() => {
-  if (props.direction === 'grid') {
-    return cn('relative grid gap-4', GRID_COLUMNS[props.columns] ?? GRID_COLUMNS[3])
-  }
-  if (props.direction === 'row') {
-    return cn('relative flex flex-wrap gap-4')
-  }
-  return cn('relative space-y-4')
-})
 
 function getKey(item: any): string | number {
   if (typeof item === 'object' && item !== null) {

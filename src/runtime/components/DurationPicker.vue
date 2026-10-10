@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, onUnmounted, ref } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import durationPicker from '../theme/duration-picker'
 
 type DurationUnit = 'hours' | 'minutes' | 'seconds'
 
@@ -12,6 +14,8 @@ interface Props {
   step?: number
   label?: string
   disabled?: boolean
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -21,6 +25,14 @@ const props = withDefaults(defineProps<Props>(), {
   step: 1,
   label: '',
   disabled: false,
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'durationPicker',
+  props,
+  theme: durationPicker,
 })
 
 const emit = defineEmits<{ 'update:modelValue': [value: number] }>()
@@ -245,16 +257,15 @@ const handleBlur = (index: number) => {
 </script>
 
 <template>
-  <div class="inline-flex flex-col gap-1.5">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <span
       v-if="label"
-      class="text-xs font-medium text-muted"
+      :class="ui.label({ class: uiProps.ui?.label })"
     >{{ label }}</span>
     <div
       role="group"
       aria-label="Duration"
-      class="inline-flex items-center gap-0.5 rounded-lg border border-default bg-default/40 px-2 py-1.5"
-      :class="disabled && 'opacity-50'"
+      :class="ui.group({ class: [disabled && 'opacity-50', uiProps.ui?.group] })"
     >
       <template
         v-for="(unit, index) in sortedUnits"
@@ -263,7 +274,7 @@ const handleBlur = (index: number) => {
         <span
           v-if="index > 0"
           aria-hidden="true"
-          class="mx-0.5 text-muted select-none"
+          :class="ui.separator({ class: uiProps.ui?.separator })"
         >:</span>
         <div
           :ref="el => { segmentRefs[index] = el as HTMLDivElement }"
@@ -273,9 +284,8 @@ const handleBlur = (index: number) => {
           :aria-valuemax="segmentMax(index)"
           :aria-valuenow="values[index]"
           :tabindex="disabled ? -1 : 0"
-          class="relative flex select-none items-center justify-center rounded-md px-1 py-0.5 font-medium text-highlighted tabular-nums outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-ns-resize"
+          :class="ui.segment({ class: [disabled && 'pointer-events-none', uiProps.ui?.segment] })"
           style="font-size: 18px; touch-action: none; user-select: none"
-          :class="disabled && 'pointer-events-none'"
           @keydown="handleKeyDown($event, index)"
           @blur="handleBlur(index)"
           @mousedown="onDragStart($event, index)"
@@ -284,13 +294,13 @@ const handleBlur = (index: number) => {
           <span
             v-for="(char, ci) in pad2(values[index]).split('')"
             :key="`${unit}-${ci}`"
-            class="relative overflow-hidden text-center"
+            :class="ui.digit({ class: uiProps.ui?.digit })"
             :style="{ height: '24px', width: '0.62em' }"
           >
             <AnimatePresence :initial="false">
               <motion.span
                 :key="`${unit}-${ci}-${char}`"
-                class="absolute inset-0 flex items-center justify-center"
+                :class="ui.digitChar({ class: uiProps.ui?.digitChar })"
                 :initial="{ opacity: 0, y: -14 }"
                 :animate="{ opacity: 1, y: 0 }"
                 :exit="{ opacity: 0, y: 14 }"

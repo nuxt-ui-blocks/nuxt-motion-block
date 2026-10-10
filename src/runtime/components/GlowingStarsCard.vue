@@ -1,6 +1,7 @@
 <template>
   <UCard
-    :ui="props.ui"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
+    :ui="uiProps.ui"
   >
     <!-- Card Header Slot -->
     <template #header>
@@ -8,15 +9,15 @@
     </template>
     <!-- Stars Animation Section -->
     <div
-      class="flex-1 flex items-center justify-center"
+      :class="ui.stars({ class: uiProps.ui?.stars })"
       @mouseenter="mouseEnter = true"
       @mouseleave="mouseEnter = false"
     >
-      <div class="h-48 w-full grid grid-cols-18 gap-px">
+      <div :class="ui.grid({ class: uiProps.ui?.grid })">
         <div
           v-for="starIdx in 108"
           :key="starIdx"
-          class="relative flex items-center justify-center"
+          :class="ui.cell({ class: uiProps.ui?.cell })"
         >
           <motion.div
             :initial="{ scale: 1 }"
@@ -29,7 +30,7 @@
               ease: 'easeInOut',
               delay: mouseEnter ? (starIdx-1) * 0.01 : ((starIdx-1) % 10) * 0.1,
             }"
-            class="h-px w-px rounded-full relative z-20"
+            :class="ui.star({ class: uiProps.ui?.star })"
           />
 
           <motion.div
@@ -41,13 +42,13 @@
               ease: 'easeInOut',
               delay: mouseEnter ? (starIdx-1) * 0.01 : ((starIdx-1) % 10) * 0.1,
             }"
-            :class="['absolute left-1/2 -translate-x-1/2 z-10 h-1 w-1 rounded-full blur-[1px] shadow-2xl', starBgClass]"
+            :class="ui.glow({ class: [starBgClass, uiProps.ui?.glow] })"
           />
         </div>
       </div>
     </div>
     <!-- Default Slot for Content -->
-    <div>
+    <div :class="ui.content({ class: uiProps.ui?.content })">
       <slot />
     </div>
     <!-- Card Footer Slot -->
@@ -60,26 +61,22 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
 import { onMounted, onUnmounted, ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import glowingStarsCard from '../theme/glowing-stars-card'
 
 interface Props {
   starBgClass?: string
-  ui?: {
-    root?: string
-    body?: string
-    header?: string
-    footer?: string
-  }
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   starBgClass: 'bg-primary-400 dark:bg-primary-500 shadow-primary-400/50 dark:shadow-primary-500/50',
-  ui: () => ({
-    root: '',
-    body: '',
-    header: '',
-    footer: '',
-  }),
+  class: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'glowingStarsCard', props, theme: glowingStarsCard })
 
 const mouseEnter = ref(false)
 const glowingStars = ref<number[]>([])

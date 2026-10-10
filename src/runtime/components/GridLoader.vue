@@ -2,8 +2,7 @@
   <output
     aria-label="Loading"
     role="status"
-    class="inline-grid grid-cols-3"
-    :class="attrClass"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="{
       filter: blur ? `blur(${blur}px)` : undefined,
       gap: `${gap}px`,
@@ -34,9 +33,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, useAttrs } from 'vue'
-import type { HTMLAttributes } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import gridLoader from '../theme/grid-loader'
 
 type GridMatrix = [
   [0 | 1, 0 | 1, 0 | 1],
@@ -79,6 +79,8 @@ interface Props {
   size?: 'sm' | 'md' | 'lg' | 'xl' | number
   speed?: 'slow' | 'normal' | 'fast'
   static?: boolean
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -91,10 +93,11 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'md',
   speed: 'normal',
   static: false,
+  class: undefined,
+  ui: undefined,
 })
 
-const attrs = useAttrs()
-const attrClass = computed<HTMLAttributes['class']>(() => attrs.class)
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'gridLoader', props, theme: gridLoader })
 
 const PATTERNS: Record<PresetPattern, GridMatrix> = {
   'solo-center': [[0, 0, 0], [0, 1, 0], [0, 0, 0]],

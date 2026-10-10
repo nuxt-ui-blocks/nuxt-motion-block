@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { motion, useScroll, useMotionValueEvent } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import floatingNavbar from '../theme/floating-navbar'
 
 interface NavLink {
   label: string
@@ -12,13 +14,21 @@ interface Props {
   brand?: string
   blur?: boolean
   class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   links: () => [],
   brand: '',
   blur: true,
-  class: '',
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'floatingNavbar',
+  props,
+  theme: floatingNavbar,
 })
 
 const { scrollY } = useScroll()
@@ -34,18 +44,11 @@ useMotionValueEvent(scrollY, 'change', (latest: number) => {
   }
   lastScrollY.value = latest
 })
-
-const navbarClasses = computed(() => [
-  'fixed top-4 left-1/2 z-50 flex items-center gap-6 px-6 py-3 rounded-full',
-  'border border-default shadow-lg',
-  props.blur ? 'bg-background/70 backdrop-blur-xl' : 'bg-background',
-  props.class,
-].join(' '))
 </script>
 
 <template>
   <motion.header
-    :class="navbarClasses"
+    :class="ui.root({ blur: props.blur, class: [uiProps.ui?.root, uiProps.class] })"
     :initial="{ opacity: 0, y: -100, x: '-50%' }"
     :animate="{
       opacity: isVisible ? 1 : 0,
@@ -54,14 +57,14 @@ const navbarClasses = computed(() => [
     }"
     :transition="{ type: 'spring', bounce: 0.15, duration: 0.5 }"
   >
-    <span class="font-bold text-lg whitespace-nowrap">{{ brand }}</span>
+    <span :class="ui.brand({ class: uiProps.ui?.brand })">{{ brand }}</span>
 
-    <nav class="hidden md:flex items-center gap-1">
+    <nav :class="ui.nav({ class: uiProps.ui?.nav })">
       <a
         v-for="link in links"
         :key="link.to"
         :href="link.to"
-        class="px-3 py-1.5 rounded-full text-sm font-medium hover:bg-muted transition-colors"
+        :class="ui.link({ class: uiProps.ui?.link })"
       >
         {{ link.label }}
       </a>

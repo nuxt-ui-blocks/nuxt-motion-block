@@ -1,14 +1,14 @@
 <template>
   <div
     ref="zoneEl"
-    class="inline-block"
+    :class="ui.root({ class: [props.className, uiProps.ui?.root, uiProps.class] })"
     role="presentation"
     :style="zoneStyle"
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
     <motion.div
-      class="inline-block"
+      :class="ui.magnet({ class: uiProps.ui?.magnet })"
       :animate="magnetTarget"
       :transition="magnetTransition"
     >
@@ -21,7 +21,7 @@
         :color="uiColor"
         :size="uiSize"
         :square="props.size === 'icon'"
-        :class="pclass"
+        :class="ui.button({ class: uiProps.ui?.button })"
         v-bind="$attrs"
       >
         <slot />
@@ -39,8 +39,10 @@
 import { cloneVNode, computed, ref, useAttrs, useSlots, watch } from 'vue'
 import { motion, useReducedMotion } from 'motion-v'
 import { useHoverCapable } from '../composables/useHoverCapable'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import type { ButtonProps } from '#ui/components/Button.vue'
 import { cn } from '../utils/merge'
+import magneticButton from '../theme/magnetic-button'
 
 defineOptions({ inheritAttrs: false })
 
@@ -68,6 +70,7 @@ export interface MagneticButtonProps {
   class?: string
   /** Alias of `class`, kept for parity with the React reference. */
   className?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<MagneticButtonProps>(), {
@@ -80,7 +83,10 @@ const props = withDefaults(defineProps<MagneticButtonProps>(), {
   size: 'default',
   class: undefined,
   className: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'magneticButton', props, theme: magneticButton })
 
 // The React reference builds its buttons with `cva`. The default branch of the
 // port delegates the whole button to `UButton` (Nuxt UI owns the base / size /
@@ -108,8 +114,6 @@ const UI_SIZE: Record<MagneticButtonSize, NonNullable<ButtonProps['size']>> = {
 const uiVariant = computed(() => UI_VARIANT[props.variant].variant)
 const uiColor = computed(() => UI_VARIANT[props.variant].color)
 const uiSize = computed(() => UI_SIZE[props.size])
-
-const pclass = computed(() => cn(props.class, props.className))
 
 // `asChild` renders whatever single element the caller puts in the slot (an
 // anchor, a Nuxt link, a router button). That element is not a motion component
@@ -149,8 +153,6 @@ const asChildClass = computed(() =>
     AS_CHILD_BASE,
     AS_CHILD_SIZE[props.size],
     AS_CHILD_VARIANT[props.variant],
-    props.class,
-    props.className,
   ),
 )
 

@@ -2,7 +2,7 @@
   <Motion
     ref="containerRef"
     :as="as"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :initial="finalVariants.hidden"
     :animate="shouldAnimate ? finalVariants.visible : finalVariants.hidden"
     :transition="transition"
@@ -18,6 +18,8 @@ import { ref, computed, watch } from 'vue'
 import { Motion } from 'motion-v'
 import { useElementVisibility } from '@vueuse/core'
 import type { VariantType, Transition } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import inView from '../theme/in-view'
 
 // Types
 interface Variants {
@@ -44,6 +46,7 @@ interface InViewProps {
   as?: keyof HTMLElementTagNameMap
   once?: boolean
   class?: string
+  ui?: Record<string, any>
   onAnimationStart?: () => void
   onAnimationComplete?: () => void
 }
@@ -56,7 +59,10 @@ const props = withDefaults(defineProps<InViewProps>(), {
   as: 'div',
   once: true,
   class: '',
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'inView', props, theme: inView })
 
 // Emits
 const emit = defineEmits<{

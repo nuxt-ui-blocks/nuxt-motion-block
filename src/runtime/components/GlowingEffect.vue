@@ -1,35 +1,24 @@
 <template>
-  <div>
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <div
-      :class="[
-        'pointer-events-none absolute -inset-px hidden rounded-[inherit] border opacity-0 transition-opacity',
-        glow && 'opacity-100',
-        variant === 'white' && 'border-white',
-        disabled && '!block',
-      ]"
+      :class="ui.border({
+        variant: props.variant,
+        glow: props.glow,
+        disabled: props.disabled,
+        class: uiProps.ui?.border,
+      })"
     />
     <div
       ref="containerRef"
       :style="glowStyles"
-      :class="[
-        'pointer-events-none absolute inset-0 rounded-[inherit] opacity-100 transition-opacity',
-        glow && 'opacity-100',
-        blur > 0 && 'blur-[var(--blur)]',
-        props.class,
-        disabled && '!hidden',
-      ]"
+      :class="ui.container({
+        glow: props.glow,
+        blur: props.blur > 0,
+        disabled: props.disabled,
+        class: uiProps.ui?.container,
+      })"
     >
-      <div
-        :class="['glow rounded-[inherit]', 'after:content-[\'\']', 'after:rounded-[inherit] after:absolute after:inset-[calc(-1*var(--glowingeffect-border-width))]',
-                 'after:[border:var(--glowingeffect-border-width)_solid_transparent]',
-                 'after:[background:var(--gradient)]',
-                 'after:[background-attachment:fixed]',
-                 'after:opacity-[var(--active)] after:transition-opacity after:duration-300',
-                 'after:[mask-clip:padding-box,border-box]',
-                 'after:[mask-composite:intersect]',
-                 'after:[mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))]',
-        ]"
-      />
+      <div :class="ui.glow({ class: uiProps.ui?.glow })" />
     </div>
   </div>
 </template>
@@ -37,6 +26,8 @@
 <script setup lang="ts">
 import { animate } from 'motion-v'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import glowingEffect from '../theme/glowing-effect'
 
 interface GlowingEffectProps {
   blur?: number
@@ -46,6 +37,7 @@ interface GlowingEffectProps {
   variant?: 'default' | 'white'
   glow?: boolean
   class?: string
+  ui?: Record<string, any>
   disabled?: boolean
   movementDuration?: number
   borderWidth?: number
@@ -58,10 +50,14 @@ const props = withDefaults(defineProps<GlowingEffectProps>(), {
   spread: 20,
   variant: 'default',
   glow: false,
+  class: undefined,
+  ui: undefined,
   disabled: true,
   movementDuration: 2,
   borderWidth: 1,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'glowingEffect', props, theme: glowingEffect })
 
 const containerRef = ref<HTMLDivElement | null>(null)
 const lastPosition = ref({ x: 0, y: 0 })

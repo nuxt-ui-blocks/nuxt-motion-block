@@ -2,7 +2,7 @@
   <motion.div
     v-bind="$attrs"
     :ref="setRoot"
-    :class="cn('relative overflow-hidden', props.class)"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="rootStyle"
     :transition="rootTransition"
     :while-hover="tracksPointer ? LIFT : undefined"
@@ -11,7 +11,7 @@
       v-if="displaces"
       aria-hidden="true"
       focusable="false"
-      class="pointer-events-none absolute h-0 w-0"
+      :class="ui.filter({ class: uiProps.ui?.filter })"
     >
       <title>Refractive glass edge</title>
       <filter :id="filterId">
@@ -38,51 +38,51 @@
     </svg>
     <div
       aria-hidden="true"
-      class="absolute"
+      :class="ui.body({ class: uiProps.ui?.body })"
       :style="bodyStyle"
     />
     <div
       aria-hidden="true"
-      class="absolute inset-0 rounded-[inherit]"
+      :class="ui.rim({ class: uiProps.ui?.rim })"
       :style="rimStyle"
     />
     <div
       aria-hidden="true"
-      class="pointer-events-none absolute inset-0 isolate overflow-hidden rounded-[inherit]"
+      :class="ui.overlay({ class: uiProps.ui?.overlay })"
     >
       <div
         :ref="setLayer(0)"
         aria-hidden="true"
-        class="absolute inset-0 rounded-[inherit]"
+        :class="ui.chromatic({ class: uiProps.ui?.chromatic })"
         :style="chromaticStyle"
       />
       <template v-if="props.specular">
         <div
           :ref="setLayer(1)"
           aria-hidden="true"
-          class="absolute"
+          :class="ui.specular({ class: uiProps.ui?.specular })"
           :style="specularStyle"
         />
         <div
           :ref="setLayer(2)"
           aria-hidden="true"
-          class="absolute top-0"
+          :class="ui.sweep({ class: uiProps.ui?.sweep })"
           :style="sweepStyle"
         />
       </template>
       <div
-        class="absolute inset-0 rounded-[inherit]"
+        :class="ui.shade({ class: uiProps.ui?.shade })"
         :style="bottomShadeStyle"
       />
     </div>
     <div
       v-if="props.border"
       aria-hidden="true"
-      class="pointer-events-none absolute inset-0 rounded-[inherit]"
+      :class="ui.ring({ class: uiProps.ui?.ring })"
       :style="innerRingStyle"
     />
     <div
-      class="relative"
+      :class="ui.content({ class: uiProps.ui?.content })"
       :style="contentStyle"
     >
       <slot />
@@ -94,8 +94,9 @@
 import { computed, onBeforeUnmount, onMounted, ref, useId } from 'vue'
 import { motion, useReducedMotion, useSpring } from 'motion-v'
 import type { CSSProperties } from 'vue'
-import { cn } from '../utils/merge'
 import { useHoverCapable } from '../composables/useHoverCapable'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import glassCard from '../theme/glass-card'
 
 defineOptions({ inheritAttrs: false })
 
@@ -129,6 +130,7 @@ const DROP_SHADOW
 
 interface Props {
   class?: string
+  ui?: Record<string, any>
   blur?: number
   border?: boolean
   interactive?: boolean
@@ -142,6 +144,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   class: undefined,
+  ui: undefined,
   blur: 11,
   border: true,
   interactive: true,
@@ -151,6 +154,12 @@ const props = withDefaults(defineProps<Props>(), {
   shadow: true,
   specular: true,
   tint: 'oklch(1 0 0 / 0.1)',
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'glassCard',
+  props,
+  theme: glassCard,
 })
 
 function ringMask(width: number): CSSProperties {

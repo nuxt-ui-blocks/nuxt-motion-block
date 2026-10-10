@@ -2,7 +2,7 @@
   <Motion
     :style="computedStyles"
     :animate="currentAnimation"
-    :class="glowClasses"
+    :class="ui.root({ blur: blurVariant, class: [uiProps.ui?.root, uiProps.class, scaleClass, blurDynamic] })"
   />
 </template>
 
@@ -10,10 +10,13 @@
 import { computed } from 'vue'
 import { Motion } from 'motion-v'
 import type { Transition } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import glowEffect from '../theme/glow-effect'
 
 // Define props
 const props = withDefaults(defineProps<{
   class?: string
+  ui?: Record<string, any>
   style?: object
   colors?: string[]
   mode?: 'rotate' | 'pulse' | 'breathe' | 'colorShift' | 'flowHorizontal' | 'static'
@@ -22,11 +25,19 @@ const props = withDefaults(defineProps<{
   scale?: number
   duration?: number
 }>(), {
+  class: undefined,
+  ui: undefined,
   colors: () => ['#FF5733', '#33FF57', '#3357FF', '#F1C40F'],
   mode: 'rotate',
   blur: 'medium',
   scale: 1,
   duration: 5,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'glowEffect',
+  props,
+  theme: glowEffect,
 })
 
 // Base transition configuration
@@ -110,32 +121,15 @@ const animations = computed(() => {
 // Current animation based on mode
 const currentAnimation = computed(() => animations.value)
 
-// Blur classes mapping
-const blurClasses = {
-  softest: 'blur-xs',
-  soft: 'blur-sm',
-  medium: 'blur-md',
-  strong: 'blur-lg',
-  stronger: 'blur-xl',
-  strongest: 'blur-2xl',
-  none: 'blur-none',
-}
+const blurVariant = computed(() =>
+  typeof props.blur === 'string' ? props.blur : undefined,
+)
 
-// Compute blur class based on prop
-const blurClass = computed(() => {
-  if (typeof props.blur === 'number') {
-    return `blur-[${props.blur}px]`
-  }
-  return blurClasses[props.blur]
-})
+const blurDynamic = computed(() =>
+  typeof props.blur === 'number' ? `blur-[${props.blur}px]` : undefined,
+)
 
-// Combined classes
-const glowClasses = computed(() => [
-  'pointer-events-none absolute inset-0 h-full w-full',
-  `scale-[${props.scale}] transform-gpu`,
-  blurClass.value,
-  props.class,
-])
+const scaleClass = computed(() => `scale-[${props.scale}]`)
 
 // Computed styles
 const computedStyles = computed(() => ({

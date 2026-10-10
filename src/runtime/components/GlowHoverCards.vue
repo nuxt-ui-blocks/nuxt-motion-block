@@ -1,12 +1,10 @@
 <template>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <UCard
       v-for="(card, index) in items"
       :key="index"
-      class="relative overflow-hidden transition-shadow duration-300"
+      :ui="{ root: ui.card({ class: uiProps.ui?.card }) }"
       :style="{ background: glowBackground(index) }"
-      :class="props.class"
-      :ui="props.ui"
       @mousemove="(e: MouseEvent) => handleMouseMove(e, index)"
       @mouseleave="handleMouseLeave(index)"
     >
@@ -25,13 +23,13 @@
         :card="card"
         :index="index"
       >
-        <div class="space-y-2">
-          <h3 class="text-lg font-semibold text-highlighted">
+        <div :class="ui.content({ class: uiProps.ui?.content })">
+          <h3 :class="ui.title({ class: uiProps.ui?.title })">
             {{ card.title }}
           </h3>
           <p
             v-if="card.description"
-            class="text-sm text-muted"
+            :class="ui.description({ class: uiProps.ui?.description })"
           >
             {{ card.description }}
           </p>
@@ -53,8 +51,9 @@
 </template>
 
 <script setup lang="ts">
-import type { CardProps } from '#ui/components/Card.vue'
 import { ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import glowHoverCards from '../theme/glow-hover-cards'
 
 defineOptions({ inheritAttrs: false })
 
@@ -66,13 +65,21 @@ interface CardItem {
 
 interface Props {
   class?: string
-  ui?: CardProps['ui']
+  ui?: Record<string, any>
   items: CardItem[]
   glowColor?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  class: undefined,
+  ui: undefined,
   glowColor: 'var(--ui-primary)',
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'glowHoverCards',
+  props,
+  theme: glowHoverCards,
 })
 
 const glowPositions = ref<Record<number, { x: number, y: number }>>({})

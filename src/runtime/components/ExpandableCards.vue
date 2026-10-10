@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-3">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <motion.div
       v-for="(item, index) in props.items"
       :key="index"
@@ -8,25 +8,27 @@
       :transition="{ type: 'spring', stiffness: 300, damping: 30, delay: index * 0.05 }"
     >
       <UCard
-        :class="props.class"
-        :ui="props.ui"
+        :ui="{
+          root: ui.cardRoot({ class: uiProps.ui?.cardRoot }),
+          body: ui.cardBody({ class: uiProps.ui?.cardBody }),
+        }"
       >
         <div
-          class="flex items-start justify-between cursor-pointer"
+          :class="ui.header({ class: uiProps.ui?.header })"
           @click="toggle(index)"
         >
-          <div class="flex-1 min-w-0">
-            <h3 class="text-lg font-semibold text-highlighted">
+          <div :class="ui.headerContent({ class: uiProps.ui?.headerContent })">
+            <h3 :class="ui.title({ class: uiProps.ui?.title })">
               {{ item.title }}
             </h3>
           </div>
           <motion.div
             :animate="{ rotate: isOpen(index) ? 180 : 0 }"
             :transition="{ type: 'spring', stiffness: 300, damping: 25 }"
-            class="ml-2 flex-shrink-0 text-muted"
+            :class="ui.chevron({ class: uiProps.ui?.chevron })"
           >
             <svg
-              class="w-5 h-5"
+              :class="ui.chevronIcon({ class: uiProps.ui?.chevronIcon })"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -48,10 +50,10 @@
             :animate="{ height: 'auto', opacity: 1 }"
             :exit="{ height: 0, opacity: 0 }"
             :transition="{ type: 'spring', stiffness: 300, damping: 30 }"
-            class="overflow-hidden"
+            :class="ui.collapsible({ class: uiProps.ui?.collapsible })"
           >
-            <div class="pt-4">
-              <p class="text-muted">
+            <div :class="ui.content({ class: uiProps.ui?.content })">
+              <p :class="ui.contentText({ class: uiProps.ui?.contentText })">
                 {{ item.content }}
               </p>
               <slot
@@ -68,9 +70,10 @@
 </template>
 
 <script setup lang="ts">
-import type { CardProps } from '#ui/components/Card.vue'
 import { ref } from 'vue'
 import { AnimatePresence, motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import expandableCards from '../theme/expandable-cards'
 
 defineOptions({ inheritAttrs: false })
 
@@ -82,13 +85,21 @@ interface AccordionItem {
 
 interface Props {
   class?: string
-  ui?: CardProps['ui']
+  ui?: Record<string, any>
   items: AccordionItem[]
   multiple?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  class: undefined,
+  ui: undefined,
   multiple: false,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'expandableCards',
+  props,
+  theme: expandableCards,
 })
 
 const openIndices = ref<Set<number>>(new Set())

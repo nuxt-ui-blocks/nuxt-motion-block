@@ -2,11 +2,10 @@
   <UCard
     ref="cardRef"
     v-bind="$attrs"
-    class="group/card relative overflow-hidden bg-transparent"
     :ui="{
-      ...ui,
+      root: ui.root({ class: [uiProps.ui?.root, uiProps.class] }),
+      body: ui.body({ class: uiProps.ui?.body }),
     }"
-    :class="[props.class]"
     @mousemove="onMouseMove"
   >
     <template
@@ -15,21 +14,21 @@
     >
       <slot name="header" />
     </template>
-    <div class="pointer-events-none absolute inset-0">
-      <div class="absolute inset-0 rounded-2xl [mask-image:linear-gradient(white,transparent)] group-hover/card:opacity-50" />
+    <div :class="ui.overlay({ class: uiProps.ui?.overlay })">
+      <div :class="ui.mask({ class: uiProps.ui?.mask })" />
 
       <!-- Gradient layer -->
       <motion.div
-        :class="['absolute inset-0 rounded-2xl bg-gradient-to-r opacity-0 group-hover/card:opacity-100 backdrop-blur-xl transition duration-500', props.gradientColors]"
+        :class="[ui.gradient({ class: uiProps.ui?.gradient }), props.gradientColors]"
         :style="gradientStyle"
       />
 
       <!-- Text pattern layer -->
       <motion.div
-        class="absolute inset-0 rounded-2xl opacity-0 mix-blend-overlay group-hover/card:opacity-100"
+        :class="ui.pattern({ class: uiProps.ui?.pattern })"
         :style="gradientStyle"
       >
-        <p class="absolute inset-x-0 text-xs break-words whitespace-pre-wrap text-white font-mono font-bold transition duration-500">
+        <p :class="ui.patternText({ class: uiProps.ui?.patternText })">
           {{ randomString }}
         </p>
       </motion.div>
@@ -50,28 +49,25 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { motion } from 'motion-v'
-
-interface UCardProps {
-  ui?: {
-    root?: string
-    header?: string
-    body?: string
-    footer?: string
-  }
-}
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import everVaultCard from '../theme/ever-vault-card'
 
 interface Props {
   class?: string
   gradientColors?: string
-  ui?: UCardProps['ui']
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  class: '',
+  class: undefined,
   gradientColors: 'from-green-500 to-blue-700',
-  ui: () => ({
-    body: 'w-full h-full bg-default',
-  }),
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'everVaultCard',
+  props,
+  theme: everVaultCard,
 })
 
 const cardRef = ref<HTMLElement>()

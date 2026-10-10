@@ -2,7 +2,7 @@
   <svg
     v-if="spec.specular"
     aria-hidden="true"
-    class="pointer-events-none absolute h-0 w-0"
+    :class="ui.filter({ class: uiProps.ui?.filter })"
   >
     <title>Plaster relief filter</title>
     <filter :id="filterId">
@@ -50,7 +50,7 @@
   <component
     :is="props.as"
     :ref="surfaceRef"
-    :class="['text-default', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="surfaceStyle"
     @pointerleave="tracksPointer ? resetLight() : undefined"
     @pointermove="tracksPointer ? trackPointer($event) : undefined"
@@ -64,6 +64,8 @@ import { computed, ref, useId } from 'vue'
 import { useReducedMotion } from 'motion-v'
 import { EASE_IN_OUT } from '../utils/motion-tokens'
 import { useHoverCapable } from '../composables/useHoverCapable'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import embossSurface from '../theme/emboss-surface'
 
 export type EmbossSurfaceVariant = 'emboss' | 'deboss' | 'plaster' | 'metal-stamp'
 
@@ -90,17 +92,25 @@ export interface EmbossSurfaceProps {
   softness?: number
   /** Material recipe used to build the relief. */
   variant?: EmbossSurfaceVariant
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<EmbossSurfaceProps>(), {
   as: 'div',
-  class: '',
+  class: undefined,
   color: 'var(--ui-bg)',
   depth: 2,
   interactive: false,
   lightAngle: 135,
   softness: 0.5,
   variant: 'emboss',
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'embossSurface',
+  props,
+  theme: embossSurface,
 })
 
 interface VariantSpec {

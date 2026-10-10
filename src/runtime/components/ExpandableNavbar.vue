@@ -1,16 +1,19 @@
 <template>
-  <UHeader :ui="{ left: 'flex items-center gap-2' }">
+  <UHeader
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
+    :ui="{ left: ui.left({ class: uiProps.ui?.left }) }"
+  >
     <template #left>
-      <span class="font-bold text-lg">{{ title }}</span>
+      <span :class="ui.title({ class: uiProps.ui?.title })">{{ title }}</span>
     </template>
 
     <UNavigationMenu
       :items="desktopItems"
-      class="hidden lg:flex"
+      :class="ui.menu({ class: uiProps.ui?.menu })"
     />
 
     <template #body>
-      <div class="lg:hidden p-4">
+      <div :class="ui.body({ class: uiProps.ui?.body })">
         <motion.div
           v-for="(item, i) in items"
           :key="item.to"
@@ -22,7 +25,7 @@
             :to="item.to"
             variant="ghost"
             :icon="item.icon"
-            class="w-full justify-start"
+            :class="ui.button({ class: uiProps.ui?.button })"
             :label="item.label"
           />
         </motion.div>
@@ -36,6 +39,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import expandableNavbar from '../theme/expandable-navbar'
 
 interface NavItem {
   label: string
@@ -46,11 +51,21 @@ interface NavItem {
 interface Props {
   title?: string
   items?: NavItem[]
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   title: '',
   items: () => [],
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'expandableNavbar',
+  props,
+  theme: expandableNavbar,
 })
 
 const desktopItems = computed(() => {

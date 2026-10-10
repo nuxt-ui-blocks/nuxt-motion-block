@@ -2,8 +2,7 @@
   <div
     role="group"
     aria-label="Reactions"
-    class="flex flex-wrap items-center gap-2"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
     <motion.button
       v-for="item in items"
@@ -11,34 +10,24 @@
       type="button"
       :aria-label="`${item.label}, ${item.count} ${item.count === 1 ? 'reaction' : 'reactions'}`"
       :aria-pressed="item.reacted"
-      :class="[
-        'relative inline-flex cursor-pointer select-none items-center rounded-full border font-medium',
-        'transition-[background-color,border-color,box-shadow,color] duration-150 ease-out',
-        'outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default',
-        'before:absolute before:-inset-1 before:content-[\'\']',
-        SIZE_CLASSES[props.size],
-        item.reacted
-          ? 'border-default bg-muted/60 text-highlighted shadow-[inset_0_1px_2px_rgb(0_0_0/0.10)] dark:shadow-[inset_0_1px_2px_rgb(0_0_0/0.45)]'
-          : 'border-default/60 bg-default text-muted shadow-[0_1px_1px_rgb(0_0_0/0.04)] hover:border-default hover:bg-muted/50 hover:text-highlighted dark:shadow-none',
-      ]"
+      :class="ui.button({ size: props.size, reacted: item.reacted, class: uiProps.ui?.button })"
       :while-press="shouldReduceMotion ? undefined : { scale: PRESS_SCALE }"
       @click="handleReactionClick(item.id)"
     >
-      <span class="relative inline-flex items-center justify-center">
+      <span :class="ui.emojiWrap({ class: uiProps.ui?.emojiWrap })">
         <span
           :ref="(el) => setEmojiElement(item.id, el)"
           aria-hidden="true"
-          class="block leading-none"
-          :class="EMOJI_CLASSES[props.size]"
+          :class="ui.emoji({ size: props.size, class: uiProps.ui?.emoji })"
         >{{ item.emoji }}</span>
         <span
           v-if="burstSeeds.get(item.id)"
           :key="`burst-${burstSeeds.get(item.id)}`"
           aria-hidden="true"
-          class="pointer-events-none absolute inset-0 flex items-center justify-center"
+          :class="ui.burst({ class: uiProps.ui?.burst })"
         >
           <motion.span
-            class="absolute size-6 rounded-full border border-primary/50"
+            :class="ui.burstRing({ class: uiProps.ui?.burstRing })"
             :initial="{ opacity: 0.7, scale: 0.4 }"
             :animate="{ opacity: 0, scale: 1.9 }"
             :transition="{ duration: BURST_DURATION_S, ease: EASE_OUT }"
@@ -46,7 +35,7 @@
           <motion.span
             v-for="particle in burstParticles.get(item.id) ?? []"
             :key="particle.id"
-            class="absolute rounded-full bg-primary"
+            :class="ui.burstParticle({ class: uiProps.ui?.burstParticle })"
             :initial="{ opacity: particle.opacity, scale: 1, x: 0, y: 0 }"
             :animate="{ opacity: 0, scale: 0.4, x: particle.x, y: particle.y }"
             :transition="{ duration: BURST_DURATION_S, ease: EASE_OUT }"
@@ -56,7 +45,7 @@
       </span>
       <span
         aria-hidden="true"
-        class="relative inline-flex h-[1.15em] items-center overflow-hidden text-center tabular-nums leading-none"
+        :class="ui.countWrap({ class: uiProps.ui?.countWrap })"
       >
         <AnimatePresence
           :initial="false"
@@ -65,7 +54,7 @@
         >
           <motion.span
             :key="item.count"
-            class="block leading-none"
+            :class="ui.count({ class: uiProps.ui?.count })"
             :custom="item.direction"
             initial="enter"
             animate="center"
@@ -80,7 +69,7 @@
     <div
       v-if="props.showPicker"
       :ref="setPickerContainer"
-      class="relative inline-flex"
+      :class="ui.pickerWrapper({ class: uiProps.ui?.pickerWrapper })"
       @mouseenter="handlePickerMouseEnter"
       @mouseleave="handlePickerMouseLeave"
     >
@@ -91,34 +80,29 @@
         aria-haspopup="menu"
         :aria-controls="menuId"
         aria-label="More reactions"
-        :class="[
-          'inline-flex cursor-pointer items-center justify-center rounded-full border border-default/60 bg-default text-muted',
-          'transition-[background-color,border-color,color] duration-150 ease-out hover:border-default hover:bg-muted/50 hover:text-highlighted',
-          'outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default',
-          TRIGGER_CLASSES[props.size],
-        ]"
+        :class="ui.trigger({ size: props.size, class: uiProps.ui?.trigger })"
         :while-press="shouldReduceMotion ? undefined : { scale: PRESS_SCALE }"
         @click="togglePicker"
         @keydown="handleTriggerKeydown"
       >
         <UIcon
           name="i-lucide-smile-plus"
-          class="size-4"
+          :class="ui.triggerIcon({ class: uiProps.ui?.triggerIcon })"
           aria-hidden="true"
         />
-        <span class="sr-only">More reactions</span>
+        <span :class="ui.srOnly({ class: uiProps.ui?.srOnly })">More reactions</span>
       </motion.button>
 
       <AnimatePresence>
         <span
           v-if="isPickerOpen"
           key="picker"
-          class="absolute bottom-full left-1/2 z-20 block -translate-x-1/2 pb-2"
+          :class="ui.pickerPanel({ class: uiProps.ui?.pickerPanel })"
         >
           <motion.div
             :id="menuId"
             role="menu"
-            class="flex gap-1 rounded-2xl border border-default bg-default p-1.5 shadow-lg shadow-black/5"
+            :class="ui.menu({ class: uiProps.ui?.menu })"
             :style="{ transformOrigin: 'bottom center' }"
             initial="closed"
             animate="open"
@@ -133,7 +117,7 @@
               role="menuitem"
               :aria-label="`React with ${emoji}`"
               :tabindex="activeIndex === index ? 0 : -1"
-              class="flex size-9 cursor-pointer items-center justify-center rounded-xl text-lg outline-none transition-colors duration-150 ease-out hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary"
+              :class="ui.menuItem({ class: uiProps.ui?.menuItem })"
               :variants="shouldReduceMotion ? MENU_ITEM_VARIANTS_REDUCED : MENU_ITEM_VARIANTS"
               @click="handlePickerItemClick(emoji)"
               @keydown="handlePickerItemKeydown($event, index)"
@@ -150,6 +134,8 @@ import type { ComponentPublicInstance } from 'vue'
 import { computed, onBeforeUnmount, onMounted, reactive, ref, useId, watch } from 'vue'
 import { AnimatePresence, motion, useAnimate, useReducedMotion } from 'motion-v'
 import { useHoverCapable } from '../composables/useHoverCapable'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import emojiReaction from '../theme/emoji-reaction'
 
 interface BurstParticle {
   id: string
@@ -183,24 +169,6 @@ const DEGREES_TO_RADIANS = Math.PI / 180
 const SPRING = { bounce: 0.1, duration: 0.25, type: 'spring' } as const
 const POP_SPRING = { bounce: 0.4, duration: 0.4 } as const
 const INSTANT = { duration: 0 }
-
-const SIZE_CLASSES: Record<EmojiReactionSize, string> = {
-  lg: 'h-11 gap-2 px-4 text-base',
-  md: 'h-9 gap-1.5 px-3 text-sm',
-  sm: 'h-7 gap-1 px-2 text-xs',
-}
-
-const EMOJI_CLASSES: Record<EmojiReactionSize, string> = {
-  lg: 'text-xl',
-  md: 'text-base',
-  sm: 'text-sm',
-}
-
-const TRIGGER_CLASSES: Record<EmojiReactionSize, string> = {
-  lg: 'size-11',
-  md: 'size-9',
-  sm: 'size-7',
-}
 
 const MENU_VARIANTS = {
   closed: {
@@ -276,10 +244,18 @@ const props = withDefaults(defineProps<Props>(), {
   allowMultiple: false,
   burst: true,
   burstCount: DEFAULT_BURST_COUNT,
+  class: undefined,
   defaultPickerOpen: false,
   pickerEmojis: () => [...DEFAULT_PICKER_EMOJIS],
   showPicker: false,
   size: 'md',
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'emojiReaction',
+  props,
+  theme: emojiReaction,
 })
 
 const emit = defineEmits<{
@@ -626,5 +602,6 @@ export interface Props {
   /** Shows a hover/focus popover with extra reaction options. */
   showPicker?: boolean
   size?: EmojiReactionSize
+  ui?: Record<string, any>
 }
 </script>

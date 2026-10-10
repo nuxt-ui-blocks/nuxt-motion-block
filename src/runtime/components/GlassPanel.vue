@@ -1,14 +1,11 @@
 <template>
   <div
     ref="cardRef"
-    :class="cn('relative overflow-hidden', props.class)"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
-    <UCard
-      :ui="props.ui"
-      class="relative z-10 backdrop-blur-md bg-default/10 dark:bg-default/30 border border-default/20 dark:border-default/10"
-    >
+    <UCard :ui="{ root: ui.card({ class: uiProps.ui?.card }) }">
       <template
         v-if="$slots.header"
         #header
@@ -28,12 +25,12 @@
 
     <div
       v-if="props.backgroundImage"
-      class="absolute inset-0 z-0 transition-transform duration-200 ease-out"
+      :class="ui.background({ class: uiProps.ui?.background })"
       :style="parallaxStyle"
     >
       <img
         :src="props.backgroundImage"
-        class="w-full h-full object-cover scale-110"
+        :class="ui.backgroundImage({ class: uiProps.ui?.backgroundImage })"
         alt=""
       >
     </div>
@@ -41,22 +38,30 @@
 </template>
 
 <script setup lang="ts">
-import type { CardProps } from '#ui/components/Card.vue'
 import { ref, computed } from 'vue'
-import { cn } from '../utils/merge'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import glassPanel from '../theme/glass-panel'
 
 defineOptions({ inheritAttrs: false })
 
 interface Props {
   class?: string
-  ui?: CardProps['ui']
+  ui?: Record<string, any>
   backgroundImage?: string
   parallax?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  class: undefined,
+  ui: undefined,
   backgroundImage: undefined,
   parallax: true,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'glassPanel',
+  props,
+  theme: glassPanel,
 })
 
 const cardRef = ref<HTMLElement>()

@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { Motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import forceDot from '../theme/force-dot'
 
 const props = defineProps({
   count: { type: Number, default: 80 }, // number of dots
@@ -13,6 +15,14 @@ const props = defineProps({
   maxForce: { type: Number, default: 3 }, // strength of mouse effect
   speed: { type: Number, default: 1 }, // velocity multiplier
   dotClass: { type: String, default: 'fill-neutral-200' }, // style for dots
+  class: { type: String, default: undefined },
+  ui: { type: Object, default: undefined },
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'forceDot',
+  props,
+  theme: forceDot,
 })
 
 // --- dots state ---
@@ -125,7 +135,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="relative"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="{ width: `${width}px`, height: `${height}px` }"
     @mousemove="onMouseMove"
     @mouseleave="onMouseLeave"
@@ -133,7 +143,7 @@ onMounted(() => {
     <svg
       :width="width"
       :height="height"
-      class="overflow-visible"
+      :class="ui.svg({ class: uiProps.ui?.svg })"
     >
       <Motion
         v-for="(dot, i) in dots"
@@ -149,7 +159,7 @@ onMounted(() => {
       >
         <circle
           :r="6"
-          :class="dotClass"
+          :class="ui.dot({ class: [dotClass, uiProps.ui?.dot] })"
         />
       </Motion>
     </svg>
