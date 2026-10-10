@@ -41,7 +41,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   defaultValue: null,
   enableHover: false,
-  backgroundClass: 'bg-neutral-300 rounded-lg',
+  backgroundClass: 'bg-accented rounded-lg',
   containerClass: '',
   class: undefined,
   transition: () => ({ duration: 300, ease: 'ease-out' }),

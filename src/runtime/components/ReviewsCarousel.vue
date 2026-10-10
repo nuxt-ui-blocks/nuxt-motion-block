@@ -33,7 +33,7 @@
                 <svg
                   v-for="star in 5"
                   :key="star"
-                  :class="[ui.star({ class: uiProps.ui?.star }), star <= review.rating ? 'text-yellow-500' : 'text-default-300']"
+                  :class="[ui.star({ class: uiProps.ui?.star }), star <= review.rating ? 'text-warning' : 'text-dimmed']"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >

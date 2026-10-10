@@ -70,7 +70,7 @@
             <slot name="ring">
               <UIcon
                 name="i-lucide-phone"
-                class="h-5 w-5 text-green-500"
+                class="h-5 w-5 text-success"
               />
               <div class="flex-1">
                 <p class="pointer-events-none font-medium text-white text-sm">
@@ -80,7 +80,7 @@
                   Guillermo Rauch
                 </p>
               </div>
-              <div class="h-2 w-2 animate-pulse rounded-full bg-green-500" />
+              <div class="h-2 w-2 animate-pulse rounded-full bg-success" />
             </slot>
           </div>
 
@@ -91,7 +91,7 @@
             <slot name="timer">
               <UIcon
                 name="i-lucide-timer"
-                class="h-5 w-5 text-amber-500"
+                class="h-5 w-5 text-warning"
               />
               <div class="flex-1">
                 <p class="pointer-events-none font-medium text-white text-sm">
@@ -101,7 +101,7 @@
               <div class="h-1 w-24 overflow-hidden rounded-full bg-white/20">
                 <div
                   data-island-progress
-                  class="h-full w-full bg-amber-500"
+                  class="h-full w-full bg-warning"
                 />
               </div>
             </slot>
@@ -113,7 +113,7 @@
           >
             <UIcon
               name="i-lucide-bell"
-              class="h-5 w-5 text-yellow-400"
+              class="h-5 w-5 text-warning"
             />
             <div class="flex-1">
               <p class="pointer-events-none font-medium text-white text-sm">
@@ -123,7 +123,7 @@
                 You have a new notification!
               </p>
             </div>
-            <span class="rounded-full bg-yellow-400/40 px-2 py-0.5 text-yellow-500 text-xs">
+            <span class="rounded-full bg-warning/40 px-2 py-0.5 text-warning text-xs">
               1
             </span>
           </div>
@@ -134,7 +134,7 @@
           >
             <UIcon
               name="i-lucide-music-2"
-              class="h-5 w-5 text-pink-500"
+              class="h-5 w-5 text-primary"
             />
             <div class="min-w-0 flex-1">
               <p class="pointer-events-none truncate font-medium text-white text-sm">
