@@ -3,13 +3,15 @@
     ref="canvasRef"
     role="img"
     :aria-label="`Avatar for ${props.seed}`"
-    :class="['rounded-full', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="{ height: `${props.size}px`, width: `${props.size}px` }"
   />
 </template>
 
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import agentAvatar from '../theme/agent-avatar'
 
 export interface AgentAvatarProps {
   /** Animate the pixel field. Still respects `prefers-reduced-motion`. */
@@ -19,13 +21,17 @@ export interface AgentAvatarProps {
   seed: string
   /** Diameter in pixels. */
   size?: number
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<AgentAvatarProps>(), {
   animated: true,
-  class: '',
+  class: undefined,
   size: 64,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'agentAvatar', props, theme: agentAvatar })
 
 const GRID_SIZE = 6
 /** Each pixel oscillates its own lightness, out of phase with its neighbours. */

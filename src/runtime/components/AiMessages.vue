@@ -8,7 +8,7 @@
     :should-auto-scroll="props.shouldAutoScroll"
     :should-scroll-to-bottom="props.shouldScrollToBottom"
     :spacing-offset="props.spacingOffset"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
     <!--
       Every slot is handed straight through, because `ChatMessages` forwards the
@@ -32,6 +32,8 @@
 import { computed, useSlots } from 'vue'
 import type { AIState } from '../composables/useAiState'
 import { getAIChatStatus } from '../composables/useAiState'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import aiMessages from '../theme/ai-messages'
 import type { AiUIMessage } from '../types/ai'
 
 interface Props {
@@ -53,18 +55,22 @@ interface Props {
   shouldScrollToBottom?: boolean
   spacingOffset?: number
   class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   assistant: () => ({}),
-  class: '',
+  class: undefined,
   compact: false,
   shouldAutoScroll: false,
   shouldScrollToBottom: true,
   spacingOffset: 0,
   state: undefined,
+  ui: undefined,
   user: () => ({}),
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiMessages', props, theme: aiMessages })
 
 const slots = useSlots()
 const forwarded = computed(() => Object.keys(slots))

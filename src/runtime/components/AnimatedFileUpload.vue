@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import type { ComponentPublicInstance } from 'vue'
 import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedFileUpload from '../theme/animated-file-upload'
 
 defineOptions({ inheritAttrs: false })
 
 interface Props {
   ui?: Record<string, any>
+  class?: string
   label?: string
   dragLabel?: string
 }
@@ -13,15 +16,18 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   label: 'Drag & drop or click to upload',
   dragLabel: 'Drop files here',
-  ui: () => ({}),
+  ui: undefined,
+  class: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'animatedFileUpload', props, theme: animatedFileUpload })
 
 const fileUploadRef = useTemplateRef<ComponentPublicInstance & { dropzoneRef?: HTMLElement }>('fileUpload')
 const isDragOver = ref(false)
 
-const motionUi = computed(() => ({
-  ...props.ui,
-  root: [props.ui?.root, 'm-file-upload'],
+const fileUploadUi = computed(() => ({
+  ...uiProps.ui,
+  root: ui.value.root({ class: uiProps.ui?.root }),
 }))
 
 const dropLabel = computed(() => (isDragOver.value ? props.dragLabel : props.label))
@@ -52,7 +58,8 @@ onBeforeUnmount(() => {
   <UFileUpload
     ref="fileUpload"
     v-bind="$attrs"
-    :ui="motionUi"
+    :class="uiProps.class"
+    :ui="fileUploadUi"
   >
     <template #label>
       <Transition

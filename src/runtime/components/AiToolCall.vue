@@ -1,14 +1,14 @@
 <template>
-  <div :class="props.class">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <!--
       The ring is the status, and it is drawn rather than spelled. A screen
       reader gets the same information as a word, in the same place the sighted
       reader finds it.
     -->
-    <span class="sr-only">{{ statusLabel }}</span>
+    <span :class="ui.status({ class: uiProps.ui?.status })">{{ statusLabel }}</span>
 
     <UChatTool
-      class="w-full"
+      :class="ui.tool({ class: uiProps.ui?.tool })"
       variant="card"
       :text="props.name"
       :suffix="props.summary"
@@ -17,26 +17,26 @@
       :streaming="isRunning"
       :default-open="props.defaultOpen"
       :unmount-on-hide="true"
-      :ui="ui"
+      :ui="chatToolUi"
     >
       <template
         v-if="hasDetail()"
         #default
       >
-        <div class="space-y-2 text-xs">
+        <div :class="ui.detail({ class: uiProps.ui?.detail })">
           <div v-if="slots.args">
-            <p class="mb-1 text-[10px] uppercase tracking-wide text-muted">
+            <p :class="ui.detailLabel({ class: uiProps.ui?.detailLabel })">
               Arguments
             </p>
-            <div class="overflow-x-auto font-mono text-highlighted">
+            <div :class="ui.args({ class: uiProps.ui?.args })">
               <slot name="args" />
             </div>
           </div>
           <div v-if="slots.result">
-            <p class="mb-1 text-[10px] uppercase tracking-wide text-muted">
+            <p :class="ui.detailLabel({ class: uiProps.ui?.detailLabel })">
               Result
             </p>
-            <div class="overflow-x-auto text-highlighted">
+            <div :class="ui.result({ class: uiProps.ui?.result })">
               <slot name="result" />
             </div>
           </div>
@@ -49,7 +49,9 @@
 <script setup lang="ts">
 import { computed, defineComponent, h } from 'vue'
 import type { AIToolCallStatus } from '../types/ai'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import AiToolCallBadge from '../utils/AiToolCallBadge.vue'
+import aiToolCall from '../theme/ai-tool-call'
 
 export type { AIToolCallStatus } from '../types/ai'
 
@@ -79,6 +81,7 @@ interface Props {
   status?: AIToolCallStatus
   /** Short trailing note, e.g. "3 files" or "1.2s". */
   summary?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -86,7 +89,10 @@ const props = withDefaults(defineProps<Props>(), {
   defaultOpen: false,
   status: 'pending',
   summary: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiToolCall', props, theme: aiToolCall })
 
 const slots = defineSlots<{
   default?: () => unknown
@@ -124,9 +130,9 @@ const badge = defineComponent({
  * the permanent marker and the chevron already lives on the trailing edge, so the
  * icon keeps its own box and its own opacity.
  */
-const ui = {
-  label: 'font-mono text-xs font-medium text-highlighted',
-  leading: '!size-5',
-  leadingIcon: '!static !inset-auto !size-5 !opacity-100',
-}
+const chatToolUi = computed(() => ({
+  label: ui.value.label({ class: uiProps.ui?.label }),
+  leading: ui.value.leading({ class: uiProps.ui?.leading }),
+  leadingIcon: ui.value.leadingIcon({ class: uiProps.ui?.leadingIcon }),
+}))
 </script>

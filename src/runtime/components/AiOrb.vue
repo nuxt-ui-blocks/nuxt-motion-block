@@ -2,7 +2,7 @@
   <div
     v-if="!supported"
     aria-hidden="true"
-    :class="['block rounded-full', props.class]"
+    :class="ui.root({ fallback: true, class: [uiProps.ui?.root, uiProps.class] })"
     :style="{
       // Lit from the same corner as the shader, so the character does not
       // change which way it faces when it falls back.
@@ -15,7 +15,7 @@
     v-else
     :ref="setCanvasEl"
     aria-hidden="true"
-    :class="['block', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="{ height: dimension, width: dimension }"
     tabindex="-1"
   />
@@ -51,6 +51,8 @@
  * (Björn Ottosson).
  */
 import { computed, onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import aiOrb from '../theme/ai-orb'
 
 interface Props {
   /** Rim dispersion. Splits the palette lookup per channel toward the edge, the way a lens fringes. */
@@ -102,9 +104,12 @@ interface Props {
   turbulence?: number
   /** Silhouette deformation, so the orb is a drop rather than a ball. */
   wobble?: number
+  ui?: Record<string, any>
 }
 
-const props = withDefaults(defineProps<Props>(), { size: 240 })
+const props = withDefaults(defineProps<Props>(), { size: 240, class: undefined, ui: undefined })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiOrb', props, theme: aiOrb })
 
 /** The editor's own defaults, which are a good orb rather than a neutral one. */
 const DEFAULTS = {

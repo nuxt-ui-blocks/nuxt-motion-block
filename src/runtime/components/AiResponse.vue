@@ -1,9 +1,6 @@
 <template>
   <p
-    :class="[
-      'text-pretty text-default text-sm leading-relaxed',
-      props.class,
-    ]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
     <template
       v-for="(token, index) in tokens"
@@ -23,8 +20,7 @@
         :is="token.citation.url ? 'a' : 'span'"
         v-else-if="token.citation"
         :animate="{ opacity: 1, scale: 1 }"
-        class="mr-0.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full border border-border bg-muted px-1 align-super font-medium text-[10px] text-muted no-underline"
-        :class="token.citation.url ? 'transition-colors hover:border-accented hover:text-highlighted' : undefined"
+        :class="ui.citation({ class: [uiProps.ui?.citation, token.citation.url ? 'transition-colors hover:border-accented hover:text-highlighted' : undefined] })"
         :href="token.citation.url"
         :initial="isNew(index) && !shouldReduceMotion ? { opacity: 0, scale: 0.6 } : false"
         :rel="token.citation.url ? 'noopener noreferrer' : undefined"
@@ -39,7 +35,7 @@
       <Motion
         v-else
         :animate="{ filter: 'blur(0px)', opacity: 1, y: 0 }"
-        class="inline-block"
+        :class="ui.word({ class: uiProps.ui?.word })"
         :initial="isNew(index) && !shouldReduceMotion ? { filter: `blur(${WORD_BLUR_PX}px)`, opacity: 0, y: 2 } : false"
         :transition="shouldReduceMotion ? NO_MOTION : WORD_TRANSITION"
       >
@@ -56,7 +52,7 @@
       v-if="props.isStreaming"
       :animate="shouldReduceMotion ? { opacity: 1 } : { opacity: [1, 0.15, 1] }"
       aria-hidden="true"
-      class="ml-0.5 inline-block h-[1em] w-[2px] translate-y-[0.15em] rounded-full bg-current align-baseline"
+      :class="ui.caret({ class: uiProps.ui?.caret })"
       :transition="shouldReduceMotion ? NO_MOTION : CARET_TRANSITION"
     />
   </p>
@@ -65,7 +61,9 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { Motion, useReducedMotion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import { EASE_OUT, SPRING_DEFAULT } from '../utils/motion-tokens'
+import aiResponse from '../theme/ai-response'
 
 export interface AIResponseCitation {
   id: string
@@ -91,6 +89,7 @@ export interface AIResponseProps {
   isStreaming?: boolean
   /** The response so far. Re-render it as it grows. */
   text: string
+  ui?: Record<string, any>
 }
 
 // `text` is deliberately absent from the defaults: upstream makes it required,
@@ -99,7 +98,10 @@ const props = withDefaults(defineProps<AIResponseProps>(), {
   citations: () => [],
   class: '',
   isStreaming: false,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiResponse', props, theme: aiResponse })
 
 const WORD_BLUR_PX = 4
 /** `[1]` style markers become citation pills. */

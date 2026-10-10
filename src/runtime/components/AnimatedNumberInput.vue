@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, useId, watch } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedNumberInput from '../theme/animated-number-input'
 
 defineOptions({ inheritAttrs: false })
 
@@ -19,6 +21,8 @@ const props = withDefaults(defineProps<{
   required?: boolean
   step?: number
   modelValue?: number
+  class?: string
+  ui?: Record<string, any>
 }>(), {
   defaultValue: 0,
   disabled: false,
@@ -34,6 +38,8 @@ const props = withDefaults(defineProps<{
   required: false,
   step: 1,
   modelValue: undefined,
+  class: undefined,
+  ui: undefined,
 })
 
 const emit = defineEmits<{
@@ -41,6 +47,12 @@ const emit = defineEmits<{
   'blur': [event: FocusEvent]
   'change': [event: Event]
 }>()
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'animatedNumberInput',
+  props,
+  theme: animatedNumberInput,
+})
 
 const ROLL_DISTANCE = 14
 const DIGIT_SPRING = { bounce: 0.1, type: 'spring', duration: 0.25 } as const
@@ -162,16 +174,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="inline-flex flex-col gap-1.5">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <label
       v-if="label"
       :for="inputId"
-      class="text-sm font-medium text-highlighted"
+      :class="ui.label({ class: uiProps.ui?.label })"
     >{{ label }}</label>
 
     <div
       ref="fieldRef"
-      class="animated-number-input-hide relative"
+      :class="ui.field({ class: uiProps.ui?.field })"
       @focusin="onFieldFocusIn"
       @focusout="onFieldFocusOut"
     >
@@ -190,7 +202,7 @@ onUnmounted(() => {
         :name="name"
         :increment="increment"
         :decrement="decrement"
-        class="w-full"
+        :class="ui.input({ class: uiProps.ui?.input })"
         @update:model-value="onUpdate"
         @blur="emit('blur', $event)"
         @change="emit('change', $event)"
@@ -198,13 +210,12 @@ onUnmounted(() => {
 
       <div
         aria-hidden
-        class="pointer-events-none absolute inset-0 flex select-none items-center text-base/5 text-highlighted md:text-sm"
-        :class="overlayAlign"
+        :class="ui.overlay({ class: [overlayAlign, uiProps.ui?.overlay] })"
       >
         <span
           v-for="(char, index) in overlayText"
           :key="index"
-          class="relative inline-block h-[1.2em] w-[0.62em] overflow-hidden text-center align-bottom tabular-nums"
+          :class="ui.digit({ class: uiProps.ui?.digit })"
         >
           <AnimatePresence
             :initial="false"
@@ -212,7 +223,7 @@ onUnmounted(() => {
           >
             <motion.span
               :key="char"
-              class="absolute inset-0 flex items-center justify-center"
+              :class="ui.char({ class: uiProps.ui?.char })"
               :initial="digitInitial(char)"
               :animate="{ opacity: 1, y: 0 }"
               :exit="digitExit(char)"

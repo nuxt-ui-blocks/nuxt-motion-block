@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref } from 'vue'
 import { AnimatePresence, motion, useAnimationControls, useReducedMotion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import appDownloadStack from '../theme/app-download-stack'
 
 defineOptions({ inheritAttrs: false })
 
@@ -23,6 +25,8 @@ export interface AppDownloadStackProps {
   selectedApps?: number[]
   /** Controlled expansion. Leave undefined to let the stack toggle itself. */
   expanded?: boolean
+  /** Per-slot classes resolved against the component theme. */
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<AppDownloadStackProps>(), {
@@ -31,6 +35,7 @@ const props = withDefaults(defineProps<AppDownloadStackProps>(), {
   expanded: undefined,
   selectedApps: undefined,
   title: 'Starter Mac',
+  ui: undefined,
 })
 
 const emit = defineEmits<{
@@ -40,6 +45,8 @@ const emit = defineEmits<{
   'update:expanded': [expanded: boolean]
   'update:selectedApps': [selected: number[]]
 }>()
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'appDownloadStack', props, theme: appDownloadStack })
 
 const DOWNLOAD_DURATION_MS = 3000
 const RESET_DELAY_MS = 1000
@@ -364,12 +371,11 @@ function layoutIdFor(appId: number) {
 <template>
   <div
     v-bind="$attrs"
-    class="flex h-auto flex-col items-center justify-center"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     data-ads-root
   >
     <motion.div
-      class="flex flex-col items-center justify-center"
+      :class="ui.wrapper({ class: uiProps.ui?.wrapper })"
       :layout="!shouldReduceMotion"
     >
       <!--
@@ -388,7 +394,7 @@ function layoutIdFor(appId: number) {
         v-if="!isExpanded && !isDownloading"
         type="button"
         aria-label="Expand app selection"
-        class="group relative isolate flex h-16 w-16 cursor-pointer items-center justify-center"
+        :class="ui.trigger({ class: uiProps.ui?.trigger })"
         data-ads-trigger
         @click="setExpanded(true)"
         @pointerenter="setHovered(true)"
@@ -399,7 +405,7 @@ function layoutIdFor(appId: number) {
           :key="app.id"
           :alt="`${app.name} Logo`"
           :custom="index"
-          class="absolute inset-0 rounded-xl border-none"
+          :class="ui.stackIcon({ class: uiProps.ui?.stackIcon })"
           :draggable="false"
           :height="64"
           :layout-id="layoutIdFor(app.id)"
@@ -415,23 +421,23 @@ function layoutIdFor(appId: number) {
         <motion.div
           v-if="isExpanded && !isDownloading"
           key="app-selector"
-          class="flex flex-col items-center gap-2"
+          :class="ui.selector({ class: uiProps.ui?.selector })"
           :layout="!shouldReduceMotion"
           v-bind="panelMotion"
           data-ads-selector
         >
           <button
             type="button"
-            class="flex w-full cursor-pointer items-center justify-between px-0.5"
+            :class="ui.selectorHeader({ class: uiProps.ui?.selectorHeader })"
             data-ads-selector-header
             @click="setExpanded(false)"
           >
-            <p class="my-0 font-medium leading-none text-highlighted">
+            <p :class="ui.title({ class: uiProps.ui?.title })">
               {{ props.title }}
             </p>
-            <div class="flex items-center gap-1">
+            <div :class="ui.countWrap({ class: uiProps.ui?.countWrap })">
               <p
-                class="my-0 font-medium leading-none text-highlighted"
+                :class="ui.count({ class: uiProps.ui?.count })"
                 data-ads-count
               >
                 {{ selected.length }}
@@ -439,27 +445,26 @@ function layoutIdFor(appId: number) {
               <!-- Decorative: the count beside it already carries the meaning. -->
               <UIcon
                 name="i-lucide-chevron-down"
-                class="size-4 text-muted"
+                :class="ui.chevron({ class: uiProps.ui?.chevron })"
               />
             </div>
           </button>
 
           <motion.ul
-            class="grid grid-cols-2 gap-3"
+            :class="ui.grid({ class: uiProps.ui?.grid })"
             data-ads-grid
           >
             <motion.li
               v-for="(app, index) in apps"
               :key="app.id"
-              class="relative flex h-[80px] w-[80px]"
+              :class="ui.tile({ class: uiProps.ui?.tile })"
               v-bind="tileMotion[index]"
               data-ads-tile
             >
               <div
-                class="pointer-events-none absolute top-2 right-2 z-[1] flex h-4 w-4 items-center justify-center rounded-full border border-solid"
-                :class="isSelected(app.id)
+                :class="[ui.check({ class: uiProps.ui?.check }), isSelected(app.id)
                   ? 'border-primary bg-primary'
-                  : 'border-default'"
+                  : 'border-default']"
                 data-ads-check
               >
                 <!--
@@ -471,7 +476,7 @@ function layoutIdFor(appId: number) {
                 -->
                 <svg
                   v-if="isSelected(app.id)"
-                  class="z-[1] h-3 w-3"
+                  :class="ui.checkmark({ class: uiProps.ui?.checkmark })"
                   fill="none"
                   stroke="currentColor"
                   stroke-linecap="round"
@@ -492,21 +497,20 @@ function layoutIdFor(appId: number) {
 
               <button
                 type="button"
-                class="group flex h-full w-full cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border-2 border-transparent bg-default/80 p-2 transition-all duration-200 hover:border-primary"
-                :class="isSelected(app.id) ? 'border-primary bg-primary/10' : ''"
+                :class="[ui.app({ class: uiProps.ui?.app }), isSelected(app.id) ? 'border-primary bg-primary/10' : '']"
                 :aria-pressed="isSelected(app.id)"
                 data-ads-app
                 @click="toggleApp(app.id)"
               >
                 <img
                   :alt="app.name"
-                  class="rounded-lg"
+                  :class="ui.appIcon({ class: uiProps.ui?.appIcon })"
                   :draggable="false"
                   :height="40"
                   :src="app.icon"
                   :width="40"
                 >
-                <span class="font-medium text-highlighted text-xs">
+                <span :class="ui.appName({ class: uiProps.ui?.appName })">
                   {{ app.name }}
                 </span>
               </button>
@@ -515,7 +519,7 @@ function layoutIdFor(appId: number) {
 
           <button
             type="button"
-            class="mt-4 w-full cursor-pointer rounded-lg bg-primary px-4 py-2 font-semibold text-inverted shadow transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+            :class="ui.download({ class: uiProps.ui?.download })"
             :disabled="selected.length === 0"
             data-ads-download
             @click="handleDownload"
@@ -527,12 +531,12 @@ function layoutIdFor(appId: number) {
         <motion.div
           v-if="isDownloading && !downloadComplete"
           key="downloading"
-          class="flex flex-col items-center gap-4"
+          :class="ui.downloading({ class: uiProps.ui?.downloading })"
           :layout="!shouldReduceMotion"
           v-bind="panelMotion"
           data-ads-downloading
         >
-          <div class="relative flex h-16 w-16 items-center justify-center">
+          <div :class="ui.downloadingWrap({ class: uiProps.ui?.downloadingWrap })">
             <!--
               The `x: 0` seed is a plain number, not a MotionValue, and it is
               load-bearing rather than decorative: the sweep is driven by
@@ -542,7 +546,7 @@ function layoutIdFor(appId: number) {
               ~2px and parks there instead of crossing the 64px panel.
             -->
             <motion.div
-              class="absolute inset-0 rounded-xl bg-primary/20"
+              :class="ui.shine({ class: uiProps.ui?.shine })"
               :animate="shineControls"
               :style="{ x: 0 }"
               data-ads-shine
@@ -552,7 +556,7 @@ function layoutIdFor(appId: number) {
               :key="app.id"
               :alt="`${app.name} Logo`"
               :custom="index"
-              class="absolute inset-0 rounded-xl border-none"
+              :class="ui.downloadingIcon({ class: uiProps.ui?.downloadingIcon })"
               :draggable="false"
               :height="64"
               :layout-id="layoutIdFor(app.id)"
@@ -564,7 +568,7 @@ function layoutIdFor(appId: number) {
             />
           </div>
           <span
-            class="font-semibold text-primary"
+            :class="ui.downloadingLabel({ class: uiProps.ui?.downloadingLabel })"
             data-ads-downloading-label
           >
             Downloading...
@@ -574,13 +578,13 @@ function layoutIdFor(appId: number) {
         <motion.div
           v-if="downloadComplete"
           key="download-complete"
-          class="flex flex-col items-center gap-4"
+          :class="ui.complete({ class: uiProps.ui?.complete })"
           :layout="!shouldReduceMotion"
           v-bind="panelMotion"
           data-ads-complete
         >
           <span
-            class="font-semibold text-success"
+            :class="ui.completeLabel({ class: uiProps.ui?.completeLabel })"
             data-ads-complete-label
           >
             Download Complete!

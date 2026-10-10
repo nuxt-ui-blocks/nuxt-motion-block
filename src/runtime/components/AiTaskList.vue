@@ -1,15 +1,15 @@
 <template>
-  <div :class="['w-full rounded-xl border border-border bg-elevated p-3', props.class]">
-    <div class="mb-1.5 flex items-baseline justify-between">
-      <p class="font-medium text-default text-sm">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
+    <div :class="ui.header({ class: uiProps.ui?.header })">
+      <p :class="ui.label({ class: uiProps.ui?.label })">
         {{ props.label }}
       </p>
-      <p class="text-muted text-xs tabular-nums">
+      <p :class="ui.count({ class: uiProps.ui?.count })">
         {{ doneCount }}/{{ allTasks.length }}
       </p>
     </div>
 
-    <ul class="list-none">
+    <ul :class="ui.list({ class: uiProps.ui?.list })">
       <template
         v-for="row in rows"
         :key="row.task.id"
@@ -17,24 +17,27 @@
         <!-- @vue-ignore -->
         <Motion
           as="li"
-          class="list-none"
+          :class="ui.row({ class: uiProps.ui?.row })"
           :style="{ paddingLeft: row.depth * INDENT_PX }"
           :animate="{ opacity: row.isDone ? DONE_OPACITY : 1, y: row.isDone && !shouldReduceMotion ? DONE_SETTLE_PX : 0 }"
           :transition="shouldReduceMotion ? NO_MOTION : SPRING_DEFAULT"
         >
-          <span class="relative flex items-start gap-2 py-1">
+          <span :class="ui.rowInner({ class: uiProps.ui?.rowInner })">
             <TaskBox
               :should-reduce-motion="shouldReduceMotion"
               :status="row.task.status"
+              :box-class="ui.box({ class: uiProps.ui?.box })"
+              :svg-class="ui.boxSvg({ class: uiProps.ui?.boxSvg })"
+              :draw-class="ui.boxDraw({ class: uiProps.ui?.boxDraw })"
             />
 
-            <span class="min-w-0 flex-1 text-default text-sm leading-snug">
+            <span :class="ui.text({ class: uiProps.ui?.text })">
               {{ row.task.label }}
             </span>
 
             <span
               v-if="row.task.note"
-              class="shrink-0 text-muted text-xs tabular-nums"
+              :class="ui.note({ class: uiProps.ui?.note })"
             >
               {{ row.task.note }}
             </span>
@@ -44,7 +47,7 @@
               v-if="row.task.status === 'running' && !shouldReduceMotion"
               as="span"
               :animate="UNDERLINE_ANIMATE"
-              class="pointer-events-none absolute inset-x-0 bottom-0 h-px"
+              :class="ui.underline({ class: uiProps.ui?.underline })"
               :style="UNDERLINE_STYLE"
               :transition="UNDERLINE_TRANSITION"
             />
@@ -58,7 +61,9 @@
 <script setup lang="ts">
 import { computed, defineComponent, h } from 'vue'
 import { Motion, useReducedMotion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import { EASE_IN_OUT, SPRING_DEFAULT } from '../utils/motion-tokens'
+import aiTaskList from '../theme/ai-task-list'
 
 export type AiTaskStatus = 'pending' | 'running' | 'done' | 'failed'
 
@@ -77,12 +82,16 @@ export interface AiTaskListProps {
   /** Heading text. The counts are derived, never passed in. */
   label?: string
   tasks: AiTask[]
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<AiTaskListProps>(), {
   class: '',
   label: 'Plan',
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiTaskList', props, theme: aiTaskList })
 
 const CHECK_PATH = 'M 3.5 7.5 L 6 10 L 10.5 4.5'
 const CROSS_PATH = 'M 5 5 L 9 9 M 9 5 L 5 9'
@@ -140,6 +149,9 @@ const TaskBox = defineComponent({
   props: {
     shouldReduceMotion: { type: Boolean, required: true },
     status: { type: String as () => AiTaskStatus, required: true },
+    boxClass: { type: String, default: undefined },
+    svgClass: { type: String, default: undefined },
+    drawClass: { type: String, default: undefined },
   },
   setup(boxProps) {
     return () => {
@@ -147,13 +159,13 @@ const TaskBox = defineComponent({
       const isFailed = boxProps.status === 'failed'
       return h(
         'span',
-        { class: 'mt-0.5 flex size-3.5 shrink-0 items-center justify-center' },
+        { class: boxProps.boxClass },
         [
           h(
             'svg',
             {
               'aria-hidden': 'true',
-              'class': 'size-3.5',
+              'class': boxProps.svgClass,
               'viewBox': `0 0 ${BOX_SIZE} ${BOX_SIZE}`,
             },
             [
@@ -178,7 +190,7 @@ const TaskBox = defineComponent({
               // ticking the box rather than a state that was always there.
               isDone
                 ? h('path', {
-                    class: 'ai-task-draw',
+                    class: boxProps.drawClass,
                     d: CHECK_PATH,
                     fill: 'none',
                     pathLength: 1,
@@ -191,7 +203,7 @@ const TaskBox = defineComponent({
                 : null,
               isFailed
                 ? h('path', {
-                    class: 'ai-task-draw',
+                    class: boxProps.drawClass,
                     d: CROSS_PATH,
                     fill: 'none',
                     pathLength: 1,

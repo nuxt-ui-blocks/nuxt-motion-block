@@ -1,7 +1,7 @@
 <template>
   <div
     ref="rootEl"
-    :class="['relative block', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="{
       // States carry their own saturation, so a faulted assistant visibly cools
       // down next to the rest of the interface instead of staying cheerful.
@@ -11,7 +11,7 @@
     }"
   >
     <motion.div
-      class="absolute"
+      :class="ui.body({ class: uiProps.ui?.body })"
       data-orb-body
       :style="{
         height: `${bodySpan}%`,
@@ -27,17 +27,17 @@
            survives losing its context. -->
       <div
         aria-hidden="true"
+        :class="ui.understudy({ class: uiProps.ui?.understudy })"
         :style="{
           background: `radial-gradient(circle at 34% 30%, ${finalColors.bodyEdge}, ${finalColors.body} 72%)`,
           inset: `${bodyUnderstudyInset}%`,
         }"
-        class="absolute rounded-full"
       />
       <AiOrb
         :colors="orbColors"
         :flow="orbFlow"
         :glow="0"
-        class="size-full"
+        :class="ui.orb({ class: uiProps.ui?.orb })"
         size="100%"
         :turbulence="orbTurbulence"
       />
@@ -45,7 +45,7 @@
     <motion.svg
       :aria-hidden="ariaLabel ? undefined : true"
       :aria-label="ariaLabel"
-      class="absolute inset-0 block size-full overflow-visible"
+      :class="ui.face({ class: uiProps.ui?.face })"
       data-orb-body
       :role="ariaLabel ? 'img' : undefined"
       :style="{ transformBox: 'view-box' }"
@@ -112,6 +112,8 @@ import { motion, useMotionValueEvent, useReducedMotion, useSpring } from 'motion
 import AiOrb from './AiOrb.vue'
 import type { AIAmplitude, AIState } from '../composables/useAiState'
 import { getAIStateMotion, useAmplitudeValue } from '../composables/useAiState'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import aiOrbFace from '../theme/ai-orb-face'
 
 const VIEWBOX = 100
 const CENTER = VIEWBOX / 2
@@ -191,10 +193,14 @@ const EASE_OUT = cubicBezier(0.23, 1, 0.32, 1)
 const EASE_IN = cubicBezier(0.4, 0, 1, 1)
 
 const props = withDefaults(defineProps<AiOrbFaceProps>(), {
+  class: undefined,
   gaze: true,
   size: 128,
   state: 'idle',
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiOrbFace', props, theme: aiOrbFace })
 
 const stateMotion = computed(() => getAIStateMotion(props.state))
 const amplitudeValue = useAmplitudeValue(() => props.amplitude)
@@ -733,6 +739,7 @@ export interface AiOrbFaceProps {
   /** Pixels when a number, any CSS length when a string. */
   size?: number | string
   state?: AIState
+  ui?: Record<string, any>
 }
 
 const eye = (h: number, w = 1, rotate = 0, dy = 0): AiOrbFaceEyeShape => ({ dy, h, rotate, w })

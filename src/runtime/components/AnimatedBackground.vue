@@ -1,7 +1,7 @@
 <template>
   <div
     ref="containerRef"
-    :class="['relative', containerClass]"
+    :class="ui.root({ class: [uiProps.ui?.root, props.containerClass, uiProps.class] })"
     @click="handleClick"
     @mouseover="handleMouseOver"
     @mouseleave="handleMouseLeave"
@@ -14,7 +14,7 @@
     <!-- Animated Background -->
     <div
       v-if="showBackground"
-      :class="['absolute top-0 left-0 pointer-events-none transition-all duration-300 ease-out', backgroundClass]"
+      :class="ui.background({ class: [uiProps.ui?.background, props.backgroundClass] })"
       :style="backgroundStyle"
     />
   </div>
@@ -22,16 +22,20 @@
 
 <script setup lang="ts">
 import { ref, nextTick, onMounted } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedBackground from '../theme/animated-background'
 
 interface Props {
   defaultValue?: string | null
   enableHover?: boolean
   backgroundClass?: string
   containerClass?: string
+  class?: string
   transition?: {
     duration?: number
     ease?: string
   }
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -39,8 +43,12 @@ const props = withDefaults(defineProps<Props>(), {
   enableHover: false,
   backgroundClass: 'bg-neutral-300 rounded-lg',
   containerClass: '',
+  class: undefined,
   transition: () => ({ duration: 300, ease: 'ease-out' }),
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'animatedBackground', props, theme: animatedBackground })
 
 const emit = defineEmits<{
   valueChange: [value: string | null]

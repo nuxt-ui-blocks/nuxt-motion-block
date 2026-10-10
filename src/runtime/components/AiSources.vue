@@ -1,8 +1,8 @@
 <template>
-  <div :class="['w-full', props.class]">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <button
       :aria-expanded="isOpen"
-      class="flex w-full cursor-pointer items-center gap-2 rounded-lg py-1 text-left text-sm text-muted transition-colors hover:text-default"
+      :class="ui.trigger({ class: uiProps.ui?.trigger })"
       type="button"
       @blur="onHovered(false)"
       @click="isOpen = !isOpen"
@@ -10,13 +10,13 @@
       @mouseenter="onHovered(true)"
       @mouseleave="onHovered(false)"
     >
-      <span class="flex items-center">
+      <span :class="ui.stack({ class: uiProps.ui?.stack })">
         <!-- @vue-ignore -->
         <Motion
           v-for="(entry, index) in stacked"
           :key="entry.id"
           :layout-id="isOpen ? undefined : `${layoutPrefix}-${entry.id}`"
-          class="ai-sources-chip relative block"
+          :class="ui.chip({ class: uiProps.ui?.chip })"
           :style="{
             marginLeft: `${stackOffset(index)}px`,
             zIndex: stacked.length - index,
@@ -25,6 +25,8 @@
           <SourceFavicon
             :size="STACK_FAVICON_PX"
             :source="entry"
+            :base-class="ui.faviconBase({ class: uiProps.ui?.faviconBase })"
+            :mark-class="ui.faviconMark({ class: uiProps.ui?.faviconMark })"
           >
             <template #mark>
               <slot
@@ -37,7 +39,7 @@
 
         <span
           v-if="overflow > 0"
-          class="ml-1 tabular-nums"
+          :class="ui.overflow({ class: uiProps.ui?.overflow })"
         >+{{ overflow }}</span>
       </span>
 
@@ -46,7 +48,7 @@
       <!-- @vue-ignore -->
       <Motion
         :animate="{ rotate: isOpen ? 90 : 0 }"
-        class="flex size-4 items-center justify-center"
+        :class="ui.chevron({ class: uiProps.ui?.chevron })"
         :transition="shouldReduceMotion ? NO_MOTION : SPRING_DEFAULT"
       >
         <UIcon
@@ -66,10 +68,10 @@
     -->
     <div
       :inert="!isOpen"
-      class="ai-sources-body"
+      :class="ui.body({ class: uiProps.ui?.body })"
       :style="bodyStyle"
     >
-      <ul class="mt-1 min-h-0 list-none overflow-hidden">
+      <ul :class="ui.list({ class: uiProps.ui?.list })">
         <!-- @vue-ignore -->
         <Motion
           v-for="(entry, index) in props.sources"
@@ -80,20 +82,22 @@
           :transition="rowTransition(index)"
         >
           <a
-            class="flex items-start gap-2.5 rounded-lg px-1 py-1.5 no-underline transition-colors hover:bg-muted"
+            :class="ui.link({ class: uiProps.ui?.link })"
             :href="entry.url"
             rel="noopener noreferrer"
             target="_blank"
           >
             <!-- @vue-ignore -->
             <Motion
-              class="mt-0.5 block shrink-0"
+              :class="ui.favicon({ class: uiProps.ui?.favicon })"
               :layout-id="`${layoutPrefix}-${entry.id}`"
               :transition="shouldReduceMotion ? NO_MOTION : SPRING_DEFAULT"
             >
               <SourceFavicon
                 :size="ROW_FAVICON_PX"
                 :source="entry"
+                :base-class="ui.faviconBase({ class: uiProps.ui?.faviconBase })"
+                :mark-class="ui.faviconMark({ class: uiProps.ui?.faviconMark })"
               >
                 <template #mark>
                   <slot
@@ -104,9 +108,9 @@
               </SourceFavicon>
             </Motion>
 
-            <span class="min-w-0">
-              <span class="block truncate text-sm font-medium text-default">{{ entry.title }}</span>
-              <span class="block truncate text-xs text-muted">{{ entry.snippet ?? hostOf(entry.url) }}</span>
+            <span :class="ui.rowText({ class: uiProps.ui?.rowText })">
+              <span :class="ui.rowTitle({ class: uiProps.ui?.rowTitle })">{{ entry.title }}</span>
+              <span :class="ui.rowSnippet({ class: uiProps.ui?.rowSnippet })">{{ entry.snippet ?? hostOf(entry.url) }}</span>
             </span>
           </a>
         </Motion>
@@ -118,7 +122,9 @@
 <script setup lang="ts">
 import { computed, defineComponent, h, ref, resolveComponent, useId } from 'vue'
 import { Motion, useReducedMotion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import { EASE_OUT, SPRING_DEFAULT } from '../utils/motion-tokens'
+import aiSources from '../theme/ai-sources'
 
 export interface AiSource {
   id: string
@@ -135,13 +141,17 @@ export interface AiSourcesProps {
   /** Label before the stack, e.g. "Sources". */
   label?: string
   sources: AiSource[]
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<AiSourcesProps>(), {
   class: '',
   defaultOpen: false,
   label: 'Sources',
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiSources', props, theme: aiSources })
 
 /** Favicons shown in the collapsed stack before the "+n" chip. */
 const STACK_LIMIT = 3
@@ -181,6 +191,8 @@ const SourceFavicon = defineComponent({
   props: {
     size: { type: Number, required: true },
     source: { type: Object as () => AiSource, required: true },
+    baseClass: { type: String, default: undefined },
+    markClass: { type: String, default: undefined },
   },
   setup(markProps, { slots: markSlots }) {
     return () => {
@@ -188,14 +200,14 @@ const SourceFavicon = defineComponent({
       return h(
         'span',
         {
-          class: 'flex items-center justify-center overflow-hidden rounded-full border border-border bg-muted text-muted',
+          class: markProps.baseClass,
           style: { height: `${size}px`, width: `${size}px` },
         },
         markSlots.mark
           ? h(
               'span',
               {
-                class: 'flex size-full items-center justify-center *:size-full *:fill-foreground *:object-cover',
+                class: markProps.markClass,
               },
               markSlots.mark({ source }),
             )

@@ -1,8 +1,7 @@
 <template>
   <div
     v-bind="$attrs"
-    class="relative flex h-full w-full items-center justify-center"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
     <AnimatePresence
       :custom="direction"
@@ -11,8 +10,7 @@
       <motion.div
         v-for="item in visibleEvents"
         :key="item.key"
-        class="absolute top-1/2 left-1/2 origin-center -translate-y-1/2"
-        :class="props.cardClassName"
+        :class="ui.card({ class: [uiProps.ui?.card, props.cardClassName] })"
         :animate="item.variant"
         :custom="direction"
         exit="hidden"
@@ -23,16 +21,15 @@
         }"
         :variants="variants"
       >
-        <div class="relative h-full w-full overflow-hidden rounded-3xl bg-primary">
+        <div :class="ui.cardInner({ class: uiProps.ui?.cardInner })">
           <div
             v-if="item.event.backgroundClassName"
-            class="h-full w-full"
-            :class="item.event.backgroundClassName"
+            :class="ui.background({ class: [uiProps.ui?.background, item.event.backgroundClassName] })"
           />
           <img
             v-else-if="item.event.image"
             :alt="item.event.title || ''"
-            class="h-full w-full object-cover"
+            :class="ui.image({ class: uiProps.ui?.image })"
             :draggable="false"
             height="400"
             :src="item.event.image"
@@ -40,14 +37,14 @@
           >
 
           <div
-            class="absolute z-3"
+            :class="ui.badgeWrap({ class: uiProps.ui?.badgeWrap })"
             :style="{
               left: `${metrics.badgeLeft}px`,
               top: `${metrics.badgeTop}px`,
             }"
           >
             <span
-              class="flex flex-row items-center rounded-full bg-default/30 font-medium text-inverted backdrop-blur-xl"
+              :class="ui.badge({ class: uiProps.ui?.badge })"
               :style="{
                 fontSize: `${metrics.badgeFontSize}px`,
                 gap: `${metrics.badgeGap}px`,
@@ -70,11 +67,11 @@
           </div>
 
           <div
-            class="absolute bottom-0 z-3 w-full rounded-b-3xl text-inverted"
+            :class="ui.content({ class: uiProps.ui?.content })"
             :style="{ padding: `${metrics.contentPadding}px` }"
           >
             <div
-              class="mx-auto flex items-center justify-center"
+              :class="ui.avatars({ class: uiProps.ui?.avatars })"
               :style="{
                 gap: `${metrics.avatarGap}px`,
                 marginBottom: `${metrics.avatarMarginBottom}px`,
@@ -84,7 +81,7 @@
                 v-for="(participant, idx) in item.event.participants || []"
                 :key="`participant-${participant.avatar}-${idx}`"
                 :alt="`Participant ${idx + 1}`"
-                class="rounded-full"
+                :class="ui.avatar({ class: uiProps.ui?.avatar })"
                 :draggable="false"
                 :height="metrics.avatarSize"
                 :src="participant.avatar"
@@ -97,7 +94,7 @@
             </div>
             <p
               v-if="item.event.title"
-              class="wrap-break-word text-center font-bold"
+              :class="ui.title({ class: uiProps.ui?.title })"
               :style="{
                 fontSize: `${metrics.titleFontSize}px`,
                 lineHeight: BASE_LINE_HEIGHT,
@@ -108,7 +105,7 @@
             </p>
             <p
               v-if="item.event.subtitle"
-              class="wrap-break-word text-center opacity-90"
+              :class="ui.subtitle({ class: uiProps.ui?.subtitle })"
               :style="{
                 fontSize: `${metrics.subtitleFontSize}px`,
                 lineHeight: BASE_LINE_HEIGHT,
@@ -117,7 +114,7 @@
               {{ item.event.subtitle }}
             </p>
             <p
-              class="wrap-break-word text-center opacity-90"
+              :class="ui.location({ class: uiProps.ui?.location })"
               :style="{
                 fontSize: `${metrics.locationFontSize}px`,
                 lineHeight: BASE_LINE_HEIGHT,
@@ -127,11 +124,11 @@
             </p>
           </div>
 
-          <div class="absolute inset-x-0 bottom-0 isolate z-2 h-1/2">
+          <div :class="ui.blurWrap({ class: uiProps.ui?.blurWrap })">
             <div
               v-for="blur in BLUR_LAYERS"
               :key="blur"
-              class="absolute inset-0 overflow-hidden rounded-3xl"
+              :class="ui.blurLayer({ class: uiProps.ui?.blurLayer })"
               :style="{
                 backdropFilter: `blur(${blur}px)`,
                 WebkitBackdropFilter: `blur(${blur}px)`,
@@ -150,6 +147,8 @@
 import { useWindowSize } from '@vueuse/core'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import appleInvites from '../theme/apple-invites'
 
 defineOptions({ inheritAttrs: false })
 
@@ -194,6 +193,8 @@ export interface Props {
   events: Event[]
   /** Milliseconds between automatic advances. */
   interval?: number
+  /** Per-slot classes resolved against the component theme. */
+  ui?: Record<string, any>
 }
 
 const DEFAULT_CARD_WIDTH = 240
@@ -281,11 +282,18 @@ const props = withDefaults(defineProps<Props>(), {
   cardWidth: DEFAULT_CARD_WIDTH,
   class: undefined,
   interval: 3000,
+  ui: undefined,
 })
 
 const emit = defineEmits<{
   'update:activeIndex': [index: number]
 }>()
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'appleInvites',
+  props,
+  theme: appleInvites,
+})
 
 const shouldReduceMotion = useReducedMotion()
 const { width: viewportWidth } = useWindowSize()

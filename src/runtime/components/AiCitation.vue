@@ -1,6 +1,6 @@
 <template>
   <span
-    :class="['relative inline-block align-super', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @blur="scheduleClose"
     @focus="open"
     @mouseenter="open"
@@ -8,7 +8,7 @@
   >
     <a
       :aria-describedby="isOpen ? cardId : undefined"
-      class="inline-flex h-4 min-w-4 items-center justify-center rounded-full border border-border bg-muted px-1 font-medium text-[10px] text-muted no-underline transition-colors hover:border-accented hover:text-highlighted"
+      :class="ui.pill({ class: uiProps.ui?.pill })"
       :href="props.url"
       rel="noopener noreferrer"
       target="_blank"
@@ -21,30 +21,30 @@
       :key="cardId"
       as="span"
       :animate="{ opacity: 1, scale: 1, y: 0 }"
-      :class="CARD_CLASS"
+      :class="ui.card({ class: uiProps.ui?.card })"
       :exit="shouldReduceMotion ? REDUCED_EXIT : EXIT_STATE"
       :initial="shouldReduceMotion ? RESTING_STATE : EXIT_STATE"
       :style="cardStyle"
       :transition="shouldReduceMotion ? NO_MOTION : SPRING_DEFAULT"
     >
-      <span class="mb-1 flex items-center gap-1.5">
+      <span :class="ui.header({ class: uiProps.ui?.header })">
         <CitationMark :size="MARK_PX">
           <slot name="favicon" />
         </CitationMark>
-        <span class="truncate text-muted text-xs">{{ host }}</span>
+        <span :class="ui.host({ class: uiProps.ui?.host })">{{ host }}</span>
         <UIcon
           aria-hidden="true"
-          class="ml-auto text-muted"
+          :class="ui.icon({ class: uiProps.ui?.icon })"
           name="i-lucide-arrow-up-right"
           size="12"
         />
       </span>
 
-      <span class="block text-sm font-medium leading-snug text-highlighted">{{ props.title }}</span>
+      <span :class="ui.title({ class: uiProps.ui?.title })">{{ props.title }}</span>
 
       <span
         v-if="props.description"
-        class="mt-1 block text-xs leading-relaxed text-muted"
+        :class="ui.description({ class: uiProps.ui?.description })"
       >{{ props.description }}</span>
     </Motion>
   </span>
@@ -53,6 +53,8 @@
 <script setup lang="ts">
 import { computed, defineComponent, h, onBeforeUnmount, ref, resolveComponent, watch } from 'vue'
 import { Motion, useReducedMotion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import aiCitation from '../theme/ai-citation'
 import { SPRING_DEFAULT } from '../utils/motion-tokens'
 
 export interface AiCitationProps {
@@ -63,6 +65,7 @@ export interface AiCitationProps {
   label: number | string
   title: string
   url: string
+  ui?: Record<string, any>
 }
 
 /** Grace period so the pointer can cross the gap between pill and card. */
@@ -81,27 +84,6 @@ const RESTING_STATE = { opacity: 1, scale: 1, y: 0 }
 const EXIT_STATE = { opacity: 0, scale: 0.94, y: 4 }
 /** Reduced motion keeps the exit as a plain fade with no travel. */
 const REDUCED_EXIT = { opacity: 0, transition: { duration: 0 } }
-
-/**
- * Centred with a negative margin rather than `translateX(-50%)`.
- *
- * Upstream centres the card with a hand-written `translateX: '-50%'` in `style`
- * while Motion animates `scale` and `y` on the same element — two systems
- * writing the `transform` property, where the winner depends on composition
- * order. A negative margin does the centring in layout instead, which leaves
- * the whole transform to the animation.
- */
-// Written out in full rather than interpolated from `CARD_WIDTH_REM` /
-// `CARD_CENTRE_REM`: Tailwind finds class names by scanning source text, so a
-// `w-${n}` assembled at runtime produces no CSS at all and the card silently
-// falls back to its content width. `w-72` is 18rem and `-ml-36` is 9rem, so the
-// two constants and the two classes stay in step.
-//
-// The surface uses Nuxt UI's own tokens. Upstream is shadcn, where the class is
-// `bg-background`; that name does not exist in Nuxt UI's scale, so it silently
-// produces no CSS and the card opens as a transparent panel. `bg-elevated` is
-// the floating-surface equivalent.
-const CARD_CLASS = 'absolute bottom-full left-1/2 z-50 mb-1.5 block w-72 -ml-36 rounded-xl border border-border bg-elevated p-3 text-left align-baseline shadow-lg'
 
 const hostOf = (url: string): string => {
   try {
@@ -156,8 +138,11 @@ const CitationMark = defineComponent({
  * and unusable on touch.
  */
 const props = withDefaults(defineProps<AiCitationProps>(), {
-  class: '',
+  class: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiCitation', props, theme: aiCitation })
 
 const shouldReduceMotion = useReducedMotion()
 const isOpen = ref(false)

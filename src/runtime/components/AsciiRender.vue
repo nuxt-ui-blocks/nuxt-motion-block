@@ -1,13 +1,13 @@
 <template>
   <div
     ref="containerRef"
-    :class="['relative isolate overflow-hidden rounded-xl bg-default', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
     <video
       v-if="props.source.type === 'video'"
       ref="videoRef"
       aria-hidden="true"
-      :class="mediaClass"
+      :class="ui.media({ class: [uiProps.ui?.media, mediaClass] })"
       crossorigin="anonymous"
       loop
       muted
@@ -21,7 +21,7 @@
       ref="imageRef"
       alt=""
       aria-hidden="true"
-      :class="mediaClass"
+      :class="ui.media({ class: [uiProps.ui?.media, mediaClass] })"
       crossorigin="anonymous"
       :src="props.source.src"
     >
@@ -30,10 +30,7 @@
       v-show="!isFallback"
       ref="preRef"
       aria-hidden="true"
-      :class="[
-        'm-0 select-none whitespace-pre font-mono',
-        props.color === 'mono' ? 'text-default' : 'bg-clip-text text-transparent',
-      ]"
+      :class="ui.pre({ color: props.color, class: uiProps.ui?.pre })"
       :style="{
         backgroundClip: props.color === 'source' ? 'text' : undefined,
         WebkitBackgroundClip: props.color === 'source' ? 'text' : undefined,
@@ -45,13 +42,15 @@
       }"
     />
 
-    <span class="sr-only">{{ props.alt }}</span>
+    <span :class="ui.srOnly({ class: uiProps.ui?.srOnly })">{{ props.alt }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
 import { useReducedMotion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import asciiRender from '../theme/ascii-render'
 
 export type AsciiColorMode = 'mono' | 'source'
 
@@ -81,6 +80,8 @@ export interface AsciiRenderProps {
   /** Hold the current frame without tearing down the renderer. */
   paused?: boolean
   source: AsciiRenderSource
+  /** Per-slot classes resolved against the component theme. */
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<AsciiRenderProps>(), {
@@ -92,6 +93,13 @@ const props = withDefaults(defineProps<AsciiRenderProps>(), {
   fps: 24,
   invert: false,
   paused: false,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'asciiRender',
+  props,
+  theme: asciiRender,
 })
 
 const DEFAULT_CHARSET = '@%#*+=-:. '

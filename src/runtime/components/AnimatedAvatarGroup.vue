@@ -1,7 +1,7 @@
 <template>
   <UAvatarGroup
     v-bind="fallthroughAttrs"
-    :class="['m-avatar-group', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="rootStyle"
     :size="props.size"
     :max="limit"
@@ -10,6 +10,7 @@
     :data-overlap="props.overlap === undefined ? undefined : 'true'"
     role="group"
     :aria-label="ariaLabel"
+    :ui="uiProps.ui"
   >
     <UAvatar
       v-for="(avatar, index) in props.avatars"
@@ -27,6 +28,8 @@
 
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedAvatarGroup from '../theme/animated-avatar-group'
 
 defineOptions({ inheritAttrs: false })
 
@@ -67,6 +70,8 @@ const props = withDefaults(defineProps<{
   ui: () => ({}),
   class: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'animatedAvatarGroup', props, theme: animatedAvatarGroup })
 
 const fallthroughAttrs = computed(() => {
   const { style, class: _class, ...rest } = attrs

@@ -3,13 +3,13 @@
     v-model="draft"
     :aria-label="props.ariaLabel"
     :autofocus="props.autofocus"
-    :class="props.class"
+    :class="ui.root({ accent: accent, class: [uiProps.ui?.root, uiProps.class] })"
     :disabled="props.disabled"
     :error="props.error"
     :maxrows="MAX_ROWS"
     :placeholder="props.placeholder"
     :submit-on-enter="props.submitOnEnter"
-    :ui="ui"
+    :ui="chatUi"
     @submit="onSubmit"
     @close="emit('close')"
   >
@@ -26,7 +26,7 @@
         <motion.ul
           v-if="attachments.length > 0"
           key="attachments"
-          class="flex list-none flex-wrap gap-1.5 overflow-hidden py-1.5"
+          :class="ui.attachments({ class: uiProps.ui?.attachments })"
           :animate="listShown"
           :exit="shouldReduceMotion ? listGoneInstant : listGone"
           :initial="shouldReduceMotion ? listShown : listHidden"
@@ -35,7 +35,7 @@
           <motion.li
             v-for="(attachment, index) in attachments"
             :key="attachment.id"
-            class="flex items-center gap-1.5 rounded-lg border border-default bg-muted/50 py-1 pr-1 pl-2 text-xs"
+            :class="ui.attachment({ class: uiProps.ui?.attachment })"
             :animate="chipShown"
             :exit="shouldReduceMotion ? chipGoneInstant : chipGone"
             :initial="shouldReduceMotion ? chipShown : chipHidden"
@@ -44,22 +44,22 @@
               ? instant
               : { ...SPRING_DEFAULT, delay: index * ATTACHMENT_STAGGER }"
           >
-            <span class="max-w-40 truncate">{{ attachment.name }}</span>
+            <span :class="ui.attachmentName({ class: uiProps.ui?.attachmentName })">{{ attachment.name }}</span>
             <span
               v-if="attachment.size !== undefined"
-              class="text-muted"
+              :class="ui.attachmentSize({ class: uiProps.ui?.attachmentSize })"
             >{{ formatSize(attachment.size) }}</span>
             <button
               v-if="props.removable"
               :aria-label="`Remove ${attachment.name}`"
-              class="cursor-pointer rounded-md p-0.5 text-muted transition-colors hover:bg-muted hover:text-highlighted"
+              :class="ui.remove({ class: uiProps.ui?.remove })"
               type="button"
               @click="emit('removeAttachment', attachment.id)"
             >
               <UIcon
                 aria-hidden="true"
                 name="i-lucide-x"
-                class="size-3"
+                :class="ui.removeIcon({ class: uiProps.ui?.removeIcon })"
               />
             </button>
           </motion.li>
@@ -68,11 +68,11 @@
     </template>
 
     <template #footer>
-      <div class="flex min-w-0 items-center gap-1">
+      <div :class="ui.tools({ class: uiProps.ui?.tools })">
         <button
           v-if="props.attachable"
           aria-label="Attach a file"
-          class="cursor-pointer rounded-lg p-2 text-muted transition-colors hover:bg-muted hover:text-highlighted"
+          :class="ui.attach({ class: uiProps.ui?.attach })"
           :disabled="props.disabled"
           type="button"
           @click="emit('attach')"
@@ -80,7 +80,7 @@
           <UIcon
             aria-hidden="true"
             name="i-lucide-paperclip"
-            class="size-4"
+            :class="ui.attachIcon({ class: uiProps.ui?.attachIcon })"
           />
         </button>
         <slot />
@@ -88,14 +88,14 @@
 
       <!-- `relative` so the exiting button in the popLayout swap leaves flow
            without escaping to the page's initial containing block. -->
-      <div class="relative flex items-center gap-2">
+      <div :class="ui.actions({ class: uiProps.ui?.actions })">
         <AnimatePresence
           :initial="false"
           mode="popLayout"
         >
           <motion.span
             :key="chatStatus"
-            class="flex"
+            :class="ui.submit({ class: uiProps.ui?.submit })"
             :animate="swapShown"
             :exit="shouldReduceMotion ? swapGoneInstant : swapGone"
             :initial="shouldReduceMotion ? swapInstant : swapHidden"
@@ -126,8 +126,7 @@
           <motion.span
             v-if="counterVisible"
             key="counter"
-            class="text-xs tabular-nums"
-            :class="overLimit ? 'text-error' : 'text-muted'"
+            :class="ui.counter({ overLimit: overLimit, class: uiProps.ui?.counter })"
             :animate="counterShown"
             :exit="shouldReduceMotion ? counterGoneInstant : counterGone"
             :initial="shouldReduceMotion ? counterShown : counterHidden"
@@ -148,6 +147,8 @@ import type { ComputedRef } from 'vue'
 import { computed, ref } from 'vue'
 import type { AIState } from '../composables/useAiState'
 import { getAIChatStatus, getAIStateAccent, getAIStateMotion } from '../composables/useAiState'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import aiPromptInput from '../theme/ai-prompt-input'
 
 /**
  * The prompt composer.
@@ -201,12 +202,6 @@ const SPRING_SNAPPY = {
 }
 const ATTACHMENT_STAGGER = 0.035
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
-
-/** `danger` has no Nuxt UI color of its own, so it borrows the error one. */
-const ACCENT_RINGS: Record<'danger' | 'success', string> = {
-  danger: 'ring-error/25',
-  success: 'ring-success/25',
-}
 
 // Variants are hoisted so a re-render on every keystroke cannot allocate them.
 // Reduced motion collapses the travel to a plain fade-out with no duration.
@@ -286,7 +281,7 @@ interface Props {
    */
   submitOnEnter?: boolean
   /** Themed slot overrides, merged over this module's own spacing. */
-  ui?: ChatPromptProps['ui']
+  ui?: Record<string, any>
   /** Controlled draft. Leave undefined to let the component own it. */
   modelValue?: string
 }
@@ -294,12 +289,15 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   attachments: () => [],
   autofocus: false,
+  class: undefined,
   disabled: false,
   placeholder: 'Ask anything…',
   state: 'idle',
   submitOnEnter: true,
-  ui: () => ({}),
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiPromptInput', props, theme: aiPromptInput })
 
 const emit = defineEmits<{
   'attach': []
@@ -358,15 +356,10 @@ const overLimit = computed(
  * theme's own ring, so it costs no extra element and no inline style — which
  * matters because `ChatPrompt` routes unclaimed attributes to the textarea.
  */
-const accentRing = computed(() => {
-  const accent = getAIStateAccent(props.state)
-  return accent ? ACCENT_RINGS[accent] : undefined
-})
+const accent = computed(() => getAIStateAccent(props.state))
 
-const ui = computed(() => ({
-  ...props.ui,
-  footer: [props.ui?.footer, 'pt-2'],
-  root: [props.ui?.root, 'gap-0', accentRing.value].filter(Boolean),
+const chatUi = computed(() => ({
+  footer: ui.value.footer({ class: uiProps.ui?.footer }),
 })) as unknown as ComputedRef<ChatPromptProps['ui']>
 
 function onSubmit() {

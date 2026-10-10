@@ -1,12 +1,9 @@
 <template>
   <div
-    :class="cn(
-      'absolute inset-0 flex h-full w-full items-center justify-center [mask-repeat:no-repeat] [mask-size:40px]',
-      className,
-    )"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class, props.className] })"
   >
     <svg
-      class="pointer-events-none absolute z-0 h-full w-full"
+      :class="ui.svg({ class: uiProps.ui?.svg })"
       width="100%"
       height="100%"
       viewBox="0 0 696 316"
@@ -103,22 +100,30 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { motion } from 'motion-v'
-import { cn } from '../utils/merge'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import backgroundBeams from '../theme/background-beams'
 
 interface Props {
+  class?: string
   className?: string
   gradientColors?: string[]
   strokeOpacity?: number
   numPaths?: number
   duration?: [number, number] // min and max duration
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  class: undefined,
+  className: undefined,
   gradientColors: () => ['#18CCFC', '#18CCFC', '#6344F5', '#AE48FF'],
   strokeOpacity: 0.4,
   numPaths: 50,
   duration: () => [10, 20],
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'backgroundBeams', props, theme: backgroundBeams })
 
 // Computed visible paths based on numPaths prop
 const visiblePaths = computed(() => paths.slice(0, props.numPaths))

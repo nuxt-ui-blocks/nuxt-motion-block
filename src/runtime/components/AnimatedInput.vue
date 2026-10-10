@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, useId } from 'vue'
 import { motion } from 'motion-v'
-import { cn } from '../utils/merge'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedInput from '../theme/animated-input'
 
 const props = withDefaults(defineProps<{
   modelValue?: string
@@ -11,6 +12,7 @@ const props = withDefaults(defineProps<{
   label: string
   placeholder?: string
   class?: string
+  ui?: Record<string, any>
   inputClassName?: string
   labelClassName?: string
 }>(), {
@@ -20,6 +22,7 @@ const props = withDefaults(defineProps<{
   icon: undefined,
   placeholder: '',
   class: undefined,
+  ui: undefined,
   inputClassName: '',
   labelClassName: '',
 })
@@ -27,6 +30,12 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>()
 
 defineOptions({ inheritAttrs: false })
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'animatedInput',
+  props,
+  theme: animatedInput,
+})
 
 const internalValue = ref(props.defaultValue)
 const isControlled = computed(() => props.modelValue !== undefined)
@@ -100,17 +109,17 @@ onUnmounted(() => {
 <template>
   <div
     v-bind="$attrs"
-    :class="cn('relative flex items-center', props.class)"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
     <span
       v-if="icon || $slots.icon"
       aria-hidden="true"
-      class="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-dimmed"
+      :class="ui.icon({ class: uiProps.ui?.icon })"
     >
       <UIcon
         v-if="icon"
         :name="icon"
-        class="h-4 w-4"
+        :class="ui.iconGlyph({ class: uiProps.ui?.iconGlyph })"
       />
       <slot
         v-else
@@ -122,11 +131,7 @@ onUnmounted(() => {
       :id="inputId"
       :aria-label="label"
       type="text"
-      :class="[
-        'peer w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 md:text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary',
-        { 'pl-10': !!icon || !!$slots.icon },
-        inputClassName,
-      ]"
+      :class="ui.input({ class: [{ 'pl-10': !!icon || !!$slots.icon }, inputClassName, uiProps.ui?.input] })"
       :placeholder="isFloating ? placeholder : ''"
       :disabled="disabled"
       :value="val"
@@ -142,10 +147,7 @@ onUnmounted(() => {
       :animate="labelAnimation"
       :style="labelStyle"
       :transition="labelTransition"
-      :class="[
-        'pointer-events-none absolute top-1/2 left-3 origin-left -translate-y-1/2 rounded-md border border-transparent bg-default px-1 transition-colors',
-        labelClassName,
-      ]"
+      :class="ui.label({ class: [labelClassName, uiProps.ui?.label] })"
     >
       {{ label }}
     </motion.label>

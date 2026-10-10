@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
 import { computed, onBeforeUnmount, ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import aiMessage from '../theme/ai-message'
 import type { AiMessageAction, AiMessagePart, AiMessageRole } from '../types/ai'
 import { getAiMessageText } from '../utils/ai-chat'
 
@@ -33,18 +35,22 @@ interface Props {
   /** Extra actions, rendered after the copy button. */
   actions?: AiMessageAction[]
   class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   bubble: true,
-  class: '',
+  class: undefined,
   copyable: true,
   metadata: undefined,
   side: undefined,
+  ui: undefined,
   variant: undefined,
   color: undefined,
   actions: () => [],
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiMessage', props, theme: aiMessage })
 
 defineSlots<{
   actions?: (props: { actions: AiMessageAction[] }) => unknown
@@ -127,14 +133,13 @@ const actions = computed<AiMessageAction[]>(() => {
 <template>
   <UChatMessage
     :id="props.id"
-    class="ai-message-root"
     :role="props.role"
     :parts="props.parts"
     :metadata="props.metadata"
     :side="side"
     :variant="variant"
     :color="props.color"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
     <template #header>
       <slot
@@ -183,15 +188,14 @@ const actions = computed<AiMessageAction[]>(() => {
         type="button"
         :aria-label="action.label"
         :aria-pressed="action.active === true"
-        class="ai-message-action cursor-pointer rounded-lg p-1.5 text-muted hover:bg-muted hover:text-default aria-pressed:bg-muted aria-pressed:text-default"
-        :class="[isUser ? 'ai-message-action-user' : 'ai-message-action-agent', action.active ? 'text-default' : '']"
+        :class="ui.action({ active: action.active === true, class: uiProps.ui?.action, side })"
         :style="{ transitionDelay: `${index * ACTION_STAGGER_MS}ms` }"
         @click="action.onClick()"
       >
         <UIcon
           :key="action.key === 'copy' && hasCopied ? 'copied' : 'idle'"
           :name="action.icon"
-          class="ai-message-pop"
+          :class="ui.actionIcon({ class: uiProps.ui?.actionIcon })"
           aria-hidden="true"
           size="14"
         />

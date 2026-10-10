@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
 import { computed, onMounted, ref, unref, watch } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedStepper from '../theme/animated-stepper'
 
 defineOptions({ inheritAttrs: false })
 
@@ -17,11 +19,14 @@ interface Props {
   modelValue?: number
   defaultValue?: number
   items: StepItem[]
+  class?: string
   ui?: Record<string, any>
 }
-const props = withDefaults(defineProps<Props>(), { modelValue: 0 })
+const props = withDefaults(defineProps<Props>(), { modelValue: 0, class: undefined, ui: undefined })
 
 const emit = defineEmits<{ (e: 'update:modelValue', value: number): void }>()
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'animatedStepper', props, theme: animatedStepper })
 
 const SPRING = { damping: 25, stiffness: 300, type: 'spring' as const }
 const REDUCED_TRANSITION = { duration: 0 }
@@ -60,13 +65,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <!-- @ts-ignore -->
     <UStepper
       :items="stepperItems"
       :model-value="props.modelValue"
       :default-value="props.defaultValue"
-      :ui="props.ui"
+      :ui="uiProps.ui"
       v-bind="$attrs"
       @update:model-value="(v: string | number | undefined) => handleUpdate(v)"
     >

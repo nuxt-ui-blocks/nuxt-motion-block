@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
-import { cn } from '../utils/merge'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedList from '../theme/animated-list'
 
 defineOptions({ inheritAttrs: false })
 
@@ -43,6 +44,12 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
   'update:items': [items: AnimatedListItem[]]
 }>()
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'animatedList',
+  props,
+  theme: animatedList,
+})
 
 const SPRING = { bounce: 0.1, duration: 0.25, type: 'spring' as const }
 const ENTER_OFFSET = 14
@@ -160,7 +167,7 @@ defineExpose({ add, remove, clear })
   <ul
     v-bind="$attrs"
     aria-live="polite"
-    :class="cn('flex flex-col gap-2 m-animated-list', props.class)"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @mouseenter="pauseOnHover && (isPaused = true)"
     @mouseleave="pauseOnHover && (isPaused = false)"
   >
@@ -169,7 +176,7 @@ defineExpose({ add, remove, clear })
         v-for="row in rows"
         :key="row.key"
         layout
-        class="list-none"
+        :class="ui.row({ class: uiProps.ui?.row })"
         :initial="row.initial"
         :animate="row.animate"
         :exit="row.exit"
@@ -183,7 +190,7 @@ defineExpose({ add, remove, clear })
         >
           <UCard
             v-if="onItemClick"
-            :ui="{ body: 'px-3 py-2', ...ui }"
+            :ui="{ body: 'px-3 py-2' }"
             class="cursor-pointer"
             @click="onItemClick(row.item, row.sourceIndex)"
           >
@@ -192,7 +199,7 @@ defineExpose({ add, remove, clear })
 
           <UCard
             v-else
-            :ui="{ body: 'px-3 py-2', ...ui }"
+            :ui="{ body: 'px-3 py-2' }"
           >
             <div class="flex items-center justify-between gap-3">
               <span>{{ labelOf(row.item) }}</span>

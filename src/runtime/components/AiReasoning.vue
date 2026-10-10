@@ -1,18 +1,18 @@
 <template>
   <UChatReasoning
-    class="w-full"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :text="summary"
     :streaming="props.isStreaming"
     :duration="props.duration"
     :auto-close-delay="autoCloseDelay"
     :default-open="props.defaultOpen"
-    :ui="ui"
+    :ui="reasoningUi"
   >
     <!--
       The rule doubles as the indent: the trace reads as an aside, not as part of
       the answer it is explaining.
     -->
-    <div class="border-border border-l pl-4 leading-relaxed text-muted">
+    <div :class="ui.trace({ class: uiProps.ui?.trace })">
       <slot />
     </div>
   </UChatReasoning>
@@ -20,6 +20,8 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import aiReasoning from '../theme/ai-reasoning'
 
 export interface AiReasoningProps {
   /**
@@ -33,6 +35,7 @@ export interface AiReasoningProps {
   duration?: number
   isStreaming?: boolean
   class?: string
+  ui?: Record<string, any>
 }
 
 /**
@@ -49,8 +52,11 @@ const props = withDefaults(defineProps<AiReasoningProps>(), {
   defaultOpen: undefined,
   duration: undefined,
   isStreaming: false,
-  class: '',
+  class: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiReasoning', props, theme: aiReasoning })
 
 /**
  * A beat before auto-collapsing. Snapping shut the instant the trace finishes
@@ -92,9 +98,11 @@ const summary = computed(() => {
   return 'Reasoning'
 })
 
-const ui = {
-  // The trace is an aside, not a panel: no top gap, and the rule is what
-  // separates it from the answer below.
-  body: '!pt-0 text-sm text-muted',
-}
+/**
+ * The trace is an aside, not a panel: no top gap, and the rule is what
+ * separates it from the answer below.
+ */
+const reasoningUi = computed(() => ({
+  body: ui.value.body({ class: uiProps.ui?.body }),
+}))
 </script>

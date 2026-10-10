@@ -2,7 +2,8 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
 import { computed, ref, watch } from 'vue'
 import type { PinInputProps } from '#ui/components/PinInput.vue'
-import { cn } from '../utils/merge'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedOTPInput from '../theme/animated-otp-input'
 
 defineOptions({ inheritAttrs: false })
 
@@ -21,6 +22,7 @@ const props = withDefaults(
     size?: PinInputProps['size']
     color?: PinInputProps['color']
     class?: string
+    ui?: Record<string, any>
   }>(),
   {
     length: 6,
@@ -36,6 +38,7 @@ const props = withDefaults(
     size: 'lg',
     color: 'primary',
     class: undefined,
+    ui: undefined,
   },
 )
 
@@ -43,6 +46,12 @@ const emit = defineEmits<{
   'update:modelValue': [value: string]
   'complete': [value: string]
 }>()
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'animatedOTPInput',
+  props,
+  theme: animatedOTPInput,
+})
 
 const reduce = useReducedMotion()
 
@@ -167,12 +176,12 @@ const groups = computed(() => {
     v-bind="$attrs"
     :animate="{ boxShadow: glowColor }"
     :initial="false"
-    :class="cn('relative inline-block rounded-md', props.class)"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :transition="{ type: 'spring', stiffness: 300, damping: 20 }"
   >
     <div
       ref="rootRef"
-      class="an-otp inline-flex"
+      :class="ui.underlay({ class: uiProps.ui?.underlay })"
       @focusin="onFocusIn"
       @focusout="onFocusOut"
     >
@@ -192,7 +201,7 @@ const groups = computed(() => {
       />
     </div>
 
-    <div class="pointer-events-none absolute left-0 top-0 flex h-full items-center gap-1.5">
+    <div :class="ui.overlay({ class: uiProps.ui?.overlay })">
       <template
         v-for="group in groups"
         :key="`group-${group[0]}`"
@@ -200,13 +209,12 @@ const groups = computed(() => {
         <motion.div
           v-for="index in group"
           :key="index"
-          class="relative flex size-9 items-center justify-center rounded-md border border-accented bg-elevated shadow-xs transition-[border-color,box-shadow] duration-150"
-          :class="activeCell === index && !chars[index] ? 'border-primary ring-[3px] ring-primary/50' : ''"
+          :class="ui.cell({ class: [activeCell === index && !chars[index] ? 'border-primary ring-[3px] ring-primary/50' : '', uiProps.ui?.cell] })"
           :animate="reduce ? { opacity: 1, scale: 1, y: 0 } : { opacity: 1, scale: chars[index] ? SCALE_FILLED : 1, y: 0 }"
           :initial="reduce ? { opacity: 1 } : { opacity: 0, scale: INITIAL_SCALE, y: INITIAL_Y }"
           :transition="reduce ? { duration: 0 } : { delay: index * STAGGER_DELAY, duration: DURATION_STANDARD, ease: EASE_OUT_QUINT, scale: { duration: DURATION_MEDIUM, ease: EASE_OUT_QUINT } }"
         >
-          <span class="font-medium text-highlighted">
+          <span :class="ui.cellText({ class: uiProps.ui?.cellText })">
             <AnimatePresence mode="wait">
               <motion.span
                 :key="chars[index] || 'empty'"
@@ -214,7 +222,7 @@ const groups = computed(() => {
                 :animate="reduce ? { opacity: 1, scale: 1 } : { opacity: 1, rotateY: 0, scale: 1 }"
                 :exit="reduce ? undefined : { opacity: 0, rotateY: 90, scale: 0.5 }"
                 :transition="reduce ? { duration: 0 } : { duration: DURATION_STANDARD, ease: EASE_OUT_QUINT }"
-                class="block"
+                :class="ui.glyph({ class: uiProps.ui?.glyph })"
               >
                 {{ chars[index] }}
               </motion.span>
@@ -224,14 +232,14 @@ const groups = computed(() => {
           <AnimatePresence>
             <motion.span
               v-if="!reduce && activeCell === index && !chars[index]"
-              class="pointer-events-none absolute inset-0 flex items-center justify-center"
+              :class="ui.caret({ class: uiProps.ui?.caret })"
               :initial="{ opacity: 0 }"
               :animate="{ opacity: 1 }"
               :exit="{ opacity: 0 }"
               :transition="{ duration: 0.1 }"
             >
               <motion.span
-                class="h-4 w-px bg-foreground"
+                :class="ui.caretBar({ class: uiProps.ui?.caretBar })"
                 :animate="{ opacity: [0, 1, 0] }"
                 :transition="{ duration: 1, ease: [0.645, 0.045, 0.355, 1], repeat: Infinity }"
               />
@@ -246,13 +254,13 @@ const groups = computed(() => {
       :key="separator.key"
     >
       <motion.span
-        class="text-dimmed absolute"
+        :class="ui.separator({ class: uiProps.ui?.separator })"
         :style="{ left: separator.left + 'px', top: 'calc(50% - 0.5px)', width: '8px' }"
         :animate="reduce ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }"
         :initial="reduce ? { opacity: 1 } : { opacity: 0, scale: INITIAL_SCALE }"
         :transition="reduce ? { duration: 0 } : { delay: 0.15, duration: 0.3, ease: EASE_OUT_QUINT }"
       >
-        <span class="block h-px w-2 bg-dimmed" />
+        <span :class="ui.separatorLine({ class: uiProps.ui?.separatorLine })" />
       </motion.span>
     </template>
   </motion.div>

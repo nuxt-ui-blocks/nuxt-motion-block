@@ -1,12 +1,11 @@
 <template>
   <div
     ref="rootRef"
-    :class="cn('relative w-full', className)"
+    :class="ui.root({ class: [props.className, uiProps.ui?.root, uiProps.class] })"
   >
     <div
       v-if="label"
-      class="mb-1 font-medium text-sm"
-      :class="labelClassName"
+      :class="ui.label({ class: [labelClassName, uiProps.ui?.label] })"
     >
       {{ label }}
     </div>
@@ -49,12 +48,11 @@
 
     <div
       v-if="orientation === 'horizontal'"
-      class="pointer-events-none absolute left-0 overflow-hidden"
+      :class="ui.track({ class: uiProps.ui?.track })"
       :style="trackStyle"
     >
       <motion.div
-        class="h-full overflow-hidden"
-        :class="barClassName"
+        :class="ui.bar({ class: [barClassName, uiProps.ui?.bar] })"
         :style="{ backgroundColor: barColor, borderRadius: barRadius }"
         :initial="{ width: `${MIN_PROGRESS_VALUE}%` }"
         :animate="{ width: `${clampedValue}%` }"
@@ -62,7 +60,7 @@
       >
         <motion.div
           v-if="shimmer"
-          class="absolute inset-y-0 left-0"
+          :class="ui.shimmer({ class: uiProps.ui?.shimmer })"
           :style="{ background: SHIMMER_GRADIENT, width: '200%' }"
           :initial="{ x: '-100%' }"
           :animate="{ x: '100%' }"
@@ -76,7 +74,8 @@
 <script setup lang="ts">
 import { motion, useReducedMotion } from 'motion-v'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, unref, watch } from 'vue'
-import { cn } from '../utils/merge'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedProgressBar from '../theme/animated-progress-bar'
 
 const MIN_PROGRESS_VALUE = 0
 const MAX_PROGRESS_VALUE = 100
@@ -104,6 +103,7 @@ const props = withDefaults(defineProps<{
   value?: number
   label?: string
   color?: string
+  class?: string
   className?: string
   barClassName?: string
   labelClassName?: string
@@ -119,6 +119,7 @@ const props = withDefaults(defineProps<{
   value: 0,
   label: undefined,
   color: 'primary',
+  class: undefined,
   className: '',
   barClassName: '',
   labelClassName: '',
@@ -130,6 +131,12 @@ const props = withDefaults(defineProps<{
   inverted: false,
   animation: undefined,
   ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'animatedProgressBar',
+  props,
+  theme: animatedProgressBar,
 })
 
 const reduce = useReducedMotion()

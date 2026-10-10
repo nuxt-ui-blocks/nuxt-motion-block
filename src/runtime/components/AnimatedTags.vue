@@ -2,12 +2,13 @@
   <UInputTags
     v-bind="$attrs"
     :model-value="modelValue"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :ui="tagsUi"
     @update:model-value="handleUpdate"
   >
     <div
       ref="chipsRef"
-      class="contents"
+      :class="ui.chips({ class: uiProps.ui?.chips })"
       aria-hidden="true"
     >
       <AnimatePresence>
@@ -20,13 +21,13 @@
           :exit="shouldReduce ? REDUCED_EXIT : EXIT"
           :transition="shouldReduce ? REDUCED_TRANSITION : SPRING"
           :data-state="index === activeIndex ? 'active' : 'inactive'"
-          class="group inline-flex cursor-pointer items-center gap-0.5 rounded-sm px-1.5 py-0.5 font-medium ring ring-inset ring-accented bg-elevated text-default transition-colors data-[state=active]:bg-accented"
+          :class="ui.chip({ class: uiProps.ui?.chip })"
           @click="removeTag(tag)"
         >
           <span>{{ tag }}</span>
           <UIcon
             name="i-lucide-circle-x"
-            class="inline-flex size-3.5 shrink-0 items-center justify-center rounded-xs text-dimmed transition-colors duration-200 hover:bg-accented/75 hover:text-default"
+            :class="ui.chipIcon({ class: uiProps.ui?.chipIcon })"
           />
         </motion.div>
       </AnimatePresence>
@@ -46,17 +47,25 @@
 <script setup lang="ts">
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, unref, useSlots, watch } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedTags from '../theme/animated-tags'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   modelValue?: string[]
+  class?: string
   ui?: Record<string, any>
-}>()
+}>(), {
+  class: undefined,
+  ui: undefined,
+})
 
 const emit = defineEmits<{
   'update:modelValue': [value: string[]]
 }>()
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'animatedTags', props, theme: animatedTags })
 
 const REDUCED_TRANSITION = { duration: 0 }
 const SPRING = { bounce: 0, duration: 0.25, type: 'spring' as const }
@@ -81,12 +90,12 @@ const forwardedSlots = computed(() =>
 )
 
 const tagsUi = computed(() => ({
-  ...props.ui,
+  ...uiProps.ui,
   item: [
-    props.ui?.item,
+    uiProps.ui?.item,
     'absolute start-0 top-0 size-px overflow-hidden border-0 p-0 opacity-0',
   ],
-  input: [props.ui?.input, 'order-last min-w-0'],
+  input: [uiProps.ui?.input, 'order-last min-w-0'],
 }))
 
 function isSameTags(a: string[], b: string[] | undefined) {

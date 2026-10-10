@@ -3,6 +3,8 @@ import { defineComponent, h, useSlots, computed, type PropType, type VNode, Comm
 import { Motion } from 'motion-v'
 import type { Variant } from 'motion-v'
 import { useAccessibility } from '../composables/useAccessibility'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedGroup from '../theme/animated-group'
 
 // Defines a type for a variants object that holds multiple animation states.
 type Variants = Record<string, Variant>
@@ -36,6 +38,10 @@ export default defineComponent({
   name: 'AnimatedGroup',
   props: {
     class: String,
+    ui: {
+      type: Object as PropType<Record<string, any>>,
+      default: undefined,
+    },
     variants: Object as PropType<{ container?: Variants, item?: Variants }>,
     preset: String as PropType<PresetType>,
     as: {
@@ -69,6 +75,12 @@ export default defineComponent({
   },
   setup(props) {
     const slots = useSlots()
+
+    const { props: uiProps, ui } = useMotionBlockUI({
+      name: 'animatedGroup',
+      props,
+      theme: animatedGroup,
+    })
 
     const defaultContainerVariants: Variants = {
       hidden: {},
@@ -302,7 +314,7 @@ export default defineComponent({
         Motion,
         {
           as: props.as,
-          class: props.class,
+          class: ui.value.root({ class: [uiProps.ui?.root, uiProps.class] }),
           initial: initialState.value,
           animate: props.animate,
           variants: containerVariants.value,

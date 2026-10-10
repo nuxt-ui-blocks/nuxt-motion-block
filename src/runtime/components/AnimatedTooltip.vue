@@ -10,7 +10,8 @@
     :default-open="defaultOpen"
     :delay-duration="delayDuration"
     :disabled="disabled"
-    :ui="ui"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
+    :ui="uiProps.ui"
     @update:open="$emit('update:open', $event)"
   >
     <slot />
@@ -21,23 +22,23 @@
         :animate="visibleState"
         :exit="exitedState"
         :transition="springTransition"
-        class="will-change-transform"
+        :class="ui.content({ class: uiProps.ui?.content })"
       >
         <slot name="content">
           <span
             v-if="text"
             data-slot="text"
-            :class="contentScope?.ui?.text({ class: ui?.text })"
+            :class="contentScope?.ui?.text({ class: uiProps.ui?.text })"
           >{{ text }}</span>
           <span
             v-if="kbds?.length"
             data-slot="kbds"
-            :class="contentScope?.ui?.kbds({ class: ui?.kbds })"
+            :class="contentScope?.ui?.kbds({ class: uiProps.ui?.kbds })"
           >
             <UKbd
               v-for="(kbd, index) in kbds"
               :key="index"
-              :size="ui?.kbdsSize || contentScope?.ui?.kbdsSize()"
+              :size="uiProps.ui?.kbdsSize || contentScope?.ui?.kbdsSize()"
               v-bind="typeof kbd === 'string' ? { value: kbd } : kbd"
             />
           </span>
@@ -51,6 +52,8 @@
 import { computed } from 'vue'
 import type { KbdProps } from '@nuxt/ui/components/Kbd.vue'
 import { motion, useReducedMotion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedTooltip from '../theme/animated-tooltip'
 
 defineOptions({ inheritAttrs: false })
 
@@ -73,6 +76,7 @@ interface Props {
   defaultOpen?: boolean
   delayDuration?: number
   disabled?: boolean
+  class?: string
   ui?: Record<string, any>
   springStiffness?: number
   springDamping?: number
@@ -84,6 +88,8 @@ const props = withDefaults(defineProps<Props>(), {
   portal: true,
   delayDuration: 700,
   disabled: false,
+  class: undefined,
+  ui: undefined,
   springStiffness: 500,
   springDamping: 20,
   open: undefined,
@@ -93,6 +99,8 @@ const props = withDefaults(defineProps<Props>(), {
 defineEmits<{
   'update:open': [value: boolean]
 }>()
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'animatedTooltip', props, theme: animatedTooltip })
 
 const SIDE_OFFSET = 4
 
