@@ -1,28 +1,28 @@
 ---
 title: Grid Loader
-description: A 3×3 pixel grid that pulses through one of sixty-odd built-in patterns, or cycles a custom sequence.
+description: A 3ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â3 pixel grid that pulses through one of sixty-odd built-in patterns, or cycles a custom sequence.
 navigation:
   icon: i-lucide-grid-3x3
 ---
 
 # Grid Loader
 
-A 3×3 grid of glowing squares that cycles a pattern. The pattern is either one
+A 3ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â3 grid of glowing squares that cycles a pattern. The pattern is either one
 of the sixty-odd presets (`wave-lr`, `spiral-cw`, `heartbeat`, `border`,
-`ripple-out`, …) or a 3×3 matrix of `0 | 1` you write yourself — every preset is
+`ripple-out`, ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦) or a 3ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â3 matrix of `0 | 1` you write yourself ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â every preset is
 just a matrix, so anything the presets don't cover is expressible.
 
 Three modes decide how a pattern plays:
 
-- `pulse` (default) — every active cell breathes together on an infinite loop.
-- `stagger` — active cells light up one after another, left to right, then hold.
-- `sequence` — steps through `sequence`, one entry per cycle, on a `setInterval`.
+- `pulse` (default) ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â every active cell breathes together on an infinite loop.
+- `stagger` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â active cells light up one after another, left to right, then hold.
+- `sequence` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â steps through `sequence`, one entry per cycle, on a `setInterval`.
 
 Every active cell also carries a three-layer `box-shadow` glow scaled to the cell
 size, which is what gives it the lit-pixel look rather than a flat block.
 
 ::note
-`className` is declared in the source but never read — the component styles its
+`className` is declared in the source but never read ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the component styles its
 root from the fallthrough `class` attribute instead. Pass `class`, not
 `className`. There is no `class` prop.
 ::
@@ -90,7 +90,7 @@ const patterns = ['wave-lr', 'spiral-cw', 'heartbeat', 'checkerboard', 'border',
 ```
 ::
 
-Size is set in pixels and drives the whole grid: the root is `size × size`, and
+Size is set in pixels and drives the whole grid: the root is `size ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â size`, and
 each cell is `(size - gap * 2) / 3`. A custom matrix is a plain nested array:
 
 ```vue
@@ -154,7 +154,7 @@ belongs rather than inside a button.
 The root is an `<output aria-label="Loading" role="status">`, which is the right
 semantic for a loader: it is announced politely rather than interrupting, and
 the cells are decorative `div`s with no text of their own. The label is hardcoded
-to "Loading" — there is no prop to change it, so if you need a more specific
+to "Loading" ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â there is no prop to change it, so if you need a more specific
 message, put visible text next to the loader instead of relying on the
 announcement.
 
@@ -163,14 +163,14 @@ indicator.
 
 Reduced motion is honoured: `onMounted` reads
 `(prefers-reduced-motion: reduce)` and, when it matches, `static` behaviour is
-implied — no `Motion` components are created and the `setInterval` is never
+implied ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â no `Motion` components are created and the `setInterval` is never
 started. The check runs once on mount and is not watched, so a user changing the
 setting while the page is open will not see the loader update.
 
 ## Performance
 
 - Nine cells are rendered per frame regardless of pattern, with keys
-  `tl…br` — the elements are reused across patterns rather than recreated, so
+  `tlÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦br` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the elements are reused across patterns rather than recreated, so
   switching patterns animates the existing cells rather than remounting.
 - Cell animation is `opacity` and `scale` only, both compositor properties. The
   glow is a static `box-shadow` on the cell style, not animated.
@@ -178,14 +178,70 @@ setting while the page is open will not see the loader update.
   the pattern or cycle duration changes.
 - `sequence` mode runs one `setInterval` started in `onMounted` and cleared in
   `onBeforeUnmount`. Because it is only started on mount, changing `mode` or
-  `sequence` after mount does not start or stop it — the interval keeps its
+  `sequence` after mount does not start or stop it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the interval keeps its
   original period and pattern list.
 - The `PATTERNS`, `COLORS` and `SIZES` lookup tables are exposed on the component
   instance if you need to reference the preset names from your own code.
 
 ::tip
-The table has a few entries that look like they should differ but are identical —
+The table has a few entries that look like they should differ but are identical ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
 `frame`, `frame-sync` and `border` share one matrix, and so do `corners`,
 `corners-sync` and `corners-only`. The sync variants exist for readability, not
 behaviour, so don't expect a visual difference when swapping between them.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.gridLoader` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'inline-grid grid-cols-3'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.gridLoader` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `inline-grid grid-cols-3` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.gridLoader` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `inline-grid grid-cols-3` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.gridLoader` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `inline-grid grid-cols-3` |

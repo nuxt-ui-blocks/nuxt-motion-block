@@ -13,8 +13,8 @@ to get subtly wrong: it times the trace, opens the moment streaming starts,
 auto-closes when the answer lands, and swaps its label for a shimmer only while
 work is actually happening.
 
-What this component adds is the label — seconds, to a decimal, in the module's own
-voice — and a left rule that doubles as the indent, so the trace reads as an aside
+What this component adds is the label ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â seconds, to a decimal, in the module's own
+voice ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and a left rule that doubles as the indent, so the trace reads as an aside
 rather than as part of the answer it is explaining.
 
 Use it inside an [AI Message](/docs/components/ai-message) body, usually with
@@ -40,7 +40,7 @@ label: Preview
     <MAiReasoning :is-streaming="streaming">
       The user asked why the audit needs a flag. Blast radius first: the audit
       walks every theme token, so a cold landing produces a long tail of visual
-      diffs. Then the alternative — a flag adds one branch and one flag to read
+      diffs. Then the alternative ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a flag adds one branch and one flag to read
       later, and nothing here is dangerous without review. So: flag first, remove
       it once the diffs are clean.
     </MAiReasoning>
@@ -70,7 +70,7 @@ const streaming = ref(true)
 ::field-group
   ::field{name="isStreaming" type="boolean" default="false"}
   Whether the trace is still being produced. It opens the block on the rising
-  edge, drives the shimmer, and — with `collapseWhenDone` — triggers the
+  edge, drives the shimmer, and ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â with `collapseWhenDone` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â triggers the
   auto-close on the falling edge.
   ::
   ::field{name="collapseWhenDone" type="boolean" default="true"}
@@ -85,7 +85,7 @@ const streaming = ref(true)
   ::
   ::field{name="defaultOpen" type="boolean"}
   Start expanded. Omit it and the block opens or closed depending on what
-  `isStreaming` starts as — which is the behaviour you want in a live transcript
+  `isStreaming` starts as ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â which is the behaviour you want in a live transcript
   and the wrong one for a static page.
   ::
   ::field{name="class" type="string" default="''"}
@@ -132,5 +132,69 @@ trace from the answer below it.
 - `autoCloseDelay` is a single `computed` off `collapseWhenDone`. `0` is the
   underlying component's own "do not auto-close" signal, so the opt-out needs no
   separate branch.
-- The `ui` override is a static object, not a `computed` — it never changes, and
+- The `ui` override is a static object, not a `computed` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it never changes, and
   rebuilding it per render would be pure waste.
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.aiReasoning` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'w-full'` |
+| `body` | `'!pt-0 text-sm text-muted'` |
+| `trace` | `'border-border border-l pl-4 leading-relaxed text-muted'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiReasoning` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `w-full` |
+| `body` | `!pt-0 text-sm text-muted` |
+| `trace` | `border-border border-l pl-4 leading-relaxed text-muted` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiReasoning` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `w-full` |
+| `body` | `!pt-0 text-sm text-muted` |
+| `trace` | `border-border border-l pl-4 leading-relaxed text-muted` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.aiReasoning` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `w-full` |
+| `body` | `!pt-0 text-sm text-muted` |
+| `trace` | `border-border border-l pl-4 leading-relaxed text-muted` |

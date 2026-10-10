@@ -25,7 +25,7 @@ binds `$attrs` explicitly.
 ## Usage
 
 `label` is required. Bind `v-model` when you need the value in JS, or leave it
-unbound and read nothing — the input still works as a native text field. Pass an
+unbound and read nothing ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the input still works as a native text field. Pass an
 `icon` name or fill the `icon` slot for a leading glyph.
 
 ::code-preview
@@ -72,7 +72,7 @@ label: Preview
     />
 
     <p class="text-xs text-muted">
-      {{ submitted ? 'Submitted — the label float is animation-only.' : 'Labels float on focus and on a filled value.' }}
+      {{ submitted ? 'Submitted ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the label float is animation-only.' : 'Labels float on focus and on a filled value.' }}
     </p>
   </form>
 </template>
@@ -97,7 +97,7 @@ const submitted = ref(false)
   ::
   ::field{name="modelValue" type="string"}
   The current value. While this is `undefined` the component keeps its own copy
-  seeded from `defaultValue`; passing a value — even once — switches it to
+  seeded from `defaultValue`; passing a value ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â even once ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â switches it to
   controlled mode permanently, and the internal copy is no longer written to.
   ::
   ::field{name="defaultValue" type="string" default="''"}
@@ -151,8 +151,8 @@ const submitted = ref(false)
 The `<input>` receives `:aria-label="label"`, so the label text is its
 accessible name, and `useId()` gives each instance a collision-free `id` that the
 visual `<label>` points at with `for`. The visible label is
-`aria-hidden="true"` — it is presentation, because the name is already carried by
-`aria-label` — and the icon wrapper is `aria-hidden` too, so neither is announced
+`aria-hidden="true"` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it is presentation, because the name is already carried by
+`aria-label` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and the icon wrapper is `aria-hidden` too, so neither is announced
 twice.
 
 The one real limitation: `inheritAttrs: false` with `$attrs` bound to the
@@ -165,7 +165,7 @@ error message.
 `prefers-reduced-motion` is read through a `matchMedia` listener that is attached
 on mount and removed on unmount. Under reduce the label transform is applied as a
 plain inline `transform` with a zero-duration transition, so the label still
-floats — it just arrives instantly rather than sliding.
+floats ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it just arrives instantly rather than sliding.
 
 ## Performance
 
@@ -182,7 +182,7 @@ floats — it just arrives instantly rather than sliding.
   position instead of restarting.
 - The label is `absolute` and `pointer-events-none`, and the input is a sibling
   rather than an ancestor, so focusing the field never re-renders the input.
-- `isFloating` depends on `val` and `isFocused` only — it does not read the DOM,
+- `isFloating` depends on `val` and `isFocused` only ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it does not read the DOM,
   so no layout is forced to decide whether the label is up.
 
 ::tip
@@ -192,3 +192,75 @@ the gap. Give the wrapper the same background, or pass the same background into
 `label-class-name`, or the label will look like it is sitting on top of the border
 rather than in it.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedInput` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'relative flex items-center'` |
+| `icon` | `'pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-dimmed'` |
+| `iconGlyph` | `'h-4 w-4'` |
+| `input` | `'peer w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 md:text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary'` |
+| `label` | `'pointer-events-none absolute top-1/2 left-3 origin-left -translate-y-1/2 rounded-md border border-transparent bg-default px-1 transition-colors'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedInput` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative flex items-center` |
+| `icon` | `pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-dimmed` |
+| `iconGlyph` | `h-4 w-4` |
+| `input` | `peer w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 md:text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary` |
+| `label` | `pointer-events-none absolute top-1/2 left-3 origin-left -translate-y-1/2 rounded-md border border-transparent bg-default px-1 transition-colors` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedInput` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative flex items-center` |
+| `icon` | `pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-dimmed` |
+| `iconGlyph` | `h-4 w-4` |
+| `input` | `peer w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 md:text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary` |
+| `label` | `pointer-events-none absolute top-1/2 left-3 origin-left -translate-y-1/2 rounded-md border border-transparent bg-default px-1 transition-colors` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedInput` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative flex items-center` |
+| `icon` | `pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-dimmed` |
+| `iconGlyph` | `h-4 w-4` |
+| `input` | `peer w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 md:text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary` |
+| `label` | `pointer-events-none absolute top-1/2 left-3 origin-left -translate-y-1/2 rounded-md border border-transparent bg-default px-1 transition-colors` |

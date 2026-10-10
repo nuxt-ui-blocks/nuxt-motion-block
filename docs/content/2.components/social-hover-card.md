@@ -12,7 +12,7 @@ a follow button. On a hover-capable device it opens after a delay and closes on 
 shorter one; on touch and keyboard it opens immediately and stays until you dismiss it.
 
 The card flips above the mention when there is not enough room below, and it never
-opens on a hover device from a click — a click there is a selection, not a request.
+opens on a hover device from a click ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a click there is a selection, not a request.
 
 ## Usage
 
@@ -88,7 +88,7 @@ const ilya = {
 ## Profile shape
 
 `profile` is the only required prop and the only real interface. `avatar`, `handle`,
-`id` and `name` are required; everything else is optional and its absence is handled —
+`id` and `name` are required; everything else is optional and its absence is handled ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
 no banner draws a gradient, no bio draws nothing, no stats draws no row.
 
 | Key | Type | Used for |
@@ -110,7 +110,7 @@ share a label.
 
 ::field-group
   ::field{name="profile" type="SocialProfile"}
-  Required. The profile to preview — see the table above for every key. Changing it
+  Required. The profile to preview ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â see the table above for every key. Changing it
   while the card is open re-renders the contents; the open state itself is not reset.
   ::
   ::field{name="openDelay" type="number" default="350"}
@@ -119,7 +119,7 @@ share a label.
   ::
   ::field{name="closeDelay" type="number" default="150"}
   Milliseconds after the pointer leaves before the card closes. The gap is what lets you
-  travel from the mention to the card — the card's own `mouseenter` cancels it, so
+  travel from the mention to the card ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the card's own `mouseenter` cancels it, so
   moving between the two does not dismiss anything. Set it low and the card becomes
   hard to use.
   ::
@@ -159,7 +159,7 @@ share a label.
 ::field-group
   ::field{name="trigger"}
   The inline mention. Falls back to `@<profile.handle>`. Whatever you render stays a
-  `<button>` — the click, focus and keyboard behaviour are wired to that element.
+  `<button>` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the click, focus and keyboard behaviour are wired to that element.
   ::
 ::
 
@@ -167,7 +167,7 @@ share a label.
 
 The trigger is a real `<button>` with `aria-haspopup="dialog"` and an `aria-expanded`
 that tracks the open state. The card itself carries
-`role="dialog"` with an `aria-label` of "<name> profile preview" — but *only* when it
+`role="dialog"` with an `aria-label` of "<name> profile preview" ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â but *only* when it
 was opened by focus or click. A hover-opened card deliberately stays out of the
 accessibility tree, because a card that appears because the mouse happened to be there
 is not something a screen-reader user asked for. The `id` on the card is namespaced
@@ -186,7 +186,7 @@ no text. The avatar's `alt` is the display name; the banner is decorative and ge
 `alt=""`.
 
 `prefers-reduced-motion` removes the card's scale and opacity transitions and the
-follow-label cross-fade, and the stats skip the count-up entirely — the final numbers
+follow-label cross-fade, and the stats skip the count-up entirely ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the final numbers
 are written straight in instead.
 
 ## Performance
@@ -199,10 +199,194 @@ are written straight in instead.
 - Hover intent is gated on `(hover: hover) and (pointer: fine)`, so touch devices never
   arm a hover timer or attach the pointer handlers' work at all.
 - The frame timestamp can predate the `performance.now()` captured at the start of the
-  count-up, so progress is clamped to `0..1` before it is eased — otherwise the first
+  count-up, so progress is clamped to `0..1` before it is eased ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â otherwise the first
   frame can render a negative count.
 - `motion.div layout` wraps only the follow button, so the label cross-fade is measured
   on that button alone rather than on the whole card.
 - The card is `v-if`'d inside `AnimatePresence`, so it is not in the DOM while closed.
   Its images are only fetched once it first opens, unless the browser speculates
-  otherwise — expect a small delay on that first open.
+  otherwise ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â expect a small delay on that first open.
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.socialHoverCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'relative inline-block'` |
+| `trigger` | `'rounded font-medium text-primary text-sm underline-offset-2 hover:underline'` |
+| `card` | `'absolute left-1/2 z-30 w-80 -translate-x-1/2 overflow-hidden rounded-2xl border border-default bg-default shadow-xl'` |
+| `loading` | `'animate-pulse p-4'` |
+| `loadingBanner` | `'h-16 rounded-lg bg-muted'` |
+| `loadingBody` | `'mt-3 flex items-center gap-3'` |
+| `loadingAvatar` | `'size-12 rounded-full bg-muted'` |
+| `loadingText` | `'flex-1 space-y-2'` |
+| `loadingLineWide` | `'h-3 w-2/3 rounded bg-muted'` |
+| `loadingLineNarrow` | `'h-3 w-1/3 rounded bg-muted'` |
+| `loadingLineFull` | `'mt-4 h-3 w-full rounded bg-muted'` |
+| `loadingLineShort` | `'mt-2 h-3 w-4/5 rounded bg-muted'` |
+| `banner` | `'h-16 w-full object-cover'` |
+| `bannerFallback` | `'h-16 w-full bg-gradient-to-r from-primary/40 to-primary/10'` |
+| `body` | `'p-4'` |
+| `header` | `'flex items-start justify-between gap-3'` |
+| `identity` | `'flex items-center gap-3'` |
+| `avatar` | `'size-12 shrink-0 rounded-full border-2 border-default object-cover'` |
+| `info` | `'min-w-0'` |
+| `nameRow` | `'flex items-center gap-1'` |
+| `nameLink` | `'truncate font-semibold text-highlighted text-sm hover:underline'` |
+| `name` | `'truncate font-semibold text-highlighted text-sm'` |
+| `verifiedIcon` | `'size-4 shrink-0 text-primary'` |
+| `verifiedLabel` | `'sr-only'` |
+| `handle` | `'truncate text-muted text-xs'` |
+| `action` | `'shrink-0'` |
+| `followButton` | `'rounded-full'` |
+| `followLabel` | `'inline-block'` |
+| `bio` | `'mt-3 text-highlighted/80 text-sm leading-relaxed'` |
+| `stats` | `'mt-4 flex items-center gap-4'` |
+| `stat` | `'flex flex-col'` |
+| `statValue` | `'font-semibold text-highlighted text-sm'` |
+| `statLabel` | `'text-muted text-xs'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.socialHoverCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative inline-block` |
+| `trigger` | `rounded font-medium text-primary text-sm underline-offset-2 hover:underline` |
+| `card` | `absolute left-1/2 z-30 w-80 -translate-x-1/2 overflow-hidden rounded-2xl border border-default bg-default shadow-xl` |
+| `loading` | `animate-pulse p-4` |
+| `loadingBanner` | `h-16 rounded-lg bg-muted` |
+| `loadingBody` | `mt-3 flex items-center gap-3` |
+| `loadingAvatar` | `size-12 rounded-full bg-muted` |
+| `loadingText` | `flex-1 space-y-2` |
+| `loadingLineWide` | `h-3 w-2/3 rounded bg-muted` |
+| `loadingLineNarrow` | `h-3 w-1/3 rounded bg-muted` |
+| `loadingLineFull` | `mt-4 h-3 w-full rounded bg-muted` |
+| `loadingLineShort` | `mt-2 h-3 w-4/5 rounded bg-muted` |
+| `banner` | `h-16 w-full object-cover` |
+| `bannerFallback` | `h-16 w-full bg-gradient-to-r from-primary/40 to-primary/10` |
+| `body` | `p-4` |
+| `header` | `flex items-start justify-between gap-3` |
+| `identity` | `flex items-center gap-3` |
+| `avatar` | `size-12 shrink-0 rounded-full border-2 border-default object-cover` |
+| `info` | `min-w-0` |
+| `nameRow` | `flex items-center gap-1` |
+| `nameLink` | `truncate font-semibold text-highlighted text-sm hover:underline` |
+| `name` | `truncate font-semibold text-highlighted text-sm` |
+| `verifiedIcon` | `size-4 shrink-0 text-primary` |
+| `verifiedLabel` | `sr-only` |
+| `handle` | `truncate text-muted text-xs` |
+| `action` | `shrink-0` |
+| `followButton` | `rounded-full` |
+| `followLabel` | `inline-block` |
+| `bio` | `mt-3 text-highlighted/80 text-sm leading-relaxed` |
+| `stats` | `mt-4 flex items-center gap-4` |
+| `stat` | `flex flex-col` |
+| `statValue` | `font-semibold text-highlighted text-sm` |
+| `statLabel` | `text-muted text-xs` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.socialHoverCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative inline-block` |
+| `trigger` | `rounded font-medium text-primary text-sm underline-offset-2 hover:underline` |
+| `card` | `absolute left-1/2 z-30 w-80 -translate-x-1/2 overflow-hidden rounded-2xl border border-default bg-default shadow-xl` |
+| `loading` | `animate-pulse p-4` |
+| `loadingBanner` | `h-16 rounded-lg bg-muted` |
+| `loadingBody` | `mt-3 flex items-center gap-3` |
+| `loadingAvatar` | `size-12 rounded-full bg-muted` |
+| `loadingText` | `flex-1 space-y-2` |
+| `loadingLineWide` | `h-3 w-2/3 rounded bg-muted` |
+| `loadingLineNarrow` | `h-3 w-1/3 rounded bg-muted` |
+| `loadingLineFull` | `mt-4 h-3 w-full rounded bg-muted` |
+| `loadingLineShort` | `mt-2 h-3 w-4/5 rounded bg-muted` |
+| `banner` | `h-16 w-full object-cover` |
+| `bannerFallback` | `h-16 w-full bg-gradient-to-r from-primary/40 to-primary/10` |
+| `body` | `p-4` |
+| `header` | `flex items-start justify-between gap-3` |
+| `identity` | `flex items-center gap-3` |
+| `avatar` | `size-12 shrink-0 rounded-full border-2 border-default object-cover` |
+| `info` | `min-w-0` |
+| `nameRow` | `flex items-center gap-1` |
+| `nameLink` | `truncate font-semibold text-highlighted text-sm hover:underline` |
+| `name` | `truncate font-semibold text-highlighted text-sm` |
+| `verifiedIcon` | `size-4 shrink-0 text-primary` |
+| `verifiedLabel` | `sr-only` |
+| `handle` | `truncate text-muted text-xs` |
+| `action` | `shrink-0` |
+| `followButton` | `rounded-full` |
+| `followLabel` | `inline-block` |
+| `bio` | `mt-3 text-highlighted/80 text-sm leading-relaxed` |
+| `stats` | `mt-4 flex items-center gap-4` |
+| `stat` | `flex flex-col` |
+| `statValue` | `font-semibold text-highlighted text-sm` |
+| `statLabel` | `text-muted text-xs` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.socialHoverCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative inline-block` |
+| `trigger` | `rounded font-medium text-primary text-sm underline-offset-2 hover:underline` |
+| `card` | `absolute left-1/2 z-30 w-80 -translate-x-1/2 overflow-hidden rounded-2xl border border-default bg-default shadow-xl` |
+| `loading` | `animate-pulse p-4` |
+| `loadingBanner` | `h-16 rounded-lg bg-muted` |
+| `loadingBody` | `mt-3 flex items-center gap-3` |
+| `loadingAvatar` | `size-12 rounded-full bg-muted` |
+| `loadingText` | `flex-1 space-y-2` |
+| `loadingLineWide` | `h-3 w-2/3 rounded bg-muted` |
+| `loadingLineNarrow` | `h-3 w-1/3 rounded bg-muted` |
+| `loadingLineFull` | `mt-4 h-3 w-full rounded bg-muted` |
+| `loadingLineShort` | `mt-2 h-3 w-4/5 rounded bg-muted` |
+| `banner` | `h-16 w-full object-cover` |
+| `bannerFallback` | `h-16 w-full bg-gradient-to-r from-primary/40 to-primary/10` |
+| `body` | `p-4` |
+| `header` | `flex items-start justify-between gap-3` |
+| `identity` | `flex items-center gap-3` |
+| `avatar` | `size-12 shrink-0 rounded-full border-2 border-default object-cover` |
+| `info` | `min-w-0` |
+| `nameRow` | `flex items-center gap-1` |
+| `nameLink` | `truncate font-semibold text-highlighted text-sm hover:underline` |
+| `name` | `truncate font-semibold text-highlighted text-sm` |
+| `verifiedIcon` | `size-4 shrink-0 text-primary` |
+| `verifiedLabel` | `sr-only` |
+| `handle` | `truncate text-muted text-xs` |
+| `action` | `shrink-0` |
+| `followButton` | `rounded-full` |
+| `followLabel` | `inline-block` |
+| `bio` | `mt-3 text-highlighted/80 text-sm leading-relaxed` |
+| `stats` | `mt-4 flex items-center gap-4` |
+| `stat` | `flex flex-col` |
+| `statValue` | `font-semibold text-highlighted text-sm` |
+| `statLabel` | `text-muted text-xs` |

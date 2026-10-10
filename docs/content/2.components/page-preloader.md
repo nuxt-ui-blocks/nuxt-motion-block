@@ -9,7 +9,7 @@ navigation:
 
 A full-screen loading overlay, meant for route transitions and first-load waits.
 It renders `fixed inset-0 z-50` inside a `<Teleport to="body">`, so it covers
-the whole viewport no matter where you put the component in your tree — including
+the whole viewport no matter where you put the component in your tree ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â including
 inside a card or a dialog.
 
 Two visual treatments: `bar` (default) shows a `UProgress` plus a percentage,
@@ -20,7 +20,7 @@ cross-fades in and out over 250ms via `AnimatePresence`.
 ::warning
 The overlay is dismissable by clicking its own backdrop, which emits
 `update:loading` with `false`. If your work is not actually cancelable, decide
-whether you want that escape hatch — bind `:loading` without listening to the
+whether you want that escape hatch ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â bind `:loading` without listening to the
 event if a user must not be able to dismiss it, or handle the event and cancel
 the underlying work yourself.
 ::
@@ -28,7 +28,7 @@ the underlying work yourself.
 ## Usage
 
 Bind `loading` to whether your operation is still running, and drive `progress`
-yourself — the component renders state, it never fetches anything. `v-model:loading`
+yourself ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the component renders state, it never fetches anything. `v-model:loading`
 is the intended binding, so the backdrop click works out of the box.
 
 ::code-preview
@@ -56,7 +56,7 @@ label: Preview
 
     <div class="flex h-24 items-center justify-center rounded-2xl border border-default bg-default text-sm text-muted">
       The overlay teleports to body, so it covers this card too. Click anywhere on
-      it to dismiss — that emit is the only way out.
+      it to dismiss ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â that emit is the only way out.
     </div>
 
     <UProgress
@@ -114,7 +114,7 @@ onBeforeUnmount(() => {
   ::field{name="progress" type="number" default="0"}
   Current completion, forwarded to `UProgress` as `model-value` and rounded for
   the percentage label. The component passes no `:max`, so `UProgress` uses its
-  own default of `100`. Values above `100` are not clamped — the label just reads
+  own default of `100`. Values above `100` are not clamped ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the label just reads
   e.g. `120%`.
   ::
   ::field{name="variant" type="'bar' | 'spinner'" default="'bar'"}
@@ -130,7 +130,7 @@ onBeforeUnmount(() => {
   ::field{name="update:loading" type="(value: boolean) => void"}
   Emitted with `false` when the backdrop itself is clicked, wired through
   `@click.self` so clicks that land on the inner card do not dismiss. There is no
-  separate `dismiss` or `cancel` event — the component has no notion of an
+  separate `dismiss` or `cancel` event ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the component has no notion of an
   in-flight request to cancel.
   ::
 ::
@@ -157,7 +157,7 @@ If you use it for a blocking operation, wrap it yourself:
 Keyboard users have no way out either: there is no `Escape` handler and nothing
 inside the overlay is focusable, so `Tab` stays in the content behind it.
 
-There is also no `prefers-reduced-motion` check — the 250ms fade and the
+There is also no `prefers-reduced-motion` check ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the 250ms fade and the
 spinner's infinite rotation both run regardless. The spinner is the worse of the
 two: an indefinitely rotating icon is the classic vestibular trigger, so prefer
 `variant="bar"` if motion is a concern.
@@ -165,7 +165,7 @@ two: an indefinitely rotating icon is the classic vestibular trigger, so prefer
 ## Performance
 
 - The overlay is teleported to `body`, so mounting it depends on no layout in
-  the subtree that declared it — but scoped styles in your page are not applied
+  the subtree that declared it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â but scoped styles in your page are not applied
   to it either.
 - `AnimatePresence` keeps the overlay mounted through its 250ms exit before
   removing it, so there is briefly one extra full-viewport element during teardown.
@@ -184,3 +184,75 @@ timer in your page and let the preloader be a pure view of `loading` and
 `progress`, and clearing `loading` is what stops the timer and unmounts the
 overlay.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.pagePreloader` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'fixed inset-0 z-50 flex items-center justify-center bg-(--ui-bg-inverted)/50 backdrop-blur-sm'` |
+| `panel` | `'flex flex-col items-center gap-4 p-6 rounded-xl bg-background/80 backdrop-blur-sm shadow-xl'` |
+| `progress` | `'w-48'` |
+| `spinnerIcon` | `'w-8 h-8 text-primary'` |
+| `label` | `'text-sm text-muted'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.pagePreloader` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `fixed inset-0 z-50 flex items-center justify-center bg-(--ui-bg-inverted)/50 backdrop-blur-sm` |
+| `panel` | `flex flex-col items-center gap-4 p-6 rounded-xl bg-background/80 backdrop-blur-sm shadow-xl` |
+| `progress` | `w-48` |
+| `spinnerIcon` | `w-8 h-8 text-primary` |
+| `label` | `text-sm text-muted` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.pagePreloader` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `fixed inset-0 z-50 flex items-center justify-center bg-(--ui-bg-inverted)/50 backdrop-blur-sm` |
+| `panel` | `flex flex-col items-center gap-4 p-6 rounded-xl bg-background/80 backdrop-blur-sm shadow-xl` |
+| `progress` | `w-48` |
+| `spinnerIcon` | `w-8 h-8 text-primary` |
+| `label` | `text-sm text-muted` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.pagePreloader` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `fixed inset-0 z-50 flex items-center justify-center bg-(--ui-bg-inverted)/50 backdrop-blur-sm` |
+| `panel` | `flex flex-col items-center gap-4 p-6 rounded-xl bg-background/80 backdrop-blur-sm shadow-xl` |
+| `progress` | `w-48` |
+| `spinnerIcon` | `w-8 h-8 text-primary` |
+| `label` | `text-sm text-muted` |

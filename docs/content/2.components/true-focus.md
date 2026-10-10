@@ -121,3 +121,71 @@ label: Preview
 </template>
 ```
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.trueFocus` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'relative flex gap-4 justify-center items-center flex-wrap'` |
+| `word` | `'relative text-[3rem] font-black cursor-pointer'` |
+| `focus` | `'absolute top-0 left-0 pointer-events-none box-border border-0'` |
+| `corner` | `'absolute w-4 h-4 border-[3px] rounded-[3px]'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.trueFocus` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative flex gap-4 justify-center items-center flex-wrap` |
+| `word` | `relative text-[3rem] font-black cursor-pointer` |
+| `focus` | `absolute top-0 left-0 pointer-events-none box-border border-0` |
+| `corner` | `absolute w-4 h-4 border-[3px] rounded-[3px]` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.trueFocus` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative flex gap-4 justify-center items-center flex-wrap` |
+| `word` | `relative text-[3rem] font-black cursor-pointer` |
+| `focus` | `absolute top-0 left-0 pointer-events-none box-border border-0` |
+| `corner` | `absolute w-4 h-4 border-[3px] rounded-[3px]` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.trueFocus` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative flex gap-4 justify-center items-center flex-wrap` |
+| `word` | `relative text-[3rem] font-black cursor-pointer` |
+| `focus` | `absolute top-0 left-0 pointer-events-none box-border border-0` |
+| `corner` | `absolute w-4 h-4 border-[3px] rounded-[3px]` |

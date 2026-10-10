@@ -13,12 +13,12 @@ notification stack.
 
 Two ideas do the work. **Windowing**: only the last `maxVisible` items render, so
 the list height stays fixed no matter how long the array gets. **Receding**: each
-row's opacity and scale are derived from its `position` — how far down the visible
-window it is — rather than from a single variant, so the top row is full size and
+row's opacity and scale are derived from its `position` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â how far down the visible
+window it is ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â rather than from a single variant, so the top row is full size and
 each row below steps down by a fixed amount until it hits a floor.
 
 `maxVisible` truncates by *count*, so items scroll off the top and are discarded
-from the DOM entirely. If you need them back, they are still in your array —
+from the DOM entirely. If you need them back, they are still in your array ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
 nothing is removed. Use the exposed `remove` or the `update:items` event to
 actually delete them.
 
@@ -125,7 +125,7 @@ With no slot the component renders a `UCard` per row. If you set `onItemClick`,
 that fallback becomes clickable; otherwise it includes a remove button already
 wired to `remove(row.sourceIndex)`.
 
-The three exposed methods — `add`, `remove` and `clear` — all emit
+The three exposed methods ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `add`, `remove` and `clear` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â all emit
 `update:items` rather than mutating anything, so `v-model:items` is the intended
 wiring and the array stays owned by the parent. In the example the Clear button
 goes through the exposed `clear()` rather than assigning `items.value = []`
@@ -157,7 +157,7 @@ directly; both work, and the first keeps the exit animation.
     once. Capped at 0.3s total.
   ::
   ::field{name="recede" type="boolean" default="true"}
-    Fade and shrink rows by position — opacity steps down 0.18 per row to a floor
+    Fade and shrink rows by position ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â opacity steps down 0.18 per row to a floor
     of 0.35, scale steps down 0.05 to a floor of 0.85. Set `false` for a flat
     list that only animates entries.
   ::
@@ -197,7 +197,7 @@ directly; both work, and the first keeps the exit animation.
 ::field-group
   ::field{name="default" type="{ item: AnimatedListItem, index: number, position: number, remove: (index: number) => void }"}
   Renders one row. `position` is the row's slot in the visible window (0 is the
-    newest for `direction="down"`) — use it to mirror the recede effect with your
+    newest for `direction="down"`) ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â use it to mirror the recede effect with your
     own opacity. `remove` takes an index and is the same function the exposed
     `remove` uses.
   ::
@@ -212,14 +212,14 @@ expect.
 
 The `aria-live` region is a problem on a fast feed. Any add, remove or recede
 re-inserts elements inside a polite live region, and screen readers will read the
-new row out — which is usually what you want, but it means the region stays
+new row out ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â which is usually what you want, but it means the region stays
 "noisy" for as long as the list is changing. If your rows are not announcements,
 set `aria-live="off"` yourself (or manage focus in a `role="log"` region) rather
 than leaving the default on.
 
 The list does not move focus, and it should not: rows are not interactive unless
 you make them so. If a row contains a button, note that rows are removed from the
-DOM as they age out of the window — moving focus to a button that is about to be
+DOM as they age out of the window ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â moving focus to a button that is about to be
 unmounted sends focus back to `body`.
 
 Reduced motion is fully respected. `useReducedMotion()` short-circuits every
@@ -231,24 +231,24 @@ exits fade with `duration: 0`. The list still updates, it just doesn't travel.
 - Rendering is bounded by `maxVisible`, so the DOM size does not grow with the
   array. A 10,000-item array costs the same as a 5-item one.
 - Every row sets `layout`, so Motion measures positions before and after each
-  change. That is a forced reflow per update and is the dominant cost — it is
+  change. That is a forced reflow per update and is the dominant cost ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it is
   what makes the neighbouring rows slide instead of jump.
 - Stagger is capped at `0.3`s (`MAX_STAGGER_DELAY`), so a large `maxVisible`
   cannot stretch a single update into a long, janky sequence.
 - Recede clamps at `MIN_RECEDE_OPACITY` / `MIN_RECEDE_SCALE`, so old rows never
-  become invisible or invert — you never lose a row to rounding.
+  become invisible or invert ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â you never lose a row to rounding.
 - `AnimatePresence` uses `mode="popLayout"`, which removes a leaving row from
   flow immediately so the remaining rows start moving straight away rather than
   waiting for the exit to finish.
 - The feed timer is a single `setTimeout` that reschedules itself, and it is
   cleared and re-armed by a watcher on `feed`, `feedInterval`, `items.length` and
-  the pause state — so changing any of them mid-flight cannot leave a stale timer
+  the pause state ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â so changing any of them mid-flight cannot leave a stale timer
   running.
 
 ::tip
 Row keys come from `item.id` when present. Without an `id`, objects fall back to
 `m-list-${index}`, which means inserting at the top makes every row look new to
-Vue — the whole list re-animates and the recede states are recomputed. Primitives
+Vue ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the whole list re-animates and the recede states are recomputed. Primitives
 key off their own value instead, so a list of strings is fine as long as they are
 unique.
 ::
@@ -258,3 +258,63 @@ unique.
 pass are not part of the type and will silently render in the `down` order, since
 the check is a strict equality against `'down'`.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedList` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'flex flex-col gap-2 m-animated-list'` |
+| `row` | `'list-none'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedList` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `flex flex-col gap-2 m-animated-list` |
+| `row` | `list-none` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedList` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `flex flex-col gap-2 m-animated-list` |
+| `row` | `list-none` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedList` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `flex flex-col gap-2 m-animated-list` |
+| `row` | `list-none` |

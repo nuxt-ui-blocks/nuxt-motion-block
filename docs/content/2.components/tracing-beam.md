@@ -63,3 +63,79 @@ label: Preview
 </template>
 ```
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.tracingBeam` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'relative mx-auto h-full w-full max-w-4xl'` |
+| `beam` | `'absolute top-3 -left-4 md:-left-20'` |
+| `dot` | `'border-default ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm'` |
+| `dotInner` | `'h-2 w-2 rounded-full border border-default bg-default'` |
+| `svg` | `'ml-4 block'` |
+| `content` | `''` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.tracingBeam` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative mx-auto h-full w-full max-w-4xl` |
+| `beam` | `absolute top-3 -left-4 md:-left-20` |
+| `dot` | `border-default ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm` |
+| `dotInner` | `h-2 w-2 rounded-full border border-default bg-default` |
+| `svg` | `ml-4 block` |
+| `content` |  |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.tracingBeam` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative mx-auto h-full w-full max-w-4xl` |
+| `beam` | `absolute top-3 -left-4 md:-left-20` |
+| `dot` | `border-default ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm` |
+| `dotInner` | `h-2 w-2 rounded-full border border-default bg-default` |
+| `svg` | `ml-4 block` |
+| `content` |  |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.tracingBeam` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative mx-auto h-full w-full max-w-4xl` |
+| `beam` | `absolute top-3 -left-4 md:-left-20` |
+| `dot` | `border-default ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm` |
+| `dotInner` | `h-2 w-2 rounded-full border border-default bg-default` |
+| `svg` | `ml-4 block` |
+| `content` |  |

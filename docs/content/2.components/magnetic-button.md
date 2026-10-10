@@ -13,7 +13,7 @@ when the pointer goes. Translated from smoothui's magnetic-button.
 Two implementation details are worth knowing before you reach for it. The pull radius
 is real layout, not a hit-test: the wrapper takes a negative margin of `radius / 2`
 and an equal padding, so the component's box is `radius / 2` larger than the button on
-every side. And the offset is not a MotionValue — motion-v snapshots MotionValues when
+every side. And the offset is not a MotionValue ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â motion-v snapshots MotionValues when
 it mounts, so the magnet is driven by two plain reactive numbers fed into `animate`.
 
 This is the *button* of the pair. `Magnetic` is the generic wrapper for any element and
@@ -22,8 +22,8 @@ shadcn-style variant matrix without hand-writing the classes.
 
 ## Usage
 
-Drop it in place of a button. It renders its own `<button type="button">` — no
-`UButton` underneath — so it has no `label` prop: put the label in the slot. Tune the
+Drop it in place of a button. It renders its own `<button type="button">` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â no
+`UButton` underneath ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â so it has no `label` prop: put the label in the slot. Tune the
 pull with `strength` and `radius`, and use `asChild` when the trigger should be a link
 or another element.
 
@@ -61,7 +61,7 @@ label: Preview
         aria-label="Magnet strength"
       />
       <span class="text-xs text-muted">
-        strength = {{ strength.toFixed(2) }} · radius stays at 150px
+        strength = {{ strength.toFixed(2) }} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· radius stays at 150px
       </span>
     </div>
   </div>
@@ -78,9 +78,9 @@ const strength = ref(0.3)
 
 ::field-group
   ::field{name="strength" type="number" default="0.3"}
-  Portion of the in-range pointer offset the button travels, `0`–`1`. The offset is
-  `distance × strength × (1 − distance / radius)`, so travel peaks at
-  `strength × radius / 4` — about 11px at the defaults — and eases back to zero exactly
+  Portion of the in-range pointer offset the button travels, `0`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ`1`. The offset is
+  `distance ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â strength ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â (1 ÃƒÆ’Ã‚Â¢Ãƒâ€¹Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ distance / radius)`, so travel peaks at
+  `strength ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â radius / 4` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â about 11px at the defaults ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and eases back to zero exactly
   at the edge of the radius.
   ::
   ::field{name="radius" type="number" default="150"}
@@ -123,7 +123,7 @@ const strength = ref(0.3)
 
 ::field-group
   ::field{name="default"}
-  The button's content. With `asChild` the slot must contain exactly one element — it
+  The button's content. With `asChild` the slot must contain exactly one element ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it
   is rendered through reka-ui's `Primitive` and becomes the trigger itself.
   ::
 ::
@@ -139,7 +139,7 @@ The effect is gated three ways: on `(hover: hover) and (pointer: fine)`, on
 `useReducedMotion()`, and on `disabled`. Touch devices and visitors who prefer reduced
 motion get a static button with no magnet, and the offset is reset to zero for them.
 
-With `asChild` the accessibility burden moves to your element — pass an `aria-label`
+With `asChild` the accessibility burden moves to your element ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â pass an `aria-label`
 when the child is icon-only. There is no ARIA of the component's own beyond the native
 button semantics.
 
@@ -149,7 +149,7 @@ button semantics.
   `requestAnimationFrame` batching and no cached rect, so each pointer move forces a
   layout read.
 - Offsets are plain refs rather than MotionValues, so every change re-renders the
-  component and recomputes the `animate` target — cheap here, because the DOM is one
+  component and recomputes the `animate` target ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â cheap here, because the DOM is one
   element deep.
 - The hover media query is queried once on mount, guarded for environments without
   `window.matchMedia`, and its `change` listener is removed on unmount.
@@ -163,3 +163,67 @@ occupies a box 75px larger than the button on every side, which will overlap
 neighbours or overflow a padded container. Leave that much room around it, or drop
 `radius` and raise `strength` if you want the same travel in a smaller footprint.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.magneticButton` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'inline-block'` |
+| `magnet` | `'inline-block'` |
+| `button` | `''` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.magneticButton` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `inline-block` |
+| `magnet` | `inline-block` |
+| `button` |  |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.magneticButton` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `inline-block` |
+| `magnet` | `inline-block` |
+| `button` |  |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.magneticButton` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `inline-block` |
+| `magnet` | `inline-block` |
+| `button` |  |

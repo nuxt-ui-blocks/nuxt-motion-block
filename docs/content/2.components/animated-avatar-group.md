@@ -14,7 +14,7 @@ sequence starting from the right.
 The overlap is expressed as a **ratio of the avatar's pixel size**, not as
 pixels. `overlap: 0.4` on an `lg` avatar (36px) becomes `-14.4px` of negative
 inline-end margin. That keeps the visual density identical across all nine
-sizes — `overlap: 0.3` looks the same at `3xs` and at `3xl`, which is not true
+sizes ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `overlap: 0.3` looks the same at `3xs` and at `3xl`, which is not true
 if you pass pixels.
 
 Two states change the hover behaviour, and they are not the same:
@@ -107,14 +107,14 @@ identity and animate as one.
 
 ::field-group
   ::field{name="avatars" type="AvatarData[]" default="[]"}
-  The people to render. Each entry is passed straight to `UAvatar` — `src`,
+  The people to render. Each entry is passed straight to `UAvatar` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `src`,
     `alt`, `icon` and `text` are the useful fields. A `href` field is stripped
     and will not turn an avatar into a link; see the note below.
   ::
   ::field{name="max" type="number" default="undefined"}
   How many avatars to show before collapsing into a counter. When set to a
     positive number it wins over `maxVisible`. Setting `0` does **not** mean
-    "show all" — it falls back to `maxVisible`, because the check is `max > 0`.
+    "show all" ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it falls back to `maxVisible`, because the check is `max > 0`.
   ::
   ::field{name="maxVisible" type="number" default="4"}
   The limit used when `max` is not provided, or is `0`.
@@ -125,7 +125,7 @@ identity and animate as one.
   ::
   ::field{name="overlap" type="number" default="undefined"}
   Fraction of the avatar size to pull each avatar under the next. `0.3` on a 36px
-    avatar is `-10.8px`. Omit the prop entirely to keep Nuxt UI's own spacing —
+    avatar is `-10.8px`. Omit the prop entirely to keep Nuxt UI's own spacing ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
     the negative margin is only applied when the prop is defined.
   ::
   ::field{name="expandOnHover" type="boolean" default="true"}
@@ -158,20 +158,20 @@ identity and animate as one.
 ## Accessibility
 
 The root is a `role="group"` with `aria-label="Avatar group"` by default, which
-is a poor label on its own — pass `aria-label="Reviewers"` (or any string) and it
+is a poor label on its own ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â pass `aria-label="Reviewers"` (or any string) and it
 replaces the default. Avatars are not links here, so the group is a static image
 list, not an interactive widget; nothing is focusable and there is no keyboard
 interaction to support.
 
 The visuals are hover-only and the whole effect is gated behind
 `@media (hover: hover) and (pointer: fine)`, so touch devices never see the fan
-out — they get the overlapped layout permanently. That is a deliberate choice,
+out ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â they get the overlapped layout permanently. That is a deliberate choice,
 not a bug, but it means the two presentations differ enough that you should not
 rely on the expanded spacing to convey meaning.
 
 `prefers-reduced-motion: reduce` removes the transition entirely and forces
 `scale: 1`, so hover does nothing. The avatars still overlap and the group is
-still readable — the information is never carried by the animation alone.
+still readable ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the information is never carried by the animation alone.
 
 The overflow "+N" counter is rendered by `UAvatarGroup` and inherits its own
 labelling; since the visible avatars are truncated, `aria-label` on the group is
@@ -187,18 +187,18 @@ worth writing explicitly to say how many are in total.
   bouncy `cubic-bezier(0.34, 1.56, 0.64, 1)`.
 - Stagger is implemented with ten `:nth-last-child()` rules plus an
   `:nth-last-child(n + 11)` fallback, all capped at ten steps. Past eleven
-  avatars every remaining delay is identical, which is deliberate — a per-item
+  avatars every remaining delay is identical, which is deliberate ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a per-item
   delay for fifty avatars would keep the last one animating for seconds.
 - `--m-avatar-overflow-delay` is computed as `visibleCount * staggerDelay` so
   the counter's delay matches the end of the stagger chain. Recomputing it is
   the only value that depends on the avatar count.
-- Animating `margin` is not free — it relayouts on every frame of the transition.
+- Animating `margin` is not free ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it relayouts on every frame of the transition.
   It is scoped to a handful of avatars and never applies above
   `nth-last-child(n + 11)`, so the cost stays bounded.
 
 ::tip
 Because overlap is a ratio of `size`, the same value looks consistent across
-sizes — but it is clamped by nothing. `overlap: 0.9` on a `3xs` (16px) avatar
+sizes ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â but it is clamped by nothing. `overlap: 0.9` on a `3xs` (16px) avatar
 pulls it 14.4px under its neighbour, which is nearly all of it. Keep the value
 under about `0.6` unless you are deliberately masking the avatars.
 ::
@@ -216,13 +216,69 @@ end. And it already applies its own negative margin per size (`-me-0.5` up to
 `ui` is declared as a prop but never forwarded to `UAvatarGroup` or `UAvatar`, so
 it currently does nothing. To theme the internals, put the `ui` object on your
 own `UAvatarGroup` or use the class on the root, or wrap the component and style
-the `[data-slot="base"]` children directly — that is the slot the component's own
+the `[data-slot="base"]` children directly ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â that is the slot the component's own
 stylesheet targets.
 ::
 
 ::warning
 `href` on an avatar entry is removed before the props reach `UAvatar`, so avatar
 links are not supported. If you need linked avatars, put the link inside your
-default slot content — but note that content renders *inside* the avatar, so the
+default slot content ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â but note that content renders *inside* the avatar, so the
 anchor will be nested within the image element rather than replacing it.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedAvatarGroup` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'m-avatar-group'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedAvatarGroup` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `m-avatar-group` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedAvatarGroup` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `m-avatar-group` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedAvatarGroup` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `m-avatar-group` |

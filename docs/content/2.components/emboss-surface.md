@@ -7,8 +7,8 @@ navigation:
 
 # Emboss Surface
 
-Turns any element into a lit material surface. Four variants — `emboss`,
-`deboss`, `plaster` and `metal-stamp` — each describe a different relief recipe:
+Turns any element into a lit material surface. Four variants ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `emboss`,
+`deboss`, `plaster` and `metal-stamp` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â each describe a different relief recipe:
 two shadow layers for a raised surface, the same pair inset for a pressed one, a
 wider pair plus an SVG specular filter for plaster, and a hard zero-blur pair
 with an SVG `drop-shadow` for a stamped plate. Ported from smoothui's
@@ -23,7 +23,7 @@ That is what actually produces a lit surface rather than a shaded one.
 
 Wrap content in the component and pick a `variant`. The rendered element gets its
 background colour from `color`, so give it padding of your own. Add
-`interactive` when you want the light to follow the pointer — it is gated to
+`interactive` when you want the light to follow the pointer ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it is gated to
 hover-capable pointers and reduced motion automatically.
 
 ::code-preview
@@ -72,35 +72,35 @@ const variants = ['emboss', 'deboss', 'plaster', 'metal-stamp'] as const
 
 | Variant | Relief | Blur | Built from |
 | --- | --- | --- | --- |
-| `emboss` *(default)* | Raised, highlight top-left / shade bottom-right | Soft (`softness` × 2.4) | Two `box-shadow` layers |
-| `deboss` | Pressed — same geometry, `inset` and inverted | Soft | Two `inset box-shadow` layers |
-| `plaster` | Pressed, wide and shallow | Widest (× 1.8) | Two inset layers + an SVG `feSpecularLighting` filter |
+| `emboss` *(default)* | Raised, highlight top-left / shade bottom-right | Soft (`softness` ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â 2.4) | Two `box-shadow` layers |
+| `deboss` | Pressed ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â same geometry, `inset` and inverted | Soft | Two `inset box-shadow` layers |
+| `plaster` | Pressed, wide and shallow | Widest (ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â 1.8) | Two inset layers + an SVG `feSpecularLighting` filter |
 | `metal-stamp` | Raised, hard zero-blur edges | None (`0px`) | Two hard layers + two `drop-shadow` layers |
 
 `plaster` is the only variant that mounts an SVG filter, and the only one whose
-`filter` is an `url(#…)` rather than a `drop-shadow`. `metal-stamp` is the only
+`filter` is an `url(#ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦)` rather than a `drop-shadow`. `metal-stamp` is the only
 other variant that touches `filter`, and the only one with a zero-blur layer.
 
 ## Props
 
 ::field-group
   ::field{name="variant" type="'emboss' | 'deboss' | 'plaster' | 'metal-stamp'" default="'emboss'"}
-  The material recipe. Everything else — inset vs. outset, blur scale, highlight
-  and shade mix percentages, hard edges, specular filter — is read from this one
+  The material recipe. Everything else ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â inset vs. outset, blur scale, highlight
+  and shade mix percentages, hard edges, specular filter ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â is read from this one
   value.
   ::
   ::field{name="color" type="string" default="'var(--ui-bg)'"}
   Base material colour, applied as the element's `backgroundColor`. The highlight
   and shadow tints are derived from it with `color-mix()` in oklab, so any CSS
   colour works. Note the default is `var(--ui-bg)`, **not** shadcn's
-  `var(--background)` — that variable does not exist under Nuxt UI, and an
+  `var(--background)` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â that variable does not exist under Nuxt UI, and an
   undefined custom property inside `color-mix()` invalidates the whole colour,
   which silently drops the entire `box-shadow` to `none`. A surface with no
   relief and no error.
   ::
   ::field{name="depth" type="number" default="2"}
   Relief depth in pixels. Sets the shadow offsets and also scales the blur
-  (`depth × softness × 2.4 × variant blurScale`, floored at `0.25`). It is also
+  (`depth ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â softness ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â 2.4 ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â variant blurScale`, floored at `0.25`). It is also
   the maximum pointer travel in interactive mode.
   ::
   ::field{name="softness" type="number" default="0.5"}
@@ -114,7 +114,7 @@ other variant that touches `filter`, and the only one with a zero-blur layer.
   ::
   ::field{name="interactive" type="boolean" default="false"}
   Let the light angle follow the pointer. Requires `interactive`, reduced-motion
-  to be off, **and** a `(hover: hover) and (pointer: fine)` device — the pointer
+  to be off, **and** a `(hover: hover) and (pointer: fine)` device ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the pointer
   handlers are only attached when all three hold, and are `undefined` otherwise.
   The angle resets to `lightAngle` on `pointerleave`.
   ::
@@ -125,7 +125,7 @@ other variant that touches `filter`, and the only one with a zero-blur layer.
   ::
   ::field{name="class" type="string" default="''"}
   Merged onto the surface after `text-default`. This is where padding, rounding
-  and layout classes go — the component sets only colour, shadow, filter and
+  and layout classes go ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the component sets only colour, shadow, filter and
   text-shadow inline.
   ::
 ::
@@ -142,13 +142,13 @@ other variant that touches `filter`, and the only one with a zero-blur layer.
 ## Accessibility
 
 The component renders no ARIA roles or attributes of its own and adds nothing to
-the accessibility tree — it is a `box-shadow`, a background colour and, for
+the accessibility tree ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it is a `box-shadow`, a background colour and, for
 `plaster`, an `aria-hidden="true"` SVG whose `<title>` is decorative. Its only
 semantic contribution is `as`: setting `as="button"` gives you a real button,
 and setting `as="div"` leaves whatever you put inside to carry the semantics.
 
 Interactive light tracking is pointer-only. There is no keyboard equivalent and
-no `focus` styling, so a keyboard user sees the surface at its resting angle —
+no `focus` styling, so a keyboard user sees the surface at its resting angle ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
 which is a fine outcome, but it is not an interactive control and should not be
 used as one.
 
@@ -157,7 +157,7 @@ is stable across server and client render. This matters: the surface references
 it from its own inline `filter`, and a hydration mismatch would leave the filter
 dangling and the plaster variant unlit until the next paint.
 
-Under `prefers-reduced-motion` — read via `useReducedMotion` — the
+Under `prefers-reduced-motion` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â read via `useReducedMotion` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the
 `box-shadow` transition is dropped entirely and pointer tracking is disabled, so
 the surface renders statically. Note this only removes the transition on
 `box-shadow`; the highlight/shade layers are still composed.
@@ -166,7 +166,7 @@ the surface renders statically. Note this only removes the transition on
 
 - The whole style object is one `computed`. Nothing recomputes per pointer event
   except the two custom properties `--es-dx` and `--es-dy`, written directly to
-  `element.style` — no Vue re-render per move.
+  `element.style` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â no Vue re-render per move.
 - The pointer only sets a *direction*, never a distance: the offset is normalized
   by the cursor's distance from centre and scaled by `depth`, so the relief
   depth stays a property of the material rather than of the pointer's distance.
@@ -176,13 +176,73 @@ the surface renders statically. Note this only removes the transition on
   are pure `box-shadow` and (for `metal-stamp`) `filter: drop-shadow`, all
   handled by the compositor.
 - Shadow layers are emitted as CSS custom properties (`calc(var(--es-blur) *
-  1px)`), so the light angle can change without rebuilding the shadow string —
+  1px)`), so the light angle can change without rebuilding the shadow string ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
   only the custom properties are updated.
 
 ::tip
-`color` is not decoration — it is load-bearing. Both the highlight and the shade
+`color` is not decoration ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it is load-bearing. Both the highlight and the shade
 are `color-mix(in oklab, <color>, white|black N%)`, so an unresolvable `color`
 invalidates both and collapses the surface to no relief at all, with no error in
 the console. If a surface looks flat, check that `color` resolves before you
 touch `depth` or `softness`.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.embossSurface` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'text-default'` |
+| `filter` | `'pointer-events-none absolute h-0 w-0'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.embossSurface` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `text-default` |
+| `filter` | `pointer-events-none absolute h-0 w-0` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.embossSurface` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `text-default` |
+| `filter` | `pointer-events-none absolute h-0 w-0` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.embossSurface` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `text-default` |
+| `filter` | `pointer-events-none absolute h-0 w-0` |

@@ -91,7 +91,7 @@ function onComplete(value: string) {
   ::
   ::field{name="successColor" type="string" default="'var(--ui-success)'"}
   The glow colour flashed around the field when the code completes. Accepts any
-  CSS colour, including a `var()` reference. Not a prop of `UPinInput` — this one
+  CSS colour, including a `var()` reference. Not a prop of `UPinInput` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â this one
   belongs to the component.
   ::
   ::field{name="disabled" type="boolean" default="false"}
@@ -120,7 +120,7 @@ function onComplete(value: string) {
   so this mainly affects focus and error styling of the real inputs.
   ::
   ::field{name="size" type="PinInputProps['size']" default="'lg'"}
-  Forwarded to `UPinInput`. Also drives the group separator positions — see the
+  Forwarded to `UPinInput`. Also drives the group separator positions ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â see the
   tip, because the painted cells do not follow it.
   ::
   ::field{name="color" type="PinInputProps['color']" default="'primary'"}
@@ -147,14 +147,14 @@ function onComplete(value: string) {
 
 Every cell is a real, focusable input from Reka UI's `PinInput`, so digit entry,
 arrow movement between cells and Backspace all behave natively, and `disabled`
-blocks them properly. The component does not add ARIA of its own — and it depends
+blocks them properly. The component does not add ARIA of its own ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and it depends
 on Reka UI's per-cell `aria-label` of `pin input N`, both to find the focused cell
 and as the input's accessible name.
 
 There is one duplication to be aware of. Unlike the number input, the painted
 overlay is **not** `aria-hidden`; it is only `pointer-events-none`, which stops
 the pointer but leaves it in the accessibility tree. A filled code is therefore
-exposed twice — once by the inputs and once by the overlay spans. If the exact
+exposed twice ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â once by the inputs and once by the overlay spans. If the exact
 announcement matters, set the field inside a container you can mark
 `aria-hidden`, or read the value from your own `v-model`.
 
@@ -170,7 +170,7 @@ focused empty cell, because the blinking caret is not rendered at all.
   cell, and the input's own text layer costs nothing to update.
 - Focus tracking is delegated to the wrapper: one `focusin` and one `focusout`,
   each doing a single `querySelectorAll('input[aria-label^="pin input"]')` and an
-  `indexOf(document.activeElement)` — not a listener or an index per cell.
+  `indexOf(document.activeElement)` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â not a listener or an index per cell.
 - `sanitize` strips non-digits and right-trims empty trailing cells before they
   reach state, so pasting `12-34 56` completes normally and a short paste never
   leaves a gap in the middle of the array.
@@ -184,9 +184,101 @@ focused empty cell, because the blinking caret is not rendered at all.
 - No `ResizeObserver`, no `MutationObserver`, no layout reads.
 
 ::tip
-The painted cells are a hardcoded `size-9` — 36px — while the group separators are
+The painted cells are a hardcoded `size-9` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â 36px ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â while the group separators are
 positioned from a `size`-to-pixel table whose default (`lg`) also resolves to
 36px. The overlay therefore lines up with the real inputs only at the default
 size. Set `size="sm"` or `size="xl"` and the drawn cells drift out of register
 with the inputs they are representing.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedOTPInput` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'relative inline-block rounded-md'` |
+| `underlay` | `'an-otp inline-flex'` |
+| `overlay` | `'pointer-events-none absolute left-0 top-0 flex h-full items-center gap-1.5'` |
+| `cell` | `'relative flex size-9 items-center justify-center rounded-md border border-accented bg-elevated shadow-xs transition-[border-color,box-shadow] duration-150'` |
+| `cellText` | `'font-medium text-highlighted'` |
+| `glyph` | `'block'` |
+| `caret` | `'pointer-events-none absolute inset-0 flex items-center justify-center'` |
+| `caretBar` | `'h-4 w-px bg-foreground'` |
+| `separator` | `'text-dimmed absolute'` |
+| `separatorLine` | `'block h-px w-2 bg-dimmed'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedOTPInput` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative inline-block rounded-md` |
+| `underlay` | `an-otp inline-flex` |
+| `overlay` | `pointer-events-none absolute left-0 top-0 flex h-full items-center gap-1.5` |
+| `cell` | `relative flex size-9 items-center justify-center rounded-md border border-accented bg-elevated shadow-xs transition-[border-color,box-shadow] duration-150` |
+| `cellText` | `font-medium text-highlighted` |
+| `glyph` | `block` |
+| `caret` | `pointer-events-none absolute inset-0 flex items-center justify-center` |
+| `caretBar` | `h-4 w-px bg-foreground` |
+| `separator` | `text-dimmed absolute` |
+| `separatorLine` | `block h-px w-2 bg-dimmed` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedOTPInput` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative inline-block rounded-md` |
+| `underlay` | `an-otp inline-flex` |
+| `overlay` | `pointer-events-none absolute left-0 top-0 flex h-full items-center gap-1.5` |
+| `cell` | `relative flex size-9 items-center justify-center rounded-md border border-accented bg-elevated shadow-xs transition-[border-color,box-shadow] duration-150` |
+| `cellText` | `font-medium text-highlighted` |
+| `glyph` | `block` |
+| `caret` | `pointer-events-none absolute inset-0 flex items-center justify-center` |
+| `caretBar` | `h-4 w-px bg-foreground` |
+| `separator` | `text-dimmed absolute` |
+| `separatorLine` | `block h-px w-2 bg-dimmed` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedOTPInput` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative inline-block rounded-md` |
+| `underlay` | `an-otp inline-flex` |
+| `overlay` | `pointer-events-none absolute left-0 top-0 flex h-full items-center gap-1.5` |
+| `cell` | `relative flex size-9 items-center justify-center rounded-md border border-accented bg-elevated shadow-xs transition-[border-color,box-shadow] duration-150` |
+| `cellText` | `font-medium text-highlighted` |
+| `glyph` | `block` |
+| `caret` | `pointer-events-none absolute inset-0 flex items-center justify-center` |
+| `caretBar` | `h-4 w-px bg-foreground` |
+| `separator` | `text-dimmed absolute` |
+| `separatorLine` | `block h-px w-2 bg-dimmed` |

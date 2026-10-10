@@ -75,7 +75,7 @@ const items = [
   Flat list of `{ label, to, icon? }` entries. `label` and `to` are required;
   `icon` is optional and only used by the mobile panel's buttons. The array is
   reshaped into a single-group array for `UNavigationMenu`, which is why the
-  desktop menu has no nested children — give it flat entries, not a tree.
+  desktop menu has no nested children ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â give it flat entries, not a tree.
   ::
 ::
 
@@ -93,7 +93,7 @@ const items = [
 The component delegates all landmark and disclosure semantics to Nuxt UI's
 `UHeader`, so the mobile toggle is a real button with `aria-expanded` state and
 the body panel is wired to it. Inside the panel each item is a `UButton` with
-`to`, which renders an anchor — meaning keyboard order and middle-click both
+`to`, which renders an anchor ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â meaning keyboard order and middle-click both
 behave as expected.
 
 The component adds no ARIA of its own. Note that `UNavigationMenu` in desktop
@@ -107,7 +107,7 @@ component or override `transition` yourself if that matters.
 ## Performance
 
 - `desktopItems` is a `computed`, so the reshaped navigation array is rebuilt
-  only when `items` changes — not on every render.
+  only when `items` changes ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â not on every render.
 - The staggered cascade lives entirely on mount of each `motion.div`; there are
   no timers, no `requestAnimationFrame` loops and no listeners owned by this
   component.
@@ -115,8 +115,84 @@ component or override `transition` yourself if that matters.
   the cascade does not trigger layout on each step.
 
 ::tip
-The desktop array is wrapped in an outer array — `[[...items]]` rather than
+The desktop array is wrapped in an outer array ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `[[...items]]` rather than
 `[...items]`. That single nesting level is what makes `UNavigationMenu` read it
 as one navigation group instead of treating each item as a top-level list, so
 the component takes a flat `items` prop and does the wrapping for you.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.expandableNavbar` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `''` |
+| `left` | `'flex items-center gap-2'` |
+| `title` | `'font-bold text-lg'` |
+| `menu` | `'hidden lg:flex'` |
+| `body` | `'lg:hidden p-4'` |
+| `button` | `'w-full justify-start'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.expandableNavbar` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `left` | `flex items-center gap-2` |
+| `title` | `font-bold text-lg` |
+| `menu` | `hidden lg:flex` |
+| `body` | `lg:hidden p-4` |
+| `button` | `w-full justify-start` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.expandableNavbar` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `left` | `flex items-center gap-2` |
+| `title` | `font-bold text-lg` |
+| `menu` | `hidden lg:flex` |
+| `body` | `lg:hidden p-4` |
+| `button` | `w-full justify-start` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.expandableNavbar` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `left` | `flex items-center gap-2` |
+| `title` | `font-bold text-lg` |
+| `menu` | `hidden lg:flex` |
+| `body` | `lg:hidden p-4` |
+| `button` | `w-full justify-start` |

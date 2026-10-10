@@ -192,3 +192,95 @@ The drawer uses Nuxt UI's `UDrawer` under the hood, which provides proper focus 
 ::tip
 Set `animatedHandle` to `false` if you prefer a static handle. For side drawers, the handle is hidden regardless of this prop.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.drawer` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `''` |
+| `overlay` | `'bg-default/50 backdrop-blur-sm'` |
+| `content` | `'flex flex-1 flex-col'` |
+| `handle` | `'mx-auto mt-4 h-1.5 w-12 shrink-0 rounded-full bg-accented'` |
+| `header` | `'px-6 py-4 border-b border-default'` |
+| `body` | `'flex-1 overflow-y-auto px-6 py-4'` |
+| `footer` | `'px-6 py-4 border-t border-default'` |
+| `headerContent` | `'flex flex-col gap-1'` |
+| `title` | `'text-lg font-semibold text-highlighted'` |
+| `description` | `'text-sm text-muted'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.drawer` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `overlay` | `bg-default/50 backdrop-blur-sm` |
+| `content` | `flex flex-1 flex-col` |
+| `handle` | `mx-auto mt-4 h-1.5 w-12 shrink-0 rounded-full bg-accented` |
+| `header` | `px-6 py-4 border-b border-default` |
+| `body` | `flex-1 overflow-y-auto px-6 py-4` |
+| `footer` | `px-6 py-4 border-t border-default` |
+| `headerContent` | `flex flex-col gap-1` |
+| `title` | `text-lg font-semibold text-highlighted` |
+| `description` | `text-sm text-muted` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.drawer` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `overlay` | `bg-default/50 backdrop-blur-sm` |
+| `content` | `flex flex-1 flex-col` |
+| `handle` | `mx-auto mt-4 h-1.5 w-12 shrink-0 rounded-full bg-accented` |
+| `header` | `px-6 py-4 border-b border-default` |
+| `body` | `flex-1 overflow-y-auto px-6 py-4` |
+| `footer` | `px-6 py-4 border-t border-default` |
+| `headerContent` | `flex flex-col gap-1` |
+| `title` | `text-lg font-semibold text-highlighted` |
+| `description` | `text-sm text-muted` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.drawer` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `overlay` | `bg-default/50 backdrop-blur-sm` |
+| `content` | `flex flex-1 flex-col` |
+| `handle` | `mx-auto mt-4 h-1.5 w-12 shrink-0 rounded-full bg-accented` |
+| `header` | `px-6 py-4 border-b border-default` |
+| `body` | `flex-1 overflow-y-auto px-6 py-4` |
+| `footer` | `px-6 py-4 border-t border-default` |
+| `headerContent` | `flex flex-col gap-1` |
+| `title` | `text-lg font-semibold text-highlighted` |
+| `description` | `text-sm text-muted` |

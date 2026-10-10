@@ -7,12 +7,12 @@ navigation:
 
 # Theme Toggle
 
-A button that steps Nuxt UI's colour mode through `light → dark → system`, swapping the
+A button that steps Nuxt UI's colour mode through `light ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ dark ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ system`, swapping the
 glyph to match the preference it just wrote: a sun, a moon, a monitor.
 
 It owns no state. Everything comes from `useColorMode()`, the same global the rest of
 your app reads, so a toggle in a header and one in a sidebar stay in step without any
-props. That also means it emits nothing and takes no `v-model` — there is nothing to
+props. That also means it emits nothing and takes no `v-model` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â there is nothing to
 bind, because there is nothing local.
 
 The glyph is chosen from the *preference*, not from the resolved mode. On a machine set
@@ -22,7 +22,7 @@ that is what the user just chose, whatever it currently resolves to.
 ## Usage
 
 Drop it in and click it. Pass `size` to match a surrounding toolbar, and `aria-label` to
-name the action — the component has no label of its own.
+name the action ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the component has no label of its own.
 
 ::code-preview
 ---
@@ -50,8 +50,8 @@ label: Preview
     </div>
 
     <p class="max-w-xs text-center text-xs text-muted">
-      Every click advances light → dark → system and writes Nuxt UI's global colour mode, so the whole
-      page — not just this button — follows. The icon is chosen from the preference itself, which is
+      Every click advances light ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ dark ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ system and writes Nuxt UI's global colour mode, so the whole
+      page ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â not just this button ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â follows. The icon is chosen from the preference itself, which is
       why the monitor appears in system mode rather than the resolved one.
     </p>
   </div>
@@ -86,12 +86,12 @@ The root is a real `UButton`, so it is a `<button type="button">` with keyboard
 activation and Nuxt UI's focus ring.
 
 Nothing labels it out of the box. The single `UIcon` carries no accessible name, so an
-unlabelled toggle is announced as just "button" — pass `aria-label` describing the
+unlabelled toggle is announced as just "button" ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â pass `aria-label` describing the
 action. The label does not track the current mode, and it cannot: the component cycles
 three preferences, so "Toggle dark mode" would be wrong one click in three. If you need
 that, label it from your own `useColorMode()` state instead.
 
-The mode change is visual only — no live region announces it, so a screen-reader user
+The mode change is visual only ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â no live region announces it, so a screen-reader user
 gets no confirmation that the click did anything.
 
 Reduced motion is not consulted. The swap runs at a fixed `0.2s` for every visitor,
@@ -113,7 +113,71 @@ including the exit half, which rotates the outgoing glyph a quarter turn.
 ::tip
 The icon swap is wrapped in `<AnimatePresence mode="wait">`, but motion-v does not
 implement that mode, so the outgoing glyph is not guaranteed to be gone before the
-incoming one appears — expect a brief crossfade with two icons visible rather than a
+incoming one appears ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â expect a brief crossfade with two icons visible rather than a
 clean hand-off. Keep the pair visually close: sun to moon reads well, sun to a filled
 square does not.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.themeToggle` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `''` |
+| `iconWrapper` | `'inline-flex items-center justify-center'` |
+| `icon` | `'w-5 h-5'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.themeToggle` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `iconWrapper` | `inline-flex items-center justify-center` |
+| `icon` | `w-5 h-5` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.themeToggle` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `iconWrapper` | `inline-flex items-center justify-center` |
+| `icon` | `w-5 h-5` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.themeToggle` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `iconWrapper` | `inline-flex items-center justify-center` |
+| `icon` | `w-5 h-5` |

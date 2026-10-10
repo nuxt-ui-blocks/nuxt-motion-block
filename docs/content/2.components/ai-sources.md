@@ -18,7 +18,7 @@ its evidence.
 ## Usage
 
 Pass `sources` as `{ id, title, url, snippet? }`. Without a `snippet` the row
-falls back to the host. Slot the `favicon` only if you have real marks —
+falls back to the host. Slot the `favicon` only if you have real marks ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
 otherwise you get the neutral globe, which is the honest default.
 
 ::code-preview
@@ -92,7 +92,7 @@ const sources: Source[] = [
   verbatim rather than throwing.
   ::
   ::field{name="label" type="string" default="'Sources'"}
-  The text after the stack. Set it to something countable — "4 sources" — if your
+  The text after the stack. Set it to something countable ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â "4 sources" ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â if your
   design needs the number spelled out; the stack itself only shows a `+n` chip
   for the overflow.
   ::
@@ -111,7 +111,7 @@ const sources: Source[] = [
   ::field{name="favicon" type="{ source: AiSource }"}
   The mark for a source, rendered in both the collapsed stack and the expanded
   row, and receiving the source it belongs to. Anything that fits an `<img>` works
-  — a logo service URL, a repo isotype. The wrapper applies `size-full`,
+  ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a logo service URL, a repo isotype. The wrapper applies `size-full`,
   `object-cover` and `fill-foreground` to slotted children, so an SVG that ships
   `fill="none"` picks up the current text colour.
 
@@ -130,7 +130,7 @@ const sources: Source[] = [
 - The expanded list is a real `<ul>` of `<li>`s, and every row is an anchor with
   `target="_blank"` and `rel="noopener noreferrer"`.
 - The expanded body is `inert` while collapsed. That removes it from the tab order
-  and the accessibility tree entirely — a better guarantee than a collapsed
+  and the accessibility tree entirely ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a better guarantee than a collapsed
   container that still holds focusable links.
 - The fan is a hover hint only. It reveals nothing: the expanded list is what
   actually contains the sources, so keyboard users get everything a pointer user
@@ -140,7 +140,7 @@ const sources: Source[] = [
 - Under `prefers-reduced-motion: reduce` the fan is suppressed, the expand is an
   instant `grid-template-rows` switch with no opacity fade, and the rows appear
   already settled.
-- Nothing here is announced on expand — the list appearing is not an event. If a
+- Nothing here is announced on expand ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the list appearing is not an event. If a
   reader needs to know how many sources an answer used, put that in the `label`.
 
 ## Performance
@@ -164,3 +164,115 @@ const sources: Source[] = [
   subtraction, so a fifty-source answer costs the same DOM as a three-source one.
 - Row transitions are staggered by index on open and share one frozen transition
   object per index.
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.aiSources` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'w-full'` |
+| `trigger` | `'flex w-full cursor-pointer items-center gap-2 rounded-lg py-1 text-left text-sm text-muted transition-colors hover:text-default'` |
+| `stack` | `'flex items-center'` |
+| `chip` | `'ai-sources-chip relative block'` |
+| `overflow` | `'ml-1 tabular-nums'` |
+| `chevron` | `'flex size-4 items-center justify-center'` |
+| `body` | `'ai-sources-body'` |
+| `list` | `'mt-1 min-h-0 list-none overflow-hidden'` |
+| `link` | `'flex items-start gap-2.5 rounded-lg px-1 py-1.5 no-underline transition-colors hover:bg-muted'` |
+| `favicon` | `'mt-0.5 block shrink-0'` |
+| `rowText` | `'min-w-0'` |
+| `rowTitle` | `'block truncate text-sm font-medium text-default'` |
+| `rowSnippet` | `'block truncate text-xs text-muted'` |
+| `faviconBase` | `'flex items-center justify-center overflow-hidden rounded-full border border-border bg-muted text-muted'` |
+| `faviconMark` | `'flex size-full items-center justify-center *:size-full *:fill-foreground *:object-cover'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiSources` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `w-full` |
+| `trigger` | `flex w-full cursor-pointer items-center gap-2 rounded-lg py-1 text-left text-sm text-muted transition-colors hover:text-default` |
+| `stack` | `flex items-center` |
+| `chip` | `ai-sources-chip relative block` |
+| `overflow` | `ml-1 tabular-nums` |
+| `chevron` | `flex size-4 items-center justify-center` |
+| `body` | `ai-sources-body` |
+| `list` | `mt-1 min-h-0 list-none overflow-hidden` |
+| `link` | `flex items-start gap-2.5 rounded-lg px-1 py-1.5 no-underline transition-colors hover:bg-muted` |
+| `favicon` | `mt-0.5 block shrink-0` |
+| `rowText` | `min-w-0` |
+| `rowTitle` | `block truncate text-sm font-medium text-default` |
+| `rowSnippet` | `block truncate text-xs text-muted` |
+| `faviconBase` | `flex items-center justify-center overflow-hidden rounded-full border border-border bg-muted text-muted` |
+| `faviconMark` | `flex size-full items-center justify-center *:size-full *:fill-foreground *:object-cover` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiSources` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `w-full` |
+| `trigger` | `flex w-full cursor-pointer items-center gap-2 rounded-lg py-1 text-left text-sm text-muted transition-colors hover:text-default` |
+| `stack` | `flex items-center` |
+| `chip` | `ai-sources-chip relative block` |
+| `overflow` | `ml-1 tabular-nums` |
+| `chevron` | `flex size-4 items-center justify-center` |
+| `body` | `ai-sources-body` |
+| `list` | `mt-1 min-h-0 list-none overflow-hidden` |
+| `link` | `flex items-start gap-2.5 rounded-lg px-1 py-1.5 no-underline transition-colors hover:bg-muted` |
+| `favicon` | `mt-0.5 block shrink-0` |
+| `rowText` | `min-w-0` |
+| `rowTitle` | `block truncate text-sm font-medium text-default` |
+| `rowSnippet` | `block truncate text-xs text-muted` |
+| `faviconBase` | `flex items-center justify-center overflow-hidden rounded-full border border-border bg-muted text-muted` |
+| `faviconMark` | `flex size-full items-center justify-center *:size-full *:fill-foreground *:object-cover` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.aiSources` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `w-full` |
+| `trigger` | `flex w-full cursor-pointer items-center gap-2 rounded-lg py-1 text-left text-sm text-muted transition-colors hover:text-default` |
+| `stack` | `flex items-center` |
+| `chip` | `ai-sources-chip relative block` |
+| `overflow` | `ml-1 tabular-nums` |
+| `chevron` | `flex size-4 items-center justify-center` |
+| `body` | `ai-sources-body` |
+| `list` | `mt-1 min-h-0 list-none overflow-hidden` |
+| `link` | `flex items-start gap-2.5 rounded-lg px-1 py-1.5 no-underline transition-colors hover:bg-muted` |
+| `favicon` | `mt-0.5 block shrink-0` |
+| `rowText` | `min-w-0` |
+| `rowTitle` | `block truncate text-sm font-medium text-default` |
+| `rowSnippet` | `block truncate text-xs text-muted` |
+| `faviconBase` | `flex items-center justify-center overflow-hidden rounded-full border border-border bg-muted text-muted` |
+| `faviconMark` | `flex size-full items-center justify-center *:size-full *:fill-foreground *:object-cover` |

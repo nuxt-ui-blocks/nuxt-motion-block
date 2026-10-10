@@ -17,7 +17,7 @@ attribute alone, closing the modal genuinely stops the audio instead of leaving
 it running behind the overlay.
 
 The `open` watcher is not `immediate`, so a modal that is already open on first
-render does not call `play()` — it waits for the first *change* to `open`.
+render does not call `play()` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it waits for the first *change* to `open`.
 
 ## Usage
 
@@ -67,7 +67,7 @@ const poster = 'https://picsum.photos/seed/video-modal-poster/800/450'
 ::field-group
   ::field{name="src" type="string"}
   Required. Set as the `src` of the `<video>` element, which is created with the
-  modal's content — so changing it while the modal is closed costs nothing, and
+  modal's content ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â so changing it while the modal is closed costs nothing, and
   changing it while open swaps the source in place.
   ::
   ::field{name="poster" type="string" default="''"}
@@ -81,7 +81,7 @@ const poster = 'https://picsum.photos/seed/video-modal-poster/800/450'
   The rejection is swallowed with `.catch(() => {})`.
   ::
   ::field{name="open" type="boolean" default="false"}
-  Controlled open state. The component holds no state of its own here — it
+  Controlled open state. The component holds no state of its own here ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it
   forwards to `UModal` and emits `update:open` back out, so `v-model:open` is
   the intended usage.
   ::
@@ -92,7 +92,7 @@ const poster = 'https://picsum.photos/seed/video-modal-poster/800/450'
 ::field-group
   ::field{name="update:open" type="(value: boolean) => void"}
   Emitted from the underlying modal. Dismissal through the overlay, Escape, the
-  close button, or the trigger all arrive here — this is what makes
+  close button, or the trigger all arrive here ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â this is what makes
   `v-model:open` work.
   ::
 ::
@@ -114,7 +114,7 @@ with the native `controls` attribute, so playback, seeking, volume, fullscreen
 and captions are all keyboard-operable without any extra work.
 
 What the component does not do is label or caption the video. There is no
-`aria-label`, no `<track>` support and no way to pass attributes to the element —
+`aria-label`, no `<track>` support and no way to pass attributes to the element ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
 it is rendered from a fixed set of attributes, so if your video has captions you
 will need to reach past this component. Pair it with a transcript link outside
 the modal.
@@ -128,7 +128,7 @@ unconditionally.
 - The `<video>` element is created with the modal's content and destroyed with
   it, so a closed modal holds no decoder, no buffer and no network connection.
 - Playback control runs through a `nextTick` before touching the ref, so the
-  element is guaranteed to exist on the tick the watcher fires — and the code
+  element is guaranteed to exist on the tick the watcher fires ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and the code
   bails out cleanly if it does not.
 - The rejected-`play()` promise is caught and ignored, which keeps a blocked
   unmuted autoplay from surfacing as an unhandled rejection in the console.
@@ -139,7 +139,71 @@ unconditionally.
 `play()` is called on every open with no `muted` and no user-gesture check, and
 browsers block unmuted programmatic playback that was not preceded by a click.
 In practice the user clicks the trigger first, which usually satisfies the
-policy — but if the modal is opened programmatically (a route change, a
+policy ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â but if the modal is opened programmatically (a route change, a
 notification tap), the promise rejects silently and the poster simply stays
 until the user presses play.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.videoModal` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `''` |
+| `container` | `'relative'` |
+| `video` | `'w-full rounded-lg'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.videoModal` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `container` | `relative` |
+| `video` | `w-full rounded-lg` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.videoModal` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `container` | `relative` |
+| `video` | `w-full rounded-lg` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.videoModal` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `container` | `relative` |
+| `video` | `w-full rounded-lg` |

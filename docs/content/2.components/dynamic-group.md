@@ -107,7 +107,7 @@ function addMember() {
 ```
 ::
 
-The `remove` function in the slot scope emits `remove` with the item's index — it
+The `remove` function in the slot scope emits `remove` with the item's index ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it
 does **not** mutate `items` for you. The parent owns the array, so it is the
 parent that filters it, as `onRemove` does above.
 
@@ -115,7 +115,7 @@ parent that filters it, as `onRemove` does above.
 
 ::field-group
   ::field{name="items" type="any[]" required}
-  The list to render. Items are typed `any` — strings, numbers and objects all
+  The list to render. Items are typed `any` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â strings, numbers and objects all
     work, but the shape only matters to your slot and to `keyField`.
   ::
   ::field{name="keyField" type="string" default="'id'"}
@@ -126,7 +126,7 @@ parent that filters it, as `onRemove` does above.
   ::field{name="layout" type="boolean" default="true"}
   Enables Motion's layout animation, which is what makes the remaining items
   slide into place when one leaves. Set it to `false` to skip reflow
-  measurement — cheaper, but items will jump.
+  measurement ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â cheaper, but items will jump.
   ::
   ::field{name="direction" type="'row' | 'column' | 'grid'" default="'grid'"}
   `grid` emits `grid grid-cols-N gap-4`, `row` emits `flex flex-wrap gap-4`, and
@@ -134,7 +134,7 @@ parent that filters it, as `onRemove` does above.
   ::
   ::field{name="columns" type="number" default="3"}
   Grid column count, used only when `direction="grid"`. The class is built as
-  `grid-cols-${columns}` at runtime, so Tailwind cannot see it in your source —
+  `grid-cols-${columns}` at runtime, so Tailwind cannot see it in your source ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
   see the tip below.
   ::
 ::
@@ -153,7 +153,7 @@ parent that filters it, as `onRemove` does above.
 ::field-group
   ::field{name="default" type="{ item: any, index: number, remove: () => void }"}
   Renders one item. `remove` emits the `remove` event with `index` already bound.
-    The fallback content — a `UCard` with the item interpolated as text — is
+    The fallback content ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a `UCard` with the item interpolated as text ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â is
     used when the slot is omitted.
   ::
 ::
@@ -178,7 +178,7 @@ yourself if motion is a concern.
 
 - Layout animation requires the browser to measure positions before and after
   each change, which is a forced reflow per update. It is the reason `layout`
-  exists as a prop — turning it off is the single cheapest win on a long list.
+  exists as a prop ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â turning it off is the single cheapest win on a long list.
 - The transition is a spring (`stiffness: 300`, `damping: 25`) with a per-index
   `delay: index * 0.03`. On a long list the last item's delay grows without
   bound, which both stretches the total time and keeps animations alive well
@@ -195,8 +195,68 @@ yourself if motion is a concern.
 ::tip
 `grid-cols-${columns}` is constructed at runtime, so Tailwind's scanner never sees
 it. The class only exists in your stylesheet if something else in the build
-happens to use the same literal — `grid-cols-3` is common enough that it usually
+happens to use the same literal ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `grid-cols-3` is common enough that it usually
 does, but `grid-cols-7` might not be there, and the grid would silently collapse
 to one column. If you need an unusual count, either use `direction="row"` with
 your own width constraints, or add a safelist entry for the literal.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.dynamicGroup` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'relative'` |
+| `item` | `'will-change-transform'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.dynamicGroup` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative` |
+| `item` | `will-change-transform` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.dynamicGroup` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative` |
+| `item` | `will-change-transform` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.dynamicGroup` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative` |
+| `item` | `will-change-transform` |

@@ -7,7 +7,7 @@ navigation:
 
 # ASCII Render
 
-Samples a picture — or a video frame by frame — into a character grid. Each cell's
+Samples a picture ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â or a video frame by frame ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â into a character grid. Each cell's
 luminance picks one glyph from a ramp, and the result is painted into a `<pre>`
 element over a transparent copy of the media.
 
@@ -17,12 +17,12 @@ monospace cell is treated as roughly twice as tall as it is wide (`CHAR_ASPECT =
 
 Set `color="source"` and each glyph is filled with the matching pixel of the frame
 instead of a single colour. The implementation takes the sampled grid canvas,
-turns it into a data URL and uses it as a clipped background behind the text —
+turns it into a data URL and uses it as a clipped background behind the text ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
 so the ASCII is tinted by the image, at the cost of a `toDataURL()` encode per
 frame.
 
-If the media can't be read — a CORS-tainted canvas, a missing `2d` context, a
-decode error, or a video `play()` rejection — the component silently falls back to
+If the media can't be read ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a CORS-tainted canvas, a missing `2d` context, a
+decode error, or a video `play()` rejection ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the component silently falls back to
 the plain image or video. You get a normal picture, not a broken component, but
 also no ASCII and no error to catch, so check that your media serves permissive
 CORS headers before assuming the effect is working.
@@ -82,7 +82,7 @@ const columnItems = [
 </script>```
 ::
 
-The `charset` ramp is ordered dense to sparse — index 0 is used for black, the
+The `charset` ramp is ordered dense to sparse ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â index 0 is used for black, the
 last index for white. The default `@%#*+=-:. ` puts the heaviest glyph on dark
 pixels, which reads correctly against a dark background. If your page is light,
 pass `invert` so the ramp flips, or supply your own ramp in the same order.
@@ -92,7 +92,7 @@ pass `invert` so the ramp flips, or supply your own ramp in the same order.
 ::field-group
   ::field{name="source" type="{ src: string, type: 'image' | 'video' }" required}
   The media to sample. Any `type` other than the exact string `'video'` renders
-    an `<img>`, so passing a MIME type like `'image/png'` is safe — it will not
+    an `<img>`, so passing a MIME type like `'image/png'` is safe ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it will not
     silently produce nothing.
   ::
   ::field{name="alt" type="string" required}
@@ -100,7 +100,7 @@ pass `invert` so the ramp flips, or supply your own ramp in the same order.
     the only accessible name the component produces.
   ::
   ::field{name="columns" type="number" default="80"}
-  Character columns. Clamped to 8–240, and rounded to an integer. This is the
+  Character columns. Clamped to 8ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ240, and rounded to an integer. This is the
     main quality/cost dial: every column is one pixel of the sampling canvas and
     one glyph in the DOM.
   ::
@@ -121,7 +121,7 @@ pass `invert` so the ramp flips, or supply your own ramp in the same order.
     first. Use it for light backgrounds or to invert an unconventional ramp.
   ::
   ::field{name="fps" type="number" default="24"}
-  Frames sampled per second for video sources. Clamped to 1–60. Ignored for
+  Frames sampled per second for video sources. Clamped to 1ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ60. Ignored for
     images.
   ::
   ::field{name="paused" type="boolean" default="false"}
@@ -138,7 +138,7 @@ pass `invert` so the ramp flips, or supply your own ramp in the same order.
 ## Accessibility
 
 Both the media element and the `<pre>` are `aria-hidden="true"`, and the media
-element's `alt` is empty — the ASCII is a picture of a picture, and exposing both
+element's `alt` is empty ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the ASCII is a picture of a picture, and exposing both
 would have assistive technology read the same content twice. The real
 description reaches users through the `alt` prop, rendered in a `.sr-only` span,
 so it is always available even when the fallback picture is showing.
@@ -154,7 +154,7 @@ a single frame and pauses the video instead of running the animation loop.
 
 ## Performance
 
-- Sampling happens on a canvas sized to `columns × rows` — tiny — but
+- Sampling happens on a canvas sized to `columns ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â rows` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â tiny ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â but
   `getImageData` is called on every frame and forces a readback from the
   compositor. The context is created with `willReadFrequently: true` to keep it
   on the CPU, which is the right trade at this resolution.
@@ -172,11 +172,11 @@ a single frame and pauses the video instead of running the animation loop.
   with `toDataURL()`. That is a full PNG encode per frame and is meaningfully
   more expensive than the sampling itself.
 - The media element is `opacity-0` rather than removed from the layout, so the
-  browser keeps decoding it — the video has to load even when it is invisible.
+  browser keeps decoding it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the video has to load even when it is invisible.
 
 ::tip
-The renderer is a `watchEffect`, and it reads `isVisible` — an
-`IntersectionObserver` flag with a 10% bottom `rootMargin` — as a reactive
+The renderer is a `watchEffect`, and it reads `isVisible` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â an
+`IntersectionObserver` flag with a 10% bottom `rootMargin` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â as a reactive
 dependency. Scrolling the component out of view therefore tears the renderer
 down and scrolls it back in re-runs it, which is what stops off-screen videos
 from burning frames. The observer's `disconnect` is registered inside `onMounted`,
@@ -187,7 +187,75 @@ so it is torn down with the component.
 The same `watchEffect` is what makes the controls in the example feel live. It
 reads `source`, `columns`, `charset`, `fps`, `color`, `invert`, `paused`,
 `isVisible` and the reduced-motion flag, so changing any of them tears the old
-renderer down — cancelling its frame and detaching the media listeners — and
+renderer down ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â cancelling its frame and detaching the media listeners ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and
 rebuilds it. The cost is a brief flash while the new frame loads; the benefit is
 that there is no separate "apply" step for any prop.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.asciiRender` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'relative isolate overflow-hidden rounded-xl bg-default'` |
+| `media` | `''` |
+| `pre` | `'m-0 select-none whitespace-pre font-mono'` |
+| `srOnly` | `'sr-only'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.asciiRender` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative isolate overflow-hidden rounded-xl bg-default` |
+| `media` |  |
+| `pre` | `m-0 select-none whitespace-pre font-mono` |
+| `srOnly` | `sr-only` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.asciiRender` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative isolate overflow-hidden rounded-xl bg-default` |
+| `media` |  |
+| `pre` | `m-0 select-none whitespace-pre font-mono` |
+| `srOnly` | `sr-only` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.asciiRender` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative isolate overflow-hidden rounded-xl bg-default` |
+| `media` |  |
+| `pre` | `m-0 select-none whitespace-pre font-mono` |
+| `srOnly` | `sr-only` |

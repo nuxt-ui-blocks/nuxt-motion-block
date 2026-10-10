@@ -8,7 +8,7 @@ navigation:
 # Toolbar Dynamic
 
 A floating glass toolbar that grows sideways when you press the menu button and
-collapses back to its icon rail. Two widths — `collapsedWidth` and `width` — are
+collapses back to its icon rail. Two widths ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `collapsedWidth` and `width` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â are
 animated on the root, and the expanded region fades and widens inside an
 `AnimatePresence`. Ported from smoothui's toolbar-dynamic.
 
@@ -18,7 +18,7 @@ never stays open behind whatever you just clicked.
 
 ## Usage
 
-Put one or more icon buttons in the default slot — those are what stays visible
+Put one or more icon buttons in the default slot ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â those are what stays visible
 when collapsed. Put the full set of actions in the `expanded` slot. Listen to
 `open` and `close` if you need to pause something while the toolbar is wide.
 
@@ -79,7 +79,7 @@ const lastEvent = ref('none')
 ::field-group
   ::field{name="width" type="string" default="'300px'"}
   Width the toolbar animates to when expanded. Any CSS length the browser can
-  resolve, because it is applied straight to the root's inline `style.width` —
+  resolve, because it is applied straight to the root's inline `style.width` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
   if the content inside the `expanded` slot needs more than this, it will be
   clipped by the root's `overflow-hidden`.
   ::
@@ -89,7 +89,7 @@ const lastEvent = ref('none')
   wider than one or two.
   ::
   ::field{name="class" type="string" default="''"}
-  Merged onto the root toolbar element, after its own classes — useful for
+  Merged onto the root toolbar element, after its own classes ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â useful for
   positioning (`absolute`, `bottom-6`) since the root is otherwise a plain
   static flex row.
   ::
@@ -112,8 +112,8 @@ const lastEvent = ref('none')
 
 ::field-group
   ::field{name="default"}
-  The always-visible icon rail. Mounted only while collapsed — `v-if="!isOpen"`
-  gates it — so any state it holds is destroyed on expand and re-created on
+  The always-visible icon rail. Mounted only while collapsed ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `v-if="!isOpen"`
+  gates it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â so any state it holds is destroyed on expand and re-created on
   collapse.
   ::
   ::field{name="expanded"}
@@ -126,7 +126,7 @@ const lastEvent = ref('none')
 
 The toggle is a `UButton` and its icon swaps between `i-lucide-menu` and
 `i-lucide-x`, but there is **no** `aria-expanded`, no `aria-controls` and no
-`aria-label` on it — a screen reader will announce only "button". If the toolbar
+`aria-label` on it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a screen reader will announce only "button". If the toolbar
 does anything meaningful, label the button and wire `aria-expanded` yourself.
 
 Dismissal is bound to `mousedown` on `document`, not to a focus-out or an Escape
@@ -145,13 +145,85 @@ expanded region's fade both play regardless.
   recomputed only on a state flip, not per frame.
 - The root carries `layout`, handing the width change to motion-v's layout
   projection rather than a manual transition on two elements.
-- One `mousedown` listener is attached on mount and removed on unmount — no
+- One `mousedown` listener is attached on mount and removed on unmount ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â no
   `resize` observers and no animation frames owned by the component.
 
 ::tip
 The expanded region animates `width` from `0` to `auto`. `auto` is not
 interpolatable, so motion-v measures the natural width once at mount and drives
 the reveal from that. Because the root clips with `overflow-hidden`, the wipe is
-produced by the parent's edge rather than by the panel's own content — which is
+produced by the parent's edge rather than by the panel's own content ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â which is
 why a too-narrow `width` looks like a hard cut instead of a partial reveal.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.toolbarDynamic` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'relative flex items-center h-12 rounded-2xl bg-default/80 dark:bg-default/80 backdrop-blur-xl border border-default/10 dark:border-default/10 shadow-2xl shadow-black/20 overflow-hidden'` |
+| `inner` | `'flex items-center justify-center h-full shrink-0 overflow-hidden whitespace-nowrap'` |
+| `toggle` | `'flex items-center justify-center w-12 h-full shrink-0'` |
+| `collapsed` | `'flex items-center gap-1 pr-3 shrink-0'` |
+| `expanded` | `'flex-1 flex items-center h-full px-4'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.toolbarDynamic` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative flex items-center h-12 rounded-2xl bg-default/80 dark:bg-default/80 backdrop-blur-xl border border-default/10 dark:border-default/10 shadow-2xl shadow-black/20 overflow-hidden` |
+| `inner` | `flex items-center justify-center h-full shrink-0 overflow-hidden whitespace-nowrap` |
+| `toggle` | `flex items-center justify-center w-12 h-full shrink-0` |
+| `collapsed` | `flex items-center gap-1 pr-3 shrink-0` |
+| `expanded` | `flex-1 flex items-center h-full px-4` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.toolbarDynamic` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative flex items-center h-12 rounded-2xl bg-default/80 dark:bg-default/80 backdrop-blur-xl border border-default/10 dark:border-default/10 shadow-2xl shadow-black/20 overflow-hidden` |
+| `inner` | `flex items-center justify-center h-full shrink-0 overflow-hidden whitespace-nowrap` |
+| `toggle` | `flex items-center justify-center w-12 h-full shrink-0` |
+| `collapsed` | `flex items-center gap-1 pr-3 shrink-0` |
+| `expanded` | `flex-1 flex items-center h-full px-4` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.toolbarDynamic` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative flex items-center h-12 rounded-2xl bg-default/80 dark:bg-default/80 backdrop-blur-xl border border-default/10 dark:border-default/10 shadow-2xl shadow-black/20 overflow-hidden` |
+| `inner` | `flex items-center justify-center h-full shrink-0 overflow-hidden whitespace-nowrap` |
+| `toggle` | `flex items-center justify-center w-12 h-full shrink-0` |
+| `collapsed` | `flex items-center gap-1 pr-3 shrink-0` |
+| `expanded` | `flex-1 flex items-center h-full px-4` |

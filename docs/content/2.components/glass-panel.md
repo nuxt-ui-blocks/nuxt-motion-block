@@ -19,7 +19,7 @@ The card itself is a plain Nuxt UI `UCard`, so `ui` reaches every part of it and
 
 Set `backgroundImage` to anything you want seen through the frost. The image is
 rendered at `scale-110` regardless of `parallax`, because the parallax translate would
-otherwise expose an edge — leave that over-scan to the component rather than scaling
+otherwise expose an edge ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â leave that over-scan to the component rather than scaling
 it yourself.
 
 ::code-preview
@@ -81,7 +81,7 @@ label: Preview
 ::field-group
   ::field{name="backgroundImage" type="string"}
   Source for the image behind the frost. It is always `object-cover`, always scaled to
-  `110%`, and always given `alt=""` — it is decoration behind a translucent surface,
+  `110%`, and always given `alt=""` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it is decoration behind a translucent surface,
   not content. Without it the panel is a frosted card on nothing, which is fine if the
   page behind it already has something to show.
   ::
@@ -122,7 +122,7 @@ label: Preview
 
 ## Accessibility
 
-The component contributes no roles, no ARIA attributes and no keyboard behaviour — the
+The component contributes no roles, no ARIA attributes and no keyboard behaviour ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the
 parallax is a pointer-only decoration. `mousemove` and `mouseleave` are bound on the
 wrapper and the pointer state is never exposed, so a keyboard or screen-reader user
 simply sees the un-translated image, which is the intended resting state.
@@ -132,7 +132,7 @@ information that is not already in your slot content.
 
 There is no `prefers-reduced-motion` handling. The movement is a two-axis translate of
 a single decorative layer capped at 20px and eased over 200ms, so it is unlikely to be
-problematic — but if your page needs a hard guarantee, render with
+problematic ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â but if your page needs a hard guarantee, render with
 `parallax: false`.
 
 ## Performance
@@ -142,7 +142,75 @@ problematic — but if your page needs a hard guarantee, render with
 - `mousemove` is only bound when the component has `parallax` on, and the handler
   returns before touching the DOM when it is off.
 - The image is `object-cover` at `scale-110` inside `overflow-hidden`, so the over-scan
-  is a transform rather than extra layout — nothing reflows as the pointer moves.
+  is a transform rather than extra layout ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â nothing reflows as the pointer moves.
 - Both the card and the image are painted every frame the transform changes, but the
   card's `backdrop-blur-md` sits above the image, which is the compositing that makes
   this effect expensive. One panel is nothing; a grid of them is not.
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.glassPanel` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'relative overflow-hidden'` |
+| `card` | `'relative z-10 backdrop-blur-md bg-default/10 dark:bg-default/30 border border-default/20 dark:border-default/10'` |
+| `background` | `'absolute inset-0 z-0 transition-transform duration-200 ease-out'` |
+| `backgroundImage` | `'w-full h-full object-cover scale-110'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.glassPanel` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative overflow-hidden` |
+| `card` | `relative z-10 backdrop-blur-md bg-default/10 dark:bg-default/30 border border-default/20 dark:border-default/10` |
+| `background` | `absolute inset-0 z-0 transition-transform duration-200 ease-out` |
+| `backgroundImage` | `w-full h-full object-cover scale-110` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.glassPanel` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative overflow-hidden` |
+| `card` | `relative z-10 backdrop-blur-md bg-default/10 dark:bg-default/30 border border-default/20 dark:border-default/10` |
+| `background` | `absolute inset-0 z-0 transition-transform duration-200 ease-out` |
+| `backgroundImage` | `w-full h-full object-cover scale-110` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.glassPanel` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative overflow-hidden` |
+| `card` | `relative z-10 backdrop-blur-md bg-default/10 dark:bg-default/30 border border-default/20 dark:border-default/10` |
+| `background` | `absolute inset-0 z-0 transition-transform duration-200 ease-out` |
+| `backgroundImage` | `w-full h-full object-cover scale-110` |

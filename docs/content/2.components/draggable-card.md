@@ -148,3 +148,83 @@ label: Preview
 </template>
 ```
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.draggableCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'[perspective:3000px] w-fit h-fit'` |
+| `card` | `'w-full h-full'` |
+| `cardRoot` | `'relative min-h-96 w-80 overflow-hidden rounded-md bg-default dark:bg-default p-6 shadow-2xl transform-3d'` |
+| `cardBody` | `'relative z-10'` |
+| `cardHeader` | `'relative z-10'` |
+| `cardFooter` | `'relative z-10'` |
+| `glare` | `'pointer-events-none absolute inset-0 bg-white select-none z-20'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.draggableCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `[perspective:3000px] w-fit h-fit` |
+| `card` | `w-full h-full` |
+| `cardRoot` | `relative min-h-96 w-80 overflow-hidden rounded-md bg-default dark:bg-default p-6 shadow-2xl transform-3d` |
+| `cardBody` | `relative z-10` |
+| `cardHeader` | `relative z-10` |
+| `cardFooter` | `relative z-10` |
+| `glare` | `pointer-events-none absolute inset-0 bg-white select-none z-20` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.draggableCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `[perspective:3000px] w-fit h-fit` |
+| `card` | `w-full h-full` |
+| `cardRoot` | `relative min-h-96 w-80 overflow-hidden rounded-md bg-default dark:bg-default p-6 shadow-2xl transform-3d` |
+| `cardBody` | `relative z-10` |
+| `cardHeader` | `relative z-10` |
+| `cardFooter` | `relative z-10` |
+| `glare` | `pointer-events-none absolute inset-0 bg-white select-none z-20` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.draggableCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `[perspective:3000px] w-fit h-fit` |
+| `card` | `w-full h-full` |
+| `cardRoot` | `relative min-h-96 w-80 overflow-hidden rounded-md bg-default dark:bg-default p-6 shadow-2xl transform-3d` |
+| `cardBody` | `relative z-10` |
+| `cardHeader` | `relative z-10` |
+| `cardFooter` | `relative z-10` |
+| `glare` | `pointer-events-none absolute inset-0 bg-white select-none z-20` |

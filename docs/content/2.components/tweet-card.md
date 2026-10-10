@@ -9,7 +9,7 @@ navigation:
 
 A social post card: avatar, display name, handle, optional timestamp, the post text, and
 like and repost counts. The whole card lifts and scales on hover, and it is driven
-entirely by props — there is nothing to wire up and no state to hold.
+entirely by props ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â there is nothing to wire up and no state to hold.
 
 Every prop is optional, which means an empty card renders rather than throwing. If you
 want a post to read as a post, `author`, `handle`, `content` and `avatar` are the four
@@ -38,7 +38,7 @@ label: Preview
       time="2h"
       :likes="1842"
       :retweets="316"
-      content="Spent the afternoon removing a backdrop-filter from a card. The layout shift I was chasing was never the blur — it was the repaint the blur forced on every scroll frame."
+      content="Spent the afternoon removing a backdrop-filter from a card. The layout shift I was chasing was never the blur ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it was the repaint the blur forced on every scroll frame."
     />
   </div>
 </template>
@@ -68,7 +68,7 @@ label: Preview
   is empty, so an undated post has no trailing gap.
   ::
   ::field{name="likes" type="number" default="0"}
-  Like count, rendered next to a heart icon. Rendered as written — a value over 1000
+  Like count, rendered next to a heart icon. Rendered as written ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a value over 1000
   shows as `1000`, not `1K`.
   ::
   ::field{name="retweets" type="number" default="0"}
@@ -81,13 +81,13 @@ label: Preview
 The component adds no roles, no ARIA attributes and no keyboard behaviour. The counts
 are not interactive: the heart and repeat icons are decorative glyphs beside plain
 numbers, and there is no button behind either one. If likes should be tappable, the
-component does not offer a way in — build that row yourself.
+component does not offer a way in ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â build that row yourself.
 
 The avatar is a `UAvatar` whose `alt` is the display name, so the author is announced
 once. The name and handle are truncated with CSS, which means a long name is
 present in the DOM and reachable by assistive technology even though it is visually
 cut off. The timestamp is text, not a `<time>` element, so it carries no machine-readable
-date — put one in if it matters.
+date ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â put one in if it matters.
 
 The hover lift is pointer-only and there is no `prefers-reduced-motion` handling. It is
 a scale to `1.02` with a `y: -4` lift on a spring, which is mild but not gated; if you
@@ -96,13 +96,109 @@ replace the root.
 
 ## Performance
 
-- The lift is a single `whileHover` on the root `motion.div` — one transform on one
+- The lift is a single `whileHover` on the root `motion.div` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â one transform on one
   element, with no per-frame Vue state. Nothing re-renders while hovering.
 - `will-change-transform` is set on the root, so the browser promotes it before the
   first hover rather than on the first frame of one.
 - The card has no slots, no reactive state, no timers, no listeners and no observers.
   It renders one `UAvatar`, one icon-bearing row per count and a paragraph.
 - The spring is fixed at `stiffness: 300, damping: 20` with no duration, so it settles
-  on physics rather than a clock — there is nothing to cancel or clean up on unmount.
+  on physics rather than a clock ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â there is nothing to cancel or clean up on unmount.
 - The counts are interpolated into the template as text, so changing `likes` is a text
   patch on an existing node rather than a component re-render.
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.tweetCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'will-change-transform'` |
+| `body` | `'flex items-start gap-3'` |
+| `content` | `'flex-1 min-w-0'` |
+| `header` | `'flex items-center gap-2'` |
+| `author` | `'font-semibold text-highlighted truncate'` |
+| `handle` | `'text-sm text-muted truncate'` |
+| `time` | `'text-xs text-muted ml-auto whitespace-nowrap'` |
+| `text` | `'mt-2 text-sm leading-relaxed'` |
+| `meta` | `'flex items-center gap-4 mt-3 text-sm text-muted'` |
+| `stat` | `'inline-flex items-center gap-1'` |
+| `statIcon` | `'w-4 h-4'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.tweetCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `will-change-transform` |
+| `body` | `flex items-start gap-3` |
+| `content` | `flex-1 min-w-0` |
+| `header` | `flex items-center gap-2` |
+| `author` | `font-semibold text-highlighted truncate` |
+| `handle` | `text-sm text-muted truncate` |
+| `time` | `text-xs text-muted ml-auto whitespace-nowrap` |
+| `text` | `mt-2 text-sm leading-relaxed` |
+| `meta` | `flex items-center gap-4 mt-3 text-sm text-muted` |
+| `stat` | `inline-flex items-center gap-1` |
+| `statIcon` | `w-4 h-4` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.tweetCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `will-change-transform` |
+| `body` | `flex items-start gap-3` |
+| `content` | `flex-1 min-w-0` |
+| `header` | `flex items-center gap-2` |
+| `author` | `font-semibold text-highlighted truncate` |
+| `handle` | `text-sm text-muted truncate` |
+| `time` | `text-xs text-muted ml-auto whitespace-nowrap` |
+| `text` | `mt-2 text-sm leading-relaxed` |
+| `meta` | `flex items-center gap-4 mt-3 text-sm text-muted` |
+| `stat` | `inline-flex items-center gap-1` |
+| `statIcon` | `w-4 h-4` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.tweetCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `will-change-transform` |
+| `body` | `flex items-start gap-3` |
+| `content` | `flex-1 min-w-0` |
+| `header` | `flex items-center gap-2` |
+| `author` | `font-semibold text-highlighted truncate` |
+| `handle` | `text-sm text-muted truncate` |
+| `time` | `text-xs text-muted ml-auto whitespace-nowrap` |
+| `text` | `mt-2 text-sm leading-relaxed` |
+| `meta` | `flex items-center gap-4 mt-3 text-sm text-muted` |
+| `stat` | `inline-flex items-center gap-1` |
+| `statIcon` | `w-4 h-4` |

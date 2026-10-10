@@ -8,9 +8,9 @@ navigation:
 # Radio Group
 
 A thin motion layer over Nuxt UI's `URadioGroup`. It declares one prop of its
-own — `ui` — and forwards everything else to `URadioGroup` through `$attrs`, so
+own ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `ui` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and forwards everything else to `URadioGroup` through `$attrs`, so
 the whole `URadioGroup` API (`items`, `legend`, `orientation`, `size`, `variant`,
-`color`, `disabled`, `loop`, `valueKey`, …) is available and documented in the
+`color`, `disabled`, `loop`, `valueKey`, ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦) is available and documented in the
 [Nuxt UI docs](https://ui.nuxt.com/components/radio-group).
 
 The animation is CSS, not JavaScript. Items fade and lift in on a per-item
@@ -71,7 +71,7 @@ const plans = [
   ::field{name="ui" type="Record<string, any>" default="{}"}
   Merged into the `ui` object handed to `URadioGroup`. `root` and `indicator`
   additionally receive `m-radio-group` and `m-radio-indicator`, the class names
-  the component's own CSS hooks onto — your values come first, so you can layer
+  the component's own CSS hooks onto ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â your values come first, so you can layer
   utilities on top without losing them.
   ::
   ::field{name="items" type="RadioGroupItem[]"}
@@ -81,7 +81,7 @@ const plans = [
   ::
   ::field{name="legend" type="string"}
   Forwarded from `URadioGroup`. Rendered inside a `<legend>`, which is the only
-  way to name the group — `MRadioGroup` does not forward the `legend` slot.
+  way to name the group ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `MRadioGroup` does not forward the `legend` slot.
   ::
   ::field{name="modelValue" type="string | number | null"}
   Forwarded from `URadioGroup` and the value behind `v-model`.
@@ -142,7 +142,7 @@ behaves as it does on `URadioGroup`.
 - The style block is **not scoped**. `[data-slot="item"]` and `[data-slot="base"]`
   are the same attribute names `UCheckbox`, `USwitch` and other Nuxt UI form
   components use, so every radio group on the page picks up the entrance
-  animation — including plain `URadioGroup` instances you did not wrap.
+  animation ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â including plain `URadioGroup` instances you did not wrap.
 - The checked-state pop is bound to `.m-radio-indicator[data-state="checked"]`,
   which Reka UI sets on the indicator. The class is applied through `ui`, so it
   is present as soon as `URadioGroup` renders.
@@ -153,3 +153,63 @@ permanently after finishing, but they also run once on every remount. Putting a
 radio group inside a `<Transition>` or a tab panel will replay the stagger each
 time the panel is revealed.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.radioGroup` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'m-radio-group'` |
+| `indicator` | `'m-radio-indicator'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.radioGroup` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `m-radio-group` |
+| `indicator` | `m-radio-indicator` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.radioGroup` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `m-radio-group` |
+| `indicator` | `m-radio-indicator` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.radioGroup` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `m-radio-group` |
+| `indicator` | `m-radio-indicator` |

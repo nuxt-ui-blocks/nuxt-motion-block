@@ -9,13 +9,13 @@ navigation:
 
 The composer. It re-bases on Nuxt UI's `ChatPrompt` and `ChatPromptSubmit`, so the
 box, the field and the button belong to the design system rather than to this
-module — and you inherit autoresize, the Enter / Shift+Enter and Escape keys, the
+module ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and you inherit autoresize, the Enter / Shift+Enter and Escape keys, the
 IME guard on Enter, focus rings, and the send / stop / reload glyph set.
 
 The IME guard is worth calling out: accepting a Japanese candidate with Enter used
 to both submit the prompt and swallow the character. That is handled for you.
 
-The module keeps only the motion it owns — the attachment chips, the character
+The module keeps only the motion it owns ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the attachment chips, the character
 counter, and the press physics plus crossfade on the submit button. The box's own
 chrome is the theme's, and the only status it carries is an accent ring on `error`
 and `done`.
@@ -25,8 +25,8 @@ Pair it with [AI Messages](/docs/components/ai-messages) for the transcript and
 
 ## Usage
 
-Bind `v-model` to the draft, set `state`, and handle `submit`. Everything else —
-attachments, the counter, the button swap — is opt-in through `attachable`,
+Bind `v-model` to the draft, set `state`, and handle `submit`. Everything else ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
+attachments, the counter, the button swap ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â is opt-in through `attachable`,
 `removable` and `max-length`.
 
 ::code-preview
@@ -57,7 +57,7 @@ label: Preview
       :attachments="attachments"
       attachable
       :max-length="180"
-      placeholder="Ask anything…"
+      placeholder="Ask anythingÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦"
       removable
       :state="state"
       @attach="onAttach"
@@ -134,7 +134,7 @@ const onSubmit = (value: string) => {
   header because they belong to the draft, not to the message.
   ::
   ::field{name="attachable" type="boolean" default="false"}
-  Show the paperclip control. It emits `attach` and does nothing else — opening a
+  Show the paperclip control. It emits `attach` and does nothing else ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â opening a
   file dialog is your call, because only you know where your files live.
   ::
   ::field{name="removable" type="boolean" default="false"}
@@ -143,20 +143,20 @@ const onSubmit = (value: string) => {
   ::
   ::field{name="maxLength" type="number"}
   Shows a `draft/maxLength` counter once the draft passes 80% of the limit, and
-  turns the counter red past it. It does **not** truncate — enforce the limit in
+  turns the counter red past it. It does **not** truncate ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â enforce the limit in
   your submit handler if you need it.
   ::
   ::field{name="submitOnEnter" type="boolean" default="true"}
   `true` submits on Enter and inserts a newline on Shift+Enter. `false` inverts
-  that, so Enter inserts a newline and Ctrl/Cmd+Enter submits — the right default
+  that, so Enter inserts a newline and Ctrl/Cmd+Enter submits ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the right default
   for composers holding multi-line prompts.
   ::
-  ::field{name="placeholder" type="string" default="'Ask anything…'"}
+  ::field{name="placeholder" type="string" default="'Ask anythingÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦'"}
   Forwarded to the underlying field. Without an `ariaLabel`, the placeholder is
   the only thing naming the textarea.
   ::
   ::field{name="ariaLabel" type="string"}
-  Accessible name for the field, forwarded to the textarea rather than the box —
+  Accessible name for the field, forwarded to the textarea rather than the box ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
   which is where it belongs. Set it when the composer is embedded in a larger
   surface that needs to say what the prompt is *for*.
   ::
@@ -184,7 +184,7 @@ const onSubmit = (value: string) => {
 
 ::field-group
   ::field{name="submit" payload="[value: string]"}
-  The draft was submitted. The payload is trimmed and never empty — the underlying
+  The draft was submitted. The payload is trimmed and never empty ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the underlying
   component will not submit an empty draft.
   ::
   ::field{name="update:modelValue" payload="[value: string]"}
@@ -211,7 +211,7 @@ const onSubmit = (value: string) => {
 
 ::field-group
   ::field{name="default"}
-  Renders to the left of the submit button, after the attach control — the place
+  Renders to the left of the submit button, after the attach control ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the place
   for a model picker, a mode toggle, or a web-search toggle.
   ::
 ::
@@ -221,7 +221,7 @@ const onSubmit = (value: string) => {
 - `ariaLabel` goes on the textarea, not the box, so the announced name matches
   the element that actually takes focus.
 - The attach button and each chip's remove button are native `<button>`s with
-  `aria-label`s — "Attach a file", and "Remove *filename*". The icons inside them
+  `aria-label`s ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â "Attach a file", and "Remove *filename*". The icons inside them
   are `aria-hidden`.
 - The counter uses `tabular-nums`, so the digits do not reflow as the count
   climbs, and it turns to the error colour past the limit.
@@ -254,3 +254,111 @@ const onSubmit = (value: string) => {
   Wiping a controlled draft would fight whoever owns it.
 - `ui` is rebuilt as a computed so the accent ring can join the root's classes
   without allocating on every keystroke.
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.aiPromptInput` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'gap-0'` |
+| `footer` | `'pt-2'` |
+| `attachments` | `'flex list-none flex-wrap gap-1.5 overflow-hidden py-1.5'` |
+| `attachment` | `'flex items-center gap-1.5 rounded-lg border border-default bg-muted/50 py-1 pr-1 pl-2 text-xs'` |
+| `attachmentName` | `'max-w-40 truncate'` |
+| `attachmentSize` | `'text-muted'` |
+| `remove` | `'cursor-pointer rounded-md p-0.5 text-muted transition-colors hover:bg-muted hover:text-highlighted'` |
+| `removeIcon` | `'size-3'` |
+| `tools` | `'flex min-w-0 items-center gap-1'` |
+| `attach` | `'cursor-pointer rounded-lg p-2 text-muted transition-colors hover:bg-muted hover:text-highlighted'` |
+| `attachIcon` | `'size-4'` |
+| `actions` | `'relative flex items-center gap-2'` |
+| `submit` | `'flex'` |
+| `counter` | `'text-xs tabular-nums'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiPromptInput` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `gap-0` |
+| `footer` | `pt-2` |
+| `attachments` | `flex list-none flex-wrap gap-1.5 overflow-hidden py-1.5` |
+| `attachment` | `flex items-center gap-1.5 rounded-lg border border-default bg-muted/50 py-1 pr-1 pl-2 text-xs` |
+| `attachmentName` | `max-w-40 truncate` |
+| `attachmentSize` | `text-muted` |
+| `remove` | `cursor-pointer rounded-md p-0.5 text-muted transition-colors hover:bg-muted hover:text-highlighted` |
+| `removeIcon` | `size-3` |
+| `tools` | `flex min-w-0 items-center gap-1` |
+| `attach` | `cursor-pointer rounded-lg p-2 text-muted transition-colors hover:bg-muted hover:text-highlighted` |
+| `attachIcon` | `size-4` |
+| `actions` | `relative flex items-center gap-2` |
+| `submit` | `flex` |
+| `counter` | `text-xs tabular-nums` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiPromptInput` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `gap-0` |
+| `footer` | `pt-2` |
+| `attachments` | `flex list-none flex-wrap gap-1.5 overflow-hidden py-1.5` |
+| `attachment` | `flex items-center gap-1.5 rounded-lg border border-default bg-muted/50 py-1 pr-1 pl-2 text-xs` |
+| `attachmentName` | `max-w-40 truncate` |
+| `attachmentSize` | `text-muted` |
+| `remove` | `cursor-pointer rounded-md p-0.5 text-muted transition-colors hover:bg-muted hover:text-highlighted` |
+| `removeIcon` | `size-3` |
+| `tools` | `flex min-w-0 items-center gap-1` |
+| `attach` | `cursor-pointer rounded-lg p-2 text-muted transition-colors hover:bg-muted hover:text-highlighted` |
+| `attachIcon` | `size-4` |
+| `actions` | `relative flex items-center gap-2` |
+| `submit` | `flex` |
+| `counter` | `text-xs tabular-nums` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.aiPromptInput` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `gap-0` |
+| `footer` | `pt-2` |
+| `attachments` | `flex list-none flex-wrap gap-1.5 overflow-hidden py-1.5` |
+| `attachment` | `flex items-center gap-1.5 rounded-lg border border-default bg-muted/50 py-1 pr-1 pl-2 text-xs` |
+| `attachmentName` | `max-w-40 truncate` |
+| `attachmentSize` | `text-muted` |
+| `remove` | `cursor-pointer rounded-md p-0.5 text-muted transition-colors hover:bg-muted hover:text-highlighted` |
+| `removeIcon` | `size-3` |
+| `tools` | `flex min-w-0 items-center gap-1` |
+| `attach` | `cursor-pointer rounded-lg p-2 text-muted transition-colors hover:bg-muted hover:text-highlighted` |
+| `attachIcon` | `size-4` |
+| `actions` | `relative flex items-center gap-2` |
+| `submit` | `flex` |
+| `counter` | `text-xs tabular-nums` |

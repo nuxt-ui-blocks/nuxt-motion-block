@@ -9,7 +9,7 @@ navigation:
 
 Nuxt UI's `UTooltip` with the enter and exit replaced. Everything positioning,
 portalling, delay and focus behaviour still comes from the underlying tooltip;
-the only thing this component adds is the motion — a spring that scales the
+the only thing this component adds is the motion ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a spring that scales the
 content up from `0.95` and settles it, on the way in and on the way out.
 
 The direction of that entrance is derived from `content.side`. A tooltip opening
@@ -25,7 +25,7 @@ markup.
 
 Put a single focusable trigger in the default slot and describe it with `text`
 or `kbds`; use the `content` slot when the tooltip needs more than a line.
-Tune the feel with `springStiffness` and `springDamping` — the defaults are
+Tune the feel with `springStiffness` and `springDamping` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the defaults are
 snappier and bouncier than Nuxt UI's own fade.
 
 ::code-preview
@@ -54,7 +54,7 @@ label: Preview
 
       <MAnimatedTooltip
         text="Save this build"
-        :kbds="['⌘', 'S']"
+        :kbds="['ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬â„¢Ãƒâ€¹Ã…â€œ', 'S']"
       >
         <UButton
           icon="i-lucide-save"
@@ -117,7 +117,7 @@ const disabled = ref(false)
   bubble 8px away with 8px of collision padding.
   ::
   ::field{name="arrow" type="boolean | object" default="false"}
-  Forwarded to `UTooltip`, so the arrow is the upstream one — it renders inside
+  Forwarded to `UTooltip`, so the arrow is the upstream one ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it renders inside
   the content surface alongside the motion wrapper rather than being animated by
   this component.
   ::
@@ -169,7 +169,7 @@ const disabled = ref(false)
 ::field-group
   ::field{name="default"}
   The trigger. It is rendered with `as-child` upstream, so a single focusable
-  element is what you want — a bare `<span>` will not receive focus and the
+  element is what you want ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a bare `<span>` will not receive focus and the
   tooltip will be keyboard-unreachable.
   ::
   ::field{name="content"}
@@ -181,7 +181,7 @@ const disabled = ref(false)
 
 ## Accessibility
 
-The component adds no ARIA of its own — the animated wrapper is a plain
+The component adds no ARIA of its own ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the animated wrapper is a plain
 `motion.div` carrying `will-change-transform` and nothing else. Everything
 semantic is upstream: the bubble is a `tooltip`, the trigger is linked to it
 with `aria-describedby`, and it opens on hover *and* on keyboard focus with
@@ -189,7 +189,7 @@ Escape to dismiss.
 
 Attribute inheritance is off and `$attrs` is forwarded to `UTooltip`, which in
 turn forwards anything it does not declare onto the trigger. So `aria-label`,
-`data-*` and `id` land on your trigger element — and so do the upstream props
+`data-*` and `id` land on your trigger element ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and so do the upstream props
 this component does not re-declare: `disableHoverableContent`,
 `disableClosingTrigger`, `ignoreNonKeyboardFocus` and `reference` all pass
 through as ordinary attributes.
@@ -204,7 +204,7 @@ tooltip appears and disappears without the scale or the 4px offset.
 
 ## Performance
 
-- `scale`, `x`, `y` and `opacity` only — the entrance never touches a layout
+- `scale`, `x`, `y` and `opacity` only ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the entrance never touches a layout
   property, so showing a tooltip costs no reflow.
 - The 4px offset is baked into the hidden state, not animated separately, so
   enter and exit run on the same spring rather than two different curves.
@@ -217,7 +217,67 @@ tooltip appears and disappears without the scale or the 4px offset.
 
 ::tip
 Because this component always hands `UTooltip` a `#content` template, upstream's
-"no text, no `kbds`, no content slot ⇒ disable the tooltip" check is always
-satisfied. A tooltip with a bare trigger and nothing else still opens — as an
+"no text, no `kbds`, no content slot ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ disable the tooltip" check is always
+satisfied. A tooltip with a bare trigger and nothing else still opens ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â as an
 empty bubble. Always give it `text`, `kbds` or the `content` slot.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedTooltip` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `''` |
+| `content` | `'will-change-transform'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedTooltip` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `content` | `will-change-transform` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedTooltip` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `content` | `will-change-transform` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedTooltip` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `content` | `will-change-transform` |

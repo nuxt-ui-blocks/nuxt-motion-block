@@ -13,14 +13,14 @@ outside.
 
 The component is deliberately split in two. Give it a `src` and it owns an `<audio>`
 element, playing and pausing it as the state changes. Omit `src` and it is purely
-visual — you own playback and you feed it `playing` and `progress`. It also works
+visual ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â you own playback and you feed it `playing` and `progress`. It also works
 controlled or not: pass `playing` and it never mutates its own state, leave it out and
 it keeps one internally from `defaultPlaying`.
 
 ## Usage
 
 Point it at a file and let it play, or omit `src` and bind `playing` and `progress`
-yourself. Bind `v-model:playing` either way — that is what the emit carries — and pass
+yourself. Bind `v-model:playing` either way ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â that is what the emit carries ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and pass
 `on-seek` if you want the slider to be operable.
 
 ::code-preview
@@ -53,7 +53,7 @@ label: Preview
         aria-label="Track progress"
       />
       <span class="text-xs text-muted">
-        progress = {{ progress.toFixed(2) }} · focus the ring, then use ←/→, Home or End
+        progress = {{ progress.toFixed(2) }} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· focus the ring, then use ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Ãƒâ€šÃ‚Â/ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢, Home or End
       </span>
     </div>
   </div>
@@ -82,7 +82,7 @@ function seek(value: number) {
   SVG scales to fit inside it.
   ::
   ::field{name="progress" type="number" default="0"}
-  Playback position from 0 to 1. Always controlled — it is never derived from the audio
+  Playback position from 0 to 1. Always controlled ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it is never derived from the audio
   element, even when `src` is set.
   ::
   ::field{name="src" type="string"}
@@ -112,7 +112,7 @@ function seek(value: number) {
   `update:playing` emit.
   ::
   ::field{name="onSeek" type="(progress: number) => void"}
-  Called with a 0–1 position when the slider is used. Its presence is what makes the
+  Called with a 0ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ1 position when the slider is used. Its presence is what makes the
   slider focusable and keyboard-operable; omit it and the overlay is inert.
   ::
   ::field{name="class" type="string"}
@@ -128,7 +128,7 @@ function seek(value: number) {
 ::field-group
   ::field{name="update:playing" type="(playing: boolean) => void"}
   Emitted on every toggle with the state the component wants to move to. In controlled
-  mode it does nothing on its own — bind it, or use `on-playing-change`.
+  mode it does nothing on its own ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â bind it, or use `on-playing-change`.
   ::
 ::
 
@@ -140,7 +140,7 @@ action rather than as an icon. With no `title` or `artist` it is just "Play" / "
 
 The ring overlay is a `role="slider"` with `aria-valuemin` 0, `aria-valuemax` 100 and
 `aria-valuenow` set to `progress` as a percentage, labelled "Seek <track>". Its
-`tabindex` is `0` only when `onSeek` is supplied — otherwise it is `-1` and stays out of
+`tabindex` is `0` only when `onSeek` is supplied ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â otherwise it is `-1` and stays out of
 the tab order, mirroring the reference's behaviour of leaving seeking out of reach when
 no handler exists. Arrow keys and Home/End then step by 5%.
 
@@ -155,7 +155,7 @@ duration transition.
 ## Performance
 
 - The record's rotation is a hand-written `requestAnimationFrame` loop writing
-  `style.rotate` directly, not a MotionValue — motion-v snapshots MotionValues bound
+  `style.rotate` directly, not a MotionValue ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â motion-v snapshots MotionValues bound
   through `:style`. Its tick locals are deliberately non-reactive, so no frame triggers
   a re-render.
 - The loop resolves the record element lazily on the first frame, because function refs
@@ -164,11 +164,11 @@ duration transition.
 - The loop runs only while playing and motion is allowed; stopping it and starting it
   are keyed off `watch([playing, shouldReduceMotion])`.
 - `progress` is watched with a non-immediate watcher, so passing `defaultPlaying` does
-  not kick off playback on mount — it starts on the first change.
+  not kick off playback on mount ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it starts on the first change.
 - `play()` rejections are swallowed: a blocked autoplay leaves the visual state alone
   rather than throwing.
 - The play/pause swap is wrapped in `<AnimatePresence :initial="false">`, and the source
-  notes that motion-v's `AnimatePresence` does not implement `mode="wait"` — both icons
+  notes that motion-v's `AnimatePresence` does not implement `mode="wait"` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â both icons
   stay mounted during the swap and are centred on top of each other. Treat it as a
   crossfade, not a sequential hand-off. The ring's dash offset is a plain
   `motion.circle` with no presence wrapper at all, so it simply re-targets.
@@ -176,8 +176,136 @@ duration transition.
 ::tip
 `progress` is entirely yours to own. When you pass `src`, the component plays and
 pauses the audio but never reads `currentTime`, so the ring and waveform only advance if
-you update `progress` yourself — from a `timeupdate` listener, an
+you update `progress` yourself ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â from a `timeupdate` listener, an
 `AudioContext`, or a plain `setInterval`. The `<audio>` element it renders is hidden
 and carries a `<track kind="captions">` with no `src`, so captions are not wired up for
 you either.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.musicToggle` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'inline-flex items-center gap-3'` |
+| `recordFrame` | `'relative shrink-0'` |
+| `seek` | `'pointer-events-none absolute inset-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default'` |
+| `ring` | `'h-full w-full -rotate-90'` |
+| `ringTrack` | `'text-dimmed'` |
+| `ringProgress` | `'text-primary'` |
+| `disc` | `'absolute inset-[10%] overflow-hidden rounded-full border border-default bg-muted'` |
+| `cover` | `'h-full w-full object-cover'` |
+| `coverFallback` | `'h-full w-full bg-gradient-to-br from-primary/40 to-primary/10'` |
+| `discCenter` | `'absolute inset-[38%] rounded-full bg-default'` |
+| `toggle` | `'absolute inset-[38%] z-10 flex items-center justify-center rounded-full bg-default text-highlighted shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default'` |
+| `iconWrapper` | `'absolute inset-0 flex items-center justify-center'` |
+| `icon` | `'size-4 fill-current'` |
+| `info` | `'flex flex-col gap-1.5'` |
+| `text` | `'flex flex-col'` |
+| `title` | `'text-sm font-medium text-highlighted'` |
+| `artist` | `'text-xs text-muted'` |
+| `bars` | `'flex h-5 items-end gap-[2px]'` |
+| `bar` | `'w-[2px] rounded-full bg-inverted/70'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.musicToggle` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `inline-flex items-center gap-3` |
+| `recordFrame` | `relative shrink-0` |
+| `seek` | `pointer-events-none absolute inset-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default` |
+| `ring` | `h-full w-full -rotate-90` |
+| `ringTrack` | `text-dimmed` |
+| `ringProgress` | `text-primary` |
+| `disc` | `absolute inset-[10%] overflow-hidden rounded-full border border-default bg-muted` |
+| `cover` | `h-full w-full object-cover` |
+| `coverFallback` | `h-full w-full bg-gradient-to-br from-primary/40 to-primary/10` |
+| `discCenter` | `absolute inset-[38%] rounded-full bg-default` |
+| `toggle` | `absolute inset-[38%] z-10 flex items-center justify-center rounded-full bg-default text-highlighted shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default` |
+| `iconWrapper` | `absolute inset-0 flex items-center justify-center` |
+| `icon` | `size-4 fill-current` |
+| `info` | `flex flex-col gap-1.5` |
+| `text` | `flex flex-col` |
+| `title` | `text-sm font-medium text-highlighted` |
+| `artist` | `text-xs text-muted` |
+| `bars` | `flex h-5 items-end gap-[2px]` |
+| `bar` | `w-[2px] rounded-full bg-inverted/70` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.musicToggle` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `inline-flex items-center gap-3` |
+| `recordFrame` | `relative shrink-0` |
+| `seek` | `pointer-events-none absolute inset-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default` |
+| `ring` | `h-full w-full -rotate-90` |
+| `ringTrack` | `text-dimmed` |
+| `ringProgress` | `text-primary` |
+| `disc` | `absolute inset-[10%] overflow-hidden rounded-full border border-default bg-muted` |
+| `cover` | `h-full w-full object-cover` |
+| `coverFallback` | `h-full w-full bg-gradient-to-br from-primary/40 to-primary/10` |
+| `discCenter` | `absolute inset-[38%] rounded-full bg-default` |
+| `toggle` | `absolute inset-[38%] z-10 flex items-center justify-center rounded-full bg-default text-highlighted shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default` |
+| `iconWrapper` | `absolute inset-0 flex items-center justify-center` |
+| `icon` | `size-4 fill-current` |
+| `info` | `flex flex-col gap-1.5` |
+| `text` | `flex flex-col` |
+| `title` | `text-sm font-medium text-highlighted` |
+| `artist` | `text-xs text-muted` |
+| `bars` | `flex h-5 items-end gap-[2px]` |
+| `bar` | `w-[2px] rounded-full bg-inverted/70` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.musicToggle` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `inline-flex items-center gap-3` |
+| `recordFrame` | `relative shrink-0` |
+| `seek` | `pointer-events-none absolute inset-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default` |
+| `ring` | `h-full w-full -rotate-90` |
+| `ringTrack` | `text-dimmed` |
+| `ringProgress` | `text-primary` |
+| `disc` | `absolute inset-[10%] overflow-hidden rounded-full border border-default bg-muted` |
+| `cover` | `h-full w-full object-cover` |
+| `coverFallback` | `h-full w-full bg-gradient-to-br from-primary/40 to-primary/10` |
+| `discCenter` | `absolute inset-[38%] rounded-full bg-default` |
+| `toggle` | `absolute inset-[38%] z-10 flex items-center justify-center rounded-full bg-default text-highlighted shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default` |
+| `iconWrapper` | `absolute inset-0 flex items-center justify-center` |
+| `icon` | `size-4 fill-current` |
+| `info` | `flex flex-col gap-1.5` |
+| `text` | `flex flex-col` |
+| `title` | `text-sm font-medium text-highlighted` |
+| `artist` | `text-xs text-muted` |
+| `bars` | `flex h-5 items-end gap-[2px]` |
+| `bar` | `w-[2px] rounded-full bg-inverted/70` |

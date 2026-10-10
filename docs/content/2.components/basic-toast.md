@@ -8,14 +8,14 @@ navigation:
 # Basic Toast
 
 A toast, and not much more than one: a fixed panel in the top-right corner that
-springs in, holds for `duration` milliseconds, and slides back out. Four types —
-`info`, `success`, `warning`, `error` — each pick their own icon, icon colour,
+springs in, holds for `duration` milliseconds, and slides back out. Four types ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
+`info`, `success`, `warning`, `error` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â each pick their own icon, icon colour,
 border and tint, and each get a screen-reader-only label for the type.
 
 The panel is teleported to `<body>` and wrapped in `<ClientOnly>`, so nothing it
 renders exists on the server or in the SSR payload. It renders no markup at all
 while hidden, which means a `v-if` on the component in your own template is
-unnecessary — `isVisible` is enough.
+unnecessary ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `isVisible` is enough.
 
 The component owns a timer but never its own visibility: the timer calls the
 same `hide()` the close button does, and `hide()` emits `close` and
@@ -28,7 +28,7 @@ has no close button in reach.
 Drive it with `isVisible` and `v-model:is-visible`, and give it a `message`.
 Because the timer only starts on mount and whenever `isVisible` or `duration`
 changes, re-triggering the same toast means flipping `isVisible` off and back
-on — the example remounts it with a key so the timer restarts cleanly.
+on ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the example remounts it with a key so the timer restarts cleanly.
 
 ::code-preview
 ---
@@ -80,7 +80,7 @@ const options: { type: ToastKind, label: string, color: string }[] = [
 ]
 
 const copy: Record<ToastKind, string> = {
-  success: 'Deploy finished — build 4821 is live.',
+  success: 'Deploy finished ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â build 4821 is live.',
   error: 'Upload failed: the file is larger than 25 MB.',
   info: 'Three files are staged and ready to sync.',
   warning: 'Your trial ends in two days.',
@@ -97,7 +97,7 @@ function show(next: ToastKind) {
   isVisible.value = false
   nextTick(() => {
     // Remounting restarts the internal timer, which `isVisible` flipping back to
-    // true on its own would not do — the timer only starts on mount and on
+    // true on its own would not do ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the timer only starts on mount and on
     // change.
     run.value++
     isVisible.value = true
@@ -111,13 +111,13 @@ function show(next: ToastKind) {
 
 ::field-group
   ::field{name="message" type="string"}
-  The body text. Required, and the only content the component renders — it has
+  The body text. Required, and the only content the component renders ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it has
   no slots.
   ::
   ::field{name="type" type="'success' | 'error' | 'info' | 'warning'" default="'info'"}
   Selects the icon (`circle-check`, `circle-x`, `info`, `circle-alert`), the
   matching semantic icon colour, the border/tint pair, and the screen-reader
-  label. There is no free-form customisation — a fifth type is not possible
+  label. There is no free-form customisation ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a fifth type is not possible
   without editing the component.
   ::
   ::field{name="duration" type="number" default="3000"}
@@ -154,7 +154,7 @@ function show(next: ToastKind) {
 
 ## Accessibility
 
-The panel applies no `role` and no live region — it is your job to add one, and
+The panel applies no `role` and no live region ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it is your job to add one, and
 the example does exactly that with `role="status"` and `aria-live="polite"`.
 That only works because the component opts out of attribute inheritance
 (`inheritAttrs: false`) and spreads `$attrs` onto the teleported panel itself;
@@ -169,7 +169,7 @@ read in full.
 
 Reduced motion is honoured. `useReducedMotion()` swaps the spring for a
 zero-duration transition and drops the scale and slide, leaving a plain opacity
-fade in and out — and a `duration: 0` exit, so the toast leaves promptly instead
+fade in and out ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and a `duration: 0` exit, so the toast leaves promptly instead
 of lingering.
 
 ## Performance
@@ -181,13 +181,93 @@ of lingering.
   again in `onUnmounted`.
 - Enter is a 0.25s spring with `bounce: 0.1`; exit is a fixed 0.15s fade, so a
   dismissed toast never over-springs back out of the viewport.
-- `scale` and `x` only — no layout properties are animated, so the toast never
+- `scale` and `x` only ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â no layout properties are animated, so the toast never
   triggers reflow on the page behind it.
 
 ::tip
 `defineExpose({ dismiss })` gives you a component-level close, but it fires the
 same two emits as the close button, so anything listening for `close` still runs
-— including the `update:isVisible` that a `v-model` binding writes back. Handing
+ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â including the `update:isVisible` that a `v-model` binding writes back. Handing
 the toast a `:key` and remounting it is the reliable way to show the *same*
 message twice in a row, because the internal timer has already been spent.
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.basicToast` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `'m-toast fixed top-4 right-4 z-50 flex w-80 items-center gap-3 rounded-lg border p-4 shadow-lg'` |
+| `iconWrapper` | `'shrink-0'` |
+| `icon` | `'h-5 w-5'` |
+| `srLabel` | `'sr-only'` |
+| `message` | `'flex-1 text-sm'` |
+| `close` | `'shrink-0 cursor-pointer rounded-full p-1 transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none'` |
+| `closeIcon` | `'h-4 w-4'` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.basicToast` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `m-toast fixed top-4 right-4 z-50 flex w-80 items-center gap-3 rounded-lg border p-4 shadow-lg` |
+| `iconWrapper` | `shrink-0` |
+| `icon` | `h-5 w-5` |
+| `srLabel` | `sr-only` |
+| `message` | `flex-1 text-sm` |
+| `close` | `shrink-0 cursor-pointer rounded-full p-1 transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none` |
+| `closeIcon` | `h-4 w-4` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.basicToast` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `m-toast fixed top-4 right-4 z-50 flex w-80 items-center gap-3 rounded-lg border p-4 shadow-lg` |
+| `iconWrapper` | `shrink-0` |
+| `icon` | `h-5 w-5` |
+| `srLabel` | `sr-only` |
+| `message` | `flex-1 text-sm` |
+| `close` | `shrink-0 cursor-pointer rounded-full p-1 transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none` |
+| `closeIcon` | `h-4 w-4` |
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.basicToast` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `m-toast fixed top-4 right-4 z-50 flex w-80 items-center gap-3 rounded-lg border p-4 shadow-lg` |
+| `iconWrapper` | `shrink-0` |
+| `icon` | `h-5 w-5` |
+| `srLabel` | `sr-only` |
+| `message` | `flex-1 text-sm` |
+| `close` | `shrink-0 cursor-pointer rounded-full p-1 transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none` |
+| `closeIcon` | `h-4 w-4` |
