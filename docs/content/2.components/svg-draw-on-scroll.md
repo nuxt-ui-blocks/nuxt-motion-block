@@ -8,8 +8,8 @@ navigation:
 # SVG Draw on Scroll
 
 Hands you a `d` attribute and draws it as the user scrolls. Give it an outline,
-a signature, a chart frame ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â anything you would otherwise animate by hand on a
-scroll listener ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and it tracks the progress for you.
+a signature, a chart frame — anything you would otherwise animate by hand on a
+scroll listener — and it tracks the progress for you.
 
 The stroke is revealed with `stroke-dasharray` rather than by animating the `d`
 itself. Each `<path>` carries `pathLength="1"`, which normalises the dash units so
@@ -38,7 +38,7 @@ label: Preview
 <template>
   <div class="flex w-full max-w-md flex-col gap-3">
     <p class="text-sm text-muted">
-      Scroll the panel ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the four paths are drawn in sequence as it moves.
+      Scroll the panel — the four paths are drawn in sequence as it moves.
     </p>
 
     <div
@@ -78,7 +78,7 @@ const paths = [
 </script>```
 ::
 
-The `viewBox` and the `d` values have to agree ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the paths are authored in
+The `viewBox` and the `d` values have to agree — the paths are authored in
 viewBox units, and the SVG scales to fit whatever box the wrapper is given
 (`preserveAspectRatio="xMidYMid meet"`). The wrapper needs a size: it renders the
 `<svg>` at `h-full w-full`, so without a height the drawing has nothing to fill.
@@ -89,7 +89,7 @@ the artwork is still in the middle of the viewport. The example widens it to
 scroll range: with `h-48` spacers around a `h-40` drawing in an `h-64` panel, the
 first path stays hidden at `scrollTop` 0 and the last one completes exactly at the
 bottom. Offsets are measured against the container, so pick them from the spacer
-and artwork heights rather than copying the default ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â an offset range wider than
+and artwork heights rather than copying the default — an offset range wider than
 the panel's scrollable distance leaves the last path permanently unfinished.
 
 ## Props
@@ -107,14 +107,14 @@ the panel's scrollable distance leaves the last path permanently unfinished.
       without rewriting the paths will move the drawing.
   ::
   ::field{name="offset" type="ScrollOffset" default="['start 0.9', 'end 0.6']"}
-    Motion's `useScroll` offset tuple ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â when drawing starts and ends, measured
+    Motion's `useScroll` offset tuple — when drawing starts and ends, measured
       against the scroll container's edges. `["start end", "end start"]` draws
       while the element travels fully through the viewport; the default stops
       sooner so the finished stroke stays on screen.
   ::
   ::field{name="container" type="MaybeComputedElementRef"}
     The scrollable ancestor that drives the draw. Omit it and the window scrolls.
-      See the warning below ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the way you pass it matters.
+      See the warning below — the way you pass it matters.
   ::
   ::field{name="once" type="boolean" default="false"}
     Make progress monotonic, so the drawing stays complete instead of undoing
@@ -125,7 +125,7 @@ the panel's scrollable distance leaves the last path permanently unfinished.
       enough.
   ::
   ::field{name="strokeWidth" type="number" default="2"}
-    Stroke width in viewBox units, not pixels ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it scales with the drawing.
+    Stroke width in viewBox units, not pixels — it scales with the drawing.
   ::
   ::field{name="class" type="string" default="''"}
     Merged onto the wrapper alongside `relative`. This is where you set the size.
@@ -136,7 +136,7 @@ the panel's scrollable distance leaves the last path permanently unfinished.
 
 ::field-group
   ::field{name="marker" type="(none)"}
-  An element positioned at the drawing head ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a dot, a pin, a label. It is
+  An element positioned at the drawing head — a dot, a pin, a label. It is
     centred on the point and does not receive any props; position it with your own
     Tailwind classes.
   ::
@@ -146,7 +146,7 @@ the panel's scrollable distance leaves the last path permanently unfinished.
 
 The `<svg>` is `aria-hidden="true"`, and the marker wrapper is `aria-hidden` and
 `pointer-events-none`. The component contributes nothing to the accessibility
-tree, which is right for a decorative reveal ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â but it means **the drawing is
+tree, which is right for a decorative reveal — but it means **the drawing is
 invisible to assistive technology and there is no textual equivalent**. If the
 shape conveys information, put that information in adjacent text, a caption or a
 `figure`/`figcaption`.
@@ -163,7 +163,7 @@ will not be announced. Treat it as decoration.
 Reduced motion is handled by jumping to the end state: every path is reported at
 full progress and the marker is placed at the end of the geometry, permanently.
 The stroke is still there, it just does not animate. Note this is a full render,
-not a fallback image ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the reduced-motion user sees the finished drawing.
+not a fallback image — the reduced-motion user sees the finished drawing.
 
 ## Performance
 
@@ -179,7 +179,7 @@ not a fallback image ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â�
 - The marker is the expensive part: on every spring frame it calls
   `getPointAtLength()` and `getScreenCTM()` and allocates a `DOMPoint`. That is a
   forced layout read per frame while the marker is on screen. If you do not need
-  a marker, drop the slot and none of it runs ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `hasMarker` gates the whole
+  a marker, drop the slot and none of it runs — `hasMarker` gates the whole
   path, including the extra measuring `<path>`.
 - The marker is also re-synced by a `ResizeObserver` on the wrapper and once on
   mount, because the scroll value can sit still for the entire life of the
@@ -191,7 +191,7 @@ not a fallback image ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â�
 ::warning
 Pass `container` as a **getter**: `:container="() => panel"`. A plain
 `:container="panel"` binding is unwrapped by the template and captured during
-`setup`, when the ref is still `null` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â nothing re-reads it afterwards and
+`setup`, when the ref is still `null` — nothing re-reads it afterwards and
 `useScroll` silently falls back to the window. You then get no error and no
 drawing progress tied to your panel, which is why several instances on one page
 tend to look like only the last one works.
@@ -205,7 +205,7 @@ against an unrelated ancestor.
 
 ::tip
 With `once`, progress is clamped to the high-water mark. The clamp lives in a
-`useTransform` closure over a ref, so it is per-instance ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â several components on
+`useTransform` closure over a ref, so it is per-instance — several components on
 one page each keep their own maximum and do not interfere.
 ::
 

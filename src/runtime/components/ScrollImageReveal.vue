@@ -102,7 +102,7 @@ const buildClipPath = (mask: ScrollImageRevealMask, direction: ScrollImageReveal
 
 /**
  * A repeating gradient whose opaque band grows with progress. A hard-edged
- * gradient is the only way to get N discrete slats from one value â€” a clip
+ * gradient is the only way to get N discrete slats from one value — a clip
  * path can only cut one continuous region.
  */
 const buildBlindsMask = (direction: ScrollImageRevealDirection, progress: number) => {
@@ -149,7 +149,7 @@ const maskImage = useTransform(revealProgress, (latest) => {
 })
 
 // Scales *down* into place from an overscan, never up from smaller than the
-// frame â€” scaling up from 0.85 would expose the background at the edges.
+// frame — scaling up from 0.85 would expose the background at the edges.
 const scale = useTransform(revealProgress, (latest) => {
   if (isStatic.value || props.mask !== 'scale') {
     return FULL_SCALE

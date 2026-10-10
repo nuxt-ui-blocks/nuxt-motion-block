@@ -7,13 +7,13 @@ navigation:
 
 # Checkbox
 
-A checkbox with a drawn-in tick. The box pops through a `1 ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ 1.15 ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ 1` scale
+A checkbox with a drawn-in tick. The box pops through a `1 → 1.15 → 1` scale
 when it is checked, and the tick draws itself along its stroke by animating
 `pathLength` from `0` to `1`.
 
 It is a controlled component with three props and no styling API of its own: the
 checked state is always `bg-primary` with a white tick. Wrap it in a fieldset
-with a legend if a group of them needs a name ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the component renders a bare
+with a legend if a group of them needs a name — the component renders a bare
 `<label>` and no group semantics.
 
 ## Usage
@@ -72,7 +72,7 @@ const enabledCount = computed(() => Object.values(enabled).filter(Boolean).lengt
 
 ::field-group
   ::field{name="modelValue" type="boolean" default="false"}
-  Whether the box is checked. The component is fully controlled ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it renders
+  Whether the box is checked. The component is fully controlled — it renders
   `:checked` straight onto the native input and never keeps its own copy, so
   this must be bound for the checkbox to respond at all.
   ::
@@ -83,7 +83,7 @@ const enabledCount = computed(() => Object.values(enabled).filter(Boolean).lengt
   ::
   ::field{name="drawDuration" type="number" default="0.3"}
   Seconds the tick takes to draw itself along its stroke. Applies to the tick
-  only ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the box's scale pop is a fixed `0.25s` and is not configurable.
+  only — the box's scale pop is a fixed `0.25s` and is not configurable.
   ::
 ::
 
@@ -103,11 +103,11 @@ inside the wrapping `<label>`. That gives native click-to-toggle on the label,
 Space to toggle from the keyboard, and the label text as the accessible name.
 
 The painted box is a plain `div` with no ARIA at all, so it adds nothing to the
-accessibility tree ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it is purely visual, and the checkbox is announced once.
+accessibility tree — it is purely visual, and the checkbox is announced once.
 
 Two gaps worth knowing about. The input is `sr-only`, so the browser's focus ring
 lands on a clipped one-pixel element and **no visible focus indicator is
-rendered** ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â add your own `:focus-within` ring on the label if you ship this
+rendered** — add your own `:focus-within` ring on the label if you ship this
 form to keyboard users. And there is no `disabled` prop, so a checkbox in a
 locked state has to be replaced rather than disabled.
 
@@ -119,19 +119,19 @@ tick draw; the box's scale keyframes still run.
 - Two animated elements per checkbox: the box `motion.div` and the tick
   `motion.path`. No timers, no listeners, no per-frame JavaScript.
 - The box animates `scale` only, on `0.25s` ease-out. Because the target is the
-  keyframe array `[1, 1.15, 1]`, it replays on every unchecked ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ checked
+  keyframe array `[1, 1.15, 1]`, it replays on every unchecked → checked
   transition and collapses to a static `1` while unchecked.
 - The tick animates `pathLength`, which is a stroke-dash draw: no layout and no
   repaint of the surrounding box, only of the tick's own path.
 - The tick's `stroke` is hardcoded to white and the checked fill to
-  `bg-primary`, so there is no theme hook for the colours ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â restyle through
+  `bg-primary`, so there is no theme hook for the colours — restyle through
   `bg-primary` overrides or wrap the component.
 - The SVG is a fixed `0 0 24 24` viewBox rendered at `14px`, so it costs the same
   at every font size.
 
 ::tip
 `drawDuration` only paces the tick's stroke. The box pop is a hardcoded `250ms`,
-so setting `drawDuration` to `0.7` does not slow the checkbox down ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it makes the
+so setting `drawDuration` to `0.7` does not slow the checkbox down — it makes the
 tick finish long after the box has already landed.
 ::
 

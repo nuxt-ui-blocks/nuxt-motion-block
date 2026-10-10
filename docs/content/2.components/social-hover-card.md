@@ -12,7 +12,7 @@ a follow button. On a hover-capable device it opens after a delay and closes on 
 shorter one; on touch and keyboard it opens immediately and stays until you dismiss it.
 
 The card flips above the mention when there is not enough room below, and it never
-opens on a hover device from a click ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a click there is a selection, not a request.
+opens on a hover device from a click — a click there is a selection, not a request.
 
 ## Usage
 
@@ -88,7 +88,7 @@ const ilya = {
 ## Profile shape
 
 `profile` is the only required prop and the only real interface. `avatar`, `handle`,
-`id` and `name` are required; everything else is optional and its absence is handled ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+`id` and `name` are required; everything else is optional and its absence is handled —
 no banner draws a gradient, no bio draws nothing, no stats draws no row.
 
 | Key | Type | Used for |
@@ -110,7 +110,7 @@ share a label.
 
 ::field-group
   ::field{name="profile" type="SocialProfile"}
-  Required. The profile to preview ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â see the table above for every key. Changing it
+  Required. The profile to preview — see the table above for every key. Changing it
   while the card is open re-renders the contents; the open state itself is not reset.
   ::
   ::field{name="openDelay" type="number" default="350"}
@@ -119,7 +119,7 @@ share a label.
   ::
   ::field{name="closeDelay" type="number" default="150"}
   Milliseconds after the pointer leaves before the card closes. The gap is what lets you
-  travel from the mention to the card ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the card's own `mouseenter` cancels it, so
+  travel from the mention to the card — the card's own `mouseenter` cancels it, so
   moving between the two does not dismiss anything. Set it low and the card becomes
   hard to use.
   ::
@@ -159,7 +159,7 @@ share a label.
 ::field-group
   ::field{name="trigger"}
   The inline mention. Falls back to `@<profile.handle>`. Whatever you render stays a
-  `<button>` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the click, focus and keyboard behaviour are wired to that element.
+  `<button>` — the click, focus and keyboard behaviour are wired to that element.
   ::
 ::
 
@@ -167,7 +167,7 @@ share a label.
 
 The trigger is a real `<button>` with `aria-haspopup="dialog"` and an `aria-expanded`
 that tracks the open state. The card itself carries
-`role="dialog"` with an `aria-label` of "<name> profile preview" ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â but *only* when it
+`role="dialog"` with an `aria-label` of "<name> profile preview" — but *only* when it
 was opened by focus or click. A hover-opened card deliberately stays out of the
 accessibility tree, because a card that appears because the mouse happened to be there
 is not something a screen-reader user asked for. The `id` on the card is namespaced
@@ -186,7 +186,7 @@ no text. The avatar's `alt` is the display name; the banner is decorative and ge
 `alt=""`.
 
 `prefers-reduced-motion` removes the card's scale and opacity transitions and the
-follow-label cross-fade, and the stats skip the count-up entirely ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the final numbers
+follow-label cross-fade, and the stats skip the count-up entirely — the final numbers
 are written straight in instead.
 
 ## Performance
@@ -199,13 +199,13 @@ are written straight in instead.
 - Hover intent is gated on `(hover: hover) and (pointer: fine)`, so touch devices never
   arm a hover timer or attach the pointer handlers' work at all.
 - The frame timestamp can predate the `performance.now()` captured at the start of the
-  count-up, so progress is clamped to `0..1` before it is eased ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â otherwise the first
+  count-up, so progress is clamped to `0..1` before it is eased — otherwise the first
   frame can render a negative count.
 - `motion.div layout` wraps only the follow button, so the label cross-fade is measured
   on that button alone rather than on the whole card.
 - The card is `v-if`'d inside `AnimatePresence`, so it is not in the DOM while closed.
   Its images are only fetched once it first opens, unless the browser speculates
-  otherwise ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â expect a small delay on that first open.
+  otherwise — expect a small delay on that first open.
 
 ## UI
 

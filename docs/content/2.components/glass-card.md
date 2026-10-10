@@ -13,8 +13,8 @@ gradient blended additively over the top. Pointer movement springs all of them t
 the cursor; leaving returns them to rest.
 
 Because `backdrop-filter` only shows what is behind the element, the effect is
-invisible on a flat page. Put something with colour and contrast behind it ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a
-gradient, an image, or blurred blobs ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and the panel starts reading as glass.
+invisible on a flat page. Put something with colour and contrast behind it — a
+gradient, an image, or blurred blobs — and the panel starts reading as glass.
 
 ## Usage
 
@@ -45,7 +45,7 @@ label: Preview
           Deep work, uninterrupted
         </h3>
         <p class="text-sm text-white/80">
-          Move the pointer across the panel ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the highlight, the vertical sweep and
+          Move the pointer across the panel — the highlight, the vertical sweep and
           the chromatic rim all follow it, then settle back on leave.
         </p>
         <UButton
@@ -68,7 +68,7 @@ component. The two that move are driven by the pointer; the rest are static.
 | --- | --- |
 | `blur` | Body blur, plus saturate and a small brightness lift. The rim's own blur is derived at 12% of this, never less than `1px`. |
 | `rimWidth` | Thickness of the refracting ring. Also sets the content padding (`max(20, rimWidth + 10)`) and the body's inner radius. |
-| `tint` | The body's background colour, painted over the blur. `oklch(1 0 0 / 0.1)` by default ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â mostly white at low alpha. |
+| `tint` | The body's background colour, painted over the blur. `oklch(1 0 0 / 0.1)` by default — mostly white at low alpha. |
 | `refraction` | Displacement scale of the rim's turbulence. `0` disables the bend entirely, leaving a blurred rim. |
 | `specular` | Whether the highlight and the light sweep render at all. Turning it off leaves a static, still-glass panel. |
 | `border` | The inset inner ring that reads as the pane's edge highlight. |
@@ -85,7 +85,7 @@ component. The two that move are driven by the pointer; the rest are static.
   so the two layers stay in proportion at any value.
   ::
   ::field{name="border" type="boolean" default="true"}
-  Renders the inset inner ring ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the two light hairlines plus the soft outer edge ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+  Renders the inset inner ring — the two light hairlines plus the soft outer edge —
   that reads as the pane's physical thickness. Turn it off for a borderless sheet.
   ::
   ::field{name="interactive" type="boolean" default="true"}
@@ -99,7 +99,7 @@ component. The two that move are driven by the pointer; the rest are static.
   ::
   ::field{name="refraction" type="number" default="24"}
   Scale of the `feDisplacementMap` that bends the rim's backdrop. The effect is also
-  gated on a runtime capability probe, so this is a ceiling rather than a guarantee ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+  gated on a runtime capability probe, so this is a ceiling rather than a guarantee —
   see the tip.
   ::
   ::field{name="rimWidth" type="number" default="12"}
@@ -137,14 +137,14 @@ component. The two that move are driven by the pointer; the rest are static.
 
 ## Accessibility
 
-Every decorative layer ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the SVG filter host, the body, the rim, the chromatic
-gradient, the specular highlight, the sweep, the bottom shade and the inner ring ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â is
+Every decorative layer — the SVG filter host, the body, the rim, the chromatic
+gradient, the specular highlight, the sweep, the bottom shade and the inner ring — is
 `aria-hidden="true"`, and the SVG host is `focusable="false"`. The component adds
 nothing to the accessibility tree; only your slot content does.
 
 There is no role and no keyboard behaviour: the surface is a presentation wrapper, and
 the hover lift is a pointer affordance. Two guards keep it out of the way when it
-should not be there ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â tracking only runs under `(hover: hover) and (pointer: fine)`,
+should not be there — tracking only runs under `(hover: hover) and (pointer: fine)`,
 and `useReducedMotion` disables it entirely, removing both the pointer tracking and
 the `whileHover` lift and collapsing the root transition to `duration: 0`.
 
@@ -156,7 +156,7 @@ restyles it.
 - The pointer loop writes `transform` directly onto three plain `div` layers from a
   single `requestAnimationFrame` callback. Motion's own DOM pipeline snapshots
   `MotionValue`s handed over through `style` once at mount, so the springs are read
-  manually instead ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â Vue does not re-render on any frame.
+  manually instead — Vue does not re-render on any frame.
 - `pointermove` and `pointerleave` are attached lazily to the resolved root element,
   only when `interactive` is true, and both are removed on unmount along with the rAF
   frame and the `matchMedia` listener.
@@ -169,9 +169,9 @@ restyles it.
   once on mount and skips the filter node entirely where it is unsupported.
 
 ::tip
-The refraction is Chromium-only ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `backdrop-filter` cannot composite an SVG
+The refraction is Chromium-only — `backdrop-filter` cannot composite an SVG
 displacement map anywhere else. Rather than dropping the whole declaration, the mount
-probe swaps `url(#filterId) blur(npx) saturate(ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦)` for plain `blur(npx) saturate(ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦)`,
+probe swaps `url(#filterId) blur(npx) saturate(…)` for plain `blur(npx) saturate(…)`,
 so Safari and Firefox keep a blurred, saturated rim and lose only the bend.
 ::
 

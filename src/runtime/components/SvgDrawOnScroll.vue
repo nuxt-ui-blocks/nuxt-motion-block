@@ -22,7 +22,7 @@
         :stroke-width="props.strokeWidth"
         :style="{ strokeDasharray: '1 1', strokeDashoffset: 1 - entry.pathLength }"
       />
-      <!-- Never painted â€” it exists only so the marker has a single, stable
+      <!-- Never painted — it exists only so the marker has a single, stable
            geometry to measure against, including across multiple paths. -->
       <path
         v-if="hasMarker"
@@ -185,7 +185,7 @@ const markerYValue = motionValue(0)
 /**
  * The marker is positioned from the path's own geometry rather than CSS
  * `offset-path`. `offset-path: path()` measures in the element's CSS pixel
- * space, but the `d` is written in viewBox units â€” so any viewBox that is not
+ * space, but the `d` is written in viewBox units — so any viewBox that is not
  * 1:1 with the rendered box (which is the normal case, since the SVG scales
  * with `preserveAspectRatio`) left the marker floating away from the stroke it
  * is supposed to ride. `getPointAtLength` + `getScreenCTM` resolve the point

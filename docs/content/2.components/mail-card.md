@@ -11,7 +11,7 @@ A list row that reads as mail: sender title, a truncated preview line, and a che
 that rotates as the card opens. Clicking anywhere in the header toggles the body, which
 expands from `height: 0` to `auto` on a spring and collapses again on the way out.
 
-With no slot content the expanded body shows `preview` in full ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â which is the usual
+With no slot content the expanded body shows `preview` in full — which is the usual
 use, a mail list where the truncated line becomes the whole message on open. Pass the
 default slot when you have real content to reveal.
 
@@ -94,7 +94,7 @@ function onToggle(value: boolean) {
   ::
   ::field{name="expanded" type="boolean" default="false"}
   The card's opening state. It is read once, when the component is set up, into an
-  internal ref ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â changing the prop afterwards does not move the card. Treat it as an
+  internal ref — changing the prop afterwards does not move the card. Treat it as an
   initial value and use `update:expanded` to follow what the user does.
   ::
   ::field{name="ui" type="CardProps['ui']" default="undefined"}
@@ -111,7 +111,7 @@ function onToggle(value: boolean) {
 ::field-group
   ::field{name="update:expanded" type="(value: boolean) => void"}
   Fired after the internal state has flipped, with the new value. The component keeps
-  its own state either way ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â this event reports the toggle, it does not control it, so
+  its own state either way — this event reports the toggle, it does not control it, so
   treat `expanded` as an initial value rather than a controlled prop.
   ::
 ::
@@ -129,17 +129,17 @@ function onToggle(value: boolean) {
 
 The component applies no ARIA roles or attributes of its own, and its keyboard story
 needs your attention. The header is a `div` with a click handler and
-`cursor-pointer` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it is not a `button`, carries no `tabindex`, and does not respond to
+`cursor-pointer` — it is not a `button`, carries no `tabindex`, and does not respond to
 Enter or Space. The chevron is a plain inline `svg` with no label, and the only text
 alternative the collapsed state offers is the truncated `preview`.
 
 If this card is going to open for keyboard users, put a real control in the default
-slot area and drive `expanded` yourself, or pass the toggle through `ui` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the
+slot area and drive `expanded` yourself, or pass the toggle through `ui` — the
 component gives you nothing to hang an `aria-expanded` on. The wrapping `UCard` is
 otherwise plain, so heading order stays yours to manage.
 
 There is no `prefers-reduced-motion` handling. The body animates `height` from `0` to
-`auto` on a spring and the chevron rotates 180ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°; if the motion is a problem, drive the
+`auto` on a spring and the chevron rotates 180°; if the motion is a problem, drive the
 open state yourself and skip the click handler's animation by rendering the body
 statically.
 
@@ -148,8 +148,8 @@ statically.
 - The body is wrapped in `AnimatePresence` with a `v-if`, so the expand and collapse
   are enter/exit transitions rather than a height watcher. Closing animates before the
   node is removed.
-- Both faces run on springs ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `stiffness: 300, damping: 30` for the body, `300 / 25`
-  for the chevron's rotation ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so there is no duration to tune and no timer to clear.
+- Both faces run on springs — `stiffness: 300, damping: 30` for the body, `300 / 25`
+  for the chevron's rotation — so there is no duration to tune and no timer to clear.
 - Animating `height: 0` to `auto` measures the content once per open, which is the
   unavoidable cost of this effect; the measured value is then driven by transform-free
   layout animation.

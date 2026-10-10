@@ -7,7 +7,7 @@ navigation:
 
 # Glow Hover Cards
 
-A responsive grid ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â one column, two from `sm`, three from `lg` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â of `UCard`s that each
+A responsive grid — one column, two from `sm`, three from `lg` — of `UCard`s that each
 track the pointer independently. Moving the cursor inside a card paints a 600px radial
 gradient at that point, mixed from `glowColor` into the card's background; leaving
 removes it.
@@ -18,7 +18,7 @@ card in the list.
 ## Usage
 
 Pass `items` and let the default slot render `title` and `description` on its own.
-Supply the default slot yourself ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â along with `header` or `footer` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the moment the
+Supply the default slot yourself — along with `header` or `footer` — the moment the
 cards need anything the item does not carry.
 
 ::code-preview
@@ -83,12 +83,12 @@ const items = [
 
 ::field-group
   ::field{name="items" type="{ title: string, description?: string, [key: string]: any }[]"}
-  Required. The cards to render, in order. Only `title` is relied on ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `description` is
-  used by the default slot ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â but the type carries an index signature, so extra keys
+  Required. The cards to render, in order. Only `title` is relied on — `description` is
+  used by the default slot — but the type carries an index signature, so extra keys
   like `icon` or `href` pass through and are available to your slot props.
   ::
   ::field{name="glowColor" type="string" default="'var(--ui-primary)'"}
-  Any CSS colour. It is interpolated with `color-mix(in srgb, ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦ 8%, transparent)` and
+  Any CSS colour. It is interpolated with `color-mix(in srgb, … 8%, transparent)` and
   composited into the radial gradient, so a raw hex, an `oklch()` value and a theme
   token all work, and the alpha is chosen by the component rather than by you.
   ::
@@ -98,7 +98,7 @@ const items = [
   ::
   ::field{name="class" type="string"}
   Merged onto every card, not just the first. Use it for the per-card hover treatment
-  ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the component already supplies `relative overflow-hidden transition-shadow
+  — the component already supplies `relative overflow-hidden transition-shadow
   duration-300`, so appending is enough.
   ::
 ::
@@ -129,20 +129,20 @@ about the card changes for a keyboard or screen-reader user except that the card
 plain card.
 
 Two things are yours to supply. If a card is meant to be clickable, wrap it in an
-anchor or button and put the interaction there ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â nothing in this component makes a
+anchor or button and put the interaction there — nothing in this component makes a
 card focusable. And if a card's meaning depends on the image or icon a sighted user
 sees, that needs a text equivalent in your slot; the fallback markup renders `title`
 and `description` as plain text but nothing is added to it for you.
 
 There is no `prefers-reduced-motion` handling. The glow is a static gradient at a new
-position per move, not an animation, so there is nothing to suppress ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â but if your page
+position per move, not an animation, so there is nothing to suppress — but if your page
 needs the guarantee, drive `glowColor` to a neutral value or keep the grid off
 pointer devices.
 
 ## Performance
 
 - Each `mousemove` replaces one entry in a plain record of positions and recomputes
-  that card's `background`. Vue re-renders the card it is over, not the grid ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the
+  that card's `background`. Vue re-renders the card it is over, not the grid — the
   other cards' glow positions are preserved across the update.
 - `mouseleave` deletes the entry with a rest-spread, so leaving a card restores the
   remaining positions without mutating the object in place.
@@ -150,7 +150,7 @@ pointer devices.
   already carries `overflow-hidden`, so it costs no extra DOM and no extra stacking
   context.
 - `transition-shadow duration-300` is already on every card, which means the class you
-  pass through `class` should change a shadow or nothing ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â changing background
+  pass through `class` should change a shadow or nothing — changing background
   gradients will not animate.
 - Grid columns are fixed at `sm` and `lg` breakpoints, so the layout reflows at the
   viewport and never measures the items.

@@ -15,7 +15,7 @@ slide.
 Highlighting is done in the browser. On mount the component creates a Shiki
 highlighter for exactly the theme and language it was given, converts the code to
 HTML, and injects the result. That means the markup is fully highlighted by the
-time it appears rather than flashing plain text and recolouring ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â at the cost of
+time it appears rather than flashing plain text and recolouring — at the cost of
 the panel being empty on the server render.
 
 Because it goes through Shiki, `language` has to be a language Shiki knows and a
@@ -77,7 +77,7 @@ function onChange(next: Item[]) {
 ::field-group
   ::field{name="code" type="string"}
   The source to display, and the exact text the copy button puts on the clipboard
-  ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â not the highlighted HTML. Required.
+  — not the highlighted HTML. Required.
   ::
   ::field{name="language" type="string" default="'vue'"}
   Shiki language id used both to load the grammar and to tokenise the code. An
@@ -97,13 +97,13 @@ function onChange(next: Item[]) {
 ## Accessibility
 
 The copy button is a bare `<button>` with no `type` and no accessible label beyond
-its own visible text, so its accessible name changes with that text ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â "Copy", then
-"Copied!" ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â but nothing announces the change to a screen reader, and there is no
+its own visible text, so its accessible name changes with that text — "Copy", then
+"Copied!" — but nothing announces the change to a screen reader, and there is no
 `aria-live` region. The language name in the header is a `<span>`, not a label
 element.
 
 The highlighted code is injected with `v-html`, so the code itself reaches the
-accessibility tree as the Shiki spans it produces ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â token colours carry no extra
+accessibility tree as the Shiki spans it produces — token colours carry no extra
 semantics, and the code reads as text. There is no `tabindex` on the scrollable
 body, so a keyboard user cannot scroll a long line horizontally; the copy button
 is the only focusable element in the panel.
@@ -119,7 +119,7 @@ second timer that flips the label back is not cleared on unmount.
 - The highlighter runs once; the copy path only calls `useClipboard`'s `copy` and
   toggles a ref.
 - The panel fades and slides in on mount with the default transition, and its
-  variant declares `staggerChildren` while having no motion children of its own ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+  variant declares `staggerChildren` while having no motion children of its own —
   so the stagger has nothing to stagger and the whole panel is one animated element.
 - The `showLineNumbers` branch is duplicated in the template: two near-identical
   `motion.div` trees, one with the gutter and one without. Only one renders.
@@ -128,7 +128,7 @@ second timer that flips the label back is not cleared on unmount.
 
 ::tip
 The highlighter is created once in `onMounted`, so changing `code` or `language` on
-an existing instance does not re-highlight ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the old markup stays until the
+an existing instance does not re-highlight — the old markup stays until the
 component is recreated. Key the component on the snippet instead of updating it.
 Note also that `theme` only controls token colours while the panel background is
 `#0d1117` hardcoded, so a light Shiki theme lands light-coloured tokens on a dark

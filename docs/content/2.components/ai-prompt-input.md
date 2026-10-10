@@ -9,13 +9,13 @@ navigation:
 
 The composer. It re-bases on Nuxt UI's `ChatPrompt` and `ChatPromptSubmit`, so the
 box, the field and the button belong to the design system rather than to this
-module ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and you inherit autoresize, the Enter / Shift+Enter and Escape keys, the
+module — and you inherit autoresize, the Enter / Shift+Enter and Escape keys, the
 IME guard on Enter, focus rings, and the send / stop / reload glyph set.
 
 The IME guard is worth calling out: accepting a Japanese candidate with Enter used
 to both submit the prompt and swallow the character. That is handled for you.
 
-The module keeps only the motion it owns ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the attachment chips, the character
+The module keeps only the motion it owns — the attachment chips, the character
 counter, and the press physics plus crossfade on the submit button. The box's own
 chrome is the theme's, and the only status it carries is an accent ring on `error`
 and `done`.
@@ -25,8 +25,8 @@ Pair it with [AI Messages](/docs/components/ai-messages) for the transcript and
 
 ## Usage
 
-Bind `v-model` to the draft, set `state`, and handle `submit`. Everything else ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
-attachments, the counter, the button swap ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â is opt-in through `attachable`,
+Bind `v-model` to the draft, set `state`, and handle `submit`. Everything else —
+attachments, the counter, the button swap — is opt-in through `attachable`,
 `removable` and `max-length`.
 
 ::code-preview
@@ -57,7 +57,7 @@ label: Preview
       :attachments="attachments"
       attachable
       :max-length="180"
-      placeholder="Ask anythingÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦"
+      placeholder="Ask anything…"
       removable
       :state="state"
       @attach="onAttach"
@@ -134,7 +134,7 @@ const onSubmit = (value: string) => {
   header because they belong to the draft, not to the message.
   ::
   ::field{name="attachable" type="boolean" default="false"}
-  Show the paperclip control. It emits `attach` and does nothing else ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â opening a
+  Show the paperclip control. It emits `attach` and does nothing else — opening a
   file dialog is your call, because only you know where your files live.
   ::
   ::field{name="removable" type="boolean" default="false"}
@@ -143,20 +143,20 @@ const onSubmit = (value: string) => {
   ::
   ::field{name="maxLength" type="number"}
   Shows a `draft/maxLength` counter once the draft passes 80% of the limit, and
-  turns the counter red past it. It does **not** truncate ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â enforce the limit in
+  turns the counter red past it. It does **not** truncate — enforce the limit in
   your submit handler if you need it.
   ::
   ::field{name="submitOnEnter" type="boolean" default="true"}
   `true` submits on Enter and inserts a newline on Shift+Enter. `false` inverts
-  that, so Enter inserts a newline and Ctrl/Cmd+Enter submits ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the right default
+  that, so Enter inserts a newline and Ctrl/Cmd+Enter submits — the right default
   for composers holding multi-line prompts.
   ::
-  ::field{name="placeholder" type="string" default="'Ask anythingÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦'"}
+  ::field{name="placeholder" type="string" default="'Ask anything…'"}
   Forwarded to the underlying field. Without an `ariaLabel`, the placeholder is
   the only thing naming the textarea.
   ::
   ::field{name="ariaLabel" type="string"}
-  Accessible name for the field, forwarded to the textarea rather than the box ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+  Accessible name for the field, forwarded to the textarea rather than the box —
   which is where it belongs. Set it when the composer is embedded in a larger
   surface that needs to say what the prompt is *for*.
   ::
@@ -184,7 +184,7 @@ const onSubmit = (value: string) => {
 
 ::field-group
   ::field{name="submit" payload="[value: string]"}
-  The draft was submitted. The payload is trimmed and never empty ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the underlying
+  The draft was submitted. The payload is trimmed and never empty — the underlying
   component will not submit an empty draft.
   ::
   ::field{name="update:modelValue" payload="[value: string]"}
@@ -211,7 +211,7 @@ const onSubmit = (value: string) => {
 
 ::field-group
   ::field{name="default"}
-  Renders to the left of the submit button, after the attach control ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the place
+  Renders to the left of the submit button, after the attach control — the place
   for a model picker, a mode toggle, or a web-search toggle.
   ::
 ::
@@ -221,7 +221,7 @@ const onSubmit = (value: string) => {
 - `ariaLabel` goes on the textarea, not the box, so the announced name matches
   the element that actually takes focus.
 - The attach button and each chip's remove button are native `<button>`s with
-  `aria-label`s ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â "Attach a file", and "Remove *filename*". The icons inside them
+  `aria-label`s — "Attach a file", and "Remove *filename*". The icons inside them
   are `aria-hidden`.
 - The counter uses `tabular-nums`, so the digits do not reflow as the count
   climbs, and it turns to the error colour past the limit.

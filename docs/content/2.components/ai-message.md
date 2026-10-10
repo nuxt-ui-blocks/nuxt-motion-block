@@ -1,6 +1,6 @@
 ---
 title: AI Message
-description: One chat turn ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â role, part-driven content, a copy action and your own actions.
+description: One chat turn — role, part-driven content, a copy action and your own actions.
 navigation:
   icon: i-lucide-message-square
 ---
@@ -8,7 +8,7 @@ navigation:
 # AI Message
 
 A single turn in a conversation. It wraps Nuxt UI's `UChatMessage` with a
-motion-choreographed action row, sensible defaults per role, and typed slots ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+motion-choreographed action row, sensible defaults per role, and typed slots —
 so you render one message here and never hand-assemble an avatar, a bubble, a
 header and a copy button.
 
@@ -122,14 +122,14 @@ const voteActions = computed<MessageAction[]>(() => [
   offered first.
   ::
   ::field{name="parts" type="AiMessagePart[]"}
-  Required. The turn's content as typed pieces ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `{ type, state?, text? }`.
+  Required. The turn's content as typed pieces — `{ type, state?, text? }`.
   `type` is a plain string, not a union, so a part type the AI SDK adds later
   cannot break your build. The `#content` slot receives the joined plain text of
   every `type: 'text'` part.
   ::
   ::field{name="bubble" type="boolean" default="true"}
   Wrap the turn in a surface. Set `false` when the turn already brings its own
-  surfaces ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a reasoning trace, a tool call, a diff ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â because a bubble around a
+  surfaces — a reasoning trace, a tool call, a diff — because a bubble around a
   stack of cards reads as a box inside a box.
   ::
   ::field{name="side" type="'left' | 'right'"}
@@ -143,7 +143,7 @@ const voteActions = computed<MessageAction[]>(() => [
   Passed straight through to the underlying `UChatMessage`.
   ::
   ::field{name="copyable" type="boolean" default="true"}
-  Offer a copy action ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â but only when the turn has plain text. A turn made purely
+  Offer a copy action — but only when the turn has plain text. A turn made purely
   of tool calls has nothing to copy, so no button appears.
   ::
   ::field{name="actions" type="AiMessageAction[]" default="[]"}
@@ -151,7 +151,7 @@ const voteActions = computed<MessageAction[]>(() => [
   button. `active: true` marks the button as a toggle that is currently on.
   ::
   ::field{name="metadata" type="unknown"}
-  Anything else you want to hand to the slots ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a model name, token counts, a
+  Anything else you want to hand to the slots — a model name, token counts, a
   timestamp.
   ::
   ::field{name="class" type="string" default="''"}
@@ -189,14 +189,14 @@ Every message-level slot receives `{ id, role, parts, metadata }`. The
 ## Accessibility
 
 - The action row is hover-revealed, which would hide it from anyone tabbing
-  through the transcript ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so `:focus-within` reveals it too. Focus counts as
+  through the transcript — so `:focus-within` reveals it too. Focus counts as
   intent.
 - Each action is a native `<button>` carrying its `label` as `aria-label`, since
   the visible content is an icon only. The icon itself is `aria-hidden`.
 - A toggle action sets `aria-pressed`, so a cast vote is announced as pressed
   rather than only looking pressed.
-- Buttons slide in from the side their message belongs to ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â left for the agent,
-  right for the user ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â via a `--ai-message-slide` custom property, so the reveal
+- Buttons slide in from the side their message belongs to — left for the agent,
+  right for the user — via a `--ai-message-slide` custom property, so the reveal
   points at the turn it belongs to.
 - Under `prefers-reduced-motion: reduce` the slide is dropped and the copy icon's
   pop keyframe is disabled; the buttons simply appear.
@@ -208,7 +208,7 @@ Every message-level slot receives `{ id, role, parts, metadata }`. The
 
 ## Performance
 
-- Nuxt UI owns the row's opacity reveal and these buttons own `transform` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â one
+- Nuxt UI owns the row's opacity reveal and these buttons own `transform` — one
   property per owner, so the two fades never fight.
 - The copy timer is cleared on every copy and again in `onBeforeUnmount`, so a
   fast double-click or a mid-transition unmount cannot leave a stray timer

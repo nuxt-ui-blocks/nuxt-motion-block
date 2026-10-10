@@ -91,7 +91,7 @@ The header is a plain clickable `div` with `cursor-pointer` (no `button` role, `
 - No timers, heavy computations, or WebGL. Rendering scales linearly with `items.length`.
 
 ::tip
-To keep animation smooth with variable-height content, the body uses `overflow-hidden` and `height: 'auto'` during the spring; very long content still animates but may feel slowerÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Âconsider truncating or splitting dense sections if needed.
+To keep animation smooth with variable-height content, the body uses `overflow-hidden` and `height: 'auto'` during the spring; very long content still animates but may feel slower—consider truncating or splitting dense sections if needed.
 ::
 
 ## UI

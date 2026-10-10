@@ -8,8 +8,8 @@ navigation:
 # Animated Stepper
 
 `UStepper` with the content panel animated. When the step changes, the outgoing
-panel exits and the incoming one enters with a 20px horizontal offset ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â to the
-right when moving forward, to the left when moving back ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â on a
+panel exits and the incoming one enters with a 20px horizontal offset — to the
+right when moving forward, to the left when moving back — on a
 `{ stiffness: 300, damping: 25 }` spring, cross-faded over the top of each other.
 
 The direction is not guessed at render time. A `flush: 'sync'` watcher on
@@ -24,7 +24,7 @@ focus. What the component adds is the transition inside `#content`.
 ## Usage
 
 `items` is required. Set `modelValue` to the **index** of the active step, not a
-key ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `UStepper` matches on index here because the component renumbers each item
+key — `UStepper` matches on index here because the component renumbers each item
 with `value: i`. Supply `content` per item for the default body text, or override
 an individual step with a `step-0`-style slot.
 
@@ -115,8 +115,8 @@ const steps = [
   ::
 ::
 
-Every other `UStepper` prop and listener ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `orientation`, `color`, `class`,
-`:linear="false"`, `@next`, `@prev` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â reaches `UStepper` through `$attrs`, since
+Every other `UStepper` prop and listener — `orientation`, `color`, `class`,
+`:linear="false"`, `@next`, `@prev` — reaches `UStepper` through `$attrs`, since
 the component sets `inheritAttrs: false` and binds them explicitly.
 
 ## Events
@@ -142,8 +142,8 @@ the component sets `inheritAttrs: false` and binds them explicitly.
   ::
 ::
 
-Named slots of `UStepper` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `title`, `description`, `trigger`, `indicator`,
-`separator`, `wrapper` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â are **not** forwarded. Only `#content` is supplied,
+Named slots of `UStepper` — `title`, `description`, `trigger`, `indicator`,
+`separator`, `wrapper` — are **not** forwarded. Only `#content` is supplied,
 because that is the slot being replaced. Use each item's `title`, `description`
 and `icon` fields for the header instead.
 
@@ -157,7 +157,7 @@ one, and the title and description are wired to it with `aria-labelledby` and
 `aria-describedby`. Arrow keys, Home and End move between triggers.
 
 Two things to know. First, `UStepper` defaults `linear` to `true`, so a future
-step cannot be jumped to ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â pass `:linear="false"` to change that. Second, the
+step cannot be jumped to — pass `:linear="false"` to change that. Second, the
 animation is transform-and-opacity only and adds no focusable elements, so
 nothing about the motion reaches assistive technology; the hidden `role="status"`
 region is what reports the change.
@@ -170,7 +170,7 @@ horizontal offset and a zero-duration transition.
 ## Performance
 
 - One `motion.div` per panel, inside a single `AnimatePresence mode="wait"`, so
-  the outgoing panel finishes exiting before the incoming one is mounted ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â at
+  the outgoing panel finishes exiting before the incoming one is mounted — at
   most two nodes exist during a transition.
 - The panel is keyed by index, so a `v-model` write that resolves to the same step
   mounts nothing at all.
@@ -187,7 +187,7 @@ horizontal offset and a zero-duration transition.
 
 ::tip
 `UStepper` exposes `next()`, `prev()`, `hasNext` and `hasPrev` through
-`defineExpose`, and nothing in its own template calls them ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â they exist purely
+`defineExpose`, and nothing in its own template calls them — they exist purely
 for imperative control. `MAnimatedStepper` wraps it in a plain `<div>` and does
 not re-expose them, so a template ref on `MAnimatedStepper` gives you that
 `<div>` and `next()` is not reachable. Drive the step with `v-model`, as in the

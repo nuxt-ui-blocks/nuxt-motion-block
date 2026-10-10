@@ -24,7 +24,7 @@ label: Preview
   <MGlowingStarsCard>
     <template #header>
       <h2 class="font-bold text-2xl text-[#eaeaea]">
-        ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¨ Cosmic Dashboard
+        ✨ Cosmic Dashboard
       </h2>
     </template>
     <div class="text-center space-y-3">
@@ -110,7 +110,7 @@ label: Preview
   <MGlowingStarsCard star-bg-class="bg-purple-400 dark:bg-purple-500 shadow-purple-400/50 dark:shadow-purple-500/50">
     <template #header>
       <h2 class="font-bold text-xl text-[#eaeaea]">
-        ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ Purple Stars
+        🌟 Purple Stars
       </h2>
     </template>
     <div class="text-center py-4">

@@ -8,7 +8,7 @@ navigation:
 # AI Messages
 
 The transcript: a scrolling list of turns with per-role defaults already set.
-It wraps Nuxt UI's `UChatMessages` and does one thing the wrapper cannot ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it
+It wraps Nuxt UI's `UChatMessages` and does one thing the wrapper cannot — it
 accepts this module's six-state `AIState` vocabulary and translates it down to
 the four states chat components actually speak.
 
@@ -30,7 +30,7 @@ collapses the six onto the four in one place:
 ## Usage
 
 Pass your turns as messages with `parts` and set `state` to whichever of the six
-AI states the surface is in ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â you never pick a chat status yourself. To render a
+AI states the surface is in — you never pick a chat status yourself. To render a
 single turn with the motion-choreographed action row, see
 [AI Message](/docs/components/ai-message).
 
@@ -127,7 +127,7 @@ const messages = ref<ChatMessage[]>([
   ::field{name="assistant" type="Record<string, unknown>"}
   Extra props for the `assistant` role, merged over the defaults
   `{ side: 'left', variant: 'soft' }`. Assistant turns stay soft rather than
-  solid so a turn carrying its own surfaces ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a reasoning trace, a tool call ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â is
+  solid so a turn carrying its own surfaces — a reasoning trace, a tool call — is
   not boxed twice.
   ::
   ::field{name="compact" type="boolean" default="false"}
@@ -150,8 +150,8 @@ const messages = ref<ChatMessage[]>([
 
 ## Slots
 
-The wrapper forwards every slot it does not consume ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `header`, `leading`,
-`files`, `body`, `content`, `actions` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â into each turn. Slot props come from
+The wrapper forwards every slot it does not consume — `header`, `leading`,
+`files`, `body`, `content`, `actions` — into each turn. Slot props come from
 `UChatMessages`, so a `#leading` receives the turn's `role`, and a `#body`
 receives the turn's `parts`. A `#default` slot is forwarded too, which is the
 supported way to draw the list yourself.
@@ -170,8 +170,8 @@ slot instead of relying on the wrapper's own rendering.
 - Because `listening` and `done` both collapse to `ready`, neither announces a
   change to assistive technology. If your UI needs those distinctions spoken,
   render them yourself rather than assuming the transcript will.
-- The list has no fixed height by default. Set one on the wrapper ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `max-h-72` in
-  the example above ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so scrolling actually happens, and keep the scroll container
+- The list has no fixed height by default. Set one on the wrapper — `max-h-72` in
+  the example above — so scrolling actually happens, and keep the scroll container
   focusable if you want keyboard paging.
 
 ## Performance
@@ -183,7 +183,7 @@ slot instead of relying on the wrapper's own rendering.
   a slot is picked up without a restart.
 - Role defaults are declared `as const`. An object literal inside a `computed`
   widens `side`, `variant` and `color` to `string`, which no longer satisfies
-  the unions `ChatMessage` expects ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a type error that only appears once the
+  the unions `ChatMessage` expects — a type error that only appears once the
   merge is written naively.
 - `user` and `assistant` are spread into fresh objects per change, so mutating a
   role's props does not leak into the other role's defaults.

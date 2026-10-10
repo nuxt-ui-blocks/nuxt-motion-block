@@ -8,8 +8,8 @@ navigation:
 # Agent Avatar
 
 An avatar for an agent, derived from a string. The same seed always produces the
-same picture ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a hashed palette, a hashed 6ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â6 grid of cell brightness, colour
-and phase ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so you can store one string per agent instead of uploading one image.
+same picture — a hashed palette, a hashed 6×6 grid of cell brightness, colour
+and phase — so you can store one string per agent instead of uploading one image.
 
 Nothing about it is random at render time. Two processes, a string hash and a
 `mulberry32` generator, turn the seed into the full pixel field before the first
@@ -23,7 +23,7 @@ screened ring sits on top of the silhouette.
 
 ## Usage
 
-Pass a stable `seed` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â an agent id, a slug, an email ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and nothing else. The
+Pass a stable `seed` — an agent id, a slug, an email — and nothing else. The
 avatar resizes and re-animates itself when `seed`, `size` or `animated` changes;
 it does not watch anything else.
 
@@ -63,7 +63,7 @@ label: Preview
     </div>
 
     <p class="text-xs text-muted">
-      {{ size }}px ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â four seeds, four permanently distinct avatars.
+      {{ size }}px — four seeds, four permanently distinct avatars.
     </p>
   </div>
 </template>
@@ -81,7 +81,7 @@ const size = ref(72)
 ::field-group
   ::field{name="seed" type="string"}
   Required. Hashed with a 32-bit string hash, then used to seed a `mulberry32`
-  generator twice: once for a three-stop hue-family palette, once for the 6ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â6
+  generator twice: once for a three-stop hue-family palette, once for the 6×6
   cell grid. Change it and the renderer restarts around a completely new picture.
   ::
   ::field{name="size" type="number" default="64"}
@@ -89,7 +89,7 @@ const size = ref(72)
   latter scaled by `devicePixelRatio`). Changing it re-creates the grid.
   ::
   ::field{name="animated" type="boolean" default="true"}
-  Runs the frame loop. `false` still draws ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â one static frame at time zero ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so
+  Runs the frame loop. `false` still draws — one static frame at time zero — so
   the avatar is never blank, just still. Ignored under
   `prefers-reduced-motion: reduce`.
   ::
@@ -101,7 +101,7 @@ const size = ref(72)
 
 ## Accessibility
 
-The canvas carries `role="img"` and an `aria-label` of `Avatar for <seed>` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the
+The canvas carries `role="img"` and an `aria-label` of `Avatar for <seed>` — the
 raw seed, not a friendly name. If the seed is an opaque id (`usr_8f21`), pass a
 readable one or render the name next to the avatar; the component has no prop
 for a separate label.
@@ -113,13 +113,13 @@ remount.
 
 ## Performance
 
-- A 6ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â6 field is 36 `fillRect` calls per frame with a per-cell shadow blur, on a
-  2D context sized to the component ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â cost scales with `sizeÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â²`, not with the
+- A 6×6 field is 36 `fillRect` calls per frame with a per-cell shadow blur, on a
+  2D context sized to the component — cost scales with `size²`, not with the
   number of avatars on the page.
 - The grid and palette are generated once per renderer start, inside the draw
   closure. They are not reactive, so no Vue update can invalidate them.
-- `watch` covers exactly the three inputs the effect depends on ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `seed`, `size`,
-  `animated` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â with `flush: 'post'`, so the canvas is measured after layout.
+- `watch` covers exactly the three inputs the effect depends on — `seed`, `size`,
+  `animated` — with `flush: 'post'`, so the canvas is measured after layout.
 - A restart replaces the previous teardown wholesale: the old frame callback is
   cancelled and its `matchMedia` listener removed before a new one is attached,
   so repeatedly changing `seed` cannot leak listeners.

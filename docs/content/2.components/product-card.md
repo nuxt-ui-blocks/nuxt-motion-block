@@ -11,7 +11,7 @@ A complete product tile: full-bleed image that zooms on hover, an optional badge
 half-star-accurate rating, price with an optional strike-through discount, a wishlist
 heart and an add-to-cart button that confirms for two seconds.
 
-The card has no slots and no markup of its own to extend ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it is a fixed layout, so
+The card has no slots and no markup of its own to extend — it is a fixed layout, so
 what varies between products is data, not structure. `image`, `title` and `price` are
 the only required props.
 
@@ -54,7 +54,7 @@ label: Preview
     />
 
     <span class="col-span-full text-xs text-muted">
-      Added to cart: {{ added }} ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· wishlisted: {{ wishlisted }}
+      Added to cart: {{ added }} · wishlisted: {{ wishlisted }}
     </span>
   </div>
 </template>
@@ -98,7 +98,7 @@ for `error` and `new` for `success`, with `primary` for everything else.
   `aria-label`, in the wishlist button's label and in the image's `alt`.
   ::
   ::field{name="price" type="number"}
-  Required. Current price, rendered as `currency` immediately followed by the number ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+  Required. Current price, rendered as `currency` immediately followed by the number —
   it is string concatenation, so `249.5` will read as `$249.5`. Pre-format the value if
   you need cents.
   ::
@@ -120,7 +120,7 @@ for `error` and `new` for `success`, with `primary` for everything else.
   ::
   ::field{name="onAddToCart" type="() => void"}
   Called when the button is pressed, immediately after the card enters its confirming
-  state. Receives no payload ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the product is identified by the props you already
+  state. Receives no payload — the product is identified by the props you already
   rendered.
   ::
   ::field{name="onWishlist" type="() => void"}
@@ -129,8 +129,8 @@ for `error` and `new` for `success`, with `primary` for everything else.
   ::
   ::field{name="ui" type="object" default="{}"}
   Merged over the card's own `ui` slots, so your keys win. The component zero-pads the
-  body itself ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â Nuxt UI's own `p-4 sm:p-6` would inset the image by 24px and break the
-  full-bleed frame ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so overriding `body` reintroduces that inset.
+  body itself — Nuxt UI's own `p-4 sm:p-6` would inset the image by 24px and break the
+  full-bleed frame — so overriding `body` reintroduces that inset.
   ::
   ::field{name="class" type="string"}
   Merged onto the `UCard` root, beneath the component's own radius, border and overflow
@@ -145,18 +145,18 @@ The `UCard` is given `role="article"` and an `aria-label` of
 image carries `alt` set to the title and is not a link.
 
 Both controls are real buttons. The wishlist heart has a `motion.button` with an
-`aria-label` that changes with its state ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â "Add ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦ to wishlist" versus "Remove ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦ from
-wishlist" ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and a visible focus ring. The add-to-cart button keeps Nuxt UI's
+`aria-label` that changes with its state — "Add … to wishlist" versus "Remove … from
+wishlist" — and a visible focus ring. The add-to-cart button keeps Nuxt UI's
 `aria-label` and disables itself in the confirming state, so a screen reader reports
 it as unavailable for the two seconds it takes to reset.
 
 The rating row is `aria-label="<rating> out of 5 stars"` and its five SVG stars are
 `aria-hidden`, so the stars are announced once as a number rather than five times.
-Every icon-only element ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â heart, cart, check ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â is `aria-hidden` with the label or
+Every icon-only element — heart, cart, check — is `aria-hidden` with the label or
 button text carrying the meaning. The badge sits in a `role="status"` region.
 
 Hover affordances are gated on `(hover: hover) and (pointer: fine)`, so on touch the
-image never scales and the overlay never fades ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and on touch devices the wishlist heart
+image never scales and the overlay never fades — and on touch devices the wishlist heart
 is fully opaque rather than hidden until hover, because otherwise there is no way to
 reach it.
 
@@ -172,7 +172,7 @@ at all.
 - The "Added" state is a 2-second `setTimeout` that clears any previous timer first and
   is cleared on unmount. It is the only timer in the component.
 - The button label is swapped by `AnimatePresence mode="wait"`, so the outgoing glyph
-  finishes before the incoming one starts ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â one label in the DOM at a time, not two
+  finishes before the incoming one starts — one label in the DOM at a time, not two
   overlaid.
 - Hover zoom and the overlay are CSS transitions on `transform` and `opacity`; the
   press feedback and the button icon are motion. None of them touch layout.

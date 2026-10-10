@@ -10,7 +10,7 @@ navigation:
 A marquee in eleven lines. It renders your content twice, side by side, and runs
 a CSS animation that translates the pair from `0` to `-50%` forever. Because the
 pair is exactly twice the content's width, `-50%` lands precisely on where the
-first copy started ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and the second copy is already in place under it. The seam
+first copy started — and the second copy is already in place under it. The seam
 never appears and the loop never resets visibly.
 
 The duplication is unconditional. There is no clone-and-measure, no gap
@@ -20,7 +20,7 @@ depends on the two copies being identical and evenly spaced, which they are as
 long as your content does not itself vary per copy.
 
 Because the content is `width: fit-content` in a flex row inside an
-`overflow-hidden` box, the component is edge-to-edge by construction ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â put it in a
+`overflow-hidden` box, the component is edge-to-edge by construction — put it in a
 full-bleed section and the seam lands exactly at the viewport edges.
 
 ## Usage
@@ -79,13 +79,13 @@ const logos = [
 ## The half-width trick
 
 The whole effect is one number. The row contains two copies of your content, so
-its width is exactly `2 ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â content`. Translating by `-50%` therefore moves the row
-by precisely one content width ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the moment copy one leaves the left edge, copy
+its width is exactly `2 × content`. Translating by `-50%` therefore moves the row
+by precisely one content width — the moment copy one leaves the left edge, copy
 two is already exactly where copy one started.
 
 That is why the animation has to be `infinite` and not `alternate`, and why
 `duration` is seconds for the full pass rather than per-copy: it is one lap of the
-doubled row, not two. It is also why nothing needs measuring ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â no
+doubled row, not two. It is also why nothing needs measuring — no
 `ResizeObserver`, no `offsetWidth`, no recalculation on resize. If the content
 changes width, the ratio holds.
 
@@ -94,7 +94,7 @@ changes width, the ratio holds.
 ::field-group
   ::field{name="duration" type="number" default="40"}
   Seconds for one full lap. Written straight to `animationDuration`, so 40 means
-  the content crosses the box once every forty seconds ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â not once per copy.
+  the content crosses the box once every forty seconds — not once per copy.
   ::
   ::field{name="className" type="string"}
   Merged onto the scrolling flex row, which is the element carrying the
@@ -107,7 +107,7 @@ changes width, the ratio holds.
 
 ::field-group
   ::field{name="default"}
-  The content. Rendered twice ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the second copy is what makes the loop seamless,
+  The content. Rendered twice — the second copy is what makes the loop seamless,
   so anything with a random or time-varying value will visibly disagree with its
   twin at the wrap point.
   ::
@@ -121,7 +121,7 @@ full speed for every user.
 
 Because the content is duplicated, screen readers and tab order see everything
 twice. That is the accessibility cost of the trick as implemented, and it is not
-addressable from the props ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â if the content is focusable, wrap each item in a way
+addressable from the props — if the content is focusable, wrap each item in a way
 that hides the second copy, or replace the second `<slot />` with a static
 placeholder in your own fork.
 
@@ -133,7 +133,7 @@ dominant motion.
 
 - No JavaScript at all. One `computed` produces `animationDuration`; everything
   else is a scoped `@keyframes` animation on `transform: translateX`.
-- The animation is compositor-driven ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the browser runs it off the main thread
+- The animation is compositor-driven — the browser runs it off the main thread
   and Vue never re-renders while it plays.
 - Only `transform` is animated, never `left` or `margin`, so there is no layout
   on any frame.
@@ -145,7 +145,7 @@ dominant motion.
 
 ::tip
 The gap between the last item of one copy and the first of the next is whatever
-gap the flex row applies ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the seam is not special. If your row uses `gap-10`,
+gap the flex row applies — the seam is not special. If your row uses `gap-10`,
 the wrap looks seamless; if you space items with margins instead, the trailing
 margin of the last item and the leading margin of the first double up at the
 wrap. Use `gap`, not per-item margins.

@@ -114,7 +114,7 @@ label: Preview
               <div>
                 <div class="flex justify-between mb-2">
                   <span class="text-gray-700 dark:text-gray-300">Angle</span>
-                  <span class="text-gray-900 dark:text-white font-medium">45ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°</span>
+                  <span class="text-gray-900 dark:text-white font-medium">45°</span>
                 </div>
                 <input 
                   type="range" 

@@ -25,7 +25,7 @@ binds `$attrs` explicitly.
 ## Usage
 
 `label` is required. Bind `v-model` when you need the value in JS, or leave it
-unbound and read nothing ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the input still works as a native text field. Pass an
+unbound and read nothing — the input still works as a native text field. Pass an
 `icon` name or fill the `icon` slot for a leading glyph.
 
 ::code-preview
@@ -72,7 +72,7 @@ label: Preview
     />
 
     <p class="text-xs text-muted">
-      {{ submitted ? 'Submitted ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the label float is animation-only.' : 'Labels float on focus and on a filled value.' }}
+      {{ submitted ? 'Submitted — the label float is animation-only.' : 'Labels float on focus and on a filled value.' }}
     </p>
   </form>
 </template>
@@ -97,7 +97,7 @@ const submitted = ref(false)
   ::
   ::field{name="modelValue" type="string"}
   The current value. While this is `undefined` the component keeps its own copy
-  seeded from `defaultValue`; passing a value ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â even once ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â switches it to
+  seeded from `defaultValue`; passing a value — even once — switches it to
   controlled mode permanently, and the internal copy is no longer written to.
   ::
   ::field{name="defaultValue" type="string" default="''"}
@@ -151,8 +151,8 @@ const submitted = ref(false)
 The `<input>` receives `:aria-label="label"`, so the label text is its
 accessible name, and `useId()` gives each instance a collision-free `id` that the
 visual `<label>` points at with `for`. The visible label is
-`aria-hidden="true"` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it is presentation, because the name is already carried by
-`aria-label` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and the icon wrapper is `aria-hidden` too, so neither is announced
+`aria-hidden="true"` — it is presentation, because the name is already carried by
+`aria-label` — and the icon wrapper is `aria-hidden` too, so neither is announced
 twice.
 
 The one real limitation: `inheritAttrs: false` with `$attrs` bound to the
@@ -165,7 +165,7 @@ error message.
 `prefers-reduced-motion` is read through a `matchMedia` listener that is attached
 on mount and removed on unmount. Under reduce the label transform is applied as a
 plain inline `transform` with a zero-duration transition, so the label still
-floats ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it just arrives instantly rather than sliding.
+floats — it just arrives instantly rather than sliding.
 
 ## Performance
 
@@ -182,7 +182,7 @@ floats ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢�
   position instead of restarting.
 - The label is `absolute` and `pointer-events-none`, and the input is a sibling
   rather than an ancestor, so focusing the field never re-renders the input.
-- `isFloating` depends on `val` and `isFocused` only ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it does not read the DOM,
+- `isFloating` depends on `val` and `isFocused` only — it does not read the DOM,
   so no layout is forced to decide whether the label is up.
 
 ::tip

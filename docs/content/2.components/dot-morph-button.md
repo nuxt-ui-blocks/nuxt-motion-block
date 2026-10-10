@@ -20,7 +20,7 @@ spilling out of the button.
 ## Usage
 
 Give it a `label` and hover it. Pass a `dot-color` when the dot should read against
-the button rather than match it ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a destructive button with a primary dot looks
+the button rather than match it — a destructive button with a primary dot looks
 unfinished.
 
 ::code-preview
@@ -78,7 +78,7 @@ label: Preview
   ::
   ::field{name="dotColor" type="string" default="'primary'"}
   A Nuxt UI palette key, interpolated into `var(--color-<value>-500)` and applied as
-  the dot's `background`. It is not free-form CSS ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â see the note below.
+  the dot's `background`. It is not free-form CSS — see the note below.
   ::
   ::field{name="label" type="string" default="'Dot-Morph'"}
   The button label, used when no default slot is supplied.
@@ -102,7 +102,7 @@ label: Preview
 
 The root is a real `UButton`, so it is a `<button type="button">` with the usual focus
 ring and keyboard activation. The dot is an empty `<span>` with no text and no role, so
-it adds nothing to the accessibility tree ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â though the component does not mark it
+it adds nothing to the accessibility tree — though the component does not mark it
 `aria-hidden` either.
 
 The morph is pointer-only: it is driven by `mouseenter` on a device matching
@@ -115,12 +115,12 @@ changes shape.
 
 - A `ResizeObserver` watches the button element and recomputes the pill height whenever
   the button resizes. It is disconnected on unmount.
-- Two media queries ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â hover capability and reduced motion ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â are tracked with `change`
+- Two media queries — hover capability and reduced motion — are tracked with `change`
   listeners that are removed on unmount.
 - The morph animates `width` and `height` through a spring, and both are layout
   properties, so the 0.25s morph re-runs layout on the dot and its parent every frame.
   `border-radius` is animated too but stays pinned at `999px`, so it costs paint only.
-- The dot's colour is one computed `var(--color-ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦)` reference, so changing `dotColor`
+- The dot's colour is one computed `var(--color-…)` reference, so changing `dotColor`
   swaps a background value instead of re-mounting the dot.
 - Leaving hover only flips `isHovered`; the idle `animate` target is rebuilt to the same
   base values each time.

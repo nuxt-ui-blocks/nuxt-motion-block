@@ -11,7 +11,7 @@ The answer itself: streamed text where each word resolves out of a blur as it
 arrives, and every `[n]` marker in the string becomes a citation pill.
 
 The important behaviour is *when* words animate. They animate as they arrive, not
-on a fixed timer ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the component remembers how many tokens it had on its last
+on a fixed timer — the component remembers how many tokens it had on its last
 render and animates only the new ones. A timer-driven typewriter drifts out of
 step with the real stream and starts lying about how fast the model is answering.
 
@@ -22,7 +22,7 @@ marker needs a preview card rather than just a link.
 
 ## Usage
 
-Set `text` to the answer so far and append tokens to it as they arrive ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the
+Set `text` to the answer so far and append tokens to it as they arrive — the
 component animates the new words by itself. Pass `citations` to turn `[n]` markers
 into pills.
 
@@ -106,7 +106,7 @@ onMounted(replay)
 ::field-group
   ::field{name="text" type="string"}
   Required. The response so far; re-render it as it grows. It has no default on
-  purpose ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â giving it one would also make it optional, which it is not.
+  purpose — giving it one would also make it optional, which it is not.
   ::
   ::field{name="citations" type="AIResponseCitation[]" default="[]"}
   Sources referenced by `[n]` markers, each `{ id, index, title, url? }`. The
@@ -132,7 +132,7 @@ onMounted(replay)
 - A citation with a `url` renders as a real anchor with `target="_blank"`,
   `rel="noopener noreferrer"` and a `title`, so it is reachable by keyboard,
   middle-clickable, and readable on hover. One without a URL renders as a
-  `<span>` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â never a link that goes nowhere.
+  `<span>` — never a link that goes nowhere.
 - The caret is `aria-hidden="true"`. Streaming is visual; announcing it would
   interrupt every reader on every token.
 - `text-pretty` is used on the paragraph so the browser balances the last line
@@ -150,14 +150,14 @@ onMounted(replay)
 
 - Transition objects are frozen and hoisted at module scope. Motion restarts an
   animation whenever its transition changes identity, and this component re-renders
-  on every token ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â handing over a fresh object each time would restart every word
+  on every token — handing over a fresh object each time would restart every word
   on screen.
 - The `tokens` computed splits and resolves citations once per text change, not
   once per render.
 - `paintedCount` is watched with `flush: 'post'`, so the new-token test is against
   a count already committed to the DOM. Watching it earlier would mark the
   arriving word as already-painted and drop its animation.
-- Words animate `filter: blur()` and `opacity` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â no layout properties, no width
+- Words animate `filter: blur()` and `opacity` — no layout properties, no width
   measurement, and no reflow per token.
 - The pill list is a linear `find` over `citations` per marker. That is fine for
   the handful of sources a single answer carries; a transcript with hundreds of

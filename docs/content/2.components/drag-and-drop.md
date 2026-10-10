@@ -9,14 +9,14 @@ navigation:
 
 A drag-and-drop container for an array of items. Drag one onto another and it
 takes that one's place, animating the rest of the list into their new positions
-along the way. Three layouts are built in ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â list, grid and masonry ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â plus two
+along the way. Three layouts are built in — list, grid and masonry — plus two
 extra behaviours for `move` and `copy` modes, where three drop zones appear below
 the container.
 
 The container keeps its own copy of your items and reorders that. Your array is
 never mutated; the new order is handed back through the `change` event, so the
 source of truth stays yours. If you do not write it back, the container resets on
-the next `items` change ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â which is why the example writes it straight back.
+the next `items` change — which is why the example writes it straight back.
 
 It is built on the native HTML drag-and-drop API, not on pointer events. That
 gives keyboard and touch behaviour from the platform for free on browsers that
@@ -27,7 +27,7 @@ plain bordered card showing `label`, `name` or `id`.
 
 ## Usage
 
-Pass `items` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â objects with an `id`, plus anything else your slot needs ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and
+Pass `items` — objects with an `id`, plus anything else your slot needs — and
 handle `change` to adopt the new order. `layout` picks the arrangement; with
 `grid`, `columns` and `gap` shape it.
 
@@ -71,7 +71,7 @@ label: Preview
     </MDragAndDrop>
 
     <p class="text-xs text-muted">
-      Drag a row onto another to reorder it ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the new order is emitted, not applied
+      Drag a row onto another to reorder it — the new order is emitted, not applied
       to your source array.
     </p>
   </div>
@@ -99,9 +99,9 @@ function onChange(next: { id: string, label: string, owner: string }[]) {
 
 | Mode | Drop zones | What dropping on another item does |
 | --- | --- | --- |
-| `sort` *(default)* | none | Reorders ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the dragged item takes the target's index. |
+| `sort` *(default)* | none | Reorders — the dragged item takes the target's index. |
 | `move` | three | Reorders as above, and dropping on a zone removes the item from the list. |
-| `copy` | three | Reorders, and dropping on a zone emits `drop` without removing ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the copy is yours to place. |
+| `copy` | three | Reorders, and dropping on a zone emits `drop` without removing — the copy is yours to place. |
 
 | Layout | Arrangement |
 | --- | --- |
@@ -113,15 +113,15 @@ Grid and masonry use Tailwind classes assembled at runtime (`grid-cols-${columns
 `gap-${gap / 4}`), which means those exact class names must exist in your
 stylesheet for the layout to apply. `gap` also means different things in the two:
 in `grid` it is a Tailwind step divided by four, while in `masonry` it is a pixel
-value applied as an inline `margin-bottom` on each item ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the column gap itself
+value applied as an inline `margin-bottom` on each item — the column gap itself
 is a hardcoded `gap-4`.
 
 ## Props
 
 ::field-group
   ::field{name="items" type="DragItem[]"}
-  The items to render. Each needs an `id` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â used as the `layout-id` and the
-  selection key ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and may carry anything else your slot reads. The type allows
+  The items to render. Each needs an `id` — used as the `layout-id` and the
+  selection key — and may carry anything else your slot reads. The type allows
   `string | number`, but `id` is bound straight to `layout-id`, so prefer a
   string: a numeric id reaches `layout-id` unchanged and logs a Vue prop-type
   warning on every item. Changes are watched deeply and reset the component's
@@ -136,7 +136,7 @@ is a hardcoded `gap-4`.
   `copy` rather than `move`.
   ::
   ::field{name="disabled" type="boolean" default="false"}
-  Blocks dragging ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the container ignores `dragstart` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and dims every item with
+  Blocks dragging — the container ignores `dragstart` — and dims every item with
   a `cursor-not-allowed` and reduced opacity. Drop handling is not separately
   gated.
   ::
@@ -154,7 +154,7 @@ is a hardcoded `gap-4`.
   ::
   ::field{name="allowMultiSelect" type="boolean" default="false"}
   Turns on click and ctrl/cmd-click selection, tracked in a `Set` of ids and
-  reflected with a blue ring. Exposed methods cover the rest ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â see below.
+  reflected with a blue ring. Exposed methods cover the rest — see below.
   ::
   ::field{name="animationDuration" type="number" default="0.3"}
   Duration of the spring that settles items into place after a reorder. Read as
@@ -175,8 +175,8 @@ is a hardcoded `gap-4`.
 
 ::field-group
   ::field{name="change" type="(items: DragItem[]) => void"}
-  The full reordered array, fired after a reorder on an item and ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â in `move` mode
-  ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â after a removal via a drop zone. This is the only way the new order gets out;
+  The full reordered array, fired after a reorder on an item and — in `move` mode
+  — after a removal via a drop zone. This is the only way the new order gets out;
   your own array is never touched.
   ::
   ::field{name="dragStart" type="(item: DragItem, index: number) => void"}
@@ -201,7 +201,7 @@ is a hardcoded `gap-4`.
 ::field-group
   ::field{name="default"}
   Replaces each item's content, scoped with `{ item, index, isDragging, isOver,
-  isSelected }` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the three booleans reflect live drag state, so a slot can react
+  isSelected }` — the three booleans reflect live drag state, so a slot can react
   to a drag without tracking it itself. The slot's wrapper is the `motion`
   element that carries the drag handlers; put a real element inside it.
   ::
@@ -210,7 +210,7 @@ is a hardcoded `gap-4`.
 ## Accessibility
 
 There is no ARIA on the container or on the items, and no keyboard alternative to
-dragging. Items are plain `motion.div` elements with `draggable` set ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â not
+dragging. Items are plain `motion.div` elements with `draggable` set — not
 focusable, no role, no live region. A keyboard user cannot reorder anything; the
 click-to-select path needs a pointer too, since it is bound to `click` and
 `mousedown`.
@@ -235,11 +235,11 @@ transitions on the same terms.
 - All state is local: `sortedItems` is a ref, `selectedItems` a `Set`, and drag
   state a single `reactive` object. Nothing is emitted per frame.
 - `items` is watched with `deep: true`, so in-place mutations to your array do
-  reset the internal copy ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â at the cost of a full traversal of the array on change.
+  reset the internal copy — at the cost of a full traversal of the array on change.
 - `getItemStyles` returns an empty object for every layout except `masonry`, so
   the style binding is a no-op write in the common case.
 - `dragleave` clears the drop target through a 10ms `setTimeout` so that moving
-  onto a child element does not clear it mid-drag ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the one timer in the
+  onto a child element does not clear it mid-drag — the one timer in the
   component.
 
 ::tip

@@ -13,10 +13,10 @@ at half scale while the label slides up from below, and both revert when the tim
 expires.
 
 Three things shape how it works. The click is bound internally on the inner
-`UButton` with `inheritAttrs` turned off, so a `@click` you pass still fires ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it
+`UButton` with `inheritAttrs` turned off, so a `@click` you pass still fires — it
 is forwarded through `$attrs` onto the same underlying button rather than replacing
 the copy. The label after copying is the literal string `Copied!`: the default slot
-is consulted only for the *uncopied* state. And the confirmation is optimistic ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the
+is consulted only for the *uncopied* state. And the confirmation is optimistic — the
 component awaits `copy(text)` for its side effect and throws the return value away,
 so `copied` flips to `true` on every click, including one the browser refused to
 write.
@@ -25,8 +25,8 @@ write.
 
 Give `text` the value to copy. Leave the slot out and the button labels itself with
 that same string; pass a slot when you want a different label, and use the
-`copy-icon` / `copied-icon` slots to replace the two glyphs. Every other prop ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
-`label`, `icon`, `color`, `variant`, `size`, `loading`, `disabled` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â is forwarded to
+`copy-icon` / `copied-icon` slots to replace the two glyphs. Every other prop —
+`label`, `icon`, `color`, `variant`, `size`, `loading`, `disabled` — is forwarded to
 the inner `UButton`.
 
 ::code-preview
@@ -58,7 +58,7 @@ label: Preview
 
     <div class="flex flex-col gap-2">
       <span class="text-sm font-medium text-highlighted">
-        Package name ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â no slot, so <code>text</code> becomes the label
+        Package name — no slot, so <code>text</code> becomes the label
       </span>
       <div class="flex items-center justify-between gap-3 rounded-xl border border-default px-4 py-3">
         <code class="font-mono text-xs text-muted">nuxt-motion-block</code>
@@ -115,14 +115,14 @@ label: Preview
 
 The root is a real `UButton`, so the control is a `<button type="button">` with a
 visible focus ring and full keyboard activation. The component contributes no ARIA of
-its own: the confirmation is visual only ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the label text changes and turns green,
+its own: the confirmation is visual only — the label text changes and turns green,
 but nothing is announced. If the copy result matters to a screen-reader user, pair the
 button with your own `aria-live="polite"` region.
 
 The write itself goes through VueUse's `useClipboard`, which prefers
 `navigator.clipboard.writeText` and falls back to a hidden textarea with
 `execCommand('copy')`. Both paths need a secure context to be reliable, and because
-the result is discarded the button cannot tell you when neither worked ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a
+the result is discarded the button cannot tell you when neither worked — a
 click without a clipboard permission still shows the checkmark.
 
 Reduced motion is not consulted: both swap animations run on their fixed 0.15s /
@@ -132,19 +132,19 @@ Reduced motion is not consulted: both swap animations run on their fixed 0.15s /
 
 - One `setTimeout` per copy. A click while the copied state is showing clears the
   previous timer before starting a new one, so the timer count never grows past one.
-- Every animation is `opacity`, `scale` or `rotate` on two wrapper spans ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â no layout
+- Every animation is `opacity`, `scale` or `rotate` on two wrapper spans — no layout
   properties, no reflow.
 - `copied` is the only reactive input besides `text`, so a state change re-renders the
   button and re-evaluates both `AnimatePresence` trees.
 - The timer is not cleared on unmount. A button removed mid-confirmation leaves a
-  pending timeout that fires against a discarded component ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â harmless, but it holds
+  pending timeout that fires against a discarded component — harmless, but it holds
   the closure for the remainder of `copiedDuration`.
 
 ::tip
 Both swaps are wrapped in `<AnimatePresence mode="wait">`, but motion-v does not
 implement that mode, so treat each swap as a crossfade between two mounted elements
-rather than a strictly sequential one. The defaults happen to overlap gracefully ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
-copy glyph to checkmark is a similar silhouette in the same box ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â but if you swap in
+rather than a strictly sequential one. The defaults happen to overlap gracefully —
+copy glyph to checkmark is a similar silhouette in the same box — but if you swap in
 your own pair, pick two that blend.
 ::
 

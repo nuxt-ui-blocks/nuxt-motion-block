@@ -7,8 +7,8 @@ navigation:
 
 # Toolbar Expandable
 
-A vertical icon rail where pressing a button opens a panel above the rail ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
-animated with `height: 0 ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ auto` plus a slight scale, so it unfolds out of the
+A vertical icon rail where pressing a button opens a panel above the rail —
+animated with `height: 0 → auto` plus a slight scale, so it unfolds out of the
 button rather than appearing in place. Ported from smoothui's toolbar-expandable.
 
 Pressing the active button again closes the panel, and a `mousedown` on
@@ -80,7 +80,7 @@ const items = [
 ::field-group
   ::field{name="items" type="ToolbarItem[]" default="[]"}
   The buttons to render. `id` is required and doubles as the identity used to
-  open, close and re-key the panel ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â two items sharing an `id` will fight over
+  open, close and re-key the panel — two items sharing an `id` will fight over
   the same panel. `label` is passed to the `item-icon` and `item-content` slots
   but is not used for any accessible name on the button itself. `icon` is applied
   as the button's `icon` prop, and `content` is only used as the panel's
@@ -98,7 +98,7 @@ const items = [
   ::field{name="select" type="(item: ToolbarItem) => void"}
   Emitted with the full item when a button opens its panel. Pressing the already
   active button closes it and does **not** emit, as does dismissing with an
-  outside click ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so `select` means "opened", not "toggled".
+  outside click — so `select` means "opened", not "toggled".
   ::
 ::
 
@@ -107,7 +107,7 @@ const items = [
 ::field-group
   ::field{name="item-icon" type="{ item: ToolbarItem, isActive: boolean }"}
   Rendered inside each button, so it sits next to whatever `icon` produced rather
-  than replacing it ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â use it for badges or counts, not for the glyph itself.
+  than replacing it — use it for badges or counts, not for the glyph itself.
   `isActive` reflects the current open state.
   ::
   ::field{name="item-content" type="{ item: ToolbarItem }"}
@@ -121,7 +121,7 @@ const items = [
 Each button is a `UButton` with an `icon` and no `label`, so it has **no
 accessible name** unless you supply one through the `item-icon` slot or your own
 attributes. The active item is only distinguished visually, by a
-`bg-black/10 dark:bg-white/10` class ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â there is no `aria-pressed`,
+`bg-black/10 dark:bg-white/10` class — there is no `aria-pressed`,
 `aria-expanded` or `aria-controls` on the button, and the panel has no `role`,
 no heading and no `id` to reference.
 
@@ -133,7 +133,7 @@ Dismissal is a `mousedown` listener on `document`: there is no Escape handler
 and no focus management, so a keyboard user can open a panel but not close it
 with the keyboard.
 
-There is no `prefers-reduced-motion` branch ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the unfold spring plays regardless.
+There is no `prefers-reduced-motion` branch — the unfold spring plays regardless.
 
 ## Performance
 
@@ -142,15 +142,15 @@ There is no `prefers-reduced-motion` branch ÃƒÆ’Ã†â€™Ãƒâ€šÃ�
   check rather than a per-render search.
 - The panel is keyed by `activeItem.id` inside an `AnimatePresence`, which is
   what lets one panel exit and the next enter as two separate animations.
-- Animating `height: 0 ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ auto` is a layout-affecting property. `AnimatePresence`
+- Animating `height: 0 → auto` is a layout-affecting property. `AnimatePresence`
   is given `:initial="false"` so the first panel opened does not animate in from
-  nothing ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â only subsequent opens do.
+  nothing — only subsequent opens do.
 - One `mousedown` listener, attached on mount and removed on unmount. No
   observers, no timers, no animation frames owned by the component.
 
 ::tip
 The root is `flex-col-reverse`, which is why the panel appears *above* the rail
-rather than below it ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â reversing the column keeps the rail's DOM position (and
+rather than below it — reversing the column keeps the rail's DOM position (and
 therefore its natural place in tab order) below a panel that is painted first.
 That also means the rail sits at the visual bottom of the component's box, so
 give the wrapper bottom padding if the panel would otherwise collide with the

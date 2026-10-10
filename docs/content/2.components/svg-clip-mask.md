@@ -7,7 +7,7 @@ navigation:
 
 # SVG Clip Mask
 
-A mask that clips its content to a real SVG `<clipPath>` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and animates that
+A mask that clips its content to a real SVG `<clipPath>` — and animates that
 path. Four presets (`blob`, `arch`, `diamond`, `wave`) each ship with a partner
 outline so they can morph, and you can supply your own in
 `objectBoundingBox` (0..1) coordinates. Ported from smoothui's svg-clip-mask.
@@ -19,7 +19,7 @@ discrete step as the frame scrolls) and `hover` (a swap on hover).
 
 ## Usage
 
-Give the component a height ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the root is `relative` with no intrinsic size, and
+Give the component a height — the root is `relative` with no intrinsic size, and
 the clipped child is `h-full w-full`, so without one the mask collapses. Choose
 a `shape`, and add `animate="morph"` for the continuous version.
 
@@ -66,13 +66,13 @@ const shapes = ['blob', 'arch', 'diamond', 'wave'] as const
 ## Authoring morph paths
 
 `morphPaths` is how you supply your own outlines, and it has one hard
-requirement: **every path must share the same command structure** ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the same
+requirement: **every path must share the same command structure** — the same
 sequence of `M`/`L`/`C`/`Z` and the same number of coordinates.
 
 The interpolation is positional. Paths are split on numbers and lerped by index,
 so `M0.5,0 L1,0.5` against `M0.5,0.1 L0.9,0.5` blends cleanly, but a path with
 an extra `C` segment would have its coordinate lerped against a missing one and
-read as `0` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the mask bends into nonsense rather than failing loudly.
+read as `0` — the mask bends into nonsense rather than failing loudly.
 
 Every preset already satisfies this internally: each ships a partner that repeats
 its command structure number for number.
@@ -81,21 +81,21 @@ its command structure number for number.
 
 | Mode | Behaviour | `duration` used? | Needs |
 | --- | --- | --- | --- |
-| `none` *(default)* | Static clip on `paths[0]` | No | ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â |
-| `morph` | Loops continuously through every path | Yes ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â one full cycle | 2+ paths |
+| `none` *(default)* | Static clip on `paths[0]` | No | — |
+| `morph` | Loops continuously through every path | Yes — one full cycle | 2+ paths |
 | `scroll` | Steps through the paths as the frame scrolls | No | 2+ paths |
 | `hover` | Swaps to `paths[1]` while hovered | No | 2+ paths and a fine pointer |
 
 `morph` cycles through the whole list and wraps to the first path, so more than
 two paths produce a longer choreography rather than a faster ping-pong. `scroll`
-discrete-steps ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `Math.floor(progress ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â paths.length)` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so with four paths each
+discrete-steps — `Math.floor(progress × paths.length)` — so with four paths each
 quarter of the scroll window holds one shape. `hover` only swaps on devices
 matching `(hover: hover) and (pointer: fine)`; on touch it stays static.
 
 Discrete swaps (scroll steps, hover) are not applied instantly. Each is eased
 over 0.3s on the same cubic-bezier the morph uses, which is what makes a stepped
 progression read as deliberate motion rather than a stutter. Only `duration`
-(the morph loop length) is configurable ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the 0.3s swap tween is fixed.
+(the morph loop length) is configurable — the 0.3s swap tween is fixed.
 
 ## Props
 
@@ -111,7 +111,7 @@ progression read as deliberate motion rather than a stutter. Only `duration`
   ::
   ::field{name="morphPaths" type="string[]"}
   Paths to cycle between, overriding the shape's built-in pair. Used when it has
-  more than one entry. All entries must share the same command structure ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â see
+  more than one entry. All entries must share the same command structure — see
   the section above. With one entry or none, the preset pair is used instead.
   ::
   ::field{name="animate" type="'none' | 'morph' | 'scroll' | 'hover'" default="'none'"}
@@ -124,7 +124,7 @@ progression read as deliberate motion rather than a stutter. Only `duration`
   ::
   ::field{name="container" type="MaybeComputedElementRef"}
   Scrollable ancestor that drives `scroll` mode, instead of the window. Pass it
-  as a **getter** ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `:container="() => panelRef"` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â not as the element. A plain
+  as a **getter** — `:container="() => panelRef"` — not as the element. A plain
   binding is unwrapped by the template and captured as `null` during setup, after
   which nothing re-reads it and `useScroll` quietly falls back to the window,
   which never leaves the `0..1` band for a container that scrolls internally.
@@ -132,7 +132,7 @@ progression read as deliberate motion rather than a stutter. Only `duration`
   ::
   ::field{name="class" type="string" default="''"}
   Merged onto the root frame after `relative`. Set the frame's size here (or on a
-  parent) ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the clipped child is `h-full w-full`, so the frame is what gives the
+  parent) — the clipped child is `h-full w-full`, so the frame is what gives the
   mask its box.
   ::
 ::
@@ -149,7 +149,7 @@ progression read as deliberate motion rather than a stutter. Only `duration`
 ## Accessibility
 
 The `<svg>` holding the `<defs>` is `aria-hidden="true"` and `focusable="false"`,
-so the mask contributes nothing to the accessibility tree ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the clipped content
+so the mask contributes nothing to the accessibility tree — the clipped content
 is read exactly as it would be unmasked. The component adds no roles, no states
 and no live regions.
 
@@ -158,7 +158,7 @@ For `animate="hover"` there is no keyboard equivalent: the swap is bound to
 pointer, and only on devices that report fine-pointer hover. Treat `hover` as
 decoration, and expose the state yourself if it carries meaning.
 
-Under `prefers-reduced-motion` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â read via `useReducedMotion` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â every mode
+Under `prefers-reduced-motion` — read via `useReducedMotion` — every mode
 collapses to the static `paths[0]`. The `scroll` listener returns early, the
 morph loop is disabled, and the hover swap resolves to the resting path.
 
@@ -174,7 +174,7 @@ morph loop is disabled, and the hover swap resolves to the resting path.
 - An `IntersectionObserver` on the frame gates morphing on visibility, so
   off-screen masks cost nothing per frame.
 - The scroll subscription is a `useMotionValueEvent` on `scrollYProgress` with
-  an early return for non-`scroll` modes ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â hover and morph never touch it.
+  an early return for non-`scroll` modes — hover and morph never touch it.
 - The hover-capability check uses `matchMedia` with a `change` listener, and it
   is only set up when `animate === 'hover'`.
 - Both the SVG id and the `clip-path` reference are derived from Vue's `useId`,
@@ -186,9 +186,9 @@ morph loop is disabled, and the hover swap resolves to the resting path.
 ::tip
 The reference easing is deliberately **not** a symmetric ease-in-out: its control
 points sit at `x = 0.645` / `x = 0.355` with very shallow `y`, and that
-asymmetry is the "settle into place" feel. A generic `2tÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â²` ease reads as
+asymmetry is the "settle into place" feel. A generic `2t²` ease reads as
 mechanical next to it. If you ever find yourself swapping the easing, keep the
-asymmetry ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the mask's character lives in it.
+asymmetry — the mask's character lives in it.
 ::
 
 ## UI

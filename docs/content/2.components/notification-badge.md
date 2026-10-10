@@ -12,8 +12,8 @@ slot, and springs in and out as the count changes. It is a thin wrapper: the
 badge itself is a Nuxt UI `UBadge`, and the only motion is the scale-and-fade
 that `AnimatePresence` plays when the count crosses zero.
 
-Two rules come straight from the source. `count <= 0` hides the badge entirely ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
-there is no "zero" state to render ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and `count > max` is clamped to a `max+`
+Two rules come straight from the source. `count <= 0` hides the badge entirely —
+there is no "zero" state to render — and `count > max` is clamped to a `max+`
 label so an unread inbox never grows past a fixed width.
 
 The whole wrapper is a `UTooltip`, so anything you pass as `tooltip` becomes the
@@ -21,7 +21,7 @@ trigger's description on hover and on keyboard focus.
 
 ## Usage
 
-Wrap any element ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â an icon button, an avatar, a nav link ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and feed it `count`.
+Wrap any element — an icon button, an avatar, a nav link — and feed it `count`.
 The badge is positioned absolutely, so it never reflows the element underneath.
 
 ::code-preview
@@ -112,7 +112,7 @@ const tooltip = computed(() => {
   ::
   ::field{name="max" type="number" default="99"}
   Upper bound for the label. Anything above it renders as `` `${max}+` ``. It
-  only affects the text ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the badge is still rendered at its full width.
+  only affects the text — the badge is still rendered at its full width.
   ::
   ::field{name="color" type="string" default="'error'"}
   Forwarded straight to `UBadge`'s `color`, so any Nuxt UI colour alias works
@@ -130,7 +130,7 @@ const tooltip = computed(() => {
 ::field-group
   ::field{name="default"}
   The element the badge anchors to. Rendered inside a `relative inline-flex`
-  wrapper, so give it whatever size you like ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the badge positions itself
+  wrapper, so give it whatever size you like — the badge positions itself
   against that wrapper.
   ::
 ::
@@ -139,7 +139,7 @@ const tooltip = computed(() => {
 
 The badge is plain text inside the wrapper, with no `role` and no live region
 of its own. Because the wrapper is also the tooltip's trigger, that text becomes
-part of the trigger's accessible name ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a button containing this component reads
+part of the trigger's accessible name — a button containing this component reads
 as something like "3 Notifications", and a change from 3 to 4 is silent to a
 screen reader. Announce the change yourself if it matters.
 
@@ -158,7 +158,7 @@ preference is. It is short and small, but it is not opt-out.
 
 ::tip
 `color` is typed as `string` in the component's own props and cast to `any` on
-the way into `UBadge`, so a typo is not caught by the type checker ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it fails
+the way into `UBadge`, so a typo is not caught by the type checker — it fails
 silently and the badge falls back to `UBadge`'s default colour. If the badge is
 the wrong colour, check the string before anything else.
 ::

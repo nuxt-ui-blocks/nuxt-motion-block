@@ -19,7 +19,7 @@ The card itself is a plain Nuxt UI `UCard`, so `ui` reaches every part of it and
 
 Set `backgroundImage` to anything you want seen through the frost. The image is
 rendered at `scale-110` regardless of `parallax`, because the parallax translate would
-otherwise expose an edge ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â leave that over-scan to the component rather than scaling
+otherwise expose an edge — leave that over-scan to the component rather than scaling
 it yourself.
 
 ::code-preview
@@ -81,7 +81,7 @@ label: Preview
 ::field-group
   ::field{name="backgroundImage" type="string"}
   Source for the image behind the frost. It is always `object-cover`, always scaled to
-  `110%`, and always given `alt=""` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it is decoration behind a translucent surface,
+  `110%`, and always given `alt=""` — it is decoration behind a translucent surface,
   not content. Without it the panel is a frosted card on nothing, which is fine if the
   page behind it already has something to show.
   ::
@@ -122,7 +122,7 @@ label: Preview
 
 ## Accessibility
 
-The component contributes no roles, no ARIA attributes and no keyboard behaviour ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the
+The component contributes no roles, no ARIA attributes and no keyboard behaviour — the
 parallax is a pointer-only decoration. `mousemove` and `mouseleave` are bound on the
 wrapper and the pointer state is never exposed, so a keyboard or screen-reader user
 simply sees the un-translated image, which is the intended resting state.
@@ -132,7 +132,7 @@ information that is not already in your slot content.
 
 There is no `prefers-reduced-motion` handling. The movement is a two-axis translate of
 a single decorative layer capped at 20px and eased over 200ms, so it is unlikely to be
-problematic ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â but if your page needs a hard guarantee, render with
+problematic — but if your page needs a hard guarantee, render with
 `parallax: false`.
 
 ## Performance
@@ -142,7 +142,7 @@ problematic ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢
 - `mousemove` is only bound when the component has `parallax` on, and the handler
   returns before touching the DOM when it is off.
 - The image is `object-cover` at `scale-110` inside `overflow-hidden`, so the over-scan
-  is a transform rather than extra layout ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â nothing reflows as the pointer moves.
+  is a transform rather than extra layout — nothing reflows as the pointer moves.
 - Both the card and the image are painted every frame the transform changes, but the
   card's `backdrop-blur-md` sits above the image, which is the compositing that makes
   this effect expensive. One panel is nothing; a grid of them is not.

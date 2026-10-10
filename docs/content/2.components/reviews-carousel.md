@@ -7,8 +7,8 @@ navigation:
 
 # Reviews Carousel
 
-A horizontal strip of review cards. It scrolls ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â by trackpad, by drag, by the two
-arrows, or on its own ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â with each card snapping to the start of the container as
+A horizontal strip of review cards. It scrolls — by trackpad, by drag, by the two
+arrows, or on its own — with each card snapping to the start of the container as
 it lands. Cards animate in once on mount, staggered by their position in the list.
 
 It is a native scroll container, not a scripted carousel. That is the whole
@@ -24,7 +24,7 @@ end, so it cycles forever. Hovering pauses it.
 
 Pass `reviews`, each with an `author`, a numeric `rating` out of five and the
 body `content`; `avatar` is optional. Card width is fixed at `w-80` inside the
-component ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â size it with `class` on the wrapper rather than trying to pass a card
+component — size it with `class` on the wrapper rather than trying to pass a card
 width.
 
 ::code-preview
@@ -89,7 +89,7 @@ const reviews = [
   read `class` anywhere, so this prop has no effect.
   ::
   ::field{name="ui" type="CardProps['ui']"}
-  Declared but not wired ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the inner `UCard` is rendered without a `ui` override,
+  Declared but not wired — the inner `UCard` is rendered without a `ui` override,
   so this prop has no effect.
   ::
 ::
@@ -99,7 +99,7 @@ const reviews = [
 The component adds no ARIA of its own. The scroll container is a plain div with
 `overflow-x-auto`, the scrollbar is hidden with both the modern
 `scrollbar-width` and the legacy `-ms-overflow-style` properties, and the two
-arrows are `<button>` elements with no accessible name ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â an icon-only button
+arrows are `<button>` elements with no accessible name — an icon-only button
 announces as "button" and nothing else. If you need the arrows labelled, that is
 a change to the component rather than something you can pass in.
 
@@ -110,7 +110,7 @@ There is no `prefers-reduced-motion` handling. Cards animate in with a spring
 (staggered 100ms apart) on mount, and the auto-advance scrolls smoothly on a
 timer, regardless of the user's motion preference.
 
-The star row is five inline SVGs coloured by `star <= review.rating` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a visual
+The star row is five inline SVGs coloured by `star <= review.rating` — a visual
 rating only. The rating is not exposed as text, so a screen reader gets the
 review body with no indication of how it was scored.
 
@@ -120,7 +120,7 @@ review body with no indication of how it was scored.
   whether to step, and bails before touching the DOM when paused.
 - Cards animate in once on mount with a per-index delay; there is no scroll or
   intersection listener, so scrolling does no component work at all.
-- Motion is `scrollBy` / `scrollTo` with `behavior: 'smooth'` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the compositor
+- Motion is `scrollBy` / `scrollTo` with `behavior: 'smooth'` — the compositor
   does the moving, and Vue never re-renders to scroll.
 - Auto-advance detects the end by comparing `scrollLeft + clientWidth` to
   `scrollWidth` with a 10px tolerance, then wraps to zero.
@@ -128,7 +128,7 @@ review body with no indication of how it was scored.
   (320px) and the wrap detection are calibrated to.
 
 ::tip
-Hovering pauses the auto-advance but not the entrance animation ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the mount
+Hovering pauses the auto-advance but not the entrance animation — the mount
 spring runs regardless. If the strip feels busy on a page that also wants the
 reader's attention, render it below the fold; nothing here reacts to viewport
 position.

@@ -8,12 +8,12 @@ navigation:
 # Transition Panel
 
 A single panel that swaps its content with a proper exit-then-enter sequence.
-You give it an `activeIndex` and three variants ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `enter`, `center` and `exit` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+You give it an `activeIndex` and three variants — `enter`, `center` and `exit` —
 and it renders the current index as a keyed child inside an `AnimatePresence`.
 
 Because the child is keyed on `activeIndex`, any index change animates the old
 content out before the new content arrives. That makes it a better fit than a
-plain CSS crossfade when the outgoing content needs to leave the way it came ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+plain CSS crossfade when the outgoing content needs to leave the way it came —
 sliding out of frame rather than dissolving in place.
 
 ::note
@@ -90,7 +90,7 @@ const variants = {
 ::
 
 The default slot holds the panel content. Only the currently active index is in
-the tree, so keep the slot cheap ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a single element rather than a `v-for` over
+the tree, so keep the slot cheap — a single element rather than a `v-for` over
 every step.
 
 ## Props
@@ -102,7 +102,7 @@ every step.
   ::field{name="variants" type="{ enter?: Record<string, any>, center?: Record<string, any>, exit?: Record<string, any> }" default="{}"}
   Motion variants for the three states. The source falls back to a keyframe
   sequence built from `enter`/`exit` when either is missing, so a partial object
-  still animates ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â but you lose the `center` target.
+  still animates — but you lose the `center` target.
   ::
   ::field{name="transition" type="Record<string, any>" default="{}"}
   Transition used for all three phases. Passed straight to the child `Motion`, so
@@ -110,7 +110,7 @@ every step.
   ::
   ::field{name="class" type="string" default="''"}
   Merged onto the root element alongside its own `relative`. The root has no
-  `overflow: hidden` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â clip with your own class if exit content travels
+  `overflow: hidden` — clip with your own class if exit content travels
   outside.
   ::
   ::field{name="custom" type="any" default="undefined"}
@@ -125,7 +125,7 @@ every step.
 
 ::field-group
   ::field{name="default"}
-  The panel content for the active index. The slot is scoped to nothing ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â you
+  The panel content for the active index. The slot is scoped to nothing — you
   close over the same state that feeds `activeIndex` yourself, as in the example
   where the slot content is itself keyed on `active`.
   ::
@@ -133,7 +133,7 @@ every step.
 
 ## Accessibility
 
-The panel has no semantics of its own ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the root is a plain `div`, so it is
+The panel has no semantics of its own — the root is a plain `div`, so it is
 invisible to assistive technology beyond its content. For a step indicator or
 carousel, put the role and state on your own trigger buttons and give the panel
 an `aria-live` region if the change is meaningful to read out:
@@ -158,13 +158,13 @@ transforms are decorative, disable the transitions yourself.
   content, not with the number of indices.
 - The source defaults to `mode="popLayout"` on `AnimatePresence`, which pops the
   exiting element out of flow so the entering one does not wait for a layout
-  pass ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â useful when the outgoing content is tall.
+  pass — useful when the outgoing content is tall.
 - A transition built on `x`, `y`, `scale` or `opacity` stays on the compositor.
   Animating layout properties such as `height` or `top` will thrash.
 
 ::tip
 When you swap content in the slot, key the slotted element on `activeIndex` too.
-The inner `Motion` is keyed on the index, so its subtree remounts on change ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+The inner `Motion` is keyed on the index, so its subtree remounts on change —
 but only the subtree you give it. Unkeyed slot content that happens to look the
 same across indices will visually cross-fade instead of exiting cleanly.
 ::

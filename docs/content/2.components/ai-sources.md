@@ -18,7 +18,7 @@ its evidence.
 ## Usage
 
 Pass `sources` as `{ id, title, url, snippet? }`. Without a `snippet` the row
-falls back to the host. Slot the `favicon` only if you have real marks ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+falls back to the host. Slot the `favicon` only if you have real marks —
 otherwise you get the neutral globe, which is the honest default.
 
 ::code-preview
@@ -92,7 +92,7 @@ const sources: Source[] = [
   verbatim rather than throwing.
   ::
   ::field{name="label" type="string" default="'Sources'"}
-  The text after the stack. Set it to something countable ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â "4 sources" ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â if your
+  The text after the stack. Set it to something countable — "4 sources" — if your
   design needs the number spelled out; the stack itself only shows a `+n` chip
   for the overflow.
   ::
@@ -111,7 +111,7 @@ const sources: Source[] = [
   ::field{name="favicon" type="{ source: AiSource }"}
   The mark for a source, rendered in both the collapsed stack and the expanded
   row, and receiving the source it belongs to. Anything that fits an `<img>` works
-  ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a logo service URL, a repo isotype. The wrapper applies `size-full`,
+  — a logo service URL, a repo isotype. The wrapper applies `size-full`,
   `object-cover` and `fill-foreground` to slotted children, so an SVG that ships
   `fill="none"` picks up the current text colour.
 
@@ -130,7 +130,7 @@ const sources: Source[] = [
 - The expanded list is a real `<ul>` of `<li>`s, and every row is an anchor with
   `target="_blank"` and `rel="noopener noreferrer"`.
 - The expanded body is `inert` while collapsed. That removes it from the tab order
-  and the accessibility tree entirely ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a better guarantee than a collapsed
+  and the accessibility tree entirely — a better guarantee than a collapsed
   container that still holds focusable links.
 - The fan is a hover hint only. It reveals nothing: the expanded list is what
   actually contains the sources, so keyboard users get everything a pointer user
@@ -140,7 +140,7 @@ const sources: Source[] = [
 - Under `prefers-reduced-motion: reduce` the fan is suppressed, the expand is an
   instant `grid-template-rows` switch with no opacity fade, and the rows appear
   already settled.
-- Nothing here is announced on expand ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the list appearing is not an event. If a
+- Nothing here is announced on expand — the list appearing is not an event. If a
   reader needs to know how many sources an answer used, put that in the `label`.
 
 ## Performance

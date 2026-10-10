@@ -120,7 +120,7 @@ All three visible cards are absolutely positioned `motion.div` elements with no 
 
 ## Performance
 
-- Uses `AnimatePresence` with `custom="direction"` and `variants` for `center/left/right/hidden`. Side cards are scaled down (`0.9`) and rotated (ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±12ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°) with `z-index` layering.
+- Uses `AnimatePresence` with `custom="direction"` and `variants` for `center/left/right/hidden`. Side cards are scaled down (`0.9`) and rotated (±12°) with `z-index` layering.
 - Responsive sizing computes `metrics` (font sizes, padding, avatar sizes, badge position) from resolved card width; initial size uses `base` or first available value, client-only re-resolves on viewport width.
 - Auto-advance uses `setInterval` (only `import.meta.client`, restarted on page/interval/events change). Clears timer on unmount.
 - Blurred underlay uses five stacked layers (`BLUR_LAYERS = [1,2,3,6,12]`) with `backdrop-filter`/`mask-image` for a gradient fade.

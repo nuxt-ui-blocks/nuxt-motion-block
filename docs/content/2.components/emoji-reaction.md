@@ -8,8 +8,8 @@ navigation:
 # Emoji Reaction
 
 A reaction bar for a post: a row of pill buttons, each holding an emoji and a
-count, plus an optional popover of extra emojis. The count is an odometer ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it
-rolls up or down in the direction of the change ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and selecting a reaction pops
+count, plus an optional popover of extra emojis. The count is an odometer — it
+rolls up or down in the direction of the change — and selecting a reaction pops
 the emoji and throws a small burst of particles out of it.
 
 The component is fully controlled and mutates nothing. It renders the
@@ -19,7 +19,7 @@ inferred.
 
 That contract shows up most clearly in the picker. A picked emoji that already
 exists in the bar toggles that reaction, so the exclusivity rule still applies;
-one that does not exist is reported as new ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and the payload for that case is
+one that does not exist is reported as new — and the payload for that case is
 the emoji string itself, used as an id.
 
 ## Usage
@@ -53,7 +53,7 @@ label: Preview
     </div>
 
     <p class="text-xs text-muted">
-      One reaction at a time ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â {{ reactedLabel }}
+      One reaction at a time — {{ reactedLabel }}
     </p>
   </div>
 </template>
@@ -68,9 +68,9 @@ type Reaction = {
 }
 
 const reactions = ref<Reaction[]>([
-  { count: 12, emoji: 'ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¹Ã…â€œÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â', id: 'thumbs-up', label: 'Thumbs up', reacted: false },
-  { count: 4, emoji: 'ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â°', id: 'party-popper', label: 'Party popper', reacted: false },
-  { count: 9, emoji: 'ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬', id: 'rocket', label: 'Rocket', reacted: true },
+  { count: 12, emoji: '👍', id: 'thumbs-up', label: 'Thumbs up', reacted: false },
+  { count: 4, emoji: '🎉', id: 'party-popper', label: 'Party popper', reacted: false },
+  { count: 9, emoji: '🚀', id: 'rocket', label: 'Rocket', reacted: true },
 ])
 
 const reactedLabel = computed(() => {
@@ -96,7 +96,7 @@ function onReact(id: string, reacted: boolean) {
 
 ## What `react` reports
 
-One event, five situations. In every case the component emits and waits ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it
+One event, five situations. In every case the component emits and waits — it
 never changes `reactions` itself.
 
 | You did this | The component emits |
@@ -104,9 +104,9 @@ never changes `reactions` itself.
 | Clicked an un-reacted pill | `react(id, true)` |
 | Clicked an already-reacted pill | `react(id, false)` |
 | Turned one on while another is on, `allowMultiple: false` | `react(otherId, false)` for each other active reaction, then `react(id, true)` |
-| Picked an emoji already in the bar, not yet reacted | `react(id, true)` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â matched against `id` *or* `emoji` |
+| Picked an emoji already in the bar, not yet reacted | `react(id, true)` — matched against `id` *or* `emoji` |
 | Picked an emoji already in the bar, already reacted | nothing |
-| Picked an emoji that is not in the bar | `react(emoji, true)` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the emoji string is the payload |
+| Picked an emoji that is not in the bar | `react(emoji, true)` — the emoji string is the payload |
 
 ## Props
 
@@ -118,7 +118,7 @@ never changes `reactions` itself.
   array; `label` is what the button's accessible name is built from.
   ::
   ::field{name="allowMultiple" type="boolean" default="false"}
-  When `false` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the default ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â reacting to one item emits `react(otherId, false)`
+  When `false` — the default — reacting to one item emits `react(otherId, false)`
   for every other item currently marked `reacted`, so your handler only has to
   handle one toggle.
   ::
@@ -128,13 +128,13 @@ never changes `reactions` itself.
   ::
   ::field{name="burstCount" type="number" default="10"}
   How many particles to throw. They are spread evenly around a circle with a
-  small angular jitter, at a randomised distance of 22ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“40px, sized 3ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“6px.
+  small angular jitter, at a randomised distance of 22–40px, sized 3–6px.
   ::
   ::field{name="showPicker" type="boolean" default="false"}
   Render the trailing trigger that opens the extra-emoji popover. Without it the
   bar is just the pills you passed in and `pickerEmojis` is inert.
   ::
-  ::field{name="pickerEmojis" type="string[]" default="['ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â½ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â°', 'ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚ÂÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¥', 'ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã¢â‚¬Â¹Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â', 'ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¹Ã…â€œÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬', 'ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬', 'ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¯']"}
+  ::field{name="pickerEmojis" type="string[]" default="['🎉', '🔥', '😍', '👀', '🚀', '💯']"}
   The emojis offered by the picker. Each is looked up against your `reactions`
   by both `id` and `emoji`, so an emoji that is already a pill in the bar
   toggles it instead of adding a duplicate. New ones arrive at you as
@@ -145,7 +145,7 @@ never changes `reactions` itself.
   (`sm` 28px tall, `md` 36px, `lg` 44px).
   ::
   ::field{name="defaultPickerOpen" type="boolean" default="false"}
-  Start with the picker open. Mostly useful for docs and screenshots ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it is
+  Start with the picker open. Mostly useful for docs and screenshots — it is
   initial state, so the component still closes it on Escape, an outside click or
   Tab as usual.
   ::
@@ -160,7 +160,7 @@ never changes `reactions` itself.
 ::field-group
   ::field{name="react" type="(id: string, reacted: boolean) => void"}
   Fired when a reaction should change. The first argument is the `id` from your
-  `reactions` array ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â or the raw emoji string when the picker proposes one that
+  `reactions` array — or the raw emoji string when the picker proposes one that
   is not in the array yet. The second is the state it should move to. See the
   table above for the exact emissions, including the exclusivity emits that
   precede the one you asked for.
@@ -171,7 +171,7 @@ never changes `reactions` itself.
 
 The bar is a `role="group"` labelled "Reactions". Each pill is a real `<button>`
 carrying `aria-pressed` and an `aria-label` of the form "Party popper, 4
-reactions" ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â singular when the count is 1, so the label tracks your count
+reactions" — singular when the count is 1, so the label tracks your count
 rather than being a static string.
 
 The picker is a proper menu. The trigger has `aria-haspopup="menu"`,
@@ -191,7 +191,7 @@ drop out entirely under `prefers-reduced-motion`.
 ## Performance
 
 - Burst particles come from a seeded linear congruential generator, not
-  `Math.random()`, so a given seed always throws the same shape ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the effect is
+  `Math.random()`, so a given seed always throws the same shape — the effect is
   reproducible and free of a global RNG call.
 - The burst layer is unmounted on a `550ms` timer, not on the ring's animation
   completing. motion-v re-runs `animateUpdates` on every re-render and resolves
@@ -202,14 +202,14 @@ drop out entirely under `prefers-reduced-motion`.
 - Counters use `AnimatePresence` with `mode="popLayout"` and a fixed
   `1.15em` overflow window, so a rolling number never widens the pill.
 - The two `document` listeners (`pointerdown`, `keydown`) are added when the
-  picker opens and removed when it closes or the component unmounts ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â they are
+  picker opens and removed when it closes or the component unmounts — they are
   not permanent.
 - Nothing animates a layout property; the press, pop, burst and roll are all
   `transform` and `opacity`.
 
 ::tip
 The roll direction is derived by watching the `id:count` pairs of your array, so
-it works on the very first render only as a flat "up" ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the previous counts map
+it works on the very first render only as a flat "up" — the previous counts map
 is empty and the direction defaults to `1`. If your initial state already has a
 high count and the first change is a decrement, the digits will still roll up.
 ::

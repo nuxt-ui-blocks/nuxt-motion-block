@@ -96,7 +96,7 @@ The animated card container is rendered as a `role="button"` with `tabindex="0"`
 ## Performance
 
 - Measures content height via a hidden `measureEl` (first child `scrollHeight`) on mount with two timeouts (100ms, 500ms) and also on `message`/`width` changes (`nextTick` then measure) to ensure layout is stable.
-- Animations driven by `motion-v`: card size animates between `{height,width}` (closed 32ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â32, open `contentHeight`ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â`width`), avatar offset animates `left/top`, content animates `opacity` + `filter: blur(...)` with delayed blur/opacity on enter.
+- Animations driven by `motion-v`: card size animates between `{height,width}` (closed 32×32, open `contentHeight`×`width`), avatar offset animates `left/top`, content animates `opacity` + `filter: blur(...)` with delayed blur/opacity on enter.
 - Spring transitions: card uses `stiffness:550,damping:45,mass:0.7`, avatar uses `stiffness:300,damping:25`, content uses custom `ease: [0.22,1,0.36,1]` for blur/opacity.
 - `useClickOutside` attached to root wrapper; click handler lives on wrapper (not directly on motion node) to ensure reliable event binding.
 - Avatar fallback: `avatarFailed` ref set on image error; also checks `img.complete && naturalWidth===0` on mount/URL change. No timers beyond measurement timeouts.
