@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group relative inline-block"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="{ transform: isPressed ? 'scale(0.95)' : 'scale(1)', transition: 'transform 0.15s ease' }"
     @mousedown="isPressed = true"
     @mouseup="isPressed = false"
@@ -14,11 +14,11 @@
       <slot />
     </UButton>
     <div
-      class="pointer-events-none absolute inset-0 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      :class="ui.shine({ class: uiProps.ui?.shine })"
       :style="{ borderRadius: btnRadius }"
     >
       <div
-        class="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent mix-blend-plus-lighter"
+        :class="ui.shineBar({ class: uiProps.ui?.shineBar })"
         :style="{
           width: '200%',
           left: isHovered ? '100%' : '-100%',
@@ -31,8 +31,14 @@
 
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import smoothButton from '../theme/smooth-button'
 
 defineOptions({ inheritAttrs: false })
+
+const props = defineProps<{ class?: string, ui?: Record<string, any> }>()
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'smoothButton', props, theme: smoothButton })
 
 const isPressed = ref(false)
 const isHovered = ref(false)

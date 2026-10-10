@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Motion, AnimatePresence } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import transitionPanel from '../theme/transition-panel'
 
 interface TransitionPanelProps {
   activeIndex: number
@@ -12,6 +14,7 @@ interface TransitionPanelProps {
   transition?: Record<string, any>
   class?: string
   custom?: any
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<TransitionPanelProps>(), {
@@ -19,7 +22,10 @@ const props = withDefaults(defineProps<TransitionPanelProps>(), {
   transition: () => ({}),
   class: '',
   custom: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'transitionPanel', props, theme: transitionPanel })
 
 const motionProps = computed(() => {
   const { activeIndex, variants, transition, class: _class, custom } = props
@@ -28,7 +34,7 @@ const motionProps = computed(() => {
 </script>
 
 <template>
-  <div :class="['relative', props.class]">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <AnimatePresence
       :initial="false"
       mode="popLayout"
