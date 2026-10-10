@@ -2,13 +2,12 @@
   <div
     ref="rootEl"
     v-bind="$attrs"
-    class="h-[200px]"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
-    <div class="relative flex h-full w-full flex-col justify-center">
+    <div :class="ui.inner({ class: uiProps.ui?.inner })">
       <motion.div
         :layout="true"
-        class="mx-auto w-fit min-w-[100px] overflow-hidden rounded-full bg-black"
+        :class="ui.pill({ class: uiProps.ui?.pill })"
         :style="{ borderRadius: PILL_RADIUS }"
         :transition="pillTransition"
       >
@@ -20,6 +19,7 @@
         -->
         <motion.div
           :key="activeView"
+          :class="ui.content({ class: uiProps.ui?.content })"
           :initial="contentInitial"
           :animate="contentAnimate"
           :transition="contentTransition"
@@ -27,7 +27,7 @@
           <motion.div
             v-if="activeView === 'idle'"
             :layout="true"
-            class="flex items-center gap-2 px-3 py-2"
+            :class="ui.idle({ class: uiProps.ui?.idle })"
             @mouseenter="handleIdleEnter"
             @mouseleave="handleIdleLeave"
           >
@@ -35,11 +35,10 @@
               <motion.div
                 :initial="{ opacity: 0, scale: 0.8 }"
                 :animate="{ opacity: 1, scale: 1 }"
-                class="text-white"
               >
                 <UIcon
                   name="i-lucide-cloud-lightning"
-                  class="h-5 w-5 text-white"
+                  :class="ui.idleIcon({ class: uiProps.ui?.idleIcon })"
                 />
               </motion.div>
 
@@ -47,16 +46,16 @@
                 <motion.div
                   v-if="showTemperature"
                   key="temperature"
-                  class="flex items-center gap-1 overflow-hidden text-white"
+                  :class="ui.temperature({ class: uiProps.ui?.temperature })"
                   :initial="{ opacity: 0, width: 0 }"
                   :animate="{ opacity: 1, width: 'auto' }"
                   :exit="{ opacity: 0, width: 0 }"
                 >
                   <UIcon
                     name="i-lucide-thermometer"
-                    class="h-3 w-3"
+                    :class="ui.temperatureIcon({ class: uiProps.ui?.temperatureIcon })"
                   />
-                  <span class="pointer-events-none whitespace-nowrap text-white text-xs">
+                  <span :class="ui.temperatureValue({ class: uiProps.ui?.temperatureValue })">
                     12°C
                   </span>
                 </motion.div>
@@ -66,7 +65,7 @@
 
           <div
             v-else-if="activeView === 'ring'"
-            class="flex w-64 items-center gap-3 overflow-hidden px-4 py-2 text-white"
+            :class="ui.ring({ class: uiProps.ui?.ring })"
           >
             <slot name="ring">
               <UIcon
@@ -87,7 +86,7 @@
 
           <div
             v-else-if="activeView === 'timer'"
-            class="flex w-64 items-center gap-3 overflow-hidden px-4 py-2 text-white"
+            :class="ui.timer({ class: uiProps.ui?.timer })"
           >
             <slot name="timer">
               <UIcon
@@ -110,7 +109,7 @@
 
           <div
             v-else-if="activeView === 'notification'"
-            class="flex w-64 items-center gap-3 overflow-hidden px-4 py-2 text-white"
+            :class="ui.notification({ class: uiProps.ui?.notification })"
           >
             <UIcon
               name="i-lucide-bell"
@@ -131,7 +130,7 @@
 
           <div
             v-else
-            class="flex w-72 items-center gap-3 overflow-hidden px-4 py-2 text-white"
+            :class="ui.music({ class: uiProps.ui?.music })"
           >
             <UIcon
               name="i-lucide-music-2"
@@ -184,19 +183,19 @@
         </motion.div>
       </motion.div>
 
-      <div class="absolute bottom-2 left-1/2 z-10 flex -translate-x-1/2 justify-center gap-1 rounded-full border bg-default p-1">
+      <div :class="ui.track({ class: uiProps.ui?.track })">
         <button
           v-for="item in VIEW_SWITCHES"
           :key="item.key"
           type="button"
           :aria-label="item.key"
           :aria-pressed="activeView === item.key"
-          class="flex size-8 cursor-pointer items-center justify-center rounded-full border border-default bg-primary px-2 text-inverted"
+          :class="ui.dot({ class: uiProps.ui?.dot })"
           @click="handleSwitch(item.key)"
         >
           <UIcon
             :name="item.icon"
-            class="size-3"
+            :class="ui.dotIcon({ class: uiProps.ui?.dotIcon })"
           />
         </button>
       </div>
@@ -207,6 +206,8 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { dynamicIsland } from '../theme'
 
 defineOptions({ inheritAttrs: false })
 
@@ -215,6 +216,8 @@ export type DynamicIslandView = 'idle' | 'ring' | 'timer' | 'notification' | 'mu
 export interface DynamicIslandProps {
   /** Merged onto the outer 200px-high container. */
   class?: string
+  /** Per-slot classes resolved against the component theme. */
+  ui?: Record<string, any>
   /** Controlled view. Leave undefined to let the island drive itself. */
   view?: DynamicIslandView
   /** Change callback. `@view-change` and `v-model:view` both land here. */
@@ -223,6 +226,7 @@ export interface DynamicIslandProps {
 
 const props = withDefaults(defineProps<DynamicIslandProps>(), {
   class: undefined,
+  ui: undefined,
   view: undefined,
   onViewChange: undefined,
 })
@@ -230,6 +234,12 @@ const props = withDefaults(defineProps<DynamicIslandProps>(), {
 const emit = defineEmits<{
   'update:view': [view: DynamicIslandView]
 }>()
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'dynamicIsland',
+  props,
+  theme: dynamicIsland,
+})
 
 const BOUNCE_VARIANTS: Record<string, number> = {
   'idle': 0.5,
