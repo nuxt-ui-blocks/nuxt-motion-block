@@ -1,7 +1,7 @@
 <template>
   <div
     v-bind="$attrs"
-    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
+    :class="ui.wrapper({ class: uiProps.ui?.wrapper })"
     :style="{ perspective: '1000px' }"
   >
     <AnimatePresence mode="wait">
@@ -16,7 +16,8 @@
         :class="ui.front({ class: uiProps.ui?.front })"
       >
         <UCard
-          :ui="{ root: ui.card({ class: uiProps.ui?.card }) }"
+          :class="uiProps.class"
+          :ui="{ ...uiProps.ui, root: ui.card({ class: [uiProps.ui?.root, uiProps.ui?.card] }) }"
         >
           <slot name="front" />
         </UCard>
@@ -33,7 +34,8 @@
         :class="ui.back({ class: uiProps.ui?.back })"
       >
         <UCard
-          :ui="{ root: ui.card({ class: uiProps.ui?.card }) }"
+          :class="uiProps.class"
+          :ui="{ ...uiProps.ui, root: ui.card({ class: [uiProps.ui?.root, uiProps.ui?.card] }) }"
         >
           <slot name="back" />
         </UCard>

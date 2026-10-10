@@ -107,13 +107,13 @@ onMounted(async () => {
 <template>
   <div
     ref="internalContainerRef"
-    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
+    :class="ui.root({ class: uiProps.ui?.root })"
   >
     <span
       v-for="(char, i) in label.split('')"
       :key="i"
       ref="charRefs"
-      :class="ui.char({ class: uiProps.ui?.char })"
+      :class="ui.char({ class: [uiProps.ui?.char, uiProps.class] })"
       style="display: inline-block; will-change: font-variation-settings, transform;"
     >
       {{ char === ' ' ? '\u00A0' : char }}

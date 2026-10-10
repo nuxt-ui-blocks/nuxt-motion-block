@@ -1,13 +1,14 @@
 <template>
   <motion.div
     ref="cardRef"
-    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
+    :class="ui.wrapper({ class: uiProps.ui?.wrapper })"
     :style="wobbleStyle"
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
     <UCard
-      :class="ui.card({ class: uiProps.ui?.card })"
+      :class="uiProps.class"
+      :ui="{ ...uiProps.ui, root: ui.card({ class: [uiProps.ui?.root, uiProps.ui?.card] }) }"
     >
       <template
         v-if="$slots.header"

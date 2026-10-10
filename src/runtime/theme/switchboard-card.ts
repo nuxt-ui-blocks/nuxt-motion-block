@@ -2,7 +2,7 @@ import type { ComponentConfig } from '@nuxt/ui'
 
 const defaultTheme = {
   slots: {
-    root: 'relative',
+    wrapper: 'relative',
     front: 'w-full',
     back: 'w-full',
     card: '',

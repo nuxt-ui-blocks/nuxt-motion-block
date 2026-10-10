@@ -3,12 +3,12 @@
     :initial="{ opacity: 0, y: 40 }"
     :animate="{ opacity: 1, y: 0 }"
     :transition="{ type: 'spring', stiffness: 300, damping: 30 }"
-    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
+    :class="ui.wrapper({ class: [uiProps.ui?.wrapper, uiProps.class] })"
     @mouseenter="showShine = true"
     @mouseleave="showShine = false"
   >
     <UCard
-      :class="ui.card({ class: uiProps.ui?.card })"
+      :ui="{ ...uiProps.ui, root: ui.card({ class: [uiProps.ui?.root, uiProps.ui?.card] }) }"
     >
       <template
         v-if="$slots.header"

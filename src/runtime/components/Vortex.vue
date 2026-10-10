@@ -1,5 +1,5 @@
 <template>
-  <div :class="ui.root({ class: [props.containerClass, uiProps.ui?.root, uiProps.class] })">
+  <div :class="ui.root({ class: [props.containerClass, uiProps.ui?.root] })">
     <motion.div
       ref="containerRef"
       :initial="{ opacity: 0 }"
@@ -12,7 +12,7 @@
       />
     </motion.div>
 
-    <div :class="ui.content({ class: uiProps.ui?.content })">
+    <div :class="ui.content({ class: [uiProps.ui?.content, uiProps.class] })">
       <slot />
     </div>
   </div>

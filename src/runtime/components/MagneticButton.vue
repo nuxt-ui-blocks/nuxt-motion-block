@@ -1,7 +1,7 @@
 <template>
   <div
     ref="zoneEl"
-    :class="ui.root({ class: [props.className, uiProps.ui?.root, uiProps.class] })"
+    :class="ui.root({ class: uiProps.ui?.root })"
     role="presentation"
     :style="zoneStyle"
     @mousemove="handleMouseMove"
@@ -21,7 +21,7 @@
         :color="uiColor"
         :size="uiSize"
         :square="props.size === 'icon'"
-        :class="ui.button({ class: uiProps.ui?.button })"
+        :class="ui.button({ class: [uiProps.ui?.button, uiProps.className, uiProps.class] })"
         v-bind="$attrs"
       >
         <slot />
@@ -153,6 +153,8 @@ const asChildClass = computed(() =>
     AS_CHILD_BASE,
     AS_CHILD_SIZE[props.size],
     AS_CHILD_VARIANT[props.variant],
+    uiProps.class,
+    uiProps.className,
   ),
 )
 

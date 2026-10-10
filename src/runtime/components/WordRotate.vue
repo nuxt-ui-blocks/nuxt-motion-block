@@ -1,7 +1,7 @@
 <template>
   <Motion
     ref="containerRef"
-    :class="ui.root({ class: [props.containerClass, uiProps.ui?.root, uiProps.class] })"
+    :class="ui.root({ class: [props.containerClass, uiProps.ui?.root] })"
     v-bind="$attrs"
   >
     <!-- @vue-ignore -->
@@ -14,7 +14,7 @@
       :style="{
         perspective: animationStyle === 'flip' ? '1000px' : undefined,
       }"
-      :class="ui.word({ class: uiProps.ui?.word })"
+      :class="ui.word({ class: [uiProps.ui?.word, uiProps.class] })"
     >
       {{ words[currentWord] }}
     </Motion>

@@ -2,7 +2,7 @@ import type { ComponentConfig } from '@nuxt/ui'
 
 const defaultTheme = {
   slots: {
-    root: 'relative overflow-hidden',
+    wrapper: 'relative overflow-hidden',
     card: 'h-full',
     body: 'space-y-4',
     balance: 'text-2xl font-bold text-highlighted',
