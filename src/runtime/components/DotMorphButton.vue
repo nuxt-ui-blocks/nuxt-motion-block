@@ -1,19 +1,21 @@
 <template>
   <UButton
     v-bind="$attrs"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :color="color"
     :variant="variant"
     :size="size"
+    :ui="uiProps.ui"
     @mouseenter="onMouseEnter"
     @mouseleave="isHovered = false"
   >
     <template #leading>
       <span
         ref="wrapperEl"
-        class="flex h-4 w-4 shrink-0 items-center justify-center"
+        :class="ui.leading({ class: uiProps.ui?.leading })"
       >
         <motion.span
-          class="flex items-center justify-center"
+          :class="ui.dot({ class: uiProps.ui?.dot })"
           :style="{ background: dotBackground, display: 'inline-block' }"
           :initial="false"
           :animate="dotAnimation"
@@ -33,20 +35,28 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { motion } from 'motion-v'
 import type { ButtonProps } from '#ui/components/Button.vue'
 import { useHoverCapable } from '../composables/useHoverCapable'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import dotMorphButton from '../theme/dot-morph-button'
 
 const props = withDefaults(defineProps<{
+  class?: string
   color?: ButtonProps['color']
   dotColor?: string
   label?: string
   size?: ButtonProps['size']
+  ui?: Record<string, any>
   variant?: ButtonProps['variant']
 }>(), {
+  class: undefined,
   color: 'primary',
   dotColor: 'primary',
   label: 'Dot-Morph',
   size: 'md',
+  ui: undefined,
   variant: 'solid',
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'dotMorphButton', props, theme: dotMorphButton })
 
 const isHovered = ref(false)
 const isHoverDevice = useHoverCapable()

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['[perspective:3000px] w-fit h-fit', containerClass]">
+  <div :class="ui.root({ class: [uiProps.ui?.root, props.containerClass] })">
     <motion.div
       ref="cardRef"
       drag
@@ -12,7 +12,7 @@
       }"
       :animate="controls"
       :while-hover="{ scale: 1.02 }"
-      class="w-full h-full"
+      :class="ui.card({ class: uiProps.ui?.card })"
       @drag:start="onDragStart"
       @drag:end="onDragEnd"
       @mousemove="handleMouseMove"
@@ -21,13 +21,10 @@
       <!-- Nuxt UI Card -->
       <UCard
         :ui="{
-          root: [
-            'relative min-h-96 w-80 overflow-hidden rounded-md bg-default dark:bg-default p-6 shadow-2xl transform-3d',
-            props.class,
-          ],
-          body: 'relative z-10',
-          header: 'relative z-10',
-          footer: 'relative z-10',
+          root: ui.cardRoot({ class: [uiProps.ui?.cardRoot, uiProps.class] }),
+          body: ui.cardBody({ class: uiProps.ui?.cardBody }),
+          header: ui.cardHeader({ class: uiProps.ui?.cardHeader }),
+          footer: ui.cardFooter({ class: uiProps.ui?.cardFooter }),
         }"
       >
         <!-- Main content slot -->
@@ -46,7 +43,7 @@
         <!-- Glare effect -->
         <motion.div
           :style="{ opacity: glareOpacity }"
-          class="pointer-events-none absolute inset-0 bg-white select-none z-20"
+          :class="ui.glare({ class: uiProps.ui?.glare })"
         />
       </UCard>
     </motion.div>
@@ -55,19 +52,23 @@
 
 <script setup lang="ts">
 import { motion, useMotionValue, useSpring, useTransform, animate, useVelocity, useAnimationControls } from 'motion-v'
-import type { CardProps } from '#ui/components/Card.vue'
 import { onMounted, onUnmounted, ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import draggableCard from '../theme/draggable-card'
 
 interface Props {
   class?: string
   containerClass?: string
-  ui?: CardProps['ui']
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   class: '',
   containerClass: '',
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'draggableCard', props, theme: draggableCard })
 
 // Motion values
 const mouseX = useMotionValue(0)

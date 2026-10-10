@@ -1,7 +1,7 @@
 <template>
   <div
     ref="containerRef"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="{
       position: 'absolute',
       inset: 0,
@@ -10,6 +10,7 @@
   >
     <canvas
       ref="canvasRef"
+      :class="ui.canvas({ class: uiProps.ui?.canvas })"
       :style="{
         display: 'block',
         width: '100%',
@@ -22,6 +23,8 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch, type StyleValue } from 'vue'
 import { useColorMode } from '#imports'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import dottedGlowBackground from '../theme/dotted-glow-background'
 
 interface DottedGlowBackgroundProps {
   class?: string
@@ -41,6 +44,7 @@ interface DottedGlowBackgroundProps {
   speedMin?: number
   speedMax?: number
   speedScale?: number
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<DottedGlowBackgroundProps>(), {
@@ -53,7 +57,10 @@ const props = withDefaults(defineProps<DottedGlowBackgroundProps>(), {
   speedMin: 0.4,
   speedMax: 1.3,
   speedScale: 1,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'dottedGlowBackground', props, theme: dottedGlowBackground })
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const containerRef = ref<HTMLDivElement | null>(null)

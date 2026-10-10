@@ -1,9 +1,6 @@
 <template>
   <svg
-    :class="[
-      'animate-spotlight pointer-events-none absolute z-[1] h-[169%] w-[138%] lg:w-[84%] opacity-0',
-      props.class,
-    ]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 3787 2842"
     fill="none"
@@ -49,12 +46,25 @@
 </template>
 
 <script setup lang="ts">
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import directionalLight from '../theme/directional-light'
+
 interface SpotlightProps {
   class?: string
+  ui?: Record<string, any>
   fill?: string
 }
 
-const props = defineProps<SpotlightProps>()
+const props = withDefaults(defineProps<SpotlightProps>(), {
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'directionalLight',
+  props,
+  theme: directionalLight,
+})
 </script>
 
 <style scoped>

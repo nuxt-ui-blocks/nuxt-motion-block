@@ -1,22 +1,22 @@
 <template>
-  <figure class="inline-flex flex-col gap-2 text-default">
+  <figure :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <span
       v-if="label"
-      class="font-medium text-sm"
+      :class="ui.label({ class: uiProps.ui?.label })"
     >{{ label }}</span>
     <canvas
       ref="canvasRef"
       aria-hidden="true"
-      class="block"
+      :class="ui.canvas({ class: uiProps.ui?.canvas })"
       :style="{ height: `${height}px`, width: `${width}px` }"
       :width="width"
       :height="height"
       tabindex="-1"
     />
-    <span class="sr-only">{{ description }}</span>
+    <span :class="ui.description({ class: uiProps.ui?.description })">{{ description }}</span>
     <figcaption
       v-if="caption"
-      class="text-muted text-xs"
+      :class="ui.caption({ class: uiProps.ui?.caption })"
     >
       {{ caption }}
     </figcaption>
@@ -25,16 +25,20 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import ditherChart from '../theme/dither-chart'
 
 export interface Props {
   animate?: boolean
   caption?: string
+  class?: string
   data: DitherChartSeries[]
   height?: number
   label?: string
   matrix?: DitherChartMatrixOrder
   palette?: string[]
   pixelSize?: number
+  ui?: Record<string, any>
   variant?: DitherChartVariant
   width?: number
 }
@@ -42,14 +46,18 @@ export interface Props {
 const props = withDefaults(defineProps<Props>(), {
   animate: true,
   caption: undefined,
+  class: undefined,
   height: 180,
   label: undefined,
   matrix: 4 as DitherChartMatrixOrder,
   palette: undefined,
   pixelSize: 3,
+  ui: undefined,
   variant: 'line' as DitherChartVariant,
   width: 320,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'ditherChart', props, theme: ditherChart })
 
 /* -------------------------------------------------------------------------- */
 /* Constants                                                                  */

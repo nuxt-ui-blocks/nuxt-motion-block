@@ -1,7 +1,7 @@
 <template>
   <div
     ref="wrapperRef"
-    :class="['relative isolate', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="wrapperStyle"
   >
     <slot />
@@ -9,7 +9,7 @@
     <svg
       v-if="hasBox"
       aria-hidden="true"
-      class="pointer-events-none absolute inset-0 z-10 h-full w-full overflow-visible"
+      :class="ui.svg({ class: uiProps.ui?.svg })"
       fill="none"
       :viewBox="`0 0 ${width} ${height}`"
     >
@@ -72,7 +72,7 @@
           normally there and simply tints.
         -->
         <g
-          class="dark:mix-blend-plus-lighter"
+          :class="ui.halo({ class: uiProps.ui?.halo })"
           color-interpolation-filters="sRGB"
           :style="{ filter: `blur(${haloBlur}px)` }"
         >
@@ -119,6 +119,8 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue'
 import { useReducedMotion } from 'motion-v'
 import { useHoverCapable } from '../composables/useHoverCapable'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import borderBeam from '../theme/border-beam'
 
 const hoverCapable = useHoverCapable()
 
@@ -148,13 +150,14 @@ export interface BorderBeamProps {
   reverse?: boolean
   /** Arc length of each beam, in pixels measured along the border. */
   size?: number
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<BorderBeamProps>(), {
   active: true,
   beams: 1,
   borderWidth: 1,
-  class: '',
+  class: undefined,
   colorFrom: 'var(--color-brand)',
   colorTo: 'var(--color-brand-light)',
   delay: 0,
@@ -163,7 +166,10 @@ const props = withDefaults(defineProps<BorderBeamProps>(), {
   radius: 16,
   reverse: false,
   size: 72,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'borderBeam', props, theme: borderBeam })
 
 const HALF = 0.5
 const MS_PER_SECOND = 1000

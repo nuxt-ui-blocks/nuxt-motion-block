@@ -1,16 +1,16 @@
 <template>
-  <div class="relative group">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <motion.div
       v-if="showLineNumbers"
       initial="initial"
       animate="animate"
       :variants="containerVariants"
-      class="relative overflow-hidden rounded-lg border border-default bg-[#0d1117] text-sm"
+      :class="ui.container({ class: uiProps.ui?.container })"
     >
-      <div class="flex items-center justify-between px-4 py-2 border-b border-default">
-        <span class="text-xs text-gray-400 font-mono">{{ language }}</span>
+      <div :class="ui.header({ class: uiProps.ui?.header })">
+        <span :class="ui.language({ class: uiProps.ui?.language })">{{ language }}</span>
         <button
-          class="text-gray-400 hover:text-white transition-colors"
+          :class="ui.copyButton({ class: uiProps.ui?.copyButton })"
           @click="handleCopy"
         >
           <AnimatePresence mode="wait">
@@ -20,7 +20,7 @@
               :initial="{ opacity: 0, y: 5 }"
               :animate="{ opacity: 1, y: 0 }"
               :exit="{ opacity: 0, y: -5 }"
-              class="text-xs"
+              :class="ui.copy({ class: uiProps.ui?.copy })"
             >
               Copy
             </motion.span>
@@ -30,7 +30,7 @@
               :initial="{ opacity: 0, y: 5 }"
               :animate="{ opacity: 1, y: 0 }"
               :exit="{ opacity: 0, y: -5 }"
-              class="text-xs text-green-400"
+              :class="ui.copied({ class: uiProps.ui?.copied })"
             >
               Copied!
             </motion.span>
@@ -40,17 +40,17 @@
       <div class="relative">
         <div
           v-if="showLineNumbers && highlightedLines.length"
-          class="absolute left-0 top-0 bottom-0 w-12 flex flex-col items-end pr-3 pt-4 text-gray-600 text-xs font-mono select-none border-r border-default"
+          :class="ui.lineNumbers({ class: uiProps.ui?.lineNumbers })"
         >
           <span
             v-for="(_, i) in highlightedLines"
             :key="i"
-            class="leading-6"
+            :class="ui.lineNumber({ class: uiProps.ui?.lineNumber })"
           >{{ i + 1 }}</span>
         </div>
         <!-- eslint-disable vue/no-v-html -->
         <div
-          :class="['code-body', showLineNumbers ? 'pl-16' : '']"
+          :class="ui.body({ class: [showLineNumbers ? 'pl-16' : '', uiProps.ui?.body] })"
           v-html="highlightedCode"
         />
         <!-- eslint-enable vue/no-v-html -->
@@ -62,12 +62,12 @@
       initial="initial"
       animate="animate"
       :variants="containerVariants"
-      class="relative overflow-hidden rounded-lg border border-default bg-[#0d1117] text-sm"
+      :class="ui.container({ class: uiProps.ui?.container })"
     >
-      <div class="flex items-center justify-between px-4 py-2 border-b border-default">
-        <span class="text-xs text-gray-400 font-mono">{{ language }}</span>
+      <div :class="ui.header({ class: uiProps.ui?.header })">
+        <span :class="ui.language({ class: uiProps.ui?.language })">{{ language }}</span>
         <button
-          class="text-gray-400 hover:text-white transition-colors"
+          :class="ui.copyButton({ class: uiProps.ui?.copyButton })"
           @click="handleCopy"
         >
           <AnimatePresence mode="wait">
@@ -77,7 +77,7 @@
               :initial="{ opacity: 0, y: 5 }"
               :animate="{ opacity: 1, y: 0 }"
               :exit="{ opacity: 0, y: -5 }"
-              class="text-xs"
+              :class="ui.copy({ class: uiProps.ui?.copy })"
             >
               Copy
             </motion.span>
@@ -87,7 +87,7 @@
               :initial="{ opacity: 0, y: 5 }"
               :animate="{ opacity: 1, y: 0 }"
               :exit="{ opacity: 0, y: -5 }"
-              class="text-xs text-green-400"
+              :class="ui.copied({ class: uiProps.ui?.copied })"
             >
               Copied!
             </motion.span>
@@ -96,7 +96,7 @@
       </div>
       <!-- eslint-disable vue/no-v-html -->
       <div
-        class="code-body"
+        :class="ui.body({ class: uiProps.ui?.body })"
         v-html="highlightedCode"
       />
       <!-- eslint-enable vue/no-v-html -->
@@ -109,18 +109,30 @@ import { ref, onMounted, computed } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
 import { createHighlighter } from 'shiki'
 import { useClipboard } from '@vueuse/core'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import codeBlock from '../theme/code-block'
 
 interface Props {
   code: string
   language?: string
   theme?: string
   showLineNumbers?: boolean
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   language: 'vue',
   theme: 'github-dark',
   showLineNumbers: false,
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'codeBlock',
+  props,
+  theme: codeBlock,
 })
 
 const { copy } = useClipboard()

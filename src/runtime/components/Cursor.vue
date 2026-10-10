@@ -1,7 +1,7 @@
 <template>
   <Motion
     ref="cursorRef"
-    :class="['pointer-events-none fixed left-0 top-0 z-50', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="cursorStyle"
   >
     <AnimatePresence>
@@ -22,6 +22,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch, nextTick, type ComponentPublicInstance } from 'vue'
 import { useMotionValue, useSpring, AnimatePresence, Motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import cursor from '../theme/cursor'
 
 // Types
 interface SpringOptions {
@@ -43,6 +45,7 @@ interface Variant {
 
 interface CursorProps {
   class?: string
+  ui?: Record<string, any>
   springConfig?: SpringOptions
   attachToParent?: boolean
   transition?: Transition
@@ -55,7 +58,15 @@ interface CursorProps {
 }
 
 const props = withDefaults(defineProps<CursorProps>(), {
+  class: undefined,
+  ui: undefined,
   attachToParent: false,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'cursor',
+  props,
+  theme: cursor,
 })
 
 // Refs

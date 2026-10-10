@@ -1,15 +1,14 @@
 <template>
   <div
     ref="cardRef"
-    class="bg-transparent rounded-lg overflow-hidden group/card relative cursor-pointer"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @mouseenter="handleMouseEnter"
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
     <!-- Image container with scale to prevent blank spaces -->
     <motion.div
-      class="absolute inset-0 rounded-lg overflow-hidden"
+      :class="ui.imageWrapper({ class: uiProps.ui?.imageWrapper })"
       :animate="{
         scale: isHovered ? 1.1 : 1,
         transition: { duration: 0.3 },
@@ -17,12 +16,12 @@
     >
       <img
         alt="image"
-        :class="['w-full h-full object-cover', imageClass]"
+        :class="ui.image({ class: [imageClass, uiProps.ui?.image] })"
         width="1000"
         height="1000"
         :src="imageUrl"
       >
-      <div class="absolute inset-0 bg-default/40 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
+      <div :class="ui.overlay({ class: uiProps.ui?.overlay })" />
     </motion.div>
 
     <!-- Animated content -->
@@ -30,7 +29,7 @@
       <motion.div
         v-if="isHovered"
         :key="currentDirection"
-        class="absolute inset-0 z-10 p-4 flex items-end"
+        :class="ui.content({ class: uiProps.ui?.content })"
         :initial="getContentInitial()"
         :animate="getContentAnimate()"
         :exit="getContentExit()"
@@ -39,19 +38,19 @@
           ease: 'easeOut',
         }"
       >
-        <div :class="[childrenClass, 'text-inverted w-full']">
+        <div :class="ui.text({ class: [childrenClass, uiProps.ui?.text] })">
           <slot name="content">
-            <div class="space-y-2">
-              <h3 class="text-xl font-bold">
+            <div :class="ui.details({ class: uiProps.ui?.details })">
+              <h3 :class="ui.title({ class: uiProps.ui?.title })">
                 Project Title
               </h3>
-              <p class="text-inverted/80">
+              <p :class="ui.description({ class: uiProps.ui?.description })">
                 Description of the project
               </p>
               <UButton
                 variant="solid"
                 size="sm"
-                class="bg-default text-default hover:bg-default/90"
+                :class="ui.button({ class: uiProps.ui?.button })"
               >
                 View Project
               </UButton>
@@ -66,18 +65,28 @@
 <script setup lang="ts">
 import { motion, AnimatePresence } from 'motion-v'
 import { ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import directionAwareHover from '../theme/direction-aware-hover'
 
 interface Props {
   imageUrl: string
   childrenClass?: string
   imageClass?: string
   class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   childrenClass: '',
   imageClass: '',
   class: 'md:h-96 w-60 h-60 md:w-96',
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'directionAwareHover',
+  props,
+  theme: directionAwareHover,
 })
 
 // Refs

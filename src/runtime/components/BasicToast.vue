@@ -9,31 +9,27 @@
           :exit="toastExit"
           :transition="toastTransition"
           v-bind="$attrs"
-          :class="[
-            'm-toast fixed top-4 right-4 z-50 flex w-80 items-center gap-3 rounded-lg border p-4 shadow-lg',
-            typeClasses[props.type],
-            props.class,
-          ]"
+          :class="ui.root({ type: props.type, class: [uiProps.ui?.root, uiProps.class] })"
         >
-          <div class="shrink-0">
+          <div :class="ui.iconWrapper({ class: uiProps.ui?.iconWrapper })">
             <UIcon
               :name="typeIcons[props.type]"
-              :class="['h-5 w-5', typeIconColors[props.type]]"
+              :class="ui.icon({ type: props.type, class: uiProps.ui?.icon })"
             />
-            <span class="sr-only">{{ typeLabels[props.type] }}</span>
+            <span :class="ui.srLabel({ class: uiProps.ui?.srLabel })">{{ typeLabels[props.type] }}</span>
           </div>
-          <p class="flex-1 text-sm">
+          <p :class="ui.message({ class: uiProps.ui?.message })">
             {{ props.message }}
           </p>
           <button
             type="button"
             aria-label="Close notification"
-            class="shrink-0 cursor-pointer rounded-full p-1 transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+            :class="ui.close({ class: uiProps.ui?.close })"
             @click="dismiss"
           >
             <UIcon
               name="i-lucide-x"
-              class="h-4 w-4"
+              :class="ui.closeIcon({ class: uiProps.ui?.closeIcon })"
             />
           </button>
         </motion.div>
@@ -45,9 +41,12 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import basicToast from '../theme/basic-toast'
 
 export interface Props {
   class?: string
+  ui?: Record<string, any>
   duration?: number
   isVisible?: boolean
   message: string
@@ -56,10 +55,13 @@ export interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   class: undefined,
+  ui: undefined,
   duration: 3000,
   isVisible: true,
   type: 'info',
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'basicToast', props, theme: basicToast })
 
 // The root is <ClientOnly>, which swallows fallthrough attributes without a warning, so
 // data-testid / aria-* / id on <BasicToast> would silently vanish. Opt out and spread them
@@ -80,20 +82,6 @@ const typeIcons = {
   info: 'i-lucide-info',
   success: 'i-lucide-circle-check',
   warning: 'i-lucide-circle-alert',
-} as const
-
-const typeIconColors = {
-  error: 'text-error',
-  info: 'text-info',
-  success: 'text-success',
-  warning: 'text-warning',
-} as const
-
-const typeClasses = {
-  error: 'border-error/20 bg-error/10',
-  info: 'border-info/20 bg-info/10',
-  success: 'border-success/20 bg-success/10',
-  warning: 'border-warning/20 bg-warning/10',
 } as const
 
 const typeLabels = {

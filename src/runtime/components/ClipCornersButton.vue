@@ -1,12 +1,12 @@
 <template>
   <div
-    class="relative inline-block"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
   >
     <!-- Top-left triangle -->
     <motion.div
-      class="absolute pointer-events-none z-20"
+      :class="ui.corner({ class: uiProps.ui?.corner })"
       :style="{ top: `${inset}px`, left: `${inset}px`, width: `${s}px`, height: `${s}px` }"
       :initial="false"
       :animate="shouldReduceMotion || !isHoverDevice ? {} : { x: isHovered ? move : 0, y: isHovered ? move : 0 }"
@@ -26,7 +26,7 @@
 
     <!-- Top-right triangle -->
     <motion.div
-      class="absolute pointer-events-none z-20"
+      :class="ui.corner({ class: uiProps.ui?.corner })"
       :style="{ top: `${inset}px`, right: `${inset}px`, width: `${s}px`, height: `${s}px` }"
       :initial="false"
       :animate="shouldReduceMotion || !isHoverDevice ? {} : { x: isHovered ? -move : 0, y: isHovered ? move : 0 }"
@@ -46,7 +46,7 @@
 
     <!-- Bottom-left triangle -->
     <motion.div
-      class="absolute pointer-events-none z-20"
+      :class="ui.corner({ class: uiProps.ui?.corner })"
       :style="{ bottom: `${inset}px`, left: `${inset}px`, width: `${s}px`, height: `${s}px` }"
       :initial="false"
       :animate="shouldReduceMotion || !isHoverDevice ? {} : { x: isHovered ? move : 0, y: isHovered ? -move : 0 }"
@@ -66,7 +66,7 @@
 
     <!-- Bottom-right triangle -->
     <motion.div
-      class="absolute pointer-events-none z-20"
+      :class="ui.corner({ class: uiProps.ui?.corner })"
       :style="{ bottom: `${inset}px`, right: `${inset}px`, width: `${s}px`, height: `${s}px` }"
       :initial="false"
       :animate="shouldReduceMotion || !isHoverDevice ? {} : { x: isHovered ? -move : 0, y: isHovered ? -move : 0 }"
@@ -95,17 +95,29 @@
 import { ref, computed, onMounted } from 'vue'
 import { motion } from 'motion-v'
 import { useHoverCapable } from '../composables/useHoverCapable'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import clipCornersButton from '../theme/clip-corners-button'
 
 interface Props {
   triangleColor?: string
   triangleSize?: number
   triangleInset?: number
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   triangleColor: 'var(--ui-background)',
   triangleSize: 8,
   triangleInset: 4,
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'clipCornersButton',
+  props,
+  theme: clipCornersButton,
 })
 
 defineOptions({ inheritAttrs: false })

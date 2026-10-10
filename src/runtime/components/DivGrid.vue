@@ -1,18 +1,12 @@
 <template>
   <div
-    class="div-grid"
-    :class="['relative z-[3]', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="gridStyle"
   >
     <div
       v-for="idx in cells"
       :key="idx"
-      class="cell"
-      :class="[
-        'relative border-[0.5px] opacity-40 transition-opacity duration-150 will-change-transform hover:opacity-80 dark:shadow-[0px_0px_40px_1px_var(--cell-shadow-color)_inset]',
-        clickedCell && 'animate-cell-ripple [animation-fill-mode:none]',
-        !interactive && 'pointer-events-none',
-      ]"
+      :class="ui.cell({ class: [uiProps.ui?.cell, clickedCell && 'animate-cell-ripple [animation-fill-mode:none]', !interactive && 'pointer-events-none'] })"
       :style="getCellStyle(idx) as any"
       @click="interactive ? handleClick(idx) : undefined"
     />
@@ -21,6 +15,8 @@
 
 <script setup lang="ts">
 import { computed, type PropType } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import divGrid from '../theme/div-grid'
 
 interface ClickedCell {
   row: number
@@ -67,7 +63,13 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  ui: {
+    type: Object as PropType<Record<string, any>>,
+    default: undefined,
+  },
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'divGrid', props, theme: divGrid })
 
 const emit = defineEmits<{
   cellClick: [row: number, col: number]

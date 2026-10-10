@@ -1,9 +1,9 @@
 <template>
-  <div :class="['relative', props.class]">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <Motion
       v-for="(card, index) in cards"
       :key="card.id"
-      class="absolute w-full h-full"
+      :class="ui.card({ class: uiProps.ui?.card })"
       :style="{
         transformOrigin: 'top center',
       }"
@@ -33,8 +33,8 @@
             :card="card"
             :index="index"
           >
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-highlighted">
+            <div :class="ui.header({ class: uiProps.ui?.header })">
+              <h3 :class="ui.title({ class: uiProps.ui?.title })">
                 {{ card.title || `Card ${card.id}` }}
               </h3>
             </div>
@@ -42,7 +42,7 @@
         </template>
 
         <!-- Content Slot -->
-        <div class="flex-1 font-normal text-default">
+        <div :class="ui.content({ class: uiProps.ui?.content })">
           <slot
             name="content"
             :card="card"
@@ -59,18 +59,18 @@
             :card="card"
             :index="index"
           >
-            <div class="flex items-center gap-2">
+            <div :class="ui.footer({ class: uiProps.ui?.footer })">
               <UAvatar
                 :src="card.avatar"
                 :alt="card.name"
                 size="lg"
-                class="rounded-full"
+                :class="ui.avatar({ class: uiProps.ui?.avatar })"
               />
               <div>
-                <p class="text-muted font-medium dark:text-inverted">
+                <p :class="ui.name({ class: uiProps.ui?.name })">
                   {{ card.name }}
                 </p>
-                <p class="text-muted font-normal dark:text-default text-sm">
+                <p :class="ui.designation({ class: uiProps.ui?.designation })">
                   {{ card.designation }}
                 </p>
               </div>
@@ -85,6 +85,8 @@
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 import { onMounted, onUnmounted, ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import cardStack from '../theme/card-stack'
 
 interface Card {
   id: number
@@ -102,12 +104,20 @@ const props = withDefaults(defineProps<{
   autoRotate?: boolean
   rotateInterval?: number
   class?: string
+  ui?: Record<string, any>
 }>(), {
   offset: 10,
   scaleFactor: 0.06,
   autoRotate: true,
   rotateInterval: 5000,
   class: 'h-60 w-60 md:h-60 md:w-96',
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'cardStack',
+  props,
+  theme: cardStack,
 })
 
 // Reactive state

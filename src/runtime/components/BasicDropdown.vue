@@ -8,7 +8,7 @@
     `USelect` explicitly for its own `ui.base` merge to place it on the trigger.
   -->
   <USelect
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :model-value="internalId"
     :items="props.items"
     :value-key="VALUE_KEY"
@@ -16,7 +16,7 @@
     :aria-label="triggerLabel"
     aria-haspopup="listbox"
     :content="content"
-    :ui="ui"
+    :ui="selectUi"
     v-bind="$attrs"
     @update:model-value="onUpdateValue"
   >
@@ -35,30 +35,30 @@
         v-if="item.icon"
         :name="item.icon"
         data-slot="itemLeadingIcon"
-        class="size-5 shrink-0"
+        :class="ui.itemLeadingIcon({ class: uiProps.ui?.itemLeadingIcon })"
       />
 
       <span
         data-slot="itemWrapper"
-        class="m-basic-dropdown__item-wrapper"
+        :class="ui.itemWrapper({ class: uiProps.ui?.itemWrapper })"
       >
         <SelectItemText
           data-slot="itemLabel"
-          class="m-basic-dropdown__item-label"
+          :class="ui.itemLabel({ class: uiProps.ui?.itemLabel })"
         >{{ item.label }}</SelectItemText>
       </span>
 
       <span
         data-slot="itemTrailing"
-        class="m-basic-dropdown__item-trailing"
+        :class="ui.itemTrailing({ class: uiProps.ui?.itemTrailing })"
       >
         <span
           v-if="item.id === internalId"
           data-slot="itemTrailingIcon"
-          class="m-basic-dropdown__check"
+          :class="ui.itemTrailingIcon({ class: uiProps.ui?.itemTrailingIcon })"
         >
           <svg
-            class="h-4 w-4 text-primary"
+            :class="ui.checkIcon({ class: uiProps.ui?.checkIcon })"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -82,7 +82,7 @@
       >
         <UIcon
           name="i-lucide-chevron-down"
-          class="h-4 w-4"
+          :class="ui.chevronIcon({ class: uiProps.ui?.chevronIcon })"
         />
       </motion.div>
     </template>
@@ -97,6 +97,8 @@ import { motion, useReducedMotion } from 'motion-v'
 // stays the label alone: the check SVG's `<title>Selected</title>` lives in the same subtree and
 // would otherwise be folded into the name, giving "Option 2 Selected".
 import { SelectItemText } from 'reka-ui'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import basicDropdown from '../theme/basic-dropdown'
 
 const ROTATION_ANGLE_OPEN = 180
 const ROTATION_DURATION = 0.2
@@ -110,10 +112,13 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<Props>(), {
   class: undefined,
+  ui: undefined,
   // `undefined` (not `null`) is the default so that "no `v-model` bound" stays distinguishable
   // from "`v-model` bound to `null`". Only the latter is a controlled empty state.
   modelValue: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'basicDropdown', props, theme: basicDropdown })
 
 const emit = defineEmits<{
   'change': [item: DropdownItem]
@@ -193,19 +198,19 @@ const content = {
  * `ui` prop rather than through a `scoped` style block: the content is teleported to `<body>` and
  * rendered by `USelect`, so no scope attribute is ever added to it.
  */
-const ui = {
+const selectUi = computed(() => ({
   // `text-left` and `gap-2` are the reference's own trigger declarations. `text-left` matters: the
   // Nuxt UI theme puts `text-center` on the trigger and its `pe-2.5` + `pr-9` on the trailing slot,
   // so without it the selected label is centred instead of flush-left and the chevron sits 10px from
   // the edge rather than the reference's 16px. `trailing: pe-4` restores that inset.
-  base: 'm-basic-dropdown__trigger min-h-[44px] w-full justify-between gap-2 rounded-lg px-4 text-left',
-  trailing: 'pe-4',
-  content: 'm-basic-dropdown__content rounded-lg',
-  group: 'm-basic-dropdown__group',
-  item: 'm-basic-dropdown__item',
-  itemLabel: 'm-basic-dropdown__item-label',
-  viewport: 'm-basic-dropdown__viewport',
-}
+  base: ui.value.base({ class: uiProps.ui?.base }),
+  trailing: ui.value.trailing({ class: uiProps.ui?.trailing }),
+  content: ui.value.content({ class: uiProps.ui?.content }),
+  group: ui.value.group({ class: uiProps.ui?.group }),
+  item: ui.value.item({ class: uiProps.ui?.item }),
+  itemLabel: ui.value.itemLabel({ class: uiProps.ui?.itemLabel }),
+  viewport: ui.value.viewport({ class: uiProps.ui?.viewport }),
+}))
 </script>
 
 <script lang="ts">
@@ -217,6 +222,7 @@ export interface DropdownItem {
 
 export interface Props {
   class?: string
+  ui?: Record<string, any>
   items: DropdownItem[]
   label: string
   modelValue?: DropdownItem | null

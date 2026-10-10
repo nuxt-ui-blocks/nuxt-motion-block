@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { motion, useReducedMotion, type PanInfo, type VariantType } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import coverflowCarousel from '../theme/coverflow-carousel'
 
 defineOptions({ inheritAttrs: false })
 
@@ -15,6 +17,7 @@ const props = withDefaults(defineProps<{
   autoplay?: boolean
   autoplayDelay?: number
   class?: string
+  ui?: Record<string, any>
   depth?: number
   index?: number
   inverted?: boolean
@@ -26,6 +29,8 @@ const props = withDefaults(defineProps<{
 }>(), {
   autoplay: false,
   autoplayDelay: 4000,
+  class: undefined,
+  ui: undefined,
   depth: 180,
   inverted: false,
   items: () => [],
@@ -33,6 +38,12 @@ const props = withDefaults(defineProps<{
   rotation: 45,
   scaleStep: 0.15,
   spacing: 220,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'coverflowCarousel',
+  props,
+  theme: coverflowCarousel,
 })
 
 const emit = defineEmits<{
@@ -162,8 +173,7 @@ function slideAnimate(index: number): VariantType {
 <template>
   <div
     ref="regionRef"
-    class="relative w-full select-none outline-none"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     role="region"
     aria-label="Coverflow carousel"
     aria-roledescription="carousel"
@@ -176,7 +186,7 @@ function slideAnimate(index: number): VariantType {
     @mouseleave="isPaused = false"
   >
     <motion.div
-      class="relative mx-auto flex h-[320px] items-center justify-center"
+      :class="ui.stage({ class: uiProps.ui?.stage })"
       :drag="total > 1 && !reducedMotion ? 'x' : false"
       :drag-constraints="{ left: 0, right: 0 }"
       :drag-elastic="0.12"
@@ -187,7 +197,7 @@ function slideAnimate(index: number): VariantType {
         v-for="(item, i) in props.items"
         v-show="isVisible(i)"
         :key="item.id"
-        class="absolute h-[220px] w-[280px] overflow-hidden rounded-2xl border border-foreground/10 bg-background shadow-xl"
+        :class="ui.card({ class: uiProps.ui?.card })"
         :aria-hidden="!isActive(i)"
         :style="{ transformStyle: 'preserve-3d', zIndex: total - Math.abs(getOffset(i)) }"
         :animate="slideAnimate(i)"
@@ -196,22 +206,22 @@ function slideAnimate(index: number): VariantType {
           v-if="item.image"
           :src="item.image"
           :alt="item.alt ?? ''"
-          class="h-full w-full object-cover"
+          :class="ui.image({ class: uiProps.ui?.image })"
           draggable="false"
         >
         <div
           v-else
-          class="flex h-full w-full items-center justify-center p-4 text-sm"
+          :class="ui.content({ class: uiProps.ui?.content })"
         >
           {{ item.content }}
         </div>
       </motion.div>
     </motion.div>
 
-    <div class="mt-4 flex items-center justify-center gap-4">
+    <div :class="ui.controls({ class: uiProps.ui?.controls })">
       <button
         type="button"
-        class="rounded-full border border-default bg-default px-4 py-1.5 text-sm text-default transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
+        :class="ui.button({ class: uiProps.ui?.button })"
         :disabled="!props.loop && activeIndex === 0"
         aria-label="Previous slide"
         @click="goTo(activeIndex - 1)"
@@ -220,7 +230,7 @@ function slideAnimate(index: number): VariantType {
       </button>
       <button
         type="button"
-        class="rounded-full border border-default bg-default px-4 py-1.5 text-sm text-default transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
+        :class="ui.button({ class: uiProps.ui?.button })"
         :disabled="!props.loop && activeIndex === total - 1"
         aria-label="Next slide"
         @click="goTo(activeIndex + 1)"
@@ -230,7 +240,7 @@ function slideAnimate(index: number): VariantType {
     </div>
 
     <div
-      class="sr-only"
+      :class="ui.status({ class: uiProps.ui?.status })"
       aria-live="polite"
     >
       Slide {{ activeIndex + 1 }} of {{ total }}

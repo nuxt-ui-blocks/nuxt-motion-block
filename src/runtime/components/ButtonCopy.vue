@@ -1,6 +1,7 @@
 <template>
   <UButton
     v-bind="$attrs"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     @click="handleCopy"
   >
     <template #leading>
@@ -12,11 +13,11 @@
           :animate="{ opacity: 1, scale: 1, rotate: 0 }"
           :exit="{ opacity: 0, scale: 0.5, rotate: 90 }"
           :transition="{ duration: 0.2 }"
-          class="inline-flex"
+          :class="ui.copyIcon({ class: uiProps.ui?.copyIcon })"
         >
           <slot name="copy-icon">
             <svg
-              class="w-4 h-4"
+              :class="ui.copyIconSvg({ class: uiProps.ui?.copyIconSvg })"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -37,11 +38,11 @@
           :animate="{ opacity: 1, scale: 1, rotate: 0 }"
           :exit="{ opacity: 0, scale: 0.5, rotate: 90 }"
           :transition="{ duration: 0.2 }"
-          class="inline-flex text-green-400"
+          :class="ui.copiedIcon({ class: uiProps.ui?.copiedIcon })"
         >
           <slot name="copied-icon">
             <svg
-              class="w-4 h-4"
+              :class="ui.copiedIconSvg({ class: uiProps.ui?.copiedIconSvg })"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -77,7 +78,7 @@
           :animate="{ opacity: 1, y: 0 }"
           :exit="{ opacity: 0, y: -8 }"
           :transition="{ duration: 0.15 }"
-          class="text-green-400"
+          :class="ui.copiedLabel({ class: uiProps.ui?.copiedLabel })"
         >
           Copied!
         </motion.span>
@@ -97,17 +98,25 @@
 import { ref } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
 import { useClipboard } from '@vueuse/core'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import buttonCopy from '../theme/button-copy'
 
 defineOptions({ inheritAttrs: false })
 
 interface Props {
+  class?: string
+  ui?: Record<string, any>
   text: string
   copiedDuration?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  class: undefined,
+  ui: undefined,
   copiedDuration: 2000,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'buttonCopy', props, theme: buttonCopy })
 
 const { copy } = useClipboard()
 const copied = ref(false)

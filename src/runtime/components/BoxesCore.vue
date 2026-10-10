@@ -2,17 +2,13 @@
 <template>
   <div
     :style="containerStyle"
-    :class="[
-      'absolute -top-1/4 left-1/4 z-0 flex h-full w-full -translate-x-1/2 -translate-y-1/2 p-4',
-      props.class,
-    ]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     v-bind="rest"
   >
     <div
       v-for="(_, i) in rowsArray"
       :key="`row-${i}`"
-      class="relative h-8 w-16 border-l"
-      :class="borderClass"
+      :class="ui.row({ class: [uiProps.ui?.row, borderClass] })"
     >
       <motion.div
         v-for="(_, j) in colsArray"
@@ -24,8 +20,7 @@
         :animate="{
           transition: { duration: 2 },
         }"
-        class="relative h-8 w-16 border-t border-r"
-        :class="borderClass"
+        :class="ui.cell({ class: [uiProps.ui?.cell, borderClass] })"
       >
         <svg
           v-if="showPlusSigns && j % 2 === 0 && i % 2 === 0"
@@ -34,8 +29,7 @@
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="pointer-events-none absolute -top-[14px] -left-[22px] h-6 w-10 stroke-[1px]"
-          :class="borderClass.replace('border-', 'text-')"
+          :class="ui.plusSign({ class: [uiProps.ui?.plusSign, borderClass.replace('border-', 'text-')] })"
         >
           <path
             stroke-linecap="round"
@@ -51,10 +45,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import boxesCore from '../theme/boxes-core'
 
 // Define props with defaults
 interface Props {
   class?: string
+  ui?: Record<string, any>
   rows?: number
   cols?: number
   colors?: string[]
@@ -65,7 +62,8 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  class: '',
+  class: undefined,
+  ui: undefined,
   rows: 150,
   cols: 100,
   skew: true,
@@ -84,7 +82,9 @@ const props = withDefaults(defineProps<Props>(), {
   ],
 })
 
-const { class: _, borderColor, ...rest } = props
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'boxesCore', props, theme: boxesCore })
+
+const { class: _, borderColor, ui: _ui, ...rest } = props
 
 // Computed properties for reactive arrays
 const rowsArray = computed(() => Array.from({ length: props.rows }))

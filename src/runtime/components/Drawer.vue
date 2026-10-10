@@ -24,7 +24,8 @@
     :set-background-color-on-scale="setBackgroundColorOnScale"
     :no-body-styles="noBodyStyles"
     :prevent-scroll-restoration="preventScrollRestoration"
-    :ui="mergedUi"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
+    :ui="drawerUi"
     @update:open="handleUpdateOpen"
     @close="$emit('close')"
     @drag="$emit('drag', $event)"
@@ -47,14 +48,14 @@
           :animate="contentAnimate"
           :exit="contentExit"
           :transition="contentTransition"
-          class="flex flex-1 flex-col"
+          :class="ui.content({ class: uiProps.ui?.content })"
         >
           <motion.div
             v-if="showAnimatedHandle"
             :initial="handleInitial"
             :animate="handleAnimate"
             :transition="handleTransition"
-            :class="handleClasses"
+            :class="ui.handle({ class: uiProps.ui?.handle })"
             aria-hidden="true"
           />
 
@@ -64,19 +65,19 @@
             :animate="childAnimate"
             :exit="childExit"
             :transition="staggerTransitions[0]"
-            :class="headerClasses"
+            :class="ui.header({ class: uiProps.ui?.header })"
           >
             <slot name="header">
               <div
                 v-if="title"
-                class="flex flex-col gap-1"
+                :class="ui.headerContent({ class: uiProps.ui?.headerContent })"
               >
-                <h2 class="text-lg font-semibold text-highlighted">
+                <h2 :class="ui.title({ class: uiProps.ui?.title })">
                   {{ title }}
                 </h2>
                 <p
                   v-if="description"
-                  class="text-sm text-muted"
+                  :class="ui.description({ class: uiProps.ui?.description })"
                 >
                   {{ description }}
                 </p>
@@ -89,7 +90,7 @@
             :animate="childAnimate"
             :exit="childExit"
             :transition="staggerTransitions[1]"
-            :class="bodyClasses"
+            :class="ui.body({ class: uiProps.ui?.body })"
           >
             <slot name="body" />
           </motion.div>
@@ -100,7 +101,7 @@
             :animate="childAnimate"
             :exit="childExit"
             :transition="staggerTransitions[2]"
-            :class="footerClasses"
+            :class="ui.footer({ class: uiProps.ui?.footer })"
           >
             <slot name="footer" />
           </motion.div>
@@ -165,6 +166,8 @@
 <script setup lang="ts">
 import { computed, ref, toRef } from 'vue'
 import { motion, AnimatePresence, useReducedMotion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import drawer from '../theme/drawer'
 
 defineOptions({ inheritAttrs: false })
 
@@ -198,6 +201,7 @@ interface Props {
   setBackgroundColorOnScale?: boolean
   noBodyStyles?: boolean
   preventScrollRestoration?: boolean
+  class?: string
   ui?: Record<string, any>
 }
 
@@ -216,8 +220,11 @@ const props = withDefaults(defineProps<Props>(), {
   modal: true,
   handleOnly: false,
   setBackgroundColorOnScale: true,
-  ui: () => ({}),
+  class: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'drawer', props, theme: drawer })
 
 const emit = defineEmits<{
   'update:open': [value: boolean]
@@ -312,16 +319,8 @@ const handleTransition = computed(() => {
   }
 })
 
-const mergedUi = computed(() => ({
-  ...props.ui,
-  overlay: [
-    'bg-default/50 backdrop-blur-sm',
-    props.ui?.overlay,
-  ].filter(Boolean).join(' '),
+const drawerUi = computed(() => ({
+  ...uiProps.ui,
+  overlay: ui.value.overlay({ class: uiProps.ui?.overlay }),
 }))
-
-const handleClasses = 'mx-auto mt-4 h-1.5 w-12 shrink-0 rounded-full bg-accented'
-const headerClasses = 'px-6 py-4 border-b border-default'
-const bodyClasses = 'flex-1 overflow-y-auto px-6 py-4'
-const footerClasses = 'px-6 py-4 border-t border-default'
 </script>
