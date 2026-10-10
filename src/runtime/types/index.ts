@@ -7,3 +7,4 @@ export type {
   AiUIMessage,
   AIToolCallStatus,
 } from './ai'
+export type * from './app'

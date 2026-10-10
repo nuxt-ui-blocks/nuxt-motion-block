@@ -14,6 +14,14 @@
     "./types": {
       "types": "./dist/runtime/types/index.d.ts",
       "import": "./dist/runtime/types/index.js"
+    },
+    "./runtime/theme": {
+      "types": "./dist/runtime/theme/index.d.ts",
+      "import": "./dist/runtime/theme/index.js"
+    },
+    "./runtime/composables/useMotionBlockUI": {
+      "types": "./dist/runtime/composables/useMotionBlockUI.d.ts",
+      "import": "./dist/runtime/composables/useMotionBlockUI.js"
     }
   },
   "main": "./dist/module.mjs",
