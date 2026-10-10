@@ -15,7 +15,7 @@ here" case where the value itself is not moving.
 
 The bar you see is an overlay. A real `UProgress` sits underneath with its
 indicator forced to `opacity-0`, and the component measures the track and the
-hidden indicator at mount to copy their geometry and colour ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â which is why
+hidden indicator at mount to copy their geometry and colour ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â which is why
 `color` and `size` are forwarded to `UProgress` and then read back off it instead
 of being applied twice.
 
@@ -81,8 +81,8 @@ function advance() {
 
 ::field-group
   ::field{name="value" type="number" default="0"}
-  The fill percentage, clamped to `0`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ`100` before anything else happens. This is
-  a one-way input ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the component never writes back, so it does not emit a model
+  The fill percentage, clamped to `0`ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“`100` before anything else happens. This is
+  a one-way input ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the component never writes back, so it does not emit a model
   update.
   ::
   ::field{name="label" type="string"}
@@ -112,7 +112,7 @@ function advance() {
   Forwarded to `UProgress`, and additionally caps what the hidden progress
   reports. An array switches on stepped mode: the array's entries become step
   labels through the `step-N` slots, and the effective maximum is
-  `length - 1`. See the tip ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the visible bar does not follow this.
+  `length - 1`. See the tip ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the visible bar does not follow this.
   ::
   ::field{name="orientation" type="'horizontal' | 'vertical'" default="'horizontal'"}
   Forwarded to `UProgress`. Only `'horizontal'` is animated; a vertical bar renders
@@ -163,7 +163,7 @@ with no ARIA, so the number is exposed once and the bar's motion is invisible to
 assistive technology.
 
 The gap is the name. `label` is rendered in a sibling `<div>` and nothing links
-it to the progressbar ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â there is no `aria-labelledby`, and because the component
+it to the progressbar ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â there is no `aria-labelledby`, and because the component
 does not set `inheritAttrs: false` any `aria-label` you add lands on the outer
 wrapper rather than on the progressbar itself. If a name matters, put an
 `aria-label` on a wrapping element with `role="region"`, or announce the value
@@ -181,15 +181,15 @@ because it is read from the progressbar's ARIA and not from the animation.
   fighting for the same track.
 - `measure()` runs once on mount, from a `ResizeObserver` on the root, and again
   on the next tick whenever `status`, `label`, `shimmer`, `size`, `color` or `max`
-  changes ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the cases where the track can move. The observer disconnects on
+  changes ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the cases where the track can move. The observer disconnects on
   unmount.
 - The overlay's colour and radius are read from `getComputedStyle` on the hidden
   indicator and the track, so the bar always matches the theme rather than
   restating its colours as props.
-- `value` is clamped to `0`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ`100` and then capped at `max`, so an out-of-range
+- `value` is clamped to `0`ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“`100` and then capped at `max`, so an out-of-range
   value cannot overflow the track.
 - The shimmer is a `200%`-wide gradient child sweeping `x` from `-100%` to `100%`
-  on a 1.5s linear repeat ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â one infinite transform animation, no `setInterval`.
+  on a 1.5s linear repeat ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â one infinite transform animation, no `setInterval`.
 - Unlike the rest of this set, the fill animates **`width`**, not a transform.
   That is a layout-animating property; the cost is contained to one absolutely
   positioned overlay inside a fixed-size track.
@@ -197,68 +197,14 @@ because it is read from the progressbar's ARIA and not from the animation.
 
 ::tip
 `max` is applied to the hidden progress but not to the visible bar. The bar
-animates `value` capped to `0`ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ`100` and used directly as a percentage of the
+animates `value` capped to `0`ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“`100` and used directly as a percentage of the
 track, while `UProgress` receives `min(clampedValue, max)`. With `:max="50"` and
 `value="50"` the bar stops at half the track while the progress underneath reports
 100%; with `:max="200"` the bar is full at `value="150"` while the progress
-reports 50%. An array `max` is worse ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â its effective maximum is `length - 1`, so
+reports 50%. An array `max` is worse ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â its effective maximum is `length - 1`, so
 `[0, 25, 50, 75, 100]` with `value="4"` leaves the bar at 4% while the progress
 reports 100%. Leave `max` unset when the bar is what the user should be reading.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedProgressBar` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'relative w-full'` |
-| `label` | `'mb-1 font-medium text-sm'` |
-| `track` | `'pointer-events-none absolute left-0 overflow-hidden'` |
-| `bar` | `'h-full overflow-hidden'` |
-| `shimmer` | `'absolute inset-y-0 left-0'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedProgressBar` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative w-full` |
-| `label` | `mb-1 font-medium text-sm` |
-| `track` | `pointer-events-none absolute left-0 overflow-hidden` |
-| `bar` | `h-full overflow-hidden` |
-| `shimmer` | `absolute inset-y-0 left-0` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedProgressBar` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative w-full` |
-| `label` | `mb-1 font-medium text-sm` |
-| `track` | `pointer-events-none absolute left-0 overflow-hidden` |
-| `bar` | `h-full overflow-hidden` |
-| `shimmer` | `absolute inset-y-0 left-0` |
 
 ## UI
 

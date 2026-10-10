@@ -9,7 +9,7 @@ navigation:
 
 A number input whose digits roll. Each character of the displayed value sits in
 its own cell, and when a character changes it enters and exits with a vertical
-offset in the direction of the change ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â up when the number grew, down when it
+offset in the direction of the change ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â up when the number grew, down when it
 shrank.
 
 The visible digits are not the input's text. A real `UInputNumber` sits underneath
@@ -25,7 +25,7 @@ reformatted under the caret.
 ## Usage
 
 Bind `v-model` to a number. Use `formatOptions` for anything `Intl.NumberFormat`
-accepts ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â currency, compact notation, locale grouping ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and `min`/`max` to clamp
+accepts ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â currency, compact notation, locale grouping ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and `min`/`max` to clamp
 the field. Setting `decrement="false"` moves the number left so it clears the
 increment button on its own.
 
@@ -89,7 +89,7 @@ const total = computed(() => new Intl.NumberFormat('en-US', currency).format(sea
   ::
   ::field{name="label" type="string" default="''"}
   Rendered as a real `<label :for>` above the field, and only rendered at all
-  when non-empty ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â there is no floating or in-field label here.
+  when non-empty ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â there is no floating or in-field label here.
   ::
   ::field{name="formatOptions" type="Intl.NumberFormatOptions"}
   Forwarded into `new Intl.NumberFormat`. Accepts anything `Intl` does, so
@@ -171,7 +171,7 @@ Two consequences of that arrangement are worth stating plainly. Because the
 overlay is `select-none` and the underlying text is transparent, **the displayed
 value cannot be selected or copied** by dragging over it. And since the real
 input is a text field rather than `type="number"`, the digits the user sees are
-the unformatted raw text ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â in-page find, autofill and password managers all see
+the unformatted raw text ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â in-page find, autofill and password managers all see
 the raw value, not the currency-formatted one.
 
 `useReducedMotion()` is honoured. Under reduce the spring collapses to
@@ -204,69 +204,9 @@ swap in place instead of rolling.
 Each character's cell is keyed by its **index** and the animated span inside is
 keyed by the **character**, so `AnimatePresence` diffs per position. Going from
 `2500` to `3000` rolls only the leading digit and leaves the rest of the number
-perfectly still ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the animation is local to the characters that changed, not to
+perfectly still ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the animation is local to the characters that changed, not to
 the value as a whole.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedNumberInput` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'inline-flex flex-col gap-1.5'` |
-| `label` | `'text-sm font-medium text-highlighted'` |
-| `field` | `'animated-number-input-hide relative'` |
-| `input` | `'w-full'` |
-| `overlay` | `'pointer-events-none absolute inset-0 flex select-none items-center text-base/5 text-highlighted md:text-sm'` |
-| `digit` | `'relative inline-block h-[1.2em] w-[0.62em] overflow-hidden text-center align-bottom tabular-nums'` |
-| `char` | `'absolute inset-0 flex items-center justify-center'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedNumberInput` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `inline-flex flex-col gap-1.5` |
-| `label` | `text-sm font-medium text-highlighted` |
-| `field` | `animated-number-input-hide relative` |
-| `input` | `w-full` |
-| `overlay` | `pointer-events-none absolute inset-0 flex select-none items-center text-base/5 text-highlighted md:text-sm` |
-| `digit` | `relative inline-block h-[1.2em] w-[0.62em] overflow-hidden text-center align-bottom tabular-nums` |
-| `char` | `absolute inset-0 flex items-center justify-center` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedNumberInput` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `inline-flex flex-col gap-1.5` |
-| `label` | `text-sm font-medium text-highlighted` |
-| `field` | `animated-number-input-hide relative` |
-| `input` | `w-full` |
-| `overlay` | `pointer-events-none absolute inset-0 flex select-none items-center text-base/5 text-highlighted md:text-sm` |
-| `digit` | `relative inline-block h-[1.2em] w-[0.62em] overflow-hidden text-center align-bottom tabular-nums` |
-| `char` | `absolute inset-0 flex items-center justify-center` |
 
 ## UI
 

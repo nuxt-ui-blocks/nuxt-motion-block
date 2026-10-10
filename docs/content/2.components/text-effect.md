@@ -7,14 +7,14 @@ navigation:
 
 # Text Effect
 
-Takes a plain string and splits it into segments ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â characters, words or lines ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
+Takes a plain string and splits it into segments ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â characters, words or lines ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
 then reveals each one in sequence. It is the general-purpose version of the
 family: if you want a specific motion (blur, scramble, roll, wave) there is a
 dedicated component, and this is the one to reach for when the difference
 between those motions does not matter.
 
 Two independent rates shape the result. `speedReveal` sets the stagger between
-segments ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the built-in defaults are `0.03s` per character, `0.05s` per word and
+segments ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the built-in defaults are `0.03s` per character, `0.05s` per word and
 `0.1s` per line, divided by `speedReveal`. `speedSegment` sets how long each
 segment takes on its own. Text that should feel punchy wants a high
 `speedSegment` and a low `speedReveal`; text that should feel deliberate wants
@@ -44,7 +44,7 @@ label: Preview
   <div class="flex w-full max-w-md flex-col gap-5">
     <div class="rounded-2xl border border-default bg-default p-6">
       <p class="mb-3 text-xs font-medium uppercase tracking-widest text-muted">
-        {{ per }} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· {{ preset }}
+        {{ per }} ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· {{ preset }}
       </p>
       <MTextEffect
         :key="run"
@@ -95,7 +95,7 @@ const presetOptions = ['blur', 'fade-in-blur', 'scale', 'fade', 'slide']
 ::field-group
   ::field{name="children" type="string" default="''"}
   The text to animate. It is split on whitespace for `word`, on newlines for
-  `line`, and per character for `char` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â there is no slot, so a multi-line
+  `line`, and per character for `char` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â there is no slot, so a multi-line
   string in `line` mode needs real `\n` characters.
   ::
   ::field{name="per" type="'word' | 'char' | 'line'" default="'word'"}
@@ -124,7 +124,7 @@ const presetOptions = ['blur', 'fade-in-blur', 'scale', 'fade', 'slide']
   ::
   ::field{name="trigger" type="boolean" default="true"}
   Whether the animated tree renders at all. Set it to `false` and the root
-  element is empty ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the text does not appear as plain text ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â so it is a switch
+  element is empty ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the text does not appear as plain text ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so it is a switch
   for "show the animation" versus "show nothing", not a way to disable motion.
   To replay, remount the component (a changing `:key` is enough).
   ::
@@ -134,7 +134,7 @@ const presetOptions = ['blur', 'fade-in-blur', 'scale', 'fade', 'slide']
   ::
   ::field{name="variants" type="{ container?: Record<string, any>, item?: Record<string, any> }"}
   Motion variants that replace the generated ones. `container` replaces the
-  stagger orchestration entirely ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â supply your own `staggerChildren` if you do,
+  stagger orchestration entirely ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â supply your own `staggerChildren` if you do,
   since the computed `speedReveal` and `delay` no longer apply. `item` replaces
   the preset's hidden/visible pair.
   ::
@@ -173,69 +173,18 @@ and render your own plain text if you need a non-animated fallback.
 - `char` mode builds one extra wrapper element per word, so the element count is
   roughly `characters + words`. `word` mode is the cheapest option; `char` on a
   long paragraph is not.
-- The blur presets animate a `filter`, which is composited but not free ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a long
+- The blur presets animate a `filter`, which is composited but not free ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a long
   string in `blur` or `fade-in-blur` does more work per frame than `fade`.
 - Changing `speedReveal` or `speedSegment` recomputes the variants and the
   stagger, but no animation state is reset, so it can be driven live.
 
 ::tip
 `speedSegment` is not "speed" in the intuitive sense. It only sets each segment's
-own duration, while `speedReveal` sets the gap between segments ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â so raising
+own duration, while `speedReveal` sets the gap between segments ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so raising
 `speedSegment` makes every segment take longer but the overall run *longer and
 more deliberate*, not faster. Raise `speedReveal` when you want it to feel
 brisk.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.textEffect` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `''` |
-| `container` | `''` |
-| `segmentWrapper` | `''` |
-| `segment` | `''` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.textEffect` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` |  |
-| `container` |  |
-| `segmentWrapper` |  |
-| `segment` |  |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.textEffect` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` |  |
-| `container` |  |
-| `segmentWrapper` |  |
-| `segment` |  |
 
 ## UI
 

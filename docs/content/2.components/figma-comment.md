@@ -96,7 +96,7 @@ The animated card container is rendered as a `role="button"` with `tabindex="0"`
 ## Performance
 
 - Measures content height via a hidden `measureEl` (first child `scrollHeight`) on mount with two timeouts (100ms, 500ms) and also on `message`/`width` changes (`nextTick` then measure) to ensure layout is stable.
-- Animations driven by `motion-v`: card size animates between `{height,width}` (closed 32ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â32, open `contentHeight`ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â`width`), avatar offset animates `left/top`, content animates `opacity` + `filter: blur(...)` with delayed blur/opacity on enter.
+- Animations driven by `motion-v`: card size animates between `{height,width}` (closed 32ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â32, open `contentHeight`ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â`width`), avatar offset animates `left/top`, content animates `opacity` + `filter: blur(...)` with delayed blur/opacity on enter.
 - Spring transitions: card uses `stiffness:550,damping:45,mass:0.7`, avatar uses `stiffness:300,damping:25`, content uses custom `ease: [0.22,1,0.36,1]` for blur/opacity.
 - `useClickOutside` attached to root wrapper; click handler lives on wrapper (not directly on motion node) to ensure reliable event binding.
 - Avatar fallback: `avatarFailed` ref set on image error; also checks `img.complete && naturalWidth===0` on mount/URL change. No timers beyond measurement timeouts.
@@ -105,81 +105,6 @@ The animated card container is rendered as a `role="button"` with `tabindex="0"`
 ::tip
 If the message is very long, the open height matches `scrollHeight` automatically. Keep `width` reasonable (default 180) to avoid overly wide bubbles in tight layouts.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.figmaComment` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'relative'` |
-| `card` | `'absolute bottom-0 left-0 cursor-pointer overflow-hidden rounded-2xl rounded-bl-none bg-default shadow-[0px_0px_0.5px_0px_rgb(0_0_0/0.18),0px_3px_8px_0px_rgb(0_0_0/0.1),0px_1px_3px_0px_rgb(0_0_0/0.1)] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default'` |
-| `avatar` | `'absolute z-10'` |
-| `avatarImage` | `'size-6 rounded-full object-cover'` |
-| `avatarFallback` | `'flex size-6 items-center justify-center rounded-full bg-muted text-[10px] leading-none font-semibold text-inverted'` |
-| `measure` | `'pointer-events-none absolute'` |
-| `measureInner` | `'flex flex-col items-start gap-0.5 py-3 pr-4 pl-11'` |
-| `meta` | `'flex items-start gap-0.5'` |
-| `author` | `'text-[11px] leading-4 font-semibold text-highlighted'` |
-| `timestamp` | `'text-[11px] leading-4 font-medium text-muted'` |
-| `message` | `'text-left text-[11px] leading-4 font-medium text-highlighted'` |
-| `content` | `'absolute inset-0 flex flex-col items-start gap-0.5 py-3 pr-4 pl-11'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.figmaComment` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative` |
-| `card` | `absolute bottom-0 left-0 cursor-pointer overflow-hidden rounded-2xl rounded-bl-none bg-default shadow-[0px_0px_0.5px_0px_rgb(0_0_0/0.18),0px_3px_8px_0px_rgb(0_0_0/0.1),0px_1px_3px_0px_rgb(0_0_0/0.1)] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default` |
-| `avatar` | `absolute z-10` |
-| `avatarImage` | `size-6 rounded-full object-cover` |
-| `avatarFallback` | `flex size-6 items-center justify-center rounded-full bg-muted text-[10px] leading-none font-semibold text-inverted` |
-| `measure` | `pointer-events-none absolute` |
-| `measureInner` | `flex flex-col items-start gap-0.5 py-3 pr-4 pl-11` |
-| `meta` | `flex items-start gap-0.5` |
-| `author` | `text-[11px] leading-4 font-semibold text-highlighted` |
-| `timestamp` | `text-[11px] leading-4 font-medium text-muted` |
-| `message` | `text-left text-[11px] leading-4 font-medium text-highlighted` |
-| `content` | `absolute inset-0 flex flex-col items-start gap-0.5 py-3 pr-4 pl-11` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.figmaComment` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative` |
-| `card` | `absolute bottom-0 left-0 cursor-pointer overflow-hidden rounded-2xl rounded-bl-none bg-default shadow-[0px_0px_0.5px_0px_rgb(0_0_0/0.18),0px_3px_8px_0px_rgb(0_0_0/0.1),0px_1px_3px_0px_rgb(0_0_0/0.1)] outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default` |
-| `avatar` | `absolute z-10` |
-| `avatarImage` | `size-6 rounded-full object-cover` |
-| `avatarFallback` | `flex size-6 items-center justify-center rounded-full bg-muted text-[10px] leading-none font-semibold text-inverted` |
-| `measure` | `pointer-events-none absolute` |
-| `measureInner` | `flex flex-col items-start gap-0.5 py-3 pr-4 pl-11` |
-| `meta` | `flex items-start gap-0.5` |
-| `author` | `text-[11px] leading-4 font-semibold text-highlighted` |
-| `timestamp` | `text-[11px] leading-4 font-medium text-muted` |
-| `message` | `text-left text-[11px] leading-4 font-medium text-highlighted` |
-| `content` | `absolute inset-0 flex flex-col items-start gap-0.5 py-3 pr-4 pl-11` |
 
 ## UI
 

@@ -181,63 +181,6 @@ This component's theme exposes the slots below. Override any of them per instanc
 
 | Slot | Default classes |
 | ---- | --------------- |
-| `root` | `''` |
-| `letter` | `'relative inline-block [perspective:10000px] [transform-style:preserve-3d] [width:auto]'` |
-| `enter` | `'absolute inline-block [backface-visibility:hidden] [transform-origin:50%_25%]'` |
-| `exit` | `'absolute inline-block [backface-visibility:hidden] [transform-origin:50%_100%]'` |
-| `placeholder` | `'invisible'` |
-| `srOnly` | `'sr-only'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.textRoll` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` |  |
-| `letter` | `relative inline-block [perspective:10000px] [transform-style:preserve-3d] [width:auto]` |
-| `enter` | `absolute inline-block [backface-visibility:hidden] [transform-origin:50%_25%]` |
-| `exit` | `absolute inline-block [backface-visibility:hidden] [transform-origin:50%_100%]` |
-| `placeholder` | `invisible` |
-| `srOnly` | `sr-only` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.textRoll` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` |  |
-| `letter` | `relative inline-block [perspective:10000px] [transform-style:preserve-3d] [width:auto]` |
-| `enter` | `absolute inline-block [backface-visibility:hidden] [transform-origin:50%_25%]` |
-| `exit` | `absolute inline-block [backface-visibility:hidden] [transform-origin:50%_100%]` |
-| `placeholder` | `invisible` |
-| `srOnly` | `sr-only` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.textRoll` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
 | `root` |  |
 | `letter` | `relative inline-block [perspective:10000px] [transform-style:preserve-3d] [width:auto]` |
 | `enter` | `absolute inline-block [backface-visibility:hidden] [transform-origin:50%_25%]` |

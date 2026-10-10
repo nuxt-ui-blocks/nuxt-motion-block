@@ -231,57 +231,6 @@ This component's theme exposes the slots below. Override any of them per instanc
 
 | Slot | Default classes |
 | ---- | --------------- |
-| `root` | `'relative inline-flex items-center justify-center align-baseline'` |
-| `item` | `''` |
-| `measure` | `'invisible absolute'` |
-| `measureItem` | `''` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.textLoop` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative inline-flex items-center justify-center align-baseline` |
-| `item` |  |
-| `measure` | `invisible absolute` |
-| `measureItem` |  |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.textLoop` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative inline-flex items-center justify-center align-baseline` |
-| `item` |  |
-| `measure` | `invisible absolute` |
-| `measureItem` |  |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.textLoop` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
 | `root` | `relative inline-flex items-center justify-center align-baseline` |
 | `item` |  |
 | `measure` | `invisible absolute` |

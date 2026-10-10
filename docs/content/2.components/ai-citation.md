@@ -18,7 +18,7 @@ tab, so the citation is useful even when the card is closed.
 
 ## Usage
 
-Drop it straight into assistant prose ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â anywhere a sentence runs. Pair it with
+Drop it straight into assistant prose ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â anywhere a sentence runs. Pair it with
 [AI Response](/docs/components/ai-response), which turns `[n]` markers into pills
 automatically when you want a lighter citation.
 
@@ -101,7 +101,7 @@ label: Preview
 ::field-group
   ::field{name="favicon" type="void"}
   Rendered inside a 14px square at the top-left of the card. Anything that fits
-  an `<img>` works ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a logo service URL, a repo isotype. The wrapper applies
+  an `<img>` works ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a logo service URL, a repo isotype. The wrapper applies
   `size-full`, `object-cover` and `fill-foreground` to slotted children, so an
   SVG that ships `fill="none"` picks up the current text colour. With no slot,
   a neutral `i-lucide-globe` stands in; the component never invents a badge from
@@ -115,7 +115,7 @@ label: Preview
   `rel="noopener noreferrer"`, so the link is reachable, focusable and
   middle-clickable independently of the card.
 - The card is wired to the pill with `aria-describedby`, and the attribute is
-  present only while the card is mounted ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the reference never dangles.
+  present only while the card is mounted ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the reference never dangles.
 - The wrapper opens on `focus` and closes on `blur`, so tabbing through prose
   reveals each citation without a pointer. `mouseleave` and `blur` share one
   120ms grace period, which is what lets the pointer cross the 6px gap between
@@ -140,69 +140,6 @@ label: Preview
 - Only one `setTimeout` is ever live. `open` clears a pending close and
   `onBeforeUnmount` clears it again, so navigating away mid-grace cannot leave a
   timer holding a detached component.
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.aiCitation` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'relative inline-block align-super'` |
-| `pill` | `'inline-flex h-4 min-w-4 items-center justify-center rounded-full border border-border bg-muted px-1 text-[10px] font-medium text-muted no-underline transition-colors hover:border-accented hover:text-highlighted'` |
-| `card` | `'absolute bottom-full left-1/2 z-50 -ml-36 mb-1.5 block w-72 rounded-xl border border-border bg-elevated p-3 text-left align-baseline shadow-lg'` |
-| `header` | `'mb-1 flex items-center gap-1.5'` |
-| `host` | `'truncate text-xs text-muted'` |
-| `icon` | `'ml-auto text-muted'` |
-| `title` | `'block text-sm leading-snug font-medium text-highlighted'` |
-| `description` | `'mt-1 block text-xs leading-relaxed text-muted'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiCitation` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative inline-block align-super` |
-| `pill` | `inline-flex h-4 min-w-4 items-center justify-center rounded-full border border-border bg-muted px-1 text-[10px] font-medium text-muted no-underline transition-colors hover:border-accented hover:text-highlighted` |
-| `card` | `absolute bottom-full left-1/2 z-50 -ml-36 mb-1.5 block w-72 rounded-xl border border-border bg-elevated p-3 text-left align-baseline shadow-lg` |
-| `header` | `mb-1 flex items-center gap-1.5` |
-| `host` | `truncate text-xs text-muted` |
-| `icon` | `ml-auto text-muted` |
-| `title` | `block text-sm leading-snug font-medium text-highlighted` |
-| `description` | `mt-1 block text-xs leading-relaxed text-muted` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiCitation` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative inline-block align-super` |
-| `pill` | `inline-flex h-4 min-w-4 items-center justify-center rounded-full border border-border bg-muted px-1 text-[10px] font-medium text-muted no-underline transition-colors hover:border-accented hover:text-highlighted` |
-| `card` | `absolute bottom-full left-1/2 z-50 -ml-36 mb-1.5 block w-72 rounded-xl border border-border bg-elevated p-3 text-left align-baseline shadow-lg` |
-| `header` | `mb-1 flex items-center gap-1.5` |
-| `host` | `truncate text-xs text-muted` |
-| `icon` | `ml-auto text-muted` |
-| `title` | `block text-sm leading-snug font-medium text-highlighted` |
-| `description` | `mt-1 block text-xs leading-relaxed text-muted` |
 
 ## UI
 

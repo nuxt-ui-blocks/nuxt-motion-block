@@ -14,7 +14,7 @@ the surface behind it.
 That reading is the whole trick, and it is why the triangles are painted rather than
 erased: nothing is removed from the button, four pieces of the *surrounding* colour are
 drawn on top. The default `triangleColor` is `var(--ui-background)`, which is not a
-Nuxt UI v4 token ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â on a stock setup it resolves to nothing and the polygons fall back to
+Nuxt UI v4 token ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â on a stock setup it resolves to nothing and the polygons fall back to
 the inherited SVG fill, black. Set it to the surface the button sits on
 (`var(--ui-bg)`, `--ui-bg-muted`, a card colour) and the effect lands.
 
@@ -72,7 +72,7 @@ label: Preview
 
 ::field-group
   ::field{name="triangleColor" type="string" default="'var(--ui-background)'"}
-  Fill for all four triangles ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a colour, a gradient or any CSS `fill` value. It has to
+  Fill for all four triangles ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a colour, a gradient or any CSS `fill` value. It has to
   match the surface behind the button, because that is what makes the corners look
   clipped. The default is not a Nuxt UI v4 token; prefer `var(--ui-bg)` or
   `var(--ui-bg-muted)`.
@@ -103,7 +103,7 @@ label: Preview
 The button is a real `UButton`, so it is a `<button type="button">` with keyboard
 activation and Nuxt UI's focus ring. The four triangles are absolutely positioned
 `div`s containing a one-polygon SVG with no role and no text, so assistive technology
-has nothing to read ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the component does not mark them `aria-hidden`, it simply has
+has nothing to read ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the component does not mark them `aria-hidden`, it simply has
 nothing to expose.
 
 Focus does not trigger the clip: it is `mouseenter` / `mouseleave` on the wrapper, and
@@ -127,55 +127,10 @@ triangles snap to their resting position and never move.
 ::tip
 `triangleSize` and `triangleInset` work against each other. At the defaults the
 triangles are 8px sitting 4px inside the button, so the visible cut is small. For a
-decisive clip raise both together ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `triangle-size="14" triangle-inset="0"` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and check
+decisive clip raise both together ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `triangle-size="14" triangle-inset="0"` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and check
 the result against your button's border radius, since a heavily rounded button has no
 corner left to clip.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.clipCornersButton` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'relative inline-block'` |
-| `corner` | `'absolute pointer-events-none z-20'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.clipCornersButton` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative inline-block` |
-| `corner` | `absolute pointer-events-none z-20` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.clipCornersButton` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative inline-block` |
-| `corner` | `absolute pointer-events-none z-20` |
 
 ## UI
 

@@ -223,54 +223,6 @@ This component's theme exposes the slots below. Override any of them per instanc
 
 | Slot | Default classes |
 | ---- | --------------- |
-| `root` | `'typing-text-container whitespace-pre-wrap'` |
-| `text` | `'inline-flex items-center'` |
-| `cursor` | `'typing-cursor inline-block ms-1 font-normal select-none w-px'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.typingText` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `typing-text-container whitespace-pre-wrap` |
-| `text` | `inline-flex items-center` |
-| `cursor` | `typing-cursor inline-block ms-1 font-normal select-none w-px` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.typingText` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `typing-text-container whitespace-pre-wrap` |
-| `text` | `inline-flex items-center` |
-| `cursor` | `typing-cursor inline-block ms-1 font-normal select-none w-px` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.typingText` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
 | `root` | `typing-text-container whitespace-pre-wrap` |
 | `text` | `inline-flex items-center` |
 | `cursor` | `typing-cursor inline-block ms-1 font-normal select-none w-px` |

@@ -8,7 +8,7 @@ navigation:
 # Rich Popover
 
 `UPopover` with motion added to the panel. The content surface springs in from
-`0.95` with a slight downward offset, and ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â if you ask for it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a second, arrow
+`0.95` with a slight downward offset, and ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â if you ask for it ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a second, arrow
 shaped diamond scales in behind it a beat later so the panel appears to grow out
 of the trigger.
 
@@ -24,7 +24,7 @@ pointer intent instead of a click. Delays are forwarded, so `openDelay` and
 
 ## Usage
 
-Put the trigger in the default slot and the panel in `#content` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the content
+Put the trigger in the default slot and the panel in `#content` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the content
 slot is what makes this component animate, and without it you get `UPopover`'s
 empty surface. `#anchor` is passed through if you need to position against
 something other than the trigger.
@@ -122,7 +122,7 @@ const entries = [
   closes the popover; the trigger still toggles it.
   ::
   ::field{name="openDelay" type="number" default="0"}
-  Milliseconds before opening. Only meaningful with `mode="hover"` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â in click
+  Milliseconds before opening. Only meaningful with `mode="hover"` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â in click
   mode the value is forwarded but nothing waits on it.
   ::
   ::field{name="closeDelay" type="number" default="0"}
@@ -153,7 +153,7 @@ const entries = [
   element.
   ::
   ::field{name="content"}
-  The panel. Only bound when you actually provide it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the template is guarded
+  The panel. Only bound when you actually provide it ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the template is guarded
   on `$slots.content`, so omitting it leaves `UPopover`'s own (empty) content
   surface rather than mounting an empty animated wrapper.
   ::
@@ -167,15 +167,15 @@ const entries = [
 
 Nothing semantic is added here. The animated wrapper is a plain `motion.div`
 with `will-change-transform`, so `role="dialog"`, the dismissable-layer
-behaviour, Escape, and focus management are all `UPopover`'s (or Reka's) ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and
+behaviour, Escape, and focus management are all `UPopover`'s (or Reka's) ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and
 they keep working, because the animation is a sibling of the real content rather
 than a replacement for it. Content you put in `#content` is reachable by keyboard
 and can hold real controls, which is what makes this a popover and the tooltip a
 tooltip.
 
-There is no reduced-motion branch in this component. Both springs ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the panel
+There is no reduced-motion branch in this component. Both springs ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the panel
 (`stiffness: 400, damping: 25, bounce: 0.1`) and the arrow
-(`stiffness: 500, damping: 30`, delayed `0.05s`) ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â are hard-coded and run under
+(`stiffness: 500, damping: 30`, delayed `0.05s`) ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â are hard-coded and run under
 `prefers-reduced-motion` exactly as they do otherwise.
 
 ## Performance
@@ -184,7 +184,7 @@ There is no reduced-motion branch in this component. Both springs ÃƒÆ’Ã‚
   `overflow-hidden` and the animated layer carries `will-change-transform`.
 - Open state is held in one internal ref, so the panel's `v-if` and the arrow's
   `v-if` are driven by the same boolean and cannot disagree.
-- The arrow is a 50ms-delayed sibling animation rather than a second timeline ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
+- The arrow is a 50ms-delayed sibling animation rather than a second timeline ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
   two independent springs, no orchestration cost.
 - Only the `#content` and `#anchor` templates are bound conditionally, so a
   popover without them mounts strictly less than one with them.
@@ -193,57 +193,9 @@ There is no reduced-motion branch in this component. Both springs ÃƒÆ’Ã‚
 The content wrapper is `relative overflow-hidden`, and the diamond is pinned
 `-top-1` with `translate-x-1/2` inside it. If your panel has heavy top padding
 or a background that extends to the very top edge, the arrow is drawn over your
-own content ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â give the panel a little top padding so the diamond has somewhere
+own content ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â give the panel a little top padding so the diamond has somewhere
 to sit.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.richPopover` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'relative overflow-hidden'` |
-| `content` | `'will-change-transform'` |
-| `arrow` | `'absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45 bg-default border-t border-l border-default will-change-transform'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.richPopover` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative overflow-hidden` |
-| `content` | `will-change-transform` |
-| `arrow` | `absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45 bg-default border-t border-l border-default will-change-transform` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.richPopover` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative overflow-hidden` |
-| `content` | `will-change-transform` |
-| `arrow` | `absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45 bg-default border-t border-l border-default will-change-transform` |
 
 ## UI
 

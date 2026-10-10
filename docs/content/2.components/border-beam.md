@@ -10,7 +10,7 @@ navigation:
 A glow that runs around the edge of a box. Wrap any content in it and a comet of
 light laps the border on its own.
 
-The comet is not a sprite moving along a track ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it is the border path itself,
+The comet is not a sprite moving along a track ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it is the border path itself,
 stroked as a dash. Four dashes of the same gradient stack into a tapered tail and
 accumulate into a bright head, and one wider, blurred dash behind them is the
 halo. Only `stroke-dashoffset` moves, and because the dashes are stroked along
@@ -21,7 +21,7 @@ The border itself is a separate hairline path, deliberately kept off the beam
 gradient. That is what lets `colorFrom` and `colorTo` be as bright as a glow needs
 without turning the resting border into a coloured stripe. The halo goes further
 and mixes both stops 68% towards white before using them, because blurring a dark
-stroke darkens its fringe ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a glow is light by definition, and a dark blur reads
+stroke darkens its fringe ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a glow is light by definition, and a dark blur reads
 as a shadow.
 
 The element is measured, not assumed. A `ResizeObserver` keeps the path in step
@@ -30,7 +30,7 @@ with the box, and the real perimeter from `getTotalLength()` is what normalises
 
 ## Usage
 
-Wrap content and set `radius` to match the corner radius you put on `class` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the
+Wrap content and set `radius` to match the corner radius you put on `class` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the
 root gets its radius from the prop when it is a number, so the beam's path and
 your CSS agree. `colorFrom` and `colorTo` are plain CSS colours.
 
@@ -96,7 +96,7 @@ when you push the props around.
 comet's share of the border is clamped between 2% and 45%. Below that it vanishes
 into a dot; above it it wraps most of the way round and stops reading as a comet.
 
-`beams` phase-offsets along the loop ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â each beam starts at `index / count` of a
+`beams` phase-offsets along the loop ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â each beam starts at `index / count` of a
 lap, so `beams: 3` gives three comets evenly spaced with none of them overlapping.
 Every beam costs four core dashes plus one halo, so the dash count grows linearly.
 
@@ -110,7 +110,7 @@ head, which is where the falloff stops reading as visible steps.
 ::field-group
   ::field{name="active" type="boolean" default="true"}
   Keep the beams travelling. Setting it to `false` cancels the loop and removes
-  the comet entirely ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â you are left with a plain hairline border at full opacity.
+  the comet entirely ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â you are left with a plain hairline border at full opacity.
   ::
   ::field{name="beams" type="number" default="1"}
   How many comets ride the border, evenly phase-offset around the loop. Rounded
@@ -137,7 +137,7 @@ head, which is where the falloff stops reading as visible steps.
   ::
   ::field{name="borderWidth" type="number" default="1"}
   Thickness of the resting hairline border, in pixels. It also sets the path's
-  inset ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the outline is drawn half a width in, so the beam sits on the inner
+  inset ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the outline is drawn half a width in, so the beam sits on the inner
   edge of the box rather than straddling it.
   ::
   ::field{name="radius" type="number | 'squircle'" default="16"}
@@ -181,7 +181,7 @@ There is no keyboard behaviour and no way to pause from the keyboard.
 
 Under `prefers-reduced-motion` the comet does not run at all: `isTravelling` goes
 false, the loop is stopped and the comet group is removed from the DOM. What is
-left is the static border ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and note it brightens from 70% opacity to full, since
+left is the static border ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and note it brightens from 70% opacity to full, since
 the dimmer opacity only exists to sit behind a moving beam.
 
 The gradient ids are namespaced with Vue's `useId` rather than a random string,
@@ -193,14 +193,14 @@ gradients without a hydration mismatch.
 
 - The loop writes `stroke-dashoffset` directly onto collected path nodes. No Vue
   re-render per frame; the dash nodes are found once per loop start by their
-  `data-beam-index`, not through function refs ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a function ref is re-created
+  `data-beam-index`, not through function refs ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a function ref is re-created
   every render and a rAF tick landing between its `null` and element calls reads
   a cleared slot and silently stops the animation.
 - An `IntersectionObserver` keeps a scrolled-away element's loop running but skips
   every style write, so an off-screen beam costs no paint and no layout.
 - A `ResizeObserver` re-measures the box and rebuilds the path, so the comet stays
   correct through layout changes without a window resize listener.
-- The loop restarts only on scalar props ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `active`, `beams`, `size`, `reverse`,
+- The loop restarts only on scalar props ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `active`, `beams`, `size`, `reverse`,
   `duration`, `delay`. Watching the dash-plan arrays instead would restart on
   every scheduler flush, resetting elapsed time and pinning the comet at its
   initial offset.
@@ -210,58 +210,10 @@ gradients without a hydration mismatch.
 ::tip
 The halo composites additively only in dark mode (`dark:mix-blend-plus-lighter`).
 On a light surface an additive glow has no darkness to add light to and washes out
-to nothing, so there it composites normally and simply tints ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â which is the
+to nothing, so there it composites normally and simply tints ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â which is the
 correct look for a glow on white, but it means `colorFrom` and `colorTo` read
 differently across themes.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.borderBeam` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'relative isolate'` |
-| `svg` | `'pointer-events-none absolute inset-0 z-10 h-full w-full overflow-visible'` |
-| `halo` | `'dark:mix-blend-plus-lighter'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.borderBeam` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative isolate` |
-| `svg` | `pointer-events-none absolute inset-0 z-10 h-full w-full overflow-visible` |
-| `halo` | `dark:mix-blend-plus-lighter` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.borderBeam` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative isolate` |
-| `svg` | `pointer-events-none absolute inset-0 z-10 h-full w-full overflow-visible` |
-| `halo` | `dark:mix-blend-plus-lighter` |
 
 ## UI
 

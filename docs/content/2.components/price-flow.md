@@ -77,67 +77,13 @@ The root uses `role="img"` with `aria-label` computed as `prefix + currency + ro
 - Rounds values with `Math.round` for stable digit sequences.
 - Maintains `slots` (number of digit positions) as `max(slots, next.length)` and pads with non-breaking space (`\u00A0`) to prevent width reflow when numbers shrink.
 - Uses `requestAnimationFrame` stepper: 8 steps over 600ms, linear quantization of time (not eased on steps) so steps remain spaced; per-digit spring (`stiffness:300, damping:30`) provides visual easing.
-- `AnimatePresence` with `mode="popLayout"` and spring on enter (`y:20,opacity:0 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ y:0,opacity:1`) and quick tween exit (`y:-20,opacity:0, duration:0.07`) for each changing digit key (`${index}-${digit}`).
+- `AnimatePresence` with `mode="popLayout"` and spring on enter (`y:20,opacity:0 ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ y:0,opacity:1`) and quick tween exit (`y:-20,opacity:0, duration:0.07`) for each changing digit key (`${index}-${digit}`).
 - Only one RAF loop active at a time; cancelled on value change and on unmount. No WebGL or heavy allocations.
 - Watch on `value` triggers `animateToValue` which computes start/diff and runs the stepper.
 
 ::tip
 If you need to display decimals precisely, note the component rounds to nearest integer. For fractional cents that must roll smoothly, consider formatting to integer cents or adjust the display logic externally.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.priceFlow` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'flex items-center gap-0.5 font-mono'` |
-| `inner` | `'relative flex items-center gap-0.5'` |
-| `prefix` | `'text-lg text-muted mr-0.5'` |
-| `currency` | `'text-3xl font-bold text-highlighted'` |
-| `digit` | `'inline-block text-3xl font-bold text-highlighted'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.priceFlow` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `flex items-center gap-0.5 font-mono` |
-| `inner` | `relative flex items-center gap-0.5` |
-| `prefix` | `text-lg text-muted mr-0.5` |
-| `currency` | `text-3xl font-bold text-highlighted` |
-| `digit` | `inline-block text-3xl font-bold text-highlighted` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.priceFlow` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `flex items-center gap-0.5 font-mono` |
-| `inner` | `relative flex items-center gap-0.5` |
-| `prefix` | `text-lg text-muted mr-0.5` |
-| `currency` | `text-3xl font-bold text-highlighted` |
-| `digit` | `inline-block text-3xl font-bold text-highlighted` |
 
 ## UI
 

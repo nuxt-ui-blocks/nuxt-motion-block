@@ -1,6 +1,6 @@
 ---
 title: Dynamic Island
-description: A pill that morphs between five system-style views ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â idle, incoming call, timer, notification and now playing.
+description: A pill that morphs between five system-style views ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â idle, incoming call, timer, notification and now playing.
 navigation:
   icon: i-lucide-pill
 ---
@@ -15,12 +15,12 @@ animation, so the pill's width animates between the two states instead of
 snapping.
 
 The pill is driven by its own switcher, which is rendered below it as a row of
-five icon buttons ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â there is no prop to hide it, so on a real surface you either
+five icon buttons ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â there is no prop to hide it, so on a real surface you either
 cover it or you drive the view yourself.
 
 The spring's bounce is per transition, not per view: the component keeps a
-`from-to` key and looks the bounce up in a table, so `idle ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ music` and
-`idle ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ timer` do not feel like the same switch. Two states the table does not
+`from-to` key and looks the bounce up in a table, so `idle ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ music` and
+`idle ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ timer` do not feel like the same switch. Two states the table does not
 name fall back to `0.5`.
 
 Content is keyed on `activeView`, which mirrors the reference implementation's
@@ -32,7 +32,7 @@ time you come back to it.
 
 Leave `view` undefined and the island manages itself through the switcher it
 renders. Pass `view` to take control, and listen to `update:view` so the
-built-in switcher keeps working ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â otherwise clicking it will do nothing, because
+built-in switcher keeps working ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â otherwise clicking it will do nothing, because
 a controlled view is only ever the value you give it.
 
 ::code-preview
@@ -93,11 +93,11 @@ const view = computed<IslandView | undefined>(() =>
 
 | View | Width | Contents | Slot to override |
 | --- | --- | --- | --- |
-| `idle` | intrinsic, `min-w-[100px]` | Cloud icon; a thermometer and `12ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°C` that expand in on hover | `idle` |
+| `idle` | intrinsic, `min-w-[100px]` | Cloud icon; a thermometer and `12ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°C` that expand in on hover | `idle` |
 | `ring` | `w-64` | Phone icon, "Incoming Call", caller name, pulsing dot | `ring` |
 | `timer` | `w-64` | Timer icon, whole seconds remaining, amber progress track | `timer` |
-| `notification` | `w-72` | Bell, "New Message", yellow count chip | ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â |
-| `music` | `w-72` | Track and artist, skip/play/skip transport | ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â |
+| `notification` | `w-72` | Bell, "New Message", yellow count chip | ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â |
+| `music` | `w-72` | Track and artist, skip/play/skip transport | ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â |
 
 Three of the five views are overridable. `notification` and `music` render their
 markup inline with no slot, so the island's own "you have a new notification"
@@ -108,7 +108,7 @@ copy is fixed.
 ::field-group
   ::field{name="view" type="'idle' | 'ring' | 'timer' | 'notification' | 'music'" default="undefined"}
   Controlled view. Left `undefined`, the island uses its internal state and its
-  own switcher drives it. Set it and you own the value ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â pass `@update:view` so
+  own switcher drives it. Set it and you own the value ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â pass `@update:view` so
   the switcher still appears to work.
   ::
   ::field{name="onViewChange" type="(view: DynamicIslandView) => void"}
@@ -117,8 +117,8 @@ copy is fixed.
   on every view change, including the ones the built-in switcher makes.
   ::
   ::field{name="class" type="string"}
-  Merged onto the outer container, which is `h-[200px]`. The height is fixed ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
-  it is the room the pill and its switcher need ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â so `class` is for background
+  Merged onto the outer container, which is `h-[200px]`. The height is fixed ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+  it is the room the pill and its switcher need ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so `class` is for background
   and spacing, not for sizing.
   ::
 ::
@@ -139,7 +139,7 @@ copy is fixed.
   ::field{name="idle"}
   Replaces the resting view's contents. The hover handlers that reveal the
   temperature live on the wrapper around the slot, so an overridden `idle` view
-  still gets them ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â but the temperature markup itself is part of the fallback,
+  still gets them ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â but the temperature markup itself is part of the fallback,
   so you lose it along with the icon.
   ::
   ::field{name="ring"}
@@ -150,7 +150,7 @@ copy is fixed.
   ::field{name="timer"}
   Replaces the timer row: icon, the seconds label and the progress track. The
   countdown and the track's animation both look for the element you would expect
-  here ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â see the tip below.
+  here ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â see the tip below.
   ::
 ::
 
@@ -162,7 +162,7 @@ change is completely silent to a screen reader. Attribute inheritance is off and
 `aria-live="polite"` (or `role="status"`) on `<MDynamicIsland>` and the pill's
 contents become the announcement.
 
-The transport buttons in the music view are properly labelled ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
+The transport buttons in the music view are properly labelled ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
 `aria-label="Previous track"`, a play/pause label that flips with state, and
 `aria-pressed` on the play toggle. The five switcher buttons carry the view name
 as their `aria-label` and `aria-pressed` for the active one. Nothing else in the
@@ -187,104 +187,17 @@ the `blur(5px)` that otherwise opens the new view.
   yet at that instant.
 - View content is keyed on `activeView`, so switching remounts one small subtree
   rather than diffing five of them, and per-view refs reset for free.
-- Only two springs run per switch ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the pill's layout animation and the content's
-  entrance ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and the content entrance is delayed `0.05s` so the pill is already
+- Only two springs run per switch ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the pill's layout animation and the content's
+  entrance ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and the content entrance is delayed `0.05s` so the pill is already
   moving when the new content appears.
 
 ::tip
 The timer's progress track is found by querying the island's own DOM for
 `[data-island-progress]`. Override the `timer` slot without an element carrying
 that attribute and the countdown label keeps ticking but the progress bar
-silently never appears ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the animation frame loop keeps running and finds
+silently never appears ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the animation frame loop keeps running and finds
 nothing. Add `data-island-progress` to your own element to bring it back.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.dynamicIsland` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'h-[200px]'` |
-| `inner` | `'relative flex h-full w-full flex-col justify-center'` |
-| `pill` | `'mx-auto w-fit min-w-[100px] overflow-hidden rounded-full bg-black'` |
-| `content` | `''` |
-| `idle` | `'flex items-center gap-2 px-3 py-2'` |
-| `idleIcon` | `'h-5 w-5 text-white'` |
-| `temperature` | `'flex items-center gap-1 overflow-hidden text-white'` |
-| `temperatureIcon` | `'h-3 w-3'` |
-| `temperatureValue` | `'pointer-events-none whitespace-nowrap text-white text-xs'` |
-| `ring` | `'flex w-64 items-center gap-3 overflow-hidden px-4 py-2 text-white'` |
-| `timer` | `'flex w-64 items-center gap-3 overflow-hidden px-4 py-2 text-white'` |
-| `notification` | `'flex w-64 items-center gap-3 overflow-hidden px-4 py-2 text-white'` |
-| `music` | `'flex w-72 items-center gap-3 overflow-hidden px-4 py-2 text-white'` |
-| `track` | `'absolute bottom-2 left-1/2 z-10 flex -translate-x-1/2 justify-center gap-1 rounded-full border bg-default p-1'` |
-| `dot` | `'flex size-8 cursor-pointer items-center justify-center rounded-full border border-default bg-primary px-2 text-inverted'` |
-| `dotIcon` | `'size-3'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.dynamicIsland` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `h-[200px]` |
-| `inner` | `relative flex h-full w-full flex-col justify-center` |
-| `pill` | `mx-auto w-fit min-w-[100px] overflow-hidden rounded-full bg-black` |
-| `content` |  |
-| `idle` | `flex items-center gap-2 px-3 py-2` |
-| `idleIcon` | `h-5 w-5 text-white` |
-| `temperature` | `flex items-center gap-1 overflow-hidden text-white` |
-| `temperatureIcon` | `h-3 w-3` |
-| `temperatureValue` | `pointer-events-none whitespace-nowrap text-white text-xs` |
-| `ring` | `flex w-64 items-center gap-3 overflow-hidden px-4 py-2 text-white` |
-| `timer` | `flex w-64 items-center gap-3 overflow-hidden px-4 py-2 text-white` |
-| `notification` | `flex w-64 items-center gap-3 overflow-hidden px-4 py-2 text-white` |
-| `music` | `flex w-72 items-center gap-3 overflow-hidden px-4 py-2 text-white` |
-| `track` | `absolute bottom-2 left-1/2 z-10 flex -translate-x-1/2 justify-center gap-1 rounded-full border bg-default p-1` |
-| `dot` | `flex size-8 cursor-pointer items-center justify-center rounded-full border border-default bg-primary px-2 text-inverted` |
-| `dotIcon` | `size-3` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.dynamicIsland` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `h-[200px]` |
-| `inner` | `relative flex h-full w-full flex-col justify-center` |
-| `pill` | `mx-auto w-fit min-w-[100px] overflow-hidden rounded-full bg-black` |
-| `content` |  |
-| `idle` | `flex items-center gap-2 px-3 py-2` |
-| `idleIcon` | `h-5 w-5 text-white` |
-| `temperature` | `flex items-center gap-1 overflow-hidden text-white` |
-| `temperatureIcon` | `h-3 w-3` |
-| `temperatureValue` | `pointer-events-none whitespace-nowrap text-white text-xs` |
-| `ring` | `flex w-64 items-center gap-3 overflow-hidden px-4 py-2 text-white` |
-| `timer` | `flex w-64 items-center gap-3 overflow-hidden px-4 py-2 text-white` |
-| `notification` | `flex w-64 items-center gap-3 overflow-hidden px-4 py-2 text-white` |
-| `music` | `flex w-72 items-center gap-3 overflow-hidden px-4 py-2 text-white` |
-| `track` | `absolute bottom-2 left-1/2 z-10 flex -translate-x-1/2 justify-center gap-1 rounded-full border bg-default p-1` |
-| `dot` | `flex size-8 cursor-pointer items-center justify-center rounded-full border border-default bg-primary px-2 text-inverted` |
-| `dotIcon` | `size-3` |
 
 ## UI
 

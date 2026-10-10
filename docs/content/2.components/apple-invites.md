@@ -120,7 +120,7 @@ All three visible cards are absolutely positioned `motion.div` elements with no 
 
 ## Performance
 
-- Uses `AnimatePresence` with `custom="direction"` and `variants` for `center/left/right/hidden`. Side cards are scaled down (`0.9`) and rotated (ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±12ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°) with `z-index` layering.
+- Uses `AnimatePresence` with `custom="direction"` and `variants` for `center/left/right/hidden`. Side cards are scaled down (`0.9`) and rotated (ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±12ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°) with `z-index` layering.
 - Responsive sizing computes `metrics` (font sizes, padding, avatar sizes, badge position) from resolved card width; initial size uses `base` or first available value, client-only re-resolves on viewport width.
 - Auto-advance uses `setInterval` (only `import.meta.client`, restarted on page/interval/events change). Clears timer on unmount.
 - Blurred underlay uses five stacked layers (`BLUR_LAYERS = [1,2,3,6,12]`) with `backdrop-filter`/`mask-image` for a gradient fade.
@@ -130,90 +130,6 @@ All three visible cards are absolutely positioned `motion.div` elements with no 
 ::tip
 To keep the stack visually stable, ensure `events` has stable `id` values. If you need manual control, bind `v-model:activeIndex` (or `:activeIndex` + `@update:activeIndex`) and consider disabling `interval` by setting it to `0`.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.appleInvites` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'relative flex h-full w-full items-center justify-center'` |
-| `card` | `'absolute top-1/2 left-1/2 origin-center -translate-y-1/2'` |
-| `cardInner` | `'relative h-full w-full overflow-hidden rounded-3xl bg-primary'` |
-| `background` | `'h-full w-full'` |
-| `image` | `'h-full w-full object-cover'` |
-| `badgeWrap` | `'absolute z-3'` |
-| `badge` | `'flex flex-row items-center rounded-full bg-default/30 font-medium text-inverted backdrop-blur-xl'` |
-| `content` | `'absolute bottom-0 z-3 w-full rounded-b-3xl text-inverted'` |
-| `avatars` | `'mx-auto flex items-center justify-center'` |
-| `avatar` | `'rounded-full'` |
-| `title` | `'wrap-break-word text-center font-bold'` |
-| `subtitle` | `'wrap-break-word text-center opacity-90'` |
-| `location` | `'wrap-break-word text-center opacity-90'` |
-| `blurWrap` | `'absolute inset-x-0 bottom-0 isolate z-2 h-1/2'` |
-| `blurLayer` | `'absolute inset-0 overflow-hidden rounded-3xl'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.appleInvites` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative flex h-full w-full items-center justify-center` |
-| `card` | `absolute top-1/2 left-1/2 origin-center -translate-y-1/2` |
-| `cardInner` | `relative h-full w-full overflow-hidden rounded-3xl bg-primary` |
-| `background` | `h-full w-full` |
-| `image` | `h-full w-full object-cover` |
-| `badgeWrap` | `absolute z-3` |
-| `badge` | `flex flex-row items-center rounded-full bg-default/30 font-medium text-inverted backdrop-blur-xl` |
-| `content` | `absolute bottom-0 z-3 w-full rounded-b-3xl text-inverted` |
-| `avatars` | `mx-auto flex items-center justify-center` |
-| `avatar` | `rounded-full` |
-| `title` | `wrap-break-word text-center font-bold` |
-| `subtitle` | `wrap-break-word text-center opacity-90` |
-| `location` | `wrap-break-word text-center opacity-90` |
-| `blurWrap` | `absolute inset-x-0 bottom-0 isolate z-2 h-1/2` |
-| `blurLayer` | `absolute inset-0 overflow-hidden rounded-3xl` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.appleInvites` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative flex h-full w-full items-center justify-center` |
-| `card` | `absolute top-1/2 left-1/2 origin-center -translate-y-1/2` |
-| `cardInner` | `relative h-full w-full overflow-hidden rounded-3xl bg-primary` |
-| `background` | `h-full w-full` |
-| `image` | `h-full w-full object-cover` |
-| `badgeWrap` | `absolute z-3` |
-| `badge` | `flex flex-row items-center rounded-full bg-default/30 font-medium text-inverted backdrop-blur-xl` |
-| `content` | `absolute bottom-0 z-3 w-full rounded-b-3xl text-inverted` |
-| `avatars` | `mx-auto flex items-center justify-center` |
-| `avatar` | `rounded-full` |
-| `title` | `wrap-break-word text-center font-bold` |
-| `subtitle` | `wrap-break-word text-center opacity-90` |
-| `location` | `wrap-break-word text-center opacity-90` |
-| `blurWrap` | `absolute inset-x-0 bottom-0 isolate z-2 h-1/2` |
-| `blurLayer` | `absolute inset-0 overflow-hidden rounded-3xl` |
 
 ## UI
 

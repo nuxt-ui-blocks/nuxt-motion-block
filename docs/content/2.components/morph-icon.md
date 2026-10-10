@@ -7,11 +7,11 @@ navigation:
 
 # Morph Icon
 
-Two icons in a 24ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â24 box, and a transition between them: the outgoing glyph shrinks to
+Two icons in a 24ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â24 box, and a transition between them: the outgoing glyph shrinks to
 80% while rotating a quarter turn in one direction, the incoming one arrives rotated the
 other way and settles slightly oversized at 120%.
 
-It is the smallest component in the set ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â three props, no slots, no events, no state. The
+It is the smallest component in the set ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â three props, no slots, no events, no state. The
 important consequence is that **it does not toggle itself**. `toggled` is fully
 controlled and there is no click handler anywhere in the component, so you own both the
 boolean and the interaction. Its root is a `<span>`, not a button, so it is decorative
@@ -22,7 +22,7 @@ Icons are names in the [Nuxt Icon](https://icones.js.org) format, so `i-lucide-m
 
 ## Usage
 
-Put it inside a button and bind `toggled` to the same state that button drives ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â that is
+Put it inside a button and bind `toggled` to the same state that button drives ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â that is
 the intended usage, and the example shows three variants of it.
 
 ::code-preview
@@ -75,7 +75,7 @@ label: Preview
 
     <p class="max-w-xs text-center text-xs text-muted">
       <code>toggled</code> is the only input: the component holds no state of its own, so whatever
-      flips it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a click, a route change, a keyboard shortcut ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â gets the same rotation and scale
+      flips it ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a click, a route change, a keyboard shortcut ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â gets the same rotation and scale
       swap between the two icons.
     </p>
   </div>
@@ -124,12 +124,12 @@ const open = ref(false)
   Icon name shown when `toggled` is true.
   ::
   ::field{name="toggled" type="boolean" default="false"}
-  Controlled state. Nothing happens until you change it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â no internal copy, no emit.
+  Controlled state. Nothing happens until you change it ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â no internal copy, no emit.
   ::
 ::
 
 The component declares no slots and emits no events. Attributes fall through to the root
-`<span>`, so `class`, `style` and DOM listeners such as `@click` land on it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â which
+`<span>`, so `class`, `style` and DOM listeners such as `@click` land on it ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â which
 works for a mouse user and nothing else.
 
 ## Accessibility
@@ -141,7 +141,7 @@ This is the one component in the set that ships no semantics at all. The root is
 So the component is invisible to assistive technology as a control. Everything about it
 is your job:
 
-- Put it inside a real `<button>` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the component renders no `type` and no keyboard
+- Put it inside a real `<button>` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the component renders no `type` and no keyboard
   handling of its own.
 - Describe the control on the button, not the icon. A two-glyph icon button with no label
   is announced as "button" and nothing more.
@@ -157,72 +157,24 @@ enter and the exit half, so every visitor gets the full rotation and scale.
 ## Performance
 
 - One `motion.span` keyed on `String(toggled)`, so a change unmounts one element and
-  mounts another. Both are `absolute inset-0` inside a 24ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â24 box, so the component's
+  mounts another. Both are `absolute inset-0` inside a 24ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â24 box, so the component's
   footprint never changes and mounting costs nothing measurable.
-- Everything animated is `opacity`, `scale` and `rotate` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â transform-only, no layout, no
+- Everything animated is `opacity`, `scale` and `rotate` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â transform-only, no layout, no
   reflow.
 - The transition is an inline literal in the template, rebuilt on each render. For a
   single element that is cheaper than memoising it.
 - `toggled` is the only reactive input. Because the element is keyed, the `UIcon` inside
   it is remounted on every toggle rather than patched, so the icon's own resolution runs
-  again ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â trivial for a single glyph, worth remembering if you ever swap in a heavy
+  again ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â trivial for a single glyph, worth remembering if you ever swap in a heavy
   icon.
 
 ::tip
-The resting scale is `1.2`, not `1`. The glyph deliberately sits at 120% of the 24ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â24
+The resting scale is `1.2`, not `1`. The glyph deliberately sits at 120% of the 24ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â24
 box and overflows its own container slightly, which is what gives the swap its snap. If
 your icons look clipped inside a tight button, that is usually the surrounding button's
-padding rather than a mistake in the component ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â give the button room, or scale the box
+padding rather than a mistake in the component ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â give the button room, or scale the box
 from the parent.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.morphIcon` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'relative inline-flex items-center justify-center w-6 h-6'` |
-| `icon` | `'absolute inset-0 flex items-center justify-center'` |
-| `iconIcon` | `'w-full h-full'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.morphIcon` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative inline-flex items-center justify-center w-6 h-6` |
-| `icon` | `absolute inset-0 flex items-center justify-center` |
-| `iconIcon` | `w-full h-full` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.morphIcon` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative inline-flex items-center justify-center w-6 h-6` |
-| `icon` | `absolute inset-0 flex items-center justify-center` |
-| `iconIcon` | `w-full h-full` |
 
 ## UI
 

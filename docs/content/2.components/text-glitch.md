@@ -168,60 +168,6 @@ This component's theme exposes the slots below. Override any of them per instanc
 
 | Slot | Default classes |
 | ---- | --------------- |
-| `root` | `'text-glitch-container relative inline-block select-none'` |
-| `main` | `'text-glitch-main relative z-10'` |
-| `layer` | `'text-glitch-layer absolute top-0 left-0 w-full h-full pointer-events-none'` |
-| `scanLines` | `'absolute inset-0 pointer-events-none'` |
-| `scanLine` | `'absolute bg-(--ui-bg-inverted)/20 h-px left-0 right-0'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.textGlitch` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `text-glitch-container relative inline-block select-none` |
-| `main` | `text-glitch-main relative z-10` |
-| `layer` | `text-glitch-layer absolute top-0 left-0 w-full h-full pointer-events-none` |
-| `scanLines` | `absolute inset-0 pointer-events-none` |
-| `scanLine` | `absolute bg-(--ui-bg-inverted)/20 h-px left-0 right-0` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.textGlitch` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `text-glitch-container relative inline-block select-none` |
-| `main` | `text-glitch-main relative z-10` |
-| `layer` | `text-glitch-layer absolute top-0 left-0 w-full h-full pointer-events-none` |
-| `scanLines` | `absolute inset-0 pointer-events-none` |
-| `scanLine` | `absolute bg-(--ui-bg-inverted)/20 h-px left-0 right-0` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.textGlitch` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
 | `root` | `text-glitch-container relative inline-block select-none` |
 | `main` | `text-glitch-main relative z-10` |
 | `layer` | `text-glitch-layer absolute top-0 left-0 w-full h-full pointer-events-none` |

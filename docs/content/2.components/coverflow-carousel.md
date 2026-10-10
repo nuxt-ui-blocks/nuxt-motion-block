@@ -8,7 +8,7 @@ navigation:
 # Coverflow Carousel
 
 A coverflow that renders itself. You hand it an `items` array and it draws the
-fan ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â images or text panels, positioned by distance from the active slide, rotated
+fan ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â images or text panels, positioned by distance from the active slide, rotated
 on Y, scaled down and pushed back in Z. No Embla, no slot to fill.
 
 Navigation is four ways at once: Prev/Next buttons, horizontal drag, arrow keys,
@@ -18,8 +18,8 @@ is the only state and the four paths can never disagree.
 Two behaviours are worth knowing before you wire it up. Focus pauses the motion:
 tabbing into the region stops autoplay and moving focus out restarts it, so
 keyboard users are not chasing a moving target. And the whole thing is
-self-contained ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â including the buttons, the `aria-roledescription` and the
-visually hidden "Slide N of M" ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â so you cannot restyle the controls without
+self-contained ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â including the buttons, the `aria-roledescription` and the
+visually hidden "Slide N of M" ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so you cannot restyle the controls without
 forgoing that.
 
 ## Usage
@@ -78,7 +78,7 @@ const items = [
 
 Every slide's position comes from one number: its signed distance from the
 active index. That distance feeds rotation, scale, Z and stacking order
-together, so the fan is always self-consistent ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â there is no separate "arranged"
+together, so the fan is always self-consistent ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â there is no separate "arranged"
 state to fall out of sync.
 
 | Prop | What it changes |
@@ -97,8 +97,8 @@ costs seven `motion.div` nodes but only paints the middle seven.
 
 ::field-group
   ::field{name="items" type="CoverflowItem[]" default="[]"}
-  The slides. Each needs an `id` (used as the render key) and either `image` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
-  with optional `alt`, defaulting to empty ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â or `content`, which is rendered as
+  The slides. Each needs an `id` (used as the render key) and either `image` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+  with optional `alt`, defaulting to empty ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â or `content`, which is rendered as
   plain centred text when there is no image.
   ::
   ::field{name="autoplay" type="boolean" default="false"}
@@ -143,7 +143,7 @@ costs seven `motion.div` nodes but only paints the middle seven.
 
 ::field-group
   ::field{name="update:index" type="(index: number) => void"}
-  Fired with the resolved target index on every navigation ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â button, drag, key
+  Fired with the resolved target index on every navigation ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â button, drag, key
   or autoplay. Under `loop` the value is already wrapped into range, so it is
   always a valid index into `items`. With `loop` off it is clamped.
   ::
@@ -157,14 +157,14 @@ carrying `aria-roledescription="carousel"`. Arrow keys move one step and
 
 Non-active slides are `aria-hidden="true"`, which keeps the hidden ones out of
 reading order while they are still visibly fanned. A visually hidden
-`aria-live="polite"` region announces "Slide N of M" on every change ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the
+`aria-live="polite"` region announces "Slide N of M" on every change ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the
 position is therefore readable even though the fan itself is a visual-only
 arrangement.
 
 Motion is handled in two places. Under `prefers-reduced-motion` the perspective
 is dropped, dragging is disabled entirely, and each slide snaps to its position
-with a zero-duration transition. Independently of that, focus pauses autoplay ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
-`mouseenter` and `focus` set the pause flag, `mouseleave` and `blur` clear it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â so
+with a zero-duration transition. Independently of that, focus pauses autoplay ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
+`mouseenter` and `focus` set the pause flag, `mouseleave` and `blur` clear it ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â so
 nobody is chasing the animation, and a `visibilitychange` listener pauses it
 while the tab is in the background.
 
@@ -184,77 +184,14 @@ greyed.
 - Drag is bounded with `drag-constraints` locked to `{ left: 0, right: 0 }` and a
   low `drag-elastic`, so a slide can never be pulled out of the fan.
 - Every `goTo` route funnels through one clamping function, which is also what
-  emits the index ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â one source of truth for the position.
+  emits the index ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â one source of truth for the position.
 
 ::tip
 Autoplay and `prefers-reduced-motion` interact the way you would want: the timer
 never starts, but a keyboard user can still move through every slide with the
-arrow keys, because `goTo` and the geometry are unaffected ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â only the fan and
+arrow keys, because `goTo` and the geometry are unaffected ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â only the fan and
 the drag are gone.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.coverflowCarousel` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'relative w-full select-none outline-none'` |
-| `stage` | `'relative mx-auto flex h-[320px] items-center justify-center'` |
-| `card` | `'absolute h-[220px] w-[280px] overflow-hidden rounded-2xl border border-foreground/10 bg-background shadow-xl'` |
-| `image` | `'h-full w-full object-cover'` |
-| `content` | `'flex h-full w-full items-center justify-center p-4 text-sm'` |
-| `controls` | `'mt-4 flex items-center justify-center gap-4'` |
-| `button` | `'rounded-full border border-default bg-default px-4 py-1.5 text-sm text-default transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50'` |
-| `status` | `'sr-only'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.coverflowCarousel` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative w-full select-none outline-none` |
-| `stage` | `relative mx-auto flex h-[320px] items-center justify-center` |
-| `card` | `absolute h-[220px] w-[280px] overflow-hidden rounded-2xl border border-foreground/10 bg-background shadow-xl` |
-| `image` | `h-full w-full object-cover` |
-| `content` | `flex h-full w-full items-center justify-center p-4 text-sm` |
-| `controls` | `mt-4 flex items-center justify-center gap-4` |
-| `button` | `rounded-full border border-default bg-default px-4 py-1.5 text-sm text-default transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50` |
-| `status` | `sr-only` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.coverflowCarousel` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative w-full select-none outline-none` |
-| `stage` | `relative mx-auto flex h-[320px] items-center justify-center` |
-| `card` | `absolute h-[220px] w-[280px] overflow-hidden rounded-2xl border border-foreground/10 bg-background shadow-xl` |
-| `image` | `h-full w-full object-cover` |
-| `content` | `flex h-full w-full items-center justify-center p-4 text-sm` |
-| `controls` | `mt-4 flex items-center justify-center gap-4` |
-| `button` | `rounded-full border border-default bg-default px-4 py-1.5 text-sm text-default transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50` |
-| `status` | `sr-only` |
 
 ## UI
 

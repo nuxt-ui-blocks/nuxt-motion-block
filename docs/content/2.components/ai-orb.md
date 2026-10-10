@@ -7,7 +7,7 @@ navigation:
 
 # AI Orb
 
-A configurable WebGL2 orb ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a lit sphere with colour marbling inside it. Every
+A configurable WebGL2 orb ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a lit sphere with colour marbling inside it. Every
 pixel derives a normal from its distance to the centre, which is what lets a
 rim, a highlight and a shaded side exist at all. A radial gradient has no
 surface, and that is the entire difference between this and a coloured circle.
@@ -17,18 +17,18 @@ Two ideas carry the whole thing:
 - **The loop is seamless by construction.** Every point walks a circle in a flow
   field whose angle advances by exactly one turn per loop, so the displacement
   returns to where it started. Neighbouring points begin at different angles,
-  and that is what reads as swirling ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â offset the whole domain by one shared
+  and that is what reads as swirling ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â offset the whole domain by one shared
   vector instead and you get a pulse.
 - **Colour is mixed in OkLab.** The midpoint between two stops stays clean instead
   of going muddy through sRGB, each picked colour reproduces exactly at its own
   stop, and the hue ripple is a real rotation in the `a`/`b` plane.
 
-There is no `state` prop here on purpose. State lives in the character layer ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
+There is no `state` prop here on purpose. State lives in the character layer ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
 see [AI Orb Face](/docs/components/ai-orb-face), which composes this material.
 
 ## Usage
 
-Give it `colors` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â one to four hex values, mixed in OkLab ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â and let it run. Every
+Give it `colors` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â one to four hex values, mixed in OkLab ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â and let it run. Every
 other prop tunes the material; `paused` and `reducedMotion` exist so you can stop
 it in a screenshot test or honour the OS preference from your own code.
 
@@ -120,13 +120,13 @@ const glow = ref(0)
 
 Every field below is optional; omit one and the default in the right-hand column
 applies. They are resolved once per change into a plain config object and pushed
-as shader uniforms ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â changing one never rebuilds the WebGL context.
+as shader uniforms ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â changing one never rebuilds the WebGL context.
 
 ::field-group
   ::field{name="size" type="number | string" default="240"}
   Rendered size. A number is pixels; any CSS length string (`'100%'`, `'4rem'`)
   passes through unchanged. The backing store follows the element's actual
-  device-pixel box, capped at 2ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â DPR.
+  device-pixel box, capped at 2ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â DPR.
   ::
   ::field{name="colors" type="string[]" default="['#f25aed', '#ffffff']"}
   Two to four stops, converted to the shader once per change and never per frame.
@@ -140,7 +140,7 @@ as shader uniforms ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã�
   How far the flow field carries the field over a loop.
   ::
   ::field{name="turbulence" type="number" default="0.4"}
-  Strength of the second, nested warp ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â marbling rather than blobs.
+  Strength of the second, nested warp ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â marbling rather than blobs.
   ::
   ::field{name="blobScale" type="number" default="3"}
   Interior cell size. Small is busy; large is one slow swell.
@@ -158,7 +158,7 @@ as shader uniforms ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã�
   Bends the noise lookup by the surface normal.
   ::
   ::field{name="iridescence" type="number" default="0"}
-  Fresnel-driven hue rotation ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â thin-film sheen.
+  Fresnel-driven hue rotation ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â thin-film sheen.
   ::
   ::field{name="aberration" type="number" default="0.8"}
   Rim dispersion. Splits the palette lookup per channel toward the edge, the way
@@ -201,7 +201,7 @@ as shader uniforms ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã�
   ::
   ::field{name="paused" type="boolean" default="false"}
   Freeze on the current frame. Props still apply, and a single frame is drawn
-  after every change ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a paused orb is never stale.
+  after every change ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a paused orb is never stale.
   ::
   ::field{name="class" type="string"}
   Merged onto the canvas, or onto the fallback `<div>` when WebGL2 is
@@ -211,7 +211,7 @@ as shader uniforms ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã�
 
 ## Accessibility
 
-The canvas is `aria-hidden="true"` and `tabindex="-1"` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it is decorative by
+The canvas is `aria-hidden="true"` and `tabindex="-1"` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it is decorative by
 construction, and an animation nobody asked for should not be an announced
 event. If the orb carries meaning, give it meaning in the DOM around it: a
 status label beside it, or an `aria-label` on a wrapping element. For a
@@ -223,8 +223,8 @@ Under `prefers-reduced-motion: reduce` the loop stops and the phase is pinned to
 `matchMedia` listener is live, so changing the OS setting mid-session stops the
 loop without a remount.
 
-When WebGL2 is unavailable ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â an older browser, a blocklisted driver, or too many
-contexts ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the component renders a CSS `radial-gradient` instead of a canvas.
+When WebGL2 is unavailable ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â an older browser, a blocklisted driver, or too many
+contexts ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the component renders a CSS `radial-gradient` instead of a canvas.
 That fallback is a flat disc, not a lit sphere. It is `aria-hidden`, lit from the
 same corner as the shader so the character does not appear to change which way
 it faces, and it is deliberately *not* an error state: nothing is logged and
@@ -236,7 +236,7 @@ coloured orb rather than a hole in the layout.
 - One `requestAnimationFrame` loop per instance, capped at 60fps. Ambient motion
   gains nothing from a 120 Hz display.
 - The context is requested with `powerPreference: 'low-power'`, and with
-  `depth`, `stencil` and `antialias` all off ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the covering triangle has no
+  `depth`, `stencil` and `antialias` all off ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the covering triangle has no
   geometric edges to sample.
 - The fullscreen triangle is built from `gl_VertexID`, so there is no vertex
   buffer and no attribute state to manage.
@@ -253,48 +253,6 @@ coloured orb rather than a hole in the layout.
   `WEBGL_lose_context`: Vue re-runs mount hooks in development, the second pass
   gets the same canvas back with a context that is already lost, and the program
   then fails to link and the component latches into its fallback permanently.
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.aiOrb` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'block'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiOrb` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `block` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiOrb` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `block` |
 
 ## UI
 

@@ -167,63 +167,6 @@ This component's theme exposes the slots below. Override any of them per instanc
 
 | Slot | Default classes |
 | ---- | --------------- |
-| `root` | `'relative overflow-hidden'` |
-| `mask` | `'absolute inset-0 z-10 flex items-center justify-center'` |
-| `content` | `'text-center p-6'` |
-| `iconWrapper` | `'mb-4'` |
-| `icon` | `'w-12 h-12 mx-auto text-white'` |
-| `label` | `'text-white text-lg font-medium'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.maskContainer` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative overflow-hidden` |
-| `mask` | `absolute inset-0 z-10 flex items-center justify-center` |
-| `content` | `text-center p-6` |
-| `iconWrapper` | `mb-4` |
-| `icon` | `w-12 h-12 mx-auto text-white` |
-| `label` | `text-white text-lg font-medium` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.maskContainer` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative overflow-hidden` |
-| `mask` | `absolute inset-0 z-10 flex items-center justify-center` |
-| `content` | `text-center p-6` |
-| `iconWrapper` | `mb-4` |
-| `icon` | `w-12 h-12 mx-auto text-white` |
-| `label` | `text-white text-lg font-medium` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.maskContainer` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
 | `root` | `relative overflow-hidden` |
 | `mask` | `absolute inset-0 z-10 flex items-center justify-center` |
 | `content` | `text-center p-6` |

@@ -8,7 +8,7 @@ navigation:
 # AI Diff
 
 A diff card for a patch an agent wants applied: the header, the coloured lines,
-and ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â if you pass the callbacks ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â an Accept / Reject row that resolves the
+and ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â if you pass the callbacks ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â an Accept / Reject row that resolves the
 proposal instead of leaving the reader to work out what happened next.
 
 The motion is restrained on purpose. Added lines wipe in from the left on a
@@ -20,7 +20,7 @@ page.
 
 ## Usage
 
-Pass `lines` as `{ type, content, lineNumber? }` entries and nothing else ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the
+Pass `lines` as `{ type, content, lineNumber? }` entries and nothing else ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the
 card renders its own header, counts and legend. Add `@accept` / `@reject` only if
 your app has somewhere to put the verdict.
 
@@ -92,7 +92,7 @@ const replay = () => {
   ::
   ::field{name="decision" type="'accepted' | 'rejected' | null" default="null"}
   Seeds the verdict. Local state backs the buttons, but this lets you render a
-  stored transcript as already-decided ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â without it every historical patch would
+  stored transcript as already-decided ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â without it every historical patch would
   come back pending. Changing `lines` clears it, because a different patch is a
   different question.
   ::
@@ -128,7 +128,7 @@ const replay = () => {
   wrap; the `<pre>` scrolls horizontally instead. A diff in prose would need
   different styling.
 - Under `prefers-reduced-motion: reduce` there is no clip-path wipe, no stagger,
-  no flash and no collapse transition ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the card renders at its final state.
+  no flash and no collapse transition ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the card renders at its final state.
 - Diff colour is never the only signal: added lines carry a `+`, removed lines a
   `-`, and the kind also changes the line background.
 - The component sets no ARIA role. Wrapping it in a `<figure>` with a
@@ -148,93 +148,6 @@ const replay = () => {
 - The `lines` watch resets the verdict on any new array identity, so replacing the
   array is both the "new patch" signal and the animation replay. Mutating the
   array in place will not retrigger it.
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.aiDiff` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'w-full overflow-hidden rounded-xl border border-border bg-elevated'` |
-| `header` | `'flex items-center gap-2 border-b border-border px-3 py-2'` |
-| `title` | `'min-w-0 truncate font-mono text-xs text-default'` |
-| `stats` | `'ml-auto flex shrink-0 items-center gap-1.5 text-xs tabular-nums'` |
-| `statAdded` | `'text-[oklch(58%_0.17_150)]'` |
-| `statRemoved` | `'text-destructive'` |
-| `body` | `'overflow-hidden'` |
-| `pre` | `'overflow-x-auto py-1 font-mono text-xs leading-relaxed'` |
-| `line` | `'flex gap-3 px-3'` |
-| `lineNumber` | `'w-6 shrink-0 select-none text-right tabular-nums text-muted'` |
-| `linePrefix` | `'w-2 shrink-0 select-none'` |
-| `lineContent` | `'whitespace-pre text-default'` |
-| `actions` | `'flex items-center justify-end gap-2 border-t border-border px-3 py-2'` |
-| `reject` | `'cursor-pointer rounded-lg px-2.5 py-1 text-xs text-muted transition-colors hover:bg-muted hover:text-default'` |
-| `accept` | `'cursor-pointer rounded-lg bg-foreground px-2.5 py-1 text-xs text-background'` |
-| `decision` | `'border-t border-border px-3 py-2 text-xs capitalize text-muted'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiDiff` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `w-full overflow-hidden rounded-xl border border-border bg-elevated` |
-| `header` | `flex items-center gap-2 border-b border-border px-3 py-2` |
-| `title` | `min-w-0 truncate font-mono text-xs text-default` |
-| `stats` | `ml-auto flex shrink-0 items-center gap-1.5 text-xs tabular-nums` |
-| `statAdded` | `text-[oklch(58%_0.17_150)]` |
-| `statRemoved` | `text-destructive` |
-| `body` | `overflow-hidden` |
-| `pre` | `overflow-x-auto py-1 font-mono text-xs leading-relaxed` |
-| `line` | `flex gap-3 px-3` |
-| `lineNumber` | `w-6 shrink-0 select-none text-right tabular-nums text-muted` |
-| `linePrefix` | `w-2 shrink-0 select-none` |
-| `lineContent` | `whitespace-pre text-default` |
-| `actions` | `flex items-center justify-end gap-2 border-t border-border px-3 py-2` |
-| `reject` | `cursor-pointer rounded-lg px-2.5 py-1 text-xs text-muted transition-colors hover:bg-muted hover:text-default` |
-| `accept` | `cursor-pointer rounded-lg bg-foreground px-2.5 py-1 text-xs text-background` |
-| `decision` | `border-t border-border px-3 py-2 text-xs capitalize text-muted` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiDiff` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `w-full overflow-hidden rounded-xl border border-border bg-elevated` |
-| `header` | `flex items-center gap-2 border-b border-border px-3 py-2` |
-| `title` | `min-w-0 truncate font-mono text-xs text-default` |
-| `stats` | `ml-auto flex shrink-0 items-center gap-1.5 text-xs tabular-nums` |
-| `statAdded` | `text-[oklch(58%_0.17_150)]` |
-| `statRemoved` | `text-destructive` |
-| `body` | `overflow-hidden` |
-| `pre` | `overflow-x-auto py-1 font-mono text-xs leading-relaxed` |
-| `line` | `flex gap-3 px-3` |
-| `lineNumber` | `w-6 shrink-0 select-none text-right tabular-nums text-muted` |
-| `linePrefix` | `w-2 shrink-0 select-none` |
-| `lineContent` | `whitespace-pre text-default` |
-| `actions` | `flex items-center justify-end gap-2 border-t border-border px-3 py-2` |
-| `reject` | `cursor-pointer rounded-lg px-2.5 py-1 text-xs text-muted transition-colors hover:bg-muted hover:text-default` |
-| `accept` | `cursor-pointer rounded-lg bg-foreground px-2.5 py-1 text-xs text-background` |
-| `decision` | `border-t border-border px-3 py-2 text-xs capitalize text-muted` |
 
 ## UI
 

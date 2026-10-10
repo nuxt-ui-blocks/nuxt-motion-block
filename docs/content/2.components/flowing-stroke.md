@@ -10,7 +10,7 @@ navigation:
 An SVG ribbon drawn along a wave, with a dashed stripe layer riding on top of it.
 The solid ribbon is the track; the dashed layer is the same path stroked thinner
 and dash-patterned, so the stripes sit inside it like beads on a string. They
-travel by animating `stroke-dashoffset` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â nothing moves, only the dash pattern
+travel by animating `stroke-dashoffset` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â nothing moves, only the dash pattern
 slides under a stationary path, so the motion is exactly as curved as the path it
 follows and can never drift off it.
 
@@ -26,7 +26,7 @@ stripes sit flush with the ribbon edge.
 
 ## Usage
 
-Set `width` and `height` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â they size both the root div and the SVG viewBox, so
+Set `width` and `height` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â they size both the root div and the SVG viewBox, so
 the wave scales with the box rather than being clipped. Everything else is
 tuning: the dash rhythm from `dash` and `gap`, the weight from `ribbon` and
 `stripeInset`, and `speed` as a multiplier on the base rate.
@@ -52,7 +52,7 @@ label: Preview
         :speed="1.4"
       />
       <p class="text-center text-xs text-muted">
-        Hover the ribbon ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the dashes travel along the path
+        Hover the ribbon ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the dashes travel along the path
       </p>
     </div>
 
@@ -83,7 +83,7 @@ label: Preview
   space it is rendered in.
   ::
   ::field{name="height" type="number" default="220"}
-  Pixel height, used the same way as `width` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â root size, viewBox and the wave's
+  Pixel height, used the same way as `width` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â root size, viewBox and the wave's
   vertical offsets all derive from it.
   ::
   ::field{name="ribbon" type="number" default="18"}
@@ -107,7 +107,7 @@ label: Preview
 
 ## Accessibility
 
-The `<svg>` is `aria-hidden="true"` and carries no title, role or description ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
+The `<svg>` is `aria-hidden="true"` and carries no title, role or description ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
 it is decoration, and nothing about it reaches the accessibility tree. The
 component does not contribute any semantics of its own, so the text around it is
 entirely yours to provide.
@@ -124,12 +124,12 @@ Under `prefers-reduced-motion: reduce` a scoped rule pins `stroke-dashoffset` to
 - One `requestAnimationFrame` loop per instance, started on mount and cancelled
   on unmount. It runs continuously but only writes to the ref while hovered.
 - The offset is a plain ref bound to `stroke-dashoffset`, so the write is a
-  style update on one SVG path ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â no Vue re-render, no reconciliation.
+  style update on one SVG path ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â no Vue re-render, no reconciliation.
 - Travel is time-based, not frame-based: it converts the frame delta into pixels
   per second, so the rate is identical on a 60Hz and a 144Hz display.
 - The offset is taken modulo `dash + gap`, which keeps the value bounded however
   long the pointer stays over the component.
-- Both paths share one computed `d` string ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the wave is built once from `width`
+- Both paths share one computed `d` string ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the wave is built once from `width`
   and `height`, not per layer per frame. The stripe path also carries
   `vector-effect="non-scaling-stroke"` so its width survives any SVG scaling.
 
@@ -139,51 +139,6 @@ not a configurable curve. The only shape control you have is the aspect ratio:
 a wide, short box flattens the crests, a tall narrow box steepens them. If you
 need a different curve, that path has to change in the source.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.flowingStroke` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'relative overflow-hidden'` |
-| `svg` | `'w-full h-full block'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.flowingStroke` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative overflow-hidden` |
-| `svg` | `w-full h-full block` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.flowingStroke` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative overflow-hidden` |
-| `svg` | `w-full h-full block` |
 
 ## UI
 

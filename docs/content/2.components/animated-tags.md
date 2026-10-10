@@ -9,7 +9,7 @@ navigation:
 
 A `UInputTags` whose chips are animated. Entering chips rise 20px while un-blurring
 from `blur(4px)`, and because every chip carries `layout`, the ones already on
-screen slide into their new positions when a chip is added or removed ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the row
+screen slide into their new positions when a chip is added or removed ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the row
 reflows as a spring rather than a jump.
 
 Removal works from either side. The painted chip is clickable, and the real
@@ -18,7 +18,7 @@ a keyboard both work. Both paths go through the same update, and the emit is
 skipped when the value is unchanged, so removing and re-adding a tag does not
 generate a duplicate `update:modelValue`.
 
-The active chip ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the one the input is currently on ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â is tracked with a
+The active chip ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the one the input is currently on ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â is tracked with a
 `MutationObserver` and highlighted with `data-[state=active]:bg-accented`.
 
 ## Usage
@@ -46,7 +46,7 @@ label: Preview
     />
 
     <p class="text-xs text-muted">
-      {{ tags.length }} of 6 tags ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â click a chip to remove it
+      {{ tags.length }} of 6 tags ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â click a chip to remove it
     </p>
   </div>
 </template>
@@ -61,7 +61,7 @@ const tags = ref(['Motion', 'Nuxt UI', 'TypeScript'])
 
 ::field-group
   ::field{name="modelValue" type="string[]"}
-  The list of tags. This is the only value prop ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â there is no `defaultValue`,
+  The list of tags. This is the only value prop ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â there is no `defaultValue`,
   because `UInputTags` seeds its own default and the component mirrors whatever
   arrives. Seed an initial list by passing a `ref` array, as in the example.
   ::
@@ -69,13 +69,13 @@ const tags = ref(['Motion', 'Nuxt UI', 'TypeScript'])
   Forwarded to `UInputTags`, then augmented. Your `ui.item` is merged *before*
   the component's `absolute start-0 top-0 size-px overflow-hidden border-0 p-0
   opacity-0`, and your `ui.input` before `order-last min-w-0`, so those two keys
-  cannot be overridden ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â they are what makes the real items invisible while
+  cannot be overridden ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â they are what makes the real items invisible while
   leaving room for the painted chips. Every other key is yours.
   ::
 ::
 
-Every other `UInputTags` prop and listener ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `max`, `placeholder`, `disabled`,
-`name`, `id`, `maxLength`, `size`, `variant`, `@blur`, `@focus`, `@update` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â is
+Every other `UInputTags` prop and listener ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `max`, `placeholder`, `disabled`,
+`name`, `id`, `maxLength`, `size`, `variant`, `@blur`, `@focus`, `@update` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â is
 forwarded through `$attrs`. The component sets `inheritAttrs: false`, and
 `UInputTags` in turn spreads its own `$attrs` onto the inner text input, so
 `placeholder` and `maxlength` land where you would expect.
@@ -84,7 +84,7 @@ forwarded through `$attrs`. The component sets `inheritAttrs: false`, and
 
 ::field-group
   ::field{name="update:modelValue" type="(value: string[]) => void"}
-  Emitted with a **copy** of the next list ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â typed, pasted, or removed by
+  Emitted with a **copy** of the next list ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â typed, pasted, or removed by
   clicking a chip. Guarded by a comparison against `props.modelValue`, so a
   click-driven removal that lands on the value already in props is skipped
   rather than emitted twice. Powers `v-model`.
@@ -93,14 +93,14 @@ forwarded through `$attrs`. The component sets `inheritAttrs: false`, and
 
 ## Slots
 
-The `default` slot is **not** forwarded ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â it is consumed by the painted chip
+The `default` slot is **not** forwarded ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â it is consumed by the painted chip
 overlay. A `<template #default>` on this component is silently ignored. Every
 other slot is forwarded verbatim to `UInputTags`.
 
 ::field-group
   ::field{name="item-text" type="{ item, index, ui }"}
   Replaces the text inside a real tag item. This renders inside the collapsed
-  1px item, so it does **not** change the painted chip ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â restyle the chip through
+  1px item, so it does **not** change the painted chip ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â restyle the chip through
   `ui` instead.
   ::
   ::field{name="item-delete" type="{ item, index, ui }"}
@@ -121,7 +121,7 @@ other slot is forwarded verbatim to `UInputTags`.
 Every tag is a real `TagsInputItem` from Reka UI, containing a real
 `TagsInputItemDelete` button, so each tag is reachable by keyboard and each has
 a genuine delete control with the platform's button semantics. Backspace on an
-empty input removes the last tag, and arrow keys move through the list ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â all of
+empty input removes the last tag, and arrow keys move through the list ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â all of
 that comes from `UInputTags` and is untouched.
 
 The painted overlay is `aria-hidden="true"`, so the chips you see are not
@@ -129,7 +129,7 @@ announced. The real items behind them carry the semantics, and `UInputTags` bind
 its own ARIA attributes onto the text input.
 
 The cost of that arrangement is focus feedback. Each real item is collapsed to
-`size-px` with `opacity-0`, which also collapses its own box-shadow and outline ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
+`size-px` with `opacity-0`, which also collapses its own box-shadow and outline ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
 so **the browser's focus ring on a tag's delete button is invisible**. Tabbing
 through the tags moves focus with no visible indicator. If that matters, restore
 a focus style through `ui.itemDelete` by replacing the collapsed item's
@@ -146,7 +146,7 @@ behind an `onMounted` check so the server-rendered and first client frame agree.
 - One `motion.div` per chip inside a single `AnimatePresence`, keyed by the tag's
   own text. Adding or removing one chip mounts or unmounts only that chip.
 - The `layout` prop on every chip is what reflows the row, and it is handled by
-  the library's FLIP pass ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â measure, invert, play ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â with no layout reads in your
+  the library's FLIP pass ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â measure, invert, play ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â with no layout reads in your
   code and no `ResizeObserver`.
 - Enter and exit animate `y` and `filter`. `y` is a transform, but `blur(4px)` is
   a paint-heavy filter, so this is the most expensive transition in the set. It
@@ -167,63 +167,12 @@ behind an `onMounted` check so the server-rendered and first client frame agree.
 
 ::tip
 Chips are keyed by `String(tag)`, and `removeTag` resolves a click with
-`indexOf` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the first match. If duplicate strings ever reach the list, they
+`indexOf` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the first match. If duplicate strings ever reach the list, they
 share a key and clicking one removes the first, which is almost certainly not the
 one under the pointer. Deduplicate before the value reaches this component, for
 example with `UInputTags`' own duplicate handling or by guarding at the point you
 build the array.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedTags` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `''` |
-| `chips` | `'contents'` |
-| `chip` | `'group inline-flex cursor-pointer items-center gap-0.5 rounded-sm px-1.5 py-0.5 font-medium ring ring-inset ring-accented bg-elevated text-default transition-colors data-[state=active]:bg-accented'` |
-| `chipIcon` | `'inline-flex size-3.5 shrink-0 items-center justify-center rounded-xs text-dimmed transition-colors duration-200 hover:bg-accented/75 hover:text-default'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedTags` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` |  |
-| `chips` | `contents` |
-| `chip` | `group inline-flex cursor-pointer items-center gap-0.5 rounded-sm px-1.5 py-0.5 font-medium ring ring-inset ring-accented bg-elevated text-default transition-colors data-[state=active]:bg-accented` |
-| `chipIcon` | `inline-flex size-3.5 shrink-0 items-center justify-center rounded-xs text-dimmed transition-colors duration-200 hover:bg-accented/75 hover:text-default` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.animatedTags` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` |  |
-| `chips` | `contents` |
-| `chip` | `group inline-flex cursor-pointer items-center gap-0.5 rounded-sm px-1.5 py-0.5 font-medium ring ring-inset ring-accented bg-elevated text-default transition-colors data-[state=active]:bg-accented` |
-| `chipIcon` | `inline-flex size-3.5 shrink-0 items-center justify-center rounded-xs text-dimmed transition-colors duration-200 hover:bg-accented/75 hover:text-default` |
 
 ## UI
 

@@ -268,63 +268,6 @@ This component's theme exposes the slots below. Override any of them per instanc
 
 | Slot | Default classes |
 | ---- | --------------- |
-| `root` | `'flex items-baseline'` |
-| `separator` | `'mx-0.5'` |
-| `digit` | `'relative inline-block w-[1ch] overflow-hidden leading-none tabular-nums align-baseline'` |
-| `digitTrack` | `'absolute inset-0'` |
-| `digitGhost` | `'opacity-0 block'` |
-| `digitGlyph` | `'absolute inset-0 flex items-center justify-center'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.slidingNumber` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `flex items-baseline` |
-| `separator` | `mx-0.5` |
-| `digit` | `relative inline-block w-[1ch] overflow-hidden leading-none tabular-nums align-baseline` |
-| `digitTrack` | `absolute inset-0` |
-| `digitGhost` | `opacity-0 block` |
-| `digitGlyph` | `absolute inset-0 flex items-center justify-center` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.slidingNumber` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `flex items-baseline` |
-| `separator` | `mx-0.5` |
-| `digit` | `relative inline-block w-[1ch] overflow-hidden leading-none tabular-nums align-baseline` |
-| `digitTrack` | `absolute inset-0` |
-| `digitGhost` | `opacity-0 block` |
-| `digitGlyph` | `absolute inset-0 flex items-center justify-center` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.slidingNumber` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
 | `root` | `flex items-baseline` |
 | `separator` | `mx-0.5` |
 | `digit` | `relative inline-block w-[1ch] overflow-hidden leading-none tabular-nums align-baseline` |

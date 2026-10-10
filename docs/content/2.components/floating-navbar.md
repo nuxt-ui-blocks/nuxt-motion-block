@@ -122,57 +122,6 @@ This component's theme exposes the slots below. Override any of them per instanc
 
 | Slot | Default classes |
 | ---- | --------------- |
-| `root` | `'fixed top-4 left-1/2 z-50 flex items-center gap-6 px-6 py-3 rounded-full border border-default shadow-lg'` |
-| `brand` | `'font-bold text-lg whitespace-nowrap'` |
-| `nav` | `'hidden md:flex items-center gap-1'` |
-| `link` | `'px-3 py-1.5 rounded-full text-sm font-medium hover:bg-muted transition-colors'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.floatingNavbar` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `fixed top-4 left-1/2 z-50 flex items-center gap-6 px-6 py-3 rounded-full border border-default shadow-lg` |
-| `brand` | `font-bold text-lg whitespace-nowrap` |
-| `nav` | `hidden md:flex items-center gap-1` |
-| `link` | `px-3 py-1.5 rounded-full text-sm font-medium hover:bg-muted transition-colors` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.floatingNavbar` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `fixed top-4 left-1/2 z-50 flex items-center gap-6 px-6 py-3 rounded-full border border-default shadow-lg` |
-| `brand` | `font-bold text-lg whitespace-nowrap` |
-| `nav` | `hidden md:flex items-center gap-1` |
-| `link` | `px-3 py-1.5 rounded-full text-sm font-medium hover:bg-muted transition-colors` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.floatingNavbar` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
 | `root` | `fixed top-4 left-1/2 z-50 flex items-center gap-6 px-6 py-3 rounded-full border border-default shadow-lg` |
 | `brand` | `font-bold text-lg whitespace-nowrap` |
 | `nav` | `hidden md:flex items-center gap-1` |

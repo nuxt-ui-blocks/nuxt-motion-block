@@ -1,6 +1,6 @@
 ---
 title: AI Task List
-description: A plan the model is working through ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â nested steps, a derived count, and a check that draws itself.
+description: A plan the model is working through ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â nested steps, a derived count, and a check that draws itself.
 navigation:
   icon: i-lucide-list-checks
 ---
@@ -18,7 +18,7 @@ progress.
 
 ## Usage
 
-Pass `tasks` and mutate the array as the plan progresses ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â status, not keyframes,
+Pass `tasks` and mutate the array as the plan progresses ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â status, not keyframes,
 is what drives everything. Keep nesting to one level and put counts in `note`.
 
 ::code-preview
@@ -112,7 +112,7 @@ const advance = (status: Status): Status => {
   ::field{name="tasks" type="AiTask[]"}
   Required. Each task is `{ id, label, status, note?, children? }`, where `status`
   is `'pending' | 'running' | 'done' | 'failed'` and `children` nests **one**
-  level. Grandchildren are not flattened into the rows ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â they are silently left
+  level. Grandchildren are not flattened into the rows ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â they are silently left
   out of the display and still counted, which is why one level is the documented
   limit rather than an incidental one.
   ::
@@ -126,7 +126,7 @@ const advance = (status: Status): Status => {
   ::
 ::
 
-`note` is a short right-aligned string ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `"12/12"`, `"3 files"` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â rendered with
+`note` is a short right-aligned string ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `"12/12"`, `"3 files"` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â rendered with
 `tabular-nums` so digits do not reflow as the counts climb. The component does not
 parse it or infer anything from it.
 
@@ -135,7 +135,7 @@ parse it or infer anything from it.
 - The check and cross are drawn in an SVG that is `aria-hidden`, so the row's
   status is carried by its text and colour rather than by a path nobody can
   announce. If your surface needs the state spelled out, put it in `note`.
-- Done and failed use distinct hues ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a green and a red ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â *and* distinct glyphs, a
+- Done and failed use distinct hues ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a green and a red ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â *and* distinct glyphs, a
   tick and a cross. Neither state depends on colour alone.
 - The running row keeps full opacity while completed rows settle to 65%, so the
   active step stays the highest-contrast text on the panel.
@@ -154,7 +154,7 @@ parse it or infer anything from it.
 ## Performance
 
 - The box and its tick are a plain `<svg>` with a CSS transition, not `<Motion>`.
-  motion-v's `as` does not resolve to SVG elements ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `<Motion as="rect">` renders
+  motion-v's `as` does not resolve to SVG elements ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `<Motion as="rect">` renders
   a `<div>`, which is exactly how a `<div>` once ended up inside a `<clipPath>`.
   `fill-opacity` and `stroke` are plain CSS properties on SVG, so the 200ms
   cross-fade works identically without depending on that.
@@ -175,84 +175,6 @@ parse it or infer anything from it.
 - `useReducedMotion()` is read once into a plain boolean rather than being
   reactive, because the reduced-motion preference does not change mid-session in
   any browser that matters and reading it per row would cost more than it saves.
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.aiTaskList` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'w-full rounded-xl border border-border bg-elevated p-3'` |
-| `header` | `'mb-1.5 flex items-baseline justify-between'` |
-| `label` | `'font-medium text-default text-sm'` |
-| `count` | `'text-muted text-xs tabular-nums'` |
-| `list` | `'list-none'` |
-| `row` | `'list-none'` |
-| `rowInner` | `'relative flex items-start gap-2 py-1'` |
-| `box` | `'mt-0.5 flex size-3.5 shrink-0 items-center justify-center'` |
-| `boxSvg` | `'size-3.5'` |
-| `boxDraw` | `'ai-task-draw'` |
-| `text` | `'min-w-0 flex-1 text-default text-sm leading-snug'` |
-| `note` | `'shrink-0 text-muted text-xs tabular-nums'` |
-| `underline` | `'pointer-events-none absolute inset-x-0 bottom-0 h-px'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiTaskList` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `w-full rounded-xl border border-border bg-elevated p-3` |
-| `header` | `mb-1.5 flex items-baseline justify-between` |
-| `label` | `font-medium text-default text-sm` |
-| `count` | `text-muted text-xs tabular-nums` |
-| `list` | `list-none` |
-| `row` | `list-none` |
-| `rowInner` | `relative flex items-start gap-2 py-1` |
-| `box` | `mt-0.5 flex size-3.5 shrink-0 items-center justify-center` |
-| `boxSvg` | `size-3.5` |
-| `boxDraw` | `ai-task-draw` |
-| `text` | `min-w-0 flex-1 text-default text-sm leading-snug` |
-| `note` | `shrink-0 text-muted text-xs tabular-nums` |
-| `underline` | `pointer-events-none absolute inset-x-0 bottom-0 h-px` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiTaskList` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `w-full rounded-xl border border-border bg-elevated p-3` |
-| `header` | `mb-1.5 flex items-baseline justify-between` |
-| `label` | `font-medium text-default text-sm` |
-| `count` | `text-muted text-xs tabular-nums` |
-| `list` | `list-none` |
-| `row` | `list-none` |
-| `rowInner` | `relative flex items-start gap-2 py-1` |
-| `box` | `mt-0.5 flex size-3.5 shrink-0 items-center justify-center` |
-| `boxSvg` | `size-3.5` |
-| `boxDraw` | `ai-task-draw` |
-| `text` | `min-w-0 flex-1 text-default text-sm leading-snug` |
-| `note` | `shrink-0 text-muted text-xs tabular-nums` |
-| `underline` | `pointer-events-none absolute inset-x-0 bottom-0 h-px` |
 
 ## UI
 

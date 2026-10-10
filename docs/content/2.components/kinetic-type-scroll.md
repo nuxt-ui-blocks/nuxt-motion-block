@@ -23,7 +23,7 @@ row of independent pulses into one crest moving through the phrase.
 
 Pass `words` as an array and let the phrase sit inside a scrollable container
 taller than the phrase itself. If you want to drive the effect from a specific
-scroller rather than the window, pass `container` **as a getter** ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
+scroller rather than the window, pass `container` **as a getter** ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
 `:container="() => panelRef"`, never `:container="panelRef"`. A plain binding is
 unwrapped by the template and captured as `null` during setup, after which
 nothing re-reads it and `useScroll` silently falls back to the document.
@@ -64,13 +64,13 @@ const words = ['Scroll', 'to', 'set', 'the', 'phrase', 'in', 'motion']
 The wave's geometry is derived, not configured, but two props move it most.
 `stagger` sets the fractional offset between consecutive word peaks, and `offset`
 decides which part of the viewport the phrase animates across. The rest are
-peak-vs-rest value pairs ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â every one is a `[rest, peak]` tuple.
+peak-vs-rest value pairs ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â every one is a `[rest, peak]` tuple.
 
 | Prop | Rest | Peak | What moves |
 | --- | --- | --- | --- |
 | `scaleRange` | `0.92` | `1.18` | Word size, the most legible part of the effect |
 | `trackingRange` | `-0.5px` | `2.5px` | Letter-spacing; the widest spread reads as motion |
-| `weightRange` | `380` | `800` | `wght` axis ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â **only** if the active font is variable |
+| `weightRange` | `380` | `800` | `wght` axis ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â **only** if the active font is variable |
 | `liftRange` | `0px` | `-12px` | Vertical offset; raise it for a stronger crest |
 | `dimRange` | `0.45` | `1` | Opacity; the resting words stay legible at 0.45 |
 
@@ -85,12 +85,12 @@ and closes it around the middle, leaving readable time on both sides.
 ::field-group
   ::field{name="words" type="string[]"}
   Required. The phrase, one string per word. Words are rendered as `inline-block`
-  spans in a flex row, so the phrase wraps naturally on narrow containers ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â each
+  spans in a flex row, so the phrase wraps naturally on narrow containers ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â each
   word keeps its own index even after wrapping.
   ::
   ::field{name="container" type="MaybeComputedElementRef"}
   Optional scrollable ancestor that drives the progress. Must be passed as a
-  getter (`:container="() => panelRef"`) ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â see the note above. Left undefined,
+  getter (`:container="() => panelRef"`) ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â see the note above. Left undefined,
   `useScroll` measures the nearest scrollable ancestor, which is the document.
   ::
   ::field{name="offset" type="ScrollOffset" default="['start 0.9', 'end 0.45']"}
@@ -99,7 +99,7 @@ and closes it around the middle, leaving readable time on both sides.
   ::
   ::field{name="stagger" type="number" default="0.12"}
   Fractional offset between each word's active window. Capped internally so the
-  wave always fits between the `WAVE_MARGIN` (0.14) head and tail room ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â a long
+  wave always fits between the `WAVE_MARGIN` (0.14) head and tail room ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â a long
   phrase compresses its spacing rather than running off the end of the range.
   ::
   ::field{name="scaleRange" type="[number, number]" default="[0.92, 1.18]"}
@@ -111,7 +111,7 @@ and closes it around the middle, leaving readable time on both sides.
   ::
   ::field{name="weightRange" type="[number, number]" default="[380, 800]"}
   `font-variation-settings` `"wght"` at rest vs. at peak, rounded to an integer.
-  Silently does nothing unless the active font actually has a `wght` axis ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the
+  Silently does nothing unless the active font actually has a `wght` axis ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the
   docs site runs Public Sans, which is not variable, so this prop is inert there.
   ::
   ::field{name="liftRange" type="[number, number]" default="[0, -12]"}
@@ -139,7 +139,7 @@ once, as plain text, by a screen reader. This is deliberate: an
 `aria-label` on the wrapper `div` would be dropped by assistive tech, which is
 why the readable copy is a real element rather than an attribute.
 
-Under `prefers-reduced-motion` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â read via `useReducedMotion` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â each word renders
+Under `prefers-reduced-motion` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â read via `useReducedMotion` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â each word renders
 as a plain `span` at the peak weight with no travel, no dimming and no spring.
 The phrase is fully readable in its settled state.
 
@@ -153,66 +153,21 @@ The phrase is fully readable in its settled state.
   into a moving crest instead of snapping word by word. The spring transition is
   shared and near-critically damped (`bounce: 0`).
 - Animated properties are `transform` (`scale`, `y`), `opacity` and text
-  properties ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `will-change-transform` is set on each word so the compositor
+  properties ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `will-change-transform` is set on each word so the compositor
   keeps them on their own layer.
 - Words are defined as an inline `defineComponent` with a render function rather
   than a sibling `.vue` file, specifically so they are not auto-registered with
   an `M` prefix alongside the public component set.
-- Under reduced motion the branch returns a plain `span` with a static style ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â
+- Under reduced motion the branch returns a plain `span` with a static style ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â
   no `Motion` wrapper, no motion values, no springs instantiated at all.
 
 ::tip
 Because the windows overlap, the peak-to-peak spacing is what decides whether
 this reads as a wave or as a flicker. If your phrase is long enough that the
 internal cap compresses the spacing below `MIN_WINDOW` (0.09), consecutive
-windows no longer overlap and you lose the crest ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â shorten the phrase or split it
+windows no longer overlap and you lose the crest ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â shorten the phrase or split it
 into two components rather than raising `stagger`.
 ::
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.kineticTypeScroll` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `'relative flex flex-wrap gap-x-[0.4em] gap-y-[0.18em]'` |
-| `srOnly` | `'sr-only'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.kineticTypeScroll` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative flex flex-wrap gap-x-[0.4em] gap-y-[0.18em]` |
-| `srOnly` | `sr-only` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.kineticTypeScroll` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `relative flex flex-wrap gap-x-[0.4em] gap-y-[0.18em]` |
-| `srOnly` | `sr-only` |
 
 ## UI
 

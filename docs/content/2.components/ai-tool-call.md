@@ -11,7 +11,7 @@ One tool invocation, collapsed by default. It builds on Nuxt UI's `ChatTool`, so
 the disclosure, the streaming shimmer and the card frame behave like every other
 tool call on the page.
 
-Status is a four-value enum ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `pending`, `running`, `success`, `error` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â rather
+Status is a four-value enum ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `pending`, `running`, `success`, `error` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â rather
 than the shared conversation vocabulary. A tool call has a *lifecycle*, not a
 mood, and borrowing `AIState` here would imply a connection the data does not
 have. The booleans `ChatTool` speaks are derived from it.
@@ -29,7 +29,7 @@ message and these are the detail.
 
 Render one card per invocation with a `name` and a `status`, and mutate that
 status as the tool progresses. Supply the `args` or `result` slot only when you
-have something to show ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the card is not expandable without them.
+have something to show ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â the card is not expandable without them.
 
 ::code-preview
 ---
@@ -123,7 +123,7 @@ onMounted(() => {
 
 ::field-group
   ::field{name="name" type="string"}
-  Required. The tool name, rendered in a mono font ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `search_web`,
+  Required. The tool name, rendered in a mono font ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `search_web`,
   `read_dir`. The font is deliberate: these are identifiers, not prose, and
   setting them in the body face makes them read as English words.
   ::
@@ -131,7 +131,7 @@ onMounted(() => {
   The lifecycle state, and the source of the badge's behaviour.
   ::
   ::field{name="summary" type="string"}
-  A short trailing note ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `"3 files"`, `"1.2s"`. The component does not parse it.
+  A short trailing note ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `"3 files"`, `"1.2s"`. The component does not parse it.
   ::
   ::field{name="defaultOpen" type="boolean" default="false"}
   Start expanded. Leave it `false` for a live transcript: a tool call that opens
@@ -154,7 +154,7 @@ onMounted(() => {
   ::
 ::
 
-Supply neither slot and the card renders without a disclosure ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â there is nothing
+Supply neither slot and the card renders without a disclosure ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â there is nothing
 to expand, so a chevron leading to an empty panel would be a lie. Supply one or
 both and the card becomes expandable. Presence is checked per render rather than
 cached, so a slot supplied later still opens the disclosure.
@@ -164,8 +164,8 @@ the DOM when the card closes instead of sitting there invisible.
 
 ## Accessibility
 
-- Status is spelled out in an `sr-only` span ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â `Queued`, `Running`, `Done`,
-  `Failed` ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â in the same place the sighted reader finds the ring. The ring is
+- Status is spelled out in an `sr-only` span ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â `Queued`, `Running`, `Done`,
+  `Failed` ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â in the same place the sighted reader finds the ring. The ring is
   drawn, not announced, and the text carries it instead.
 - The SVG badge is `aria-hidden`. It duplicates the status label rather than
   replacing it.
@@ -199,79 +199,10 @@ the DOM when the card closes instead of sitting there invisible.
 - The spinning group uses `transformBox: 'view-box'` with an explicit
   `transformOrigin`, because an SVG element's rotation origin is otherwise
   resolved against the page rather than the ring.
-- The indefinite rotate and the pending opacity loop need Motion ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â there is no CSS
+- The indefinite rotate and the pending opacity loop need Motion ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â there is no CSS
   equivalent that restarts without a visible jump.
 - `isRunning` and `statusLabel` are computeds, so the ring's dash pattern and the
   hidden label are derived from one `status` read.
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.aiToolCall` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` | `''` |
-| `status` | `'sr-only'` |
-| `tool` | `'w-full'` |
-| `detail` | `'space-y-2 text-xs'` |
-| `detailLabel` | `'mb-1 text-[10px] uppercase tracking-wide text-muted'` |
-| `args` | `'overflow-x-auto font-mono text-highlighted'` |
-| `result` | `'overflow-x-auto text-highlighted'` |
-| `label` | `'font-mono text-xs font-medium text-highlighted'` |
-| `leading` | `'!size-5'` |
-| `leadingIcon` | `'!static !inset-auto !size-5 !opacity-100'` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiToolCall` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` |  |
-| `status` | `sr-only` |
-| `tool` | `w-full` |
-| `detail` | `space-y-2 text-xs` |
-| `detailLabel` | `mb-1 text-[10px] uppercase tracking-wide text-muted` |
-| `args` | `overflow-x-auto font-mono text-highlighted` |
-| `result` | `overflow-x-auto text-highlighted` |
-| `label` | `font-mono text-xs font-medium text-highlighted` |
-| `leading` | `!size-5` |
-| `leadingIcon` | `!static !inset-auto !size-5 !opacity-100` |
-
-## UI
-
-This component's theme exposes the slots below. Override any of them per instance with the [ui prop](/getting-started/theming), or app-wide under `ui.aiToolCall` in `app.config.ts`.
-
-::field-group
-  ::field{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
-  ::
-::
-
-| Slot | Default classes |
-| ---- | --------------- |
-| `root` |  |
-| `status` | `sr-only` |
-| `tool` | `w-full` |
-| `detail` | `space-y-2 text-xs` |
-| `detailLabel` | `mb-1 text-[10px] uppercase tracking-wide text-muted` |
-| `args` | `overflow-x-auto font-mono text-highlighted` |
-| `result` | `overflow-x-auto text-highlighted` |
-| `label` | `font-mono text-xs font-medium text-highlighted` |
-| `leading` | `!size-5` |
-| `leadingIcon` | `!static !inset-auto !size-5 !opacity-100` |
 
 ## UI
 
