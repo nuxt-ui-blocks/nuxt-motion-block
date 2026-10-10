@@ -41,11 +41,13 @@ export function useMotionBlockUI<Props extends object>(
   const _props = useComponentProps(name, props)
   const appConfig = useAppConfig()
 
+  // Calling the `tv` instance yields the per-slot resolver functions; slot-level
+  // variant props (e.g. `ui.line({ kind })`) are applied where the slots are used.
   const ui = computed(() =>
     tv({
       extend: theme,
       ...defu({}, (appConfig as any).ui?.[name] ?? {}),
-    }),
+    })(),
   )
 
   return { props: _props, ui }
