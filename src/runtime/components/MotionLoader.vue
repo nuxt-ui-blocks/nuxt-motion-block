@@ -4,7 +4,7 @@
     aria-live="polite"
     role="status"
     :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
-    :style="{ color: color || 'currentColor', height: `${size}px`, width: `${size}px` }"
+    :style="{ color: resolvedColor || 'currentColor', height: `${size}px`, width: `${size}px` }"
   >
     <!-- orbit -->
     <template v-if="variant === 'orbit'">
@@ -285,6 +285,7 @@ import { computed } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { motion } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import motionLoader from '../theme/motion-loader'
 
 export type MotionLoaderVariant
@@ -322,6 +323,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const { props: uiProps, ui } = useMotionBlockUI({ name: 'motionLoader', props, theme: motionLoader })
+
+const resolvedColor = useResolvedColor(() => props.color)
 
 const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
 

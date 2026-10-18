@@ -7,8 +7,6 @@
  * premultiplied output. Keeping the variants as branches over a `uVariant` uniform
  * rather than as separate shaders matters: a live variant control would otherwise
  * force a fresh shader compile on the exact frame the control changes.
- *
- * Ported from smoothui's `shader-reveal-transition`.
  */
 
 /** Total sweep time, in milliseconds. */

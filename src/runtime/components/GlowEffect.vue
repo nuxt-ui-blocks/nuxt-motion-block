@@ -1,5 +1,6 @@
 <template>
   <Motion
+    ref="rootEl"
     :style="computedStyles"
     :animate="currentAnimation"
     :class="ui.root({ blur: blurVariant, class: [uiProps.ui?.root, uiProps.class, scaleClass, blurDynamic] })"
@@ -7,11 +8,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { Motion } from 'motion-v'
 import type { Transition } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import glowEffect from '../theme/glow-effect'
+import { useColorMode } from '#imports'
+import { resolveColor } from '../utils/theme-color'
 
 // Define props
 const props = withDefaults(defineProps<{
@@ -40,6 +43,23 @@ const { props: uiProps, ui } = useMotionBlockUI({
   theme: glowEffect,
 })
 
+/**
+ * `colors` accepts a theme token (`'primary'`, `var(--ui-primary)`) or a literal
+ * colour per entry. Resolve each against the active theme so the CSS gradient
+ * strings are built from concrete colours, not a bare token the browser drops.
+ */
+const colorMode = useColorMode()
+const rootEl = ref<HTMLElement | null>(null)
+const resolvedColors = ref<string[]>([...props.colors])
+
+const resolveColors = () => {
+  const target = rootEl.value instanceof HTMLElement ? rootEl.value : undefined
+  resolvedColors.value = props.colors.map(color => resolveColor(color, { target }) ?? color)
+}
+
+watch([() => props.colors, () => colorMode.value], resolveColors)
+onMounted(resolveColors)
+
 // Base transition configuration
 const BASE_TRANSITION = {
   repeat: Infinity,
@@ -49,7 +69,8 @@ const BASE_TRANSITION = {
 
 // Animation configurations
 const animations = computed(() => {
-  const { colors, mode, scale, transition } = props
+  const { mode, scale, transition } = props
+  const colors = resolvedColors.value
 
   const configs = {
     rotate: {

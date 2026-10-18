@@ -7,7 +7,7 @@ import appDownloadStack from '../theme/app-download-stack'
 defineOptions({ inheritAttrs: false })
 
 export interface AppDownloadStackApp {
-  /** Absolute or data-URI URL of the app icon. */
+  /** Nuxt UI icon name for the app icon (e.g. `i-simple-icons-safari`). */
   icon: string
   /** Stable identity — also the value carried in every emitted payload. */
   id: number
@@ -68,17 +68,15 @@ const REDUCED_EASE: [number, number, number, number] = [0.645, 0.045, 0.355, 1]
 const INFINITE_REPEAT = Number.POSITIVE_INFINITY
 
 /**
- * Placeholder icons only — pass your own `apps` in anything you ship. URLs are
- * literal rather than imported from a data package so the component stays
- * self-contained when the registry copies it into someone else's project.
+ * Placeholder icons only — pass your own `apps` in anything you ship. Names are
+ * Nuxt UI (Iconify) names so the component stays self-contained with no external
+ * image request when the registry copies it into someone else's project.
  */
-const ICON_BASE = 'https://ik.imagekit.io/16u211libb/smoothui/app-icons'
-
 const DEFAULT_APPS: AppDownloadStackApp[] = [
-  { icon: `${ICON_BASE}/safari.png?tr=w-128`, id: 1, name: 'Safari' },
-  { icon: `${ICON_BASE}/photos.png?tr=w-128`, id: 2, name: 'Photos' },
-  { icon: `${ICON_BASE}/podcasts.png?tr=w-128`, id: 3, name: 'Podcasts' },
-  { icon: `${ICON_BASE}/calendar.png?tr=w-128`, id: 4, name: 'Calendar' },
+  { icon: 'i-lucide-compass', id: 1, name: 'Safari' },
+  { icon: 'i-lucide-image', id: 2, name: 'Photos' },
+  { icon: 'i-lucide-mic', id: 3, name: 'Podcasts' },
+  { icon: 'i-lucide-calendar-days', id: 4, name: 'Calendar' },
 ]
 
 /**
@@ -400,21 +398,23 @@ function layoutIdFor(appId: number) {
         @pointerenter="setHovered(true)"
         @pointerleave="setHovered(false)"
       >
-        <motion.img
+        <motion.div
           v-for="(app, index) in apps"
           :key="app.id"
-          :alt="`${app.name} Logo`"
           :custom="index"
-          :class="ui.stackIcon({ class: uiProps.ui?.stackIcon })"
-          :draggable="false"
-          :height="64"
+          :class="[ui.stackIcon({ class: uiProps.ui?.stackIcon }), 'flex items-center justify-center']"
           :layout-id="layoutIdFor(app.id)"
-          :src="app.icon"
           :variants="stackVariants"
-          :width="64"
           v-bind="stackIconMotion[index]"
+          role="img"
+          :aria-label="app.name"
           data-ads-stack-icon
-        />
+        >
+          <UIcon
+            :name="app.icon"
+            class="size-10"
+          />
+        </motion.div>
       </button>
 
       <AnimatePresence>
@@ -502,14 +502,11 @@ function layoutIdFor(appId: number) {
                 data-ads-app
                 @click="toggleApp(app.id)"
               >
-                <img
-                  :alt="app.name"
-                  :class="ui.appIcon({ class: uiProps.ui?.appIcon })"
-                  :draggable="false"
-                  :height="40"
-                  :src="app.icon"
-                  :width="40"
-                >
+                <UIcon
+                  aria-hidden="true"
+                  :class="[ui.appIcon({ class: uiProps.ui?.appIcon }), 'size-8']"
+                  :name="app.icon"
+                />
                 <span :class="ui.appName({ class: uiProps.ui?.appName })">
                   {{ app.name }}
                 </span>
@@ -551,21 +548,22 @@ function layoutIdFor(appId: number) {
               :style="{ x: 0 }"
               data-ads-shine
             />
-            <motion.img
+            <motion.div
               v-for="(app, index) in apps"
               :key="app.id"
-              :alt="`${app.name} Logo`"
               :custom="index"
-              :class="ui.downloadingIcon({ class: uiProps.ui?.downloadingIcon })"
-              :draggable="false"
-              :height="64"
+              :class="[ui.downloadingIcon({ class: uiProps.ui?.downloadingIcon }), 'flex items-center justify-center']"
               :layout-id="layoutIdFor(app.id)"
-              :src="app.icon"
               :variants="stackVariants"
-              :width="64"
               v-bind="downloadingIconMotion[index]"
+              aria-hidden="true"
               data-ads-downloading-icon
-            />
+            >
+              <UIcon
+                :name="app.icon"
+                class="size-10"
+              />
+            </motion.div>
           </div>
           <span
             :class="ui.downloadingLabel({ class: uiProps.ui?.downloadingLabel })"

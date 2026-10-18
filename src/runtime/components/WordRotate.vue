@@ -1,12 +1,14 @@
 <template>
   <Motion
     ref="containerRef"
+    as="span"
     :class="ui.root({ class: [props.containerClass, uiProps.ui?.root] })"
     v-bind="$attrs"
   >
     <!-- @vue-ignore -->
     <Motion
       :key="currentWord"
+      as="span"
       :initial="variants[animationStyle].initial"
       :animate="show ? 'animate' : 'exit'"
       :variants="variants[animationStyle]"

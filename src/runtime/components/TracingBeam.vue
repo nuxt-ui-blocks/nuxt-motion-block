@@ -62,17 +62,17 @@
             :y2="y2"
           >
             <stop
-              :stop-color="props.beamColor[0]"
+              :stop-color="resolvedBeamColor?.[0]"
               stop-opacity="0"
             />
-            <stop :stop-color="props.beamColor[0]" />
+            <stop :stop-color="resolvedBeamColor?.[0]" />
             <stop
               offset="0.325"
-              :stop-color="props.beamColor[1]"
+              :stop-color="resolvedBeamColor?.[1]"
             />
             <stop
               offset="1"
-              :stop-color="props.beamColor[2]"
+              :stop-color="resolvedBeamColor?.[2]"
               stop-opacity="0"
             />
           </motion.linearGradient>
@@ -92,6 +92,7 @@
 import { motion } from 'motion-v'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColors } from '../composables/useThemeColor'
 import tracingBeam from '../theme/tracing-beam'
 
 interface TracingBeamProps {
@@ -111,6 +112,8 @@ const { props: uiProps, ui } = useMotionBlockUI({
   props,
   theme: tracingBeam,
 })
+
+const resolvedBeamColor = useResolvedColors(() => props.beamColor)
 
 const containerRef = ref<HTMLElement | null>(null)
 const contentRef = ref<HTMLElement | null>(null)

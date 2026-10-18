@@ -8,6 +8,7 @@
     >
       <!-- @vue-ignore -->
       <Motion
+        as="span"
         :class="ui.enter({ class: uiProps.ui?.enter })"
         :initial="enterInitial"
         :animate="enterAnimate"
@@ -21,6 +22,7 @@
       </Motion>
       <!-- @vue-ignore -->
       <Motion
+        as="span"
         :class="ui.exit({ class: uiProps.ui?.exit })"
         :initial="exitInitial"
         :animate="exitAnimate"

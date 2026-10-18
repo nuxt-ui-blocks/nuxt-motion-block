@@ -46,6 +46,7 @@
 import { computed } from 'vue'
 import { motion } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import maskContainer from '../theme/mask-container'
 
 interface Props {
@@ -68,7 +69,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { props: uiProps, ui } = useMotionBlockUI({ name: 'maskContainer', props, theme: maskContainer })
 
+const resolvedColor = useResolvedColor(() => props.color)
+
 const maskStyle = computed(() => ({
-  backgroundColor: props.color,
+  backgroundColor: resolvedColor.value,
 }))
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div
+  <span
     ref="containerRef"
     :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     role="text"
@@ -16,6 +16,7 @@
     >
       <!-- @vue-ignore -->
       <Motion
+        as="span"
         :initial="initialVariant"
         :animate="shouldAnimate ? getCharAnimateVariant(index) : initialVariant"
         :transition="getCharTransition(index)"
@@ -26,7 +27,7 @@
     </span>
     <!-- Screen reader accessible text -->
     <span :class="ui.srOnly({ class: uiProps.ui?.srOnly })">{{ props.text }}</span>
-  </div>
+  </span>
 </template>
 
 <script setup lang="ts">

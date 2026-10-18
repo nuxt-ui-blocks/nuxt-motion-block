@@ -16,6 +16,7 @@
 <script setup lang="ts">
 import { computed, type PropType } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import divGrid from '../theme/div-grid'
 
 interface ClickedCell {
@@ -49,11 +50,11 @@ const props = defineProps({
   },
   borderColor: {
     type: String,
-    default: '#3f3f46',
+    default: 'border',
   },
   fillColor: {
     type: String,
-    default: 'rgba(14,165,233,0.3)',
+    default: 'primary',
   },
   clickedCell: {
     type: Object as PropType<ClickedCell | null>,
@@ -70,6 +71,9 @@ const props = defineProps({
 })
 
 const { props: uiProps, ui } = useMotionBlockUI({ name: 'divGrid', props, theme: divGrid })
+
+const resolvedFillColor = useResolvedColor(() => props.fillColor)
+const resolvedBorderColor = useResolvedColor(() => props.borderColor)
 
 const emit = defineEmits<{
   cellClick: [row: number, col: number]
@@ -94,8 +98,8 @@ const getCellStyle = (idx: number): CellStyle => {
 
   if (!props.clickedCell) {
     return {
-      backgroundColor: props.fillColor,
-      borderColor: props.borderColor,
+      backgroundColor: resolvedFillColor.value ?? props.fillColor,
+      borderColor: resolvedBorderColor.value ?? props.borderColor,
     }
   }
 
@@ -109,8 +113,8 @@ const getCellStyle = (idx: number): CellStyle => {
   return {
     '--delay': `${delay}ms`,
     '--duration': `${duration}ms`,
-    'backgroundColor': props.fillColor,
-    'borderColor': props.borderColor,
+    'backgroundColor': resolvedFillColor.value ?? props.fillColor,
+    'borderColor': resolvedBorderColor.value ?? props.borderColor,
   }
 }
 

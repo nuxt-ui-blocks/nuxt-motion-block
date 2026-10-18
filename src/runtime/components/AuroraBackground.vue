@@ -1,7 +1,7 @@
 <template>
-  <main>
+  <div>
     <div
-      :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
+      :class="ui.root({ class: [uiProps.ui?.root, uiProps.ui?.class] })"
       v-bind="attrs"
     >
       <div
@@ -14,7 +14,7 @@
       </div>
       <slot />
     </div>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">

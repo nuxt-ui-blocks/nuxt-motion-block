@@ -58,6 +58,7 @@ import { Motion } from 'motion-v'
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useElementVisibility } from '@vueuse/core'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColors } from '../composables/useThemeColor'
 import textGlitch from '../theme/text-glitch'
 
 type GlitchTrigger = 'hover' | 'auto' | 'inView' | 'manual'
@@ -152,8 +153,11 @@ const scanLines = computed(() => {
   )
 })
 
+const resolvedColors = useResolvedColors(() => props.colors)
+
 const getLayerStyles = (index: number) => {
-  const color = props.colors[index % props.colors.length]
+  const colors = resolvedColors.value && resolvedColors.value.length > 0 ? resolvedColors.value : props.colors
+  const color = colors[index % colors.length]
   return {
     color,
     zIndex: 5 - index,

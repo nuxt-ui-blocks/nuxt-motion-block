@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Motion, useReducedMotion } from 'motion-v'
 import { computed } from 'vue'
+import { useResolvedColors } from '../../composables/useThemeColor'
 import {
   RANSOM_NOTE_DEFAULT_ANIMATE,
   RANSOM_NOTE_DEFAULT_FONTS,
@@ -88,6 +89,8 @@ interface RansomScrap {
  * pure function of the props: the server and the client produce the same
  * collage, which is the only reason this can hydrate at all.
  */
+const resolvedPalette = useResolvedColors(() => props.palette)
+
 const scraps = computed<RansomScrap[]>(() => {
   const random = createSeededRandom(props.seed)
   const intensity = clamp(
@@ -96,8 +99,9 @@ const scraps = computed<RansomScrap[]>(() => {
     RANSOM_NOTE_INTENSITY_MAX,
   )
   const fonts = props.fonts.length > 0 ? props.fonts : RANSOM_NOTE_DEFAULT_FONTS
-  const palette
-    = props.palette.length > 0 ? props.palette : RANSOM_NOTE_DEFAULT_PALETTE
+  const paletteRaw = resolvedPalette.value && resolvedPalette.value.length > 0
+    ? resolvedPalette.value
+    : (props.palette.length > 0 ? props.palette : RANSOM_NOTE_DEFAULT_PALETTE)
   const entranceSpread
     = RANSOM_NOTE_ENTRANCE_OFFSET_BASE
       + RANSOM_NOTE_ENTRANCE_OFFSET_VARIANCE * intensity
@@ -110,7 +114,7 @@ const scraps = computed<RansomScrap[]>(() => {
       // scrap and the words stop being words.
       backgroundColor: isWhitespace
         ? undefined
-        : palette[Math.floor(random() * palette.length)],
+        : paletteRaw[Math.floor(random() * paletteRaw.length)],
       character,
       entranceOffsetX: randomInRange(random, -entranceSpread, entranceSpread),
       entranceOffsetY: randomInRange(random, -entranceSpread, entranceSpread),

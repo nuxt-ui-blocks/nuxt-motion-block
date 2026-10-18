@@ -29,7 +29,7 @@
         aria-hidden="true"
         :class="ui.understudy({ class: uiProps.ui?.understudy })"
         :style="{
-          background: `radial-gradient(circle at 34% 30%, ${finalColors.bodyEdge}, ${finalColors.body} 72%)`,
+          background: `radial-gradient(circle at 34% 30%, ${resolvedColors.bodyEdge}, ${resolvedColors.body} 72%)`,
           inset: `${bodyUnderstudyInset}%`,
         }"
       />
@@ -56,7 +56,7 @@
         v-for="part in eyes"
         :key="part.side"
         :ref="(el) => setEye(part.side, el)"
-        :fill="finalColors.feature"
+        :fill="resolvedColors.feature"
         :height="part.drawn"
         :rx="part.rx"
         :width="part.width"
@@ -69,7 +69,7 @@
         :ref="(el) => setSpiral(side, el)"
         :d="SPIRAL"
         fill="none"
-        :stroke="finalColors.feature"
+        :stroke="resolvedColors.feature"
         stroke-linecap="round"
         stroke-width="3"
       />
@@ -114,6 +114,8 @@ import type { AIAmplitude, AIState } from '../composables/useAiState'
 import { getAIStateMotion, useAmplitudeValue } from '../composables/useAiState'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import aiOrbFace from '../theme/ai-orb-face'
+import { useColorMode } from '#imports'
+import { colorToRgb, resolveColor } from '../utils/theme-color'
 
 const VIEWBOX = 100
 const CENTER = VIEWBOX / 2
@@ -205,7 +207,36 @@ const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiOrbFace', props, them
 const stateMotion = computed(() => getAIStateMotion(props.state))
 const amplitudeValue = useAmplitudeValue(() => props.amplitude)
 const finalColors = computed<AiOrbFaceColors>(() => ({ ...AI_ORB_FACE_DEFAULT_COLORS, ...props.colors }))
-const orbColors = computed(() => [finalColors.value.body, finalColors.value.bodyEdge])
+
+/**
+ * The colours the browser actually paints, so a theme token (`'primary'`), a
+ * `var()`, a `color-mix()` and a literal colour all reach the shader, the
+ * understudy gradient and the SVG fill the same way. The raw `finalColors` are
+ * valid CSS wherever a declaration is parsed, but an SVG presentation attribute
+ * is not: `fill="color-mix(…)"` and `fill="primary"` are both dropped, which
+ * would leave the eyes unstyled. Resolving through the shared theme bridge hands
+ * every surface a concrete `rgb()` instead.
+ */
+const colorMode = useColorMode()
+const resolvedColors = ref<AiOrbFaceColors>({ ...finalColors.value })
+
+const toConcreteColor = (value: string): string => {
+  const target = rootEl.value ?? undefined
+  const resolved = resolveColor(value, { target }) ?? value
+  const rgb = colorToRgb(resolved, target)
+  return rgb ? `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})` : resolved
+}
+
+const resolveColors = () => {
+  const source = finalColors.value
+  resolvedColors.value = {
+    body: toConcreteColor(source.body),
+    bodyEdge: toConcreteColor(source.bodyEdge),
+    feature: toConcreteColor(source.feature),
+  }
+}
+
+const orbColors = computed(() => [resolvedColors.value.body, resolvedColors.value.bodyEdge])
 const resolvedSize = computed(() => (typeof props.size === 'number' ? `${props.size}px` : props.size))
 const isHappy = computed(() => props.state === 'done')
 const isThinking = computed(() => props.state === 'thinking')
@@ -649,6 +680,7 @@ const applyEnergy = (level: number) => {
 
 onMounted(() => {
   mounted.value = true
+  resolveColors()
   applyEnergy(amplitudeValue.get())
   detachEnergy = amplitudeValue.on('change', applyEnergy)
   startBlinking()
@@ -692,6 +724,10 @@ watch([() => props.gaze, isThinking, isBroken, shouldReduceMotion], attachGaze)
 watch([isThinking, shouldReduceMotion], startSaccades)
 
 watch([isListening, shouldReduceMotion], syncBreathing, { flush: 'post' })
+
+// Re-resolve whenever the colours change or the theme flips, so a token follows
+// the active light/dark palette instead of freezing at its first value.
+watch([finalColors, () => colorMode.value], resolveColors)
 
 watch(() => props.state, (next, previous) => {
   if (!mounted.value) return
@@ -787,13 +823,15 @@ export const AI_ORB_FACE_STATE_EXPRESSION = {
 } as const
 
 /**
- * Saturated against near-white, not a second lilac. The previous two stops sat
- * within eight points of lightness of each other, so the marbled interior read as
- * a flat disc and all the flow work in the shader went unseen.
+ * Follow the theme by default: the body is the primary colour, and the edge and
+ * features are mixed away from it so the sphere keeps a lit highlight and the
+ * eyes stay legible. The edge is mixed toward white and the features toward
+ * black, so the marbled interior reads as a sphere rather than a flat disc and
+ * the flow work in the shader stays visible.
  */
 export const AI_ORB_FACE_DEFAULT_COLORS = {
-  body: 'oklch(72% 0.21 322)',
-  bodyEdge: 'oklch(97% 0.02 322)',
-  feature: 'oklch(24% 0.03 280)',
+  body: 'var(--ui-primary)',
+  bodyEdge: 'color-mix(in oklab, var(--ui-primary), white 78%)',
+  feature: 'color-mix(in oklab, var(--ui-primary), black 82%)',
 } as const
 </script>

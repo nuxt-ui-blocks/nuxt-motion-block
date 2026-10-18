@@ -4,7 +4,7 @@ const defaultTheme = {
   slots: {
     root: 'relative w-full select-none outline-none',
     stage: 'relative mx-auto flex h-[320px] items-center justify-center',
-    card: 'absolute h-[220px] w-[280px] overflow-hidden rounded-2xl border border-foreground/10 bg-background shadow-xl',
+    card: 'absolute h-[220px] w-[280px] overflow-hidden rounded-2xl border border-inverted/10 bg-default shadow-xl',
     image: 'h-full w-full object-cover',
     content: 'flex h-full w-full items-center justify-center p-4 text-sm',
     controls: 'mt-4 flex items-center justify-center gap-4',

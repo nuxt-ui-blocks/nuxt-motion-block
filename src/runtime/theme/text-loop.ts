@@ -4,8 +4,8 @@ const defaultTheme = {
   slots: {
     root: 'relative inline-flex items-center justify-center align-baseline',
     item: '',
-    measure: 'invisible absolute',
-    measureItem: '',
+    measure: 'invisible absolute block',
+    measureItem: 'block',
   },
 }
 

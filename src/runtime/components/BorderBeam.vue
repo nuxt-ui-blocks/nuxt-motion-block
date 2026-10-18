@@ -23,11 +23,11 @@
         >
           <stop
             offset="0%"
-            :stop-color="props.colorFrom"
+            :stop-color="resolvedColorFrom"
           />
           <stop
             offset="100%"
-            :stop-color="props.colorTo"
+            :stop-color="resolvedColorTo"
           />
         </linearGradient>
         <linearGradient
@@ -39,11 +39,11 @@
         >
           <stop
             offset="0%"
-            :stop-color="toHaloStop(props.colorFrom)"
+            :stop-color="toHaloStop(resolvedColorFrom)"
           />
           <stop
             offset="100%"
-            :stop-color="toHaloStop(props.colorTo)"
+            :stop-color="toHaloStop(resolvedColorTo)"
           />
         </linearGradient>
       </defs>
@@ -120,6 +120,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, useId, watch } fro
 import { useReducedMotion } from 'motion-v'
 import { useHoverCapable } from '../composables/useHoverCapable'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import borderBeam from '../theme/border-beam'
 
 const hoverCapable = useHoverCapable()
@@ -170,6 +171,9 @@ const props = withDefaults(defineProps<BorderBeamProps>(), {
 })
 
 const { props: uiProps, ui } = useMotionBlockUI({ name: 'borderBeam', props, theme: borderBeam })
+
+const resolvedColorFrom = useResolvedColor(() => props.colorFrom)
+const resolvedColorTo = useResolvedColor(() => props.colorTo)
 
 const HALF = 0.5
 const MS_PER_SECOND = 1000
@@ -279,7 +283,7 @@ const clamp = (value: number, min: number, max: number) => Math.min(max, Math.ma
  * the halo never inherits the beam colour verbatim — it is pushed towards white
  * first. A glow is light by definition; a dark blur is a shadow.
  */
-const toHaloStop = (color: string) => `color-mix(in oklab, ${color} ${HALO_TINT}, white)`
+const toHaloStop = (color?: string) => color ? `color-mix(in oklab, ${color} ${HALO_TINT}, white)` : undefined
 
 const shouldReduceMotion = useReducedMotion()
 // `useId` rather than a random string: the gradient ids are in the rendered

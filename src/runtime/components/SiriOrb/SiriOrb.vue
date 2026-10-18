@@ -41,6 +41,7 @@ import { Motion, useMotionValue, useReducedMotion, useTransform } from 'motion-v
 import { computed, watch } from 'vue'
 import type { AIAmplitude, AIState } from '../../composables/useAiState'
 import { getAIStateMotion, useAmplitudeValue } from '../../composables/useAiState'
+import { useResolvedColor } from '../../composables/useThemeColor'
 import {
   AMPLITUDE_BLUR_FALLOFF,
   AMPLITUDE_SCALE_GAIN,
@@ -107,6 +108,12 @@ const shouldReduceMotion = useReducedMotion()
 const metrics = computed(() => resolveOrbMetrics(props.size))
 const stateMotion = computed(() => getAIStateMotion(props.state))
 const palette = computed(() => ({ ...DEFAULT_SIRI_ORB_COLORS, ...props.colors }))
+
+const resolvedBg = useResolvedColor(() => palette.value.bg)
+const resolvedC1 = useResolvedColor(() => palette.value.c1)
+const resolvedC2 = useResolvedColor(() => palette.value.c2)
+const resolvedC3 = useResolvedColor(() => palette.value.c3)
+const resolvedC4 = useResolvedColor(() => palette.value.c4)
 
 // ------------------------------------------------------------------- amplitude
 
@@ -189,17 +196,17 @@ const rootStyle = computed(() => ({
 }))
 
 const bloomStyle = computed(() => ({
-  background: `radial-gradient(circle at 50% 50%, ${palette.value.c2} 0%, transparent 64%)`,
+  background: `radial-gradient(circle at 50% 50%, ${resolvedC2.value} 0%, transparent 64%)`,
 }))
 
 const discStyle = computed(() => ({
   '--animation-duration': `${loopDuration.value}s`,
-  '--bg': palette.value.bg,
+  '--bg': resolvedBg.value,
   '--blur-amount': blurAmount,
-  '--c1': palette.value.c1,
-  '--c2': palette.value.c2,
-  '--c3': palette.value.c3,
-  '--c4': palette.value.c4,
+  '--c1': resolvedC1.value,
+  '--c2': resolvedC2.value,
+  '--c3': resolvedC3.value,
+  '--c4': resolvedC4.value,
   '--contrast-amount': metrics.value.contrastAmount,
   '--dot-size': `${metrics.value.dotSize}px`,
   '--drift-duration': `${driftDuration.value}s`,

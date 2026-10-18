@@ -1,6 +1,9 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
-  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
+  <div
+    ref="rootEl"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
+  >
     <motion.svg
       viewBox="0 0 1440 900"
       fill="none"
@@ -14,7 +17,7 @@
         v-for="(path, idx) in paths"
         :key="`path-${idx}`"
         :d="path"
-        :stroke="colors[idx % colors.length]"
+        :stroke="palette[idx % palette.length]"
         stroke-width="2.3"
         stroke-linecap="round"
         :initial="pathVariants.initial"
@@ -28,10 +31,13 @@
 
 <script setup lang="ts">
 // Using the motion component from motion-v
+import { computed, onMounted, ref, watch } from 'vue'
 import { motion } from 'motion-v'
 import type { Transition, RepeatType } from 'motion-v'
+import { useColorMode } from '#imports'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import backgroundLines from '../theme/background-lines'
+import { colorToRgb, resolveColor } from '../utils/theme-color'
 
 interface SvgOptions {
   duration?: number
@@ -46,34 +52,40 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   svgOptions: () => ({}),
-  colors: () => [
-    '#46A5CA', // Blue
-    '#8C2F2F', // Red
-    '#4FAE4D', // Green
-    '#D6590C', // Orange
-    '#811010', // Dark Red
-    '#247AFB', // Bright Blue
-    '#A534A0', // Pink/Purple
-    '#A8A438', // Olive
-    '#D6590C', // Orange (duplicate, consider changing)
-    '#46A29C', // Teal
-    '#670F6D', // Dark Purple
-    '#D7C200', // Yellow
-    '#59BBEB', // Light Blue
-    '#504F1C', // Dark Olive
-    '#55BC54', // Light Green
-    '#4D3568', // Muted Purple
-    '#9F39A5', // Bright Purple
-    '#363636', // Dark Gray
-    '#860909', // Deep Red
-    '#6A286F', // Plum
-    '#604483', // Indigo
-  ],
+  colors: () => ['primary', 'secondary', 'success', 'info', 'warning', 'error'],
   class: undefined,
   ui: undefined,
 })
 
 const { props: uiProps, ui } = useMotionBlockUI({ name: 'backgroundLines', props, theme: backgroundLines })
+
+/**
+ * `colors` accepts a theme token (`'primary'`, `var(--ui-primary)`) or a literal
+ * colour per entry. Resolve each against the active theme so an SVG `stroke` — a
+ * presentation attribute, where `var()` works but a bare token does not — always
+ * receives a concrete `rgb()`.
+ */
+const colorMode = useColorMode()
+const rootEl = ref<HTMLElement | null>(null)
+const resolvedColors = ref<string[]>([...props.colors])
+
+const toConcreteColor = (value: string): string => {
+  const target = rootEl.value ?? undefined
+  const resolved = resolveColor(value, { target }) ?? value
+  const rgb = colorToRgb(resolved, target)
+  return rgb ? `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})` : resolved
+}
+
+const resolveColors = () => {
+  resolvedColors.value = props.colors.map(toConcreteColor)
+}
+
+const palette = computed(() =>
+  resolvedColors.value.length ? resolvedColors.value : ['currentColor'],
+)
+
+watch([() => props.colors, () => colorMode.value], resolveColors)
+onMounted(resolveColors)
 
 const paths = [
   'M720 450C720 450 742.459 440.315 755.249 425.626C768.039 410.937 778.88 418.741 789.478 401.499C800.076 384.258 817.06 389.269 826.741 380.436C836.423 371.603 851.957 364.826 863.182 356.242C874.408 347.657 877.993 342.678 898.867 333.214C919.741 323.75 923.618 319.88 934.875 310.177C946.133 300.474 960.784 300.837 970.584 287.701C980.384 274.564 993.538 273.334 1004.85 263.087C1016.15 252.84 1026.42 250.801 1038.22 242.1C1050.02 233.399 1065.19 230.418 1074.63 215.721C1084.07 201.024 1085.49 209.128 1112.65 194.884C1139.8 180.64 1132.49 178.205 1146.43 170.636C1160.37 163.066 1168.97 158.613 1181.46 147.982C1193.95 137.35 1191.16 131.382 1217.55 125.645C1243.93 119.907 1234.19 118.899 1254.53 100.846C1274.86 82.7922 1275.12 92.8914 1290.37 76.09C1305.62 59.2886 1313.91 62.1868 1323.19 56.7536C1332.48 51.3204 1347.93 42.8082 1361.95 32.1468C1375.96 21.4855 1374.06 25.168 1397.08 10.1863C1420.09 -4.79534 1421.41 -3.16992 1431.52 -15.0078',

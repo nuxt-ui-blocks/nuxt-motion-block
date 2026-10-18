@@ -310,7 +310,7 @@ export interface Props {
  * pointer *and* keyboard, whereas the reference rings only on keyboard focus (`focus-visible:ring-2`) and
  * backgrounds only on hover (`hover:bg-muted`). Keying on the pseudo-class restores that split. The offset
  * ring is drawn in the surface colour, which is what `ring-offset-2` resolves to inside the reference's own
- * `bg-background` panel — Tailwind's literal default offset colour is a hardcoded white that would ring the
+ * `bg-default` panel — Tailwind's literal default offset colour is a hardcoded white that would ring the
  * dark panel in white.
  *
  * The ring colour is `--ui-primary`, not `--ui-ring`: Nuxt UI's theme declares no `--ui-ring` token,

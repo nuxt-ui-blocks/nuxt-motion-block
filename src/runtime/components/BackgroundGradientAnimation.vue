@@ -59,9 +59,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { useColorMode } from '#imports'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import { backgroundGradientAnimation } from '../theme'
+import { colorToRgb, resolveColor } from '../utils/theme-color'
 
 interface Props {
   gradientBackgroundStart?: string
@@ -105,24 +107,54 @@ const tgX = ref(0)
 const tgY = ref(0)
 const isSafari = ref(false)
 
+const colorMode = useColorMode()
+
+// Every colour prop accepts a theme token (`'primary'`, `'var(--ui-primary)'`)
+// or a literal colour. The five blob colours and the pointer colour may also be
+// given as `'R, G, B'` triplets; both forms end up as a triplet the theme's
+// rgba() gradients can consume.
+const resolveCss = (value: string) =>
+  resolveColor(value, { target: containerRef.value ?? undefined }) ?? value
+
+const resolveTriplet = (value: string) => {
+  const trimmed = value.trim()
+  if (/^\d+\s*,\s*\d+\s*,\s*\d+$/.test(trimmed)) return trimmed
+  const rgb = colorToRgb(resolveCss(trimmed))
+  return rgb ? `${rgb[0]}, ${rgb[1]}, ${rgb[2]}` : trimmed
+}
+
+const applyColors = () => {
+  const root = document.body.style
+  root.setProperty('--gradient-background-start', resolveCss(props.gradientBackgroundStart))
+  root.setProperty('--gradient-background-end', resolveCss(props.gradientBackgroundEnd))
+  root.setProperty('--first-color', resolveTriplet(props.firstColor))
+  root.setProperty('--second-color', resolveTriplet(props.secondColor))
+  root.setProperty('--third-color', resolveTriplet(props.thirdColor))
+  root.setProperty('--fourth-color', resolveTriplet(props.fourthColor))
+  root.setProperty('--fifth-color', resolveTriplet(props.fifthColor))
+  root.setProperty('--pointer-color', resolveTriplet(props.pointerColor))
+  root.setProperty('--size', props.size)
+  root.setProperty('--blending-value', props.blendingValue)
+}
+
+watch(
+  () => [
+    props.gradientBackgroundStart,
+    props.gradientBackgroundEnd,
+    props.firstColor,
+    props.secondColor,
+    props.thirdColor,
+    props.fourthColor,
+    props.fifthColor,
+    props.pointerColor,
+    colorMode.value,
+  ],
+  applyColors,
+)
+
 onMounted(() => {
   // Set CSS custom properties
-  document.body.style.setProperty(
-    '--gradient-background-start',
-    props.gradientBackgroundStart,
-  )
-  document.body.style.setProperty(
-    '--gradient-background-end',
-    props.gradientBackgroundEnd,
-  )
-  document.body.style.setProperty('--first-color', props.firstColor)
-  document.body.style.setProperty('--second-color', props.secondColor)
-  document.body.style.setProperty('--third-color', props.thirdColor)
-  document.body.style.setProperty('--fourth-color', props.fourthColor)
-  document.body.style.setProperty('--fifth-color', props.fifthColor)
-  document.body.style.setProperty('--pointer-color', props.pointerColor)
-  document.body.style.setProperty('--size', props.size)
-  document.body.style.setProperty('--blending-value', props.blendingValue)
+  applyColors()
 
   // Detect Safari
   isSafari.value = /^(?:(?!chrome|android).)*safari/i.test(navigator.userAgent)

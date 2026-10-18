@@ -19,16 +19,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useReducedMotion } from 'motion-v'
 import { useHoverCapable } from '../composables/useHoverCapable'
+import { useResolvedColor } from '../composables/useThemeColor'
 
 export interface DrawingCursorProps {
   /** Canvas composite operation used for every stroke. */
   blend?: GlobalCompositeOperation
   /** Erase the drawing when the pointer leaves. */
   clearOnLeave?: boolean
-  /** Stroke colour. */
+  /** Stroke colour. A theme token (`'primary'`, `'error'`, …) or any CSS colour. */
   color?: string
   /** Milliseconds for a point to fade to nothing. `0` never fades. */
   decay?: number
@@ -48,7 +49,7 @@ const props = withDefaults(defineProps<DrawingCursorProps>(), {
   blend: 'source-over',
   clearOnLeave: true,
   class: '',
-  color: 'var(--color-brand, #6366f1)',
+  color: 'primary',
   decay: 800,
   lineWidth: 3,
   paused: false,
@@ -105,7 +106,26 @@ let frameId = 0
 let lastPointTime = 0
 let size = { height: 0, width: 0 }
 
-const isMounted = computed(() => isPointerCapable.value && !shouldReduceMotion.value)
+/**
+ * Whether the component is mounted on the client. This starts `false` on both
+ * the server and the first client render, so the two agree and hydration does
+ * not mismatch, then flips in `onMounted`.
+ */
+const mounted = ref(false)
+/** The canvas only exists when the client is mounted *and* the pointer can hover. */
+const isMounted = computed(() => mounted.value && isPointerCapable.value && !shouldReduceMotion.value)
+
+onMounted(() => {
+  mounted.value = true
+})
+
+/**
+ * The resolved stroke colour. This has to be created in `setup` (not inside
+ * `startRenderer`) because the composable registers lifecycle hooks and a
+ * watcher, both of which need an active scope. The container getter is lazy, so
+ * resolving before the canvas mounts is safe.
+ */
+const resolvedColor = useResolvedColor(() => props.color, { target: () => containerRef.value ?? undefined })
 
 const clear = () => {
   strokes.length = 0
@@ -135,25 +155,6 @@ const startRenderer = () => {
   }
 
   const { blend, clearOnLeave, decay, lineWidth, smoothing, taper } = props
-
-  /**
-   * `ctx.strokeStyle` is not a CSS property parser: assigning `var(--brand)` to
-   * it is silently ignored and the previous colour survives, which in practice
-   * means a default black stroke. Resolving through a throwaway child of the
-   * container lets any CSS colour — including tokens defined in the component's
-   * own scope — reach the canvas.
-   */
-  const color = props.color.includes('var(')
-    ? (() => {
-        const probe = document.createElement('span')
-        probe.style.display = 'none'
-        probe.style.color = props.color
-        container.appendChild(probe)
-        const resolved = window.getComputedStyle(probe).color
-        probe.remove()
-        return resolved || props.color
-      })()
-    : props.color
 
   const resize = () => {
     const rect = container.getBoundingClientRect()
@@ -239,7 +240,7 @@ const startRenderer = () => {
       ctx.moveTo(last.x, last.y)
       ctx.lineTo(last.x + DOT_EPSILON, last.y)
       ctx.globalAlpha = lastAge
-      ctx.strokeStyle = color
+      ctx.strokeStyle = resolvedColor.value || props.color
       ctx.lineWidth = last.width
       ctx.stroke()
       return
@@ -256,7 +257,7 @@ const startRenderer = () => {
       ctx.moveTo(start.x, start.y)
       ctx.lineTo(end.x, end.y)
       ctx.globalAlpha = age
-      ctx.strokeStyle = color
+      ctx.strokeStyle = resolvedColor.value || props.color
       ctx.lineWidth = end.width
       ctx.stroke()
       return
@@ -280,7 +281,7 @@ const startRenderer = () => {
       ctx.moveTo(startX, startY)
       ctx.quadraticCurveTo(curr.x, curr.y, endX, endY)
       ctx.globalAlpha = age
-      ctx.strokeStyle = color
+      ctx.strokeStyle = resolvedColor.value || props.color
       ctx.lineWidth = curr.width
       ctx.stroke()
     }
@@ -331,12 +332,13 @@ const startRenderer = () => {
 // and the single `onBeforeUnmount` below owns the teardown.
 let teardown: (() => void) | null = null
 
-// `isMounted` gates the whole effect upstream, and a mid-session change in
-// pointer capability or reduced-motion preference must rebuild it.
+// `isMounted` gates the whole effect upstream. It starts `false` in `setup` and
+// so always transitions `false -> true` once mounted, which arms the renderer;
+// it also re-arms it when pointer capability or reduced motion changes.
 watch(
   isMounted,
-  (mounted) => {
-    if (mounted) {
+  (active) => {
+    if (active) {
       startRenderer()
     }
     else {

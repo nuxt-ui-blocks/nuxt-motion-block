@@ -18,8 +18,9 @@
           :layout-id="isOpen ? undefined : `${layoutPrefix}-${entry.id}`"
           :class="ui.chip({ class: uiProps.ui?.chip })"
           :style="{
-            marginLeft: `${stackOffset(index)}px`,
+            marginLeft: index === 0 ? '0px' : `${FAN_GAP_PX}px`,
             zIndex: stacked.length - index,
+            transform: `translateX(${chipShift(index)}px)`,
           }"
         >
           <SourceFavicon
@@ -39,7 +40,8 @@
 
         <span
           v-if="overflow > 0"
-          :class="ui.overflow({ class: uiProps.ui?.overflow })"
+          :class="[ui.overflow({ class: uiProps.ui?.overflow }), 'ai-sources-ov']"
+          :style="{ transform: `translateX(${overflowShift}px)` }"
         >+{{ overflow }}</span>
       </span>
 
@@ -90,7 +92,7 @@
             <!-- @vue-ignore -->
             <Motion
               :class="ui.favicon({ class: uiProps.ui?.favicon })"
-              :layout-id="`${layoutPrefix}-${entry.id}`"
+              :layout-id="isOpen ? `${layoutPrefix}-${entry.id}` : undefined"
               :transition="shouldReduceMotion ? NO_MOTION : SPRING_DEFAULT"
             >
               <SourceFavicon
@@ -158,6 +160,8 @@ const STACK_LIMIT = 3
 /** Overlap of the collapsed stack, and how far it fans on hover. */
 const STACK_OVERLAP_PX = 8
 const FAN_GAP_PX = 3
+/** How far a chip travels from its resting overlap to its fanned gap. */
+const FAN_SHIFT_PX = STACK_OVERLAP_PX + FAN_GAP_PX
 const ROW_STAGGER = 0.035
 const STACK_FAVICON_PX = 18
 const ROW_FAVICON_PX = 18
@@ -168,7 +172,7 @@ const GRID_SECONDS = 0.32
 const NO_MOTION = { duration: 0 }
 const BODY_TRANSITION = `grid-template-rows ${GRID_SECONDS * 1000}ms cubic-bezier(${EASE_OUT.join(', ')}), opacity ${OPACITY_SECONDS * 1000}ms cubic-bezier(${EASE_OUT.join(', ')})`
 const CHIP_SECONDS = 0.25
-const CHIP_TRANSITION = `margin-left ${CHIP_SECONDS * 1000}ms cubic-bezier(${EASE_OUT.join(', ')})`
+const CHIP_TRANSITION = `transform ${CHIP_SECONDS * 1000}ms cubic-bezier(${EASE_OUT.join(', ')})`
 
 const hostOf = (url: string): string => {
   try {
@@ -236,13 +240,18 @@ const fanned = computed(() => isHovered.value && !isOpen.value && !shouldReduceM
  * Hovering fans the stack apart as a hint that it is a set and not a single
  * badge. It is suppressed while open, where the stack has already resolved into
  * rows and a fan would just be noise.
+ *
+ * The chips are laid out at their fanned spacing and pulled back into an overlap
+ * by a transform. Animating a layout property — a reactive `margin-left` — re-runs
+ * the shared-`layout-id` FLIP on every hover, which fights the CSS transition and
+ * reads as a jitter; the transform changes only the painted position, so the
+ * layout, and the label beside the stack, never move.
  */
-const stackOffset = (index: number) => {
-  if (index === 0) {
-    return 0
-  }
-  return fanned.value ? FAN_GAP_PX : -STACK_OVERLAP_PX
-}
+const chipShift = (index: number): number =>
+  fanned.value ? 0 : index * -FAN_SHIFT_PX
+
+/** The `+n` chip tracks the last visible chip, so it hugs the stack at rest. */
+const overflowShift = computed(() => chipShift(Math.max(0, stacked.value.length - 1)))
 
 const onHovered = (next: boolean) => {
   isHovered.value = next
@@ -270,13 +279,13 @@ const bodyStyle = computed(() => {
   display: grid;
 }
 
-.ai-sources-chip {
+.ai-sources-chip,
+.ai-sources-ov {
   /*
-   * The fan is driven by `margin-left` through a CSS transition rather than a
-   * Motion spring. A Motion `animate` target on a `span` does not reliably reach
-   * the element here, and a chip that never lands at the offset reads as a
-   * broken stack rather than a hint — so the value is bound directly and the
-   * transition supplies the motion. 250ms / bounce 0.1 matches the spring it
+   * The fan is a CSS `transform` transition. The chips sit at their fanned
+   * spacing in layout, so the resting overlap is the transform's negative offset
+   * and the fan only changes what is painted — nothing reflows and the label
+   * beside the stack never shifts. 250ms / bounce 0.1 matches the spring it
    * replaces closely enough that the fan still reads as springy.
    */
   transition: v-bind('CHIP_TRANSITION');

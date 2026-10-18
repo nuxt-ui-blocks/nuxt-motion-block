@@ -17,8 +17,8 @@
 
       <!-- @vue-ignore -->
       <Motion
-        :is="token.citation.url ? 'a' : 'span'"
         v-else-if="token.citation"
+        :as="token.citation.url ? 'a' : 'span'"
         :animate="{ opacity: 1, scale: 1 }"
         :class="ui.citation({ class: [uiProps.ui?.citation, token.citation.url ? 'transition-colors hover:border-accented hover:text-highlighted' : undefined] })"
         :href="token.citation.url"
@@ -34,6 +34,7 @@
       <!-- @vue-ignore -->
       <Motion
         v-else
+        as="span"
         :animate="{ filter: 'blur(0px)', opacity: 1, y: 0 }"
         :class="ui.word({ class: uiProps.ui?.word })"
         :initial="isNew(index) && !shouldReduceMotion ? { filter: `blur(${WORD_BLUR_PX}px)`, opacity: 0, y: 2 } : false"
@@ -50,6 +51,7 @@
     <!-- @vue-ignore -->
     <Motion
       v-if="props.isStreaming"
+      as="span"
       :animate="shouldReduceMotion ? { opacity: 1 } : { opacity: [1, 0.15, 1] }"
       aria-hidden="true"
       :class="ui.caret({ class: uiProps.ui?.caret })"

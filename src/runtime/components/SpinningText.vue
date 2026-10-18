@@ -1,5 +1,6 @@
 <template>
   <Motion
+    as="span"
     :class="ui.root({ class: [uiProps.ui?.root, uiProps.class, props.className] })"
     :style="containerStyle"
     initial="hidden"
@@ -10,6 +11,7 @@
     <Motion
       v-for="(letter, index) in letters"
       :key="`${index}-${letter}`"
+      as="span"
       aria-hidden="true"
       :variants="itemVariants"
       :class="ui.letter({ class: uiProps.ui?.letter })"

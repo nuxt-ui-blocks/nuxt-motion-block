@@ -1,6 +1,6 @@
 <template>
   <UChatMessages
-    :messages="props.messages"
+    :messages="props.messages as any"
     :status="status"
     :user="user"
     :assistant="assistant"

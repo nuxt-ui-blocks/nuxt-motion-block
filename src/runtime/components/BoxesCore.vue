@@ -46,6 +46,7 @@
 import { computed } from 'vue'
 import { motion } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColors } from '../composables/useThemeColor'
 import boxesCore from '../theme/boxes-core'
 
 // Define props with defaults
@@ -100,7 +101,10 @@ const containerStyle = computed(() => ({
 // Computed class for border color
 const borderClass = computed(() => props.borderColor)
 
+const resolvedColors = useResolvedColors(() => props.colors)
+
 const getRandomColor = () => {
-  return props.colors[Math.floor(Math.random() * props.colors.length)]
+  const colors = resolvedColors.value ?? props.colors
+  return colors[Math.floor(Math.random() * colors.length)]
 }
 </script>

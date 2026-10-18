@@ -1,158 +1,86 @@
-<template>
-  <ClientOnly>
-    <Teleport to="body">
-      <AnimatePresence>
-        <motion.div
-          v-if="visible"
-          :initial="toastInitial"
-          :animate="toastAnimate"
-          :exit="toastExit"
-          :transition="toastTransition"
-          v-bind="$attrs"
-          :class="ui.root({ type: props.type, class: [uiProps.ui?.root, uiProps.class] })"
-        >
-          <div :class="ui.iconWrapper({ class: uiProps.ui?.iconWrapper })">
-            <UIcon
-              :name="typeIcons[props.type]"
-              :class="ui.icon({ type: props.type, class: uiProps.ui?.icon })"
-            />
-            <span :class="ui.srLabel({ class: uiProps.ui?.srLabel })">{{ typeLabels[props.type] }}</span>
-          </div>
-          <p :class="ui.message({ class: uiProps.ui?.message })">
-            {{ props.message }}
-          </p>
-          <button
-            type="button"
-            aria-label="Close notification"
-            :class="ui.close({ class: uiProps.ui?.close })"
-            @click="dismiss"
-          >
-            <UIcon
-              name="i-lucide-x"
-              :class="ui.closeIcon({ class: uiProps.ui?.closeIcon })"
-            />
-          </button>
-        </motion.div>
-      </AnimatePresence>
-    </Teleport>
-  </ClientOnly>
-</template>
-
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
-import { useMotionBlockUI } from '../composables/useMotionBlockUI'
-import basicToast from '../theme/basic-toast'
+import { onBeforeUnmount, watch } from 'vue'
+import { useToast } from '#imports'
 
 export interface Props {
-  class?: string
-  ui?: Record<string, any>
+  /** How long the toast stays up, in milliseconds. `0` keeps it until dismissed. */
   duration?: number
+  /** Whether the toast is currently shown. Supports `v-model:is-visible`. */
   isVisible?: boolean
+  /** The toast body text. */
   message: string
+  /** Selects the icon colour, matching Nuxt UI toast colours. */
   type?: ToastType
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  class: undefined,
-  ui: undefined,
   duration: 3000,
   isVisible: true,
   type: 'info',
 })
-
-const { props: uiProps, ui } = useMotionBlockUI({ name: 'basicToast', props, theme: basicToast })
-
-// The root is <ClientOnly>, which swallows fallthrough attributes without a warning, so
-// data-testid / aria-* / id on <BasicToast> would silently vanish. Opt out and spread them
-// onto the teleported panel ourselves.
-defineOptions({ inheritAttrs: false })
 
 const emit = defineEmits<{
   'close': []
   'update:isVisible': [value: boolean]
 }>()
 
-const TOAST_SPRING = { type: 'spring' as const, duration: 0.25, bounce: 0.1 }
-const INSTANT = { duration: 0 }
-const EXIT = { duration: 0.15 }
+// This component renders no markup of its own: it forwards to Nuxt UI's shared
+// `useToast()` store, which a single app-level `<MToaster>` renders with motion.
+// Opting out of attribute fallthrough avoids an extraneous-attrs warning against
+// the empty root.
+defineOptions({ inheritAttrs: false })
 
-const typeIcons = {
-  error: 'i-lucide-circle-x',
-  info: 'i-lucide-info',
-  success: 'i-lucide-circle-check',
-  warning: 'i-lucide-circle-alert',
-} as const
+const { toasts, add, remove, update } = useToast()
 
-const typeLabels = {
-  error: 'Error',
-  info: 'Information',
-  success: 'Success',
-  warning: 'Warning',
-} as const
+let id: string | number | undefined
 
-const visible = ref(props.isVisible)
-
-const shouldReduceMotion = useReducedMotion()
-
-const toastInitial = computed(() =>
-  shouldReduceMotion.value ? { opacity: 1 } : { opacity: 0, scale: 0.8, x: 50 },
-)
-const toastAnimate = computed(() =>
-  shouldReduceMotion.value ? { opacity: 1 } : { opacity: 1, scale: 1, x: 0 },
-)
-const toastExit = computed(() =>
-  shouldReduceMotion.value
-    ? { opacity: 0, transition: INSTANT }
-    : { opacity: 0, scale: 0.8, x: 50, transition: EXIT },
-)
-const toastTransition = computed(() => (shouldReduceMotion.value ? INSTANT : TOAST_SPRING))
-
-let timer: ReturnType<typeof setTimeout> | undefined
-
-function clearTimer() {
-  if (timer !== undefined) {
-    clearTimeout(timer)
-    timer = undefined
-  }
-}
-
-function startTimer() {
-  clearTimer()
-  if (visible.value && props.duration > 0) {
-    timer = setTimeout(() => {
-      timer = undefined
-      hide()
-    }, props.duration)
-  }
-}
-
-function hide() {
-  if (!visible.value) {
+function open() {
+  if (id) {
     return
   }
-  visible.value = false
-  emit('close')
-  emit('update:isVisible', false)
+  id = add({ title: props.message, color: props.type, duration: props.duration }).id
 }
 
-function dismiss() {
-  clearTimer()
-  hide()
+function close(notify = true) {
+  if (!id) {
+    return
+  }
+  remove(id)
+  id = undefined
+  if (notify) {
+    emit('close')
+    emit('update:isVisible', false)
+  }
 }
 
-watch(() => props.isVisible, (value) => {
-  visible.value = value
-})
+if (import.meta.client) {
+  watch(() => props.isVisible, value => (value ? open() : close()), { immediate: true })
 
-watch([visible, () => props.duration], startTimer)
+  watch([() => props.message, () => props.type, () => props.duration], () => {
+    if (id) {
+      update(id, { title: props.message, color: props.type, duration: props.duration })
+    }
+  })
 
-onMounted(startTimer)
+  // Reflect dismissals that happen outside the component — the auto-dismiss
+  // timer, or a swipe in the toaster — back into `isVisible`.
+  watch(toasts, (value) => {
+    if (id && !value.some(toast => toast.id === id)) {
+      id = undefined
+      emit('close')
+      emit('update:isVisible', false)
+    }
+  }, { deep: true })
 
-onUnmounted(clearTimer)
+  onBeforeUnmount(() => close(false))
+}
 
-defineExpose({ dismiss })
+defineExpose({ dismiss: () => close() })
 </script>
+
+<template>
+  <span v-if="false" />
+</template>
 
 <script lang="ts">
 export type ToastType = 'success' | 'error' | 'info' | 'warning'

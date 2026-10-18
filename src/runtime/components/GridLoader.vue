@@ -36,6 +36,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { motion } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import gridLoader from '../theme/grid-loader'
 
 type GridMatrix = [
@@ -168,18 +169,18 @@ const PATTERNS: Record<PresetPattern, GridMatrix> = {
 }
 
 const COLORS: Record<string, string> = {
-  amber: 'var(--color-warning)',
-  warning: 'var(--color-warning)',
-  blue: 'var(--color-info)',
-  info: 'var(--color-info)',
-  green: 'var(--color-success)',
-  success: 'var(--color-success)',
-  red: 'var(--color-error)',
-  error: 'var(--color-error)',
+  amber: 'warning',
+  warning: 'warning',
+  blue: 'info',
+  info: 'info',
+  green: 'success',
+  success: 'success',
+  red: 'error',
+  error: 'error',
   white: 'var(--color-neutral-100)',
   neutral: 'var(--color-neutral-100)',
-  primary: 'var(--color-primary)',
-  secondary: 'var(--color-secondary)',
+  primary: 'primary',
+  secondary: 'secondary',
 }
 
 const SIZES: Record<string, number> = {
@@ -201,11 +202,6 @@ function resolvePattern(pattern: PresetPattern | GridMatrix | undefined): GridMa
   return pattern
 }
 
-function resolveColor(color: string | undefined): string {
-  if (!color) return COLORS.white
-  return COLORS[color] ?? color
-}
-
 function resolveSize(size: 'sm' | 'md' | 'lg' | 'xl' | number | undefined): number {
   if (size === undefined) return SIZES.md
   if (typeof size === 'number') return size
@@ -224,7 +220,7 @@ let intervalId: ReturnType<typeof setInterval> | null = null
 
 const resolvedSize = computed(() => resolveSize(props.size))
 const cellSize = computed(() => (resolvedSize.value - props.gap * 2) / 3)
-const resolvedColor = computed(() => resolveColor(props.color))
+const resolvedColor = useResolvedColor(() => (props.color ? COLORS[props.color] ?? props.color : COLORS.white))
 const cycleDuration = computed(() => SPEEDS[props.speed] ?? SPEEDS.normal)
 const glowSize = computed(() => cellSize.value * 0.8)
 const disableAnimation = computed(() => props.static || shouldReduceMotion.value)

@@ -17,7 +17,7 @@
       :animate="{ pathLength: 1 }"
       :d="path"
       :initial="props.canAnimate ? { pathLength: 0 } : { pathLength: 1 }"
-      :stroke="props.stroke"
+      :stroke="resolvedStroke || 'currentColor'"
       :transition="props.canAnimate
         ? { delay: index * BRACKET_STAGGER, duration: BRACKET_DRAW, ease: EASE_OUT }
         : INSTANT"
@@ -33,7 +33,7 @@
       :animate="{ pathLength: 1 }"
       :d="path"
       :initial="props.canAnimate ? { pathLength: 0 } : { pathLength: 1 }"
-      :stroke="props.stroke"
+      :stroke="resolvedStroke || 'currentColor'"
       :transition="props.canAnimate
         ? { delay: FACE_DELAY + index * FACE_STAGGER, duration: FACE_DRAW, ease: EASE_OUT }
         : INSTANT"
@@ -88,6 +88,7 @@
 
 <script setup lang="ts">
 import { motion } from 'motion-v'
+import { useResolvedColor } from '../../composables/useThemeColor'
 import {
   BRACKET_DRAW,
   BRACKET_PATHS,
@@ -124,6 +125,8 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+
+const resolvedStroke = useResolvedColor(() => (props.stroke === 'currentColor' ? undefined : props.stroke))
 
 /**
  * `transform-box: view-box` is what makes `50px 50px` mean the middle of the

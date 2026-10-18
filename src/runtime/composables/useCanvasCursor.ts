@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { onMounted, onUnmounted, type Ref } from 'vue'
+import { resolveCssColor } from '../utils/theme-color'
 
 export const useCanvasCursor = (canvasRef: Ref<HTMLCanvasElement>, options: { color?: string } = {}) => {
   onMounted(() => {
@@ -113,19 +114,8 @@ export const useCanvasCursor = (canvasRef: Ref<HTMLCanvasElement>, options: { co
       ctx.lineWidth = 1
 
       if (options.color && options.color !== 'random') {
-        try {
-          const colorVar = `--color-${options.color}-500`
-          const hslaColor = getComputedStyle(document.documentElement).getPropertyValue(colorVar).trim()
-          if (hslaColor) {
-            ctx.strokeStyle = hslaColor
-          }
-          else {
-            ctx.strokeStyle = 'hsla(' + Math.round(f.update()) + ',50%,50%,0.2)'
-          }
-        }
-        catch {
-          ctx.strokeStyle = 'hsla(' + Math.round(f.update()) + ',50%,50%,0.2)'
-        }
+        const resolved = resolveCssColor(`var(--color-${options.color}-500)`)
+        ctx.strokeStyle = resolved ?? ('hsla(' + Math.round(f.update()) + ',50%,50%,0.2)')
       }
       else {
         ctx.strokeStyle = 'hsla(' + Math.round(f.update()) + ',50%,50%,0.2)'

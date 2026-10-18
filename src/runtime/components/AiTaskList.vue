@@ -221,7 +221,7 @@ const TaskBox = defineComponent({
   },
 })
 
-const shouldReduceMotion = Boolean(useReducedMotion())
+const shouldReduceMotion = useReducedMotion()
 
 /**
  * Header counts come from the tasks, so the summary can never disagree with the

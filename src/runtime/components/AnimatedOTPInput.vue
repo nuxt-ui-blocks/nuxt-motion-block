@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
 import { computed, ref, watch } from 'vue'
 import type { PinInputProps } from '#ui/components/PinInput.vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import animatedOTPInput from '../theme/animated-otp-input'
 
 defineOptions({ inheritAttrs: false })
@@ -69,6 +70,8 @@ const rootRef = ref<HTMLElement | null>(null)
 const glowColor = ref('transparent')
 const activeCell = ref(-1)
 
+const resolvedSuccessColor = useResolvedColor(() => props.successColor)
+
 const innerValue = ref<string[]>(Array.from({ length: props.length }, () => ''))
 
 const chars = computed(() =>
@@ -111,7 +114,7 @@ watch(
       emit('complete', merged.value)
       glowColor.value = 'transparent'
       requestAnimationFrame(() => {
-        glowColor.value = props.successColor
+        glowColor.value = resolvedSuccessColor.value ?? props.successColor
       })
       window.setTimeout(() => {
         glowColor.value = 'transparent'

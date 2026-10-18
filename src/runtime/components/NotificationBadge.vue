@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import notificationBadge from '../theme/notification-badge'
@@ -32,6 +32,12 @@ const displayText = computed(() => {
 })
 
 const isVisible = computed(() => props.count > 0)
+
+const direction = ref(1)
+
+watch(() => props.count, (next, prev) => {
+  direction.value = next >= prev ? 1 : -1
+})
 </script>
 
 <template>
@@ -49,12 +55,28 @@ const isVisible = computed(() => props.count > 0)
           :class="ui.badge({ class: uiProps.ui?.badge })"
         >
           <UBadge
-            :label="displayText"
             :color="color as any"
             variant="solid"
             :size="badgeSize"
             :class="ui.badgeContent({ class: uiProps.ui?.badgeContent })"
-          />
+          >
+            <span class="relative inline-flex justify-center overflow-hidden">
+              <AnimatePresence
+                :initial="false"
+                mode="popLayout"
+              >
+                <motion.span
+                  :key="props.count"
+                  :initial="{ y: direction * 12, opacity: 0 }"
+                  :animate="{ y: 0, opacity: 1 }"
+                  :exit="{ y: -direction * 12, opacity: 0 }"
+                  :transition="{ type: 'spring', bounce: 0.1, duration: 0.3 }"
+                >
+                  {{ displayText }}
+                </motion.span>
+              </AnimatePresence>
+            </span>
+          </UBadge>
         </motion.div>
       </AnimatePresence>
     </div>

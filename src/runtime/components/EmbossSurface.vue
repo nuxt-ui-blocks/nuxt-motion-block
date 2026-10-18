@@ -20,9 +20,9 @@
         in="relief"
         lighting-color="white"
         result="specular"
-        :specular-constant="SPECULAR_CONSTANT"
-        :specular-exponent="SPECULAR_EXPONENT"
-        :surface-scale="SPECULAR_SURFACE_SCALE"
+        :specularConstant="SPECULAR_CONSTANT"
+        :specularExponent="SPECULAR_EXPONENT"
+        :surfaceScale="SPECULAR_SURFACE_SCALE"
       >
         <feDistantLight
           :azimuth="lightAzimuth"
@@ -65,6 +65,7 @@ import { useReducedMotion } from 'motion-v'
 import { EASE_IN_OUT } from '../utils/motion-tokens'
 import { useHoverCapable } from '../composables/useHoverCapable'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import embossSurface from '../theme/emboss-surface'
 
 export type EmbossSurfaceVariant = 'emboss' | 'deboss' | 'plaster' | 'metal-stamp'
@@ -169,6 +170,8 @@ const isHoverDevice = useHoverCapable()
 
 const spec = computed(() => VARIANTS[props.variant])
 
+const resolvedColor = useResolvedColor(() => props.color)
+
 const lightX = computed(() => Math.cos(props.lightAngle * RADIANS_PER_DEGREE) * props.depth)
 const lightY = computed(() => -Math.sin(props.lightAngle * RADIANS_PER_DEGREE) * props.depth)
 const lightAzimuth = computed(() => (DEGREES_PER_TURN - props.lightAngle) % DEGREES_PER_TURN)
@@ -177,8 +180,8 @@ const blur = computed(() =>
   Math.max(MIN_BLUR, props.depth * props.softness * SOFTNESS_SCALE * spec.value.blurScale),
 )
 
-const highlight = computed(() => `color-mix(in oklab, ${props.color}, white ${spec.value.highlightMix}%)`)
-const shade = computed(() => `color-mix(in oklab, ${props.color}, black ${spec.value.shadeMix}%)`)
+const highlight = computed(() => `color-mix(in oklab, ${resolvedColor.value}, white ${spec.value.highlightMix}%)`)
+const shade = computed(() => `color-mix(in oklab, ${resolvedColor.value}, black ${spec.value.shadeMix}%)`)
 
 const tracksPointer = computed(
   () => props.interactive && !shouldReduceMotion.value && isHoverDevice.value,
@@ -226,7 +229,7 @@ const surfaceStyle = computed(() => ({
   '--es-blur': blur.value,
   '--es-dx': lightX.value,
   '--es-dy': lightY.value,
-  'backgroundColor': props.color,
+  'backgroundColor': resolvedColor.value,
   'boxShadow': buildShadow(spec.value, highlight.value, shade.value, spec.value.inset ? 'inset ' : ''),
   'filter': spec.value.specular ? `url(#${filterId})` : dropShadow.value,
   'textShadow': buildShadow(spec.value, highlight.value, shade.value, ''),

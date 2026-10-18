@@ -23,11 +23,11 @@
       >
         <stop
           offset="0%"
-          :style="`stop-color: ${trailColor}; stop-opacity: 0`"
+          :style="`stop-color: ${resolvedTrailColor}; stop-opacity: 0`"
         />
         <stop
           offset="100%"
-          :style="`stop-color: ${starColor}; stop-opacity: 1`"
+          :style="`stop-color: ${resolvedStarColor}; stop-opacity: 1`"
         />
       </linearGradient>
     </defs>
@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import shootingStars from '../theme/shooting-stars'
 
 interface ShootingStar {
@@ -80,6 +81,9 @@ const { props: uiProps, ui } = useMotionBlockUI({
   props,
   theme: shootingStars,
 })
+
+const resolvedStarColor = useResolvedColor(() => props.starColor)
+const resolvedTrailColor = useResolvedColor(() => props.trailColor)
 
 const star = ref<ShootingStar | null>(null)
 const svgRef = ref<SVGSVGElement | null>(null)

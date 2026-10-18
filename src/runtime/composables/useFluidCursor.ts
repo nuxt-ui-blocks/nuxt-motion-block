@@ -2,6 +2,7 @@
 // @ts-nocheck
 /* eslint-disable */ 
 import { onMounted, onUnmounted, type Ref } from 'vue'
+import { colorToRgb } from '../utils/theme-color'
 
 export const useFluidCursor = (canvasRef: Ref<HTMLCanvasElement>, options: { color?: string } = {}) => {
   onMounted(() => {
@@ -12,43 +13,10 @@ export const useFluidCursor = (canvasRef: Ref<HTMLCanvasElement>, options: { col
 
     let customRgb = null
     let frameId = 0
-    let tempCtx
-
-    function initTempCanvas() {
-      const tempCanvas = document.createElement('canvas')
-      tempCanvas.width = 1
-      tempCanvas.height = 1
-      tempCtx = tempCanvas.getContext('2d', { willReadFrequently: true })
-    }
 
     function getThemeColorRgb(colorName) {
-      const colorVar = `--color-${colorName}-500`
-
-      const tempEl = document.createElement('div')
-      tempEl.style.color = `var(${colorVar})`
-      tempEl.style.position = 'fixed'
-      tempEl.style.display = 'none'
-      document.body.appendChild(tempEl)
-
-      const computedColor = getComputedStyle(tempEl).color
-      document.body.removeChild(tempEl)
-
-      if (!computedColor || !tempCtx) return null
-
-      tempCtx.fillStyle = computedColor
-      tempCtx.fillRect(0, 0, 1, 1)
-
-      const pixelData = tempCtx.getImageData(0, 0, 1, 1).data
-
-      if (pixelData[3] > 0) { // Check alpha channel
-        return {
-          r: pixelData[0],
-          g: pixelData[1],
-          b: pixelData[2],
-        }
-      }
-
-      return null
+      const rgb = colorToRgb(`var(--color-${colorName}-500)`)
+      return rgb ? { r: rgb[0], g: rgb[1], b: rgb[2] } : null
     }
 
     const config = {
@@ -1417,7 +1385,6 @@ export const useFluidCursor = (canvasRef: Ref<HTMLCanvasElement>, options: { col
       return hash
     }
 
-    initTempCanvas()
     initFramebuffers()
     updateKeywords()
     update()

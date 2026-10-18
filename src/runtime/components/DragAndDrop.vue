@@ -6,47 +6,61 @@
     @drop="handleDrop"
   >
     <!-- @vue-ignore -->
-    <Motion
+    <template
       v-for="(item, index) in sortedItems"
       :key="item.id"
-      :layout-id="item.id"
-      :initial="false"
-      :animate="getItemAnimation(index)"
-      :transition="itemTransition"
-      :class="ui.item({ class: [uiProps.ui?.item, getItemStateClasses(item, index), props.itemClass] })"
-      :style="getItemStyles(item, index)"
-      :draggable="!disabled"
-      @dragstart="handleDragStart($event, item, index)"
-      @dragend="handleDragEnd"
-      @dragenter="handleDragEnter($event, index)"
-      @dragleave="handleDragLeave"
-      @mousedown="handleMouseDown($event, item, index)"
-      @click="handleItemClick(item, index)"
     >
-      <slot
-        :item="item"
-        :index="index"
-        :is-dragging="dragState.draggedItem?.id === item.id"
-        :is-over="dragState.dropTarget === index"
-        :is-selected="isSelected(item)"
+      <Motion
+        :layout-id="String(item.id)"
+        :initial="false"
+        :animate="getItemAnimation(index)"
+        :transition="itemTransition"
+        :class="ui.item({ class: [uiProps.ui?.item, getItemStateClasses(item, index), props.itemClass] })"
+        :style="getItemStyles()"
+        :draggable="!disabled"
+        @dragstart="handleDragStart($event, item, index)"
+        @dragend="handleDragEnd"
+        @dragenter="handleDragEnter($event, index)"
+        @dragover.prevent="handleItemDragOver($event, index)"
+        @dragleave="handleDragLeave"
+        @mousedown="handleMouseDown($event, item)"
+        @click="handleItemClick(item)"
       >
-        <div :class="ui.itemDefault({ class: uiProps.ui?.itemDefault })">
-          {{ item.label || item.name || item.id }}
-        </div>
-      </slot>
+        <slot
+          :item="item"
+          :index="index"
+          :is-dragging="dragState.draggedIds.has(item.id)"
+          :is-over="dragState.dropTarget === index"
+          :is-selected="isSelected(item)"
+        >
+          <div :class="ui.itemDefault({ class: uiProps.ui?.itemDefault })">
+            {{ item.label || item.name || item.id }}
+          </div>
+        </slot>
 
-      <!-- Drag handle -->
-      <div
-        v-if="showHandle"
-        :class="ui.itemHandle({ class: uiProps.ui?.itemHandle })"
-        @mousedown.stop="handleMouseDown($event, item)"
-      >
-        <UIcon
-          name="i-lucide-grip-vertical"
-          :class="ui.itemHandleIcon({ class: uiProps.ui?.itemHandleIcon })"
+        <!-- Drag handle -->
+        <div
+          v-if="showHandle"
+          :class="ui.itemHandle({ class: uiProps.ui?.itemHandle })"
+          @mousedown.stop="handleMouseDown($event, item)"
+        >
+          <UIcon
+            name="i-lucide-grip-vertical"
+            :class="ui.itemHandleIcon({ class: uiProps.ui?.itemHandleIcon })"
+          />
+        </div>
+
+        <!-- Inline drop indicator. Absolutely positioned so revealing or moving
+             it never reflows the list — the source of the drag jitter. -->
+        <div
+          v-if="showIndicatorFor(index)"
+          :class="ui.dropIndicator({ class: uiProps.ui?.dropIndicator })"
+          class="pointer-events-none absolute inset-x-0 z-10"
+          :style="indicatorStyle(index)"
+          aria-hidden="true"
         />
-      </div>
-    </Motion>
+      </Motion>
+    </template>
 
     <!-- Drop zones -->
     <div
@@ -134,8 +148,11 @@ const selectedItems = ref<Set<string | number>>(new Set())
 const dragState = reactive({
   isDragging: false,
   draggedItem: null as DragItem | null,
+  draggedItems: [] as DragItem[],
+  draggedIds: new Set<string | number>(),
   draggedIndex: -1,
   dropTarget: -1,
+  dropIndex: -1,
   dropZone: -1,
 })
 
@@ -162,12 +179,12 @@ const itemTransition = computed(() => ({
 const getItemStateClasses = (item: DragItem, index: number) => {
   const classes: string[] = []
 
-  if (dragState.draggedItem?.id === item.id) {
+  if (dragState.draggedIds.has(item.id)) {
     classes.push('opacity-50', 'scale-105', 'z-50')
   }
 
-  if (dragState.dropTarget === index) {
-    classes.push('ring-2', 'ring-primary-500', 'ring-opacity-50')
+  if (props.layout !== 'list' && dragState.dropTarget === index) {
+    classes.push('ring-2', 'ring-primary/50')
   }
 
   if (isSelected(item)) {
@@ -179,6 +196,22 @@ const getItemStateClasses = (item: DragItem, index: number) => {
   }
 
   return classes.join(' ')
+}
+
+const showIndicatorFor = (index: number) => {
+  if (props.layout !== 'list' || !dragState.isDragging) return false
+
+  const lastIndex = sortedItems.value.length - 1
+
+  return dragState.dropIndex === index
+    || (dragState.dropIndex === sortedItems.value.length && index === lastIndex)
+}
+
+const indicatorStyle = (index: number) => {
+  const lastIndex = sortedItems.value.length - 1
+  const belowLast = dragState.dropIndex === sortedItems.value.length && index === lastIndex
+
+  return belowLast ? { bottom: '-6px' } : { top: '-6px' }
 }
 
 const getItemStyles = () => {
@@ -193,10 +226,14 @@ const getItemStyles = () => {
 }
 
 const getItemAnimation = (index: number) => {
+  const itemId = sortedItems.value[index]?.id
+  const isDragged = itemId !== undefined && dragState.draggedIds.has(itemId)
+  const isPrimary = dragState.draggedItem?.id === itemId
+
   return {
     y: 0,
-    scale: dragState.draggedIndex === index ? 1.05 : 1,
-    rotate: dragState.draggedIndex === index ? 2 : 0,
+    scale: isDragged ? 1.05 : 1,
+    rotate: isPrimary ? 2 : 0,
   }
 }
 
@@ -215,59 +252,131 @@ const isSelected = (item: DragItem) => {
 const handleDragStart = (event: DragEvent, item: DragItem, index: number) => {
   if (props.disabled) return
 
+  // When multi-select is on and the grabbed item is part of a larger
+  // selection, the whole selection travels together rather than just the one
+  // item under the pointer.
+  const dragsSelection = props.allowMultiSelect
+    && selectedItems.value.has(item.id)
+    && selectedItems.value.size > 1
+
+  const movingItems = dragsSelection
+    ? sortedItems.value.filter(candidate => selectedItems.value.has(candidate.id))
+    : [item]
+
   dragState.isDragging = true
   dragState.draggedItem = item
+  dragState.draggedItems = movingItems
+  dragState.draggedIds = new Set(movingItems.map(movingItem => movingItem.id))
   dragState.draggedIndex = index
 
   event.dataTransfer!.effectAllowed = props.mode === 'copy' ? 'copy' : 'move'
-  event.dataTransfer!.setData('text/plain', JSON.stringify(item))
+  event.dataTransfer!.setData('text/plain', JSON.stringify(movingItems))
 
   emit('dragStart', item, index)
 }
 
 const handleDragEnd = () => {
-  const oldIndex = dragState.draggedIndex
-  const newIndex = dragState.dropTarget
-  const item = dragState.draggedItem
+  const insertAt = dragState.dropIndex
+  const primary = dragState.draggedItem
 
-  if (item && oldIndex !== -1 && newIndex !== -1 && oldIndex !== newIndex) {
-    // Reorder items
-    const newItems = [...sortedItems.value]
-    const movedItem = newItems[oldIndex]
+  if (primary && dragState.draggedIds.size > 0 && insertAt !== -1) {
+    const draggedIds = dragState.draggedIds
 
-    if (movedItem) {
-      newItems.splice(oldIndex, 1)
-      newItems.splice(newIndex, 0, movedItem)
+    // The block keeps its current visual order as it moves.
+    const orderedBlock = sortedItems.value.filter(candidate => draggedIds.has(candidate.id))
+    const remaining = sortedItems.value.filter(candidate => !draggedIds.has(candidate.id))
+
+    // `insertAt` is a gap position (0…n); every dragged item sitting before
+    // that gap is removed, shifting the effective insertion point down.
+    const removedBefore = sortedItems.value
+      .slice(0, insertAt)
+      .filter(candidate => draggedIds.has(candidate.id))
+      .length
+    const target = Math.max(0, insertAt - removedBefore)
+
+    const newItems = [...remaining]
+    newItems.splice(target, 0, ...orderedBlock)
+
+    // Skip the emit (and the re-render) when the drop leaves the order intact.
+    const unchanged = newItems.length === sortedItems.value.length
+      && newItems.every((candidate, i) => candidate.id === sortedItems.value[i]?.id)
+
+    if (!unchanged) {
+      const oldIndex = sortedItems.value.findIndex(candidate => candidate.id === primary.id)
 
       sortedItems.value = newItems
       emit('change', newItems)
-      emit('dragEnd', item, oldIndex, newIndex)
+      emit('dragEnd', primary, oldIndex, target)
     }
   }
 
-  // Reset drag state
+  resetDragState()
+}
+
+const resetDragState = () => {
   Object.assign(dragState, {
     isDragging: false,
     draggedItem: null,
+    draggedItems: [],
+    draggedIds: new Set<string | number>(),
     draggedIndex: -1,
     dropTarget: -1,
+    dropIndex: -1,
     dropZone: -1,
   })
 }
 
 const handleDragEnter = (event: DragEvent, index: number) => {
   event.preventDefault()
-  if (dragState.draggedIndex !== index) {
-    dragState.dropTarget = index
-  }
+  handleItemDragOver(event, index)
 }
 
-const handleDragLeave = () => {
-  // Only reset if not hovering over a child element
-  setTimeout(() => {
-    if (!dragState.isDragging) return
-    dragState.dropTarget = -1
-  }, 10)
+const handleItemDragOver = (event: DragEvent, index: number) => {
+  if (props.disabled || !dragState.isDragging) return
+
+  // Hovering any item that is already part of the moving block is not a valid
+  // drop position — keep the indicator where it is.
+  const hoveredItem = sortedItems.value[index]
+  if (hoveredItem && dragState.draggedIds.has(hoveredItem.id)) return
+
+  const target = event.currentTarget as HTMLElement | null
+  const rect = target?.getBoundingClientRect()
+
+  let nextDropIndex = index
+
+  if (rect) {
+    if (props.layout === 'grid') {
+      // In a grid the pointer can leave an item through any of its sides, so
+      // "after" is decided on the diagonal: past the bottom-right half inserts
+      // after the item, otherwise before it.
+      const relX = (event.clientX - rect.left) / rect.width
+      const relY = (event.clientY - rect.top) / rect.height
+      nextDropIndex = relX + relY > 1 ? index + 1 : index
+    }
+    else {
+      // List/masonry flow vertically — top half inserts before, bottom after.
+      const bottomHalf = event.clientY > rect.top + rect.height / 2
+      nextDropIndex = bottomHalf ? index + 1 : index
+    }
+  }
+
+  // Skip the write (and the resulting re-render) when the gap has not actually
+  // changed — `dragover` fires many times per second during a drag.
+  if (dragState.dropTarget === index && dragState.dropIndex === nextDropIndex) return
+
+  dragState.dropTarget = index
+  dragState.dropIndex = nextDropIndex
+}
+
+const handleDragLeave = (event: DragEvent) => {
+  // Clear the target only when the pointer truly leaves the container. Moving
+  // between items — or onto a child of one — reports a relatedTarget that is
+  // still inside the container, so the indicator stays put instead of blinking.
+  const related = event.relatedTarget as Node | null
+  if (!related || containerRef.value?.contains(related)) return
+
+  dragState.dropTarget = -1
+  dragState.dropIndex = -1
 }
 
 const handleDrop = (event: DragEvent) => {

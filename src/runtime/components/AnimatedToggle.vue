@@ -2,7 +2,7 @@
   <motion.div
     :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :animate="{ scale: modelValue ? [1, 1.2, 1] : 1 }"
-    :transition="{ type: 'spring', stiffness: 500, damping: 25 }"
+    :transition="{ duration: 0.35 }"
   >
     <USwitch
       v-bind="$attrs"

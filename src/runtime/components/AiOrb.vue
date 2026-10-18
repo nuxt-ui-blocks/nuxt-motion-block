@@ -53,6 +53,8 @@
 import { computed, onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import aiOrb from '../theme/ai-orb'
+import type { Oklab } from '../utils/theme-color'
+import { colorToRgb, rgbToOklab } from '../utils/theme-color'
 
 interface Props {
   /** Rim dispersion. Splits the palette lookup per channel toward the edge, the way a lens fringes. */
@@ -139,8 +141,6 @@ const DEFAULTS = {
 
 const MAX_STOPS = 4
 const MAX_DPR = 2
-const RGB_MAX = 255
-const SRGB_KNEE = 0.040_45
 const TAU = Math.PI * 2
 /** Ambient motion gains nothing from 120 Hz. */
 const FRAME_CAP_MS = 1000 / 60
@@ -357,48 +357,16 @@ void main() {
   fragColor = vec4(outCol * alpha, alpha);   // premultiplied
 }`
 
-type Oklab = [number, number, number]
-
 /**
- * Any CSS colour to OkLab, in two steps because neither alone is enough.
+ * Any CSS colour to OkLab.
  *
- * `getComputedStyle` resolves `var()` and named colours, but Chrome hands back
- * `oklch(0.72 0.21 322)` verbatim rather than converting it — read that as three
- * sRGB channels and a magenta comes out blue. A 1x1 2D canvas rasterises
- * whatever syntax survives into actual pixels, which is the only step that
- * cannot lie about the result.
+ * The two halves live in `theme-color` so they stay shared with the rest of the
+ * library: `colorToRgb` resolves the string (a `var()` or an `oklch()` becomes
+ * real pixels) and `rgbToOklab` does the colour-space maths.
  */
 const cssToOklab = (input: string): Oklab => {
-  const probe = document.createElement('span')
-  probe.style.color = input
-  document.body.appendChild(probe)
-  const resolved = getComputedStyle(probe).color
-  probe.remove()
-
-  const surface = document.createElement('canvas')
-  surface.width = 1
-  surface.height = 1
-  const ctx = surface.getContext('2d', { willReadFrequently: true })
-  if (!ctx) {
-    return [1, 0, 0]
-  }
-  ctx.fillStyle = resolved
-  ctx.fillRect(0, 0, 1, 1)
-  const [r8, g8, b8] = ctx.getImageData(0, 0, 1, 1).data
-
-  // Published colour-space constants, kept digit-for-digit against the reference.
-  const [r, g, b] = [r8, g8, b8].map((channel) => {
-    const u = channel / RGB_MAX
-    return u <= SRGB_KNEE ? u / 12.92 : ((u + 0.055) / 1.055) ** 2.4
-  })
-  const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b)
-  const m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b)
-  const s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b)
-  return [
-    0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s,
-    1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s,
-    0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s,
-  ]
+  const rgb = colorToRgb(input)
+  return rgb ? rgbToOklab(rgb) : [1, 0, 0]
 }
 
 const compileShader = (
@@ -438,7 +406,7 @@ const resolveConfig = (): OrbConfig => ({
   balance: props.balance ?? DEFAULTS.balance,
   blobScale: props.blobScale ?? DEFAULTS.blobScale,
   chroma: props.chroma ?? DEFAULTS.chroma,
-  colors: props.colors ?? [...DEFAULTS.colors],
+  colors: props.colors?.length ? props.colors : [...DEFAULTS.colors],
   contrast: props.contrast ?? DEFAULTS.contrast,
   duration: props.duration ?? DEFAULTS.duration,
   flow: props.flow ?? DEFAULTS.flow,
@@ -474,7 +442,7 @@ const dimension = computed(() =>
  * would latch the first palette it ever saw and never see a later one.
  */
 const fallbackStops = computed(() =>
-  (props.colors ?? DEFAULTS.colors).slice(0, MAX_STOPS),
+  (props.colors?.length ? props.colors : DEFAULTS.colors).slice(0, MAX_STOPS),
 )
 
 /** `devicePixelContentBoxSize` is not in every lib.dom the toolchain resolves. */

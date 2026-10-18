@@ -89,11 +89,17 @@ watch(
   { immediate: true },
 )
 
-const seconds = computed(() => props.duration ?? measuredSeconds.value)
+const seconds = computed(() => {
+  const raw: unknown = props.duration ?? measuredSeconds.value
+  if (raw === null || raw === undefined || raw === '') return null
+  const value = Number(raw)
+  return Number.isFinite(value) ? value : null
+})
 
 const summary = computed(() => {
-  if (seconds.value !== null && seconds.value !== undefined) {
-    return `Thought for ${seconds.value.toFixed(1)}s`
+  const value = seconds.value
+  if (value !== null) {
+    return `Thought for ${value.toFixed(1)}s`
   }
   return 'Reasoning'
 })

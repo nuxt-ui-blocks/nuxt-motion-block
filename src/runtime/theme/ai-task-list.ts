@@ -2,7 +2,7 @@ import type { ComponentConfig } from '@nuxt/ui'
 
 const defaultTheme = {
   slots: {
-    root: 'w-full rounded-xl border border-border bg-elevated p-3',
+    root: 'w-full rounded-xl border border-default bg-elevated p-3',
     header: 'mb-1.5 flex items-baseline justify-between',
     label: 'font-medium text-default text-sm',
     count: 'text-muted text-xs tabular-nums',

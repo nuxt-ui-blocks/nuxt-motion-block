@@ -53,7 +53,7 @@ const props = withDefaults(defineProps<Props>(), {
 const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiMessage', props, theme: aiMessage })
 
 defineSlots<{
-  actions?: (props: { actions: AiMessageAction[] }) => unknown
+  actions?: (props: { id: string, role: AiMessageRole, parts?: unknown, metadata?: unknown, actions?: unknown }) => unknown
   body?: (props: { id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
   content?: (props: { content?: string, id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
   files?: (props: { id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
@@ -134,7 +134,7 @@ const actions = computed<AiMessageAction[]>(() => {
   <UChatMessage
     :id="props.id"
     :role="props.role"
-    :parts="props.parts"
+    :parts="props.parts as any"
     :metadata="props.metadata"
     :side="side"
     :variant="variant"

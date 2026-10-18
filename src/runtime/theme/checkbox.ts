@@ -3,7 +3,7 @@ import type { ComponentConfig } from '@nuxt/ui'
 const defaultTheme = {
   slots: {
     root: 'inline-flex cursor-pointer select-none items-center gap-2',
-    checkbox: 'inline-flex',
+    checkbox: 'relative inline-flex [&_[data-slot=icon]]:opacity-0',
     label: 'text-sm',
   },
 }

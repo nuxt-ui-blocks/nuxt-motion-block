@@ -134,7 +134,7 @@ const shouldReduceMotion = useReducedMotion()
  * panel height can be driven by motion-v instead of Nuxt UI's CSS keyframes. Nuxt UI still owns the
  * trigger, the state and the region semantics; only the expanding element is swapped.
  *
- * `unmountOnHide` defaults to `false` (mounted, SmoothUI-style) so the closing spring is visible —
+ * `unmountOnHide` defaults to `false` (mounted by default) so the closing spring is visible —
  * Reka marks the closed wrapper `hidden="until-found"`, and the unlayered rules below clear that so
  * the shrink can animate, then `inert` removes the collapsed content from the a11y tree and tab order.
  *

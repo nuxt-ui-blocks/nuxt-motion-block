@@ -48,6 +48,7 @@ interface DockProps {
   spring?: SpringOptions
   variant?: DockVariant
   size?: DockSize
+  position?: 'fixed' | 'inline'
   ariaLabel?: string
   showLabels?: boolean
   background?: 'glass' | 'solid' | 'none'
@@ -66,6 +67,7 @@ const props = withDefaults(defineProps<DockProps>(), {
   spring: () => ({ mass: 0.1, stiffness: 150, damping: 12 }),
   variant: 'bottom',
   size: 'md',
+  position: 'fixed',
   ariaLabel: 'Application dock',
   showLabels: true,
   background: 'glass',
@@ -83,12 +85,14 @@ const focusedItemIndex = ref(-1)
 const throttle = useThrottle
 const { createArrowNavigation } = useKeyboardNavigation()
 
-// Size configurations
-const sizeConfig = computed(() => {
+// Size configurations. Written as literal classes so Tailwind can see them —
+// building names like `gap-${n}` at runtime produces classes the compiler
+// never emits.
+const sizeClasses = computed(() => {
   const configs = {
-    sm: { gap: 2, padding: 3, magnification: 60 },
-    md: { gap: 3, padding: 4, magnification: 80 },
-    lg: { gap: 4, padding: 5, magnification: 100 },
+    sm: 'gap-2 px-3 py-3',
+    md: 'gap-3 px-4 py-4',
+    lg: 'gap-4 px-5 py-5',
   }
   return configs[props.size]
 })
@@ -101,6 +105,12 @@ const orientation = computed(() => {
 // Container classes based on variant
 const containerClasses = computed(() => {
   const baseClasses = 'z-[1000] pointer-events-none'
+
+  // Inline docks sit in normal flow so they can be embedded in a page or an
+  // example; `variant` then only drives orientation, not placement.
+  if (props.position === 'inline') {
+    return baseClasses
+  }
 
   const variantClasses = {
     bottom: 'fixed bottom-5 left-1/2 -translate-x-1/2',
@@ -159,13 +169,7 @@ const dockClasses = computed(() => {
   }
 
   // Add size-specific classes
-  const sizeClasses = {
-    sm: `gap-${sizeConfig.value.gap} px-${sizeConfig.value.padding} py-${sizeConfig.value.padding}`,
-    md: `gap-${sizeConfig.value.gap} px-${sizeConfig.value.padding} py-${sizeConfig.value.padding}`,
-    lg: `gap-${sizeConfig.value.gap} px-${sizeConfig.value.padding} py-${sizeConfig.value.padding}`,
-  }
-
-  return [baseClasses.join(' '), props.class, sizeClasses[props.size]].filter(Boolean).join(' ')
+  return [baseClasses.join(' '), props.class, sizeClasses.value].filter(Boolean).join(' ')
 })
 
 // Provide dock context

@@ -15,8 +15,8 @@ const defaultTheme = {
     rowText: 'min-w-0',
     rowTitle: 'block truncate text-sm font-medium text-default',
     rowSnippet: 'block truncate text-xs text-muted',
-    faviconBase: 'flex items-center justify-center overflow-hidden rounded-full border border-border bg-muted text-muted',
-    faviconMark: 'flex size-full items-center justify-center *:size-full *:fill-foreground *:object-cover',
+    faviconBase: 'flex items-center justify-center overflow-hidden rounded-full border border-default bg-muted text-muted',
+    faviconMark: 'flex size-full items-center justify-center *:size-full *:fill-current *:object-cover',
   },
 }
 

@@ -32,6 +32,12 @@
           :class="ui.avatarImage({ class: uiProps.ui?.avatarImage })"
           @error="avatarFailed = true"
         >
+        <UIcon
+          v-else-if="props.avatarIcon"
+          aria-hidden="true"
+          :name="props.avatarIcon"
+          :class="ui.avatarFallback({ class: uiProps.ui?.avatarFallback })"
+        />
         <span
           v-else
           aria-hidden="true"
@@ -101,6 +107,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<FigmaCommentProps>(), {
   authorName: DEFAULT_AUTHOR_NAME,
   avatarAlt: undefined,
+  avatarIcon: DEFAULT_AVATAR_ICON,
   avatarUrl: DEFAULT_AVATAR_URL,
   class: undefined,
   className: undefined,
@@ -362,12 +369,11 @@ const CONTAINER_CLOSE_DELAY = 0.08
 const BLUR_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
 const DEFAULT_WIDTH = 180
 const DEFAULT_TIMESTAMP = 'Just now'
-// The reference reads its defaults from `somePeople(1, 11)[0]`, which is
-// `arjun-mehta` in smoothui's cast data. The avatar url is the exact string
-// `getImageKitUrl` builds for that entry.
 const DEFAULT_AUTHOR_NAME = 'Arjun Mehta'
-const DEFAULT_AVATAR_URL
-  = 'https://ik.imagekit.io/16u211libb/smoothui/troupe-people/arjun-mehta.webp?tr=w-48,h-48,q-85,f-auto'
+// A real portrait out of the box, with `avatarIcon` as the graceful fallback if
+// the image is absent or fails to load.
+const DEFAULT_AVATAR_URL = 'https://randomuser.me/api/portraits/men/11.jpg'
+const DEFAULT_AVATAR_ICON = 'i-lucide-user-round'
 const DEFAULT_MESSAGE
   = 'What happens if we adjust this to handle a light and dark mode? I\'m not sure if we\'re ready to handle...'
 
@@ -376,7 +382,9 @@ export interface FigmaCommentProps {
   authorName?: string
   /** Alternative text for the avatar image. Defaults to `authorName`. */
   avatarAlt?: string
-  /** Avatar image url. Defaults to the reference author's ImageKit portrait. */
+  /** Nuxt UI icon shown in the avatar slot if `avatarUrl` is missing or fails to load. */
+  avatarIcon?: string
+  /** Avatar image url. Defaults to a portrait; falls back to `avatarIcon` on failure. */
   avatarUrl?: string
   /** Extra classes for the positioning wrapper. */
   class?: string

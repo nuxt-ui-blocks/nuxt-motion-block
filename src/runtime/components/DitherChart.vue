@@ -25,8 +25,10 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { useColorMode } from '#imports'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import ditherChart from '../theme/dither-chart'
+import { resolveColor, resolveThemeColor } from '../utils/theme-color'
 
 export interface Props {
   animate?: boolean
@@ -404,10 +406,11 @@ const applyDither = (
 }
 
 const resolvePalette = (element: HTMLElement, palette?: string[]): string[] => {
-  if (palette && palette.length > 0) return palette
-  const styles = getComputedStyle(element)
-  const current = styles.color || '#000000'
-  const brand = styles.getPropertyValue('--ui-primary').trim()
+  if (palette && palette.length > 0) {
+    return palette.map(entry => resolveColor(entry, { target: element, fallback: entry }) ?? entry)
+  }
+  const current = getComputedStyle(element).color || '#000000'
+  const brand = resolveThemeColor('primary', { target: element })
   return brand ? [brand, current] : [current]
 }
 
@@ -416,6 +419,7 @@ const resolvePalette = (element: HTMLElement, palette?: string[]): string[] => {
 /* -------------------------------------------------------------------------- */
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
+const colorMode = useColorMode()
 const bufferCanvas = typeof document !== 'undefined' ? document.createElement('canvas') : null
 let animFrame = 0
 let observer: IntersectionObserver | null = null
@@ -542,6 +546,10 @@ watch(
   },
   { deep: true },
 )
+
+watch(() => colorMode.value, () => {
+  draw(props.animate ? 0 : 1)
+})
 </script>
 
 <script lang="ts">

@@ -9,7 +9,7 @@ const defaultTheme = {
     cellText: 'font-medium text-highlighted',
     glyph: 'block',
     caret: 'pointer-events-none absolute inset-0 flex items-center justify-center',
-    caretBar: 'h-4 w-px bg-foreground',
+    caretBar: 'h-4 w-px bg-inverted',
     separator: 'text-dimmed absolute',
     separatorLine: 'block h-px w-2 bg-dimmed',
   },

@@ -53,6 +53,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import glowHoverCards from '../theme/glow-hover-cards'
 
 defineOptions({ inheritAttrs: false })
@@ -84,13 +85,15 @@ const { props: uiProps, ui } = useMotionBlockUI({
 
 const glowPositions = ref<Record<number, { x: number, y: number }>>({})
 
+const resolvedGlowColor = useResolvedColor(() => props.glowColor)
+
 function glowBackground(index: number) {
   const position = glowPositions.value[index]
   if (!position) {
     return undefined
   }
 
-  return `radial-gradient(600px circle at ${position.x}px ${position.y}px, color-mix(in srgb, ${props.glowColor} 8%, transparent), transparent 40%)`
+  return `radial-gradient(600px circle at ${position.x}px ${position.y}px, color-mix(in srgb, ${resolvedGlowColor.value} 8%, transparent), transparent 40%)`
 }
 
 function handleMouseMove(e: MouseEvent, index: number) {

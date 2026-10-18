@@ -1,7 +1,37 @@
 <template>
   <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
+    <!--
+      Diff mode reuses the code surface: the same monospace body and line
+      rhythm, but each line carries a kind so a patch reads as a patch. It is
+      chrome-less (`bare`) because the host card owns the frame.
+    -->
+    <div
+      v-if="isDiff"
+      :class="bare ? undefined : ui.container({ class: uiProps.ui?.container })"
+    >
+      <pre :class="ui.diffBody({ class: uiProps.ui?.diffBody })">
+        <motion.div
+          v-for="(line, index) in props.lines"
+          :key="index"
+          :animate="lineAnimate()"
+          :class="ui.diffLine({ kind: line.kind ?? 'context', class: uiProps.ui?.diffLine })"
+          :initial="lineInitial(line)"
+          :transition="lineTransition(index)"
+        >
+          <span
+            v-if="line.number !== undefined"
+            :class="ui.diffLineNumber({ class: uiProps.ui?.diffLineNumber })"
+          >{{ line.number }}</span>
+          <span
+            :class="ui.diffLinePrefix({ kind: line.kind ?? 'context', class: uiProps.ui?.diffLinePrefix })"
+          >{{ PREFIX[line.kind ?? 'context'] }}</span>
+          <span :class="ui.diffLineContent({ class: uiProps.ui?.diffLineContent })">{{ line.content }}</span>
+        </motion.div>
+      </pre>
+    </div>
+
     <motion.div
-      v-if="showLineNumbers"
+      v-else-if="showLineNumbers"
       initial="initial"
       animate="animate"
       :variants="containerVariants"
@@ -50,7 +80,7 @@
         </div>
         <!-- eslint-disable vue/no-v-html -->
         <div
-          :class="ui.body({ class: [showLineNumbers ? 'pl-16' : '', uiProps.ui?.body] })"
+          :class="ui.body({ class: ['code-body--numbered', uiProps.ui?.body] })"
           v-html="highlightedCode"
         />
         <!-- eslint-enable vue/no-v-html -->
@@ -106,25 +136,45 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { motion, AnimatePresence } from 'motion-v'
+import { motion, AnimatePresence, useReducedMotion } from 'motion-v'
 import { createHighlighter } from 'shiki'
 import { useClipboard } from '@vueuse/core'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { EASE_OUT } from '../utils/motion-tokens'
 import codeBlock from '../theme/code-block'
 
+export type CodeBlockDiffKind = 'added' | 'removed' | 'context'
+
+export interface CodeBlockDiffLine {
+  content: string
+  /** Line kind. Omitted lines are treated as `context`. */
+  kind?: CodeBlockDiffKind
+  /** Line number in the file. Omit for tabular data rather than code. */
+  number?: number
+}
+
 interface Props {
-  code: string
+  code?: string
   language?: string
   theme?: string
   showLineNumbers?: boolean
+  /** `diff` renders `lines` instead of highlighting `code`. */
+  variant?: 'code' | 'diff'
+  lines?: CodeBlockDiffLine[]
+  /** Drop the container frame so the host card can own it. */
+  bare?: boolean
   class?: string
   ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  code: '',
   language: 'vue',
   theme: 'github-dark',
   showLineNumbers: false,
+  variant: 'code',
+  lines: () => [],
+  bare: false,
   class: undefined,
   ui: undefined,
 })
@@ -138,6 +188,8 @@ const { props: uiProps, ui } = useMotionBlockUI({
 const { copy } = useClipboard()
 const copied = ref(false)
 const highlightedCode = ref('')
+
+const isDiff = computed(() => props.variant === 'diff')
 
 const highlightedLines = computed(() => {
   if (!highlightedCode.value) return []
@@ -155,6 +207,30 @@ const containerVariants = {
   },
 }
 
+const LINE_STAGGER = 0.02
+const WIPE_DURATION = 0.28
+
+const PREFIX: Record<CodeBlockDiffKind, string> = {
+  added: '+',
+  context: ' ',
+  removed: '-',
+}
+
+const shouldReduceMotion = useReducedMotion()
+
+const lineInitial = (line: CodeBlockDiffLine) =>
+  line.kind === 'added' && !shouldReduceMotion.value
+    ? { clipPath: 'inset(0 100% 0 0)' }
+    : false
+
+const lineAnimate = () =>
+  shouldReduceMotion.value ? undefined : { clipPath: 'inset(0 0% 0 0)' }
+
+const lineTransition = (index: number) =>
+  shouldReduceMotion.value
+    ? { duration: 0 }
+    : { delay: index * LINE_STAGGER, duration: WIPE_DURATION, ease: EASE_OUT }
+
 const handleCopy = async () => {
   await copy(props.code)
   copied.value = true
@@ -164,6 +240,7 @@ const handleCopy = async () => {
 }
 
 onMounted(async () => {
+  if (props.variant !== 'code' || !props.code) return
   try {
     const highlighter = await createHighlighter({
       themes: [props.theme],
@@ -202,4 +279,9 @@ function escapeHtml(value: string) {
   padding: 0;
   background: transparent;
 }
+
+.code-body.code-body--numbered {
+  padding-left: 4rem;
+}
+
 </style>
