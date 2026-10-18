@@ -309,7 +309,7 @@ const article = {
   author: {
     name: 'Alex Johnson',
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-    role: 'Senior Frontend Developer',
+    role: 'Senior Front-end dev',
     bio: 'Alex is a senior frontend developer with over 8 years of experience building web applications. He specializes in Vue.js and React.',
     twitter: 'https://twitter.com/example',
     linkedin: 'https://linkedin.com/in/example',
@@ -318,7 +318,7 @@ const article = {
   tags: ['Vue.js', 'JavaScript', 'Frontend', 'Composition API'],
   headings: [
     { id: 'introduction', text: 'Introduction' },
-    { id: 'setup', text: 'Setting Up Your Project' },
+    { id: 'setup', text: 'Getting your project ready' },
     { id: 'reactive-data', text: 'Working with Reactive Data' },
     { id: 'computed-properties', text: 'Computed Properties and Watchers' },
     { id: 'lifecycle-hooks', text: 'Lifecycle Hooks' },
@@ -329,7 +329,7 @@ const article = {
     <h2 id="introduction">Introduction</h2>
     <p>The Vue 3 Composition API is a new way to organize and reuse logic in Vue components. It provides a more flexible alternative to the Options API, allowing developers to group related logic together and share it across components more easily.</p>
     
-    <h2 id="setup">Setting Up Your Project</h2>
+    <h2 id="setup">Getting your project ready</h2>
     <p>To get started with the Composition API, you'll need to have Vue 3 installed in your project. If you're starting a new project, you can use the Vue CLI:</p>
     <pre><code class="language-bash">npm install -g @vue/cli
 vue create my-project
@@ -425,7 +425,7 @@ const relatedArticles = [
   },
   {
     id: 3,
-    title: 'State Management in Vue 3',
+    title: 'Shared state in Vue 3',
     date: 'May 5, 2023',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
     slug: 'state-management-in-vue-3',

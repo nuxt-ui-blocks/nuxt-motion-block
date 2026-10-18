@@ -7,7 +7,7 @@
     >
       <div
         class="flex h-44 flex-col items-center justify-center gap-1 text-center"
-        :class="queued ? 'bg-rose-600 text-white' : 'bg-zinc-900 text-zinc-300'"
+        :class="queued ? 'bg-rose-600 text-white' : 'bg-accented text-dimmed'"
       >
         <span class="text-xs font-medium uppercase tracking-widest opacity-70">
           {{ queued ? 'Export queued' : 'No exports' }}

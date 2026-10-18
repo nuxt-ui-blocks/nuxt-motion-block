@@ -32,7 +32,7 @@ type Citation = {
 }
 
 const citations: Citation[] = [
-  { id: 'c-1', index: 1, title: 'Theme token audit runbook', url: 'https://motion-primitives.com' },
+  { id: 'c-1', index: 1, title: 'Theme token audit runbook', url: 'https://example.com' },
   { id: 'c-2', index: 2, title: 'Release checklist, internal' },
 ]
 

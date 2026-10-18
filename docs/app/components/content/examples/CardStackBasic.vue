@@ -6,13 +6,13 @@
           id: 1,
           title: 'Project Alpha',
           content: 'A revolutionary new product that changes everything.',
-          name: 'Alex Developer',
+          name: 'Sam Rivera',
           designation: 'Lead Developer',
           avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80',
         },
         {
           id: 2,
-          title: 'Project Beta',
+          title: 'Project Betaeta',
           content: 'An innovative solution for modern businesses.',
           name: 'Sam Designer',
           designation: 'Senior Designer',
@@ -38,7 +38,7 @@
       class="w-full max-w-md"
     >
       <template #card="{ item }">
-        <UCard class="bg-white dark:bg-gray-800 shadow-xl rounded-xl border-0">
+        <UCard class="bg-default shadow-xl rounded-xl border-0">
           <div class="p-6">
             <div class="flex items-start mb-4">
               <img
@@ -47,18 +47,18 @@
                 class="w-14 h-14 rounded-full mr-4 border-2 border-primary-500"
               >
               <div>
-                <h3 class="font-bold text-lg text-gray-900 dark:text-white">
+                <h3 class="font-bold text-lg text-highlighted">
                   {{ item.name }}
                 </h3>
-                <p class="text-gray-600 dark:text-gray-400 text-sm">
+                <p class="text-muted text-sm">
                   {{ item.designation }}
                 </p>
               </div>
             </div>
-            <h4 class="font-bold text-xl mb-2 text-gray-900 dark:text-white">
+            <h4 class="font-bold text-xl mb-2 text-highlighted">
               {{ item.title }}
             </h4>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">
+            <p class="text-muted mb-4">
               {{ item.content }}
             </p>
             <div class="flex justify-between items-center">

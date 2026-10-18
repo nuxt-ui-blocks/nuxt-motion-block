@@ -1,0 +1,515 @@
+<template>
+  <div>
+    <div class="relative p-4">
+      <!-- Navbar -->
+      <UHeader
+        title="MotionBlocks"
+        class="sticky top-0 z-50 bg-white/90 dark:bg-default/90 backdrop-blur-sm rounded-full shadow-md border-b border-neutral-200 dark:border-neutral-800"
+      >
+        <template #right>
+          <div class="hidden md:flex items-center space-x-3">
+            <UButton
+              to="#"
+              variant="ghost"
+              color="primary"
+              class="font-medium"
+            >
+              Sign in
+            </UButton>
+            <UButton
+              to="#"
+              variant="solid"
+              color="primary"
+            >
+              Sign up
+            </UButton>
+          </div>
+        </template>
+
+        <template #body>
+          <UNavigationMenu
+            :items="navigationItems"
+            class="flex flex-col space-y-4 md:hidden py-4"
+            orientation="vertical"
+          >
+            <template #item="{ item }">
+              <ULink
+                v-bind="item"
+                class="text-neutral-900 dark:text-white font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2"
+              >
+                {{ item.label }}
+              </ULink>
+            </template>
+            <template #item-child="{ item }">
+              <ULink
+                v-bind="item"
+                class="block text-sm text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 py-1 pl-4 border-l-2 border-primary-500 dark:border-primary-400 ml-1"
+              >
+                {{ item.label }}
+              </ULink>
+            </template>
+          </UNavigationMenu>
+          <div class="flex space-x-3 pt-4">
+            <UButton
+              to="#"
+              variant="ghost"
+              color="primary"
+              class="flex-1 font-medium"
+            >
+              Sign in
+            </UButton>
+            <UButton
+              to="#"
+              variant="solid"
+              color="primary"
+              class="flex-1"
+            >
+              Sign up
+            </UButton>
+          </div>
+        </template>
+
+        <template #default>
+          <UNavigationMenu
+            :items="navigationItems"
+            class="hidden md:flex space-x-6"
+          >
+            <template #item="{ item }">
+              <ULink
+                v-bind="item"
+                class="text-neutral-900 dark:text-white font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors px-3 py-2 rounded-lg hover:bg-primary-50 dark:hover:bg-neutral-800"
+              >
+                {{ item.label }}
+              </ULink>
+            </template>
+            <template #item-child="{ item }">
+              <ULink
+                v-bind="item"
+                class="block px-4 py-3 text-sm hover:bg-primary-50 dark:hover:bg-neutral-700"
+              >
+                <div class="font-medium text-neutral-900 dark:text-white">{{ item.label }}</div>
+                <div
+                  v-if="item.description"
+                  class="text-neutral-500 dark:text-neutral-400 mt-1"
+                >{{ item.description }}</div>
+              </ULink>
+            </template>
+          </UNavigationMenu>
+        </template>
+      </UHeader>
+
+      <!-- Hero Section -->
+      <section class="w-full min-h-screen flex flex-col items-center justify-center overflow-hidden">
+        <MBackgroundGradientAnimation
+          gradient-background-start="rgb(20, 184, 166)"
+          gradient-background-end="rgb(13, 148, 136)"
+          first-color="20, 184, 166"
+          second-color="13, 148, 136"
+          third-color="8, 145, 178"
+          fourth-color="5, 150, 105"
+          pointer-color="20, 184, 166"
+          size="80%"
+          blending-value="soft-light"
+          children-class="h-full w-full blur-md"
+          container-class="absolute inset-0 z-0"
+        />
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+          <div class="text-center">
+            <MInView
+              :variants="{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }"
+              :transition="{ duration: 0.5, delay: 0.1 }"
+              class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white backdrop-blur-sm"
+            >
+              <UIcon
+                name="i-heroicons-sparkles"
+                class="w-4 h-4"
+              />
+              New Release
+              <UIcon
+                name="i-heroicons-arrow-right"
+                class="w-4 h-4"
+              />
+            </MInView>
+            <MInView
+              :variants="{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }"
+              :transition="{ duration: 0.5, delay: 0.2 }"
+              class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white"
+            >
+              Build Amazing Websites with Motion
+            </MInView>
+            <MInView
+              :variants="{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }"
+              :transition="{ duration: 0.5, delay: 0.3 }"
+              class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-neutral-100"
+            >
+              Create stunning, animated interfaces with our collection of beautifully designed components. Just copy, paste, and build.
+            </MInView>
+            <MInView
+              :variants="{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }"
+              :transition="{ duration: 0.5, delay: 0.4 }"
+              class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              <UButton
+                to="#"
+                color="white"
+                variant="solid"
+                size="xl"
+                class="font-medium"
+              >
+                Get Started
+              </UButton>
+              <UButton
+                to="#"
+                color="white"
+                variant="outline"
+                size="xl"
+                class="font-medium"
+              >
+                View Components
+              </UButton>
+            </MInView>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Features Section -->
+    <section class="py-20 bg-neutral-50 dark:bg-neutral-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full text-sm font-medium bg-primary-100 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300">
+            <UIcon
+              name="i-heroicons-light-bulb"
+              class="w-4 h-4"
+            />
+            Why Choose Us
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+            Powerful Features
+          </h2>
+          <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+            Everything you need to create beautiful, animated interfaces.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <MInView
+            v-for="(feature, index) in features"
+            :key="index"
+            :variants="{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }"
+            :transition="{ duration: 0.5, delay: index * 0.1 }"
+            class="bg-white dark:bg-neutral-800 rounded-2xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+          >
+            <div class="w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/20 flex items-center justify-center mb-4">
+              <UIcon
+                :name="feature.icon"
+                class="w-6 h-6 text-primary-600 dark:text-primary-400"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mb-2">
+              {{ feature.title }}
+            </h3>
+            <p class="text-neutral-600 dark:text-neutral-400">
+              {{ feature.description }}
+            </p>
+          </MInView>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white dark:bg-neutral-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full text-sm font-medium bg-primary-100 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300">
+            <UIcon
+              name="i-heroicons-chat-bubble-left-right"
+              class="w-4 h-4"
+            />
+            Testimonials
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+            Loved by Developers
+          </h2>
+          <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+            Here's what some of our users have to say about our components.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <MInView
+            v-for="(testimonial, index) in testimonials"
+            :key="index"
+            :variants="{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }"
+            :transition="{ duration: 0.5, delay: index * 0.1 }"
+            class="bg-neutral-50 dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-center mb-4">
+              <UAvatar
+                :src="testimonial.author.avatar"
+                :alt="testimonial.author.name"
+                size="md"
+                class="mr-3"
+              />
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-white">
+                  {{ testimonial.author.name }}
+                </h4>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                  {{ testimonial.author.role }}
+                </p>
+              </div>
+            </div>
+            <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+              {{ testimonial.content }}
+            </p>
+            <div class="flex">
+              <UIcon
+                v-for="i in 5"
+                :key="i"
+                :name="i <= testimonial.rating ? 'i-heroicons-star-solid' : 'i-heroicons-star'"
+                class="w-5 h-5 text-yellow-400"
+              />
+            </div>
+          </MInView>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-primary-600 to-indigo-700 text-white relative">
+      <MBackgroundRippleEffect
+        class="absolute inset-0 z-0"
+        :colors="['#93c5fd', '#60a5fa', '#a5b4fc']"
+      />
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="max-w-3xl mx-auto">
+          <div class="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full text-sm font-medium bg-white/10 backdrop-blur-sm">
+            <UIcon
+              name="i-heroicons-rocket-launch"
+              class="w-4 h-4"
+            />
+            What are you waiting for?
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            Ready to Get Started?
+          </h2>
+          <p class="text-lg text-primary-100 mb-8">
+            Join thousands of developers who are already building amazing interfaces with our components.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <UButton
+              to="#"
+              color="white"
+              variant="solid"
+              size="lg"
+              class="font-medium"
+            >
+              Start Building
+            </UButton>
+            <UButton
+              to="#"
+              color="white"
+              variant="outline"
+              size="lg"
+              class="font-medium"
+            >
+              View Documentation
+            </UButton>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 text-neutral-400 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          <div class="lg:col-span-2">
+            <h3 class="text-white text-xl font-bold mb-4">
+              MotionBlocks
+            </h3>
+            <p class="mb-6 max-w-md">
+              Creating beautiful, animated interfaces with Vue and Tailwind CSS.
+            </p>
+            <div class="flex space-x-4">
+              <UButton
+                v-for="(social, index) in socialLinks"
+                :key="index"
+                :icon="social.icon"
+                :to="social.to"
+                color="neutral"
+                variant="ghost"
+                size="sm"
+                square
+                class="hover:bg-neutral-800"
+              />
+            </div>
+          </div>
+          <div
+            v-for="(column, index) in linkColumns"
+            :key="index"
+          >
+            <h4 class="text-white font-semibold mb-4">
+              {{ column.title }}
+            </h4>
+            <ul class="space-y-2">
+              <li
+                v-for="(link, linkIndex) in column.links"
+                :key="linkIndex"
+              >
+                <a
+                  :href="link.to"
+                  class="hover:text-white transition-colors hover:underline"
+                >
+                  {{ link.label }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-neutral-800 mt-12 pt-8 text-sm flex flex-col md:flex-row justify-between items-center">
+          <p>© 2023 MotionBlocks. All rights reserved.</p>
+          <div class="mt-4 md:mt-0 flex space-x-6">
+            <a
+              href="#"
+              class="hover:text-white transition-colors hover:underline"
+            >Privacy Policy</a>
+            <a
+              href="#"
+              class="hover:text-white transition-colors hover:underline"
+            >Terms of Service</a>
+            <a
+              href="#"
+              class="hover:text-white transition-colors hover:underline"
+            >Cookies</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</template>
+
+<script setup>
+const features = [
+  {
+    title: 'Beautiful Animations',
+    description: 'Pre-built animations that bring your interface to life with smooth transitions and effects.',
+    icon: 'i-heroicons-sparkles',
+  },
+  {
+    title: 'Easy to Customize',
+    description: 'Fully customizable components that adapt to your brand and design requirements.',
+    icon: 'i-heroicons-adjustments-horizontal',
+  },
+  {
+    title: 'Nuxt UI Integration',
+    description: 'Seamlessly integrates with Nuxt UI for a consistent design system.',
+    icon: 'i-simple-icons-nuxtdotjs',
+  },
+  {
+    title: 'Performance Optimized',
+    description: 'Lightweight components that won\'t slow down your application.',
+    icon: 'i-heroicons-bolt',
+  },
+  {
+    title: 'Responsive Design',
+    description: 'Looks great on all devices from mobile to desktop.',
+    icon: 'i-heroicons-device-phone-mobile',
+  },
+  {
+    title: 'Developer Friendly',
+    description: 'Well-documented components with clear examples and TypeScript support.',
+    icon: 'i-heroicons-code-bracket',
+  },
+]
+
+const testimonials = [
+  {
+    content: 'These components have completely transformed how we build our UI. The animations are smooth and the customization options are endless.',
+    author: {
+      name: 'Alex Johnson',
+      role: 'Frontend Developer',
+      avatar: 'https://picsum.photos/seed/alex/100/100',
+    },
+    rating: 5,
+  },
+  {
+    content: 'As a designer, I appreciate how these components balance aesthetics with functionality. They\'ve saved us countless hours of development time.',
+    author: {
+      name: 'Sarah Williams',
+      role: 'UI/UX Designer',
+      avatar: 'https://picsum.photos/seed/sarah/100/100',
+    },
+    rating: 5,
+  },
+  {
+    content: 'The documentation is excellent and the components are easy to integrate into our existing Nuxt projects. Highly recommended!',
+    author: {
+      name: 'Michael Chen',
+      role: 'Tech Lead',
+      avatar: 'https://picsum.photos/seed/michael/100/100',
+    },
+    rating: 4,
+  },
+]
+
+const socialLinks = [
+  { label: 'Twitter', to: '#', icon: 'i-simple-icons-x' },
+  { label: 'GitHub', to: '#', icon: 'i-simple-icons-github' },
+  { label: 'LinkedIn', to: '#', icon: 'i-simple-icons-linkedin' },
+]
+
+const linkColumns = [
+  {
+    title: 'Product',
+    links: [
+      { label: 'Components', to: '#' },
+      { label: 'Templates', to: '#' },
+      { label: 'Pricing', to: '#' },
+      { label: 'Changelog', to: '#' },
+    ],
+  },
+  {
+    title: 'Resources',
+    links: [
+      { label: 'Documentation', to: '#' },
+      { label: 'Tutorials', to: '#' },
+      { label: 'Blog', to: '#' },
+      { label: 'Support', to: '#' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About', to: '#' },
+      { label: 'Careers', to: '#' },
+      { label: 'Contact', to: '#' },
+      { label: 'Partners', to: '#' },
+    ],
+  },
+]
+
+const navigationItems = [
+  {
+    label: 'Home',
+    to: '#',
+  },
+  {
+    label: 'Products',
+    children: [
+      {
+        label: 'Web Components',
+        description: 'Beautiful UI components with animations',
+        to: '#',
+      },
+      {
+        label: 'Templates',
+        description: 'Pre-built website templates',
+        to: '#',
+      },
+    ],
+  },
+  {
+    label: 'Pricing',
+    to: '#',
+  },
+]
+</script>

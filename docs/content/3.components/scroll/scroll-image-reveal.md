@@ -1,0 +1,336 @@
+---
+title: Scroll Image Reveal
+description: An image unmasked by scroll progress through a wipe, curtain, circle, blinds or scale, with counter-parallax inside the frame.
+---
+
+An image that reveals itself as you scroll, using a CSS mask on the frame rather
+than a clip on the image. Five masks are available — `wipe`, `curtain`,
+`circle`, `blinds` and `scale` — and all of them share one spring-smoothed
+progress value, with a counter-parallax drift underneath so the image settles
+into place rather than simply appearing.
+
+Two implementation details shape how you use it. First, the mask lives on the
+**frame**, not the image: the image is deliberately taller than its frame by
+`2 × parallax` pixels so the drift has somewhere to travel, and a clip measured
+against that oversized box would never line up with the visible edges. Second,
+the frame has no intrinsic height — the image is absolutely positioned — so you
+must give the frame one.
+
+## Usage
+
+Set an explicit height on the frame (via `class`), pass `src` and `alt`, and
+pick a `mask`. Reach for `once` when the reveal is a one-time entrance — without
+it, scrolling back up re-hides the image, because the mask is a direct function
+of progress rather than a latch.
+
+::code-preview
+---
+label: Preview
+---
+  :::div{class="flex justify-center w-full h-full"}
+    <component-example name="scroll-image-reveal-basic" />
+  :::
+#code
+```vue
+<template>
+  <div class="w-full max-w-lg space-y-3">
+    <MScrollImageReveal
+      :src="src"
+      :alt="alt"
+      mask="circle"
+      class="h-64"
+    />
+    <p class="text-muted text-sm">
+      The frame is absolutely positioned inside, so it needs an explicit height.
+    </p>
+  </div>
+</template>
+
+<script setup lang="ts">
+const src = 'https://picsum.photos/seed/motion-reveal/900/600'
+const alt = 'A misty mountain ridge at sunrise'
+</script>
+```
+::
+
+## Examples
+
+### Every mask
+
+`wipe`, `curtain`, `blinds` and `scale` alongside the default `circle`. Each frame
+sets its own `mask` and, where the mask honours it, a `direction`.
+
+::code-preview
+---
+label: Preview
+---
+  :::div{class="flex justify-center w-full h-full"}
+    <component-example name="scroll-image-reveal-masks" />
+  :::
+#code
+```vue
+<template>
+  <div class="grid w-full max-w-3xl gap-6 sm:grid-cols-2">
+    <figure
+      v-for="sample in samples"
+      :key="sample.label"
+      class="space-y-2"
+    >
+      <MScrollImageReveal
+        :src="sample.src"
+        :alt="sample.label"
+        :mask="sample.mask"
+        :direction="sample.direction"
+        rounded="rounded-xl"
+        class="h-40"
+      />
+      <figcaption class="text-xs text-muted">
+        mask="{{ sample.mask }}" · direction="{{ sample.direction }}"
+      </figcaption>
+    </figure>
+  </div>
+</template>
+
+<script setup lang="ts">
+const samples = [
+  { label: 'Wipe from the right', mask: 'wipe' as const, direction: 'right' as const, src: 'https://picsum.photos/seed/reveal-wipe/640/420' },
+  { label: 'Curtain from the bottom', mask: 'curtain' as const, direction: 'up' as const, src: 'https://picsum.photos/seed/reveal-curtain/640/420' },
+  { label: 'Blinds from the left', mask: 'blinds' as const, direction: 'left' as const, src: 'https://picsum.photos/seed/reveal-blinds/640/420' },
+  { label: 'Scale up', mask: 'scale' as const, direction: 'left' as const, src: 'https://picsum.photos/seed/reveal-scale/640/420' },
+]
+</script>
+```
+::
+
+### Counter-parallax
+
+`parallax` controls how far the image drifts inside its overscanned frame. A
+small value is a subtle settle; a large one is a pronounced slide. Note the
+drift is never fully off: any falsy value (including `0`) falls back to the
+`60` default, so use a small positive number to minimise it.
+
+::code-preview
+---
+label: Preview
+---
+  :::div{class="flex justify-center w-full h-full"}
+    <component-example name="scroll-image-reveal-parallax" />
+  :::
+#code
+```vue
+<template>
+  <div class="flex w-full max-w-2xl gap-4">
+    <div class="flex-1 space-y-2">
+      <MScrollImageReveal
+        :src="src"
+        alt="Subtle parallax"
+        :parallax="20"
+        mask="wipe"
+        class="h-64"
+      />
+      <p class="text-xs text-muted">
+        parallax="20" — a gentle drift
+      </p>
+    </div>
+
+    <div class="flex-1 space-y-2">
+      <MScrollImageReveal
+        :src="src"
+        alt="Strong parallax"
+        :parallax="140"
+        mask="wipe"
+        class="h-64"
+      />
+      <p class="text-xs text-muted">
+        parallax="140" — a pronounced drift
+      </p>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+const src = 'https://picsum.photos/seed/motion-parallax/900/600'
+</script>
+```
+::
+
+### Latch the reveal
+
+Set `once` when the reveal is a one-time entrance. The mask is then driven by the
+high-water mark of progress, so scrolling back up leaves the image fully
+revealed instead of re-hiding it.
+
+::code-preview
+---
+label: Preview
+---
+  :::div{class="flex justify-center w-full h-full"}
+    <component-example name="scroll-image-reveal-once" />
+  :::
+#code
+```vue
+<template>
+  <div class="w-full max-w-lg space-y-3">
+    <MScrollImageReveal
+      :src="src"
+      alt="Latched reveal"
+      mask="wipe"
+      once
+      class="h-64"
+    />
+    <p class="text-sm text-muted">
+      With <code>once</code> the image stays revealed after scrolling back up.
+    </p>
+  </div>
+</template>
+
+<script setup lang="ts">
+const src = 'https://picsum.photos/seed/motion-once/900/600'
+</script>
+```
+::
+
+## Customize
+
+Adjust the image, `mask`, `direction`, `parallax` and `once` live in the
+playground below.
+
+::code-preview
+---
+label: Preview
+---
+  :::div{class="w-full"}
+    <component-example name="scroll-image-reveal-custom" />
+  :::
+#code
+  <PlaygroundCode name="ScrollImageReveal" />
+::
+
+## Props
+
+::component-props
+  ::component-prop{name="src" type="string" required}
+  Image URL, applied to the `<img>` directly — there is no loader or
+  Nuxt Image integration, so supply an optimised source yourself if size matters.
+  The image also carries `decoding="async"`.
+  ::
+  ::component-prop{name="alt" type="string" required}
+  Forwarded to the `<img>` as its `alt`. The component will not invent
+  one, and there is no decorative mode — pass `alt=""` yourself if the image is
+  purely decorative.
+  ::
+  ::component-prop{name="mask" type="'wipe' | 'curtain' | 'circle' | 'blinds' | 'scale'" default="'wipe'"}
+  Which reveal to use. See the table below for how each behaves and which honour
+  `direction`.
+  ::
+  ::component-prop{name="direction" type="'left' | 'right' | 'up' | 'down'" default="'left'"}
+  Reveal direction. Only `left`/`right` apply to `wipe` and `blinds`; only
+  `up`/`down` apply to `curtain`; `circle` and `scale` ignore it.
+  ::
+  ::component-prop{name="offset" type="ScrollOffset" default="['start 0.9', 'end 0.6']"}
+  Motion scroll-offset tuple for `useScroll`, measured against the frame. The
+  default is deliberately narrower than Motion's own `['start start', 'end
+  start']` — running the full enter-to-exit range finishes the reveal just as
+  the element leaves the viewport, so the payoff happens off-screen.
+  ::
+  ::component-prop{name="parallax" type="number" default="60"}
+  Counter-parallax travel in pixels. The image is rendered
+  `calc(100% + ${parallax * 2}px)` tall and offset by `-parallax`, so it drifts
+  within an overscanned box and never drags a strip of background into view.
+  The absolute value is used, so a negative value behaves like its positive
+  counterpart, and any falsy value — including `0` — falls back to the `60`
+  default, so there is no way to disable the drift from the prop.
+  ::
+  ::component-prop{name="once" type="boolean" default="false"}
+  Latch the reveal at its furthest point. With `false` (the default) the mask is
+  a pure function of scroll progress, so scrolling back up re-hides the image.
+  With `true` the component tracks `maxReveal` and never retreats.
+  ::
+  ::component-prop{name="rounded" type="string" default="'rounded-2xl'"}
+  Tailwind `rounded-*` class applied to the frame. Because the mask is on the
+  frame, this is what rounds the revealed image — pass `rounded-none` for square
+  corners.
+  ::
+  ::component-prop{name="class" type="string" default="''"}
+  Merged onto the frame after `relative overflow-hidden`. This is where you set
+  the frame's height — without one the component collapses, because the image
+  inside is absolutely positioned and contributes no height of its own.
+  ::
+::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.scrollImageReveal` in `app.config.ts`.
+
+::component-props
+  ::component-prop{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+::component-slots
+  ::component-slot-row{name="root"}
+  `relative overflow-hidden`
+  ::
+  ::component-slot-row{name="image"}
+  `absolute inset-x-0 w-full object-cover`
+  ::
+::
+
+## Accessibility
+
+The component is a `<div>` frame wrapping a single `<img>` that carries the
+`alt` you passed. It applies no ARIA attributes, roles or live regions of its own,
+and it does not manage focus — a scroll-driven reveal is purely visual, so
+nothing about it needs announcing.
+
+The image is in the accessibility tree from first paint, before the mask opens.
+A screen-reader user is therefore never blocked from the content, and the reveal
+carries no semantic meaning that would need announcing.
+
+Under `prefers-reduced-motion` — read via `useReducedMotion` — the mask is
+dropped entirely (`inset(0% 0% 0% 0%)` / `none`), parallax becomes `0`, and the
+`scale` mask settles at full scale and full opacity. The image is simply there,
+fully visible and static.
+
+## Performance
+
+- One `useScroll` and one `useSpring` (`stiffness: 260`, `mass: 0.4`,
+  `damping: 32`) for the whole component. Every mask, the parallax and the
+  opacity all derive from that single smoothed value.
+- The mask is a `useTransform` returning a CSS string, so the browser composites
+  the reveal on `clip-path` / `mask-image` rather than the component writing a
+  style on every scroll tick.
+- The image's drift is a `y` transform inside an overscanned box, so parallax
+  costs one transform instead of a `top` change and no layout.
+- The image is deliberately oversized (`100% + 2 × parallax`) so the drift never
+  exposes the frame's background — no reflow when the scroll offset changes.
+- `once` is implemented by tracking a `maxReveal` ref inside the transform, so
+  latching costs one number rather than a separate animation or watcher.
+
+::tip
+Reveal progress is multiplied by `2.5` before it reaches the mask. The scroll
+window is intentionally longer than the visible reveal, so the image finishes
+unmasking while still comfortably on screen rather than as it slides away. If
+your image feels like it reveals too late, widen `offset`'s first value (pull
+`start 0.9` toward `start 1`) rather than reaching for a different mask.
+::
+
+## Masks
+
+| Mask | Mechanism | `direction` applies |
+| --- | --- | --- |
+| `wipe` *(default)* | `clip-path: inset()` cutting from one edge | `left` / `right` |
+| `curtain` | `clip-path: inset()` cutting from top or bottom | `up` / `down` |
+| `circle` | `clip-path: circle()` expanding from the centre | ignored — always centred |
+| `blinds` | `repeating-linear-gradient` mask, opaque band growing | `left` / `right` / `up` / `down` |
+| `scale` | No mask — the image scales down from `1.12` and fades in | ignored |
+
+`direction` is only honoured by the masks listed above. `wipe` reads `right` as
+"reveal from the right edge inward" and anything else as "from the left edge
+inward"; `curtain` reads `down` and anything else as "from the bottom upward".
+Passing `up` or `down` to `wipe` silently gets you the left-edge behaviour.
+
+`blinds` is the odd one out: a clip path can only cut one continuous region, so
+the slats come from a hard-edged repeating gradient whose opaque band widens with
+progress. Band size is fixed at 40px and is not configurable.

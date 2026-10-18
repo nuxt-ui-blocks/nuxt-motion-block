@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col items-center p-8">
     <div class="text-center mb-8">
-      <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+      <h3 class="text-2xl font-bold mb-3 text-highlighted">
         Force Dot
       </h3>
-      <p class="text-gray-600 dark:text-gray-400 max-w-md">
+      <p class="text-muted max-w-md">
         Interactive physics-based dot that responds to cursor movements with realistic force simulations
       </p>
     </div>

@@ -12,7 +12,7 @@
       <h2 class="text-4xl font-bold text-white mb-6">
         Lamp Effect
       </h2>
-      <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+      <p class="text-dimmed text-lg mb-8 max-w-2xl mx-auto">
         Create dramatic lighting effects with our lamp container that adds depth and atmosphere to your content
       </p>
       <div class="flex flex-wrap justify-center gap-5">

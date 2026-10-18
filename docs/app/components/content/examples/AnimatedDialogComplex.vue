@@ -11,7 +11,7 @@
     <template #body>
       <div class="p-4">
         <p>This is the main content of the dialog. It can contain any Vue components or HTML elements.</p>
-        <div class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded">
+        <div class="mt-4 p-4 bg-muted rounded">
           <p>You can include forms, images, or any other content here.</p>
         </div>
       </div>

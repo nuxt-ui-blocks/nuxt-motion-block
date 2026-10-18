@@ -9,12 +9,12 @@
         :scale="1.1"
         :duration="4"
       />
-      <div class="relative z-10 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 h-full">
+      <div class="relative z-10 p-6 bg-default rounded-xl shadow-lg border border-default h-full">
         <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-yellow-500 rounded-lg mb-4" />
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+        <h3 class="text-xl font-bold text-highlighted mb-2">
           Rotate Mode
         </h3>
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           Conic gradient that rotates continuously
         </p>
       </div>
@@ -29,12 +29,12 @@
         :scale="1.1"
         :duration="2"
       />
-      <div class="relative z-10 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 h-full">
+      <div class="relative z-10 p-6 bg-default rounded-xl shadow-lg border border-default h-full">
         <div class="w-12 h-12 bg-pink-500 rounded-lg mb-4" />
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+        <h3 class="text-xl font-bold text-highlighted mb-2">
           Pulse Mode
         </h3>
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           Pulsing radial gradient with scale animation
         </p>
       </div>
@@ -49,12 +49,12 @@
         :scale="1.05"
         :duration="3"
       />
-      <div class="relative z-10 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 h-full">
+      <div class="relative z-10 p-6 bg-default rounded-xl shadow-lg border border-default h-full">
         <div class="w-12 h-12 bg-emerald-500 rounded-lg mb-4" />
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+        <h3 class="text-xl font-bold text-highlighted mb-2">
           Breathe Mode
         </h3>
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           Subtle breathing effect with gentle scale changes
         </p>
       </div>
@@ -69,12 +69,12 @@
         :scale="1.05"
         :duration="5"
       />
-      <div class="relative z-10 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 h-full">
+      <div class="relative z-10 p-6 bg-default rounded-xl shadow-lg border border-default h-full">
         <div class="w-12 h-12 bg-purple-500 rounded-lg mb-4" />
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+        <h3 class="text-xl font-bold text-highlighted mb-2">
           Color Shift
         </h3>
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           Smooth transitions between multiple colors
         </p>
       </div>
@@ -89,12 +89,12 @@
         :scale="1.05"
         :duration="4"
       />
-      <div class="relative z-10 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 h-full">
+      <div class="relative z-10 p-6 bg-default rounded-xl shadow-lg border border-default h-full">
         <div class="w-12 h-12 bg-cyan-500 rounded-lg mb-4" />
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+        <h3 class="text-xl font-bold text-highlighted mb-2">
           Flow Horizontal
         </h3>
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           Horizontal linear gradient flow animation
         </p>
       </div>
@@ -108,12 +108,12 @@
         blur="medium"
         :scale="1.05"
       />
-      <div class="relative z-10 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 h-full">
+      <div class="relative z-10 p-6 bg-default rounded-xl shadow-lg border border-default h-full">
         <div class="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg mb-4" />
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+        <h3 class="text-xl font-bold text-highlighted mb-2">
           Static Mode
         </h3>
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           Fixed gradient without animation
         </p>
       </div>

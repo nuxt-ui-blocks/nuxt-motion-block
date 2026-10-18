@@ -4,15 +4,8 @@
       v-model="expandedValue"
       :items="faqs"
     >
-      <template #default="{ open, item }">
-        <span class="flex items-center justify-between gap-4 text-sm font-medium text-highlighted">
-          {{ item.label }}
-          <UIcon
-            name="i-lucide-chevron-down"
-            class="size-4 shrink-0 text-dimmed transition-transform duration-200"
-            :class="open ? 'rotate-180' : ''"
-          />
-        </span>
+      <template #default="{ item }">
+        <span class="text-sm font-medium text-highlighted">{{ item.label }}</span>
       </template>
     </MAccordion>
 

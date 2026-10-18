@@ -13,7 +13,7 @@
         Custom Gradient
       </h3>
     </template>
-    <p class="text-gray-600 dark:text-gray-400 text-sm">
+    <p class="text-muted text-sm">
       Custom color gradient with rounded corners
     </p>
   </UCard>

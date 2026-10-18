@@ -50,7 +50,7 @@
           <div class="flex items-center justify-between">
             <div>
               <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                Active Users
+                Monthly actives
               </p>
               <MAnimatedNumber
                 :value="stats.users"

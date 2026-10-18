@@ -125,12 +125,12 @@ const features = ref([
     icon: 'i-heroicons-chart-bar',
   },
   {
-    title: 'Advanced Analytics',
+    title: 'Deep insights',
     description: 'Gain deep insights into your business performance with our powerful analytics and reporting tools.',
     icon: 'i-heroicons-presentation-chart-bar',
   },
   {
-    title: 'Seamless Integration',
+    title: 'Frictionless setup',
     description: 'Connect with your favorite tools and services through our extensive library of integrations.',
     icon: 'i-heroicons-arrow-path',
   },

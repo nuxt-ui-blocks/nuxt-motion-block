@@ -1,16 +1,16 @@
 <template>
-  <div class="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-    <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">
+  <div class="rounded-lg bg-elevated p-4">
+    <h3 class="mb-4 text-lg font-bold text-highlighted">
       Slow Infinite Slider
     </h3>
     <MInfiniteSlider
       :duration="60"
-      class="gap-6"
+      class-name="gap-6"
     >
       <div
         v-for="i in 8"
         :key="i"
-        class="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-purple-400 to-pink-500 rounded-lg flex items-center justify-center text-white font-bold text-2xl"
+        class="flex h-40 w-40 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-purple-400 to-pink-500 text-2xl font-bold text-white"
       >
         {{ i }}
       </div>

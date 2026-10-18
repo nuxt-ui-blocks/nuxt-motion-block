@@ -1,11 +1,11 @@
 <template>
-  <section class="py-20 bg-white dark:bg-gray-900">
+  <section class="py-20 bg-default">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-highlighted mb-4">
           Powerful Features
         </h2>
-        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        <p class="text-lg text-muted max-w-2xl mx-auto">
           Everything you need to create beautiful, animated interfaces.
         </p>
       </div>
@@ -20,7 +20,7 @@
             :stagger-children="0.1"
           >
             <MGlareCard
-              class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 h-full"
+              class="bg-default rounded-xl p-6 border border-default h-full"
             >
               <div class="w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center mb-4">
                 <UIcon
@@ -28,10 +28,10 @@
                   class="w-6 h-6 text-primary-600 dark:text-primary-400"
                 />
               </div>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              <h3 class="text-xl font-semibold text-highlighted mb-2">
                 {{ feature.title }}
               </h3>
-              <p class="text-gray-600 dark:text-gray-400 mb-4">
+              <p class="text-muted mb-4">
                 {{ feature.description }}
               </p>
               <UButton
@@ -60,7 +60,7 @@ const features = [
     link: '#',
   },
   {
-    title: 'Easy to Customize',
+    title: 'Easy to restyle',
     description: 'Fully customizable components that adapt to your brand and design requirements.',
     icon: 'i-heroicons-adjustments-horizontal',
     link: '#',
@@ -72,19 +72,19 @@ const features = [
     link: '#',
   },
   {
-    title: 'Performance Optimized',
+    title: 'Built for speed',
     description: 'Lightweight components that won\'t slow down your application.',
     icon: 'i-heroicons-bolt',
     link: '#',
   },
   {
-    title: 'Responsive Design',
+    title: 'Adaptive layout',
     description: 'Looks great on all devices from mobile to desktop.',
     icon: 'i-heroicons-device-phone-mobile',
     link: '#',
   },
   {
-    title: 'Developer Friendly',
+    title: 'Coder friendly',
     description: 'Well-documented components with clear examples and TypeScript support.',
     icon: 'i-heroicons-code-bracket',
     link: '#',

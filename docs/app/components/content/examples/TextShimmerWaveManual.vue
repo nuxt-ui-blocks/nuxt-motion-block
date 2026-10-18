@@ -6,7 +6,7 @@
       class="text-xl font-bold"
     />
     <button
-      class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+      class="px-4 py-2 bg-primary/70 text-white rounded hover:bg-primary transition-colors"
       @click="triggerWave"
     >
       Replay Wave Animation

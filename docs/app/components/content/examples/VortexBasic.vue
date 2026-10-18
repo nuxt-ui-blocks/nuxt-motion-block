@@ -12,7 +12,7 @@
       <h2 class="text-3xl font-bold text-white">
         Vortex Effect
       </h2>
-      <p class="text-gray-300 max-w-md mx-auto">
+      <p class="text-dimmed max-w-md mx-auto">
         Create mesmerizing vortex animations that draw users into your content with dynamic spiral motions
       </p>
       <UButton

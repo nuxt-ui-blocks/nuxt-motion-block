@@ -10,7 +10,7 @@
     />
     <template #header>
       <div class="flex items-center justify-between">
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+        <h3 class="text-xl font-bold text-highlighted">
           New Message
         </h3>
         <UBadge color="primary">
@@ -26,13 +26,13 @@
           size="md"
         />
         <div>
-          <h4 class="font-medium text-gray-900 dark:text-white">
+          <h4 class="font-medium text-highlighted">
             Alex Johnson
           </h4>
-          <p class="text-sm text-gray-600 dark:text-gray-400">
+          <p class="text-sm text-muted">
             Hey, are we still meeting tomorrow?
           </p>
-          <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+          <p class="text-xs text-muted mt-1">
             2 min ago
           </p>
         </div>
@@ -45,13 +45,13 @@
           size="md"
         />
         <div>
-          <h4 class="font-medium text-gray-900 dark:text-white">
+          <h4 class="font-medium text-highlighted">
             Sam Wilson
           </h4>
-          <p class="text-sm text-gray-600 dark:text-gray-400">
+          <p class="text-sm text-muted">
             Check out this new design I made
           </p>
-          <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+          <p class="text-xs text-muted mt-1">
             15 min ago
           </p>
         </div>

@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col items-center space-y-10 p-10">
     <div class="text-center max-w-3xl">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+      <h2 class="text-3xl font-bold text-highlighted mb-4">
         Glitch Effect
       </h2>
-      <p class="text-gray-600 dark:text-gray-400 text-lg mb-8">
+      <p class="text-muted text-lg mb-8">
         Add cyberpunk-style glitch effects to your text for a futuristic aesthetic
       </p>
     </div>
@@ -20,12 +20,12 @@
       <UCard class="text-center hover:shadow-xl transition-shadow">
         <UIcon
           name="i-lucide-zap"
-          class="w-10 h-10 text-blue-500 mx-auto mb-4"
+          class="w-10 h-10 text-primary mx-auto mb-4"
         />
         <h3 class="font-bold text-xl mb-2">
           High Energy
         </h3>
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           Dynamic visual effects
         </p>
       </UCard>
@@ -38,7 +38,7 @@
         <h3 class="font-bold text-xl mb-2">
           Futuristic
         </h3>
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           Modern design aesthetic
         </p>
       </UCard>
@@ -51,7 +51,7 @@
         <h3 class="font-bold text-xl mb-2">
           Attention Grabbing
         </h3>
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           Stand out from the crowd
         </p>
       </UCard>

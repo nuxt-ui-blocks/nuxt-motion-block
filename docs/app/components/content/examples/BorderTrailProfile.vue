@@ -19,7 +19,7 @@
         <h3 class="text-xl font-bold">
           John Doe
         </h3>
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           Senior Developer
         </p>
       </div>

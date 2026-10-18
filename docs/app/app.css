@@ -1,0 +1,32 @@
+/*
+ * Docus imports this file automatically. Do not add `@import "tailwindcss"`.
+ * Only declare design tokens here; component styling belongs to Nuxt UI themes.
+ */
+
+@theme {
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --breakpoint-3xl: 1920px;
+}
+
+:root {
+  --ui-radius: 0.5rem;
+  /*
+   * Docus/Nuxt UI declare the default font stack on an *unlayered* :root rule,
+   * which beats our layered @theme tokens in the cascade. Redeclaring here
+   * (same origin, later in source order) is what actually applies Geist.
+   */
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/*
+ * The docs render their own motion toaster (`MToaster`, mounted once in
+ * `AppHeader`). `UApp` always mounts Nuxt UI's stock `UToaster` as well, and
+ * both read the same `useToast()` queue, so hide the stock region to avoid the
+ * same toast rendering twice. `MToaster` marks its region with `.m-toaster`.
+ */
+[role='region'][aria-label^='Notifications']:not(.m-toaster) {
+  display: none !important;
+}

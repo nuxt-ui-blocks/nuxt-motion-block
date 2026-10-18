@@ -2,20 +2,20 @@
   <div class="w-full max-w-4xl mx-auto px-4 py-12">
     <MTracingBeam>
       <div class="mb-12">
-        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h1 class="text-4xl font-bold text-highlighted mb-4">
           The Future of Web Development
         </h1>
-        <p class="text-xl text-gray-600 dark:text-gray-400">
+        <p class="text-xl text-muted">
           Exploring the latest trends and technologies shaping the web development landscape
         </p>
       </div>
 
       <div class="space-y-12">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        <div class="bg-default rounded-xl shadow-lg p-6 border border-default">
+          <h2 class="text-2xl font-bold text-highlighted mb-4">
             Introduction to Modern Frameworks
           </h2>
-          <p class="text-gray-600 dark:text-gray-400 mb-4">
+          <p class="text-muted mb-4">
             The web development landscape has evolved dramatically over the past decade. With the rise of modern frameworks like Vue.js, React, and Angular,
             developers now have powerful tools at their disposal to build complex, interactive applications.
           </p>
@@ -27,10 +27,10 @@
               class="mr-4"
             />
             <div>
-              <p class="font-medium text-gray-900 dark:text-white">
+              <p class="font-medium text-highlighted">
                 Alex Johnson
               </p>
-              <p class="text-sm text-gray-500 dark:text-gray-400">
+              <p class="text-sm text-muted">
                 Senior Developer
               </p>
             </div>
@@ -63,13 +63,13 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        <div class="bg-default rounded-xl shadow-lg p-6 border border-default">
+          <h2 class="text-2xl font-bold text-highlighted mb-4">
             The Rise of Server-Side Rendering
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <p class="text-gray-600 dark:text-gray-400 mb-4">
+              <p class="text-muted mb-4">
                 Server-side rendering (SSR) has become increasingly popular due to its SEO benefits and improved initial load performance.
                 Frameworks like Nuxt.js and Next.js have made SSR more accessible than ever.
               </p>
@@ -97,13 +97,13 @@
                 </li>
               </ul>
             </div>
-            <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 flex items-center justify-center">
+            <div class="bg-muted rounded-lg p-4 flex items-center justify-center">
               <div class="text-center">
                 <UIcon
                   name="i-heroicons-server"
-                  class="w-12 h-12 text-gray-500 dark:text-gray-400 mx-auto mb-2"
+                  class="w-12 h-12 text-muted mx-auto mb-2"
                 />
-                <p class="text-gray-500 dark:text-gray-400">
+                <p class="text-muted">
                   SSR Architecture
                 </p>
               </div>
@@ -111,16 +111,16 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        <div class="bg-default rounded-xl shadow-lg p-6 border border-default">
+          <h2 class="text-2xl font-bold text-highlighted mb-4">
             Conclusion
           </h2>
-          <p class="text-gray-600 dark:text-gray-400 mb-4">
+          <p class="text-muted mb-4">
             As we look toward the future, it's clear that web development will continue to evolve rapidly. Staying current with these trends and
             technologies will be crucial for developers who want to build cutting-edge applications.
           </p>
-          <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-            <p class="text-blue-800 dark:text-blue-200">
+          <div class="mt-6 p-4 bg-primary/5 dark:bg-primary/20 rounded-lg border border-primary/20 dark:border-primary/80">
+            <p class="text-primary">
               <span class="font-semibold">Tip:</span> Consider experimenting with these technologies in your next project to see the benefits firsthand.
             </p>
           </div>

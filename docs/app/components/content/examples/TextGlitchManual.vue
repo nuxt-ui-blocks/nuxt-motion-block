@@ -1,27 +1,26 @@
 <template>
-  <div class="p-4 space-y-4 flex flex-col">
+  <div class="flex flex-col items-center gap-4 p-8">
     <MTextGlitch
-      ref="glitchRef"
+      ref="glitch"
       text="MANUAL"
       trigger="manual"
+      intensity="extreme"
+      :duration="1"
+      auto-start
+      class="text-5xl font-black"
     />
-    <button
-      class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-      @click="triggerGlitch"
+    <UButton
+      color="primary"
+      variant="subtle"
+      @click="glitch?.trigger()"
     >
-      Trigger Glitch
-    </button>
+      Trigger glitch
+    </UButton>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 
-const glitchRef = ref(null)
-
-const triggerGlitch = () => {
-  if (glitchRef.value) {
-    glitchRef.value.trigger()
-  }
-}
+const glitch = ref()
 </script>

@@ -15,11 +15,11 @@
     </template>
 
     <div class="text-center space-y-4">
-      <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 mx-auto" />
+      <div class="bg-accented border-2 border-dashed rounded-xl w-16 h-16 mx-auto" />
       <h3 class="text-xl font-bold text-white">
         Premium Widget
       </h3>
-      <p class="text-slate-400">
+      <p class="text-dimmed">
         High-quality widget with advanced features and durable construction.
       </p>
       <div class="flex justify-between items-center">
@@ -34,7 +34,7 @@
     </div>
 
     <template #footer>
-      <div class="flex justify-between text-sm text-slate-400">
+      <div class="flex justify-between text-sm text-dimmed">
         <span>4.8 ★</span>
         <span>128 reviews</span>
       </div>

@@ -13,7 +13,7 @@
       <h2 class="text-3xl font-bold text-white">
         Vortex Effect
       </h2>
-      <p class="text-lg text-gray-300">
+      <p class="text-lg text-dimmed">
         Animated particle vortex with customizable parameters
       </p>
     </div>

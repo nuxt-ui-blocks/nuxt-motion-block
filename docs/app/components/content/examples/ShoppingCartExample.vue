@@ -244,6 +244,8 @@
 </template>
 
 <script setup lang="ts">
+const toast = useToast()
+
 const promoCode = ref('')
 const applyingPromo = ref(false)
 const promoValid = ref(false)
@@ -345,7 +347,7 @@ const applyPromoCode = async () => {
 
 const checkout = () => {
   // In a real app, this would redirect to checkout page
-  useToast().add({
+  toast.add({
     title: 'Checkout',
     description: 'Proceeding to secure checkout...',
     icon: 'i-heroicons-credit-card',

@@ -1,22 +1,22 @@
 <template>
   <div class="p-8 max-w-lg mx-auto">
     <div class="text-center mb-12">
-      <h3 class="text-3xl font-bold mb-3 text-gray-900 dark:text-white">
+      <h3 class="text-3xl font-bold mb-3 text-highlighted">
         Performance Metrics
       </h3>
-      <p class="text-gray-600 dark:text-gray-400 text-lg">
+      <p class="text-muted text-lg">
         Real-time statistics with smooth sliding animations
       </p>
     </div>
 
     <div class="space-y-8">
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
+      <div class="bg-default rounded-xl shadow-xl p-6 border border-default">
         <div class="flex justify-between items-center mb-4">
           <div>
-            <h4 class="font-bold text-gray-900 dark:text-white">
+            <h4 class="font-bold text-highlighted">
               Response Time
             </h4>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
+            <p class="text-sm text-muted">
               Milliseconds
             </p>
           </div>
@@ -27,10 +27,10 @@
             ms
           </UBadge>
         </div>
-        <div class="text-5xl font-bold text-gray-900 dark:text-white">
+        <div class="text-5xl font-bold text-highlighted">
           <MSlidingNumber :value="responseTime" />
         </div>
-        <div class="mt-2 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+        <div class="mt-2 h-2 bg-accented rounded-full overflow-hidden">
           <div
             class="h-full bg-primary rounded-full"
             :style="{ width: `${Math.min(100, responseTime / 5)}%` }"
@@ -38,13 +38,13 @@
         </div>
       </div>
 
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
+      <div class="bg-default rounded-xl shadow-xl p-6 border border-default">
         <div class="flex justify-between items-center mb-4">
           <div>
-            <h4 class="font-bold text-gray-900 dark:text-white">
+            <h4 class="font-bold text-highlighted">
               Uptime
             </h4>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
+            <p class="text-sm text-muted">
               Service availability
             </p>
           </div>
@@ -55,13 +55,13 @@
             %
           </UBadge>
         </div>
-        <div class="text-5xl font-bold text-gray-900 dark:text-white">
+        <div class="text-5xl font-bold text-highlighted">
           <MSlidingNumber
             :value="uptime"
-            :decimal-places="1"
+            :precision="1"
           />
         </div>
-        <div class="mt-2 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+        <div class="mt-2 h-2 bg-accented rounded-full overflow-hidden">
           <div
             class="h-full bg-green-500 rounded-full"
             :style="{ width: `${uptime}%` }"
@@ -69,23 +69,23 @@
         </div>
       </div>
 
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 border border-gray-200 dark:border-gray-700">
+      <div class="bg-default rounded-xl shadow-xl p-6 border border-default">
         <div class="flex justify-between items-center mb-4">
           <div>
-            <h4 class="font-bold text-gray-900 dark:text-white">
-              Active Users
+            <h4 class="font-bold text-highlighted">
+              Monthly actives
             </h4>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
+            <p class="text-sm text-muted">
               Current online
             </p>
           </div>
         </div>
-        <div class="text-5xl font-bold text-gray-900 dark:text-white">
+        <div class="text-5xl font-bold text-highlighted">
           <MSlidingNumber :value="activeUsers" />
         </div>
-        <div class="mt-2 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+        <div class="mt-2 h-2 bg-accented rounded-full overflow-hidden">
           <div
-            class="h-full bg-blue-500 rounded-full"
+            class="h-full bg-primary/70 rounded-full"
             :style="{ width: `${Math.min(100, activeUsers / 2000 * 100)}%` }"
           />
         </div>

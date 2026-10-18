@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-full max-w-sm flex-col gap-4">
-    <div class="flex min-h-32 items-center justify-center rounded-xl bg-black/5 p-6 dark:bg-white/5">
+    <div class="flex min-h-32 items-center justify-center rounded-xl bg-black/5 p-6">
       <MSiriOrb
         :state="state"
         size="120px"

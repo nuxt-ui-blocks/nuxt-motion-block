@@ -1,5 +1,5 @@
 <template>
-  <div class="relative h-80 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+  <div class="relative h-80 rounded-xl overflow-hidden border border-default">
     <MDottedGlowBackground
       :gap="15"
       :radius="2"
@@ -14,10 +14,10 @@
           />
         </div>
       </div>
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+      <h2 class="text-3xl font-bold text-highlighted mb-4">
         Dotted Glow
       </h2>
-      <p class="text-gray-700 dark:text-gray-300 max-w-md mb-6">
+      <p class="text-default max-w-md mb-6">
         Subtle glowing dot patterns that create depth and visual interest in your backgrounds
       </p>
       <UButton

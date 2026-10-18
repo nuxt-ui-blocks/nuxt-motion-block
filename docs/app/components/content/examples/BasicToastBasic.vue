@@ -17,12 +17,9 @@
     </p>
 
     <MBasicToast
-      :key="run"
       :message="message"
       :type="type"
       :is-visible="isVisible"
-      role="status"
-      aria-live="polite"
       @update:is-visible="isVisible = $event"
     />
   </div>
@@ -48,17 +45,15 @@ const copy: Record<ToastKind, string> = {
 const type = ref<ToastKind>('info')
 const message = ref(copy.info)
 const isVisible = ref(true)
-const run = ref(0)
 
 function show(next: ToastKind) {
   type.value = next
   message.value = copy[next]
   isVisible.value = false
+  // Flipping the flag back to true in the same tick would be swallowed by the
+  // watcher; letting the `false` settle first re-adds the toast with a fresh
+  // timer.
   nextTick(() => {
-    // Remounting restarts the internal timer, which `isVisible` flipping back to
-    // true on its own would not do — the timer only starts on mount and on
-    // change.
-    run.value++
     isVisible.value = true
   })
 }

@@ -1,10 +1,10 @@
 <template>
   <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 rounded-xl max-w-2xl mx-auto">
     <div class="text-center mb-8">
-      <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+      <h3 class="text-2xl font-bold mb-3 text-highlighted">
         Proximity Effect
       </h3>
-      <p class="text-gray-600 dark:text-gray-400">
+      <p class="text-muted">
         Interactive text that responds to cursor proximity for engaging user experiences
       </p>
     </div>
@@ -14,8 +14,7 @@
       href="https://rsms.me/inter/inter.css"
     >
     <div
-      ref="containerRef"
-      class="relative p-8 bg-white dark:bg-gray-800 rounded-lg shadow"
+      class="relative p-8 bg-default rounded-lg shadow"
       style="font-family: 'Inter var', 'Inter', sans-serif;"
     >
       <MVariableProximity
@@ -25,7 +24,7 @@
       />
 
       <div class="mt-6 text-center">
-        <p class="text-gray-600 dark:text-gray-400 text-sm">
+        <p class="text-muted text-sm">
           Move your cursor around the text to see the proximity effect in action
         </p>
       </div>
@@ -45,9 +44,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const containerRef = ref(null)
-</script>

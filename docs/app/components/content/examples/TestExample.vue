@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-blue-100 dark:bg-blue-900 rounded-lg">
+  <div class="p-4 bg-primary/10 dark:bg-primary/70 rounded-lg">
     <h2 class="text-2xl font-bold mb-4">
       Test Example
     </h2>

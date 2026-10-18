@@ -10,7 +10,7 @@
           <h3 class="font-bold text-lg mb-2">
             Anchor Slot
           </h3>
-          <p class="text-gray-600 dark:text-gray-400">
+          <p class="text-muted">
             This popover uses the anchor slot.
           </p>
         </div>

@@ -5,7 +5,7 @@
         <div class="space-y-3">
           <UIcon
             name="i-heroicons-computer-desktop"
-            class="w-8 h-8 text-blue-400"
+            class="w-8 h-8 text-primary"
           />
           <h3 class="text-2xl font-bold">
             Web Development

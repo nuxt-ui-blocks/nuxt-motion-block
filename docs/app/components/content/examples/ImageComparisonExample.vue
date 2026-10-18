@@ -12,7 +12,7 @@
         position="right"
       />
       <MImageComparisonSlider>
-        <div class="text-xs font-medium text-gray-900 bg-white px-2 py-1 rounded absolute -top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+        <div class="text-xs font-medium text-highlighted bg-default px-2 py-1 rounded absolute -top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
           Drag to compare
         </div>
       </MImageComparisonSlider>

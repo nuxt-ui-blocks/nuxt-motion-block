@@ -11,10 +11,10 @@
     />
 
     <div class="relative z-10 py-12">
-      <UCard class="max-w-2xl mx-auto backdrop-blur-sm bg-white/80 dark:bg-gray-900/80">
+      <UCard class="max-w-2xl mx-auto backdrop-blur-sm bg-default/80">
         <template #header>
           <div class="flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+            <h1 class="text-2xl font-bold text-highlighted">
               Welcome to Nuxt UI
             </h1>
             <UColorModeButton />

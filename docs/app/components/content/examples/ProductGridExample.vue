@@ -166,6 +166,8 @@
 </template>
 
 <script setup lang="ts">
+const toast = useToast()
+
 const searchQuery = ref('')
 const categoryFilter = ref('')
 const sortOption = ref('')
@@ -343,7 +345,7 @@ const addToCart = (product: any) => {
   // In a real app, this would add to cart state
   console.log('Added to cart:', product.name)
   // Show notification
-  useToast().add({
+  toast.add({
     title: 'Added to cart',
     description: `${product.name} has been added to your cart`,
     icon: 'i-heroicons-shopping-cart',

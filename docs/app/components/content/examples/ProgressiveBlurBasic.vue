@@ -1,10 +1,10 @@
 <template>
   <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 rounded-xl max-w-2xl mx-auto">
     <div class="text-center mb-6">
-      <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+      <h3 class="text-2xl font-bold mb-3 text-highlighted">
         Progressive Blur
       </h3>
-      <p class="text-gray-600 dark:text-gray-400">
+      <p class="text-muted">
         Create depth and focus effects with progressive blur that intensifies towards the edges
       </p>
     </div>
@@ -25,7 +25,7 @@
           <h4 class="font-bold text-white">
             Mountain Landscape
           </h4>
-          <p class="text-gray-300 text-sm">
+          <p class="text-dimmed text-sm">
             Focus effect with progressive blur
           </p>
         </div>

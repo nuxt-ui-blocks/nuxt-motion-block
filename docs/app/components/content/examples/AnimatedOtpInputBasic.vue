@@ -4,7 +4,7 @@
       <p class="text-sm font-medium text-highlighted">
         Verification code
       </p>
-      <MAnimatedOtpInput
+      <MAnimatedOTPInput
         v-model="code"
         :length="6"
         @complete="onComplete"

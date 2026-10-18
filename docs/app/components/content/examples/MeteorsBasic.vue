@@ -13,7 +13,7 @@
       <h2 class="text-4xl font-bold text-white mb-6">
         Meteor Shower
       </h2>
-      <p class="text-gray-300 max-w-md mb-8 text-lg">
+      <p class="text-dimmed max-w-md mb-8 text-lg">
         Create stunning meteor effects that streak across your interface for a cosmic user experience
       </p>
       <div class="flex flex-col sm:flex-row gap-4">

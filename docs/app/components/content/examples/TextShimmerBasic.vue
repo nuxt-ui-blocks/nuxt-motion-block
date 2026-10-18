@@ -11,7 +11,7 @@
         text="Create stunning interfaces with our collection of animated components"
         :duration="3"
         :spread="1.5"
-        class="text-xl text-gray-600 dark:text-gray-300"
+        class="text-xl text-muted"
       />
     </div>
 
@@ -19,13 +19,13 @@
       <UCard class="text-center">
         <UIcon
           name="i-lucide-zap"
-          class="w-12 h-12 text-blue-500 mx-auto mb-4"
+          class="w-12 h-12 text-primary mx-auto mb-4"
         />
         <h3 class="text-lg font-semibold mb-2">
-          Lightning Fast
+          Blazing quick
         </h3>
-        <p class="text-gray-600 dark:text-gray-400 text-sm">
-          Optimized for performance
+        <p class="text-muted text-sm">
+          Tuned for speed
         </p>
       </UCard>
 
@@ -37,7 +37,7 @@
         <h3 class="text-lg font-semibold mb-2">
           Beautiful Effects
         </h3>
-        <p class="text-gray-600 dark:text-gray-400 text-sm">
+        <p class="text-muted text-sm">
           Stunning animations
         </p>
       </UCard>
@@ -48,10 +48,10 @@
           class="w-12 h-12 text-green-500 mx-auto mb-4"
         />
         <h3 class="text-lg font-semibold mb-2">
-          Easy Integration
+          Plug-in ready
         </h3>
-        <p class="text-gray-600 dark:text-gray-400 text-sm">
-          Simple to implement
+        <p class="text-muted text-sm">
+          Quick to add
         </p>
       </UCard>
     </div>

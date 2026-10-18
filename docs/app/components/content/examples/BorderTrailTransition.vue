@@ -13,7 +13,7 @@
         Slow Animation
       </h3>
     </template>
-    <p class="text-gray-600 dark:text-gray-400 text-sm">
+    <p class="text-muted text-sm">
       Slower, smoother transition effect
     </p>
   </UCard>

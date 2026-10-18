@@ -20,7 +20,7 @@
     <div class="grid grid-cols-2 gap-3">
       <USelect
         v-model="color"
-        :items="['#6366f1', '#f43f5e', '#22c55e', '#f59e0b']"
+        :items="colorItems"
       />
       <USelect
         v-model="decay"
@@ -56,10 +56,17 @@
 <script setup lang="ts">
 const cursor = ref<{ clear: () => void } | null>(null)
 const run = ref(0)
-const color = ref('#6366f1')
+const color = ref('primary')
 const lineWidth = ref(3)
 const decay = ref(1200)
 const taper = ref(true)
+
+const colorItems = [
+  { label: 'Primary', value: 'primary' },
+  { label: 'Success', value: 'success' },
+  { label: 'Warning', value: 'warning' },
+  { label: 'Error', value: 'error' },
+]
 
 const decayItems = [
   { label: 'Ink that lingers', value: 0 },

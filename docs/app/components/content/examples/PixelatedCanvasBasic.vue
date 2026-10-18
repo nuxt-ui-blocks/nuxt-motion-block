@@ -1,15 +1,15 @@
 <template>
   <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 rounded-xl max-w-2xl mx-auto">
     <div class="text-center mb-6">
-      <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+      <h3 class="text-2xl font-bold mb-3 text-highlighted">
         Pixelated Canvas
       </h3>
-      <p class="text-gray-600 dark:text-gray-400">
+      <p class="text-muted">
         Retro-style pixelated images with customizable pixel sizes for nostalgic effects
       </p>
     </div>
 
-    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow flex justify-center">
+    <div class="bg-default rounded-lg p-4 shadow flex justify-center">
       <MPixelatedCanvas
         src="https://picsum.photos/400/300"
         :width="400"

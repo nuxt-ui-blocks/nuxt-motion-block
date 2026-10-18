@@ -3,7 +3,7 @@
     <MStaggerFromCenter
       class="text-2xl font-semibold"
       :stagger="0"
-      text="No stagger"
+      text="Without stagger"
     />
     <MStaggerFromCenter
       class="text-2xl font-semibold"

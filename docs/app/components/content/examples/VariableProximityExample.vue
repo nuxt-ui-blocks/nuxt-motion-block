@@ -1,6 +1,6 @@
 <template>
-  <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
-    <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">
+  <div class="p-6 bg-elevated rounded-lg">
+    <h3 class="text-lg font-bold mb-4 text-highlighted">
       Variable Proximity
     </h3>
     <link
@@ -8,7 +8,6 @@
       href="https://rsms.me/inter/inter.css"
     >
     <div
-      ref="containerRef"
       class="relative"
       style="font-family: 'Inter var', 'Inter', sans-serif;"
     >
@@ -23,9 +22,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const containerRef = ref(null)
-</script>

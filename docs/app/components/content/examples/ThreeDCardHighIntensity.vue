@@ -10,7 +10,7 @@
       </template>
 
       <M3DItem :translate-z="25">
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           This card has a more pronounced 3D effect.
         </p>
       </M3DItem>

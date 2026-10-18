@@ -1,11 +1,11 @@
 <template>
   <div class="p-6 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 rounded-xl max-w-md mx-auto">
-    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow mb-6">
+    <div class="bg-default rounded-lg p-6 shadow mb-6">
       <div class="text-center">
-        <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">
+        <div class="text-sm text-muted mb-1">
           Current Count
         </div>
-        <div class="text-4xl font-bold text-blue-600 dark:text-blue-400">
+        <div class="text-4xl font-bold text-primary">
           <MAnimatedNumber
             :value="count"
             :spring-options="{ stiffness: 150, damping: 20 }"

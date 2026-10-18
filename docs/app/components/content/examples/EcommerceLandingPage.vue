@@ -1017,7 +1017,7 @@ const footerLinks = [
       { label: 'Women', to: '#' },
       { label: 'Men', to: '#' },
       { label: 'Accessories', to: '#' },
-      { label: 'New Arrivals', to: '#' },
+      { label: 'Fresh Drops', to: '#' },
       { label: 'Sale', to: '#' },
     ],
   },

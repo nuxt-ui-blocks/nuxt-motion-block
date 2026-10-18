@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center p-8 bg-gray-900 rounded-lg">
+  <div class="flex justify-center p-8 bg-accented rounded-lg">
     <MTextGlitchNew text="NEW GLITCH" />
   </div>
 </template>
