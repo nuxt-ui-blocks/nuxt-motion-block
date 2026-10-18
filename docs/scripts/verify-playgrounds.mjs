@@ -33,7 +33,7 @@ for (const file of files) {
 }
 
 async function pool(items, size, worker, onDone) {
-  const results = new Array(items.length)
+  const results = Array.from({ length: items.length })
   let next = 0
   let done = 0
   async function run() {
@@ -50,7 +50,6 @@ async function pool(items, size, worker, onDone) {
 
 const runnable = targets.filter(t => !t.skip)
 console.log(`Warming up ${runnable.length} routes...`)
-let warm = 0
 await pool(runnable, 8, async (t) => {
   try {
     const ctrl = new AbortController()
@@ -58,8 +57,12 @@ await pool(runnable, 8, async (t) => {
     await fetch(t.url, { signal: ctrl.signal })
     clearTimeout(timer)
   }
-  catch {}
-}, (d) => { warm = d; if (d % 20 === 0) console.log(`  warm ${d}/${runnable.length}`) })
+  catch {
+    // Warm-up failures are non-fatal; the verification pass reports real errors.
+  }
+}, (d) => {
+  if (d % 20 === 0) console.log(`  warm ${d}/${runnable.length}`)
+})
 console.log('Warm-up done.')
 console.log(`Verifying ${runnable.length} playground pages (skipping ${targets.length - runnable.length})...`)
 
@@ -70,8 +73,10 @@ let lastLog = 0
 const results = await pool(runnable, 4, async (target) => {
   const page = await context.newPage()
   const errors = []
-  const onConsole = (msg) => { if (msg.type() === 'error') errors.push(`console: ${msg.text().slice(0, 160)}`) }
-  const onPageError = (err) => errors.push(`pageerror: ${String(err).slice(0, 160)}`)
+  const onConsole = (msg) => {
+    if (msg.type() === 'error') errors.push(`console: ${msg.text().slice(0, 160)}`)
+  }
+  const onPageError = err => errors.push(`pageerror: ${String(err).slice(0, 160)}`)
   page.on('console', onConsole)
   page.on('pageerror', onPageError)
   try {
@@ -80,11 +85,11 @@ const results = await pool(runnable, 4, async (target) => {
     const info = await page.evaluate(() => {
       const codeEl = document.querySelector('[data-playground-code]')
       const pre = codeEl ? codeEl.querySelector('pre') : null
-      const code = pre ? pre.innerText : (codeEl ? codeEl.innerText : '')
+      const code = pre ? pre.textContent : (codeEl ? codeEl.textContent : '')
       return {
         hasCode: !!codeEl,
         empty: !!document.querySelector('[data-playground-code-empty]'),
-        notRegistered: document.body.innerText.includes('is not registered for the playground yet'),
+        notRegistered: document.body.textContent.includes('is not registered for the playground yet'),
         code,
       }
     })

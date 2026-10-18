@@ -283,5 +283,4 @@ function escapeHtml(value: string) {
 .code-body.code-body--numbered {
   padding-left: 4rem;
 }
-
 </style>
