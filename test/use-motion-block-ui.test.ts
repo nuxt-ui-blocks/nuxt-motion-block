@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { defineComponent, h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { useMotionBlockUI } from '../src/runtime/composables/useMotionBlockUI'
-import { aiDiff, dynamicIsland } from '../src/runtime/theme'
+import { codeBlock, dynamicIsland } from '../src/runtime/theme'
 import { appConfig } from './stubs/imports'
 
 function withSetup<T>(composable: () => T): { result: T, unmount: () => void } {
@@ -48,12 +48,12 @@ describe('useMotionBlockUI', () => {
 
   it('applies tv variants', () => {
     const { result, unmount } = withSetup(() => useMotionBlockUI({
-      name: 'aiDiff',
+      name: 'codeBlock',
       props: {} as any,
-      theme: aiDiff,
+      theme: codeBlock,
     }))
 
-    const line = result.ui.value.line({ kind: 'added', class: 'y' })
+    const line = result.ui.value.diffLine({ kind: 'added', class: 'y' })
     expect(line).toContain('flex gap-3 px-3')
     expect(line).toContain('bg-[oklch(72%_0.17_150_/_0.12)]')
     expect(line).toContain('y')
