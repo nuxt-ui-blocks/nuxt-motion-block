@@ -17,7 +17,7 @@ export default defineAppConfig({
   },
   github: {
     url: 'https://github.com/nuxt-ui-blocks/nuxt-motion-block',
-    branch: 'feat/docs-docus-rebuild',
+    branch: 'master',
     rootDir: 'docs',
   },
   toc: {
