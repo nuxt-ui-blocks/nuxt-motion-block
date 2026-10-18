@@ -40,7 +40,7 @@ for (const fp of targets) {
     // sections render live code via `<PlaygroundCode>` (no fence), so the next
     // `\`\`\`vue` may belong to a later section — bail when the slot has closed.
     const seg = src.slice(m.index, fenceIdx)
-    const closed = /(^|\r?\n)::[ \t]*(\r?\n|$)/.test(seg) || /(^|\r?\n)##[ \t]/.test(seg)
+    const closed = /(?:^|\r?\n)::[ \t]*(?:\r?\n|$)/.test(seg) || /(?:^|\r?\n)##[ \t]/.test(seg)
     if (!seg.includes('#code') || closed) continue
     const bodyStart = src.indexOf('\n', fenceIdx) + 1
     const closeIdx = src.indexOf('```', bodyStart)

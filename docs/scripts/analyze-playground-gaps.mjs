@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, statSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { resolve, join } from 'node:path'
 
 const repoRoot = resolve(import.meta.dirname, '..', '..')
