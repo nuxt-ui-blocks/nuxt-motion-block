@@ -24,7 +24,7 @@
             Fade-in-Blur Preset
           </h2>
           <MTextEffect
-            children="Animated Text Effect"
+            children="Animated Text motion"
             per="word"
             preset="fade-in-blur"
             :delay="0.3"
@@ -58,7 +58,7 @@
             Slide Preset
           </h2>
           <MTextEffect
-            children="Slide Up Effect"
+            children="Rise in Effect"
             per="word"
             preset="slide"
           />

@@ -38,8 +38,8 @@
       </template>
 
       <p class="mb-4 text-muted text-sm">
-        Two locally-served icons, custom <code>title</code>, and a custom
-        <code>class</code> on the outer column.
+        Custom apps built from Nuxt UI icons, a custom <code>title</code>, and
+        a custom <code>class</code> on the outer column.
       </p>
 
       <div class="mx-auto max-w-sm">
@@ -123,23 +123,15 @@
 import { computed, reactive, ref } from 'vue'
 
 /**
- * Data-URI icons so the demo never depends on the reference's remote
- * imagekit host being reachable. `name` doubles as the accessible name the
- * component puts on the `alt` of both the stack icon and the grid tile.
+ * Nuxt UI icon names, so the demo needs no remote assets. `name` doubles as the
+ * accessible name the component puts on the label of both the stack icon and
+ * the grid tile.
  */
-function icon(color: string, glyph: string) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">`
-    + `<rect width="64" height="64" rx="14" fill="${color}"/>`
-    + `<text x="32" y="42" font-family="ui-sans-serif,system-ui,sans-serif" font-size="28" font-weight="700" fill="#fff" text-anchor="middle">${glyph}</text>`
-    + `</svg>`
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`
-}
-
 const localApps = [
-  { icon: icon('#f97316', 'A'), id: 1, name: 'Acorn' },
-  { icon: icon('#22c55e', 'B'), id: 2, name: 'Basalt' },
-  { icon: icon('#3b82f6', 'C'), id: 3, name: 'Cobalt' },
-  { icon: icon('#a855f7', 'D'), id: 4, name: 'Dune' },
+  { icon: 'i-lucide-nut', id: 1, name: 'Acorn' },
+  { icon: 'i-lucide-mountain', id: 2, name: 'Basalt' },
+  { icon: 'i-lucide-hexagon', id: 3, name: 'Cobalt' },
+  { icon: 'i-lucide-sun', id: 4, name: 'Dune' },
 ]
 
 const expanded = ref(true)

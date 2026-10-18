@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-const seed = ref('motion-primitives')
+const seed = ref('nuxt-motion-block')
 const size = ref(220)
 const animated = ref(true)
 
-const presets = ['motion-primitives', 'nuxt-motion-block', 'smoothui', 'flux capacitor']
+const presets = ['nuxt-motion-block', 'aurora', 'design-system', 'flux capacitor']
 
 const frames = computed(() => size.value * 2)
 </script>

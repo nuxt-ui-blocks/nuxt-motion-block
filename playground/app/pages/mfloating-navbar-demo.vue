@@ -8,7 +8,7 @@
       </template>
 
       <div class="space-y-4">
-        <p class="text-muted-foreground">
+        <p class="text-muted">
           Scroll down to see the floating navbar appear. It slides up when scrolling down and slides down when scrolling up.
         </p>
       </div>
@@ -46,13 +46,13 @@
           <h2 class="text-xl font-semibold mb-2">
             Section {{ section }}
           </h2>
-          <p class="text-muted-foreground leading-relaxed">
+          <p class="text-muted leading-relaxed">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
             exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
             dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
           </p>
-          <p class="text-muted-foreground leading-relaxed mt-2">
+          <p class="text-muted leading-relaxed mt-2">
             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
             mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit
             voluptatem accusantium doloremque laudantium, totam rem aperiam.

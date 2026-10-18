@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="MaskRevealUp"
-      description="Lines rise out of their own clipping box. Translated from smoothui's mask-reveal-up."
+      description="Lines rise out of their own clipping box."
     />
 
     <UCard>

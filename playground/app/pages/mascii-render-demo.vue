@@ -1,4 +1,4 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import { computed, ref } from 'vue'
 
 /**
@@ -47,7 +47,7 @@ const charsets = [
   { label: 'Standard ramp', value: '@%#*+=-:. ' },
   { label: 'Blocks', value: 'â–ˆâ–“â–’â–‘ ' },
   { label: 'Binary', value: '01 ' },
-  { label: 'Dense ramp', value: '$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,"^`\'. ' },
+  { label: 'Steep ramp', value: '$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,"^`\'. ' },
 ]
 
 const charsetOptions = ref(charsets[0]!.value)

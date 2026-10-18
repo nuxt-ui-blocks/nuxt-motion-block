@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="MusicToggle"
-      description="Port of smoothui's music-toggle. A vinyl record that spins while playing, wrapped in a progress ring, a keyboard seek target and a mirrored waveform."
+      description="A vinyl record that spins while playing, wrapped in a progress ring, a keyboard seek target and a mirrored waveform."
     />
 
     <UCard>
@@ -24,7 +24,7 @@
           :on-playing-change="onPlayingChange"
           :on-seek="onSeek"
           :progress="progress"
-          :title="'Midnight Drive'"
+          :title="'Night Ride'"
           artist="Nova Kinetic"
           default-playing
         />

@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="SiriOrb"
-      description="A state-reactive orb. One prop picks a motion motif, a bloom strength, a saturation and a base scale; another, `amplitude`, lets a live audio level tighten the gradient. Translated from smoothui's siri-orb."
+      description="A state-reactive orb. One prop picks a motion motif, a bloom strength, a saturation and a base scale; another, `amplitude`, lets a live audio level tighten the gradient."
     />
 
     <UCard>

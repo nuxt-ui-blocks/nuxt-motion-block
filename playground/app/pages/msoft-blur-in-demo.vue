@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="SoftBlurIn"
-      description="Characters drift upward out of a wide blur and resolve into focus. Translated from smoothui's soft-blur-in."
+      description="Characters drift upward out of a wide blur and resolve into focus."
     />
 
     <UCard>

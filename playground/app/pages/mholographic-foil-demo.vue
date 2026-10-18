@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-6 p-6">
     <UPageHeader
-      title="Holographic Foil"
-      description="A card whose surface picks up a travelling foil, sheen and glare, tilting toward the pointer. Translated from smoothui's holographic-foil."
+      title="Iridescent foil"
+      description="A card whose surface picks up a travelling foil, sheen and glare, tilting toward the pointer."
     />
 
     <UCard>
@@ -289,7 +289,7 @@ const tracksPointer = computed(() => reducedMotion.value !== true && hoverCapabl
  * An earlier version of this readout mirrored the component's gate, which
  * looked like evidence about the component but was only an independent
  * estimate: the component keeps its own grant state, so clicking its own
- * "Enable tilt" button flipped the card while this still read `prompt`.
+ * "Turn on tilt" button flipped the card while this still read `prompt`.
  * Reading another component's private setup state is fragile, and this page
  * otherwise deliberately reports observable consequences, so the readout now
  * sticks to the one thing the page genuinely knows — whether the API needs a

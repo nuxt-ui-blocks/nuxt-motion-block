@@ -37,7 +37,7 @@
               type="button"
               :data-id="tab.id"
               :data-testid="`tab-${tab.id}`"
-              :class="activeId === tab.id ? 'text-primary-foreground' : 'text-muted hover:text-highlighted'"
+              :class="activeId === tab.id ? 'text-inverted' : 'text-muted hover:text-highlighted'"
               class="rounded-lg px-4 py-2 text-sm font-medium transition-colors"
             >
               {{ tab.label }}
@@ -117,7 +117,7 @@
               type="button"
               :data-id="tab.id"
               :data-testid="`hover-tab-${tab.id}`"
-              :class="activeId === tab.id ? 'text-secondary-foreground' : 'text-muted hover:text-highlighted'"
+              :class="activeId === tab.id ? 'text-inverted' : 'text-muted hover:text-highlighted'"
               class="rounded-lg px-4 py-2 text-sm font-medium transition-colors"
             >
               {{ tab.label }}

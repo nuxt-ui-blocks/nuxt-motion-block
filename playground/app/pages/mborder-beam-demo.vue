@@ -137,7 +137,7 @@ const beamCounts = [1, 2, 3, 4]
           />
           <USwitch
             v-model="pauseOnHover"
-            label="Pause on hover"
+            label="Pause while hovering"
           />
         </div>
       </div>

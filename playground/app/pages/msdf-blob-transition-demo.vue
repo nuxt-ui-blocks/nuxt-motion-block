@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="SdfBlobTransition"
-      description="Metaball shapes sweep over changing content. Translated from smoothui's sdf-blob-transition."
+      description="Metaball shapes sweep over changing content."
     />
 
     <UCard>
@@ -208,12 +208,12 @@ const panels = [
   {
     body: 'A slide deck advance, a route change, a tab switch.',
     surfaceClass: 'bg-[oklch(0.93_0.05_330)] dark:bg-[oklch(0.36_0.11_330)]',
-    title: 'Panel one',
+    title: 'Left panel',
   },
   {
     body: 'The same box, a different state, covered by the sweep.',
     surfaceClass: 'bg-[oklch(0.93_0.06_200)] dark:bg-[oklch(0.36_0.1_200)]',
-    title: 'Panel two',
+    title: 'Right panel',
   },
 ]
 

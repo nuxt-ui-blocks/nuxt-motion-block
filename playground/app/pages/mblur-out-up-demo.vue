@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="BlurOutUp"
-      description="Words rise out of a blur, one after another. Translated from smoothui's blur-out-up."
+      description="Words rise out of a blur, one after another."
     />
 
     <UCard>

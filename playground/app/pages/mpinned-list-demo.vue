@@ -4,14 +4,14 @@ import { ref } from 'vue'
 const MAX_PINNED = 4
 
 const items = [
-  { id: 'conv-nadia', title: 'Nadia Ferreira', meta: '"Numbers are in — they look good."', icon: 'i-lucide-message-circle' },
-  { id: 'team-launch', title: 'Launch War Room', meta: '8 members · active now', icon: 'i-lucide-rocket' },
-  { id: 'doc-roadmap', title: 'Q3 Roadmap Draft', meta: 'Edited yesterday by Hiro', icon: 'i-lucide-file-text' },
+  { id: 'conv-nadia', title: 'Priya Nair', meta: '"Numbers are in — they look good."', icon: 'i-lucide-message-circle' },
+  { id: 'team-launch', title: 'Launch Command Center', meta: '8 members · active now', icon: 'i-lucide-rocket' },
+  { id: 'doc-roadmap', title: 'Plan draft', meta: 'Edited today by Lena', icon: 'i-lucide-file-text' },
   { id: 'pr-registry', title: 'feat: registry bundling', meta: '#482 · 2 approvals, 1 change requested', icon: 'i-lucide-git-pull-request' },
-  { id: 'design-tokens', title: 'Design tokens · v4', meta: '3 new comments', icon: 'i-lucide-figma' },
-  { id: 'conv-hiro', title: 'Hiro Tanaka', meta: '"Shipping the fix tonight."', icon: 'i-lucide-star' },
-  { id: 'team-support', title: 'Customer Support', meta: '12 members · 4 unread', icon: 'i-lucide-users' },
-  { id: 'chan-announcements', title: 'Announcements', meta: 'Last post 3h ago', icon: 'i-lucide-megaphone' },
+  { id: 'design-tokens', title: 'Style tokens · v4', meta: '3 new comments', icon: 'i-lucide-figma' },
+  { id: 'conv-hiro', title: 'Kenji Sato', meta: '"Shipping the fix tonight."', icon: 'i-lucide-star' },
+  { id: 'team-support', title: 'Support Desk', meta: '12 members · 4 unread', icon: 'i-lucide-users' },
+  { id: 'chan-announcements', title: 'Announcements', meta: 'Posted 2h ago', icon: 'i-lucide-megaphone' },
 ]
 
 const DEFAULT_PINNED = ['conv-nadia', 'team-launch', 'doc-roadmap']
@@ -40,8 +40,8 @@ const handlePinnedChange = (ids: string[]) => {
           :items="items"
           :pinned-ids="pinned"
           :max-pinned="MAX_PINNED"
-          empty-pinned-message="Nothing pinned — pin a row to keep it up here."
-          label="Inbox items"
+          empty-pinned-message="Nothing pinned yet — pin a row to keep it at the top."
+          label="Inbox rows"
           show-divider
           @update:pinned="handlePinnedChange"
         />

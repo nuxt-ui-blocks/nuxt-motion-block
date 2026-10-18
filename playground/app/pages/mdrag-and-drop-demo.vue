@@ -347,7 +347,7 @@ interface SlotScope {
 }
 
 const sortSeed: SortItem[] = [
-  { id: 'design-tokens', label: 'Design tokens', owner: 'Ana' },
+  { id: 'design-tokens', label: 'Style tokens', owner: 'Ana' },
   { id: 'component-audit', label: 'Component audit', owner: 'Ben' },
   { id: 'motion-guidelines', label: 'Motion guidelines', owner: 'Chidi' },
   { id: 'accessibility-pass', label: 'Accessibility pass', owner: 'Dara' },

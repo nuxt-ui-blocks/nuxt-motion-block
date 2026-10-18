@@ -8,7 +8,7 @@ const password = ref('')
   <div class="space-y-12">
     <UPageHeader
       title="AnimatedInput"
-      description="Text input with a floating animated label, ported from SmoothUI and themed with the Nuxt UI design system."
+      description="Text input with a floating animated label, themed with the Nuxt UI design system."
     />
 
     <section>

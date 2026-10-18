@@ -42,15 +42,15 @@ const sections = [
     description: 'Pre-existing animated component demos',
     items: [
       { to: '/accordion-demo', label: 'Accordion', description: 'Animated accordion component' },
-      { to: '/animated-dialog-demo', label: 'Animated Dialog', description: 'Dialog with motion transitions' },
-      { to: '/carousel-demo', label: 'Carousel', description: 'Animated carousel' },
+      { to: '/animated-dialog-demo', label: 'Motion dialog', description: 'Dialog with motion transitions' },
+      { to: '/carousel-demo', label: 'Carousel', description: 'Motion carousel' },
       { to: '/collision-demo', label: 'Collision', description: 'Collision detection demo' },
-      { to: '/morphing-dialog-demo', label: 'Morphing Dialog', description: 'Morphing dialog transitions' },
-      { to: '/morphing-popover-demo', label: 'Morphing Popover', description: 'Morphing popover transitions' },
-      { to: '/text-effect-demo', label: 'Text Effect', description: 'Text animation effects' },
-      { to: '/toolbar-dynamic-demo', label: 'Toolbar Dynamic', description: 'Dynamic toolbar demo' },
-      { to: '/toolbar-expandable-demo', label: 'Toolbar Expandable', description: 'Expandable toolbar demo' },
-      { to: '/transition-panel-demo', label: 'Transition Panel', description: 'Panel transition effects' },
+      { to: '/morphing-dialog-demo', label: 'Shape-shift dialog', description: 'Morphing dialog transitions' },
+      { to: '/morphing-popover-demo', label: 'Shape-shift popover', description: 'Morphing popover transitions' },
+      { to: '/text-effect-demo', label: 'Text motion', description: 'Text animation effects' },
+      { to: '/toolbar-dynamic-demo', label: 'Toolbar adaptive', description: 'Dynamic toolbar demo' },
+      { to: '/toolbar-expandable-demo', label: 'Toolbar collapsible', description: 'Expandable toolbar demo' },
+      { to: '/transition-panel-demo', label: 'Switch panel', description: 'Panel transition effects' },
     ],
   },
   {
@@ -58,7 +58,7 @@ const sections = [
     description: 'Interactive buttons and code display components',
     items: [
       { to: '/msmooth-button-demo', label: 'SmoothButton', description: 'Smooth hover animation button' },
-      { to: '/mbutton-copy-demo', label: 'ButtonCopy', description: 'Copy-to-clipboard button' },
+      { to: '/mbutton-copy-demo', label: 'ButtonCopy', description: 'Duplicate button' },
       { to: '/mclip-corners-button-demo', label: 'ClipCornersButton', description: 'Clipped corner button' },
       { to: '/mdot-morph-button-demo', label: 'DotMorphButton', description: 'Dot morphing button' },
       { to: '/mcode-block-demo', label: 'CodeBlock', description: 'Animated code block display' },
@@ -76,8 +76,8 @@ const sections = [
     title: 'Phase 1 — Form & UI',
     description: 'Form elements and UI utility components',
     items: [
-      { to: '/mcheckbox-demo', label: 'Checkbox', description: 'Animated checkbox' },
-      { to: '/mnotification-badge-demo', label: 'NotificationBadge', description: 'Animated notification badge' },
+      { to: '/mcheckbox-demo', label: 'Checkbox', description: 'Motion checkbox' },
+      { to: '/mnotification-badge-demo', label: 'NotificationBadge', description: 'Motion notification badge' },
       { to: '/mduration-picker-demo', label: 'DurationPicker', description: 'Duration picker component' },
       { to: '/mpinned-list-demo', label: 'PinnedList', description: 'Pinned list with animations' },
     ],
@@ -110,8 +110,8 @@ const sections = [
       { to: '/manimated-input-demo', label: 'AnimatedInput', description: 'Animated text input' },
       { to: '/manimated-number-input-demo', label: 'AnimatedNumberInput', description: 'Animated number input' },
       { to: '/manimated-otp-input-demo', label: 'AnimatedOTPInput', description: 'OTP input with animations' },
-      { to: '/manimated-progress-bar-demo', label: 'AnimatedProgressBar', description: 'Animated progress bar' },
-      { to: '/manimated-toggle-demo', label: 'AnimatedToggle', description: 'Animated toggle switch' },
+      { to: '/manimated-progress-bar-demo', label: 'AnimatedProgressBar', description: 'Motion progress bar' },
+      { to: '/manimated-toggle-demo', label: 'AnimatedToggle', description: 'Motion toggle switch' },
       { to: '/manimated-tags-demo', label: 'AnimatedTags', description: 'Animated tag input' },
     ],
   },
@@ -120,8 +120,8 @@ const sections = [
     description: 'Navigation helpers and overlay components',
     items: [
       { to: '/manimated-stepper-demo', label: 'AnimatedStepper', description: 'Stepper with animations' },
-      { to: '/manimated-tooltip-demo', label: 'AnimatedTooltip', description: 'Animated tooltip' },
-      { to: '/mdrawer-demo', label: 'Drawer', description: 'Drawer component' },
+      { to: '/manimated-tooltip-demo', label: 'AnimatedTooltip', description: 'Motion tooltip' },
+      { to: '/mdrawer-demo', label: 'Drawer', description: 'Side drawer' },
       { to: '/mradio-group-demo', label: 'RadioGroup', description: 'Radio group with animations' },
     ],
   },
@@ -155,7 +155,7 @@ const sections = [
     description: 'Advanced composite components',
     items: [
       { to: '/msocial-hover-card-demo', label: 'SocialHoverCard', description: 'Social media hover card' },
-      { to: '/mrich-popover-demo', label: 'RichPopover', description: 'Rich content popover' },
+      { to: '/mrich-popover-demo', label: 'RichPopover', description: 'Popover with rich content' },
       { to: '/mreviews-carousel-demo', label: 'ReviewsCarousel', description: 'Reviews carousel' },
       { to: '/mswitchboard-card-demo', label: 'SwitchboardCard', description: 'Switchboard card component' },
       { to: '/memoji-reaction-demo', label: 'EmojiReaction', description: 'Emoji reaction animation' },
@@ -222,7 +222,7 @@ const sections = [
   },
   {
     title: 'Bucket A — Ports',
-    description: 'SmoothUI components ported to Nuxt UI and motion-v',
+    description: 'Animated components built with Nuxt UI and motion-v',
     items: [
       { to: '/msiri-orb-demo', label: 'SiriOrb', description: 'Five AI states as one gradient disc, scaled and blurred by a live amplitude' },
       { to: '/munlock-face-id-demo', label: 'UnlockFaceId', description: 'Face-id verification with a self-drawing scan ring and a morphing result' },
@@ -238,8 +238,8 @@ const sections = [
     ],
   },
   {
-    title: 'Text Effects',
-    description: 'Character- and word-level text animations ported from smoothui',
+    title: 'Text motions',
+    description: 'Character- and word-level text animations',
     items: [
       { to: '/mblur-out-up-demo', label: 'BlurOutUp', description: 'Words rise out of a blur, one after another' },
       { to: '/mbottom-up-letters-demo', label: 'BottomUpLetters', description: 'Characters rise into place one after another from below' },
@@ -317,7 +317,7 @@ const sections = [
     ],
   },
   {
-    title: 'Text Animations',
+    title: 'Text motions',
     description: 'Character- and word-level text animation components',
     items: [
       { to: '/mtext-glitch-demo', label: 'TextGlitch', description: 'Glitching slices with flicker and rattle' },

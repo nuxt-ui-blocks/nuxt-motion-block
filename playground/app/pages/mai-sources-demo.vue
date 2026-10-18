@@ -62,7 +62,7 @@ const startOpen = ref(false)
           :sources="sources"
         />
 
-        <div class="border-t border-border pt-4 text-sm text-muted-foreground">
+        <div class="border-t border-default pt-4 text-sm text-muted">
           Default open on mount
           <MAiSources
             :default-open="true"
@@ -136,7 +136,7 @@ const startOpen = ref(false)
           :sources="withSnippets"
         >
           <template #favicon>
-            <span class="flex size-full items-center justify-center bg-primary text-[9px] font-bold text-primary-foreground">
+            <span class="flex size-full items-center justify-center bg-primary text-[9px] font-bold text-inverted">
               X
             </span>
           </template>

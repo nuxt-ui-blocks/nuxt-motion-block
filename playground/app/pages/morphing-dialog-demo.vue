@@ -1,7 +1,7 @@
 <template>
   <div class="p-8">
     <h1 class="text-2xl font-bold text-highlighted mb-2">
-      Morphing Dialog
+      Shape-shift dialog
     </h1>
     <p class="text-muted mb-6">
       Compound component with layout morph animations between trigger and content.
@@ -12,7 +12,7 @@
       <UCard>
         <template #header>
           <h2 class="text-lg font-semibold text-highlighted">
-            Basic Morphing Dialog
+            Basic Shape-shift dialog
           </h2>
         </template>
         <MMorphingDialog>
@@ -25,7 +25,7 @@
           <template #content="{ close }">
             <div class="w-[400px] rounded-2xl bg-default p-6 shadow-2xl">
               <h2 class="text-xl font-bold mb-2">
-                Morphing Dialog
+                Shape-shift dialog
               </h2>
               <p class="text-muted mb-4">
                 Morphs from the trigger button using layout animations. Click outside or press Escape to close.
@@ -45,7 +45,7 @@
       <UCard>
         <template #header>
           <h2 class="text-lg font-semibold text-highlighted">
-            Card Morphing Dialog
+            Card Shape-shift dialog
           </h2>
         </template>
         <MMorphingDialog>

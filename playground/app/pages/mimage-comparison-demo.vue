@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-12">
     <UPageHeader
-      title="Image Comparison"
+      title="Image compare"
       description="A draggable divider that clips one image against another, with hover, zoom and keyboard input."
     />
 

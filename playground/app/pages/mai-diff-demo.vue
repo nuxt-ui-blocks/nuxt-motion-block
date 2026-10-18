@@ -37,6 +37,9 @@ const BOOLEAN_PATCH = [
 const lines = ref<DiffLine[]>(PATCH.map(line => ({ ...line })))
 const booleanLines = ref<DiffLine[]>(BOOLEAN_PATCH.map(line => ({ ...line })))
 
+const runId = ref(0)
+const booleanRunId = ref(0)
+
 const events = ref<string[]>([])
 const log = (message: string) => {
   events.value = [message, ...events.value].slice(0, 6)
@@ -47,17 +50,14 @@ const copyLines = (source: DiffLine[]) =>
 
 const reset = () => {
   lines.value = copyLines(PATCH)
+  runId.value += 1
   log('reset — awaiting a decision again')
 }
 
 const resetBoolean = () => {
   booleanLines.value = copyLines(BOOLEAN_PATCH)
+  booleanRunId.value += 1
   log('boolean patch reset')
-}
-
-const seedAccepted = () => {
-  lines.value = copyLines(PATCH)
-  log('decision="accepted" seeded from props — for a stored transcript')
 }
 </script>
 
@@ -65,7 +65,7 @@ const seedAccepted = () => {
   <div class="space-y-12">
     <UPageHeader
       title="AiDiff"
-      description="A proposed edit awaiting a human yes or no"
+      description="An edit waiting for someone to approve"
     />
 
     <UCard>
@@ -95,14 +95,6 @@ const seedAccepted = () => {
             color="neutral"
             variant="outline"
             size="sm"
-            @click="seedAccepted"
-          >
-            Seed accepted
-          </UButton>
-          <UButton
-            color="neutral"
-            variant="outline"
-            size="sm"
             @click="resetBoolean"
           >
             Reset boolean patch
@@ -110,6 +102,7 @@ const seedAccepted = () => {
         </div>
 
         <MAiDiff
+          :key="runId"
           :lines="lines"
           :on-accept="() => log('accepted')"
           :on-reject="() => log('rejected')"
@@ -117,9 +110,11 @@ const seedAccepted = () => {
         />
 
         <MAiDiff
-          :decision="'rejected'"
+          :key="booleanRunId"
           :lines="booleanLines"
-          title="seeded as rejected — a stored transcript"
+          :on-accept="() => log('accepted (boolean)')"
+          :on-reject="() => log('rejected (boolean)')"
+          title="src/runtime/flags.ts"
         />
       </div>
     </UCard>

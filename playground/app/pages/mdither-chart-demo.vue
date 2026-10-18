@@ -156,7 +156,7 @@
             variant="bubbles"
             :width="400"
             :height="200"
-            label="User Engagement"
+            label="Visitor activity"
           />
         </div>
       </UCard>

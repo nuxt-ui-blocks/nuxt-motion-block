@@ -31,7 +31,7 @@
             <div
               aria-hidden="true"
               class="size-14 shrink-0 rounded-lg ring-1 ring-inset ring-white/25"
-              :style="{ backgroundImage: 'url(https://ik.imagekit.io/16u211libb/smoothui/scenes/cobalt-pink.webp?tr=w-160,h-160,f-auto)', backgroundPosition: 'center', backgroundSize: 'cover' }"
+              :style="{ backgroundImage: 'linear-gradient(135deg, oklch(0.62 0.21 260), oklch(0.7 0.2 350))' }"
             />
             <div class="min-w-0 flex-1">
               <p
@@ -108,7 +108,7 @@
             <div
               class="h-1 w-full overflow-hidden rounded-full bg-white/25"
               role="progressbar"
-              aria-label="Playback progress"
+              aria-label="Playback status"
               aria-valuemin="0"
               aria-valuemax="100"
               :aria-valuenow="PROGRESS"
@@ -232,7 +232,7 @@ import { ref } from 'vue'
 const PROGRESS = 42
 
 const PHOTO
-  = 'url(https://ik.imagekit.io/16u211libb/smoothui/scenes/cyan-tangerine.webp?tr=w-1200,h-800,f-auto) center/cover no-repeat'
+  = 'linear-gradient(135deg, oklch(0.72 0.13 195), oklch(0.78 0.17 60))'
 /**
  * Saturated gradient over the right two thirds — the diagonal seam it forms
  * with the photo is the first hard edge the rim has to bend.

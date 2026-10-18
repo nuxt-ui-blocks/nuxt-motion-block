@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="StaggerFromCenter"
-      description="Characters resolve outward from the middle of the string, each one offset by its distance from the center. Translated from smoothui's stagger-from-center."
+      description="Characters resolve outward from the middle of the string, each one offset by its distance from the center."
     />
 
     <UCard>
