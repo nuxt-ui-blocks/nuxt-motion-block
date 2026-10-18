@@ -430,7 +430,7 @@ const project = {
     metrics: [
       { value: 45, options: { suffix: '%', decimalPlaces: 0 }, label: 'Conversion Increase' },
       { value: 38, options: { suffix: '%', decimalPlaces: 0 }, label: 'Cart Abandonment' },
-      { value: 65, options: { suffix: '%', decimalPlaces: 0 }, label: 'Faster Load Times' },
+      { value: 65, options: { suffix: '%', decimalPlaces: 0 }, label: 'Quicker page loads' },
       { value: 58, options: { suffix: '%', decimalPlaces: 0 }, label: 'Mobile Conversion' }
     ]
   },

@@ -59,7 +59,7 @@ label: Preview
         <div class="p-5">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Active Users</p>
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Monthly actives</p>
               <MAnimatedNumber
                 :value="stats.users"
                 class="text-2xl font-bold mt-1"

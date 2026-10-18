@@ -8,7 +8,7 @@ navigation:
 # Magnetic Button
 
 A button that leans toward the pointer once it comes within range, then springs back
-when the pointer goes. Translated from smoothui's magnetic-button.
+when the pointer goes.
 
 Two implementation details are worth knowing before you reach for it. The pull radius
 is real layout, not a hit-test: the wrapper takes a negative margin of `radius / 2`

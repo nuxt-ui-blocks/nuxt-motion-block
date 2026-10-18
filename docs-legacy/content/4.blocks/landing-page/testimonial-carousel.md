@@ -139,8 +139,8 @@ const testimonials = ref([
 ])
 
 const stats = ref([
-  { value: 98, label: "Customer Satisfaction", format: (value) => `${Math.round(value)}%` },
-  { value: 10000, label: "Active Users" },
+  { value: 98, label: "Delighted customers", format: (value) => `${Math.round(value)}%` },
+  { value: 10000, label: "Monthly actives" },
   { value: 4.9, label: "Average Rating", format: (value) => `${value.toFixed(1)}/5` },
   { value: 24, label: "Hours Saved Weekly" }
 ])

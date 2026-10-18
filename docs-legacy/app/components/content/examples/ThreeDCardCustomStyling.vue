@@ -8,7 +8,7 @@
       <template #header>
         <M3DItem :translate-z="40">
           <h2 class="text-2xl font-bold">
-            Custom Styled
+            Tailored styled
           </h2>
         </M3DItem>
       </template>

@@ -179,7 +179,7 @@ const handleClick = () => {
   // Add a temporary extra glow effect on click
   if (glowRef.value) {
     // This would be implemented if we had access to the glow effect methods
-    console.log('Button clicked!')
+    console.log('Button activated!')
   }
 }
 </script>
@@ -211,7 +211,7 @@ label: Preview
         <div class="w-12 h-12 bg-cyan-500 rounded-lg flex items-center justify-center mb-4">
           <UIcon name="i-heroicons-lightning-bolt" class="w-6 h-6 text-white" />
         </div>
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Lightning Fast</h3>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Blazing quick</h3>
         <p class="text-gray-600 dark:text-gray-400">
           Experience blazing fast performance with our optimized solutions.
         </p>
@@ -290,7 +290,7 @@ label: Preview
           <ul class="space-y-3 mb-8">
             <li class="flex items-center text-white/90">
               <UIcon name="i-heroicons-check-circle-solid" class="w-5 h-5 mr-2 text-white" />
-              Unlimited projects
+              Endless projects
             </li>
             <li class="flex items-center text-white/90">
               <UIcon name="i-heroicons-check-circle-solid" class="w-5 h-5 mr-2 text-white" />

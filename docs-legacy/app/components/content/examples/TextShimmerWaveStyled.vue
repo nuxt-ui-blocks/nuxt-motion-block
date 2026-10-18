@@ -310,14 +310,14 @@
             </div>
             <h3 class="text-lg font-semibold mb-2">
               <MTextShimmerWave
-                text="Lightning Fast"
+                text="Blazing quick"
                 :duration="1"
                 :z-distance="10"
                 class="inline-block text-teal-600 dark:text-teal-400"
               />
             </h3>
             <p class="text-gray-600 dark:text-gray-400 text-sm">
-              Optimized for performance with minimal load times
+              Tuned for speed with minimal load times
             </p>
           </UCard>
 
@@ -354,14 +354,14 @@
             </div>
             <h3 class="text-lg font-semibold mb-2">
               <MTextShimmerWave
-                text="Easy Integration"
+                text="Plug-in ready"
                 :duration="1.1"
                 :z-distance="11"
                 class="inline-block text-green-600 dark:text-green-400"
               />
             </h3>
             <p class="text-gray-600 dark:text-gray-400 text-sm">
-              Simple to implement with clean, well-documented code
+              Quick to add with clean, well-documented code
             </p>
           </UCard>
         </div>

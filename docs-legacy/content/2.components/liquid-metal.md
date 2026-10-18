@@ -8,8 +8,7 @@ navigation:
 # Liquid Metal
 
 An ambient surface rather than a transition: a domain-warped fBm height field
-read as a normal, lit by a single key light with a Fresnel rim. Ported from
-smoothui's liquid-metal.
+read as a normal, lit by a single key light with a Fresnel rim.
 
 Every variant is the same shader with a different (low, high, tint) triple, so
 switching `variant` is a uniform write — never a recompile. The field flows

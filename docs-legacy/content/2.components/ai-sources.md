@@ -69,7 +69,7 @@ const sources: Source[] = [
     icon: 'i-lucide-file-text',
     snippet: 'Release checklist, internal',
     title: 'Shipping checklist',
-    url: 'https://motion-primitives.com'
+    url: 'https://example.com'
   },
   {
     id: 's-4',

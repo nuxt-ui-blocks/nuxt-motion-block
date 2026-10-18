@@ -34,7 +34,7 @@
             />
           </div>
           <div class="text-gray-600 dark:text-gray-400 mb-3">
-            Active Users
+            Monthly actives
           </div>
           <div class="flex items-center justify-center text-sm text-green-600 dark:text-green-400">
             <UIcon

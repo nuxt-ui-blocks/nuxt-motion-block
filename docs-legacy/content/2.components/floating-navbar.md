@@ -9,7 +9,7 @@ navigation:
 
 A compact floating navbar that sits anchored to the top-center of the viewport.
 It tracks scroll position with `useScroll` from `motion-v` and uses a `spring`
-animation to slide up and down. Ported from smoothui's floating-navbar.
+animation to slide up and down.
 
 ## Usage
 

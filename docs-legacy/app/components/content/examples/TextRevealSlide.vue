@@ -38,7 +38,7 @@
               effect="slide"
               direction="up"
               :duration="0.8"
-              text="Lightning Fast"
+              text="Blazing quick"
             />
           </h3>
           <p class="text-gray-600 dark:text-gray-400 text-sm">
@@ -46,7 +46,7 @@
               effect="slide"
               direction="up"
               :duration="0.8"
-              text="Optimized for performance"
+              text="Tuned for speed"
               :stagger="0.02"
             />
           </p>
@@ -94,7 +94,7 @@
               effect="slide"
               direction="up"
               :duration="0.8"
-              text="Easy Integration"
+              text="Plug-in ready"
             />
           </h3>
           <p class="text-gray-600 dark:text-gray-400 text-sm">
@@ -102,7 +102,7 @@
               effect="slide"
               direction="up"
               :duration="0.8"
-              text="Simple to implement"
+              text="Quick to add"
               :stagger="0.02"
             />
           </p>

@@ -10,7 +10,7 @@ navigation:
 A mask that clips its content to a real SVG `<clipPath>` — and animates that
 path. Four presets (`blob`, `arch`, `diamond`, `wave`) each ship with a partner
 outline so they can morph, and you can supply your own in
-`objectBoundingBox` (0..1) coordinates. Ported from smoothui's svg-clip-mask.
+`objectBoundingBox` (0..1) coordinates.
 
 The path is declared with `clipPathUnits="objectBoundingBox"`, which is why
 every preset is authored in `0..1` and reuses at any size without scaling. There

@@ -7,7 +7,7 @@ navigation:
 
 # Animated Toggle
 
-An animated toggle switch built on Reka UI's `SwitchRoot` and `SwitchThumb`. When toggled, the thumb scales slightly and slides with a spring transition. Ported from smoothui's animated-toggle.
+An animated toggle switch built on Reka UI's `SwitchRoot` and `SwitchThumb`. When toggled, the thumb scales slightly and slides with a spring transition.
 
 ## Usage
 

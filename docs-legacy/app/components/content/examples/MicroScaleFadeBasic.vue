@@ -1,6 +1,6 @@
 <template>
   <MMicroScaleFade
     class="text-3xl font-bold"
-    text="Settle in"
+    text="Get comfy"
   />
 </template>

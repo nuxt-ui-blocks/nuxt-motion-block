@@ -73,7 +73,7 @@
         <div class="flex justify-between items-center mb-4">
           <div>
             <h4 class="font-bold text-gray-900 dark:text-white">
-              Active Users
+              Monthly actives
             </h4>
             <p class="text-sm text-gray-500 dark:text-gray-400">
               Current online

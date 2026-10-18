@@ -9,8 +9,7 @@ navigation:
 
 A transition that pushes a prismatic band across a panel. The band enters from
 one edge, travels to the other with a long ease-out, and the panel's content
-changes behind it while an opaque cover hides the swap. Ported from smoothui's
-prism-sweep-transition.
+changes behind it while an opaque cover hides the swap.
 
 Vue slots have no midpoint: the slot always holds whatever the parent last
 rendered, so the old content cannot be held back until the band has crossed.

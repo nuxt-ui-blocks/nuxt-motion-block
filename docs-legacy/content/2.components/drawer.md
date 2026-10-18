@@ -7,7 +7,7 @@ navigation:
 
 # Drawer
 
-A slide-in drawer built on Nuxt UI's `UDrawer` with animated entrance/exit transitions and staggered child animations. The drawer slides in from the specified direction and animates its header, body, and footer content with motion effects. Ported from smoothui's drawer.
+A slide-in drawer built on Nuxt UI's `UDrawer` with animated entrance/exit transitions and staggered child animations. The drawer slides in from the specified direction and animates its header, body, and footer content with motion effects.
 
 ## Usage
 

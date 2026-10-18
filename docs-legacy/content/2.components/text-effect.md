@@ -1,11 +1,11 @@
 ---
-title: Text Effect
+title: Text motion
 description: Splits a string into characters, words or lines and staggers a preset reveal across them.
 navigation:
   icon: i-lucide-text-cursor-input
 ---
 
-# Text Effect
+# Text motion
 
 Takes a plain string and splits it into segments — characters, words or lines —
 then reveals each one in sequence. It is the general-purpose version of the

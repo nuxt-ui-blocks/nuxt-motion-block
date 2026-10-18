@@ -165,5 +165,5 @@ than a fixed reserved width.
   occupying the gap.
 - `overflow: hidden` is what keeps the travel masked. If you override it on the
   root, the incoming phrase will slide across the copy beside it.
-- Compare [Short Slide Down](/components/short-slide-down), which builds a centred
+- Compare [Short Lower in](/components/short-slide-down), which builds a centred
   stack downward instead and is a block-level box.

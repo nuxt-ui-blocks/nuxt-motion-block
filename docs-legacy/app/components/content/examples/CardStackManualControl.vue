@@ -4,9 +4,9 @@
       <MCardStack
         ref="cardStackRef"
         :items="[
-          { id: 1, title: 'Manual Control', content: 'Use the buttons below to control this card stack.', name: 'Control Panel', designation: 'Demo' },
-          { id: 2, title: 'Second Card', content: 'This card can be manually rotated.', name: 'Manual Control', designation: 'Demo' },
-          { id: 3, title: 'Third Card', content: 'The rotation interval has been disabled.', name: 'Manual Control', designation: 'Demo' },
+          { id: 1, title: 'Hands-on control', content: 'Use the buttons below to control this card stack.', name: 'Control Panel', designation: 'Demo' },
+          { id: 2, title: 'Second Card', content: 'This card can be manually rotated.', name: 'Hands-on control', designation: 'Demo' },
+          { id: 3, title: 'Third Card', content: 'The rotation interval has been disabled.', name: 'Hands-on control', designation: 'Demo' },
         ]"
         :auto-rotate="false"
       />

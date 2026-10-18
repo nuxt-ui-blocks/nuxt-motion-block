@@ -316,7 +316,7 @@
             </div>
             <h3 class="text-lg font-semibold mb-2">
               <MTextScramble
-                text="Lightning Fast"
+                text="Blazing quick"
                 :duration="0.5"
                 :speed="0.03"
                 :trigger="feature1Trigger"
@@ -333,7 +333,7 @@
               </div>
             </h3>
             <p class="text-gray-600 dark:text-gray-400 text-sm">
-              Optimized for performance with minimal load times
+              Tuned for speed with minimal load times
             </p>
           </UCard>
 
@@ -380,7 +380,7 @@
             </div>
             <h3 class="text-lg font-semibold mb-2">
               <MTextScramble
-                text="Easy Integration"
+                text="Plug-in ready"
                 :duration="0.55"
                 :speed="0.032"
                 :trigger="feature3Trigger"
@@ -397,7 +397,7 @@
               </div>
             </h3>
             <p class="text-gray-600 dark:text-gray-400 text-sm">
-              Simple to implement with clean, well-documented code
+              Quick to add with clean, well-documented code
             </p>
           </UCard>
         </div>

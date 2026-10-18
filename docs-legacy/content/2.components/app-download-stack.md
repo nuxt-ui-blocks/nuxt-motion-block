@@ -7,7 +7,7 @@ navigation:
 
 # App Download Stack
 
-App Download Stack starts as a collapsed fan of app icons. Clicking expands a selectable grid; you can toggle apps (up to `maxPinned`-like cap implied by selection), then trigger a download sequence that shows a downloading state with a shine sweep and finally a completion state before auto-resetting. It respects `prefers-reduced-motion`, supports controlled `expanded`/`selectedApps`, and emits lifecycle events. Ported from smoothui's app-download-stack.
+App Download Stack starts as a collapsed fan of app icons. Clicking expands a selectable grid; you can toggle apps (up to `maxPinned`-like cap implied by selection), then trigger a download sequence that shows a downloading state with a shine sweep and finally a completion state before auto-resetting. It respects `prefers-reduced-motion`, supports controlled `expanded`/`selectedApps`, and emits lifecycle events.
 
 ## Usage
 
@@ -104,7 +104,7 @@ The collapsed trigger is a plain `<button>` with `aria-label="Expand app selecti
 - No WebGL, heavy loops, or per-frame state churn beyond timers and the small computed maps.
 
 ::tip
-Pass custom `apps` with optimized image URLs (small, square). The default placeholder icons use ImageKit URLs; replace them to avoid external requests if self-hosting.
+Pass custom `apps` with Nuxt UI icon names (any `i-…` Iconify id). The default placeholder icons are Nuxt UI icons, so no external asset request is made.
 ::
 
 ## UI

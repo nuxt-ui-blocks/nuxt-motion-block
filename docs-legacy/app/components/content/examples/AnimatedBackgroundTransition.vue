@@ -60,32 +60,32 @@ const ITEMS = [
   {
     id: 1,
     title: 'Dialog',
-    description: 'Enhances modal presentations.',
+    description: 'Improves modal dialogs.',
   },
   {
     id: 2,
     title: 'Popover',
-    description: 'For small interactive overlays.',
+    description: 'Great for small overlay widgets.',
   },
   {
     id: 3,
     title: 'Accordion',
-    description: 'Collapsible sections for more content.',
+    description: 'Foldable sections that reveal more content.',
   },
   {
     id: 4,
     title: 'Collapsible',
-    description: 'Collapsible sections for more content.',
+    description: 'Foldable sections that reveal more content.',
   },
   {
     id: 5,
-    title: 'Drag to Reorder',
-    description: 'Reorder items with drag and drop.',
+    title: 'Drag to rearrange',
+    description: 'Rearrange items by dragging.',
   },
   {
     id: 6,
-    title: 'Swipe to Delete',
-    description: 'Delete items with swipe gestures.',
+    title: 'Swipe to remove',
+    description: 'Remove items by swiping.',
   },
 ]
 

@@ -7,7 +7,7 @@ navigation:
 
 # Wallet Card
 
-The Wallet Card presents a compact financial summary with balance, masked card number and optional header/footer slots. It uses `motion-v` for a small spring entrance and a thin shine sweep that plays on hover to draw attention without distracting. Ported from smoothui's wallet-card.
+The Wallet Card presents a compact financial summary with balance, masked card number and optional header/footer slots. It uses `motion-v` for a small spring entrance and a thin shine sweep that plays on hover to draw attention without distracting.
 
 ## Usage
 

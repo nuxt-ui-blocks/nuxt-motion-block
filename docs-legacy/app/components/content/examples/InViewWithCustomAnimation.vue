@@ -15,7 +15,7 @@
     >
       <div class="p-6 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg">
         <h3 class="text-lg font-medium mb-2">
-          Custom Animation
+          Tailored motion
         </h3>
         <p>This element uses custom variants for animation.</p>
       </div>

@@ -76,7 +76,7 @@ label: Preview
 
 ## Examples
 
-### Manual Control
+### Hands-on control
 
 ::code-preview
 ---
@@ -95,7 +95,7 @@ label: Preview
     </div>
     <MTextShimmerWave 
       ref="shimmerRef"
-      text="Manual Control" 
+      text="Hands-on control" 
       :auto-play="false"
     />
   </div>

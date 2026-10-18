@@ -1,11 +1,11 @@
 ---
-title: Parallax Layers
+title: Depth layers
 description: Scroll-driven multi-depth parallax with optional pointer tracking.
 navigation:
   icon: i-lucide-layers
 ---
 
-# Parallax Layers
+# Depth layers
 
 `ParallaxLayers` renders a stack of absolutely-positioned layers that drift at
 different rates as the scene scrolls through the viewport, and optionally lean

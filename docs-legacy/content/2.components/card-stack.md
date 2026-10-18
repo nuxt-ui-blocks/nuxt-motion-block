@@ -1,11 +1,11 @@
 ---
-title: Card Stack
+title: Stacked Cards
 description: Animated stack of cards that automatically rotate with smooth transitions.
 navigation:
   icon: i-lucide-layers
 ---
 
-# Card Stack
+# Stacked Cards
 
 The CardStack component creates an animated stack of cards that automatically rotate with smooth transitions. It's perfect for showcasing a series of items with a visually appealing card stack effect.
 
@@ -106,7 +106,7 @@ Each card in the [items](#items) array should have the following properties:
 
 ## Examples
 
-### Basic Card Stack
+### Basic Stacked Cards
 
 ::code-preview
 ---
@@ -119,8 +119,8 @@ label: Preview
 ```vue
 <template>
   <MCardStack :items="[
-    { id: 1, title: 'Project Alpha', content: 'A revolutionary new product that changes everything.', name: 'Alex Developer', designation: 'Lead Developer' },
-    { id: 2, title: 'Project Beta', content: 'An innovative solution for modern businesses.', name: 'Sam Designer', designation: 'Senior Designer' },
+    { id: 1, title: 'Project Alpha', content: 'A revolutionary new product that changes everything.', name: 'Sam Rivera', designation: 'Lead Developer' },
+    { id: 2, title: 'Project Betaeta', content: 'An innovative solution for modern businesses.', name: 'Sam Designer', designation: 'Senior Designer' },
     { id: 3, title: 'Project Gamma', content: 'A cutting-edge platform for the future.', name: 'Jordan Manager', designation: 'Project Manager' }
   ]" />
 </template>
@@ -152,7 +152,7 @@ label: Preview
 ```
 ::
 
-### Manual Control
+### Hands-on control
 
 ::code-preview
 ---
@@ -169,9 +169,9 @@ label: Preview
       <MCardStack 
         ref="cardStackRef"
         :items="[
-          { id: 1, title: 'Manual Control', content: 'Use the buttons below to control this card stack.', name: 'Control Panel', designation: 'Demo' },
-          { id: 2, title: 'Second Card', content: 'This card can be manually rotated.', name: 'Manual Control', designation: 'Demo' },
-          { id: 3, title: 'Third Card', content: 'The rotation interval has been disabled.', name: 'Manual Control', designation: 'Demo' }
+          { id: 1, title: 'Hands-on control', content: 'Use the buttons below to control this card stack.', name: 'Control Panel', designation: 'Demo' },
+          { id: 2, title: 'Second Card', content: 'This card can be manually rotated.', name: 'Hands-on control', designation: 'Demo' },
+          { id: 3, title: 'Third Card', content: 'The rotation interval has been disabled.', name: 'Hands-on control', designation: 'Demo' }
         ]"
         :auto-rotate="false"
       />
@@ -251,7 +251,7 @@ label: Preview
 <template>
   <MCardStack 
     :items="[
-      { id: 1, title: 'Custom Style', content: 'This stack has custom dimensions and styling.', name: 'Designer', designation: 'UI/UX' },
+      { id: 1, title: 'Tailored style', content: 'This stack has custom dimensions and styling.', name: 'Designer', designation: 'UI/UX' },
       { id: 2, title: 'Second Card', content: 'Notice the different size and colors.', name: 'Designer', designation: 'UI/UX' },
       { id: 3, title: 'Third Card', content: 'Perfect for branded presentations.', name: 'Designer', designation: 'UI/UX' }
     ]" 

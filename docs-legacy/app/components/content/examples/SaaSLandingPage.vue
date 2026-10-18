@@ -346,7 +346,7 @@
                           class="border-2 border-white dark:border-gray-800 -ml-2"
                         />
                       </div>
-                      <span class="text-sm text-muted ml-2">Active Users</span>
+                      <span class="text-sm text-muted ml-2">Monthly actives</span>
                     </div>
                     <UButton
                       to="#"
@@ -805,7 +805,7 @@ const features = [
     icon: 'i-heroicons-chart-bar',
   },
   {
-    title: 'Team Collaboration',
+    title: 'Teamwork',
     description: 'Work seamlessly with your team through shared workspaces and real-time collaboration.',
     icon: 'i-heroicons-user-group',
   },
@@ -827,7 +827,7 @@ const features = [
 ]
 
 const stats = [
-  { value: 10000, label: 'Active Users' },
+  { value: 10000, label: 'Monthly actives' },
   { value: 99.9, label: 'Uptime %' },
   { value: 42, label: 'Average % Savings' },
   { value: 24, label: 'Hours Saved/Week' },

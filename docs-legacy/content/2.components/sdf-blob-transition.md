@@ -11,7 +11,7 @@ A content-swap transition drawn as signed distance fields: a blob grows from a
 hairline point until it covers the panel, and the content changes behind its
 edge. Shapes blend with `smin`, so two circles fillet into one blob instead of
 intersecting in a crease — that blend width is what makes the transition read as
-liquid rather than as geometry. Ported from smoothui's sdf-blob-transition.
+liquid rather than as geometry.
 
 Vue slots have no midpoint, so the slot already holds the new content on the
 first frame. The component hides that behind a cover painted from the shader's

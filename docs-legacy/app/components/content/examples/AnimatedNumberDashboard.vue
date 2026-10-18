@@ -53,7 +53,7 @@
         />
       </div>
 
-      <!-- Manual Controls -->
+      <!-- Hands-on controls -->
       <div class="space-y-4">
         <div class="font-medium text-gray-900 dark:text-white">
           Manual Actions

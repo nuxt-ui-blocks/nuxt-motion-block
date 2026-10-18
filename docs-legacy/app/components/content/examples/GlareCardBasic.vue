@@ -25,7 +25,7 @@
               />
             </div>
             <h3 class="text-2xl font-bold text-white">
-              Lightning Fast
+              Blazing quick
             </h3>
             <p class="text-slate-400">
               Experience blazing performance with our optimized solution
@@ -85,10 +85,10 @@
               />
             </div>
             <h3 class="text-2xl font-bold text-white">
-              Easy Integration
+              Plug-in ready
             </h3>
             <p class="text-slate-400">
-              Simple to implement with clean documentation
+              Quick to add with clean documentation
             </p>
             <div class="mt-4">
               <UButton

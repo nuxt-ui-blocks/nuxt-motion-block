@@ -136,7 +136,7 @@ label: Preview
     <MStaggerFromEdges
       class="text-2xl font-semibold"
       :stagger="0"
-      text="No stagger"
+      text="Without stagger"
     />
     <MStaggerFromEdges
       class="text-2xl font-semibold"

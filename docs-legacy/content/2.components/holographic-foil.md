@@ -1,11 +1,11 @@
 ---
-title: Holographic Foil
+title: Iridescent foil
 description: A card that tilts toward the pointer under a banded holographic foil, with a looping sheen and a device-tilt mode.
 navigation:
   icon: i-lucide-sparkles
 ---
 
-# Holographic Foil
+# Iridescent foil
 
 A card that leans toward the pointer while a banded foil, a drifting specular
 blob and a looping sheen move across it. The foil is a real gradient stack
@@ -36,7 +36,7 @@ label: Preview
         Series 04
       </p>
       <p class="text-2xl font-semibold text-white">
-        Holographic Foil
+        Iridescent foil
       </p>
       <p class="text-sm text-white/60">
         Move the pointer across the card.
@@ -285,7 +285,7 @@ whatever angle it had reached.
 `useDeviceOrientation` swaps the pointer for `gamma`/`beta`, mapped from ±32°.
 
 On iOS 13 and later the events are gated behind an explicit, user-initiated
-grant, so the card renders its own **Enable tilt** button in the corner and only
+grant, so the card renders its own **Turn on tilt** button in the corner and only
 tilt once that has been answered. Everywhere else the events already arrive and
 there is nothing to ask for, so the card responds on mount and no button
 appears. If the request is denied the card falls back to static rather than

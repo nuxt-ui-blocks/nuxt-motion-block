@@ -24,7 +24,7 @@
           <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             <MTextReveal
               effect="fade"
-              text="Key Features"
+              text="Core features"
             />
           </h2>
 

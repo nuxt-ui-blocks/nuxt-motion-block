@@ -1,11 +1,11 @@
 ---
-title: Exposure Slider
+title: Brightness slider
 description: A notched exposure-control rail with spring tracking, keyboard support and a progress ring.
 navigation:
   icon: i-lucide-aperture
 ---
 
-# Exposure Slider
+# Brightness slider
 
 A notched rail you drag, click, or step with the keyboard. Only the notch under
 the centre line is painted in the accent colour; its neighbours fade and clip

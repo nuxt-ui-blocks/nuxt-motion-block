@@ -123,7 +123,7 @@ label: Preview
 ```
 ::
 
-### Manual Control
+### Hands-on control
 
 ::code-preview
 ---

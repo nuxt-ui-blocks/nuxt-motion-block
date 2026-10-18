@@ -18,7 +18,7 @@
       />
     </div>
 
-    <!-- Manual Controls -->
+    <!-- Hands-on controls -->
     <div class="grid grid-cols-2 gap-2">
       <UButton
         size="xs"

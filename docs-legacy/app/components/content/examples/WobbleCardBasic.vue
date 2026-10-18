@@ -21,7 +21,7 @@
                 />
               </div>
               <h3 class="text-lg font-semibold">
-                Lightning Fast
+                Blazing quick
               </h3>
             </div>
           </template>
@@ -75,12 +75,12 @@
                 />
               </div>
               <h3 class="text-lg font-semibold">
-                Easy Integration
+                Plug-in ready
               </h3>
             </div>
           </template>
           <p class="text-gray-600 dark:text-gray-400">
-            Simple to implement with clean documentation and well-structured APIs for quick adoption.
+            Quick to add with clean documentation and well-structured APIs for quick adoption.
           </p>
           <template #footer>
             <UButton

@@ -7,7 +7,7 @@ navigation:
 
 # Pinned List
 
-Pinned List renders items grouped into pinned and unpinned sections. Pinned items animate to the top (with layout transitions), get a left accent bar, and show a rotated pin icon; unpinned items can be pinned until `maxPinned` is reached. It supports controlled/uncontrolled `pinnedIds`, exposes keyboard shortcuts (ArrowUp/Down, Home/End, P), emits `update:pinned`, and can be accessed via template ref (`togglePin`, `focusedIndex`, etc.). Ported from smoothui's pinned-list.
+Pinned List renders items grouped into pinned and unpinned sections. Pinned items animate to the top (with layout transitions), get a left accent bar, and show a rotated pin icon; unpinned items can be pinned until `maxPinned` is reached. It supports controlled/uncontrolled `pinnedIds`, exposes keyboard shortcuts (ArrowUp/Down, Home/End, P), emits `update:pinned`, and can be accessed via template ref (`togglePin`, `focusedIndex`, etc.).
 
 ## Usage
 

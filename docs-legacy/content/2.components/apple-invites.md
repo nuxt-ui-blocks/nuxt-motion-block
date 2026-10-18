@@ -7,7 +7,7 @@ navigation:
 
 # Apple Invites
 
-Apple Invites renders a small stack of overlapping cards that cycle through a list of events. At any time it shows up to three slots (left, center, right) with scaled/rotated transforms for the side cards and a blur-masked gradient underlay for depth. It auto-advances at `interval` ms (when mounted client-side), can be controlled via `activeIndex`, and emits `update:activeIndex` when the internal page changes. Responsive card sizing is supported via `cardWidth`/`cardHeight`/`aspectRatio`. Ported from smoothui's apple-invites.
+Apple Invites renders a small stack of overlapping cards that cycle through a list of events. At any time it shows up to three slots (left, center, right) with scaled/rotated transforms for the side cards and a blur-masked gradient underlay for depth. It auto-advances at `interval` ms (when mounted client-side), can be controlled via `activeIndex`, and emits `update:activeIndex` when the internal page changes. Responsive card sizing is supported via `cardWidth`/`cardHeight`/`aspectRatio`.
 
 ## Usage
 

@@ -11,8 +11,7 @@ An image that reveals itself as you scroll, using a CSS mask on the frame rather
 than a clip on the image. Five masks are available — `wipe`, `curtain`,
 `circle`, `blinds` and `scale` — and all of them share one spring-smoothed
 progress value, with a counter-parallax drift underneath so the image settles
-into place rather than simply appearing. Ported from smoothui's
-scroll-image-reveal.
+into place rather than simply appearing.
 
 Two implementation details shape how you use it. First, the mask lives on the
 **frame**, not the image: the image is deliberately taller than its frame by

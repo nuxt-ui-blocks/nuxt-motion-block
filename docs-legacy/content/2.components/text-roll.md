@@ -21,7 +21,7 @@ label: Preview
 #code
 ```vue
 <template>
-  <MTextRoll children="Rolling Text" />
+  <MTextRoll children="Scrolling words" />
 </template>
 ```
 ::

@@ -9,8 +9,7 @@ navigation:
 
 A content-swap transition whose overlay is drawn by one fragment shader in eight
 different shapes: a turbulent noise gate, a zoom lens, an iris, a blade wipe,
-ribboned luminance, a spiral, a barcode shutter and a vertical push. Ported from
-smoothui's shader-reveal-transition.
+ribboned luminance, a spiral, a barcode shutter and a vertical push.
 
 All eight share a single compiled program. Each branch writes a `mask` (how much
 of this pixel is covered) and a `glow` (a bright leading edge), and a shared

@@ -1,11 +1,11 @@
 ---
-title: Animated Dialog
+title: Motion dialog
 description: A modal dialog component with smooth animations powered by motion-v.
 navigation:
   icon: i-lucide-layout-panel-top
 ---
 
-# Animated Dialog
+# Motion dialog
 
 The AnimatedDialog component is a modal dialog that combines the functionality of Nuxt UI's UModal with smooth animations powered by motion-v. It provides an enhanced user experience with customizable entrance and exit animations.
 
@@ -22,7 +22,7 @@ label: Preview
 ```vue
 <template>
   <MAnimatedDialog
-    title="Animated Dialog"
+    title="Motion dialog"
     description="A modal dialog with smooth animations"
   >
     <UButton label="Open Dialog" color="primary" />
@@ -240,11 +240,11 @@ label: Preview
     :variants="customVariants"
     :transition-options="customTransition"
   >
-    <UButton label="Custom Animation" color="warning" />
+    <UButton label="Tailored motion" color="warning" />
     
     <template #body>
       <div class="p-4">
-        <h3 class="text-lg font-semibold mb-2">Custom Animation</h3>
+        <h3 class="text-lg font-semibold mb-2">Tailored motion</h3>
         <p>This dialog uses custom variants and transition props.</p>
       </div>
     </template>

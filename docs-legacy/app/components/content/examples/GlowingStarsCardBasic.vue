@@ -23,7 +23,7 @@
         </div>
         <div>
           <h3 class="font-semibold text-white mb-1">
-            Lightning Fast
+            Blazing quick
           </h3>
           <p class="text-gray-300 text-sm">
             Optimized performance with instant loading and minimal resource usage

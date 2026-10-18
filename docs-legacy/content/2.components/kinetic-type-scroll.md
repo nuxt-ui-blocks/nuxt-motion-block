@@ -10,8 +10,7 @@ navigation:
 A phrase whose words each animate on their own slice of a shared scroll progress
 value. As you scroll, a soft wave travels through the line: each word scales up,
 gains letter-spacing and optical weight, lifts off the baseline and comes back
-to full opacity at its peak, then returns to rest. Ported from smoothui's
-kinetic-type-scroll.
+to full opacity at its peak, then returns to rest.
 
 Every word receives the same `scrollYProgress` and derives its own window from
 its index. The windows deliberately **overlap** (`WINDOW_OVERLAP = 1.2`), and

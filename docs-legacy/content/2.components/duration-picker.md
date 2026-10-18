@@ -7,7 +7,7 @@ navigation:
 
 # Duration Picker
 
-A time duration input that lets you adjust hours, minutes, and seconds by dragging vertically (or touching), using arrow keys, typing digits, or jumping with Page/Home/End. Digits animate with spring transitions as values change. Ported from smoothui's duration-picker.
+A time duration input that lets you adjust hours, minutes, and seconds by dragging vertically (or touching), using arrow keys, typing digits, or jumping with Page/Home/End. Digits animate with spring transitions as values change.
 
 ## Usage
 

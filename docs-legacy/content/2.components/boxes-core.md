@@ -380,7 +380,7 @@ label: Preview
               1.2K
             </div>
             <div class="text-gray-500 dark:text-gray-400">
-              Active Users
+              Monthly actives
             </div>
           </div>
           <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">

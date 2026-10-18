@@ -23,7 +23,7 @@
                 name="i-heroicons-check-circle-solid"
                 class="w-5 h-5 mr-2 text-white"
               />
-              Unlimited projects
+              Endless projects
             </li>
             <li class="flex items-center text-white/90">
               <UIcon

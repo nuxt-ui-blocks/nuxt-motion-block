@@ -132,7 +132,7 @@ label: Preview
 ```
 ::
 
-### With Custom Animation
+### With Tailored motion
 
 ::code-preview
 ---

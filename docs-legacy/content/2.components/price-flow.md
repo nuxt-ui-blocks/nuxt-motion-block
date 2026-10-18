@@ -7,7 +7,7 @@ navigation:
 
 # Price Flow
 
-Price Flow displays a numeric amount and rolls individual digits when the value changes. It rounds to nearest integer for display, preserves a stable width by growing slots to the widest value seen (never shrinking), and animates each changing digit with its own spring. A small requestAnimationFrame stepper updates values in 8 discrete steps over 600ms so glyphs don't overlap; the per-digit spring provides the easing. Ported from smoothui's price-flow.
+Price Flow displays a numeric amount and rolls individual digits when the value changes. It rounds to nearest integer for display, preserves a stable width by growing slots to the widest value seen (never shrinking), and animates each changing digit with its own spring. A small requestAnimationFrame stepper updates values in 8 discrete steps over 600ms so glyphs don't overlap; the per-digit spring provides the easing.
 
 ## Usage
 

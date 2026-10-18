@@ -1,16 +1,16 @@
 ---
-title: Toolbar Dynamic
+title: Toolbar adaptive
 description: A pill toolbar that expands in place from a compact icon rail to a wider action bar.
 navigation:
   icon: i-lucide-align-justify
 ---
 
-# Toolbar Dynamic
+# Toolbar adaptive
 
 A floating glass toolbar that grows sideways when you press the menu button and
 collapses back to its icon rail. Two widths — `collapsedWidth` and `width` — are
 animated on the root, and the expanded region fades and widens inside an
-`AnimatePresence`. Ported from smoothui's toolbar-dynamic.
+`AnimatePresence`.
 
 The collapse is not a separate state you manage: a `mousedown` listener on
 `document` closes it whenever the press lands outside the toolbar, so the bar

@@ -33,13 +33,13 @@
           </div>
           <h3 class="text-lg font-semibold mb-2">
             <MTextGradient
-              text="Lightning Fast"
+              text="Blazing quick"
               animation="pulse"
               :speed="0.8"
             />
           </h3>
           <p class="text-gray-600 dark:text-gray-400 text-sm">
-            Optimized for performance with minimal load times
+            Tuned for speed with minimal load times
           </p>
         </UCard>
 
@@ -75,13 +75,13 @@
           </div>
           <h3 class="text-lg font-semibold mb-2">
             <MTextGradient
-              text="Easy Integration"
+              text="Plug-in ready"
               animation="wave"
               :speed="0.9"
             />
           </h3>
           <p class="text-gray-600 dark:text-gray-400 text-sm">
-            Simple to implement with clean, well-documented code
+            Quick to add with clean, well-documented code
           </p>
         </UCard>
       </div>

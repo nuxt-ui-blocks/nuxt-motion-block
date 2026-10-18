@@ -1,6 +1,6 @@
 <template>
   <MAnimatedDialog
-    title="Animated Dialog"
+    title="Motion dialog"
     description="A modal dialog with smooth animations"
   >
     <UButton

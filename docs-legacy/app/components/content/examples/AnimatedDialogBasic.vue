@@ -9,7 +9,7 @@
       <template #body>
         <div class="p-4">
           <h3 class="text-lg font-semibold mb-2">
-            Animated Dialog
+            Motion dialog
           </h3>
           <p class="text-gray-600 dark:text-gray-300 mb-4">
             This dialog opens with smooth motion-v animations.

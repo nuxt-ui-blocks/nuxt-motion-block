@@ -426,7 +426,7 @@ label: Preview
         />
       </div>
 
-      <!-- Manual Controls -->
+      <!-- Hands-on controls -->
       <div class="space-y-4">
         <div class="font-medium text-gray-900 dark:text-white">Manual Actions</div>
         <div class="grid grid-cols-2 gap-3">

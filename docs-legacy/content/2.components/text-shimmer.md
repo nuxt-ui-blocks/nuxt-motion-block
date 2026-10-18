@@ -21,7 +21,7 @@ label: Preview
 #code
 ```vue
 <template>
-  <MTextShimmer text="Shimmering Text Effect" :duration="3" :spread="1.5" class="text-4xl font-bold" />
+  <MTextShimmer text="Shimmering Text motion" :duration="3" :spread="1.5" class="text-4xl font-bold" />
 </template>
 ```
 ::

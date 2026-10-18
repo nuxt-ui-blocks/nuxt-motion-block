@@ -1,11 +1,11 @@
 ---
-title: Image Comparison
+title: Image compare
 description: Interactive image comparison component with slider controls for before/after visualization.
 navigation:
   icon: i-lucide-image
 ---
 
-# Image Comparison
+# Image compare
 
 The ImageComparison component creates an interactive image comparison slider that allows users to compare two images side by side. It supports multiple comparison modes, keyboard navigation, and touch controls for a seamless user experience.
 
@@ -158,7 +158,7 @@ label: Preview
 
 ## Examples
 
-### Basic Image Comparison
+### Basic Image compare
 
 ::code-preview
 ---

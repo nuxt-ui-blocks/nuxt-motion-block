@@ -4,14 +4,14 @@
     :transition-options="customTransition"
   >
     <UButton
-      label="Custom Animation"
+      label="Tailored motion"
       color="warning"
     />
 
     <template #body>
       <div class="p-4">
         <h3 class="text-lg font-semibold mb-2">
-          Custom Animation
+          Tailored motion
         </h3>
         <p>This dialog uses custom variants and transition props.</p>
       </div>

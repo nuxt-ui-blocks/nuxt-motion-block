@@ -7,7 +7,7 @@ navigation:
 
 # Figma Comment
 
-Figma Comment renders a small floating comment marker that expands into a card when opened. It measures its content height after mount (and on message/width changes) to animate smoothly between collapsed (`32x32`) and expanded states. The avatar slides from the corner into the padded content area, and the body fades in with a subtle blur. Supports controlled/uncontrolled `open` state, emits `openChange`/`update:open`, and respects `prefers-reduced-motion`. Ported from smoothui's figma-comment.
+Figma Comment renders a small floating comment marker that expands into a card when opened. It measures its content height after mount (and on message/width changes) to animate smoothly between collapsed (`32x32`) and expanded states. The avatar slides from the corner into the padded content area, and the body fades in with a subtle blur. Supports controlled/uncontrolled `open` state, emits `openChange`/`update:open`, and respects `prefers-reduced-motion`.
 
 ## Usage
 
@@ -41,8 +41,11 @@ label: Preview
   ::field{name="authorName" type="string" default="'Arjun Mehta'"}
   Comment author, shown in the attribution row.
   ::
-  ::field{name="avatarUrl" type="string" default=".../arjun-mehta.webp"}
-  Avatar image URL. When missing or fails to load, shows fallback initial. Defaults to the reference ImageKit portrait.
+  ::field{name="avatarUrl" type="string" default="https://randomuser.me/api/portraits/men/11.jpg"}
+  Avatar image URL. Defaults to a portrait; if it is absent or fails to load, `avatarIcon` is shown instead.
+  ::
+  ::field{name="avatarIcon" type="string" default="'i-lucide-user-round'"}
+  Nuxt UI icon shown in the avatar slot when `avatarUrl` is missing or fails to load.
   ::
   ::field{name="avatarAlt" type="string" default="undefined"}
   Alternative text for avatar; defaults to `authorName`.

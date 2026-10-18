@@ -166,7 +166,7 @@ label: Preview
           <UCard class="hover:shadow-md transition-shadow">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-gray-500 dark:text-gray-400 text-sm">Active Users</p>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">Monthly actives</p>
                 <p class="text-2xl font-bold text-gray-900 dark:text-white">12,458</p>
               </div>
               <div class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
@@ -461,32 +461,32 @@ const ITEMS = [
   {
     id: 1,
     title: 'Dialog',
-    description: 'Enhances modal presentations.'
+    description: 'Improves modal dialogs.'
   },
   {
     id: 2,
     title: 'Popover',
-    description: 'For small interactive overlays.'
+    description: 'Great for small overlay widgets.'
   },
   {
     id: 3,
     title: 'Accordion',
-    description: 'Collapsible sections for more content.'
+    description: 'Foldable sections that reveal more content.'
   },
   {
     id: 4,
     title: 'Collapsible',
-    description: 'Collapsible sections for more content.'
+    description: 'Foldable sections that reveal more content.'
   },
   {
     id: 5,
-    title: 'Drag to Reorder',
-    description: 'Reorder items with drag and drop.'
+    title: 'Drag to rearrange',
+    description: 'Rearrange items by dragging.'
   },
   {
     id: 6,
-    title: 'Swipe to Delete',
-    description: 'Delete items with swipe gestures.'
+    title: 'Swipe to remove',
+    description: 'Remove items by swiping.'
   }
 ]
 

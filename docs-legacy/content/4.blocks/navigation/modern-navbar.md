@@ -168,7 +168,7 @@ const navigationItems = [
         to: '#'
       },
       {
-        label: 'For Designers',
+        label: 'Built for designers',
         id: 'for-designers',
         description: 'Design systems and UI kits',
         to: '#'

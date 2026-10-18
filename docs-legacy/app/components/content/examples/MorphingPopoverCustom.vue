@@ -5,13 +5,13 @@
       :transition="customTransition"
     >
       <UButton color="tertiary">
-        Custom Animation
+        Tailored motion
       </UButton>
 
       <template #content>
         <div class="p-4 w-64">
           <h3 class="font-bold text-lg mb-2">
-            Custom Animation
+            Tailored motion
           </h3>
           <p class="text-gray-600 dark:text-gray-400 mb-4">
             This popover has custom morphing animations.

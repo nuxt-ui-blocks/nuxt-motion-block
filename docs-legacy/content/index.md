@@ -98,7 +98,7 @@ A powerful collection of motion components for Nuxt applications. Enhance your U
   icon: i-lucide-type
   ---
   #title
-  Text Animations
+  Text motions
 
   #description
   Bring your content to life with text animations including morphing, scrambling, rolling, and gradient effects.
@@ -131,7 +131,7 @@ A powerful collection of motion components for Nuxt applications. Enhance your U
   icon: i-lucide-zap
   ---
   #title
-  Performance Optimized
+  Built for speed
 
   #description
   All components are built with performance in mind, using efficient animations and minimal JavaScript.

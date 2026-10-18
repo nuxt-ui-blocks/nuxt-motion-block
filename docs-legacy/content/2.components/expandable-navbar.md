@@ -10,7 +10,6 @@ navigation:
 A responsive header built on Nuxt UI's `UHeader`. Above `lg` it renders a
 horizontal `UNavigationMenu`; below it, the same links collapse into the
 header's body panel and each one fades in from the left on a staggered spring.
-Ported from smoothui's expandable-navbar.
 
 The interesting part is the mobile panel: every link is its own `motion.div`
 with a `delay: i * 0.06`, so opening the menu reads as a short cascade rather

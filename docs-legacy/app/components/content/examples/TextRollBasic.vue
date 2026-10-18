@@ -30,12 +30,12 @@
           </div>
           <h3 class="text-lg font-semibold mb-2">
             <MTextRoll
-              children="Lightning Fast"
+              children="Blazing quick"
               class="text-blue-600 dark:text-blue-400"
             />
           </h3>
           <p class="text-gray-600 dark:text-gray-400 text-sm">
-            Optimized for performance with minimal load times
+            Tuned for speed with minimal load times
           </p>
         </UCard>
 
@@ -70,12 +70,12 @@
           </div>
           <h3 class="text-lg font-semibold mb-2">
             <MTextRoll
-              children="Easy Integration"
+              children="Plug-in ready"
               class="text-green-600 dark:text-green-400"
             />
           </h3>
           <p class="text-gray-600 dark:text-gray-400 text-sm">
-            Simple to implement with clean, well-documented code
+            Quick to add with clean, well-documented code
           </p>
         </UCard>
       </div>

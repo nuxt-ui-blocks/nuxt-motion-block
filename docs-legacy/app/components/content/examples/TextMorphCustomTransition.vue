@@ -409,9 +409,9 @@ const currentPreset = ref('Purple')
 
 // Dynamic text examples
 const featureTexts = ['New!', 'Hot!', 'Trending!', 'Popular!']
-const performanceTexts = ['99.9% Uptime', 'Fast Loading', 'Reliable', 'Stable']
+const performanceTexts = ['99.9% Uptime', 'Speedy loads', 'Reliable', 'Stable']
 const ctaTexts = ['Get Started Today', 'Join Now', 'Sign Up', 'Try It Free']
-const showcaseTitles = ['Why Choose Our Effects?', 'Amazing Features', 'Powerful Tools', 'Innovative Solutions']
+const showcaseTitles = ['Why Choose Our Effects?', 'Amazing Features', 'Capable tools', 'Innovative Solutions']
 const ctaButtonTexts = ['Get Started Now', 'Learn More', 'Explore Features', 'See Demo']
 
 const featureTextIndex = ref(0)
@@ -429,16 +429,16 @@ const ctaButtonText = computed(() => ctaButtonTexts[ctaButtonIndex.value])
 // Feature data
 const features = [
   {
-    title: ['Lightning Fast', 'Ultra Fast', 'Super Fast', 'Hyper Fast'],
-    description: 'Optimized for performance with minimal load times',
+    title: ['Blazing quick', 'Ultra Fast', 'Super Fast', 'Hyper Fast'],
+    description: 'Tuned for speed with minimal load times',
   },
   {
     title: ['Beautiful Effects', 'Stunning FX', 'Gorgeous Animations', 'Awesome Effects'],
     description: 'Stunning animations that captivate your audience',
   },
   {
-    title: ['Easy Integration', 'Simple Setup', 'Quick Install', 'Smooth Integration'],
-    description: 'Simple to implement with clean, well-documented code',
+    title: ['Plug-in ready', 'Simple Setup', 'Quick Install', 'Frictionless fit'],
+    description: 'Quick to add with clean, well-documented code',
   },
 ]
 

@@ -7,7 +7,7 @@ navigation:
 
 # Expandable Cards
 
-Expandable Cards renders a vertical list of collapsible items. Only one card is open at a time by default; enable `multiple` to allow several open simultaneously. Each header animates its chevron on toggle, and the body expands with height/opacity via `AnimatePresence` and `motion-v`. Ported from smoothui's expandable-cards.
+Expandable Cards renders a vertical list of collapsible items. Only one card is open at a time by default; enable `multiple` to allow several open simultaneously. Each header animates its chevron on toggle, and the body expands with height/opacity via `AnimatePresence` and `motion-v`.
 
 ## Usage
 

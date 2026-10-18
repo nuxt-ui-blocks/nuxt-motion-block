@@ -17,7 +17,7 @@
           />
         </div>
         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
-          Lightning Fast
+          Blazing quick
         </h3>
         <p class="text-gray-600 dark:text-gray-400">
           Experience blazing fast performance with our optimized solutions.

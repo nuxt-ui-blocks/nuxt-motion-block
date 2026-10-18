@@ -29,7 +29,7 @@
               John Doe
             </p>
             <p class="text-sm text-gray-500">
-              Software Engineer
+              Software craft
             </p>
           </div>
         </div>

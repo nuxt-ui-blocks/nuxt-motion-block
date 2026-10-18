@@ -1,15 +1,15 @@
 ---
-title: Toolbar Expandable
+title: Toolbar collapsible
 description: A vertical toolbar where each icon button expands a panel of content above it.
 navigation:
   icon: i-lucide-panels-top-left
 ---
 
-# Toolbar Expandable
+# Toolbar collapsible
 
 A vertical icon rail where pressing a button opens a panel above the rail —
 animated with `height: 0 → auto` plus a slight scale, so it unfolds out of the
-button rather than appearing in place. Ported from smoothui's toolbar-expandable.
+button rather than appearing in place.
 
 Pressing the active button again closes the panel, and a `mousedown` on
 `document` outside the toolbar dismisses it. The panel is keyed by item `id`, so

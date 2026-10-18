@@ -143,7 +143,7 @@ label: Preview
 ```
 ::
 
-### Slide Up Animation
+### Rise in Animation
 
 ::code-preview
 ---
@@ -155,7 +155,7 @@ label: Preview
 #code
 ```vue
 <template>
-  <MTypingText text="Slide Up" animation="slideUp" />
+  <MTypingText text="Rise in" animation="slideUp" />
 </template>
 ```
 ::
@@ -177,7 +177,7 @@ label: Preview
 ```
 ::
 
-### Manual Control
+### Hands-on control
 
 ::code-preview
 ---
@@ -197,7 +197,7 @@ label: Preview
     </div>
     <MTypingText 
       ref="typingRef"
-      text="Manual Control" 
+      text="Hands-on control" 
       :auto-start="false"
     />
   </div>

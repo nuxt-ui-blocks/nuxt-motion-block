@@ -345,7 +345,7 @@ const article = {
   tags: ['Vue.js', 'JavaScript', 'Frontend', 'Composition API'],
   headings: [
     { id: 'introduction', text: 'Introduction' },
-    { id: 'setup', text: 'Setting Up Your Project' },
+    { id: 'setup', text: 'Getting your project ready' },
     { id: 'reactive-data', text: 'Working with Reactive Data' },
     { id: 'computed-properties', text: 'Computed Properties and Watchers' },
     { id: 'lifecycle-hooks', text: 'Lifecycle Hooks' },
@@ -356,7 +356,7 @@ const article = {
     <h2 id="introduction">Introduction</h2>
     <p>The Vue 3 Composition API is a new way to organize and reuse logic in Vue components. It provides a more flexible alternative to the Options API, allowing developers to group related logic together and share it across components more easily.</p>
     
-    <h2 id="setup">Setting Up Your Project</h2>
+    <h2 id="setup">Getting your project ready</h2>
     <p>To get started with the Composition API, you'll need to have Vue 3 installed in your project. If you're starting a new project, you can use the Vue CLI:</p>
     <pre><code class="language-bash">npm install -g @vue/cli
 vue create my-project

@@ -228,7 +228,7 @@
                         color="purple"
                         size="sm"
                       >
-                        Web Design
+                        Web craft
                       </UBadge>
                       <UBadge
                         variant="subtle"
@@ -492,7 +492,7 @@
                 size="sm"
                 class="font-medium"
               >
-                View Case Study
+                View Client story
               </UButton>
             </div>
           </MInView>
@@ -839,7 +839,7 @@ const navigationItems = [
 
 const services = [
   {
-    title: 'Web Design',
+    title: 'Web craft',
     description: 'Beautiful, responsive websites that engage your audience and drive conversions.',
     icon: 'i-heroicons-computer-desktop',
     link: '#',
@@ -881,14 +881,14 @@ const projects = [
     title: 'EcoLife App',
     description: 'Sustainable living made simple with our comprehensive mobile application.',
     image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-    category: { name: 'Mobile App', color: 'blue' },
+    category: { name: 'Handheld app', color: 'blue' },
     link: '#',
   },
   {
     title: 'FinTech Dashboard',
     description: 'Modern financial dashboard for real-time analytics and reporting.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-    category: { name: 'Web Design', color: 'primary' },
+    category: { name: 'Web craft', color: 'primary' },
     link: '#',
   },
   {
@@ -991,7 +991,7 @@ const footerLinks = [
   {
     title: 'Services',
     links: [
-      { label: 'Web Design', to: '#' },
+      { label: 'Web craft', to: '#' },
       { label: 'Branding', to: '#' },
       { label: 'Marketing', to: '#' },
       { label: 'Development', to: '#' },
@@ -1010,7 +1010,7 @@ const footerLinks = [
     title: 'Resources',
     links: [
       { label: 'Blog', to: '#' },
-      { label: 'Case Studies', to: '#' },
+      { label: 'Client stories', to: '#' },
       { label: 'Portfolio', to: '#' },
       { label: 'FAQs', to: '#' },
     ],

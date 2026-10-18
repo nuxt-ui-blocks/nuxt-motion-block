@@ -88,7 +88,7 @@ items:
         to: /components/apple-invites
       - title: App Download Stack
         to: /components/app-download-stack
-      - title: Card Stack
+      - title: Stacked Cards
         to: /components/card-stack
       - title: Draggable Card
         to: /components/draggable-card
@@ -184,15 +184,15 @@ items:
         to: /components/expandable-navbar
       - title: Floating Navbar
         to: /components/floating-navbar
-      - title: Toolbar Dynamic
+      - title: Toolbar adaptive
         to: /components/toolbar-dynamic
-      - title: Toolbar Expandable
+      - title: Toolbar collapsible
         to: /components/toolbar-expandable
   - title: Interactive Elements
     items:
       - title: Accordion
         to: /components/accordion
-      - title: Animated Dialog
+      - title: Motion dialog
         to: /components/animated-dialog
       - title: Animated Tooltip
         to: /components/animated-tooltip
@@ -214,13 +214,13 @@ items:
         to: /components/dynamic-island
       - title: Emoji Reaction
         to: /components/emoji-reaction
-      - title: Image Comparison
+      - title: Image compare
         to: /components/image-comparison
       - title: Morph Icon
         to: /components/morph-icon
-      - title: Morphing Dialog
+      - title: Shape-shift dialog
         to: /components/morphing-dialog
-      - title: Morphing Popover
+      - title: Shape-shift popover
         to: /components/morphing-popover
       - title: Notification Badge
         to: /components/notification-badge
@@ -262,7 +262,7 @@ items:
         to: /components/perspective-text-3d
       - title: Ransom Note
         to: /components/ransom-note
-      - title: Short Slide Down
+      - title: Short Lower in
         to: /components/short-slide-down
       - title: Short Slide Right
         to: /components/short-slide-right
@@ -280,7 +280,7 @@ items:
         to: /components/stagger-from-center
       - title: Stagger From Edges
         to: /components/stagger-from-edges
-      - title: Text Effect
+      - title: Text motion
         to: /components/text-effect
       - title: TextGlitch
         to: /components/text-glitch
@@ -324,7 +324,7 @@ items:
         to: /components/sdf-blob-transition
       - title: Shader Reveal Transition
         to: /components/shader-reveal-transition
-      - title: Transition Panel
+      - title: Switch panel
         to: /components/transition-panel
   - title: Visual Effects
     items:
@@ -342,7 +342,7 @@ items:
         to: /components/drawing-cursor
       - title: Emboss Surface
         to: /components/emboss-surface
-      - title: Exposure Slider
+      - title: Brightness slider
         to: /components/exposure-slider
       - title: Flowing Stroke
         to: /components/flowing-stroke
@@ -350,13 +350,13 @@ items:
         to: /components/glow-effect
       - title: Glowing Effect
         to: /components/glowing-effect
-      - title: Holographic Foil
+      - title: Iridescent foil
         to: /components/holographic-foil
       - title: Liquid Metal
         to: /components/liquid-metal
       - title: Mask Container
         to: /components/mask-container
-      - title: Parallax Layers
+      - title: Depth layers
         to: /components/parallax-layers
       - title: Pixelated Canvas
         to: /components/pixelated-canvas

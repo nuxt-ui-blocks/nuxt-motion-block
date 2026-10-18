@@ -39,7 +39,7 @@ label: Preview
       :progress="progress"
       :on-seek="seek"
       :size="104"
-      title="Midnight Drive"
+      title="Night Ride"
       artist="Nova Kinetic"
       cover="https://picsum.photos/seed/midnight-drive/400/400"
     />
@@ -50,7 +50,7 @@ label: Preview
         :min="0"
         :max="1"
         :step="0.01"
-        aria-label="Track progress"
+        aria-label="Follow progress"
       />
       <span class="text-xs text-muted">
         progress = {{ progress.toFixed(2) }} · focus the ring, then use ←/→, Home or End

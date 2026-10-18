@@ -73,7 +73,7 @@ const features = [
     icon: 'i-heroicons-sparkles'
   },
   {
-    title: 'Easy to Customize',
+    title: 'Easy to restyle',
     description: 'Fully customizable components that adapt to your brand and design requirements.',
     icon: 'i-heroicons-adjustments-horizontal'
   },
@@ -83,17 +83,17 @@ const features = [
     icon: 'i-simple-icons-nuxtdotjs'
   },
   {
-    title: 'Performance Optimized',
+    title: 'Built for speed',
     description: 'Lightweight components that won\'t slow down your application.',
     icon: 'i-heroicons-bolt'
   },
   {
-    title: 'Responsive Design',
+    title: 'Adaptive layout',
     description: 'Looks great on all devices from mobile to desktop.',
     icon: 'i-heroicons-device-phone-mobile'
   },
   {
-    title: 'Developer Friendly',
+    title: 'Coder friendly',
     description: 'Well-documented components with clear examples and TypeScript support.',
     icon: 'i-heroicons-code-bracket'
   }

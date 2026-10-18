@@ -29,10 +29,10 @@ import { ref } from 'vue'
 
 const items = ref([
   { id: 1, name: 'Project A', category: 'Development' },
-  { id: 2, name: 'Project B', category: 'Design' },
-  { id: 3, name: 'Project C', category: 'Marketing' },
+  { id: 2, name: 'Project Beta', category: 'Design' },
+  { id: 3, name: 'Project Gamma', category: 'Marketing' },
   { id: 4, name: 'Project D', category: 'Development' },
-  { id: 5, name: 'Project E', category: 'Design' },
-  { id: 6, name: 'Project F', category: 'Marketing' },
+  { id: 5, name: 'Project Delta', category: 'Design' },
+  { id: 6, name: 'Project Omega', category: 'Marketing' },
 ])
 </script>

@@ -21,7 +21,7 @@
                 />
               </div>
               <h3 class="text-lg font-semibold mb-2">
-                Lightning Fast
+                Blazing quick
               </h3>
               <p class="text-gray-600 dark:text-gray-400 text-sm">
                 Experience blazing performance with our optimized solution
@@ -59,10 +59,10 @@
                 />
               </div>
               <h3 class="text-lg font-semibold mb-2">
-                Easy Integration
+                Plug-in ready
               </h3>
               <p class="text-gray-600 dark:text-gray-400 text-sm">
-                Simple to implement with clean documentation
+                Quick to add with clean documentation
               </p>
             </div>
           </UCard>

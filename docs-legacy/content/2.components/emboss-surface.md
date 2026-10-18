@@ -11,8 +11,7 @@ Turns any element into a lit material surface. Four variants — `emboss`,
 `deboss`, `plaster` and `metal-stamp` — each describe a different relief recipe:
 two shadow layers for a raised surface, the same pair inset for a pressed one, a
 wider pair plus an SVG specular filter for plaster, and a hard zero-blur pair
-with an SVG `drop-shadow` for a stamped plate. Ported from smoothui's
-emboss-surface.
+with an SVG `drop-shadow` for a stamped plate.
 
 A stack of `box-shadow`s can only darken, which is why `plaster` is different:
 it blurs the element's own alpha channel into a height field, lights that field

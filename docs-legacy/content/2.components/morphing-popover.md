@@ -1,11 +1,11 @@
 ---
-title: Morphing Popover
+title: Shape-shift popover
 description: A popover component with morphing animations powered by motion-v, built as a wrapper around Nuxt UI's Popover component.
 navigation:
   icon: i-lucide-maximize-2
 ---
 
-# Morphing Popover
+# Shape-shift popover
 
 A popover component with morphing animations powered by motion-v, built as a wrapper around Nuxt UI's Popover component.
 
@@ -25,7 +25,7 @@ label: Preview
     <UButton label="Open Popover" color="primary" />
     <template #content>
       <div class="p-4 w-64">
-        <h3 class="text-lg font-semibold mb-2">Morphing Popover</h3>
+        <h3 class="text-lg font-semibold mb-2">Shape-shift popover</h3>
         <p class="text-gray-600 dark:text-gray-300">
           This popover has smooth morphing animations.
         </p>
@@ -230,10 +230,10 @@ label: Preview
     :variants="customVariants" 
     :transition="customTransition"
   >
-    <UButton color="tertiary">Custom Animation</UButton>
+    <UButton color="tertiary">Tailored motion</UButton>
     <template #content>
       <div class="p-4 w-64">
-        <h3 class="font-bold text-lg mb-2">Custom Animation</h3>
+        <h3 class="font-bold text-lg mb-2">Tailored motion</h3>
         <p class="text-gray-600 dark:text-gray-400 mb-4">
           This popover has custom morphing animations.
         </p>

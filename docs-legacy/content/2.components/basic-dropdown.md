@@ -7,7 +7,7 @@ navigation:
 
 # Basic Dropdown
 
-A dropdown component built on Nuxt UI's `USelect` and Reka UI primitives, with a rotating chevron animation and custom item rendering that includes icons and a checkmark indicator. It supports both controlled (`v-model`) and uncontrolled modes, with motion-v powered animations. Ported from smoothui's basic-dropdown.
+A dropdown component built on Nuxt UI's `USelect` and Reka UI primitives, with a rotating chevron animation and custom item rendering that includes icons and a checkmark indicator. It supports both controlled (`v-model`) and uncontrolled modes, with motion-v powered animations.
 
 ## Usage
 

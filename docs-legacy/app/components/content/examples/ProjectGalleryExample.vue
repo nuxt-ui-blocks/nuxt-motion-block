@@ -214,8 +214,8 @@ const projectsPerPage = 6
 
 const categories = [
   { label: 'All Categories', value: '' },
-  { label: 'Web Design', value: 'Web Design' },
-  { label: 'Mobile App', value: 'Mobile App' },
+  { label: 'Web craft', value: 'Web craft' },
+  { label: 'Handheld app', value: 'Handheld app' },
   { label: 'Branding', value: 'Branding' },
   { label: 'UI/UX', value: 'UI/UX' },
   { label: 'Development', value: 'Development' },
@@ -235,7 +235,7 @@ const projects = ref([
     id: 1,
     title: 'E-commerce Platform Redesign',
     description: 'Complete redesign of a major e-commerce platform focusing on user experience and conversion optimization.',
-    category: 'Web Design',
+    category: 'Web craft',
     date: 'June 2023',
     image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
     client: {
@@ -249,7 +249,7 @@ const projects = ref([
     id: 2,
     title: 'Mobile Banking Application',
     description: 'Secure mobile banking application with biometric authentication and real-time transaction monitoring.',
-    category: 'Mobile App',
+    category: 'Handheld app',
     date: 'May 2023',
     image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
     client: {
@@ -284,7 +284,7 @@ const projects = ref([
       name: 'Wellness Co.',
       avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
     },
-    tags: ['Figma', 'Data Visualization', 'User Research', 'Prototyping'],
+    tags: ['Figma', 'Data charts', 'User Research', 'Prototyping'],
     slug: '#health-fitness-dashboard',
   },
   {
@@ -305,7 +305,7 @@ const projects = ref([
     id: 6,
     title: 'Restaurant Booking System',
     description: 'Online reservation system for restaurants with table management, waitlist features, and customer notifications.',
-    category: 'Web Design',
+    category: 'Web craft',
     date: 'January 2023',
     image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
     client: {
@@ -317,9 +317,9 @@ const projects = ref([
   },
   {
     id: 7,
-    title: 'Educational Mobile App',
+    title: 'Educational Handheld app',
     description: 'Gamified learning platform for children with interactive lessons, progress tracking, and parental controls.',
-    category: 'Mobile App',
+    category: 'Handheld app',
     date: 'December 2022',
     image: 'https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
     client: {
@@ -333,7 +333,7 @@ const projects = ref([
     id: 8,
     title: 'Non-Profit Website Redesign',
     description: 'Modern, accessible website for a non-profit organization focused on fundraising and community engagement.',
-    category: 'Web Design',
+    category: 'Web craft',
     date: 'November 2022',
     image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
     client: {
@@ -401,8 +401,8 @@ const paginatedProjects = computed(() => {
 
 const getCategoryColor = (category: string) => {
   switch (category) {
-    case 'Web Design': return 'blue'
-    case 'Mobile App': return 'purple'
+    case 'Web craft': return 'blue'
+    case 'Handheld app': return 'purple'
     case 'Branding': return 'pink'
     case 'UI/UX': return 'green'
     case 'Development': return 'amber'

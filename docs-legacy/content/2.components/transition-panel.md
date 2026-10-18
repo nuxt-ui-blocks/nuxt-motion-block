@@ -1,11 +1,11 @@
 ---
-title: Transition Panel
+title: Switch panel
 description: Swaps slotted content with enter, center and exit variants driven by a numeric index.
 navigation:
   icon: i-lucide-panel-top
 ---
 
-# Transition Panel
+# Switch panel
 
 A single panel that swaps its content with a proper exit-then-enter sequence.
 You give it an `activeIndex` and three variants — `enter`, `center` and `exit` —

@@ -55,10 +55,10 @@ import { ref } from 'vue'
 
 const dragDropRef = ref()
 const items = ref([
-  { id: 1, name: 'Task 1', status: 'In Progress' },
-  { id: 2, name: 'Task 2', status: 'Completed' },
-  { id: 3, name: 'Task 3', status: 'Pending' },
-  { id: 4, name: 'Task 4', status: 'In Progress' },
+  { id: 1, name: 'Stage 1', status: 'In Progress' },
+  { id: 2, name: 'Stage 2', status: 'Completed' },
+  { id: 3, name: 'Stage 3', status: 'Pending' },
+  { id: 4, name: 'Stage 4', status: 'In Progress' },
 ])
 
 const handleSelect = (item, selected) => {

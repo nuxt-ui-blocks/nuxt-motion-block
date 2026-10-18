@@ -48,7 +48,7 @@ const handleClick = () => {
   // Add a temporary extra glow effect on click
   if (glowRef.value) {
     // This would be implemented if we had access to the glow effect methods
-    console.log('Button clicked!')
+    console.log('Button activated!')
   }
 }
 </script>

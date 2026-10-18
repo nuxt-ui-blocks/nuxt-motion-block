@@ -153,7 +153,7 @@ label: Preview
 ```
 ::
 
-### Manual Control
+### Hands-on control
 
 ::code-preview
 ---
@@ -173,7 +173,7 @@ label: Preview
     </div>
     <MTilt v-model:enabled="tiltEnabled">
       <div class="p-6 bg-primary rounded-lg shadow-lg">
-        <h3 class="text-xl font-bold mb-2">Manual Control</h3>
+        <h3 class="text-xl font-bold mb-2">Hands-on control</h3>
         <p class="text-gray-600 dark:text-gray-400">Tilt effect can be toggled on/off.</p>
       </div>
     </MTilt>

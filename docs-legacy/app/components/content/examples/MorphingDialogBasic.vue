@@ -8,7 +8,7 @@
         <template #content>
           <div class="flex flex-col gap-4 p-6">
             <h3 class="text-lg font-semibold">
-              Morphing Dialog
+              Shape-shift dialog
             </h3>
             <p class="text-sm text-muted">
               This dialog morphs from its trigger with a smooth layout animation.

@@ -1,11 +1,11 @@
 ---
-title: Short Slide Down
+title: Short Lower in
 description: Rotating phrases that build one word at a time into a centered stack, then drop away.
 navigation:
   icon: i-lucide-move-down
 ---
 
-# Short Slide Down
+# Short Lower in
 
 Words drop in from above, one every `500ms`, each landing on its own centred line.
 The stack grows downward as it fills, so a two-word phrase resolves to two centred

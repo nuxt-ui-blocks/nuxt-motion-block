@@ -282,7 +282,7 @@
             </div>
             <h3 class="text-lg font-semibold mb-2">
               <MTextRoll
-                children="Lightning Fast"
+                children="Blazing quick"
                 :duration="0.5"
                 :get-enter-delay="(i) => i * 0.05"
                 :variants="{ enter: { initial: { rotateX: 0 }, animate: { rotateX: 90 } }, exit: { initial: { rotateX: 90 }, animate: { rotateX: 0 } } }"
@@ -290,7 +290,7 @@
               />
             </h3>
             <p class="text-gray-600 dark:text-gray-400 text-sm">
-              Optimized for performance with minimal load times
+              Tuned for speed with minimal load times
             </p>
           </UCard>
 
@@ -328,7 +328,7 @@
             </div>
             <h3 class="text-lg font-semibold mb-2">
               <MTextRoll
-                children="Easy Integration"
+                children="Plug-in ready"
                 :duration="0.55"
                 :get-enter-delay="(i) => i * 0.055"
                 :variants="{ enter: { initial: { rotateZ: 0, scale: 0.8 }, animate: { rotateZ: 180, scale: 1 } }, exit: { initial: { rotateZ: 180, scale: 1 }, animate: { rotateZ: 0, scale: 0.8 } } }"
@@ -336,7 +336,7 @@
               />
             </h3>
             <p class="text-gray-600 dark:text-gray-400 text-sm">
-              Simple to implement with clean, well-documented code
+              Quick to add with clean, well-documented code
             </p>
           </UCard>
         </div>

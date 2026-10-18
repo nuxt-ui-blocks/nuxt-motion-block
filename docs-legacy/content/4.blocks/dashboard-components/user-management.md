@@ -182,7 +182,7 @@ label: Preview
             <UIcon name="i-heroicons-check-circle" class="w-6 h-6 text-green-600 dark:text-green-400" />
           </div>
           <div>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Active Users</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Monthly actives</p>
             <MAnimatedNumber
               :value="userStats.active"
               class="text-2xl font-bold"

@@ -246,7 +246,7 @@ label: Preview
   >
     <template #header>
       <M3DItem :translate-z="40">
-        <h2 class="text-2xl font-bold">Custom Styled</h2>
+        <h2 class="text-2xl font-bold">Tailored styled</h2>
       </M3DItem>
     </template>
     

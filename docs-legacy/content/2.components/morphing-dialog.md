@@ -1,13 +1,13 @@
 ---
-title: Morphing Dialog
+title: Shape-shift dialog
 description: A modal dialog that morphs from its trigger using shared layout animations.
 navigation:
   icon: i-lucide-layout-template
 ---
 
-# Morphing Dialog
+# Shape-shift dialog
 
-A morphing dialog built on Nuxt UI's `UModal` with Framer Motion-style layout animations. When triggered, the dialog content can morph from the trigger element position/size using `layoutId`, creating a smooth transition effect. Ported from smoothui's morphing-dialog.
+A morphing dialog built on Nuxt UI's `UModal` with Framer Motion-style layout animations. When triggered, the dialog content can morph from the trigger element position/size using `layoutId`, creating a smooth transition effect.
 
 ## Usage
 
@@ -31,7 +31,7 @@ label: Preview
         </MMorphingDialogTrigger>
         <template #content>
           <div class="flex flex-col gap-4 p-6">
-            <h3 class="text-lg font-semibold">Morphing Dialog</h3>
+            <h3 class="text-lg font-semibold">Shape-shift dialog</h3>
             <p class="text-sm text-muted">This dialog morphs from its trigger with a smooth layout animation.</p>
             <div class="flex justify-end">
               <UButton label="Close" @click="() => {}" />

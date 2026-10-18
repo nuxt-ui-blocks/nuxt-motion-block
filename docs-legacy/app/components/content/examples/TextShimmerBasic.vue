@@ -22,10 +22,10 @@
           class="w-12 h-12 text-blue-500 mx-auto mb-4"
         />
         <h3 class="text-lg font-semibold mb-2">
-          Lightning Fast
+          Blazing quick
         </h3>
         <p class="text-gray-600 dark:text-gray-400 text-sm">
-          Optimized for performance
+          Tuned for speed
         </p>
       </UCard>
 
@@ -48,10 +48,10 @@
           class="w-12 h-12 text-green-500 mx-auto mb-4"
         />
         <h3 class="text-lg font-semibold mb-2">
-          Easy Integration
+          Plug-in ready
         </h3>
         <p class="text-gray-600 dark:text-gray-400 text-sm">
-          Simple to implement
+          Quick to add
         </p>
       </UCard>
     </div>

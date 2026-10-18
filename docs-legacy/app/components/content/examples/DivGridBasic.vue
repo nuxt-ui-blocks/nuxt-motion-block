@@ -149,7 +149,7 @@
                 </div>
                 <div>
                   <h4 class="font-medium text-gray-900 dark:text-white">
-                    Data Visualization
+                    Data charts
                   </h4>
                   <p class="text-gray-600 dark:text-gray-400 text-sm">
                     Visualize data in grid format

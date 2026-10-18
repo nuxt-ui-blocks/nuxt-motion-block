@@ -57,7 +57,7 @@
           </div>
           <div>
             <p class="text-sm text-gray-500 dark:text-gray-400">
-              Active Users
+              Monthly actives
             </p>
             <MAnimatedNumber
               :value="userStats.active"
