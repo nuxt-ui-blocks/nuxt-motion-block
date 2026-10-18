@@ -581,3 +581,17 @@ Choose from predefined blur intensities or specify a custom pixel value:
 - **strongest**: `blur-2xl`
 - **none**: `blur-none`
 - **Custom**: Any numeric value (e.g., `:blur="10"` for 10px blur)
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.glowEffect` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `pointer-events-none absolute inset-0 h-full w-full transform-gpu` |

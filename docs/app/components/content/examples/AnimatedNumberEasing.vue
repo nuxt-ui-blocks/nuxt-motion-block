@@ -70,7 +70,7 @@
               Between 0-1000
             </div>
           </div>
-          <UToggle
+          <USwitch
             v-model="autoCycle"
             @update:model-value="toggleAutoCycle"
           />

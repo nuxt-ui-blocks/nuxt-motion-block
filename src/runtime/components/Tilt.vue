@@ -1,7 +1,7 @@
 <template>
   <Motion
     ref="tiltRef"
-    :class="className"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class, props.className] })"
     :style="combinedStyles"
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
@@ -13,6 +13,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import tilt from '../theme/tilt'
 
 // Types
 interface SpringOptions {
@@ -23,6 +25,8 @@ interface SpringOptions {
 
 interface TiltProps {
   className?: string
+  class?: string
+  ui?: Record<string, any>
   style?: Record<string, any>
   rotationFactor?: number
   isReverse?: boolean
@@ -32,7 +36,15 @@ interface TiltProps {
 const props = withDefaults(defineProps<TiltProps>(), {
   rotationFactor: 15,
   isReverse: false,
+  class: undefined,
+  ui: undefined,
   springOptions: () => ({}),
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'tilt',
+  props,
+  theme: tilt,
 })
 
 // Refs

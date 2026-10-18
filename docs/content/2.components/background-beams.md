@@ -118,3 +118,18 @@ label: Preview
 </template>
 ```
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.backgroundBeams` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `absolute inset-0 flex h-full w-full items-center justify-center [mask-repeat:no-repeat] [mask-size:40px]` |
+| `svg` | `pointer-events-none absolute z-0 h-full w-full` |

@@ -12,3 +12,7 @@ items:
     items:
       - title: useMorphingPopover
         to: /composables/use-morphing-popover
+  - title: Theming Composables
+    items:
+      - title: useMotionBlockUI
+        to: /composables/use-motion-block-ui

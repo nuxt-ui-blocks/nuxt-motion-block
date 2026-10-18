@@ -1,15 +1,20 @@
 <template>
   <div class="p-8">
-    <h1 class="text-3xl font-bold mb-6">
-      Morphing Popover Demo
+    <h1 class="text-2xl font-bold text-highlighted mb-2">
+      Morphing Popover
     </h1>
+    <p class="text-muted mb-6">
+      UPopover extended with motion-v scale/opacity morphing animations.
+    </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Basic Morphing Popover (Click Mode) -->
-      <div class="p-6 border rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">
-          Click Mode Popover
-        </h2>
+      <!-- Click Mode -->
+      <UCard>
+        <template #header>
+          <h2 class="text-lg font-semibold text-highlighted">
+            Click Mode
+          </h2>
+        </template>
         <MMorphingPopover
           mode="click"
           :scale="0.95"
@@ -23,8 +28,8 @@
               <h3 class="text-lg font-semibold mb-2">
                 Click Popover
               </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4">
-                This popover opens on click with motion-v animations.
+              <p class="text-muted mb-4">
+                Opens on click with motion-v animations.
               </p>
               <UButton
                 label="Action"
@@ -35,13 +40,15 @@
             </div>
           </template>
         </MMorphingPopover>
-      </div>
+      </UCard>
 
       <!-- Hover Mode -->
-      <div class="p-6 border rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">
-          Hover Mode Popover
-        </h2>
+      <UCard>
+        <template #header>
+          <h2 class="text-lg font-semibold text-highlighted">
+            Hover Mode
+          </h2>
+        </template>
         <MMorphingPopover
           mode="hover"
           :open-delay="300"
@@ -57,19 +64,21 @@
               <h3 class="text-lg font-semibold mb-2">
                 Hover Popover
               </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                This popover opens on hover with motion-v animations.
+              <p class="text-muted">
+                Opens on hover with motion-v animations.
               </p>
             </div>
           </template>
         </MMorphingPopover>
-      </div>
+      </UCard>
 
       <!-- Custom Scale -->
-      <div class="p-6 border rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">
-          Custom Scale Animation
-        </h2>
+      <UCard>
+        <template #header>
+          <h2 class="text-lg font-semibold text-highlighted">
+            Custom Scale
+          </h2>
+        </template>
         <MMorphingPopover
           mode="click"
           :scale="0.9"
@@ -83,19 +92,21 @@
               <h3 class="text-lg font-semibold mb-2">
                 Strong Morphing
               </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                This popover uses a stronger motion-v morphing effect.
+              <p class="text-muted">
+                Stronger motion-v morphing effect.
               </p>
             </div>
           </template>
         </MMorphingPopover>
-      </div>
+      </UCard>
 
-      <!-- Custom Variants and Transition -->
-      <div class="p-6 border rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">
-          Custom Variants & Transition
-        </h2>
+      <!-- Custom Variants -->
+      <UCard>
+        <template #header>
+          <h2 class="text-lg font-semibold text-highlighted">
+            Custom Variants
+          </h2>
+        </template>
         <MMorphingPopover
           mode="click"
           :variants="customVariants"
@@ -110,19 +121,21 @@
               <h3 class="text-lg font-semibold mb-2">
                 Custom Animation
               </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                This popover uses custom variants and transition props.
+              <p class="text-muted">
+                Custom variants and transition props.
               </p>
             </div>
           </template>
         </MMorphingPopover>
-      </div>
+      </UCard>
 
-      <!-- Rotate Animation -->
-      <div class="p-6 border rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">
-          Rotate Animation
-        </h2>
+      <!-- Rotate -->
+      <UCard>
+        <template #header>
+          <h2 class="text-lg font-semibold text-highlighted">
+            Rotate Animation
+          </h2>
+        </template>
         <MMorphingPopover
           mode="click"
           :variants="rotateVariants"
@@ -137,19 +150,21 @@
               <h3 class="text-lg font-semibold mb-2">
                 Rotate Animation
               </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                This popover rotates while morphing.
+              <p class="text-muted">
+                Rotates while morphing in.
               </p>
             </div>
           </template>
         </MMorphingPopover>
-      </div>
+      </UCard>
 
-      <!-- Nuxt UI Popover (Control) -->
-      <div class="p-6 border rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">
-          Nuxt UI Popover (Control)
-        </h2>
+      <!-- Control -->
+      <UCard>
+        <template #header>
+          <h2 class="text-lg font-semibold text-highlighted">
+            Nuxt UI Popover (Control)
+          </h2>
+        </template>
         <UPopover mode="click">
           <UButton
             label="Open Control"
@@ -157,10 +172,12 @@
             variant="subtle"
           />
           <template #content>
-            Control Popover Content
+            <div class="p-4">
+              Control Popover Content
+            </div>
           </template>
         </UPopover>
-      </div>
+      </UCard>
     </div>
   </div>
 </template>
@@ -173,7 +190,7 @@ const customVariants = {
 }
 
 const customTransition = {
-  type: 'spring',
+  type: 'spring' as const,
   bounce: 0.2,
   duration: 0.5,
 }

@@ -1,7 +1,7 @@
 <template>
   <svg
     ref="svgRef"
-    :class="['w-full h-full absolute inset-0', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
     <rect
       v-if="star"
@@ -36,6 +36,8 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import shootingStars from '../theme/shooting-stars'
 
 interface ShootingStar {
   id: number
@@ -57,6 +59,7 @@ interface Props {
   starWidth?: number
   starHeight?: number
   class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -68,6 +71,14 @@ const props = withDefaults(defineProps<Props>(), {
   trailColor: '#2EB9DF',
   starWidth: 10,
   starHeight: 1,
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'shootingStars',
+  props,
+  theme: shootingStars,
 })
 
 const star = ref<ShootingStar | null>(null)

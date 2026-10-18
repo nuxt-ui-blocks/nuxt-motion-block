@@ -1,7 +1,7 @@
 <template>
   <Motion
     ref="containerRef"
-    :class="['inline-block', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     v-bind="props"
   >
     {{ formattedValue }}
@@ -12,6 +12,8 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { Motion } from 'motion-v'
 import { useElementVisibility } from '@vueuse/core'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import countingNumber from '../theme/counting-number'
 
 interface CountingNumberProps {
   from?: number
@@ -19,6 +21,7 @@ interface CountingNumberProps {
   duration?: number // seconds
   delay?: number // ms
   class?: string
+  ui?: Record<string, any>
   startOnView?: boolean
   once?: boolean
   inViewMargin?: string
@@ -32,9 +35,16 @@ const props = withDefaults(defineProps<CountingNumberProps>(), {
   duration: 2,
   delay: 0,
   class: '',
+  ui: undefined,
   startOnView: true,
   once: false,
   inViewMargin: '0px',
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'countingNumber',
+  props,
+  theme: countingNumber,
 })
 
 const emit = defineEmits(['complete'])

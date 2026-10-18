@@ -66,7 +66,7 @@
           <div class="text-sm text-gray-600 dark:text-gray-400">
             Auto Increment
           </div>
-          <UToggle
+          <USwitch
             v-model="autoIncrement"
             @update:model-value="toggleAutoIncrement"
           />

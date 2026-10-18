@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, inject, onMounted, onUnmounted } from 'vue'
+import { ref, computed, inject, onMounted, onUnmounted, type Ref } from 'vue'
 import type { MotionValue } from 'motion-v'
 
 const props = defineProps<{
@@ -25,7 +25,7 @@ const sliderClasses = computed(() => [
 ])
 
 const motionSliderPosition = inject<MotionValue<number>>('motionSliderPosition')
-const isDragging = inject('isDragging')
+const isDragging = inject<Ref<boolean>>('isDragging', ref(false))
 
 const sliderValue = ref(motionSliderPosition?.get() || 50)
 

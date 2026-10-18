@@ -1,7 +1,7 @@
 <template>
   <div
     ref="containerRef"
-    :class="containerClasses"
+    :class="ui.root({ layout: props.layout, class: [uiProps.ui?.root, uiProps.class, gridGapClasses] })"
     @dragover.prevent
     @drop="handleDrop"
   >
@@ -13,7 +13,7 @@
       :initial="false"
       :animate="getItemAnimation(index)"
       :transition="itemTransition"
-      :class="getItemClasses(item, index)"
+      :class="ui.item({ class: [uiProps.ui?.item, getItemStateClasses(item, index), props.itemClass] })"
       :style="getItemStyles(item, index)"
       :draggable="!disabled"
       @dragstart="handleDragStart($event, item, index)"
@@ -30,7 +30,7 @@
         :is-over="dragState.dropTarget === index"
         :is-selected="isSelected(item)"
       >
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div :class="ui.itemDefault({ class: uiProps.ui?.itemDefault })">
           {{ item.label || item.name || item.id }}
         </div>
       </slot>
@@ -38,12 +38,12 @@
       <!-- Drag handle -->
       <div
         v-if="showHandle"
-        class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab"
+        :class="ui.itemHandle({ class: uiProps.ui?.itemHandle })"
         @mousedown.stop="handleMouseDown($event, item)"
       >
         <UIcon
           name="i-lucide-grip-vertical"
-          class="w-4 h-4 text-gray-400"
+          :class="ui.itemHandleIcon({ class: uiProps.ui?.itemHandleIcon })"
         />
       </div>
     </Motion>
@@ -52,7 +52,7 @@
     <div
       v-for="(zone, index) in dropZones"
       :key="`drop-zone-${index}`"
-      :class="getDropZoneClasses(index)"
+      :class="ui.dropZone({ class: [uiProps.ui?.dropZone, getDropZoneStateClasses(index)] })"
       @dragover.prevent
       @dragenter="handleZoneEnter(index)"
       @dragleave="handleZoneLeave"
@@ -60,11 +60,11 @@
     >
       <div
         v-if="dragState.isDragging"
-        class="text-center text-gray-500 dark:text-gray-400"
+        :class="ui.dropZoneContent({ class: uiProps.ui?.dropZoneContent })"
       >
         <UIcon
           name="i-lucide-plus"
-          class="w-6 h-6 mx-auto mb-2"
+          :class="ui.dropZoneIcon({ class: uiProps.ui?.dropZoneIcon })"
         />
         Drop here
       </div>
@@ -75,6 +75,8 @@
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 import { ref, computed, reactive, watch } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import dragAndDrop from '../theme/drag-and-drop'
 
 type LayoutType = 'list' | 'grid' | 'masonry'
 type DragMode = 'sort' | 'move' | 'copy'
@@ -97,6 +99,7 @@ interface DragAndDropProps {
   allowMultiSelect?: boolean
   snapToGrid?: boolean
   animationDuration?: number
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<DragAndDropProps>(), {
@@ -111,7 +114,10 @@ const props = withDefaults(defineProps<DragAndDropProps>(), {
   allowMultiSelect: false,
   snapToGrid: true,
   animationDuration: 0.3,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'dragAndDrop', props, theme: dragAndDrop })
 
 const emit = defineEmits<{
   change: [items: DragItem[]]
@@ -139,24 +145,12 @@ const dropZones = computed(() => {
   return Array.from({ length: 3 }, (_, i) => ({ id: i, label: `Zone ${i + 1}` }))
 })
 
-const containerClasses = computed(() => {
-  const baseClasses = [
-    'drag-drop-container',
-    'relative',
-    'min-h-32',
-  ]
-
+const gridGapClasses = computed(() => {
   if (props.layout === 'grid') {
-    baseClasses.push('grid', `grid-cols-${props.columns}`, `gap-${props.gap / 4}`)
-  }
-  else if (props.layout === 'list') {
-    baseClasses.push('space-y-2')
-  }
-  else if (props.layout === 'masonry') {
-    baseClasses.push('columns-2', 'md:columns-3', 'lg:columns-4', 'gap-4')
+    return [`grid-cols-${props.columns}`, `gap-${props.gap / 4}`]
   }
 
-  return [baseClasses.join(' '), props.class].filter(Boolean).join(' ')
+  return []
 })
 
 const itemTransition = computed(() => ({
@@ -165,15 +159,8 @@ const itemTransition = computed(() => ({
   duration: props.animationDuration,
 }))
 
-const getItemClasses = (item: DragItem, index: number) => {
-  const classes = [
-    'drag-item',
-    'group',
-    'relative',
-    'cursor-pointer',
-    'transition-all',
-    'duration-200',
-  ]
+const getItemStateClasses = (item: DragItem, index: number) => {
+  const classes: string[] = []
 
   if (dragState.draggedItem?.id === item.id) {
     classes.push('opacity-50', 'scale-105', 'z-50')
@@ -191,7 +178,7 @@ const getItemClasses = (item: DragItem, index: number) => {
     classes.push('cursor-not-allowed', 'opacity-50')
   }
 
-  return [classes.join(' '), props.itemClass].filter(Boolean).join(' ')
+  return classes.join(' ')
 }
 
 const getItemStyles = () => {
@@ -213,27 +200,12 @@ const getItemAnimation = (index: number) => {
   }
 }
 
-const getDropZoneClasses = (index: number) => {
-  const classes = [
-    'drop-zone',
-    'min-h-24',
-    'border-2',
-    'border-dashed',
-    'border-gray-300',
-    'dark:border-gray-600',
-    'rounded-lg',
-    'flex',
-    'items-center',
-    'justify-center',
-    'transition-all',
-    'duration-200',
-  ]
-
+const getDropZoneStateClasses = (index: number) => {
   if (dragState.dropZone === index) {
-    classes.push('border-primary-500', 'bg-primary-50', 'dark:bg-primary-900/20')
+    return 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
   }
 
-  return classes.join(' ')
+  return ''
 }
 
 const isSelected = (item: DragItem) => {

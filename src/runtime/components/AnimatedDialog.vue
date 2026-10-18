@@ -12,7 +12,8 @@
     :close="close"
     :close-icon="closeIcon"
     :dismissible="dismissible"
-    :ui="ui"
+    :ui="uiProps.ui"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :modal="modal"
     @update:open="handleOpenChange"
   >
@@ -22,7 +23,7 @@
 
     <!--  eslint-disable-next-line vue/no-template-shadow -->
     <template #content="{ close }">
-      <div :class="contentClasses">
+      <div :class="ui.content({ class: uiProps.ui?.content })">
         <AnimatePresence>
           <motion.div
             v-if="isOpen"
@@ -31,7 +32,7 @@
             exit="exit"
             :variants="contentVariants"
             :transition="contentTransition"
-            class="will-change-transform"
+            :class="ui.contentInner({ class: uiProps.ui?.contentInner })"
           >
             <!-- Custom header slot -->
             <slot
@@ -41,14 +42,14 @@
             />
 
             <!-- Body -->
-            <div :class="bodyClasses">
+            <div :class="ui.body({ class: uiProps.ui?.body })">
               <slot name="body" />
             </div>
 
             <!-- Footer -->
             <div
               v-if="$slots.footer"
-              :class="footerClasses"
+              :class="ui.footer({ class: uiProps.ui?.footer })"
             >
               <slot
                 name="footer"
@@ -90,8 +91,9 @@
 import { ref, computed, watch } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
 import type { Variant, Transition } from 'motion-v'
-// @ts-ignore
-import type { ButtonProps } from '#ui/types'
+import type { ButtonProps } from '#ui/components/Button.vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedDialog from '../theme/animated-dialog'
 
 interface Variants {
   initial?: Variant
@@ -112,7 +114,8 @@ interface Props {
   close?: boolean | Partial<ButtonProps>
   closeIcon?: string
   dismissible?: boolean
-  ui?: object
+  ui?: Record<string, any>
+  class?: string
   open?: boolean
   defaultOpen?: boolean
   modal?: boolean
@@ -131,12 +134,16 @@ const props = withDefaults(defineProps<Props>(), {
   portal: true,
   close: true,
   dismissible: true,
+  ui: undefined,
+  class: undefined,
   defaultOpen: false,
   modal: true,
   scale: 0.95,
   variants: () => ({}),
   transitionOptions: () => ({}),
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'animatedDialog', props, theme: animatedDialog })
 
 const emit = defineEmits<{
   'update:open': [open: boolean]
@@ -188,31 +195,6 @@ const contentTransition = computed(() => {
     ...defaultTransition,
     ...props.transitionOptions,
   }
-})
-
-// Computed classes
-const contentClasses = computed(() => {
-  return [
-    'relative overflow-hidden',
-    'backdrop-blur-sm',
-    'outline-none focus:outline-none',
-    'border-default',
-    'bg-default',
-    'text-default',
-  ].join(' ')
-})
-
-const bodyClasses = computed(() => {
-  return [
-    'flex-1 p-4 sm:p-6',
-  ].join(' ')
-})
-
-const footerClasses = computed(() => {
-  return [
-    'flex items-center gap-1.5 p-4 sm:px-6',
-    'border-t border-default',
-  ].join(' ')
 })
 
 const contentProps = computed(() => {

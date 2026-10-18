@@ -1,8 +1,8 @@
 <template>
-  <div class="pointer-events-none absolute inset-0 rounded-[inherit] border border-transparent [mask-clip:padding-box,border-box] [mask-composite:intersect] [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)]">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <!-- @vue-ignore -->
     <Motion
-      :class="['absolute aspect-square', trailClass]"
+      :class="ui.trail({ class: uiProps.ui?.trail })"
       :style="motionStyle"
       :animate="{
         offsetDistance: ['0%', '100%'],
@@ -16,6 +16,8 @@
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 import { computed } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import borderTrail from '../theme/border-trail'
 
 // Types
 interface Transition {
@@ -27,6 +29,7 @@ interface Transition {
 
 interface BorderTrailProps {
   class?: string
+  ui?: Record<string, any>
   size?: number
   transition?: Transition
   onAnimationComplete?: () => void
@@ -34,8 +37,12 @@ interface BorderTrailProps {
 }
 
 const props = withDefaults(defineProps<BorderTrailProps>(), {
+  class: undefined,
+  ui: undefined,
   size: 60,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'borderTrail', props, theme: borderTrail })
 
 // Default transition
 const defaultTransition: Transition = {
@@ -55,8 +62,4 @@ const motionStyle = computed(() => ({
   offsetPath: `rect(0 auto auto 0 round ${props.size}px)`,
   ...props.style,
 }))
-
-const trailClass = computed(() => {
-  return props.class || 'bg-zinc-500'
-})
 </script>

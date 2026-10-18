@@ -135,3 +135,20 @@ label: Preview
 </template>
 ```
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.textReveal` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `text-reveal-container inline-block` |
+| `char` | `text-reveal-char relative` |
+| `charInner` | `inline-block` |
+| `srOnly` | `sr-only` |

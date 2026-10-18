@@ -313,3 +313,21 @@ label: Preview
 </template>
 ```
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedDialog` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` |  |
+| `content` | `relative overflow-hidden backdrop-blur-sm outline-none focus:outline-none border-default bg-default text-default` |
+| `contentInner` | `will-change-transform` |
+| `body` | `flex-1 p-4 sm:p-6` |
+| `footer` | `flex items-center gap-1.5 p-4 sm:px-6 border-t border-default` |

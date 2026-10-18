@@ -124,7 +124,7 @@ label: Preview
     
     <div class="flex items-center justify-between">
       <span class="text-sm">Auto Increment:</span>
-      <UToggle v-model="autoIncrement" />
+      <USwitch v-model="autoIncrement" />
     </div>
   </div>
 </template>
@@ -193,7 +193,7 @@ label: Preview
     
     <div class="flex items-center justify-between">
       <span class="text-sm">Auto Cycle:</span>
-      <UToggle v-model="autoCycle" />
+      <USwitch v-model="autoCycle" />
     </div>
   </div>
 </template>
@@ -278,7 +278,7 @@ label: Preview
     
     <div class="flex items-center justify-between">
       <span class="text-sm">Live Updates:</span>
-      <UToggle v-model="liveUpdates" />
+      <USwitch v-model="liveUpdates" />
     </div>
   </div>
 </template>
@@ -420,8 +420,8 @@ label: Preview
           <div class="font-medium text-gray-900 dark:text-white">Auto Update</div>
           <div class="text-sm text-gray-500 dark:text-gray-400">Automatic page view simulation</div>
         </div>
-        <UToggle 
-          v-model="isAutoUpdating" 
+        <USwitch
+          v-model="isAutoUpdating"
           @update:model-value="toggleAutoUpdate"
         />
       </div>
@@ -552,3 +552,17 @@ onUnmounted(() => {
 </script>
 ```
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.animatedNumber` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `inline-block tabular-nums` |

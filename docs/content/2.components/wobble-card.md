@@ -9,6 +9,8 @@ navigation:
 
 The WobbleCard component creates a card with a wobble effect that responds to cursor movement. It's perfect for creating interactive cards with fluid, organic animations.
 
+The card tilts in 3D toward the cursor. `intensity` controls how far it tilts, and `speed` controls how quickly it settles back when the cursor leaves.
+
 ## Usage
 
 ::code-preview
@@ -34,16 +36,20 @@ label: Preview
 ## Props
 
 ::field-group
-  ::field{name="containerClass" type="string" default="'bg-primary w-full h-full'"}
-  CSS classes to apply to the card container.
-  ::
-  
   ::field{name="class" type="string" default="''"}
-  CSS classes to apply to the card content.
+  CSS classes to apply to the card.
   ::
   
   ::field{name="ui" type="object" default="{}"}
   UI configuration for the underlying UCard component.
+  ::
+
+  ::field{name="intensity" type="number" default="10"}
+  Maximum tilt in degrees at the edge of the card.
+  ::
+
+  ::field{name="speed" type="number" default="300"}
+  Duration in milliseconds of the return animation when the cursor leaves.
   ::
 ::
 
@@ -71,7 +77,7 @@ label: Preview
 ```
 ::
 
-### With Custom Container Class
+### With Custom Styling
 
 ::code-preview
 ---
@@ -83,11 +89,11 @@ label: Preview
 #code
 ```vue
 <template>
-  <MWobbleCard container-class="bg-primary w-full h-full">
+  <MWobbleCard class="bg-primary w-full h-48">
     <template #header>
-      <h3 class="text-lg font-semibold">Custom Container</h3>
+      <h3 class="text-lg font-semibold">Custom Styling</h3>
     </template>
-    <p>This card has a custom container class.</p>
+    <p>This card applies a custom class to the card surface.</p>
   </MWobbleCard>
 </template>
 ```
@@ -105,7 +111,7 @@ label: Preview
 #code
 ```vue
 <template>
-  <MWobbleCard container-class="bg-gradient-to-r from-purple-500 to-pink-600 w-full h-full">
+  <MWobbleCard class="bg-gradient-to-r from-purple-500 to-pink-600 w-full h-48">
     <template #header>
       <h3 class="text-lg font-semibold text-white">Gradient Style</h3>
     </template>
@@ -127,7 +133,7 @@ label: Preview
 #code
 ```vue
 <template>
-  <MWobbleCard container-class="bg-indigo-800 w-full h-full">
+  <MWobbleCard class="bg-indigo-800 w-full h-48">
     <template #header>
       <h3 class="text-lg font-semibold text-white">Dark Theme</h3>
     </template>
@@ -149,7 +155,7 @@ label: Preview
 #code
 ```vue
 <template>
-  <MWobbleCard container-class="bg-slate-800 w-full h-full">
+  <MWobbleCard class="bg-slate-800 w-full h-48">
     <template #header>
       <h3 class="text-lg font-semibold text-white">Slate Background</h3>
     </template>
@@ -159,3 +165,17 @@ label: Preview
 ```
 ::
 
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.wobbleCard` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `wrapper` | `relative` |
+| `card` | `h-full` |

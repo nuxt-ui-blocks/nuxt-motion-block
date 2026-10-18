@@ -1,13 +1,15 @@
 <template>
   <canvas
     ref="canvasRef"
-    :class="['h-full w-full absolute inset-0', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   />
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useThrottleFn } from '@vueuse/core'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import starsBackground from '../theme/stars-background'
 
 interface StarProps {
   x: number
@@ -24,6 +26,7 @@ interface Props {
   minTwinkleSpeed?: number
   maxTwinkleSpeed?: number
   class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -32,7 +35,11 @@ const props = withDefaults(defineProps<Props>(), {
   twinkleProbability: 0.7,
   minTwinkleSpeed: 0.5,
   maxTwinkleSpeed: 1,
+  class: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'starsBackground', props, theme: starsBackground })
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const stars = ref<StarProps[]>([])

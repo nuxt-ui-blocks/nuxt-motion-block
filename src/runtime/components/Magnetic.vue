@@ -1,6 +1,7 @@
 <template>
   <Motion
     ref="magneticRef"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="{ x: springX, y: springY }"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
@@ -12,6 +13,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch, type ComponentPublicInstance } from 'vue'
 import { Motion, useMotionValue, useSpring } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import magnetic from '../theme/magnetic'
 
 // Types
 interface SpringOptions {
@@ -25,6 +28,8 @@ interface MagneticProps {
   range?: number
   actionArea?: 'self' | 'parent' | 'global'
   springOptions?: SpringOptions
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<MagneticProps>(), {
@@ -32,7 +37,11 @@ const props = withDefaults(defineProps<MagneticProps>(), {
   range: 100,
   actionArea: 'self',
   springOptions: () => ({ stiffness: 26.7, damping: 4.1, mass: 0.2 }),
+  class: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'magnetic', props, theme: magnetic })
 
 // Refs
 const magneticRef = ref<ComponentPublicInstance | HTMLElement | null>(null)

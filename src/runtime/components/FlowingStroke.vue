@@ -1,5 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import flowingStroke from '../theme/flowing-stroke'
 
 const props = defineProps({
   width: { type: Number, default: 1200 },
@@ -9,6 +11,14 @@ const props = defineProps({
   dash: { type: Number, default: 34 }, // dash length
   gap: { type: Number, default: 22 }, // gap length
   speed: { type: Number, default: 1 }, // multiplier for stripe travel speed
+  class: { type: String, default: undefined },
+  ui: { type: Object, default: undefined },
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'flowingStroke',
+  props,
+  theme: flowingStroke,
 })
 
 // hovered state
@@ -58,7 +68,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div
-    class="relative overflow-hidden"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="{ width: `${props.width}px`, height: `${props.height}px` }"
     @mouseenter="hovered = true"
     @mouseleave="hovered = false"
@@ -67,7 +77,7 @@ onBeforeUnmount(() => {
       :width="props.width"
       :height="props.height"
       :viewBox="`0 0 ${props.width} ${props.height}`"
-      class="w-full h-full block"
+      :class="ui.svg({ class: uiProps.ui?.svg })"
       aria-hidden="true"
     >
       <!-- solid ribbon (background) -->

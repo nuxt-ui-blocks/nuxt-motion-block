@@ -1,22 +1,40 @@
 <template>
   <Motion
-    :class="progressClasses"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="progressStyle"
   />
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, withDefaults, defineProps, type Ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { Motion, useScroll, useSpring, useMotionValueEvent } from 'motion-v'
+import type { MaybeComputedElementRef } from '@vueuse/core'
 import type { SpringOptions } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import scrollProgress from '../theme/scroll-progress'
 
 const props = withDefaults(defineProps<{
   class?: string
+  ui?: Record<string, any>
   springOptions?: SpringOptions
-  containerRef?: Ref<HTMLElement | null>
+  /**
+   * Scrollable ancestor to track instead of the window. Pass a getter —
+   * `:container-ref="() => panelRef"` — not the element: a plain binding is
+   * unwrapped by the template and captured as `null` during `setup`, after
+   * which nothing re-reads it and `useScroll` falls back to the window.
+   */
+  containerRef?: MaybeComputedElementRef
 }>(), {
+  class: undefined,
+  ui: undefined,
   springOptions: undefined,
   containerRef: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'scrollProgress',
+  props,
+  theme: scrollProgress,
 })
 
 const DEFAULT_SPRING_OPTIONS: SpringOptions = {
@@ -27,6 +45,9 @@ const DEFAULT_SPRING_OPTIONS: SpringOptions = {
 
 // Use scroll tracking
 const { scrollYProgress } = useScroll({
+  // Straight through, never `props.containerRef?.value`: `useScroll` resolves the
+  // getter via `unrefElement` inside its own `flush: 'post'` effect, so
+  // unwrapping here would strip the reactive source.
   container: props.containerRef,
 })
 
@@ -43,11 +64,6 @@ onMounted(() => {
     scaleXValue.value = latest as number
   })
 })
-
-const progressClasses = computed(() => [
-  'inset-x-0 top-0 h-1 origin-left',
-  props.class,
-])
 
 const progressStyle = computed(() => ({
   scaleX: scaleXValue.value,

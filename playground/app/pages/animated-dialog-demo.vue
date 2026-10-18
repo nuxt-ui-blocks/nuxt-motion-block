@@ -1,15 +1,20 @@
 <template>
   <div class="p-8">
-    <h1 class="text-3xl font-bold mb-6">
-      Animated Dialog Demo
+    <h1 class="text-2xl font-bold text-highlighted mb-2">
+      Animated Dialog
     </h1>
+    <p class="text-muted mb-6">
+      UModal extended with motion-v scale/opacity morphing animations.
+    </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Basic Animated Dialog -->
-      <div class="p-6 border rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">
-          Basic Animated Dialog
-        </h2>
+      <!-- Basic -->
+      <UCard>
+        <template #header>
+          <h2 class="text-lg font-semibold text-highlighted">
+            Basic Dialog
+          </h2>
+        </template>
         <MAnimatedDialog>
           <UButton
             label="Open Dialog"
@@ -20,8 +25,8 @@
               <h3 class="text-lg font-semibold mb-2">
                 Basic Dialog
               </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4">
-                This dialog opens with motion-v animations.
+              <p class="text-muted mb-4">
+                Opens with motion-v animations.
               </p>
               <UButton
                 label="Action"
@@ -32,13 +37,15 @@
             </div>
           </template>
         </MAnimatedDialog>
-      </div>
+      </UCard>
 
-      <!-- Custom Scale Animation -->
-      <div class="p-6 border rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">
-          Custom Scale Animation
-        </h2>
+      <!-- Custom Scale -->
+      <UCard>
+        <template #header>
+          <h2 class="text-lg font-semibold text-highlighted">
+            Custom Scale
+          </h2>
+        </template>
         <MAnimatedDialog :scale="0.8">
           <UButton
             label="Strong Morph"
@@ -49,19 +56,21 @@
               <h3 class="text-lg font-semibold mb-2">
                 Strong Morphing
               </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                This dialog uses a stronger motion-v morphing effect.
+              <p class="text-muted">
+                Stronger motion-v morphing effect.
               </p>
             </div>
           </template>
         </MAnimatedDialog>
-      </div>
+      </UCard>
 
-      <!-- Custom Variants and Transition -->
-      <div class="p-6 border rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">
-          Custom Variants & Transition
-        </h2>
+      <!-- Custom Variants -->
+      <UCard>
+        <template #header>
+          <h2 class="text-lg font-semibold text-highlighted">
+            Custom Variants
+          </h2>
+        </template>
         <MAnimatedDialog
           :variants="customVariants"
           :transition-options="customTransition"
@@ -75,19 +84,21 @@
               <h3 class="text-lg font-semibold mb-2">
                 Custom Animation
               </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                This dialog uses custom variants and transition props.
+              <p class="text-muted">
+                Custom variants and transition props.
               </p>
             </div>
           </template>
         </MAnimatedDialog>
-      </div>
+      </UCard>
 
-      <!-- Rotate Animation -->
-      <div class="p-6 border rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">
-          Rotate Animation
-        </h2>
+      <!-- Rotate -->
+      <UCard>
+        <template #header>
+          <h2 class="text-lg font-semibold text-highlighted">
+            Rotate Animation
+          </h2>
+        </template>
         <MAnimatedDialog
           :variants="rotateVariants"
           :transition-options="{ type: 'spring', stiffness: 200, damping: 15 }"
@@ -101,22 +112,24 @@
               <h3 class="text-lg font-semibold mb-2">
                 Rotate Animation
               </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                This dialog rotates while animating.
+              <p class="text-muted">
+                Rotates while animating.
               </p>
             </div>
           </template>
         </MAnimatedDialog>
-      </div>
+      </UCard>
 
-      <!-- With Header and Footer -->
-      <div class="p-6 border rounded-lg md:col-span-2">
-        <h2 class="text-xl font-semibold mb-4">
-          With Header and Footer
-        </h2>
+      <!-- Header + Footer -->
+      <UCard class="md:col-span-2">
+        <template #header>
+          <h2 class="text-lg font-semibold text-highlighted">
+            Header and Footer
+          </h2>
+        </template>
         <MAnimatedDialog
           title="Dialog with Header and Footer"
-          description="This dialog has custom header and footer slots"
+          description="Custom header and footer slots"
         >
           <UButton
             label="Open Complex Dialog"
@@ -124,10 +137,10 @@
           />
           <template #body>
             <div class="p-4">
-              <p class="text-gray-600 dark:text-gray-300">
-                This is the main content of the dialog. It can contain any Vue components or HTML elements.
+              <p class="text-muted">
+                Main content of the dialog. Can contain any Vue components or HTML.
               </p>
-              <div class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded">
+              <div class="mt-4 p-4 bg-muted rounded-lg">
                 <p>You can include forms, images, or any other content here.</p>
               </div>
             </div>
@@ -148,7 +161,7 @@
             </div>
           </template>
         </MAnimatedDialog>
-      </div>
+      </UCard>
     </div>
   </div>
 </template>
@@ -161,7 +174,7 @@ const customVariants = {
 }
 
 const customTransition = {
-  type: 'spring',
+  type: 'spring' as const,
   bounce: 0.2,
   duration: 0.5,
 }

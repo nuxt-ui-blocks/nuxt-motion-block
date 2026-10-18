@@ -1,8 +1,7 @@
 <template>
-  <div class="w-full overflow-hidden">
+  <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <div
-      class="infinite-slider-content"
-      :class="className"
+      :class="ui.content({ class: [uiProps.ui?.content, className] })"
       :style="style"
     >
       <slot />
@@ -13,15 +12,23 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import infiniteSlider from '../theme/infinite-slider'
 
 type Props = {
   className?: string
   duration?: number
+  class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
   duration: 40,
+  class: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'infiniteSlider', props, theme: infiniteSlider })
 
 const style = computed(() => ({
   animationDuration: `${props.duration}s`,

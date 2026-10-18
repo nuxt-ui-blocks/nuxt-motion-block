@@ -1,7 +1,7 @@
 <template>
   <Motion
     ref="containerRef"
-    :class="['inline-block overflow-hidden', containerClass]"
+    :class="ui.root({ class: [props.containerClass, uiProps.ui?.root] })"
     v-bind="$attrs"
   >
     <!-- @vue-ignore -->
@@ -14,7 +14,7 @@
       :style="{
         perspective: animationStyle === 'flip' ? '1000px' : undefined,
       }"
-      :class="['inline-block overflow-hidden', props.class]"
+      :class="ui.word({ class: [uiProps.ui?.word, uiProps.class] })"
     >
       {{ words[currentWord] }}
     </Motion>
@@ -25,6 +25,8 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { Motion } from 'motion-v'
 import { useElementVisibility } from '@vueuse/core'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import wordRotate from '../theme/word-rotate'
 
 interface WordRotateProps {
   words?: string[]
@@ -37,6 +39,7 @@ interface WordRotateProps {
   startOnView?: boolean
   once?: boolean
   inViewMargin?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<WordRotateProps>(), {
@@ -44,12 +47,19 @@ const props = withDefaults(defineProps<WordRotateProps>(), {
   duration: 1500,
   animationStyle: 'fade',
   loop: true,
-  class: '',
+  class: undefined,
   containerClass: '',
   pauseDuration: 300,
   startOnView: true,
   once: false,
   inViewMargin: '0px',
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'wordRotate',
+  props,
+  theme: wordRotate,
 })
 
 const containerRef = ref<HTMLElement | null>(null)

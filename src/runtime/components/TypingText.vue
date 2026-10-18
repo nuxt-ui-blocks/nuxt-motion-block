@@ -1,7 +1,16 @@
 <script setup lang="ts">
 import { ref, computed, onUnmounted, watch, onMounted } from 'vue'
-import { Motion } from 'motion-v'
+import type { ExtractPropTypes } from 'vue'
+import { Motion, type MotionProps } from 'motion-v'
 import { useElementVisibility } from '@vueuse/core'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import typingText from '../theme/typing-text'
+
+// motion-v types `inViewOptions.margin` as an internal `MarginType` template-literal
+// union that it never exports, so read it off the resolved `MotionProps` rather than
+// the raw runtime props declaration.
+type ResolvedMotionProps = Partial<ExtractPropTypes<MotionProps>>
+type MotionInViewMargin = NonNullable<NonNullable<ResolvedMotionProps['inViewOptions']>['margin']>
 
 interface TypingTextProps {
   /** Text to animate */
@@ -24,6 +33,8 @@ interface TypingTextProps {
   pauseDuration?: number
   /** Custom class */
   class?: string
+  /** Per-slot classes resolved against the component theme. */
+  ui?: Record<string, any>
   /** Callback when typing completes */
   onComplete?: () => void
   /** Whether to start animation when component enters viewport */
@@ -33,7 +44,7 @@ interface TypingTextProps {
   /** The animation preset to use */
   animation?: string
   /** Margin for in-view detection (rootMargin) */
-  inViewMargin?: string
+  inViewMargin?: MotionInViewMargin
 }
 
 const props = withDefaults(defineProps<TypingTextProps>(), {
@@ -45,17 +56,24 @@ const props = withDefaults(defineProps<TypingTextProps>(), {
   cursorClass: '',
   loop: false,
   pauseDuration: 2000,
-  class: '',
+  class: undefined,
+  ui: undefined,
   startOnView: true,
   once: false,
-  inViewMargin: '0px',
+  inViewMargin: '0px' as MotionInViewMargin,
   animation: 'fadeIn',
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'typingText',
+  props,
+  theme: typingText,
 })
 
 const emit = defineEmits(['complete'])
 
 const containerRef = ref<HTMLElement | null>(null)
-const isInView = useElementVisibility(containerRef, { margin: props.inViewMargin })
+const isInView = useElementVisibility(containerRef, { rootMargin: props.inViewMargin })
 const hasAnimated = ref(false)
 const displayText = ref('')
 const currentIndex = ref(0)
@@ -171,11 +189,12 @@ function typeText() {
     emit('complete')
     props.onComplete?.()
 
-    if (props.loop && props.texts && props.texts.length > 1) {
+    const texts = props.texts
+    if (props.loop && texts && texts.length > 1) {
       typingTimeoutId = setTimeout(() => {
         displayText.value = ''
         currentIndex.value = 0
-        currentTextIndex.value = (currentTextIndex.value + 1) % props.texts.length
+        currentTextIndex.value = (currentTextIndex.value + 1) % texts.length
         typeText()
       }, props.pauseDuration)
     }
@@ -193,11 +212,11 @@ function handleClick() {
     :initial="initialAnimationState"
     :animate="shouldStart ? targetAnimationState : initialAnimationState"
     :transition="containerTransition"
-    :class="['typing-text-container', 'whitespace-pre-wrap', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :in-view-options="{ margin: inViewMargin }"
     @click="handleClick"
   >
-    <span class="inline-flex items-center">
+    <span :class="ui.text({ class: uiProps.ui?.text })">
       {{ displayText }}
       <Motion
         v-if="showCursor"
@@ -206,10 +225,10 @@ function handleClick() {
         :transition="{
           duration: 1,
           repeat: Infinity,
-          easing: 'linear',
+          ease: 'linear',
           times: [0, 0.5, 0.5, 1],
         }"
-        :class="['typing-cursor', 'inline-block ms-1 font-normal select-none w-px', cursorClass]"
+        :class="ui.cursor({ class: [uiProps.ui?.cursor, cursorClass] })"
       >
         {{ cursor }}
       </Motion>

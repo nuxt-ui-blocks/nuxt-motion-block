@@ -124,6 +124,9 @@ describe('AnimatedDialog', () => {
       global: {
         stubs: {
           UModal: {
+            // `AnimatedDialog` never imports `UModal` — it resolves it by tag name — so the stub
+            // has to carry the name for `findComponent()` to be able to reach it.
+            name: 'UModal',
             template: '<div><slot /><slot name="content" /></div>',
             props: ['open'],
           },
@@ -137,11 +140,13 @@ describe('AnimatedDialog', () => {
       },
     })
 
-    // Test that setting the open prop triggers the watch and emits the event
+    // Test that setting the open prop propagates through to UModal
     await wrapper.setProps({ open: true })
+    expect(wrapper.findComponent({ name: 'UModal' }).props('open')).toBe(true)
 
-    // Since we're testing the component's internal logic, not the UModal's emission,
-    // we should check if the component properly reacts to prop changes
-    expect(wrapper.vm.isOpen).toBe(true)
+    // Closing from inside the dialog emits update:open so the parent stays in sync
+    wrapper.findComponent({ name: 'UModal' }).vm.$emit('update:open', false)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.emitted('update:open')).toEqual([[false]])
   })
 })

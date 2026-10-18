@@ -120,3 +120,20 @@ label: Preview
 </template>
 ```
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.backgroundRippleEffect` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `background-ripple-effect absolute inset-0 h-full w-full [--cell-border-color:var(--color-neutral-300)] [--cell-fill-color:var(--color-neutral-100)] [--cell-shadow-color:var(--color-neutral-500)] dark:[--cell-border-color:var(--color-neutral-700)] dark:[--cell-fill-color:var(--color-neutral-900)] dark:[--cell-shadow-color:var(--color-neutral-800)]` |
+| `inner` | `relative h-auto w-auto overflow-hidden` |
+| `mask` | `pointer-events-none absolute inset-0 z-[2] h-full w-full overflow-hidden` |
+| `grid` | `mask-radial-from-20% mask-radial-at-top opacity-600` |

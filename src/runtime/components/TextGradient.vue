@@ -1,7 +1,7 @@
 <template>
   <Motion
     :is="component"
-    :class="computedClasses"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="computedStyles"
     :initial="initialVariant"
     :animate="animateVariant"
@@ -15,7 +15,7 @@
     <!-- Screen reader accessible text if needed -->
     <span
       v-if="hideFromScreenReader"
-      class="sr-only"
+      :class="ui.srOnly({ class: uiProps.ui?.srOnly })"
     >{{ text }}</span>
   </Motion>
 </template>
@@ -23,6 +23,8 @@
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 import { computed, ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import textGradient from '../theme/text-gradient'
 
 type GradientDirection = 'horizontal' | 'vertical' | 'diagonal' | 'radial'
 type AnimationType = 'wave' | 'pulse' | 'flow' | 'rainbow' | 'static'
@@ -41,6 +43,7 @@ interface TextGradientProps {
   ariaLabel?: string
   hideFromScreenReader?: boolean
   reduceMotion?: boolean
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<TextGradientProps>(), {
@@ -52,12 +55,15 @@ const props = withDefaults(defineProps<TextGradientProps>(), {
   duration: 3,
   speed: 1,
   size: 200,
-  class: '',
+  class: undefined,
   hover: false,
   ariaLabel: '',
   hideFromScreenReader: false,
   reduceMotion: false,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'textGradient', props, theme: textGradient })
 
 const component = computed(() => props.as)
 
@@ -91,16 +97,6 @@ const createGradient = () => {
   }
   return `linear-gradient(${direction}, ${colors})`
 }
-
-const computedClasses = computed(() => {
-  return [
-    'text-gradient',
-    'bg-clip-text',
-    'text-transparent',
-    'font-bold',
-    props.class,
-  ].filter(Boolean).join(' ')
-})
 
 const computedStyles = computed(() => {
   const gradient = createGradient()

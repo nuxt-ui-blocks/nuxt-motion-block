@@ -2,15 +2,24 @@
 import type { PropType } from 'vue'
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { animate } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import variableProximity from '../theme/variable-proximity'
 
 const props = defineProps({
   label: { type: String, required: true },
-  class: { type: String, default: '' },
+  class: { type: String, default: undefined },
+  ui: { type: Object, default: undefined },
   fromFontVariationSettings: { type: String, default: '\'wght\' 400, \'opsz\' 9' },
   toFontVariationSettings: { type: String, default: '\'wght\' 1000, \'opsz\' 40' },
   containerRef: { type: Object, default: null },
   radius: { type: Number, default: 100 },
   falloff: { type: String as PropType<'linear' | 'exponential' | 'gaussian'>, default: 'linear' },
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'variableProximity',
+  props,
+  theme: variableProximity,
 })
 
 const internalContainerRef = ref<HTMLElement | null>(null)
@@ -98,13 +107,13 @@ onMounted(async () => {
 <template>
   <div
     ref="internalContainerRef"
-    class="relative inline-block"
+    :class="ui.root({ class: uiProps.ui?.root })"
   >
     <span
       v-for="(char, i) in label.split('')"
       :key="i"
       ref="charRefs"
-      :class="props.class"
+      :class="ui.char({ class: [uiProps.ui?.char, uiProps.class] })"
       style="display: inline-block; will-change: font-variation-settings, transform;"
     >
       {{ char === ' ' ? '\u00A0' : char }}

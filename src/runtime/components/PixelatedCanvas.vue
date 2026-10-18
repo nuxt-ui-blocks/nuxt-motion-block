@@ -1,7 +1,7 @@
 <template>
   <canvas
     ref="canvasRef"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     aria-label="Pixelated rendering of source image"
     role="img"
   />
@@ -9,6 +9,8 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import pixelatedCanvas from '../theme/pixelated-canvas'
 
 interface PixelatedCanvasProps {
   src: string
@@ -36,6 +38,7 @@ interface PixelatedCanvasProps {
   jitterSpeed?: number
   fadeOnLeave?: boolean
   fadeSpeed?: number
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<PixelatedCanvasProps>(), {
@@ -62,6 +65,14 @@ const props = withDefaults(defineProps<PixelatedCanvasProps>(), {
   jitterSpeed: 4,
   fadeOnLeave: true,
   fadeSpeed: 0.1,
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'pixelatedCanvas',
+  props,
+  theme: pixelatedCanvas,
 })
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)

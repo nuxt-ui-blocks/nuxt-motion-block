@@ -31,7 +31,7 @@
         v-if="enableZoom"
         size="xs"
         variant="outline"
-        class="bg-white/80 backdrop-blur-sm"
+        class="bg-default/80 backdrop-blur-sm"
         @click="resetZoom"
       >
         <UIcon
@@ -42,7 +42,7 @@
       <UButton
         size="xs"
         variant="outline"
-        class="bg-white/80 backdrop-blur-sm"
+        class="bg-default/80 backdrop-blur-sm"
         @click="resetPosition"
       >
         <UIcon
@@ -57,7 +57,7 @@
       v-if="showPosition"
       class="absolute bottom-4 left-4 z-20"
     >
-      <div class="bg-black/60 text-white px-2 py-1 rounded text-xs backdrop-blur-sm">
+      <div class="bg-(--ui-bg-inverted)/60 text-inverted px-2 py-1 rounded text-xs backdrop-blur-sm">
         {{ Math.round(sliderPosition) }}%
       </div>
     </div>

@@ -1,34 +1,31 @@
 <template>
-  <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 rounded-xl max-w-2xl mx-auto">
-    <div class="text-center mb-6">
-      <h3 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
-        Flowing Stroke
-      </h3>
-      <p class="text-gray-600 dark:text-gray-400">
-        Animated stroke effects that flow along paths for dynamic visual elements
+  <div class="flex w-full max-w-lg flex-col gap-6">
+    <div class="rounded-2xl bg-violet-50 p-4 dark:bg-violet-950/30">
+      <MFlowingStroke
+        :width="440"
+        :height="140"
+        :dash="30"
+        :gap="18"
+        :ribbon="16"
+        :speed="1.4"
+      />
+      <p class="text-center text-xs text-muted">
+        Hover the ribbon — the dashes travel along the path
       </p>
     </div>
 
-    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
+    <div class="rounded-2xl border border-default p-4">
       <MFlowingStroke
-        :width="400"
-        :height="120"
-        class="mx-auto"
+        :width="440"
+        :height="160"
+        :dash="6"
+        :gap="10"
+        :ribbon="10"
+        :speed="3"
       />
-    </div>
-
-    <div class="mt-6 flex justify-center">
-      <UButton
-        color="primary"
-        variant="solid"
-        size="sm"
-      >
-        <UIcon
-          name="i-lucide-play"
-          class="w-4 h-4 mr-2"
-        />
-        Animate Stroke
-      </UButton>
+      <p class="text-center text-xs text-muted">
+        A tight dash at three times the base speed
+      </p>
     </div>
   </div>
 </template>

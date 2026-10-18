@@ -2,12 +2,12 @@
   <Motion
     ref="containerRef"
     :as="as"
-    :class="props.class"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :initial="finalVariants.hidden"
     :animate="shouldAnimate ? finalVariants.visible : finalVariants.hidden"
     :transition="transition"
-    @motionstart="onMotionStart"
-    @motioncomplete="onMotionComplete"
+    @animation-start="onMotionStart"
+    @animation-complete="onMotionComplete"
   >
     <slot />
   </Motion>
@@ -17,12 +17,14 @@
 import { ref, computed, watch } from 'vue'
 import { Motion } from 'motion-v'
 import { useElementVisibility } from '@vueuse/core'
-import type { Variant, Transition } from 'motion-v'
+import type { VariantType, Transition } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import inView from '../theme/in-view'
 
 // Types
 interface Variants {
-  hidden: Variant
-  visible: Variant
+  hidden: VariantType
+  visible: VariantType
 }
 
 interface ViewOptions {
@@ -34,9 +36,17 @@ interface InViewProps {
   variants?: Variants
   transition?: Transition
   viewOptions?: ViewOptions
-  as?: string
+  /**
+   * Element tag to render. Constrained to real HTML tags because motion-v types
+   * `<Motion as>` generically: a widened `string` infers the tag as `string`, and
+   * Vue's `keyof IntrinsicElementAttributes` collapses to `string | number`, which
+   * sends the component's own prop types into an index-signature branch typed
+   * `never` and rejects every other binding.
+   */
+  as?: keyof HTMLElementTagNameMap
   once?: boolean
   class?: string
+  ui?: Record<string, any>
   onAnimationStart?: () => void
   onAnimationComplete?: () => void
 }
@@ -49,7 +59,10 @@ const props = withDefaults(defineProps<InViewProps>(), {
   as: 'div',
   once: true,
   class: '',
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'inView', props, theme: inView })
 
 // Emits
 const emit = defineEmits<{
@@ -63,7 +76,7 @@ const hasAnimated = ref(false)
 
 // Setup viewport detection using VueUse
 const isInView = useElementVisibility(containerRef, {
-  margin: props.viewOptions?.margin || '0px',
+  rootMargin: props.viewOptions?.margin || '0px',
   threshold: props.viewOptions?.threshold || 0.1,
 })
 
@@ -74,7 +87,7 @@ const defaultVariants: Variants = {
 }
 
 // Computed variants combining defaults with props
-const finalVariants = computed(() => ({
+const finalVariants = computed<Variants>(() => ({
   hidden: { ...defaultVariants.hidden, ...(props.variants?.hidden || {}) },
   visible: { ...defaultVariants.visible, ...(props.variants?.visible || {}) },
 }))

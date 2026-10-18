@@ -1,10 +1,7 @@
 <template>
   <div
     ref="containerRef"
-    :class="[
-      'h-full w-full overflow-hidden top-0 left-0 bg-[linear-gradient(40deg,var(--gradient-background-start),var(--gradient-background-end))]',
-      containerClass,
-    ]"
+    :class="ui.root({ class: [uiProps.ui?.root, props.containerClass] })"
     @mousemove="handleMouseMove"
   >
     <svg class="hidden">
@@ -29,70 +26,33 @@
       </defs>
     </svg>
 
-    <div :class="props.class">
+    <div :class="ui.content({ class: [uiProps.ui?.content, uiProps.class] })">
       <slot />
     </div>
 
     <div
-      :class="[
-        'gradients-container h-full w-full blur-lg',
-        isSafari ? 'blur-2xl' : '[filter:url(#blurMe)_blur(40px)]',
-      ]"
+      :class="ui.gradients({ safari: isSafari, class: uiProps.ui?.gradients })"
     >
       <div
-        :class="[
-          'absolute [background:radial-gradient(circle_at_center,_var(--first-color)_0,_var(--first-color)_50%)_no-repeat]',
-          '[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]',
-          '[transform-origin:center_center]',
-          'animate-first',
-          'opacity-100',
-        ]"
+        :class="ui.first({ class: uiProps.ui?.first })"
       />
       <div
-        :class="[
-          'absolute [background:radial-gradient(circle_at_center,_rgba(var(--second-color),_0.8)_0,_rgba(var(--second-color),_0)_50%)_no-repeat]',
-          '[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]',
-          '[transform-origin:calc(50%-400px)]',
-          'animate-second',
-          'opacity-100',
-        ]"
+        :class="ui.second({ class: uiProps.ui?.second })"
       />
       <div
-        :class="[
-          'absolute [background:radial-gradient(circle_at_center,_rgba(var(--third-color),_0.8)_0,_rgba(var(--third-color),_0)_50%)_no-repeat]',
-          '[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]',
-          '[transform-origin:calc(50%+400px)]',
-          'animate-third',
-          'opacity-100',
-        ]"
+        :class="ui.third({ class: uiProps.ui?.third })"
       />
       <div
-        :class="[
-          'absolute [background:radial-gradient(circle_at_center,_rgba(var(--fourth-color),_0.8)_0,_rgba(var(--fourth-color),_0)_50%)_no-repeat]',
-          '[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]',
-          '[transform-origin:calc(50%-200px)]',
-          'animate-fourth',
-          'opacity-70',
-        ]"
+        :class="ui.fourth({ class: uiProps.ui?.fourth })"
       />
       <div
-        :class="[
-          'absolute [background:radial-gradient(circle_at_center,_rgba(var(--fifth-color),_0.8)_0,_rgba(var(--fifth-color),_0)_50%)_no-repeat]',
-          '[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]',
-          '[transform-origin:calc(50%-800px)_calc(50%+800px)]',
-          'animate-fifth',
-          'opacity-100',
-        ]"
+        :class="ui.fifth({ class: uiProps.ui?.fifth })"
       />
 
       <div
         v-if="interactive"
         ref="interactiveRef"
-        :class="[
-          'absolute [background:radial-gradient(circle_at_center,_rgba(var(--pointer-color),_0.8)_0,_rgba(var(--pointer-color),_0)_50%)_no-repeat]',
-          '[mix-blend-mode:var(--blending-value)] w-full h-full -top-1/2 -left-1/2',
-          'opacity-70',
-        ]"
+        :class="ui.pointer({ class: uiProps.ui?.pointer })"
       />
     </div>
   </div>
@@ -100,6 +60,8 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { backgroundGradientAnimation } from '../theme'
 
 interface Props {
   gradientBackgroundStart?: string
@@ -115,6 +77,7 @@ interface Props {
   class?: string
   interactive?: boolean
   containerClass?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -130,6 +93,8 @@ const props = withDefaults(defineProps<Props>(), {
   blendingValue: 'hard-light',
   interactive: true,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'backgroundGradientAnimation', props, theme: backgroundGradientAnimation })
 
 const interactiveRef = ref<HTMLDivElement>()
 const containerRef = ref<HTMLDivElement>()
@@ -235,7 +200,7 @@ const handleMouseMove = (event: MouseEvent) => {
 }
 
 .animate-second {
-  animation: moveInCircle 20s reverse infinite;
+  animation: moveInCircle 20s ease infinite;
 }
 
 .animate-third {

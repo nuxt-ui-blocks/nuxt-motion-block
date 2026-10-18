@@ -361,7 +361,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
 const morphSettings = ref({
   title: 'Transform Your Digital Experience',
@@ -490,7 +490,15 @@ const cycleTexts = () => {
 }
 
 // Auto-cycle texts periodically
-setInterval(() => {
-  cycleTexts()
-}, 3000)
+let cycleTimer
+
+onMounted(() => {
+  cycleTimer = setInterval(() => {
+    cycleTexts()
+  }, 3000)
+})
+
+onBeforeUnmount(() => {
+  clearInterval(cycleTimer)
+})
 </script>

@@ -1,7 +1,6 @@
 <template>
   <Motion
-    class="relative"
-    :class="className"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class, props.className] })"
     :style="containerStyle"
     initial="hidden"
     animate="visible"
@@ -13,18 +12,20 @@
       :key="`${index}-${letter}`"
       aria-hidden="true"
       :variants="itemVariants"
-      class="absolute left-1/2 top-1/2 inline-block"
+      :class="ui.letter({ class: uiProps.ui?.letter })"
       :style="getLetterStyle(index)"
     >
       {{ letter }}
     </Motion>
-    <span class="sr-only">{{ children }}</span>
+    <span :class="ui.srLabel({ class: uiProps.ui?.srLabel })">{{ children }}</span>
   </Motion>
 </template>
 
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 import { computed } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import spinningText from '../theme/spinning-text'
 
 // Types
 interface Transition {
@@ -43,6 +44,8 @@ interface SpinningTextProps {
   style?: object
   duration?: number
   className?: string
+  class?: string
+  ui?: Record<string, any>
   reverse?: boolean
   fontSize?: number
   radius?: number
@@ -60,6 +63,14 @@ const props = withDefaults(defineProps<SpinningTextProps>(), {
   radius: 5,
   transition: () => ({}),
   variants: () => ({}),
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'spinningText',
+  props,
+  theme: spinningText,
 })
 
 // Constants

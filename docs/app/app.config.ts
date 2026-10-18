@@ -1,4 +1,7 @@
 export default defineAppConfig({
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://nuxt-motion-block.pages.dev',
+  },
   ui: {
     colors: {
       primary: 'teal',

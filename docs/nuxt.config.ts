@@ -1,7 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxt/image', '@nuxt/ui', '@nuxt/content', 'nuxt-og-image', 'nuxt-llms', '../src/module'],
+  modules: ['@nuxt/eslint', '@nuxt/image', '@nuxt/ui', '@nuxt/content', 'nuxt-llms', '../src/module'],
+
+  imports: {
+    presets: [
+      {
+        from: '~/utils/og-image-verify-stub',
+        imports: ['defineOgImageComponent'],
+      },
+    ],
+  },
 
   devtools: {
     enabled: true,

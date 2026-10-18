@@ -4,7 +4,7 @@
     :ui="{
       root: [
         'relative overflow-hidden h-60 md:h-96 w-full transition-all duration-300 ease-out cursor-pointer group',
-        'bg-gray-100 dark:bg-neutral-900',
+        'bg-default',
         hovered !== null && hovered !== index && 'blur-sm scale-[0.98]',
       ],
       body: 'p-0 h-full',
@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UCardProps } from '#ui/types'
+import type { CardProps } from '#ui/components/Card.vue'
 
 interface Card {
   title: string
@@ -60,7 +60,7 @@ interface Props {
   card: Card
   index: number
   hovered: number | null
-  ui?: UCardProps['ui']
+  ui?: CardProps['ui']
 }
 
 defineProps<Props>()

@@ -1,13 +1,13 @@
 <template>
   <div
     ref="containerRef"
-    class="relative flex gap-4 justify-center items-center flex-wrap"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
     <span
       v-for="(word, index) in words"
       :key="index"
       :ref="(el) => { wordRefs[index] = el as HTMLElement | null }"
-      class="relative text-[3rem] font-black cursor-pointer"
+      :class="ui.word({ class: uiProps.ui?.word })"
       :style="{
         filter: manualMode
           ? (index === currentIndex ? 'blur(0px)' : `blur(${blurAmount}px)`)
@@ -21,7 +21,7 @@
     </span>
 
     <motion.div
-      class="absolute top-0 left-0 pointer-events-none box-border border-0"
+      :class="ui.focus({ class: uiProps.ui?.focus })"
       :animate="{
         x: focusRect.x,
         y: focusRect.y,
@@ -38,28 +38,28 @@
       }"
     >
       <span
-        class="absolute w-4 h-4 border-[3px] rounded-[3px] top-[-10px] left-[-10px] border-r-0 border-b-0"
+        :class="ui.corner({ class: uiProps.ui?.corner, position: 'topLeft' })"
         :style="{
           borderColor: 'var(--border-color)',
           filter: 'drop-shadow(0 0 4px var(--border-color))',
         }"
       />
       <span
-        class="absolute w-4 h-4 border-[3px] rounded-[3px] top-[-10px] right-[-10px] border-l-0 border-b-0"
+        :class="ui.corner({ class: uiProps.ui?.corner, position: 'topRight' })"
         :style="{
           borderColor: 'var(--border-color)',
           filter: 'drop-shadow(0 0 4px var(--border-color))',
         }"
       />
       <span
-        class="absolute w-4 h-4 border-[3px] rounded-[3px] bottom-[-10px] left-[-10px] border-r-0 border-t-0"
+        :class="ui.corner({ class: uiProps.ui?.corner, position: 'bottomLeft' })"
         :style="{
           borderColor: 'var(--border-color)',
           filter: 'drop-shadow(0 0 4px var(--border-color))',
         }"
       />
       <span
-        class="absolute w-4 h-4 border-[3px] rounded-[3px] bottom-[-10px] right-[-10px] border-l-0 border-t-0"
+        :class="ui.corner({ class: uiProps.ui?.corner, position: 'bottomRight' })"
         :style="{
           borderColor: 'var(--border-color)',
           filter: 'drop-shadow(0 0 4px var(--border-color))',
@@ -72,6 +72,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import trueFocus from '../theme/true-focus'
 
 const props = defineProps({
   sentence: {
@@ -102,6 +104,20 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
+  class: {
+    type: String,
+    default: undefined,
+  },
+  ui: {
+    type: Object,
+    default: undefined,
+  },
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'trueFocus',
+  props,
+  theme: trueFocus,
 })
 
 const words = computed(() => props.sentence.split(' '))

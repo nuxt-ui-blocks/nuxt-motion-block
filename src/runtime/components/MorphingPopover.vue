@@ -1,6 +1,7 @@
 <template>
   <UPopover
     v-model:open="isOpen"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :mode="mode"
     :content="contentProps"
     :arrow="arrow"
@@ -10,7 +11,7 @@
     :modal="modal"
     :open-delay="openDelay"
     :close-delay="closeDelay"
-    :ui="ui"
+    :ui="uiProps.ui"
     @update:open="handleOpenChange"
   >
     <template #default>
@@ -20,7 +21,7 @@
         exit="exit"
         :variants="triggerVariants"
         :transition="triggerTransition"
-        class="inline-block will-change-transform"
+        :class="ui.trigger({ class: uiProps.ui?.trigger })"
       >
         <slot />
       </motion.div>
@@ -31,7 +32,7 @@
       #content
     >
       <!-- Origin-aware animation for the content -->
-      <div :class="contentClasses">
+      <div :class="ui.content({ class: [contentClasses, uiProps.ui?.content] })">
         <AnimatePresence>
           <motion.div
             v-if="isOpen"
@@ -40,7 +41,7 @@
             exit="exit"
             :variants="contentVariants"
             :transition="contentTransition"
-            class="will-change-transform"
+            :class="ui.contentInner({ class: uiProps.ui?.contentInner })"
             :style="{
               transformOrigin: 'var(--reka-popover-content-transform-origin, center)',
             }"
@@ -64,6 +65,9 @@
 import { ref, computed, watch } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
 import type { Variant, Transition } from 'motion-v'
+import type { PopoverProps } from '#ui/components/Popover.vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import morphingPopover from '../theme/morphing-popover'
 
 interface Variants {
   initial?: Variant
@@ -72,8 +76,9 @@ interface Variants {
 }
 
 interface Props {
+  class?: string
   mode?: 'click' | 'hover'
-  content?: object
+  content?: PopoverProps['content']
   arrow?: boolean | object
   portal?: string | boolean | HTMLElement
   dismissible?: boolean
@@ -82,7 +87,7 @@ interface Props {
   modal?: boolean
   openDelay?: number
   closeDelay?: number
-  ui?: object
+  ui?: Record<string, any>
   // Morphing effect props
   scale?: number
   // Custom animation props (matching React API)
@@ -91,6 +96,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  class: undefined,
   mode: 'click',
   dismissible: true,
   defaultOpen: false,
@@ -100,9 +106,12 @@ const props = withDefaults(defineProps<Props>(), {
   arrow: false,
   portal: true,
   scale: 0.95,
+  ui: undefined,
   variants: () => ({}),
   transition: () => ({}),
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'morphingPopover', props, theme: morphingPopover })
 
 const emit = defineEmits<{
   'update:open': [open: boolean]
@@ -198,7 +207,7 @@ const contentClasses = computed(() => {
 
 const contentProps = computed(() => {
   return {
-    side: 'bottom',
+    side: 'bottom' as const,
     sideOffset: 8,
     collisionPadding: 8,
     ...props.content,

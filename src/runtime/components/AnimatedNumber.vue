@@ -2,7 +2,7 @@
   <!-- @vue-ignore -->
   <Motion
     :as="as"
-    :class="['inline-block tabular-nums', props.class]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     v-bind="$attrs"
   >
     {{ displayValue }}
@@ -12,10 +12,13 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { Motion, motionValue, useSpring, type SpringOptions } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedNumber from '../theme/animated-number'
 
 interface AnimatedNumberProps {
   value: number
   class?: string
+  ui?: Record<string, any>
   springOptions?: SpringOptions
   as?: string
   format?: (value: number) => string
@@ -23,6 +26,7 @@ interface AnimatedNumberProps {
 
 const props = withDefaults(defineProps<AnimatedNumberProps>(), {
   class: '',
+  ui: undefined,
   springOptions: () => ({
     stiffness: 300,
     damping: 30,
@@ -30,6 +34,12 @@ const props = withDefaults(defineProps<AnimatedNumberProps>(), {
   }),
   as: 'span',
   format: (value: number) => Math.round(value).toLocaleString(),
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'animatedNumber',
+  props,
+  theme: animatedNumber,
 })
 
 // State for the current display value

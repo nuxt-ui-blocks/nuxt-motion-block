@@ -1,7 +1,7 @@
 <template>
   <Motion
     :is="component"
-    :class="className"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class, props.className] })"
     v-bind="$attrs"
   >
     {{ displayText }}
@@ -11,6 +11,8 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, nextTick } from 'vue'
 import { Motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import textScramble from '../theme/text-scramble'
 
 interface TextScrambleProps {
   text?: string
@@ -18,6 +20,8 @@ interface TextScrambleProps {
   speed?: number
   characterSet?: string
   as?: string
+  class?: string
+  ui?: Record<string, any>
   className?: string
   trigger?: boolean
   onScrambleComplete?: () => void
@@ -29,8 +33,16 @@ const props = withDefaults(defineProps<TextScrambleProps>(), {
   speed: 0.04,
   characterSet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
   as: 'p',
+  class: undefined,
+  ui: undefined,
   className: '',
   trigger: true,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'textScramble',
+  props,
+  theme: textScramble,
 })
 
 const emit = defineEmits(['scrambleComplete'])

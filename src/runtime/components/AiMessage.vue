@@ -1,0 +1,271 @@
+<script setup lang="ts">
+import { useClipboard } from '@vueuse/core'
+import { computed, onBeforeUnmount, ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import aiMessage from '../theme/ai-message'
+import type { AiMessageAction, AiMessagePart, AiMessageRole } from '../types/ai'
+import { getAiMessageText } from '../utils/ai-chat'
+
+interface Props {
+  /** Stable identity for the turn. Required, because React keys messages on it. */
+  id: string
+  role: AiMessageRole
+  /**
+   * The turn's content, split into typed pieces.
+   *
+   * A plain structural array rather than the AI SDK's `UIMessage['parts']`:
+   * `ai` is only an optional peer of Nuxt UI, so depending on its types here
+   * would make every consumer of this module install the SDK just to typecheck.
+   */
+  parts: AiMessagePart[]
+  metadata?: unknown
+  side?: 'left' | 'right'
+  variant?: 'solid' | 'outline' | 'soft' | 'subtle' | 'naked'
+  color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
+  /**
+   * Wrap the turn in a bubble. Defaults to `true`.
+   *
+   * Opt out when the turn already carries its own surfaces — a reasoning trace, a
+   * tool call, a diff. A bubble around a stack of cards reads as a box inside a
+   * box, and the double border is what makes chat UIs feel heavy.
+   */
+  bubble?: boolean
+  /** Offer a copy action when the turn has text. Defaults to `true`. */
+  copyable?: boolean
+  /** Extra actions, rendered after the copy button. */
+  actions?: AiMessageAction[]
+  class?: string
+  ui?: Record<string, any>
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  bubble: true,
+  class: undefined,
+  copyable: true,
+  metadata: undefined,
+  side: undefined,
+  ui: undefined,
+  variant: undefined,
+  color: undefined,
+  actions: () => [],
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'aiMessage', props, theme: aiMessage })
+
+defineSlots<{
+  actions?: (props: { actions: AiMessageAction[] }) => unknown
+  body?: (props: { id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
+  content?: (props: { content?: string, id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
+  files?: (props: { id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
+  header?: (props: { id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
+  leading?: (props: { id: string, role: AiMessageRole, parts: AiMessagePart[], metadata: unknown }) => unknown
+}>()
+
+const COPIED_RESET_MS = 1600
+const ACTION_STAGGER_MS = 30
+
+const isUser = computed(() => props.role === 'user')
+
+const side = computed(() => props.side ?? (isUser.value ? 'right' : 'left'))
+
+/**
+ * A user turn is the one thing that reads as a bubble by default — solid
+ * inverted, the way a sent message reads everywhere. An assistant turn stays soft
+ * so it does not fight the cards it usually contains.
+ */
+const variant = computed(() => props.variant ?? (props.bubble ? (isUser.value ? 'solid' : 'soft') : 'naked'))
+
+const text = computed(() => getAiMessageText(props))
+
+/**
+ * What the message-level slots receive.
+ *
+ * Forwarding the upstream slot payload would tie this component's public slot
+ * types to `ChatMessage`, whose `files` payload collapses into an index
+ * signature — `Omit<UIMessage, 'parts'>` over a type that has one. The props
+ * already carry everything the slots are declared to receive, so hand them that
+ * instead and let the contract stay this module's.
+ */
+const messageProps = computed(() => ({
+  id: props.id,
+  role: props.role,
+  parts: props.parts,
+  metadata: props.metadata,
+}))
+
+const { copy } = useClipboard()
+const hasCopied = ref(false)
+let copyTimer: ReturnType<typeof setTimeout> | undefined
+
+onBeforeUnmount(() => clearTimeout(copyTimer))
+
+const copyMessage = async () => {
+  try {
+    await copy(text.value)
+  }
+  catch {
+    // A refused clipboard is not worth interrupting the reader over.
+    return
+  }
+
+  hasCopied.value = true
+  clearTimeout(copyTimer)
+  copyTimer = setTimeout(() => {
+    hasCopied.value = false
+  }, COPIED_RESET_MS)
+}
+
+const actions = computed<AiMessageAction[]>(() => {
+  if (!props.copyable || !text.value) return props.actions
+
+  return [
+    {
+      key: 'copy',
+      icon: hasCopied.value ? 'i-lucide-check' : 'i-lucide-copy',
+      label: hasCopied.value ? 'copied' : 'copy message',
+      onClick: copyMessage,
+    },
+    ...props.actions,
+  ]
+})
+</script>
+
+<template>
+  <UChatMessage
+    :id="props.id"
+    :role="props.role"
+    :parts="props.parts"
+    :metadata="props.metadata"
+    :side="side"
+    :variant="variant"
+    :color="props.color"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
+  >
+    <template #header>
+      <slot
+        name="header"
+        v-bind="messageProps"
+      />
+    </template>
+
+    <template #leading>
+      <slot
+        name="leading"
+        v-bind="messageProps"
+      />
+    </template>
+
+    <template #files>
+      <slot
+        name="files"
+        v-bind="messageProps"
+      />
+    </template>
+
+    <template #body>
+      <slot
+        name="body"
+        v-bind="messageProps"
+      />
+    </template>
+
+    <template #content>
+      <slot
+        name="content"
+        v-bind="{ ...messageProps, content: text }"
+      />
+    </template>
+
+    <template #actions="slotProps">
+      <slot
+        name="actions"
+        v-bind="slotProps"
+      />
+
+      <button
+        v-for="(action, index) in actions"
+        :key="action.key"
+        type="button"
+        :aria-label="action.label"
+        :aria-pressed="action.active === true"
+        :class="ui.action({ active: action.active === true, class: uiProps.ui?.action, side })"
+        :style="{ transitionDelay: `${index * ACTION_STAGGER_MS}ms` }"
+        @click="action.onClick()"
+      >
+        <UIcon
+          :key="action.key === 'copy' && hasCopied ? 'copied' : 'idle'"
+          :name="action.icon"
+          :class="ui.actionIcon({ class: uiProps.ui?.actionIcon })"
+          aria-hidden="true"
+          size="14"
+        />
+      </button>
+    </template>
+  </UChatMessage>
+</template>
+
+<style scoped>
+/*
+ * Nuxt UI already fades the whole action row in on hover. This owns the second
+ * half of the reveal: each button arrives on its own, sliding in from the side it
+ * belongs to, one frame apart. One property per owner — the row owns opacity,
+ * these own transform — so the two never fight over the same fade.
+ */
+@media (hover: hover) {
+  .ai-message-action {
+    transform: translateX(var(--ai-message-slide)) scale(0.9);
+    transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1), background-color 150ms ease-out, color 150ms ease-out;
+  }
+
+  .ai-message-root:hover .ai-message-action,
+  .ai-message-root:focus-within .ai-message-action {
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Buttons slide in from the side of the message they belong to. */
+.ai-message-action-agent {
+  --ai-message-slide: -6px;
+}
+
+.ai-message-action-user {
+  --ai-message-slide: 6px;
+}
+
+/*
+ * The row is hover-only by design, which would hide it from anyone tabbing
+ * through the page. Focus counts as intent.
+ */
+.ai-message-root:focus-within :deep([data-slot='actions']) {
+  opacity: 1;
+}
+
+.ai-message-pop {
+  animation: ai-message-pop 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes ai-message-pop {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-message-action {
+    transform: none;
+    transition: none;
+  }
+
+  .ai-message-pop {
+    animation: none;
+  }
+}
+</style>

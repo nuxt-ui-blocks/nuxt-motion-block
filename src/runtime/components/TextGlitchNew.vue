@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed, type CSSProperties } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import textGlitchNew from '../theme/text-glitch-new'
 
 interface GlitchTextProps {
   text: string
@@ -7,14 +9,18 @@ interface GlitchTextProps {
   enableShadows?: boolean
   enableOnHover?: boolean
   class?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<GlitchTextProps>(), {
   speed: 0.5,
   enableShadows: true,
   enableOnHover: false,
-  class: '',
+  class: undefined,
+  ui: undefined,
 })
+
+const { props: uiProps, ui } = useMotionBlockUI({ name: 'textGlitchNew', props, theme: textGlitchNew })
 
 interface CustomCSSProperties extends CSSProperties {
   // Custom properties for shadow offset (used in after/before styles)
@@ -41,41 +47,13 @@ const inlineStyles = computed<CustomCSSProperties>(() => {
     '--before-animation': beforeAnimationString,
   }
 })
-
-const baseClasses = 'text-white text-[clamp(2rem,10vw,8rem)] font-black relative mx-auto select-none cursor-pointer'
-
-const pseudoClasses = computed(() => {
-  // The animation application is now embedded directly in the class strings
-
-  if (!props.enableOnHover) {
-    // Permanent Glitch Effect
-    return (
-      // Apply the full animation using a static property [animation:var(--after-animation)]
-      'after:content-[attr(data-text)] after:absolute after:top-0 after:left-[10px] after:text-white after:bg-[#060010] after:overflow-hidden after:[clip-path:inset(0_0_0_0)] after:[text-shadow:var(--after-shadow)] after:[animation:var(--after-animation)] '
-      + 'before:content-[attr(data-text)] before:absolute before:top-0 before:left-[-10px] before:text-white before:bg-[#060010] before:overflow-hidden before:[clip-path:inset(0_0_0_0)] before:[text-shadow:var(--before-shadow)] before:[animation:var(--before-animation)]'
-    )
-  }
-  else {
-    // Glitch Effect on Hover
-    return (
-      // Initial state: hidden content
-      'after:content-[\'\'] after:absolute after:top-0 after:left-[10px] after:text-white after:bg-[#060010] after:overflow-hidden after:[clip-path:inset(0_0_0_0)] after:opacity-0 '
-      + 'before:content-[\'\'] before:absolute before:top-0 before:left-[-10px] before:text-white before:bg-[#060010] before:overflow-hidden before:[clip-path:inset(0_0_0_0)] before:opacity-0 '
-      // Hover state: show content, apply shadow, and start animation
-      + 'hover:after:content-[attr(data-text)] hover:after:opacity-100 hover:after:[text-shadow:var(--after-shadow)] hover:after:[animation:var(--after-animation)] '
-      + 'hover:before:content-[attr(data-text)] hover:before:opacity-100 hover:before:[text-shadow:var(--before-shadow)] hover:before:[animation:var(--before-animation)]'
-    )
-  }
-})
-
-const combinedClasses = computed(() => `${baseClasses} ${pseudoClasses.value} ${props.class}`)
 </script>
 
 <template>
   <div
     :style="inlineStyles"
     :data-text="text"
-    :class="combinedClasses"
+    :class="ui.root({ enableOnHover: props.enableOnHover, class: [uiProps.ui?.root, uiProps.class] })"
   >
     {{ text }}
   </div>

@@ -22,7 +22,7 @@ label: Preview
 ```vue
 <template>
   <div class="relative h-64 w-full overflow-hidden rounded-lg border bg-gradient-to-br from-gray-900 to-black">
-    <MMeteors :number="30" />
+    <MMeteors :count="30" />
     <div class="relative z-10 h-full flex flex-col items-center justify-center text-center p-4">
       <h3 class="text-2xl font-bold text-white mb-2">Meteor Shower</h3>
       <p class="text-gray-300">Animated meteor shower effect</p>
@@ -35,12 +35,16 @@ label: Preview
 ## Props
 
 ::field-group
-  ::field{name="number" type="number" default="20"}
+  ::field{name="count" type="number" default="10"}
   Number of meteors to display in the shower.
+  ::
+
+  ::field{name="speed" type="number" default="1"}
+  Multiplier for the fall speed. Higher values make the meteors fall faster, `2` is twice as fast.
   ::
   
   ::field{name="class" type="string" default="''"}
-  CSS classes to apply to the meteor elements.
+  CSS classes to apply to the container. The container fills its parent, so give the parent a height.
   ::
 ::
 
@@ -81,7 +85,7 @@ label: Preview
 ```vue
 <template>
   <div class="relative h-64 w-full overflow-hidden rounded-lg border bg-gradient-to-br from-gray-900 to-black">
-    <MMeteors :number="50" />
+    <MMeteors :count="50" />
     <div class="relative z-10 h-full flex flex-col items-center justify-center text-center p-4">
       <h3 class="text-xl font-bold text-white mb-2">Dense Meteor Shower</h3>
       <p class="text-gray-300">50 meteors for a more intense effect</p>
@@ -90,3 +94,18 @@ label: Preview
 </template>
 ```
 ::
+
+## UI
+
+This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.meteors` in `app.config.ts`.
+
+::field-group
+  ::field{name="ui" type="object"}
+  Per-slot classes merged over the theme defaults.
+  ::
+::
+
+| Slot | Default classes |
+| ---- | --------------- |
+| `root` | `relative h-full w-full overflow-hidden` |
+| `meteor` | `meteor` |

@@ -1,14 +1,14 @@
 <template>
-  <span :class="props.class">
+  <span :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
     <span
       v-for="(letter, i) in letters"
       :key="i"
-      class="relative inline-block [perspective:10000px] [transform-style:preserve-3d] [width:auto]"
+      :class="ui.letter({ class: uiProps.ui?.letter })"
       aria-hidden="true"
     >
       <!-- @vue-ignore -->
       <Motion
-        class="absolute inline-block [backface-visibility:hidden] [transform-origin:50%_25%]"
+        :class="ui.enter({ class: uiProps.ui?.enter })"
         :initial="enterInitial"
         :animate="enterAnimate"
         :transition="{
@@ -21,7 +21,7 @@
       </Motion>
       <!-- @vue-ignore -->
       <Motion
-        class="absolute inline-block [backface-visibility:hidden] [transform-origin:50%_100%]"
+        :class="ui.exit({ class: uiProps.ui?.exit })"
         :initial="exitInitial"
         :animate="exitAnimate"
         :transition="{
@@ -33,17 +33,19 @@
       >
         {{ letter === ' ' ? '\u00A0' : letter }}
       </Motion>
-      <span class="invisible">
+      <span :class="ui.placeholder({ class: uiProps.ui?.placeholder })">
         {{ letter === ' ' ? '\u00A0' : letter }}
       </span>
     </span>
-    <span class="sr-only">{{ children }}</span>
+    <span :class="ui.srOnly({ class: uiProps.ui?.srOnly })">{{ children }}</span>
   </span>
 </template>
 
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 import { computed } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import textRoll from '../theme/text-roll'
 
 interface TextRollProps {
   children?: string
@@ -51,6 +53,7 @@ interface TextRollProps {
   getEnterDelay?: (index: number) => number
   getExitDelay?: (index: number) => number
   class?: string
+  ui?: Record<string, any>
   transition?: object
   variants?: {
     enter: {
@@ -70,8 +73,16 @@ const props = withDefaults(defineProps<TextRollProps>(), {
   duration: 0.5,
   getEnterDelay: (i: number) => i * 0.1,
   getExitDelay: (i: number) => i * 0.1 + 0.2,
+  class: undefined,
+  ui: undefined,
   className: '',
   transition: () => ({ ease: 'easeIn' }),
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'textRoll',
+  props,
+  theme: textRoll,
 })
 
 // Default variants

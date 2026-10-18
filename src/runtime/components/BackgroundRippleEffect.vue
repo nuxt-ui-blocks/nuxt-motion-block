@@ -1,18 +1,13 @@
 <template>
   <div
     ref="containerRef"
-    class="background-ripple-effect"
-    :class="[
-      'absolute inset-0 h-full w-full',
-      '[--cell-border-color:var(--color-neutral-300)] [--cell-fill-color:var(--color-neutral-100)] [--cell-shadow-color:var(--color-neutral-500)]',
-      'dark:[--cell-border-color:var(--color-neutral-700)] dark:[--cell-fill-color:var(--color-neutral-900)] dark:[--cell-shadow-color:var(--color-neutral-800)]',
-    ]"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
-    <div class="relative h-auto w-auto overflow-hidden">
-      <div class="pointer-events-none absolute inset-0 z-[2] h-full w-full overflow-hidden" />
+    <div :class="ui.inner({ class: uiProps.ui?.inner })">
+      <div :class="ui.mask({ class: uiProps.ui?.mask })" />
       <DivGrid
         :key="`base-${rippleKey}`"
-        class="mask-radial-from-20% mask-radial-at-top opacity-600"
+        :class="ui.grid({ class: uiProps.ui?.grid })"
         :rows="rows"
         :cols="cols"
         :cell-size="cellSize"
@@ -29,26 +24,34 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import DivGrid from './DivGrid.vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import backgroundRippleEffect from '../theme/background-ripple-effect'
 
 interface ClickedCell {
   row: number
   col: number
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const props = defineProps({
-  rows: {
-    type: Number,
-    default: 8,
-  },
-  cols: {
-    type: Number,
-    default: 27,
-  },
-  cellSize: {
-    type: Number,
-    default: 56,
-  },
+interface Props {
+  class?: string
+  ui?: Record<string, any>
+  rows?: number
+  cols?: number
+  cellSize?: number
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  class: undefined,
+  ui: undefined,
+  rows: 8,
+  cols: 27,
+  cellSize: 56,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'backgroundRippleEffect',
+  props,
+  theme: backgroundRippleEffect,
 })
 
 const clickedCell = ref<ClickedCell | null>(null)

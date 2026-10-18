@@ -3,7 +3,7 @@
     :initial="{ opacity: 0 }"
     :animate="{ opacity: 1 }"
     :transition="{ duration: 1.5 }"
-    class="pointer-events-none absolute inset-0 h-full w-full"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
   >
     <!-- Left Side Animation -->
     <motion.div
@@ -14,7 +14,7 @@
         repeatType: 'reverse',
         ease: 'easeInOut',
       }"
-      class="absolute top-0 left-0 w-screen h-screen z-40 pointer-events-none"
+      :class="ui.left({ class: uiProps.ui?.left })"
     >
       <div
         :style="{
@@ -23,7 +23,7 @@
           width: `${width}px`,
           height: `${height}px`,
         }"
-        class="absolute top-0 left-0"
+        :class="ui.leftFirst({ class: uiProps.ui?.leftFirst })"
       />
 
       <div
@@ -33,7 +33,7 @@
           width: `${smallWidth}px`,
           height: `${height}px`,
         }"
-        class="absolute top-0 left-0 origin-top-left"
+        :class="ui.leftSecond({ class: uiProps.ui?.leftSecond })"
       />
 
       <div
@@ -43,7 +43,7 @@
           width: `${smallWidth}px`,
           height: `${height}px`,
         }"
-        class="absolute top-0 left-0 origin-top-left"
+        :class="ui.leftThird({ class: uiProps.ui?.leftThird })"
       />
     </motion.div>
 
@@ -56,7 +56,7 @@
         repeatType: 'reverse',
         ease: 'easeInOut',
       }"
-      class="absolute top-0 right-0 w-screen h-screen z-40 pointer-events-none"
+      :class="ui.right({ class: uiProps.ui?.right })"
     >
       <div
         :style="{
@@ -65,7 +65,7 @@
           width: `${width}px`,
           height: `${height}px`,
         }"
-        class="absolute top-0 right-0"
+        :class="ui.rightFirst({ class: uiProps.ui?.rightFirst })"
       />
 
       <div
@@ -75,7 +75,7 @@
           width: `${smallWidth}px`,
           height: `${height}px`,
         }"
-        class="absolute top-0 right-0 origin-top-right"
+        :class="ui.rightSecond({ class: uiProps.ui?.rightSecond })"
       />
 
       <div
@@ -85,7 +85,7 @@
           width: `${smallWidth}px`,
           height: `${height}px`,
         }"
-        class="absolute top-0 right-0 origin-top-right"
+        :class="ui.rightThird({ class: uiProps.ui?.rightThird })"
       />
     </motion.div>
   </motion.div>
@@ -93,6 +93,8 @@
 
 <script setup lang="ts">
 import { motion } from 'motion-v'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import animatedSpotlight from '../theme/animated-spotlight'
 
 interface SpotlightProps {
   gradientFirst?: string
@@ -104,9 +106,10 @@ interface SpotlightProps {
   smallWidth?: number
   duration?: number
   xOffset?: number
+  class?: string
+  ui?: Record<string, any>
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = withDefaults(defineProps<SpotlightProps>(), {
   gradientFirst: 'radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(210, 100%, 85%, .08) 0, hsla(210, 100%, 55%, .02) 50%, hsla(210, 100%, 45%, 0) 80%)',
   gradientSecond: 'radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .06) 0, hsla(210, 100%, 55%, .02) 80%, transparent 100%)',
@@ -117,5 +120,13 @@ const props = withDefaults(defineProps<SpotlightProps>(), {
   smallWidth: 240,
   duration: 7,
   xOffset: 100,
+  class: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'animatedSpotlight',
+  props,
+  theme: animatedSpotlight,
 })
 </script>

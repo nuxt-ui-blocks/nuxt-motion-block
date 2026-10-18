@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted, watch } from 'vue'
 import type { PropType } from 'vue'
 import { AnimatePresence, motion } from 'motion-v'
 import Explosion from './Explosion.vue'
+import { cn } from '../../utils/merge'
 
 // Define BeamOptions interface
 interface BeamOptions {
@@ -155,13 +156,13 @@ const toColor = props.beamOptions.toColor || 'to-transparent'
       delay: props.beamOptions.delay || 0,
       repeatDelay: props.beamOptions.repeatDelay || 0,
     }"
-    :class="[
+    :class="cn(
       'absolute left-0 top-20 m-auto h-14 w-px rounded-full bg-gradient-to-t',
       fromColor,
       viaColor,
       toColor,
       props.beamOptions.className,
-    ]"
+    )"
   />
 
   <AnimatePresence>

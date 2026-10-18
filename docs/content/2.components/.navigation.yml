@@ -6,6 +6,34 @@ items:
     items:
       - title: 3D Card
         to: /components/3d-card
+  - title: AI Components
+    items:
+      - title: Agent Avatar
+        to: /components/agent-avatar
+      - title: AI Citation
+        to: /components/ai-citation
+      - title: AI Diff
+        to: /components/ai-diff
+      - title: AI Message
+        to: /components/ai-message
+      - title: AI Messages
+        to: /components/ai-messages
+      - title: AI Orb
+        to: /components/ai-orb
+      - title: AI Orb Face
+        to: /components/ai-orb-face
+      - title: AI Prompt Input
+        to: /components/ai-prompt-input
+      - title: AI Reasoning
+        to: /components/ai-reasoning
+      - title: AI Response
+        to: /components/ai-response
+      - title: AI Sources
+        to: /components/ai-sources
+      - title: AI Task List
+        to: /components/ai-task-list
+      - title: AI Tool Call
+        to: /components/ai-tool-call
   - title: Background Components
     items:
       - title: Animated Spotlight
@@ -38,52 +66,222 @@ items:
         to: /components/vortex
       - title: AnimatedBackground
         to: /components/animated-background
+  - title: Buttons
+    items:
+      - title: Button Copy
+        to: /components/button-copy
+      - title: Clip Corners Button
+        to: /components/clip-corners-button
+      - title: Dot Morph Button
+        to: /components/dot-morph-button
+      - title: Magnetic Button
+        to: /components/magnetic-button
+      - title: Music Toggle
+        to: /components/music-toggle
+      - title: Smooth Button
+        to: /components/smooth-button
+      - title: Theme Toggle
+        to: /components/theme-toggle
   - title: Card Components
     items:
+      - title: Apple Invites
+        to: /components/apple-invites
+      - title: App Download Stack
+        to: /components/app-download-stack
       - title: Card Stack
         to: /components/card-stack
       - title: Draggable Card
         to: /components/draggable-card
       - title: Evervault Card
         to: /components/ever-vault-card
+      - title: Expandable Cards
+        to: /components/expandable-cards
+      - title: Figma Comment
+        to: /components/figma-comment
       - title: Focus Cards
         to: /components/focus-cards
+      - title: Glass Card
+        to: /components/glass-card
+      - title: Glass Panel
+        to: /components/glass-panel
       - title: Glare Card
         to: /components/glare-card
+      - title: Glow Hover Cards
+        to: /components/glow-hover-cards
       - title: Glowing Stars Card
         to: /components/glowing-stars-card
+      - title: Mail Card
+        to: /components/mail-card
+      - title: Price Flow
+        to: /components/price-flow
+      - title: Product Card
+        to: /components/product-card
+      - title: Social Hover Card
+        to: /components/social-hover-card
+      - title: Switchboard Card
+        to: /components/switchboard-card
+      - title: Tweet Card
+        to: /components/tweet-card
+      - title: Wallet Card
+        to: /components/wallet-card
       - title: Wobble Card
         to: /components/wobble-card
+  - title: Carousels
+    items:
+      - title: Carousel
+        to: /components/carousel
+      - title: Coverflow Carousel
+        to: /components/coverflow-carousel
+      - title: Reviews Carousel
+        to: /components/reviews-carousel
   - title: Directional Components
     items:
       - title: Direction Aware Hover
         to: /components/direction-aware-hover
       - title: Direction Aware Hover New
         to: /components/direction-aware-hover-new
+  - title: Form Components
+    items:
+      - title: Animated File Upload
+        to: /components/animated-file-upload
+      - title: Animated Input
+        to: /components/animated-input
+      - title: Animated Number Input
+        to: /components/animated-number-input
+      - title: Animated OTP Input
+        to: /components/animated-otp-input
+      - title: Animated Progress Bar
+        to: /components/animated-progress-bar
+      - title: Animated Stepper
+        to: /components/animated-stepper
+      - title: Animated Tags
+        to: /components/animated-tags
+      - title: Animated Toggle
+        to: /components/animated-toggle
+      - title: Checkbox
+        to: /components/checkbox
+      - title: Duration Picker
+        to: /components/duration-picker
+      - title: Radio Group
+        to: /components/radio-group
   - title: Layout & Background
     items:
       - title: AnimatedGroup
         to: /components/animated-group
       - title: Collision
         to: /components/collision
+  - title: Loaders & Progress
+    items:
+      - title: Grid Loader
+        to: /components/grid-loader
+      - title: Motion Loader
+        to: /components/motion-loader
+      - title: Page Preloader
+        to: /components/page-preloader
+  - title: Navigation & Toolbars
+    items:
+      - title: Expandable Navbar
+        to: /components/expandable-navbar
+      - title: Floating Navbar
+        to: /components/floating-navbar
+      - title: Toolbar Dynamic
+        to: /components/toolbar-dynamic
+      - title: Toolbar Expandable
+        to: /components/toolbar-expandable
   - title: Interactive Elements
     items:
+      - title: Accordion
+        to: /components/accordion
       - title: Animated Dialog
         to: /components/animated-dialog
+      - title: Animated Tooltip
+        to: /components/animated-tooltip
+      - title: Basic Dropdown
+        to: /components/basic-dropdown
+      - title: Basic Toast
+        to: /components/basic-toast
+      - title: Code Block
+        to: /components/code-block
       - title: Dock
         to: /components/dock
+      - title: Drag and Drop
+        to: /components/drag-and-drop
+      - title: Drawer
+        to: /components/drawer
+      - title: Dynamic Group
+        to: /components/dynamic-group
+      - title: Dynamic Island
+        to: /components/dynamic-island
+      - title: Emoji Reaction
+        to: /components/emoji-reaction
       - title: Image Comparison
         to: /components/image-comparison
+      - title: Morph Icon
+        to: /components/morph-icon
+      - title: Morphing Dialog
+        to: /components/morphing-dialog
       - title: Morphing Popover
         to: /components/morphing-popover
+      - title: Notification Badge
+        to: /components/notification-badge
+      - title: Orbital Image Wheel
+        to: /components/orbital-image-wheel
+      - title: Pinned List
+        to: /components/pinned-list
+      - title: Rich Popover
+        to: /components/rich-popover
+      - title: Unlock Face ID
+        to: /components/unlock-face-id
+      - title: Video Modal
+        to: /components/video-modal
   - title: Numbers & Text
     items:
+      - title: Animated Avatar Group
+        to: /components/animated-avatar-group
+      - title: Animated List
+        to: /components/animated-list
       - title: AnimatedNumber
         to: /components/animated-number
+      - title: Blur Out Up
+        to: /components/blur-out-up
+      - title: Bottom Up Letters
+        to: /components/bottom-up-letters
       - title: CountingNumber
         to: /components/counting-number
+      - title: Focus Blur Resolve
+        to: /components/focus-blur-resolve
+      - title: Line By Line Slide
+        to: /components/line-by-line-slide
+      - title: Mask Reveal Up
+        to: /components/mask-reveal-up
+      - title: Micro Scale Fade
+        to: /components/micro-scale-fade
+      - title: Per Word Crossfade
+        to: /components/per-word-crossfade
+      - title: Perspective Text 3D
+        to: /components/perspective-text-3d
+      - title: Ransom Note
+        to: /components/ransom-note
+      - title: Short Slide Down
+        to: /components/short-slide-down
+      - title: Short Slide Right
+        to: /components/short-slide-right
+      - title: Shine Text
+        to: /components/shine-text
       - title: SlidingNumber
         to: /components/sliding-number
+      - title: Soft Blur In
+        to: /components/soft-blur-in
+      - title: Spinning Text
+        to: /components/spinning-text
+      - title: Spring Scale In
+        to: /components/spring-scale-in
+      - title: Stagger From Center
+        to: /components/stagger-from-center
+      - title: Stagger From Edges
+        to: /components/stagger-from-edges
+      - title: Text Effect
+        to: /components/text-effect
       - title: TextGlitch
         to: /components/text-glitch
       - title: TextGlitch New
@@ -92,6 +290,8 @@ items:
         to: /components/text-gradient
       - title: TextLoop
         to: /components/text-loop
+      - title: TextLoop Alignment
+        to: /components/text-loop-alignment
       - title: TextMorph
         to: /components/text-morph
       - title: TextReveal
@@ -104,42 +304,78 @@ items:
         to: /components/text-shimmer
       - title: TextShimmerWave
         to: /components/text-shimmer-wave
+      - title: Top Down Letters
+        to: /components/top-down-letters
       - title: True Focus
         to: /components/true-focus
       - title: TypingText
         to: /components/typing-text
       - title: Variable Proximity
         to: /components/variable-proximity
+      - title: Wave Text
+        to: /components/wave-text
       - title: WordRotate
         to: /components/word-rotate
+  - title: Transitions
+    items:
+      - title: Prism Sweep Transition
+        to: /components/prism-sweep-transition
+      - title: SDF Blob Transition
+        to: /components/sdf-blob-transition
+      - title: Shader Reveal Transition
+        to: /components/shader-reveal-transition
+      - title: Transition Panel
+        to: /components/transition-panel
   - title: Visual Effects
     items:
+      - title: Ascii Render
+        to: /components/ascii-render
+      - title: Border Beam
+        to: /components/border-beam
       - title: BorderTrail
         to: /components/border-trail
+      - title: Dither Chart
+        to: /components/dither-chart
       - title: Div Grid
         to: /components/div-grid
+      - title: Drawing Cursor
+        to: /components/drawing-cursor
+      - title: Emboss Surface
+        to: /components/emboss-surface
+      - title: Exposure Slider
+        to: /components/exposure-slider
       - title: Flowing Stroke
         to: /components/flowing-stroke
       - title: GlowEffect
         to: /components/glow-effect
       - title: Glowing Effect
         to: /components/glowing-effect
+      - title: Holographic Foil
+        to: /components/holographic-foil
+      - title: Liquid Metal
+        to: /components/liquid-metal
       - title: Mask Container
         to: /components/mask-container
+      - title: Parallax Layers
+        to: /components/parallax-layers
       - title: Pixelated Canvas
         to: /components/pixelated-canvas
       - title: ProgressiveBlur
         to: /components/progressive-blur
+      - title: Siri Orb
+        to: /components/siri-orb
       - title: Spotlight
         to: /components/spotlight
+      - title: Squircle
+        to: /components/squircle
+      - title: SVG Clip Mask
+        to: /components/svg-clip-mask
       - title: TracingBeam
         to: /components/tracing-beam
   - title: Interaction & Movement
     items:
       - title: Cursor
         to: /components/cursor
-      - title: Drag And Drop
-        to: /components/drag-and-drop
       - title: ForceDot
         to: /components/force-dot
       - title: Magnetic
@@ -152,7 +388,13 @@ items:
         to: /components/in-view
       - title: Infinite Slider
         to: /components/infinite-slider
+      - title: Kinetic Type Scroll
+        to: /components/kinetic-type-scroll
+      - title: Scroll Image Reveal
+        to: /components/scroll-image-reveal
       - title: Scroll Velocity
         to: /components/scroll-velocity
       - title: ScrollProgress
         to: /components/scroll-progress
+      - title: SVG Draw On Scroll
+        to: /components/svg-draw-on-scroll

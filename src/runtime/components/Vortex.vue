@@ -1,15 +1,18 @@
 <template>
-  <div :class="['relative h-full w-full', containerClass]">
+  <div :class="ui.root({ class: [props.containerClass, uiProps.ui?.root] })">
     <motion.div
       ref="containerRef"
       :initial="{ opacity: 0 }"
       :animate="{ opacity: 1 }"
-      class="absolute inset-0 z-0 flex h-full w-full items-center justify-center bg-transparent"
+      :class="ui.background({ class: uiProps.ui?.background })"
     >
-      <canvas ref="canvasRef" />
+      <canvas
+        ref="canvasRef"
+        :class="ui.canvas({ class: uiProps.ui?.canvas })"
+      />
     </motion.div>
 
-    <div :class="['relative z-10', props.class]">
+    <div :class="ui.content({ class: [uiProps.ui?.content, uiProps.class] })">
       <slot />
     </div>
   </div>
@@ -19,6 +22,8 @@
 import { motion } from 'motion-v'
 import { createNoise3D } from 'simplex-noise' // for 3D noise add this package as dependency make sure add details in docs
 import { onMounted, onUnmounted, ref } from 'vue'
+import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import vortex from '../theme/vortex'
 
 interface VortexProps {
   class?: string
@@ -31,6 +36,7 @@ interface VortexProps {
   baseRadius?: number
   rangeRadius?: number
   backgroundColor?: string
+  ui?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<VortexProps>(), {
@@ -42,6 +48,15 @@ const props = withDefaults(defineProps<VortexProps>(), {
   baseRadius: 1,
   rangeRadius: 2,
   backgroundColor: '#000000',
+  class: undefined,
+  containerClass: undefined,
+  ui: undefined,
+})
+
+const { props: uiProps, ui } = useMotionBlockUI({
+  name: 'vortex',
+  props,
+  theme: vortex,
 })
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
