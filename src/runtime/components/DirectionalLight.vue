@@ -12,7 +12,7 @@
         rx="1924.71"
         ry="273.501"
         transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
-        :fill="fill || 'white'"
+        :fill="resolvedFill"
         fill-opacity="0.21"
       />
     </g>
@@ -47,6 +47,7 @@
 
 <script setup lang="ts">
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import directionalLight from '../theme/directional-light'
 
 interface SpotlightProps {
@@ -65,6 +66,8 @@ const { props: uiProps, ui } = useMotionBlockUI({
   props,
   theme: directionalLight,
 })
+
+const resolvedFill = useResolvedColor(() => props.fill || 'white')
 </script>
 
 <style scoped>

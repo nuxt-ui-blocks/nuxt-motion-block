@@ -2,17 +2,17 @@
   <div class="p-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-4">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 dark:bg-primary/30 rounded-full mb-4">
           <UIcon
             name="i-lucide-bar-chart-3"
-            class="w-5 h-5 text-blue-600 dark:text-blue-400"
+            class="w-5 h-5 text-primary"
           />
-          <span class="text-blue-700 dark:text-blue-300 font-medium">Performance Dashboard</span>
+          <span class="text-primary font-medium">Performance Dashboard</span>
         </div>
-        <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h2 class="text-4xl font-bold text-highlighted mb-4">
           Real-time Metrics
         </h2>
-        <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+        <p class="text-xl text-muted max-w-3xl mx-auto">
           Live analytics and performance indicators that update in real-time to help you make informed decisions
         </p>
       </div>
@@ -20,21 +20,21 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <UCard class="text-center hover:shadow-lg transition-shadow">
           <div class="flex justify-center mb-4">
-            <div class="w-16 h-16 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+            <div class="w-16 h-16 rounded-xl bg-primary/10 dark:bg-primary/30 flex items-center justify-center">
               <UIcon
                 name="i-lucide-users"
-                class="w-8 h-8 text-blue-600 dark:text-blue-400"
+                class="w-8 h-8 text-primary"
               />
             </div>
           </div>
-          <div class="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <div class="text-4xl font-bold text-highlighted mb-2">
             <MAnimatedNumber
               :value="activeUsers"
               :spring-options="{ stiffness: 100, damping: 10 }"
             />
           </div>
-          <div class="text-gray-600 dark:text-gray-400 mb-3">
-            Active Users
+          <div class="text-muted mb-3">
+            Monthly actives
           </div>
           <div class="flex items-center justify-center text-sm text-green-600 dark:text-green-400">
             <UIcon
@@ -54,14 +54,14 @@
               />
             </div>
           </div>
-          <div class="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <div class="text-4xl font-bold text-highlighted mb-2">
             <MAnimatedNumber
               :value="uptime"
               :spring-options="{ stiffness: 100, damping: 10 }"
             />
             <span class="text-2xl">%</span>
           </div>
-          <div class="text-gray-600 dark:text-gray-400 mb-3">
+          <div class="text-muted mb-3">
             System Uptime
           </div>
           <div class="flex items-center justify-center text-sm text-green-600 dark:text-green-400">
@@ -82,16 +82,16 @@
               />
             </div>
           </div>
-          <div class="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <div class="text-4xl font-bold text-highlighted mb-2">
             <MAnimatedNumber
               :value="projects"
               :spring-options="{ stiffness: 100, damping: 10 }"
             />+
           </div>
-          <div class="text-gray-600 dark:text-gray-400 mb-3">
+          <div class="text-muted mb-3">
             Projects Delivered
           </div>
-          <div class="flex items-center justify-center text-sm text-blue-600 dark:text-blue-400">
+          <div class="flex items-center justify-center text-sm text-primary">
             <UIcon
               name="i-lucide-trending-up"
               class="w-4 h-4 mr-1"
@@ -109,14 +109,14 @@
               />
             </div>
           </div>
-          <div class="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <div class="text-4xl font-bold text-highlighted mb-2">
             <MAnimatedNumber
               :value="responseTime"
               :spring-options="{ stiffness: 100, damping: 10 }"
             />
             <span class="text-2xl">ms</span>
           </div>
-          <div class="text-gray-600 dark:text-gray-400 mb-3">
+          <div class="text-muted mb-3">
             Avg. Response Time
           </div>
           <div class="flex items-center justify-center text-sm text-green-600 dark:text-green-400">
@@ -132,10 +132,10 @@
       <UCard class="mb-8">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
           <div>
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">
+            <h3 class="text-xl font-bold text-highlighted mb-1">
               Performance Trends
             </h3>
-            <p class="text-gray-600 dark:text-gray-400">
+            <p class="text-muted">
               Historical data and growth patterns
             </p>
           </div>
@@ -167,16 +167,16 @@
           </div>
         </div>
 
-        <div class="h-64 flex items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <div class="h-64 flex items-center justify-center bg-elevated rounded-lg">
           <div class="text-center">
             <UIcon
               name="i-lucide-bar-chart-3"
-              class="w-12 h-12 text-gray-400 mx-auto mb-3"
+              class="w-12 h-12 text-dimmed mx-auto mb-3"
             />
-            <p class="text-gray-500 dark:text-gray-400">
+            <p class="text-muted">
               Performance chart visualization
             </p>
-            <p class="text-sm text-gray-400 mt-1">
+            <p class="text-sm text-dimmed mt-1">
               Interactive chart would appear here
             </p>
           </div>

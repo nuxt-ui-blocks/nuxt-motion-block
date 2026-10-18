@@ -6,8 +6,6 @@
  * edge it enters from, how wide it is, what colours it refracts — is a uniform,
  * so a live direction or tone control never forces a shader recompile on the
  * exact frame it moves.
- *
- * Ported from smoothui's `prism-sweep-transition`.
  */
 
 /** Total sweep time, in milliseconds. */

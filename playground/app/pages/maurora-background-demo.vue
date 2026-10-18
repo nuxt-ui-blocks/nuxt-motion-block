@@ -31,7 +31,7 @@
         />
       </div>
 
-      <div class="relative h-[70vh] overflow-hidden rounded-2xl border border-default bg-background">
+      <div class="relative h-[70vh] overflow-hidden rounded-2xl border border-default bg-default">
         <MAuroraBackground
           :key="replayKey"
           data-testid="basic"
@@ -133,7 +133,7 @@
         />
       </div>
 
-      <div class="relative h-96 overflow-hidden rounded-2xl border border-default bg-background">
+      <div class="relative h-96 overflow-hidden rounded-2xl border border-default bg-default">
         <MAuroraBackground
           :show-radial-gradient="showRadial"
           data-testid="radial-stage"

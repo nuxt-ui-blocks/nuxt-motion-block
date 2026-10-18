@@ -13,12 +13,12 @@
         <h3 class="text-3xl font-bold text-white mb-4">
           Secure Vault
         </h3>
-        <p class="text-gray-300 mb-8">
+        <p class="text-dimmed mb-8">
           Enterprise-grade encryption and security protection for your most sensitive data
         </p>
       </div>
       <div class="space-y-4">
-        <div class="flex items-center p-4 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-colors">
+        <div class="flex items-center p-4 bg-default/10 backdrop-blur-sm rounded-lg hover:bg-default/20 transition-colors">
           <UIcon
             name="i-lucide-shield-check"
             class="w-6 h-6 text-green-400 mr-4"
@@ -27,26 +27,26 @@
             <h4 class="font-semibold text-white">
               256-bit AES Encryption
             </h4>
-            <p class="text-gray-300 text-sm">
+            <p class="text-dimmed text-sm">
               Military-grade security for your data
             </p>
           </div>
         </div>
-        <div class="flex items-center p-4 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-colors">
+        <div class="flex items-center p-4 bg-default/10 backdrop-blur-sm rounded-lg hover:bg-default/20 transition-colors">
           <UIcon
             name="i-lucide-key"
-            class="w-6 h-6 text-blue-400 mr-4"
+            class="w-6 h-6 text-primary mr-4"
           />
           <div>
             <h4 class="font-semibold text-white">
               Zero-Knowledge Architecture
             </h4>
-            <p class="text-gray-300 text-sm">
+            <p class="text-dimmed text-sm">
               We can't see your data, ever
             </p>
           </div>
         </div>
-        <div class="flex items-center p-4 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-colors">
+        <div class="flex items-center p-4 bg-default/10 backdrop-blur-sm rounded-lg hover:bg-default/20 transition-colors">
           <UIcon
             name="i-lucide-globe"
             class="w-6 h-6 text-purple-400 mr-4"
@@ -55,7 +55,7 @@
             <h4 class="font-semibold text-white">
               Global Compliance
             </h4>
-            <p class="text-gray-300 text-sm">
+            <p class="text-dimmed text-sm">
               GDPR, HIPAA, and SOC2 compliant
             </p>
           </div>

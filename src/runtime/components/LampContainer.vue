@@ -81,6 +81,7 @@
 import { Motion } from 'motion-v'
 import { computed } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import lampContainer from '../theme/lamp-container'
 
 interface LampContainerProps {
@@ -105,39 +106,31 @@ const props = withDefaults(defineProps<LampContainerProps>(), {
 
 const { props: uiProps, ui } = useMotionBlockUI({ name: 'lampContainer', props, theme: lampContainer })
 
-// Convert color prop to CSS variable or hex color
-const getColorValue = (colorProp: string): string => {
-  // If it's already a hex/rgb/hsl/color variable, return as is
-  if (colorProp.startsWith('#') || colorProp.startsWith('rgb') || colorProp.startsWith('hsl') || colorProp.startsWith('var(')) {
-    return colorProp
-  }
-
-  // Convert Tailwind color class to CSS variable
-  // Remove 'bg-' prefix if present
-  const cleanClass = colorProp.replace(/^bg-/, '')
-
-  // Convert format: primary-500 => var(--color-primary-500)
-  return `var(--color-${cleanClass})`
-}
+// Resolve colors via shared composable (supports theme tokens, var(--ui-*), CSS literals, Tailwind vars)
+const fromColorResolved = useResolvedColor(() => props.fromColor)
+const toColorResolved = useResolvedColor(() => props.toColor)
+const centerColorResolved = useResolvedColor(() => props.centerColor)
+const glowColorResolved = useResolvedColor(() => props.glowColor)
+const lineColorResolved = useResolvedColor(() => props.lineColor)
 
 // Computed styles for all elements using inline styles
 const leftGradientStyle = computed(() => ({
-  backgroundImage: `conic-gradient(var(--conic-position), ${getColorValue(props.fromColor)}, transparent, transparent)`,
+  backgroundImage: `conic-gradient(var(--conic-position), ${fromColorResolved.value || props.fromColor}, transparent, transparent)`,
 }))
 
 const rightGradientStyle = computed(() => ({
-  backgroundImage: `conic-gradient(var(--conic-position), transparent, transparent, ${getColorValue(props.toColor)})`,
+  backgroundImage: `conic-gradient(var(--conic-position), transparent, transparent, ${toColorResolved.value || props.toColor})`,
 }))
 
 const centerColorStyle = computed(() => ({
-  backgroundColor: getColorValue(props.centerColor),
+  backgroundColor: centerColorResolved.value || props.centerColor,
 }))
 
 const glowColorStyle = computed(() => ({
-  backgroundColor: getColorValue(props.glowColor),
+  backgroundColor: glowColorResolved.value || props.glowColor,
 }))
 
 const lineColorStyle = computed(() => ({
-  backgroundColor: getColorValue(props.lineColor),
+  backgroundColor: lineColorResolved.value || props.lineColor,
 }))
 </script>

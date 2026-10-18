@@ -25,6 +25,7 @@ import { onMounted, onUnmounted, ref, watch, type StyleValue } from 'vue'
 import { useColorMode } from '#imports'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import dottedGlowBackground from '../theme/dotted-glow-background'
+import { resolveColor, resolveCssColor } from '../utils/theme-color'
 
 interface DottedGlowBackgroundProps {
   class?: string
@@ -81,14 +82,23 @@ const initializeColors = () => {
   const container = containerRef.value ?? document.documentElement
   const isDark = colorMode.value === 'dark'
 
-  let nextColor: string = props.color
-  let nextGlow: string = props.glowColor
+  const baseColor = resolveColor(props.color, { target: container, fallback: props.color }) ?? props.color
+  const baseGlow = resolveColor(props.glowColor, { target: container, fallback: props.glowColor }) ?? props.glowColor
+  const darkColor = props.darkColor
+    ? resolveColor(props.darkColor, { target: container, fallback: props.darkColor }) ?? props.darkColor
+    : undefined
+  const darkGlow = props.darkGlowColor
+    ? resolveColor(props.darkGlowColor, { target: container, fallback: props.darkGlowColor }) ?? props.darkGlowColor
+    : undefined
+
+  let nextColor: string = baseColor
+  let nextGlow: string = baseGlow
 
   if (isDark) {
     const varDot = resolveCssVariable(container, props.colorDarkVar)
     const varGlow = resolveCssVariable(container, props.glowColorDarkVar)
-    nextColor = varDot || props.darkColor || nextColor
-    nextGlow = varGlow || props.darkGlowColor || nextGlow
+    nextColor = varDot || darkColor || nextColor
+    nextGlow = varGlow || darkGlow || nextGlow
   }
   else {
     const varDot = resolveCssVariable(container, props.colorLightVar)
@@ -102,14 +112,14 @@ const initializeColors = () => {
 }
 
 // Resolve CSS variable value
+/**
+ * Resolve a theme variable read against the container, then fall back through
+ * the cascade to the root — which is what `resolveCssColor` does with `var()`.
+ */
 const resolveCssVariable = (el: Element, variableName?: string): string | null => {
   if (!variableName) return null
   const normalized = variableName.startsWith('--') ? variableName : `--${variableName}`
-  const fromEl = getComputedStyle(el as Element).getPropertyValue(normalized).trim()
-  if (fromEl) return fromEl
-  const root = document.documentElement
-  const fromRoot = getComputedStyle(root).getPropertyValue(normalized).trim()
-  return fromRoot || null
+  return resolveCssColor(`var(${normalized})`, { target: el as HTMLElement })
 }
 
 // Update colors when props or color mode changes

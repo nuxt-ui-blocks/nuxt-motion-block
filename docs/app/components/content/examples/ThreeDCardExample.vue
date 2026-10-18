@@ -10,7 +10,7 @@
       </template>
 
       <M3DItem :translate-z="20">
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           This is a 3D card that responds to mouse movement.
         </p>
         <div class="mt-4">

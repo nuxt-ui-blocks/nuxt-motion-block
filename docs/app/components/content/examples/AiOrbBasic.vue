@@ -2,13 +2,13 @@
   <div class="flex w-full max-w-lg flex-col gap-6">
     <div class="flex flex-wrap items-center justify-center gap-6 rounded-2xl border border-default p-8">
       <MAiOrb
-        :colors="['#f25aed', '#ffffff']"
+        :colors="['var(--ui-primary)', 'var(--ui-secondary)']"
         :glow="glow"
         :size="140"
         :turbulence="turbulence"
       />
       <MAiOrb
-        :colors="['#4cc9f0', '#4361ee', '#3f37c9']"
+        :colors="['var(--ui-primary)', 'var(--ui-color-primary-300)', 'var(--ui-secondary)']"
         :flow="flow"
         :glow="glow"
         :iridescence="0.6"
@@ -16,7 +16,7 @@
         :turbulence="turbulence"
       />
       <MAiOrb
-        :colors="['#ff9f1c', '#ffbf69']"
+        :colors="['var(--ui-color-primary-400)', 'var(--ui-color-primary-200)']"
         :glow="glow"
         :paused="paused"
         :size="140"

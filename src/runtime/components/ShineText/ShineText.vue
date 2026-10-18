@@ -13,6 +13,7 @@
 <script setup lang="ts">
 import { Motion, useReducedMotion } from 'motion-v'
 import { computed, onMounted, ref } from 'vue'
+import { useResolvedColor } from '../../composables/useThemeColor'
 import {
   DEFAULT_SHINE_BASE_COLOR,
   DEFAULT_SHINE_COLOR,
@@ -68,14 +69,6 @@ const mounted = ref(false)
 /**
  * Held true through SSR *and* the first client render, then flipped in
  * `onMounted`.
- *
- * Upstream returns two entirely different trees — a bare `<span>` when the user
- * prefers reduced motion, a gradient-clipped `<motion.span>` otherwise. That is
- * a hydration hazard here: `useReducedMotion()` is always `false` on the
- * server, so a reduced-motion client would receive markup that disagrees with
- * the SSR output. Rather than branch the template, this component always
- * renders one tree and swaps only its *style*, which is identical on both
- * passes and then settles one tick later.
  */
 const canAnimate = computed(() => !mounted.value || !shouldReduceMotion.value)
 
@@ -83,22 +76,22 @@ onMounted(() => {
   mounted.value = true
 })
 
+const resolvedBaseColor = useResolvedColor(() => props.baseColor)
+const resolvedShineColor = useResolvedColor(() => props.shineColor)
+
 /**
  * The reduced-motion branch drops the gradient entirely instead of just
- * freezing it. A frozen gradient at `background-position: 0% 0%` happens to
- * land on flat base colour, but that depends on the 40%/50%/60% stops — and if
- * `background-clip: text` is ever unsupported, `color: transparent` would
- * leave the text invisible. Painting with a real `color` is the only variant
+ * freezing it. Painting with a real `color` is the only variant
  * that is legible in every case.
  */
 const shineStyle = computed(() => {
   if (!canAnimate.value) {
-    return { color: props.baseColor }
+    return { color: resolvedBaseColor.value || props.baseColor }
   }
 
   return {
     backgroundClip: 'text',
-    backgroundImage: `linear-gradient(${SHINE_GRADIENT_ANGLE}, ${props.baseColor} ${SHINE_BASE_STOP}, ${props.shineColor} ${SHINE_PEAK_STOP}, ${props.baseColor} ${SHINE_RETURN_STOP})`,
+    backgroundImage: `linear-gradient(${SHINE_GRADIENT_ANGLE}, ${resolvedBaseColor.value || props.baseColor} ${SHINE_BASE_STOP}, ${resolvedShineColor.value || props.shineColor} ${SHINE_PEAK_STOP}, ${resolvedBaseColor.value || props.baseColor} ${SHINE_RETURN_STOP})`,
     backgroundSize: SHINE_BACKGROUND_SIZE,
     color: 'transparent',
     WebkitBackgroundClip: 'text',

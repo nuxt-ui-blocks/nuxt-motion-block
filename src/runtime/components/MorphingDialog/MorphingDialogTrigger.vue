@@ -3,6 +3,8 @@
     type="button"
     :layout-id="`dialog-${uniqueId}`"
     :class="triggerClasses"
+    aria-haspopup="dialog"
+    :aria-expanded="isOpen"
     @click="handleClick"
     @keydown.enter.prevent="handleClick"
     @keydown.space.prevent="handleClick"

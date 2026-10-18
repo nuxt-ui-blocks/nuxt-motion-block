@@ -108,7 +108,7 @@ const plans = [
     annualPrice: '$790',
     description: 'Ideal for growing teams and businesses',
     features: [
-      'Unlimited projects',
+      'Endless projects',
       'All components',
       'Priority support',
       '10GB storage',
@@ -127,7 +127,7 @@ const plans = [
     annualPrice: '$1990',
     description: 'For large organizations with complex needs',
     features: [
-      'Unlimited projects',
+      'Endless projects',
       'All components',
       '24/7 dedicated support',
       'Unlimited storage',

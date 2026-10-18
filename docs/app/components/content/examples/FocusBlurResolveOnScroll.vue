@@ -1,13 +1,12 @@
 <template>
-  <div class="max-w-md text-center">
+  <div class="text-center">
     <MFocusBlurResolve
       class="text-3xl font-bold"
-      text="Resolves when seen"
+      text="Resolves on scroll"
       trigger-on-view
     />
     <p class="mt-3 text-sm text-muted">
-      Scroll this block out of view and back: the resolve runs once per mount,
-      so the second pass replays it.
+      Stays out of focus until the headline is on screen, then resolves once.
     </p>
   </div>
 </template>

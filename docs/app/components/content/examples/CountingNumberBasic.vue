@@ -2,17 +2,17 @@
   <div class="p-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-4">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 dark:bg-primary/30 rounded-full mb-4">
           <UIcon
             name="i-lucide-bar-chart-3"
-            class="w-5 h-5 text-blue-600 dark:text-blue-400"
+            class="w-5 h-5 text-primary"
           />
-          <span class="text-blue-700 dark:text-blue-300 font-medium">Growth Metrics</span>
+          <span class="text-primary font-medium">Growth Metrics</span>
         </div>
-        <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h2 class="text-4xl font-bold text-highlighted mb-4">
           Community Impact
         </h2>
-        <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+        <p class="text-xl text-muted max-w-3xl mx-auto">
           Real-time statistics showing the growth and impact of our platform
         </p>
       </div>
@@ -20,20 +20,20 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <UCard class="text-center hover:shadow-lg transition-shadow">
           <div class="flex justify-center mb-4">
-            <div class="w-16 h-16 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+            <div class="w-16 h-16 rounded-xl bg-primary/10 dark:bg-primary/30 flex items-center justify-center">
               <UIcon
                 name="i-lucide-users"
-                class="w-8 h-8 text-blue-600 dark:text-blue-400"
+                class="w-8 h-8 text-primary"
               />
             </div>
           </div>
-          <div class="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <div class="text-4xl font-bold text-highlighted mb-2">
             <MCountingNumber
               :to="communityMembers"
-              :duration="2000"
+              :duration="2"
             />
           </div>
-          <div class="text-gray-600 dark:text-gray-400 mb-3">
+          <div class="text-muted mb-3">
             Community Members
           </div>
           <div class="flex items-center justify-center text-sm text-green-600 dark:text-green-400">
@@ -54,13 +54,13 @@
               />
             </div>
           </div>
-          <div class="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <div class="text-4xl font-bold text-highlighted mb-2">
             <MCountingNumber
               :to="linesOfCode"
-              :duration="2500"
+              :duration="2.5"
             />
           </div>
-          <div class="text-gray-600 dark:text-gray-400 mb-3">
+          <div class="text-muted mb-3">
             Lines of Code
           </div>
           <div class="flex items-center justify-center text-sm text-green-600 dark:text-green-400">
@@ -81,13 +81,13 @@
               />
             </div>
           </div>
-          <div class="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <div class="text-4xl font-bold text-highlighted mb-2">
             <MCountingNumber
               :to="githubStars"
-              :duration="3000"
+              :duration="3"
             />
           </div>
-          <div class="text-gray-600 dark:text-gray-400 mb-3">
+          <div class="text-muted mb-3">
             GitHub Stars
           </div>
           <div class="flex items-center justify-center text-sm text-green-600 dark:text-green-400">
@@ -108,13 +108,13 @@
               />
             </div>
           </div>
-          <div class="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <div class="text-4xl font-bold text-highlighted mb-2">
             <MCountingNumber
               :to="countries"
-              :duration="2000"
+              :duration="2"
             />
           </div>
-          <div class="text-gray-600 dark:text-gray-400 mb-3">
+          <div class="text-muted mb-3">
             Countries
           </div>
           <div class="flex items-center justify-center text-sm text-green-600 dark:text-green-400">
@@ -130,10 +130,10 @@
       <UCard class="mb-8">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
           <div>
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">
+            <h3 class="text-xl font-bold text-highlighted mb-1">
               Growth Trends
             </h3>
-            <p class="text-gray-600 dark:text-gray-400">
+            <p class="text-muted">
               Historical data and growth patterns
             </p>
           </div>
@@ -165,16 +165,16 @@
           </div>
         </div>
 
-        <div class="h-64 flex items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <div class="h-64 flex items-center justify-center bg-elevated rounded-lg">
           <div class="text-center">
             <UIcon
               name="i-lucide-trending-up"
-              class="w-12 h-12 text-gray-400 mx-auto mb-3"
+              class="w-12 h-12 text-dimmed mx-auto mb-3"
             />
-            <p class="text-gray-500 dark:text-gray-400">
+            <p class="text-muted">
               Interactive growth chart
             </p>
-            <p class="text-sm text-gray-400 mt-1">
+            <p class="text-sm text-dimmed mt-1">
               Visualization would appear here
             </p>
           </div>

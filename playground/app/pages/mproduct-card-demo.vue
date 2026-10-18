@@ -12,8 +12,8 @@
         </p>
       </template>
 
-      <!-- Mirrors smoothui `apps/docs/examples/product-card.tsx`: two columns, a "Sale" card with a
-           discount and a half star, a "New" card without one, and live callback logging. -->
+      <!-- Two columns, a "Sale" card with a discount and a half star, a "New"
+           card without one, and live callback logging. -->
       <div class="mx-auto grid w-full max-w-lg grid-cols-2 gap-4">
         <MProductCard
           v-for="product in products"

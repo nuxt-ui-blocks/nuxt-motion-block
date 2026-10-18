@@ -7,7 +7,7 @@
       />
       <MAiOrbFace
         :state="'streaming'"
-        :colors="{ body: 'oklch(72% 0.16 220)', bodyEdge: 'oklch(97% 0.02 220)' }"
+        :colors="orbFaceColors"
         size="96"
       />
     </div>
@@ -31,4 +31,10 @@ type DemoState = 'idle' | 'listening' | 'thinking' | 'streaming' | 'done' | 'err
 
 const states: DemoState[] = ['idle', 'listening', 'thinking', 'streaming', 'done', 'error']
 const state = ref<DemoState>('idle')
+
+const orbFaceColors = {
+  body: 'secondary',
+  bodyEdge: 'color-mix(in oklab, var(--ui-secondary), white 78%)',
+  feature: 'color-mix(in oklab, var(--ui-secondary), black 82%)',
+}
 </script>

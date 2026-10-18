@@ -5,7 +5,7 @@
         Series 04
       </p>
       <p class="text-2xl font-semibold text-white">
-        Holographic Foil
+        Iridescent foil
       </p>
       <p class="text-sm text-white/60">
         Move the pointer across the card.

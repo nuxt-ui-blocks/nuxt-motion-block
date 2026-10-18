@@ -1,6 +1,6 @@
 /**
- * Design constants for `MHolographicFoil`, carried over verbatim from the
- * smoothui React original. The values are tuned as a set — the drift ratios
+ * Design constants for `MHolographicFoil`. The values are tuned as a set — the
+ * drift ratios
  * only read as "depth" while `PERSPECTIVE_PX` stays far enough away to avoid
  * keystoning, and the opacity ratios only sit correctly because the gradients
  * below already carry their own alpha.

@@ -1,16 +1,16 @@
 <template>
   <div class="p-4 space-y-4 max-w-xs">
     <div class="text-center">
-      <div class="text-sm text-gray-500 mb-1">
+      <div class="text-sm text-muted mb-1">
         Live Counter
       </div>
-      <div class="text-2xl font-bold text-blue-600">
+      <div class="text-2xl font-bold text-primary">
         <MAnimatedNumber :value="count" />
       </div>
     </div>
 
     <!-- Auto Toggle -->
-    <div class="flex items-center justify-between bg-gray-100 dark:bg-gray-800 p-2 rounded">
+    <div class="flex items-center justify-between bg-muted p-2 rounded">
       <span class="text-sm">Auto Update:</span>
       <USwitch
         v-model="isAutoUpdating"
@@ -18,7 +18,7 @@
       />
     </div>
 
-    <!-- Manual Controls -->
+    <!-- Hands-on controls -->
     <div class="grid grid-cols-2 gap-2">
       <UButton
         size="xs"
@@ -51,7 +51,7 @@
     </div>
 
     <!-- Status -->
-    <div class="text-center text-xs text-gray-500">
+    <div class="text-center text-xs text-muted">
       Status:
       <span :class="isAutoUpdating ? 'text-green-600' : 'text-red-600'">
         {{ isAutoUpdating ? 'Running' : 'Paused' }}

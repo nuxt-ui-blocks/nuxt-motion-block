@@ -10,7 +10,7 @@
           />
         </h1>
 
-        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        <p class="text-xl text-muted max-w-2xl mx-auto">
           <MTextReveal
             effect="fade"
             text="Create stunning interfaces with our collection of animated components that enhance user engagement and drive results."
@@ -21,24 +21,24 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
         <div>
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 class="text-2xl font-bold text-highlighted mb-4">
             <MTextReveal
               effect="fade"
-              text="Key Features"
+              text="Core features"
             />
           </h2>
 
           <ul class="space-y-4">
             <li class="flex items-start">
               <div class="flex-shrink-0 mt-1">
-                <div class="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                <div class="w-6 h-6 rounded-full bg-primary/10 dark:bg-primary/70 flex items-center justify-center">
                   <UIcon
                     name="i-lucide-check"
-                    class="w-4 h-4 text-blue-600 dark:text-blue-400"
+                    class="w-4 h-4 text-primary"
                   />
                 </div>
               </div>
-              <span class="ml-3 text-gray-700 dark:text-gray-300">
+              <span class="ml-3 text-default">
                 <MTextReveal
                   effect="fade"
                   text="Lightning fast performance with optimized load times"
@@ -56,7 +56,7 @@
                   />
                 </div>
               </div>
-              <span class="ml-3 text-gray-700 dark:text-gray-300">
+              <span class="ml-3 text-default">
                 <MTextReveal
                   effect="fade"
                   text="Beautiful animations that captivate your audience"
@@ -74,7 +74,7 @@
                   />
                 </div>
               </div>
-              <span class="ml-3 text-gray-700 dark:text-gray-300">
+              <span class="ml-3 text-default">
                 <MTextReveal
                   effect="fade"
                   text="Easy integration with clean, well-documented code"
@@ -85,8 +85,8 @@
           </ul>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+        <div class="bg-default rounded-xl shadow-lg p-6">
+          <h3 class="text-xl font-semibold text-highlighted mb-4">
             <MTextReveal
               effect="fade"
               text="Why Choose Us?"
@@ -94,7 +94,7 @@
           </h3>
 
           <div class="space-y-4">
-            <p class="text-gray-600 dark:text-gray-400">
+            <p class="text-muted">
               <MTextReveal
                 effect="fade"
                 text="Our platform offers cutting-edge solutions that help you achieve your goals faster."
@@ -102,7 +102,7 @@
               />
             </p>
 
-            <p class="text-gray-600 dark:text-gray-400">
+            <p class="text-muted">
               <MTextReveal
                 effect="fade"
                 text="With 99.9% uptime and 24/7 support, you can trust us to deliver."

@@ -28,7 +28,7 @@ function isOutside(
 
 /**
  * Calls `handler` whenever an event of `eventType` lands outside every supplied
- * target. Ports the smoothui `use-click-outside` helper to Vue.
+ * target.
  */
 export function useClickOutside(
   target: MaybeRefOrGetter<ClickOutsideTarget | ClickOutsideTarget[]>,

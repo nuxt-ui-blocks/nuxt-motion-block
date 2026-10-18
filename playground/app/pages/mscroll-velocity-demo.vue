@@ -36,7 +36,7 @@
       >
         <MScrollVelocity
           :key="`basic-${replayKey}`"
-          :texts="['Motion primitives', 'Motion primitives']"
+          :texts="['Component library', 'Component library']"
           :velocity="120"
           :parallax-style="{ borderRadius: '12px', background: 'rgba(59,130,246,0.08)', boxShadow: 'inset 0 0 0 1px rgba(59,130,246,0.35)' }"
           data-testid="velocity-basic-0"

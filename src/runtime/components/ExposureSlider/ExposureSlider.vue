@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex w-full max-w-[500px] flex-col items-center gap-6 text-foreground"
+    class="flex w-full max-w-[500px] flex-col items-center gap-6 text-default"
     :class="props.class"
     :style="{ '--es-accent': accent }"
   >
@@ -58,6 +58,7 @@
 <script setup lang="ts">
 import { useMotionValue, useReducedMotion, useSpring } from 'motion-v'
 import { computed, ref } from 'vue'
+import { useResolvedColor } from '../../composables/useThemeColor'
 import { SPRING_REDUCED, SPRING_SNAP } from '../../utils/motion-tokens'
 import ExposureNotch from './ExposureNotch.vue'
 import ExposureProgressRing from './ExposureProgressRing.vue'
@@ -114,7 +115,7 @@ const count = computed(() => Math.floor((props.max - props.min) / props.step) + 
 /** Largest |offset| in px, per side, before the track runs out of notches. */
 const maxOffset = computed(() => Math.max(centerIndex.value, count.value - 1 - centerIndex.value) * NOTCH_WIDTH)
 
-const accent = computed(() => props.accentColor ?? DEFAULT_ACCENT)
+const accent = useResolvedColor(() => props.accentColor ?? DEFAULT_ACCENT)
 
 const track = ref<HTMLElement | null>(null)
 

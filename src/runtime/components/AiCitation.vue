@@ -110,7 +110,7 @@ const CitationMark = defineComponent({
         'span',
         {
           'aria-hidden': 'true',
-          'class': 'flex shrink-0 items-center justify-center overflow-hidden rounded-sm text-muted *:size-full *:fill-foreground *:object-cover',
+          'class': 'flex shrink-0 items-center justify-center overflow-hidden rounded-sm text-muted *:size-full *:fill-current *:object-cover',
           'style': {
             height: `${markProps.size}px`,
             width: `${markProps.size}px`,

@@ -96,6 +96,7 @@ import { motion, useReducedMotion, useSpring } from 'motion-v'
 import type { CSSProperties } from 'vue'
 import { useHoverCapable } from '../composables/useHoverCapable'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import glassCard from '../theme/glass-card'
 
 defineOptions({ inheritAttrs: false })
@@ -161,6 +162,8 @@ const { props: uiProps, ui } = useMotionBlockUI({
   props,
   theme: glassCard,
 })
+
+const resolvedTint = useResolvedColor(() => props.tint)
 
 function ringMask(width: number): CSSProperties {
   const maskImage
@@ -336,7 +339,7 @@ const rootTransition = computed(() =>
 
 const bodyStyle = computed(() => ({
   backdropFilter: bodyFilters.value,
-  backgroundColor: props.tint,
+  backgroundColor: resolvedTint.value,
   borderRadius: `${Math.max(props.radius - props.rimWidth, INNER_RADIUS_MIN)}px`,
   boxShadow: BODY_EDGE,
   inset: `${props.rimWidth}px`,

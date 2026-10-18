@@ -18,7 +18,7 @@
               icon="i-lucide-x"
             />
           </div>
-          <p class="text-gray-600 dark:text-gray-400">
+          <p class="text-muted">
             This popover appears to the left of the trigger.
           </p>
         </div>

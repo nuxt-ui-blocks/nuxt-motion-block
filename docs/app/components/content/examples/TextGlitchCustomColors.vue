@@ -1,10 +1,14 @@
 <template>
-  <div class="p-4">
+  <div class="flex flex-col items-center gap-4 p-8">
     <MTextGlitch
-      text="TEAL"
-      :colors="['#0d9488', '#14b8a6', '#2dd4bf']"
-      trigger="auto"
-      :interval="2"
+      text="NEON"
+      :colors="['#22d3ee', '#a855f7', '#f472b6']"
+      intensity="high"
+      :show-scan-lines="false"
+      class="text-5xl font-black"
     />
+    <p class="text-sm text-muted">
+      Custom layer colours with the scan lines switched off.
+    </p>
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="PerspectiveText3D"
-      description="Letters parked at different depths on a tilting plane. Translated from smoothui's perspective-text-3d."
+      description="Letters parked at different depths on a tilting plane."
     />
 
     <UCard>

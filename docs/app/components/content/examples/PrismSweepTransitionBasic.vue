@@ -7,7 +7,7 @@
     >
       <div
         class="flex h-44 flex-col items-end justify-end gap-1 p-6"
-        :class="published ? 'bg-emerald-600 text-white' : 'bg-zinc-800 text-zinc-300'"
+        :class="published ? 'bg-emerald-600 text-white' : 'bg-accented text-dimmed'"
       >
         <span class="text-xs font-medium uppercase tracking-widest opacity-70">
           {{ published ? 'Live' : 'Draft' }}

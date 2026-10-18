@@ -6,12 +6,13 @@
     :content="contentProps"
     :overlay="overlay"
     :scrollable="scrollable"
-    :transition="transition"
+    :transition="false"
     :fullscreen="fullscreen"
     :portal="portal"
     :close="close"
     :close-icon="closeIcon"
     :dismissible="dismissible"
+    :unmount-on-hide="unmountOnHide"
     :ui="uiProps.ui"
     :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :modal="modal"
@@ -23,42 +24,39 @@
 
     <!--  eslint-disable-next-line vue/no-template-shadow -->
     <template #content="{ close }">
-      <div :class="ui.content({ class: uiProps.ui?.content })">
-        <AnimatePresence>
-          <motion.div
-            v-if="isOpen"
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            :variants="contentVariants"
-            :transition="contentTransition"
-            :class="ui.contentInner({ class: uiProps.ui?.contentInner })"
+      <AnimatePresence>
+        <motion.div
+          v-if="isOpen"
+          :class="ui.content({ class: uiProps.ui?.content })"
+          :initial="contentInitial"
+          :animate="contentAnimate"
+          :exit="contentExit"
+          :transition="contentTransition"
+        >
+          <!-- Custom header slot -->
+          <slot
+            v-if="$slots.header"
+            name="header"
+            :close="close"
+          />
+
+          <!-- Body -->
+          <div :class="ui.body({ class: uiProps.ui?.body })">
+            <slot name="body" />
+          </div>
+
+          <!-- Footer -->
+          <div
+            v-if="$slots.footer"
+            :class="ui.footer({ class: uiProps.ui?.footer })"
           >
-            <!-- Custom header slot -->
             <slot
-              v-if="$slots.header"
-              name="header"
+              name="footer"
               :close="close"
             />
-
-            <!-- Body -->
-            <div :class="ui.body({ class: uiProps.ui?.body })">
-              <slot name="body" />
-            </div>
-
-            <!-- Footer -->
-            <div
-              v-if="$slots.footer"
-              :class="ui.footer({ class: uiProps.ui?.footer })"
-            >
-              <slot
-                name="footer"
-                :close="close"
-              />
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </template>
 
     <template
@@ -108,12 +106,12 @@ interface Props {
   content?: object
   overlay?: boolean
   scrollable?: boolean
-  transition?: boolean
   fullscreen?: boolean
   portal?: string | boolean | HTMLElement
   close?: boolean | Partial<ButtonProps>
   closeIcon?: string
   dismissible?: boolean
+  unmountOnHide?: boolean
   ui?: Record<string, any>
   class?: string
   open?: boolean
@@ -129,16 +127,16 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   overlay: true,
   scrollable: false,
-  transition: true,
   fullscreen: false,
   portal: true,
   close: true,
   dismissible: true,
+  unmountOnHide: true,
   ui: undefined,
   class: undefined,
   defaultOpen: false,
   modal: true,
-  scale: 0.95,
+  scale: 0.96,
   variants: () => ({}),
   transitionOptions: () => ({}),
 })
@@ -164,28 +162,29 @@ const handleOpenChange = (open: boolean) => {
   emit('update:open', open)
 }
 
-// Default variants for animation
-const defaultContentVariants = computed(() => {
-  return {
-    initial: { opacity: 0, scale: props.scale },
-    animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: props.scale },
-  }
-})
+// Default initial/animate/exit, merged with any user variants
+const contentInitial = computed(() => ({
+  opacity: 0,
+  scale: props.scale,
+  ...props.variants?.initial,
+}))
 
-// Computed variants with fallback to defaults
-const contentVariants = computed(() => {
-  return {
-    initial: { ...(props.variants?.initial || {}), ...defaultContentVariants.value.initial },
-    animate: { ...(props.variants?.animate || {}), ...defaultContentVariants.value.animate },
-    exit: { ...(props.variants?.exit || {}), ...defaultContentVariants.value.exit },
-  }
-})
+const contentAnimate = computed(() => ({
+  opacity: 1,
+  scale: 1,
+  ...props.variants?.animate,
+}))
 
-// Default transition
-const defaultTransition = {
-  type: 'spring' as const,
-  bounce: 0.1,
+const contentExit = computed(() => ({
+  opacity: 0,
+  scale: props.scale,
+  ...props.variants?.exit,
+}))
+
+// Default transition (an ease-out tween that is clearly visible)
+const defaultTransition: Transition = {
+  type: 'tween',
+  ease: [0.22, 1, 0.36, 1],
   duration: 0.4,
 }
 

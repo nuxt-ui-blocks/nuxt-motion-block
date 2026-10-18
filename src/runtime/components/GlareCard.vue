@@ -63,6 +63,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor, useResolvedColors } from '../composables/useThemeColor'
 import glareCard from '../theme/glare-card'
 
 interface Props {
@@ -102,6 +103,12 @@ const { props: uiProps, ui } = useMotionBlockUI({
 const cardRef = ref<HTMLElement>()
 const isPointerInside = ref(false)
 
+// Colour props resolved uniformly (theme tokens, `--ui-*` vars and CSS literals)
+const resolvedGlareColor = useResolvedColor(() => props.glareColor)
+const resolvedGlareColorInner = useResolvedColor(() => props.glareColorInner)
+const resolvedGlareColorOuter = useResolvedColor(() => props.glareColorOuter)
+const resolvedRainbowColors = useResolvedColors(() => props.rainbowColors)
+
 // State
 const glareState = ref({
   glare: {
@@ -134,13 +141,13 @@ const containerStyle = {
 
 // Glare style with customizable colors
 const glareStyle = computed(() => ({
-  background: `radial-gradient(farthest-corner circle at var(--m-x) var(--m-y), ${props.glareColor} 10%, ${props.glareColorInner} 20%, ${props.glareColorOuter} 90%)`,
+  background: `radial-gradient(farthest-corner circle at var(--m-x) var(--m-y), ${resolvedGlareColor.value} 10%, ${resolvedGlareColorInner.value} 20%, ${resolvedGlareColorOuter.value} 90%)`,
 }))
 
 // Background styles
 const backgroundStyle = computed(() => {
   // Build rainbow gradient with customizable colors
-  const rainbowStops = props.rainbowColors.map((color, index) => {
+  const rainbowStops = (resolvedRainbowColors.value ?? props.rainbowColors).map((color, index) => {
     return `${color} calc(var(--step) * ${index + 1})`
   }).join(', ')
 

@@ -29,11 +29,11 @@
     class="h-64 w-full rounded-lg overflow-hidden"
   >
     <div class="relative z-10 flex items-center justify-center h-full">
-      <div class="bg-white dark:bg-neutral-900 p-6 rounded-lg shadow-lg text-center">
+      <div class="bg-default p-6 rounded-lg shadow-lg text-center">
         <h3 class="font-bold text-lg mb-2">
           Custom Colors
         </h3>
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           Beams with custom gradients
         </p>
       </div>

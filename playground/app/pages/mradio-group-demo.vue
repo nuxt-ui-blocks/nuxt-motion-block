@@ -7,7 +7,7 @@ const options = [
 
 const plans = [
   { value: 'starter', label: 'Starter', description: 'Up to 3 projects and 1 GB of storage.' },
-  { value: 'team', label: 'Team', description: 'Unlimited projects, 50 GB of storage, shared boards.' },
+  { value: 'team', label: 'Team', description: 'Endless projects, 50 GB of storage, shared boards.' },
   { value: 'legacy', label: 'Legacy', description: 'Kept for accounts created before 2024.', disabled: true },
 ]
 </script>

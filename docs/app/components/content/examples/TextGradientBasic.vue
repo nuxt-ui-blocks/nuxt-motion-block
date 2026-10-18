@@ -10,7 +10,7 @@
         />
       </h1>
 
-      <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+      <p class="text-xl text-muted mb-8">
         Create stunning interfaces with our collection of animated components that
         <MTextGradient
           text="enhance user engagement"
@@ -24,22 +24,22 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
         <UCard class="text-center">
           <div class="flex justify-center mb-4">
-            <div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+            <div class="w-16 h-16 rounded-full bg-primary/10 dark:bg-primary/70 flex items-center justify-center">
               <UIcon
                 name="i-lucide-zap"
-                class="w-8 h-8 text-blue-600 dark:text-blue-400"
+                class="w-8 h-8 text-primary"
               />
             </div>
           </div>
           <h3 class="text-lg font-semibold mb-2">
             <MTextGradient
-              text="Lightning Fast"
+              text="Blazing quick"
               animation="pulse"
               :speed="0.8"
             />
           </h3>
-          <p class="text-gray-600 dark:text-gray-400 text-sm">
-            Optimized for performance with minimal load times
+          <p class="text-muted text-sm">
+            Tuned for speed with minimal load times
           </p>
         </UCard>
 
@@ -59,7 +59,7 @@
               :speed="0.6"
             />
           </h3>
-          <p class="text-gray-600 dark:text-gray-400 text-sm">
+          <p class="text-muted text-sm">
             Stunning animations that captivate your audience
           </p>
         </UCard>
@@ -75,13 +75,13 @@
           </div>
           <h3 class="text-lg font-semibold mb-2">
             <MTextGradient
-              text="Easy Integration"
+              text="Plug-in ready"
               animation="wave"
               :speed="0.9"
             />
           </h3>
-          <p class="text-gray-600 dark:text-gray-400 text-sm">
-            Simple to implement with clean, well-documented code
+          <p class="text-muted text-sm">
+            Quick to add with clean, well-documented code
           </p>
         </UCard>
       </div>

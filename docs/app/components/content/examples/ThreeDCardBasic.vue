@@ -4,7 +4,7 @@
       <template #header>
         <M3DItem :translate-z="40">
           <div class="flex items-center">
-            <div class="w-12 h-12 rounded-lg bg-blue-500 flex items-center justify-center mr-4">
+            <div class="w-12 h-12 rounded-lg bg-primary/70 flex items-center justify-center mr-4">
               <UIcon
                 name="i-lucide-cube"
                 class="w-6 h-6 text-white"
@@ -21,32 +21,32 @@
         :translate-z="20"
         class="space-y-6"
       >
-        <p class="text-gray-600 dark:text-gray-400 text-lg">
+        <p class="text-muted text-lg">
           Experience interactive 3D effects that respond to your cursor movements for an engaging user interface.
         </p>
 
-        <div class="flex items-center p-5 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+        <div class="flex items-center p-5 bg-primary/5 dark:bg-primary/30 rounded-lg">
           <UIcon
             name="i-lucide-info"
-            class="w-6 h-6 text-blue-500 dark:text-blue-400 mr-4"
+            class="w-6 h-6 text-primary mr-4"
           />
-          <span class="text-blue-700 dark:text-blue-300">Move your cursor over the card to see the 3D effect</span>
+          <span class="text-primary">Move your cursor over the card to see the 3D effect</span>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
-          <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-            <div class="text-sm text-gray-500 dark:text-gray-400">
+          <div class="p-4 bg-muted rounded-lg">
+            <div class="text-sm text-muted">
               Rotation
             </div>
-            <div class="font-bold text-gray-900 dark:text-white">
+            <div class="font-bold text-highlighted">
               Interactive
             </div>
           </div>
-          <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-            <div class="text-sm text-gray-500 dark:text-gray-400">
+          <div class="p-4 bg-muted rounded-lg">
+            <div class="text-sm text-muted">
               Perspective
             </div>
-            <div class="font-bold text-gray-900 dark:text-white">
+            <div class="font-bold text-highlighted">
               Realistic
             </div>
           </div>

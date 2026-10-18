@@ -369,7 +369,7 @@ const project = {
   id: 1,
   title: 'E-commerce Platform Redesign',
   description: 'Complete redesign of a major e-commerce platform focusing on user experience and conversion optimization.',
-  category: 'Web Design',
+  category: 'Web craft',
   date: 'June 2023',
   duration: '4 months',
   teamSize: '8 people',
@@ -416,7 +416,7 @@ const project = {
     metrics: [
       { value: 45, options: { suffix: '%', decimalPlaces: 0 }, label: 'Conversion Increase' },
       { value: 38, options: { suffix: '%', decimalPlaces: 0 }, label: 'Cart Abandonment' },
-      { value: 65, options: { suffix: '%', decimalPlaces: 0 }, label: 'Faster Load Times' },
+      { value: 65, options: { suffix: '%', decimalPlaces: 0 }, label: 'Quicker page loads' },
       { value: 58, options: { suffix: '%', decimalPlaces: 0 }, label: 'Mobile Conversion' },
     ],
   },
@@ -432,7 +432,7 @@ const relatedProjects = [
   {
     id: 2,
     title: 'Mobile Banking Application',
-    category: 'Mobile App',
+    category: 'Handheld app',
     image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
     slug: '#mobile-banking-application',
   },
@@ -454,8 +454,8 @@ const relatedProjects = [
 
 const getCategoryColor = (category: string) => {
   switch (category) {
-    case 'Web Design': return 'blue'
-    case 'Mobile App': return 'purple'
+    case 'Web craft': return 'blue'
+    case 'Handheld app': return 'purple'
     case 'Branding': return 'pink'
     case 'UI/UX': return 'green'
     case 'Development': return 'amber'

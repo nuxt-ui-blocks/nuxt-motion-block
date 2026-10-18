@@ -1,11 +1,12 @@
 <template>
-  <div
+  <span
     :class="ui.root({ class: [uiProps.ui?.root, uiProps.className, uiProps.class] })"
     :style="{ height: containerHeight, display: 'inline-flex', verticalAlign: 'baseline' }"
   >
     <AnimatePresence mode="wait">
       <Motion
         :key="currentIndex"
+        as="span"
         :class="ui.item({ class: uiProps.ui?.item })"
         :initial="computedVariants.initial"
         :animate="computedVariants.animate"
@@ -26,19 +27,19 @@
     </AnimatePresence>
 
     <!-- Hidden element to measure text height -->
-    <div
+    <span
       ref="measureRef"
       :class="ui.measure({ class: uiProps.ui?.measure })"
     >
-      <div
+      <span
         v-for="(item, index) in items"
         :key="'measure-' + index"
         :class="ui.measureItem({ class: uiProps.ui?.measureItem })"
       >
         {{ item }}
-      </div>
-    </div>
-  </div>
+      </span>
+    </span>
+  </span>
 </template>
 
 <script setup lang="ts">

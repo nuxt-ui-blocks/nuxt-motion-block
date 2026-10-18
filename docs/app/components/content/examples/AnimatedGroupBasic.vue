@@ -1,15 +1,15 @@
 <template>
   <div class="p-6 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 rounded-xl max-w-md mx-auto">
     <div class="text-center mb-6">
-      <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+      <h3 class="text-xl font-bold text-highlighted mb-2">
         Basic Animated Group
       </h3>
-      <p class="text-gray-600 dark:text-gray-400 text-sm">
+      <p class="text-muted text-sm">
         Items animate in sequence with staggered delays
       </p>
     </div>
 
-    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+    <div class="bg-default rounded-lg p-6 shadow">
       <MAnimatedGroup
         :stagger-children="0.1"
         :variants="{

@@ -28,7 +28,7 @@
               @click="close"
             />
           </div>
-          <p class="text-gray-600 dark:text-gray-400 mb-4">
+          <p class="text-muted mb-4">
             This popover is controlled programmatically.
           </p>
           <UButton

@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="WaveText"
-      description="Each character rides the same vertical loop with a per-character delay, so the text ripples. Translated from smoothui's wave-text."
+      description="Each character rides the same vertical loop with a per-character delay, so the text ripples."
     />
 
     <UCard>

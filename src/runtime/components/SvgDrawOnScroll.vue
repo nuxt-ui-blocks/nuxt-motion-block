@@ -17,7 +17,7 @@
         :d="entry.d"
         fill="none"
         pathLength="1"
-        :stroke="props.stroke"
+        :stroke="resolvedStroke || 'currentColor'"
         stroke-linecap="round"
         :stroke-width="props.strokeWidth"
         :style="{ strokeDasharray: '1 1', strokeDashoffset: 1 - entry.pathLength }"
@@ -50,6 +50,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, shallowRef, useSlots } from 'vue'
 import { motionValue, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import svgDrawOnScroll from '../theme/svg-draw-on-scroll'
 import type { MaybeComputedElementRef } from '@vueuse/core'
 import type { ScrollOffset } from 'motion-v'
@@ -98,6 +99,8 @@ const props = withDefaults(defineProps<SvgDrawOnScrollProps>(), {
 })
 
 const { props: uiProps, ui } = useMotionBlockUI({ name: 'svgDrawOnScroll', props, theme: svgDrawOnScroll })
+
+const resolvedStroke = useResolvedColor(() => (props.stroke === 'currentColor' ? undefined : props.stroke))
 
 const SPRING_CONFIG = { damping: 28, mass: 0.4, stiffness: 240 }
 const MARKER_KEY_SLICE = 8

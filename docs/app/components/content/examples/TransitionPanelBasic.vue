@@ -37,7 +37,7 @@
 const active = ref(1)
 
 const panels = [
-  { eyebrow: 'Queued', title: 'Waiting on CI', tone: 'bg-sky-600' },
+  { eyebrow: 'Queued', title: 'Waiting on CI', tone: 'bg-primary' },
   { eyebrow: 'Running', title: 'Building bundle', tone: 'bg-amber-600' },
   { eyebrow: 'Done', title: 'Deployed to prod', tone: 'bg-emerald-600' },
 ]

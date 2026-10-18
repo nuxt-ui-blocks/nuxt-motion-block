@@ -1,6 +1,6 @@
 <template>
   <MGlareCard
-    class="w-96 h-80 bg-gray-800"
+    class="w-96 h-80 bg-accented"
     glare-color="rgba(59,130,246,0.8)"
     glare-color-inner="rgba(59,130,246,0.65)"
     glare-color-outer="rgba(59,130,246,0)"
@@ -17,7 +17,7 @@
             <p class="font-semibold text-white">
               Sarah Williams
             </p>
-            <p class="text-xs text-slate-400">
+            <p class="text-xs text-dimmed">
               Posted 2 hours ago
             </p>
           </div>
@@ -35,12 +35,12 @@
       <h3 class="text-xl font-bold text-white mb-2">
         Exploring New Design Trends
       </h3>
-      <p class="text-slate-400 mb-4">
+      <p class="text-dimmed mb-4">
         Just discovered some amazing design trends for 2023. The use of glass morphism and 3D elements
         is really pushing the boundaries of what's possible in modern UI design.
       </p>
 
-      <div class="bg-gray-800 rounded-xl p-4 mb-4">
+      <div class="bg-accented rounded-xl p-4 mb-4">
         <div class="flex items-center space-x-2 mb-2">
           <UIcon
             name="i-heroicons-light-bulb"
@@ -48,19 +48,19 @@
           />
           <span class="text-sm font-medium text-white">Design Insight</span>
         </div>
-        <p class="text-sm text-slate-300">
+        <p class="text-sm text-dimmed">
           "The key to great design is understanding how light and shadow interact with surfaces."
         </p>
       </div>
 
-      <div class="flex justify-between text-sm text-slate-400">
+      <div class="flex justify-between text-sm text-dimmed">
         <span>✨ 24 reactions</span>
         <span>💬 8 comments</span>
       </div>
     </div>
 
     <template #footer>
-      <div class="flex justify-between p-4 border-t border-slate-700/50">
+      <div class="flex justify-between p-4 border-t border-accented">
         <UButton
           icon="i-heroicons-heart"
           color="neutral"

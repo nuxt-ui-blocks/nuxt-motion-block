@@ -8,7 +8,7 @@
         <p class="text-lg mb-6 text-center max-w-md">
           Beautiful animated gradient background with interactive effects
         </p>
-        <button class="px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-colors">
+        <button class="px-6 py-3 bg-default/10 backdrop-blur-sm rounded-full hover:bg-default/20 transition-colors">
           Explore
         </button>
       </div>

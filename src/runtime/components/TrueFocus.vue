@@ -33,8 +33,8 @@
         duration: animationDuration,
       }"
       :style="{
-        '--border-color': borderColor,
-        '--glow-color': glowColor,
+        '--border-color': resolvedBorderColor,
+        '--glow-color': resolvedGlowColor,
       }"
     >
       <span
@@ -73,6 +73,7 @@
 import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { motion } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import trueFocus from '../theme/true-focus'
 
 const props = defineProps({
@@ -119,6 +120,9 @@ const { props: uiProps, ui } = useMotionBlockUI({
   props,
   theme: trueFocus,
 })
+
+const resolvedBorderColor = useResolvedColor(() => props.borderColor)
+const resolvedGlowColor = useResolvedColor(() => props.glowColor)
 
 const words = computed(() => props.sentence.split(' '))
 const currentIndex = ref<number>(0)

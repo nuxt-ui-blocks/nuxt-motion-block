@@ -2,17 +2,17 @@
   <div class="p-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-4">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 dark:bg-primary/30 rounded-full mb-4">
           <UIcon
             name="i-lucide-image"
-            class="w-5 h-5 text-blue-600 dark:text-blue-400"
+            class="w-5 h-5 text-primary"
           />
-          <span class="text-blue-700 dark:text-blue-300 font-medium">Creative Portfolio</span>
+          <span class="text-primary font-medium">Creative Portfolio</span>
         </div>
-        <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h2 class="text-4xl font-bold text-highlighted mb-4">
           Featured Projects
         </h2>
-        <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+        <p class="text-xl text-muted max-w-3xl mx-auto">
           Explore our portfolio of creative work and innovative solutions that showcase our expertise and vision
         </p>
       </div>
@@ -22,12 +22,12 @@
           v-for="(project, index) in projects"
           :key="index"
           :image-url="project.image"
-          class="rounded-2xl overflow-hidden shadow-xl"
+          class="w-full h-80 rounded-2xl overflow-hidden shadow-xl"
         >
           <template #content>
             <div class="space-y-4 p-6">
               <div class="flex items-center gap-2 mb-2">
-                <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
+                <div class="w-8 h-8 rounded-lg bg-default/20 flex items-center justify-center">
                   <UIcon
                     :name="project.icon"
                     class="w-4 h-4 text-white"
@@ -51,7 +51,7 @@
                 <div
                   v-for="tag in project.tags"
                   :key="tag"
-                  class="px-2 py-1 bg-white/20 rounded text-xs text-white"
+                  class="px-2 py-1 bg-default/20 rounded text-xs text-white"
                 >
                   {{ tag }}
                 </div>
@@ -82,13 +82,13 @@
         </MDirectionAwareHover>
       </div>
 
-      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-700">
+      <div class="bg-default rounded-2xl shadow-lg p-8 border border-default">
         <div class="flex flex-col md:flex-row items-center gap-8">
           <div class="flex-1">
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            <h3 class="text-2xl font-bold text-highlighted mb-4">
               Want to see more of our work?
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-6">
+            <p class="text-muted mb-6">
               Browse our complete portfolio to discover how we've helped businesses transform their digital presence.
             </p>
             <div class="flex flex-wrap gap-4">

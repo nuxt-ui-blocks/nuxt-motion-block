@@ -5,7 +5,7 @@
       class="left-1/2 top-1/2"
     />
     <div class="relative z-10 h-full flex items-center justify-center">
-      <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+      <h3 class="text-xl font-bold text-highlighted">
         Pink Directional Light
       </h3>
     </div>

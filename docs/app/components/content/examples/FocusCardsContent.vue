@@ -5,7 +5,7 @@
         <h3 class="text-xl font-bold mb-2">
           {{ card.title }}
         </h3>
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-muted">
           {{ card.description }}
         </p>
         <UButton

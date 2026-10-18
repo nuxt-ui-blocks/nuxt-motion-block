@@ -1,10 +1,10 @@
 <template>
   <div class="flex w-full max-w-lg flex-col gap-4">
     <MAiDiff
-      :decision="decision"
+      :key="runId"
       :lines="lines"
-      :on-accept="() => decision = 'accepted'"
-      :on-reject="() => decision = 'rejected'"
+      :on-accept="noop"
+      :on-reject="noop"
       title="src/runtime/composables/useAiState.ts"
     />
 
@@ -35,11 +35,13 @@ const lines = ref<DiffLine[]>([
   { content: '  | \'error\'', kind: 'context', number: 10 },
 ])
 
-const decision = ref<'accepted' | 'rejected' | null>(null)
+// Bumping the key remounts the card, which is what returns it to a pending
+// state and replays the wipe.
+const runId = ref(0)
+
+const noop = () => {}
 
 const replay = () => {
-  // A new array identity clears the decision and replays the wipe.
-  lines.value = [...lines.value]
-  decision.value = null
+  runId.value += 1
 }
 </script>

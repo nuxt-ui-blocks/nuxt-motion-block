@@ -1,12 +1,13 @@
 <template>
-  <div class="max-w-md text-center">
+  <div class="text-center">
     <MBottomUpLetters
       class="text-3xl font-bold"
-      text="Appears on scroll"
+      :delay="200"
+      text="Rises in on scroll"
       trigger-on-view
     />
     <p class="mt-3 text-sm text-muted">
-      Each letter rises once, bottom to top, 88ms after the one before it.
+      200ms after the headline enters view, then 88ms per letter.
     </p>
   </div>
 </template>

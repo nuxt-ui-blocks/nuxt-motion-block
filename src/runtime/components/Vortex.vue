@@ -21,9 +21,11 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
 import { createNoise3D } from 'simplex-noise' // for 3D noise add this package as dependency make sure add details in docs
-import { onMounted, onUnmounted, ref } from 'vue'
+import { useColorMode } from '#imports'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import vortex from '../theme/vortex'
+import { resolveColor } from '../utils/theme-color'
 
 interface VortexProps {
   class?: string
@@ -62,6 +64,22 @@ const { props: uiProps, ui } = useMotionBlockUI({
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const containerRef = ref<HTMLElement | null>(null)
 const animationFrameId = ref<number>()
+
+const colorMode = useColorMode()
+const resolvedBackgroundColor = ref(props.backgroundColor)
+
+// `backgroundColor` accepts a theme token (`'primary'`, `'var(--ui-primary)'`)
+// or any CSS colour; resolve it against the active theme so the canvas paints
+// the concrete value.
+const resolveBackgroundColor = () => {
+  const target = containerRef.value ?? undefined
+  resolvedBackgroundColor.value = resolveColor(props.backgroundColor, { target }) ?? props.backgroundColor
+}
+
+watch(
+  [() => props.backgroundColor, () => colorMode.value],
+  resolveBackgroundColor,
+)
 
 // Constants
 const particlePropCount = 9
@@ -137,7 +155,7 @@ const draw = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
   tick++
 
   ctx.clearRect(0, 0, canvas.width, canvas.height)
-  ctx.fillStyle = props.backgroundColor
+  ctx.fillStyle = resolvedBackgroundColor.value
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
   drawParticles(ctx)
@@ -256,6 +274,7 @@ const handleResize = () => {
 }
 
 onMounted(() => {
+  resolveBackgroundColor()
   setup()
   window.addEventListener('resize', handleResize)
 })

@@ -1,6 +1,6 @@
 <template>
   <Motion
-    :is="component"
+    :as="component"
     :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })"
     :style="computedStyles"
     :initial="initialVariant"
@@ -24,6 +24,7 @@
 import { Motion } from 'motion-v'
 import { computed, ref } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColors } from '../composables/useThemeColor'
 import textGradient from '../theme/text-gradient'
 
 type GradientDirection = 'horizontal' | 'vertical' | 'diagonal' | 'radial'
@@ -31,7 +32,7 @@ type AnimationType = 'wave' | 'pulse' | 'flow' | 'rainbow' | 'static'
 
 interface TextGradientProps {
   text?: string
-  as?: string
+  as?: keyof HTMLElementTagNameMap
   colors?: string[]
   direction?: GradientDirection
   animation?: AnimationType
@@ -88,8 +89,11 @@ const getGradientDirection = () => {
   return directions[props.direction]
 }
 
+const resolvedColors = useResolvedColors(() => props.colors)
+
 const createGradient = () => {
-  const colors = props.colors.join(', ')
+  const colorsArr = resolvedColors.value && resolvedColors.value.length > 0 ? resolvedColors.value : props.colors
+  const colors = colorsArr.join(', ')
   const direction = getGradientDirection()
 
   if (props.direction === 'radial') {

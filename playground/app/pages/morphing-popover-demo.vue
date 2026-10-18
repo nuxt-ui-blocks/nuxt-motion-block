@@ -1,7 +1,7 @@
 <template>
   <div class="p-8">
     <h1 class="text-2xl font-bold text-highlighted mb-2">
-      Morphing Popover
+      Shape-shift popover
     </h1>
     <p class="text-muted mb-6">
       UPopover extended with motion-v scale/opacity morphing animations.
@@ -113,13 +113,13 @@
           :transition="customTransition"
         >
           <UButton
-            label="Custom Animation"
+            label="Tailored motion"
             color="warning"
           />
           <template #content>
             <div class="p-4 w-64">
               <h3 class="text-lg font-semibold mb-2">
-                Custom Animation
+                Tailored motion
               </h3>
               <p class="text-muted">
                 Custom variants and transition props.

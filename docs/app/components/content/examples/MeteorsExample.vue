@@ -5,7 +5,7 @@
       <h3 class="text-2xl font-bold text-white mb-2">
         Meteor Shower
       </h3>
-      <p class="text-gray-300">
+      <p class="text-dimmed">
         Animated meteor shower effect
       </p>
     </div>

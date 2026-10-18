@@ -8,6 +8,7 @@
     <Motion
       v-for="(char, i) in characters"
       :key="i"
+      as="span"
       :class="ui.char({ class: uiProps.ui?.char })"
       :initial="{
         translateZ: 0,
@@ -64,7 +65,7 @@ interface TextShimmerWaveProps {
 
 const props = withDefaults(defineProps<TextShimmerWaveProps>(), {
   text: '',
-  as: 'p',
+  as: 'span',
   class: undefined,
   ui: undefined,
   duration: 1,

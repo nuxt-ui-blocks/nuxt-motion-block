@@ -4,7 +4,7 @@ const defaultTheme = {
   slots: {
     root: 'w-full',
     body: '!pt-0 text-sm text-muted',
-    trace: 'border-border border-l pl-4 leading-relaxed text-muted',
+    trace: 'border-default border-l pl-4 leading-relaxed text-muted',
   },
 }
 

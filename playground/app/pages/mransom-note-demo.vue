@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="RansomNote"
-      description="Each letter torn out of the newspaper and pasted back at the wrong angle. Translated from smoothui's ransom-note."
+      description="Each letter torn out of the newspaper and pasted back at the wrong angle."
     />
 
     <UCard>

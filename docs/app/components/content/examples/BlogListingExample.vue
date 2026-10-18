@@ -103,7 +103,7 @@
       </UCard>
     </MInView>
 
-    <!-- Blog Posts Grid -->
+    <!-- Articles Grid -->
     <MAnimatedGroup
       :stagger-children="0.1"
       preset="slide"
@@ -246,7 +246,7 @@ const posts = ref([
   },
   {
     id: 2,
-    title: 'The Future of Web Design in 2023',
+    title: 'The Future of Web craft in 2023',
     excerpt: 'Explore the latest trends and techniques that are shaping the future of web design this year.',
     category: 'Design',
     date: 'May 10, 2023',

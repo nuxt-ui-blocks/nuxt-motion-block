@@ -8,9 +8,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { useColorMode } from '#imports'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import pixelatedCanvas from '../theme/pixelated-canvas'
+import { colorToRgb, resolveColor } from '../utils/theme-color'
 
 interface PixelatedCanvasProps {
   src: string
@@ -77,6 +79,35 @@ const { props: uiProps, ui } = useMotionBlockUI({
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 
+const colorMode = useColorMode()
+const loadedImage = ref<HTMLImageElement | null>(null)
+const resolvedBackgroundColor = ref(props.backgroundColor)
+const resolvedTintColor = ref(props.tintColor)
+
+// Both colours accept a theme token (`'primary'`, `'var(--ui-primary)'`) or any
+// CSS colour; resolve them against the active theme before they reach the
+// canvas, so a token tracks light/dark instead of painting a raw string.
+const resolveColors = () => {
+  const target = canvasRef.value ?? undefined
+  resolvedBackgroundColor.value = resolveColor(props.backgroundColor, { target }) ?? props.backgroundColor
+  resolvedTintColor.value = resolveColor(props.tintColor, { target }) ?? props.tintColor
+}
+
+const rerender = () => {
+  const canvas = canvasRef.value
+  if (!canvas || !loadedImage.value) return
+  computeSamples(loadedImage.value, canvas)
+  if (!props.interactive) drawStatic()
+}
+
+watch(
+  [() => props.backgroundColor, () => props.tintColor, () => colorMode.value],
+  () => {
+    resolveColors()
+    rerender()
+  },
+)
+
 // Refs for state management
 const samples = ref<Array<{
   x: number
@@ -109,25 +140,6 @@ const hash2D = (ix: number, iy: number) => {
   return s - Math.floor(s)
 }
 
-const parseTintColor = (color: string): [number, number, number] | null => {
-  if (color.startsWith('#')) {
-    const hex = color.slice(1)
-    if (hex.length === 3) {
-      const r = Number.parseInt(hex[0] + hex[0], 16)
-      const g = Number.parseInt(hex[1] + hex[1], 16)
-      const b = Number.parseInt(hex[2] + hex[2], 16)
-      return [r, g, b]
-    }
-    const r = Number.parseInt(hex.slice(0, 2), 16)
-    const g = Number.parseInt(hex.slice(2, 4), 16)
-    const b = Number.parseInt(hex.slice(4, 6), 16)
-    return [r, g, b]
-  }
-  const m = color.match(/rgb\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)\)/i)
-  if (m) return [Number.parseInt(m[1], 10), Number.parseInt(m[2], 10), Number.parseInt(m[3], 10)]
-  return null
-}
-
 const computeSamples = (img: HTMLImageElement, canvas: HTMLCanvasElement) => {
   const dpr = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1
   const displayWidth = props.width ?? img.naturalWidth
@@ -143,8 +155,8 @@ const computeSamples = (img: HTMLImageElement, canvas: HTMLCanvasElement) => {
   ctx.resetTransform()
   ctx.scale(dpr, dpr)
 
-  if (props.backgroundColor) {
-    ctx.fillStyle = props.backgroundColor
+  if (resolvedBackgroundColor.value) {
+    ctx.fillStyle = resolvedBackgroundColor.value
     ctx.fillRect(0, 0, displayWidth, displayHeight)
   }
   else {
@@ -224,8 +236,8 @@ const computeSamples = (img: HTMLImageElement, canvas: HTMLCanvasElement) => {
   const newSamples: typeof samples.value = []
   let tintRGB: [number, number, number] | null = null
 
-  if (props.tintColor && props.tintStrength > 0) {
-    tintRGB = parseTintColor(props.tintColor)
+  if (resolvedTintColor.value && props.tintStrength > 0) {
+    tintRGB = colorToRgb(resolvedTintColor.value)
   }
 
   for (let y = 0; y < offscreen.height; y += props.cellSize) {
@@ -303,8 +315,8 @@ const drawStatic = () => {
   const ctx = canvas?.getContext('2d')
   if (!ctx || !dims.value || !samples.value) return
 
-  if (props.backgroundColor) {
-    ctx.fillStyle = props.backgroundColor
+  if (resolvedBackgroundColor.value) {
+    ctx.fillStyle = resolvedBackgroundColor.value
     ctx.fillRect(0, 0, dims.value.width, dims.value.height)
   }
   else {
@@ -362,8 +374,8 @@ const animate = () => {
   }
 
   // Clear canvas
-  if (props.backgroundColor) {
-    ctx.fillStyle = props.backgroundColor
+  if (resolvedBackgroundColor.value) {
+    ctx.fillStyle = resolvedBackgroundColor.value
     ctx.fillRect(0, 0, dims.value.width, dims.value.height)
   }
   else {
@@ -474,7 +486,10 @@ const handleResize = () => {
   const canvas = canvasRef.value
   if (!canvas) return
   const img = new Image()
-  img.onload = () => computeSamples(img, canvas)
+  img.onload = () => {
+    loadedImage.value = img
+    computeSamples(img, canvas)
+  }
   img.src = props.src
 }
 
@@ -483,11 +498,14 @@ onMounted(() => {
   const canvas = canvasRef.value
   if (!canvas) return
 
+  resolveColors()
+
   const img = new Image()
   img.crossOrigin = 'anonymous'
   img.src = props.src
 
   img.onload = () => {
+    loadedImage.value = img
     computeSamples(img, canvas)
 
     if (!props.interactive) {

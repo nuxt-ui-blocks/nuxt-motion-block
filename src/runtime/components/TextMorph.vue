@@ -13,6 +13,7 @@
       <Motion
         v-for="character in characters"
         :key="character.id"
+        as="span"
         :layout-id="character.id"
         :class="ui.char({ class: uiProps.ui?.char })"
         aria-hidden="true"
@@ -56,7 +57,7 @@ interface TextMorphProps {
 
 const props = withDefaults(defineProps<TextMorphProps>(), {
   text: '',
-  as: 'p',
+  as: 'span',
   className: '',
   style: () => ({}),
   variants: () => ({}),

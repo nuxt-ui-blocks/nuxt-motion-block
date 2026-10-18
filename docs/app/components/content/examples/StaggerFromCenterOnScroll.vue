@@ -1,12 +1,12 @@
 <template>
-  <div class="max-w-md text-center">
+  <div class="text-center">
     <MStaggerFromCenter
       class="text-3xl font-bold"
-      text="Appears on scroll"
+      text="Focuses on scroll"
       trigger-on-view
     />
     <p class="mt-3 text-sm text-muted">
-      Each character resolves once, outward from the middle of the string.
+      22ms per ring, once the headline is on screen.
     </p>
   </div>
 </template>

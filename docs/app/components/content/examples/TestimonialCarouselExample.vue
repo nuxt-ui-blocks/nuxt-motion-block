@@ -67,7 +67,7 @@ const testimonials = [
     content: 'These components have completely transformed how we build our UI. The animations are smooth and the customization options are endless.',
     author: {
       name: 'Alex Johnson',
-      role: 'Frontend Developer',
+      role: 'Front-end dev',
       avatar: 'https://picsum.photos/seed/alex/100/100',
     },
     rating: 5,

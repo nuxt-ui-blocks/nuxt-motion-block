@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-6 p-6">
     <UPageHeader
-      title="Exposure Slider"
-      description="A notched EV scale with a spring-settled track and a progress ring. Translated from smoothui's exposure-slider."
+      title="Brightness slider"
+      description="A notched EV scale with a spring-settled track and a progress ring."
     />
 
     <UCard>

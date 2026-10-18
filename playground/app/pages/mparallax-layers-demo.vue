@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-6 p-6">
     <UPageHeader
-      title="Parallax Layers"
-      description="Scroll-driven multi-depth parallax with optional pointer tracking. Translated from smoothui's parallax-layers."
+      title="Depth layers"
+      description="Scroll-driven multi-depth parallax with optional pointer tracking."
     />
 
     <UCard>

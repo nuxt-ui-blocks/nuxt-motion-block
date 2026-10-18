@@ -1,6 +1,29 @@
 # Changelog
 
 
+## Unreleased
+
+### 🚀 Enhancements
+
+- **code-block:** Add a `diff` variant with a `lines` prop and a `bare` chrome-less mode, so the same code surface can render a patch
+- **ai-diff:** Render the diff body through `CodeBlock` and keep the verdict in local state, replaying by remount
+- **theme-color:** Add `theme-color` utilities to map Nuxt UI tokens to CSS variables and resolved colours (and back), so components can follow the active theme instead of hardcoding custom colours
+- **theme-color:** Add a `useThemeColor` composable that returns the resolved colour as a ref, re-resolving on mount and whenever the colour mode changes
+- **theme-color:** Let a colour prop accept a Nuxt UI token or a literal colour — `Vortex`, `PixelatedCanvas`, `BackgroundGradientAnimation`, `AiOrbFace`, `BackgroundBeams` and `GlowEffect` now resolve either form against the active theme
+- **ai-orb-face:** Default the body, edge and features to the theme primary so a bare `AiOrbFace` follows the active theme, and make the AI Orb and AI Orb Face docs demos use theme tokens
+
+### 💅 Refactors
+
+- **ai-diff:** Match the reference motion — collapse on reject via an `AnimatePresence` height exit, use a `bg-background` card, and drop the `max-height` transition and the `decision` prop
+- **theme:** Move diff line slots and the `kind` variants from `ai-diff` into `code-block`
+- **theme-color:** Route `AiOrb`, `DottedGlowBackground`, `DitherChart` and the fluid/canvas cursor composables through the shared `theme-color` utilities instead of ad-hoc canvas and `getComputedStyle` reads
+- **docs:** Update the AI Diff demo, props, slots and prose for the new API
+
+### 🩹 Fixes
+
+- **ai-orb:** Fall back to the default palette when `colors` is an empty array, and guard the `theme-color` resolvers against non-string input, so a playground seeded with `:colors="[]"` no longer throws in the mount hook
+- **docs:** Pass typed props for AI SDK message parts and update the AI Diff and changelog content
+
 ## v0.0.3
 
 [compare changes](https://github.com/MuhammadKhizar7/nuxt-motion-block/compare/v0.0.2...v0.0.3)

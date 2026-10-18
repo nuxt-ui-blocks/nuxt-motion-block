@@ -17,7 +17,7 @@
 const withNumbers = ref(true)
 
 const snippet = `const items = ref([
-  { id: 1, label: 'Design tokens' },
+  { id: 1, label: 'Style tokens' },
   { id: 2, label: 'Component audit' },
 ])
 

@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-12">
     <UPageHeader
-      title="Card Stack"
+      title="Stacked Cards"
       description="A deck that deals itself — cards rotate through the front on a timer or on demand."
     />
 
@@ -268,8 +268,8 @@ interface StackCard {
 }
 
 const items: StackCard[] = [
-  { id: 1, title: 'Project Alpha', content: 'A deck that rotates the front card back to the pile.', name: 'Alex Developer', designation: 'Lead Developer' },
-  { id: 2, title: 'Project Beta', content: 'Each card behind is scaled down and lifted a few pixels.', name: 'Sam Designer', designation: 'Senior Designer' },
+  { id: 1, title: 'Project Alpha', content: 'A deck that rotates the front card back to the pile.', name: 'Sam Rivera', designation: 'Lead Developer' },
+  { id: 2, title: 'Project Betaeta', content: 'Each card behind is scaled down and lifted a few pixels.', name: 'Sam Designer', designation: 'Senior Designer' },
   { id: 3, title: 'Project Gamma', content: 'Change the interval to feel how the timing reads.', name: 'Jordan Manager', designation: 'Project Manager' },
   { id: 4, title: 'Project Delta', content: 'Manual control uses the same rotation the timer runs.', name: 'Riley Engineer', designation: 'Platform Engineer' },
 ]

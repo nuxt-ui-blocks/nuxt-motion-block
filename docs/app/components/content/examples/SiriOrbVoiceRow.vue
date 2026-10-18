@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full max-w-md rounded-xl bg-black/5 p-6 dark:bg-white/5">
+  <div class="w-full max-w-md rounded-xl bg-black/5 p-6">
     <div class="flex items-center gap-4">
       <MSiriOrb
         :amplitude="level"

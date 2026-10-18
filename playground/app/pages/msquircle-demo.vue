@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="Squircle"
-      description="Corners traced as a superellipse rather than a circular arc, which is what keeps curvature continuous into the straight edges. Translated from smoothui's squircle."
+      description="Corners traced as a superellipse rather than a circular arc, which is what keeps curvature continuous into the straight edges."
     />
 
     <UCard>

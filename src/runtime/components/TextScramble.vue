@@ -1,6 +1,6 @@
 <template>
   <Motion
-    :is="component"
+    :as="component"
     :class="ui.root({ class: [uiProps.ui?.root, uiProps.class, props.className] })"
     v-bind="$attrs"
   >
@@ -19,7 +19,7 @@ interface TextScrambleProps {
   duration?: number
   speed?: number
   characterSet?: string
-  as?: string
+  as?: keyof HTMLElementTagNameMap
   class?: string
   ui?: Record<string, any>
   className?: string

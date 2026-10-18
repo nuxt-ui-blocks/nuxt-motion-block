@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center">
     <div class="w-full max-w-3xl">
-      <h3 class="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+      <h3 class="text-2xl font-bold text-center mb-8 text-highlighted">
         Before & After Comparison
       </h3>
       <MImageComparison class="h-96 w-full rounded-xl overflow-hidden shadow-xl">
@@ -19,16 +19,16 @@
         />
         <MImageComparisonSlider>
           <template #default>
-            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-xl">
+            <div class="w-10 h-10 rounded-full bg-default flex items-center justify-center shadow-xl">
               <UIcon
                 name="i-lucide-move-horizontal"
-                class="w-5 h-5 text-gray-700"
+                class="w-5 h-5 text-default"
               />
             </div>
           </template>
         </MImageComparisonSlider>
       </MImageComparison>
-      <div class="flex justify-between mt-6 text-sm text-gray-600 dark:text-gray-400">
+      <div class="flex justify-between mt-6 text-sm text-muted">
         <span>Original</span>
         <span>Enhanced</span>
       </div>

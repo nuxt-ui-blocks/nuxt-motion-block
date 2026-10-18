@@ -1,6 +1,6 @@
 <template>
   <div class="w-full max-w-lg rounded-2xl border border-default p-6">
-    <p class="mb-4 text-sm leading-relaxed">
+    <div class="mb-4 text-sm leading-relaxed">
       Built by
       <MSocialHoverCard
         :profile="mara"
@@ -10,7 +10,7 @@
       and shipped alongside
       <MSocialHoverCard :profile="ilya" />
       .
-    </p>
+    </div>
 
     <UBadge
       :label="following ? 'Following Mara' : 'Not following'"

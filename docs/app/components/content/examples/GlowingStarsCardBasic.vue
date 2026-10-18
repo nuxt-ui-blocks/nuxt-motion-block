@@ -14,7 +14,7 @@
       </div>
     </template>
     <div class="py-6 space-y-6">
-      <div class="flex items-start p-4 bg-white/5 backdrop-blur-sm rounded-lg hover:bg-white/10 transition-colors">
+      <div class="flex items-start p-4 bg-default/5 backdrop-blur-sm rounded-lg hover:bg-default/10 transition-colors">
         <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 flex items-center justify-center mr-4 flex-shrink-0">
           <UIcon
             name="i-lucide-zap"
@@ -23,14 +23,14 @@
         </div>
         <div>
           <h3 class="font-semibold text-white mb-1">
-            Lightning Fast
+            Blazing quick
           </h3>
-          <p class="text-gray-300 text-sm">
+          <p class="text-dimmed text-sm">
             Optimized performance with instant loading and minimal resource usage
           </p>
         </div>
       </div>
-      <div class="flex items-start p-4 bg-white/5 backdrop-blur-sm rounded-lg hover:bg-white/10 transition-colors">
+      <div class="flex items-start p-4 bg-default/5 backdrop-blur-sm rounded-lg hover:bg-default/10 transition-colors">
         <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center mr-4 flex-shrink-0">
           <UIcon
             name="i-lucide-shield"
@@ -41,12 +41,12 @@
           <h3 class="font-semibold text-white mb-1">
             Secure & Private
           </h3>
-          <p class="text-gray-300 text-sm">
+          <p class="text-dimmed text-sm">
             Enterprise-grade security for your data with end-to-end encryption
           </p>
         </div>
       </div>
-      <div class="flex items-start p-4 bg-white/5 backdrop-blur-sm rounded-lg hover:bg-white/10 transition-colors">
+      <div class="flex items-start p-4 bg-default/5 backdrop-blur-sm rounded-lg hover:bg-default/10 transition-colors">
         <div class="w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-teal-400 flex items-center justify-center mr-4 flex-shrink-0">
           <UIcon
             name="i-lucide-sparkles"
@@ -57,12 +57,12 @@
           <h3 class="font-semibold text-white mb-1">
             Beautiful Effects
           </h3>
-          <p class="text-gray-300 text-sm">
+          <p class="text-dimmed text-sm">
             Stunning animations and visual experiences that captivate users
           </p>
         </div>
       </div>
-      <div class="flex items-start p-4 bg-white/5 backdrop-blur-sm rounded-lg hover:bg-white/10 transition-colors">
+      <div class="flex items-start p-4 bg-default/5 backdrop-blur-sm rounded-lg hover:bg-default/10 transition-colors">
         <div class="w-10 h-10 rounded-full bg-gradient-to-r from-orange-400 to-red-400 flex items-center justify-center mr-4 flex-shrink-0">
           <UIcon
             name="i-lucide-globe"
@@ -73,7 +73,7 @@
           <h3 class="font-semibold text-white mb-1">
             Global Access
           </h3>
-          <p class="text-gray-300 text-sm">
+          <p class="text-dimmed text-sm">
             Access your data from anywhere with our worldwide CDN network
           </p>
         </div>

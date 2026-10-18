@@ -13,10 +13,10 @@
       fill="#EF4444"
     />
     <div class="relative z-10 h-full flex flex-col items-center justify-center text-center p-4">
-      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+      <h3 class="text-2xl font-bold text-highlighted mb-2">
         Directional Light
       </h3>
-      <p class="text-gray-700 dark:text-gray-300">
+      <p class="text-default">
         Multiple directional lights with different colors and positions
       </p>
     </div>

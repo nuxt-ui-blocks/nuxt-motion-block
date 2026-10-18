@@ -3,13 +3,34 @@
     <motion.div
       :class="ui.checkbox({ class: uiProps.ui?.checkbox })"
       :animate="{ scale: modelValue ? [1, 1.15, 1] : 1 }"
-      :transition="{ duration: drawDuration, ease: 'easeOut' }"
+      :transition="{ duration: 0.25 }"
     >
       <UCheckbox
         :model-value="modelValue"
         size="xl"
         @update:model-value="$emit('update:modelValue', $event === true)"
       />
+      <svg
+        class="pointer-events-none absolute inset-0 m-auto size-3.5 text-inverted"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <AnimatePresence>
+          <motion.path
+            v-if="modelValue"
+            d="M20 6 9 17l-5-5"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            :initial="{ pathLength: 0 }"
+            :animate="{ pathLength: 1 }"
+            :exit="{ pathLength: 0 }"
+            :transition="{ duration: drawDuration }"
+          />
+        </AnimatePresence>
+      </svg>
     </motion.div>
     <span
       v-if="label"
@@ -19,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { motion } from 'motion-v'
+import { AnimatePresence, motion } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import checkbox from '../theme/checkbox'
 

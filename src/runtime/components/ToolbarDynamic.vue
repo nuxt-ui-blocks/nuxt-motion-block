@@ -100,7 +100,9 @@ onUnmounted(() => {
           :animate="{ opacity: 1, width: 'auto' }"
           :exit="{ opacity: 0, width: 0 }"
         >
-          <slot name="expanded" />
+          <slot name="expanded">
+            <slot name="default" />
+          </slot>
         </Motion>
       </AnimatePresence>
     </Motion>

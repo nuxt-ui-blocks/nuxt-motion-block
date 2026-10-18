@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-full max-w-lg flex-col gap-4">
-    <div class="overflow-hidden rounded-3xl bg-neutral-950 dark:bg-black">
+    <div class="overflow-hidden rounded-3xl bg-accented">
       <MDynamicIsland
         :view="view"
         @update:view="selected = $event"

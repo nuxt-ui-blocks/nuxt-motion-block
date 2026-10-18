@@ -5,7 +5,7 @@
       <h3 class="text-2xl font-bold text-white mb-2">
         Stars Background
       </h3>
-      <p class="text-gray-300">
+      <p class="text-dimmed">
         Animated starfield background
       </p>
     </div>

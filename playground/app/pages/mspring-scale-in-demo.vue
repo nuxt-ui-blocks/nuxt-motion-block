@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="SpringScaleIn"
-      description="Words pop in with an overshoot. Translated from smoothui's spring-scale-in."
+      description="Words pop in with an overshoot."
     />
 
     <UCard>

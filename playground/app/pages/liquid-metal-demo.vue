@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="LiquidMetal"
-      description="A domain-warped noise field read as a normal, then lit. Translated from smoothui's liquid-metal."
+      description="A domain-warped noise field read as a normal, then lit."
     />
 
     <UCard>

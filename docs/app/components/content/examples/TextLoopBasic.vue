@@ -5,12 +5,12 @@
         Build
         <MTextLoop
           :items="['Modern', 'Innovative', 'Beautiful', 'Interactive']"
-          class="text-blue-600 dark:text-blue-400"
+          class="text-primary"
         />
         Experiences
       </h1>
 
-      <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+      <p class="text-xl text-muted mb-8">
         Create stunning interfaces with our collection of animated components that
         <MTextLoop
           :items="['transform', 'enhance', 'revolutionize', 'elevate']"
@@ -19,13 +19,13 @@
         the way users interact with your applications.
       </p>
 
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 max-w-2xl mx-auto mb-8">
+      <div class="bg-default rounded-xl shadow-lg p-6 max-w-2xl mx-auto mb-8">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6">
           <div class="flex-1 text-center md:text-left">
             <h3 class="text-lg font-semibold mb-2">
               Real-time Preview
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">
+            <p class="text-muted text-sm">
               See changes instantly as you type with our live preview feature
             </p>
           </div>

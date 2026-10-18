@@ -1,6 +1,7 @@
 <template>
   <div
-    :class="ui.root({ class: [uiProps.ui?.root, uiProps.class, props.className] })"
+    ref="rootEl"
+    :class="ui.root({ class: [uiProps.ui?.root, uiProps.ui?.class, props.className] })"
   >
     <svg
       :class="ui.svg({ class: uiProps.ui?.svg })"
@@ -54,17 +55,17 @@
           }"
         >
           <stop
-            stop-color="#18CCFC"
+            :stop-color="resolvedColors[0]"
             stop-opacity="0"
           />
-          <stop stop-color="#18CCFC" />
+          <stop :stop-color="resolvedColors[1]" />
           <stop
             offset="32.5%"
-            :stop-color="gradientColors[2]"
+            :stop-color="resolvedColors[2]"
           />
           <stop
             offset="100%"
-            :stop-color="gradientColors[3]"
+            :stop-color="resolvedColors[3]"
             stop-opacity="0"
           />
         </motion.linearGradient>
@@ -98,10 +99,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { motion } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import backgroundBeams from '../theme/background-beams'
+import { useColorMode } from '#imports'
+import { colorToRgb, resolveColor } from '../utils/theme-color'
 
 interface Props {
   class?: string
@@ -127,6 +130,30 @@ const { props: uiProps, ui } = useMotionBlockUI({ name: 'backgroundBeams', props
 
 // Computed visible paths based on numPaths prop
 const visiblePaths = computed(() => paths.slice(0, props.numPaths))
+
+/**
+ * `gradientColors` accepts a theme token (`'primary'`, `var(--ui-primary)`) or a
+ * literal colour per entry. Resolve each against the active theme so an SVG
+ * `stop-color` — a presentation attribute, where `var()` works but a bare token
+ * and `color-mix()` do not — always receives a concrete `rgb()`.
+ */
+const colorMode = useColorMode()
+const rootEl = ref<HTMLElement | null>(null)
+const resolvedColors = ref<string[]>([...props.gradientColors])
+
+const toConcreteColor = (value: string): string => {
+  const target = rootEl.value ?? undefined
+  const resolved = resolveColor(value, { target }) ?? value
+  const rgb = colorToRgb(resolved, target)
+  return rgb ? `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})` : resolved
+}
+
+const resolveColors = () => {
+  resolvedColors.value = props.gradientColors.map(toConcreteColor)
+}
+
+watch([() => props.gradientColors, () => colorMode.value], resolveColors)
+onMounted(resolveColors)
 
 // Path data array
 const paths = [

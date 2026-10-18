@@ -3,10 +3,9 @@ import type { Transition } from 'motion-v'
 /**
  * Shared motion vocabulary.
  *
- * Upstream smoothui re-declares these two constants independently inside every
- * one of its 14 AI components (`ai-branch` even carries a comment recording that
- * it was refactored *to* these tokens). Centralising them here keeps every port
- * in this package on identical curves.
+ * These two constants were originally re-declared independently inside each AI
+ * component. Centralising them here keeps every port in this package on identical
+ * curves.
  *
  * They are frozen deliberately: a component that re-renders per frame or per
  * token must not hand Motion a fresh transition object each time, because a

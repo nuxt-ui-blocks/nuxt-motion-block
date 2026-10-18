@@ -13,7 +13,7 @@ const variants: Array<{ label: string, value: EmbossVariant }> = [
   { label: 'Emboss', value: 'emboss' },
   { label: 'Deboss', value: 'deboss' },
   { label: 'Plaster', value: 'plaster' },
-  { label: 'Metal stamp', value: 'metal-stamp' },
+  { label: 'Metallic seal', value: 'metal-stamp' },
 ]
 
 // The reference passes no `color` at all, so the surfaces sit on the background
@@ -52,7 +52,7 @@ const color = ref('var(--ui-bg)')
             {{ entry.label }}
           </p>
           <MEmbossSurface
-            class="flex h-40 items-center justify-center rounded-2xl border border-foreground/10 p-6"
+            class="flex h-40 items-center justify-center rounded-2xl border border-inverted/10 p-6"
             :color="color"
             :depth="depth"
             :interactive="interactive"
@@ -150,7 +150,7 @@ const color = ref('var(--ui-bg)')
 
       <MEmbossSurface
         as="section"
-        class="space-y-4 rounded-2xl border border-foreground/10 p-8"
+        class="space-y-4 rounded-2xl border border-inverted/10 p-8"
         :color="color"
         :depth="4"
         :interactive="true"
@@ -190,7 +190,7 @@ const color = ref('var(--ui-bg)')
 
       <div class="flex items-center justify-center p-8">
         <MEmbossSurface
-          class="flex items-center justify-center gap-3 rounded-2xl border border-foreground/10 p-8"
+          class="flex items-center justify-center gap-3 rounded-2xl border border-inverted/10 p-8"
           :color="color"
           :depth="2"
           :light-angle="45"
@@ -223,7 +223,7 @@ const color = ref('var(--ui-bg)')
       <div class="flex items-center justify-center p-8">
         <MEmbossSurface
           as="h2"
-          class="rounded-2xl border border-foreground/10 p-8 text-center text-3xl font-bold tracking-tight"
+          class="rounded-2xl border border-inverted/10 p-8 text-center text-3xl font-bold tracking-tight"
           :color="color"
           :depth="3"
           :interactive="true"

@@ -40,6 +40,19 @@ const reactedLabel = computed(() => {
 })
 
 function onReact(id: string, reacted: boolean) {
+  const existing = reactions.value.find(item => item.id === id)
+
+  // A picked emoji that is not in the bar yet arrives as its own emoji string,
+  // so add it as a new reaction (and clear the others, per the exclusivity rule).
+  if (!existing) {
+    if (!reacted) return
+    reactions.value = [
+      ...reactions.value.map(item => ({ ...item, reacted: false })),
+      { count: 1, emoji: id, id, label: id, reacted: true },
+    ]
+    return
+  }
+
   reactions.value = reactions.value.map((item) => {
     if (item.id === id) {
       return {

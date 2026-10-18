@@ -8,7 +8,7 @@
       <h3 class="text-xl font-bold text-white text-center">
         Secure Vault
       </h3>
-      <p class="text-gray-300 text-center">
+      <p class="text-dimmed text-center">
         Your data is protected with military-grade encryption
       </p>
     </div>

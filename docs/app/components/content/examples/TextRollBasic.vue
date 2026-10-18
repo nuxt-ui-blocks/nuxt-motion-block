@@ -5,11 +5,11 @@
         Discover
         <MTextRoll
           children="Amazing Features"
-          class="text-blue-600 dark:text-blue-400"
+          class="text-primary"
         />
       </h1>
 
-      <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+      <p class="text-xl text-muted mb-8">
         Our platform offers
         <MTextRoll
           children="cutting-edge solutions"
@@ -21,21 +21,21 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
         <UCard class="text-center">
           <div class="flex justify-center mb-4">
-            <div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+            <div class="w-16 h-16 rounded-full bg-primary/10 dark:bg-primary/70 flex items-center justify-center">
               <UIcon
                 name="i-lucide-zap"
-                class="w-8 h-8 text-blue-600 dark:text-blue-400"
+                class="w-8 h-8 text-primary"
               />
             </div>
           </div>
           <h3 class="text-lg font-semibold mb-2">
             <MTextRoll
-              children="Lightning Fast"
-              class="text-blue-600 dark:text-blue-400"
+              children="Blazing quick"
+              class="text-primary"
             />
           </h3>
-          <p class="text-gray-600 dark:text-gray-400 text-sm">
-            Optimized for performance with minimal load times
+          <p class="text-muted text-sm">
+            Tuned for speed with minimal load times
           </p>
         </UCard>
 
@@ -54,7 +54,7 @@
               class="text-purple-600 dark:text-purple-400"
             />
           </h3>
-          <p class="text-gray-600 dark:text-gray-400 text-sm">
+          <p class="text-muted text-sm">
             Stunning animations that captivate your audience
           </p>
         </UCard>
@@ -70,12 +70,12 @@
           </div>
           <h3 class="text-lg font-semibold mb-2">
             <MTextRoll
-              children="Easy Integration"
+              children="Plug-in ready"
               class="text-green-600 dark:text-green-400"
             />
           </h3>
-          <p class="text-gray-600 dark:text-gray-400 text-sm">
-            Simple to implement with clean, well-documented code
+          <p class="text-muted text-sm">
+            Quick to add with clean, well-documented code
           </p>
         </UCard>
       </div>

@@ -17,30 +17,30 @@
           <h3 class="text-xl font-bold">
             Notification Center
           </h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400">
+          <p class="text-sm text-muted">
             You have new updates
           </p>
         </div>
       </div>
     </template>
     <div class="space-y-4">
-      <div class="flex items-start p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4 flex-shrink-0">
+      <div class="flex items-start p-4 bg-elevated rounded-lg hover:bg-muted transition-colors">
+        <div class="w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/70 flex items-center justify-center mr-4 flex-shrink-0">
           <UIcon
             name="i-lucide-mail"
-            class="w-5 h-5 text-blue-600 dark:text-blue-400"
+            class="w-5 h-5 text-primary"
           />
         </div>
         <div>
-          <p class="font-medium text-gray-900 dark:text-white">
+          <p class="font-medium text-highlighted">
             New message received
           </p>
-          <p class="text-sm text-gray-600 dark:text-gray-400">
+          <p class="text-sm text-muted">
             2 minutes ago
           </p>
         </div>
       </div>
-      <div class="flex items-start p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+      <div class="flex items-start p-4 bg-elevated rounded-lg hover:bg-muted transition-colors">
         <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mr-4 flex-shrink-0">
           <UIcon
             name="i-lucide-user-plus"
@@ -48,15 +48,15 @@
           />
         </div>
         <div>
-          <p class="font-medium text-gray-900 dark:text-white">
+          <p class="font-medium text-highlighted">
             Friend request
           </p>
-          <p class="text-sm text-gray-600 dark:text-gray-400">
+          <p class="text-sm text-muted">
             5 minutes ago
           </p>
         </div>
       </div>
-      <div class="flex items-start p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+      <div class="flex items-start p-4 bg-elevated rounded-lg hover:bg-muted transition-colors">
         <div class="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900 flex items-center justify-center mr-4 flex-shrink-0">
           <UIcon
             name="i-lucide-heart"
@@ -64,10 +64,10 @@
           />
         </div>
         <div>
-          <p class="font-medium text-gray-900 dark:text-white">
+          <p class="font-medium text-highlighted">
             New like on your post
           </p>
-          <p class="text-sm text-gray-600 dark:text-gray-400">
+          <p class="text-sm text-muted">
             10 minutes ago
           </p>
         </div>

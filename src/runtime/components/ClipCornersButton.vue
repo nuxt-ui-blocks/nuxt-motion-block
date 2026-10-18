@@ -19,7 +19,7 @@
       >
         <polygon
           points="0,0 8,0 0,8"
-          :fill="triangleColor"
+          :fill="resolvedTriangleColor"
         />
       </svg>
     </motion.div>
@@ -39,7 +39,7 @@
       >
         <polygon
           points="8,0 8,8 0,0"
-          :fill="triangleColor"
+          :fill="resolvedTriangleColor"
         />
       </svg>
     </motion.div>
@@ -59,7 +59,7 @@
       >
         <polygon
           points="0,8 8,8 0,0"
-          :fill="triangleColor"
+          :fill="resolvedTriangleColor"
         />
       </svg>
     </motion.div>
@@ -79,7 +79,7 @@
       >
         <polygon
           points="8,8 0,8 8,0"
-          :fill="triangleColor"
+          :fill="resolvedTriangleColor"
         />
       </svg>
     </motion.div>
@@ -96,6 +96,7 @@ import { ref, computed, onMounted } from 'vue'
 import { motion } from 'motion-v'
 import { useHoverCapable } from '../composables/useHoverCapable'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import clipCornersButton from '../theme/clip-corners-button'
 
 interface Props {
@@ -121,6 +122,8 @@ const { props: uiProps, ui } = useMotionBlockUI({
 })
 
 defineOptions({ inheritAttrs: false })
+
+const resolvedTriangleColor = useResolvedColor(() => props.triangleColor)
 
 const s = computed(() => props.triangleSize)
 const inset = computed(() => props.triangleInset)

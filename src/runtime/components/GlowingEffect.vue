@@ -27,7 +27,9 @@
 import { animate } from 'motion-v'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColors } from '../composables/useThemeColor'
 import glowingEffect from '../theme/glowing-effect'
+import { THEME_TOKENS } from '../utils/theme-color'
 
 interface GlowingEffectProps {
   blur?: number
@@ -67,6 +69,22 @@ const animationFrameRef = ref<number>(0)
 
 const withAlpha = (color: string) => (/^#[0-9a-f]{6}$/i.test(color) ? `${color}00` : color)
 
+const isThemeReference = (value: string) => {
+  const token = value.trim()
+  return token.startsWith('var(--ui-')
+    || token.startsWith('--ui-')
+    || (THEME_TOKENS as readonly string[]).includes(token)
+}
+
+const resolvedColors = useResolvedColors(() => props.colors)
+
+// Theme references resolve to a concrete colour, while authored literals are kept
+// verbatim so `withAlpha`'s hex handling (and the colours a user typed) survive.
+const gradientColors = computed(() => {
+  const resolved = resolvedColors.value ?? props.colors
+  return props.colors.map((color, index) => (isThemeReference(color) ? resolved[index] ?? color : color))
+})
+
 const gradient = computed(() => {
   if (props.variant === 'white') {
     return `repeating-conic-gradient(
@@ -75,7 +93,7 @@ const gradient = computed(() => {
         var(--black) calc(25% / var(--repeating-conic-gradient-times))
       )`
   }
-  const [c0, c1, c2, c3] = props.colors
+  const [c0, c1, c2, c3] = gradientColors.value
   return `radial-gradient(circle, ${c0} 10%, ${withAlpha(c0)} 20%),
       radial-gradient(circle at 40% 40%, ${c1} 5%, ${withAlpha(c1)} 15%),
       radial-gradient(circle at 60% 60%, ${c2} 10%, ${withAlpha(c2)} 20%),

@@ -1,0 +1,19 @@
+<template>
+  <ComponentPlayground
+    name="ToolbarDynamic"
+    :defaults="{ width: '340px', collapsedWidth: '98px' }"
+  >
+    <UButton
+      variant="ghost"
+      size="sm"
+      square
+      icon="i-lucide-star"
+    />
+    <UButton
+      variant="ghost"
+      size="sm"
+      square
+      icon="i-lucide-share-2"
+    />
+  </ComponentPlayground>
+</template>

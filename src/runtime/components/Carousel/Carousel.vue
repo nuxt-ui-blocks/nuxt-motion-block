@@ -2,6 +2,7 @@
 import { computed, ref, watch, onBeforeUnmount, useAttrs, isRef } from 'vue'
 import type { EmblaCarouselType } from 'embla-carousel'
 import { Motion, useReducedMotion, type VariantType, type MotionStyle } from 'motion-v'
+import { carouselOffset, carouselSlideTransform } from '../../utils/carousel'
 
 defineOptions({ inheritAttrs: false })
 
@@ -60,16 +61,12 @@ onBeforeUnmount(() => {
 })
 
 function getOffset(index: number) {
-  const count = items.value.length
-  if (!count) {
-    return 0
-  }
-  let offset = index - (selectedIndex.value ?? 0)
-  if (loop.value && count > 1) {
-    const half = Math.floor(count / 2)
-    offset = ((offset + half) % count + count) % count - half
-  }
-  return offset
+  return carouselOffset({
+    index,
+    selectedIndex: selectedIndex.value ?? 0,
+    count: items.value.length,
+    loop: loop.value,
+  })
 }
 
 function itemStyle(index: number): MotionStyle {
@@ -85,15 +82,20 @@ function itemStyle(index: number): MotionStyle {
 function itemAnimate(index: number): VariantType {
   const offset = getOffset(index)
   const abs = Math.min(Math.abs(offset), 3)
-  const rotateY = (props.inverted ? -1 : -offset) * props.rotation
-  const scale = Math.max(1 - abs * props.scaleStep, 0.4)
-  const z = -abs * props.depth
   if (reducedMotion.value) {
     return { opacity: offset === 0 ? 1 : 0, transition: { duration: 0 } }
   }
+  const { rotateY, scale, z, transformPerspective } = carouselSlideTransform({
+    offset,
+    rotation: props.rotation,
+    depth: props.depth,
+    scaleStep: props.scaleStep,
+    perspective: props.perspective,
+    inverted: props.inverted,
+  })
   return {
     opacity: abs > 3 ? 0 : 1,
-    transformPerspective: props.perspective,
+    transformPerspective,
     rotateY: `${rotateY}deg`,
     scale,
     z,

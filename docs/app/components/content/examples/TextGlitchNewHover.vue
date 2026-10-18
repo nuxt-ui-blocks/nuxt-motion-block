@@ -1,13 +1,11 @@
 <template>
-  <div class="flex justify-center p-8 bg-gray-900 rounded-lg">
+  <div class="flex flex-col items-center gap-3 p-8 bg-accented rounded-lg">
     <MTextGlitchNew
-      text="HOVER GLITCH"
-      :enable-on-hover="true"
-      :speed="1.2"
+      text="HOVER"
+      enable-on-hover
     />
+    <p class="text-sm text-muted">
+      The glitch only plays while the pointer is over the text.
+    </p>
   </div>
 </template>
-
-<script setup>
-// This component will be registered globally in the documentation app
-</script>

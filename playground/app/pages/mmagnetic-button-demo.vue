@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="MagneticButton"
-      description="The button follows the pointer inside a configurable radius and springs back on leave. Translated from smoothui's magnetic-button."
+      description="The button follows the pointer inside a configurable radius and springs back on leave."
     />
 
     <UCard>

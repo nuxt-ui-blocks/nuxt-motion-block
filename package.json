@@ -2,7 +2,7 @@
   "name": "nuxt-motion-block",
   "version": "0.0.3",
   "description": "A streamlined UI library that extends Nuxt UI with motion capabilities powered by motion-v",
-  "repository": "MuhammadKhizar7/nuxt-motion-block",
+  "repository": "nuxt-ui-blocks/nuxt-motion-block",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -22,6 +22,14 @@
     "./runtime/composables/useMotionBlockUI": {
       "types": "./dist/runtime/composables/useMotionBlockUI.d.ts",
       "import": "./dist/runtime/composables/useMotionBlockUI.js"
+    },
+    "./runtime/composables/useThemeColor": {
+      "types": "./dist/runtime/composables/useThemeColor.d.ts",
+      "import": "./dist/runtime/composables/useThemeColor.js"
+    },
+    "./runtime/utils/theme-color": {
+      "types": "./dist/runtime/utils/theme-color.d.ts",
+      "import": "./dist/runtime/utils/theme-color.js"
     }
   },
   "main": "./dist/module.mjs",

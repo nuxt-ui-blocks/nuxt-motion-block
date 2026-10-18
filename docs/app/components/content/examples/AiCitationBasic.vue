@@ -5,7 +5,7 @@
       <MAiCitation
         label="1"
         title="Spring defaults"
-        url="https://motion-primitives.com"
+        url="https://example.com"
         description="The easing and stiffness values that every component in this kit falls back to when you do not pass your own."
       >
         <template #favicon>
@@ -22,7 +22,7 @@
       <MAiCitation
         label="3"
         title="Reduced motion"
-        url="https://motion-primitives.com/docs/accessibility"
+        url="https://example.com/docs/accessibility"
         description="Every primitive in this kit reads prefers-reduced-motion and falls back to an instant state change."
       />
       .

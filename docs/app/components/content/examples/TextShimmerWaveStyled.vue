@@ -23,7 +23,7 @@
             :class="waveSettings.titleClass"
           />
         </h1>
-        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        <p class="text-xl text-muted max-w-2xl mx-auto">
           <MTextShimmerWave
             :text="waveSettings.subtitle"
             :duration="waveSettings.duration * 1.2"
@@ -38,7 +38,7 @@
       <!-- Controls and Preview -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
         <!-- Controls Panel -->
-        <div class="bg-white dark:bg-gray-800/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg">
+        <div class="bg-default rounded-xl p-6 border border-default shadow-lg">
           <h2 class="text-2xl font-bold mb-6 flex items-center">
             <UIcon
               name="i-lucide-sliders"
@@ -50,7 +50,7 @@
           <div class="space-y-6">
             <!-- Text Inputs -->
             <div>
-              <label class="block text-gray-700 dark:text-gray-300 mb-2">Title Text</label>
+              <label class="block text-default mb-2">Title Text</label>
               <UInput
                 v-model="waveSettings.title"
                 placeholder="Enter title text"
@@ -59,7 +59,7 @@
             </div>
 
             <div>
-              <label class="block text-gray-700 dark:text-gray-300 mb-2">Subtitle Text</label>
+              <label class="block text-default mb-2">Subtitle Text</label>
               <UInput
                 v-model="waveSettings.subtitle"
                 placeholder="Enter subtitle text"
@@ -69,7 +69,7 @@
 
             <!-- Element Type -->
             <div>
-              <label class="block text-gray-700 dark:text-gray-300 mb-2">Element Type</label>
+              <label class="block text-default mb-2">Element Type</label>
               <div class="grid grid-cols-3 gap-2">
                 <UButton
                   v-for="type in elementTypes"
@@ -87,7 +87,7 @@
             <!-- Animation Controls -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label class="block text-gray-700 dark:text-gray-300 mb-2">
+                <label class="block text-default mb-2">
                   Duration: {{ waveSettings.duration }}s
                 </label>
                 <input
@@ -96,12 +96,12 @@
                   min="0.5"
                   max="5"
                   step="0.1"
-                  class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                  class="w-full h-2 bg-accented rounded-lg appearance-none cursor-pointer"
                 >
               </div>
 
               <div>
-                <label class="block text-gray-700 dark:text-gray-300 mb-2">
+                <label class="block text-default mb-2">
                   Z Distance: {{ waveSettings.zDistance }}
                 </label>
                 <input
@@ -110,12 +110,12 @@
                   min="0"
                   max="50"
                   step="1"
-                  class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                  class="w-full h-2 bg-accented rounded-lg appearance-none cursor-pointer"
                 >
               </div>
 
               <div>
-                <label class="block text-gray-700 dark:text-gray-300 mb-2">
+                <label class="block text-default mb-2">
                   X Distance: {{ waveSettings.xDistance }}
                 </label>
                 <input
@@ -124,12 +124,12 @@
                   min="-20"
                   max="20"
                   step="1"
-                  class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                  class="w-full h-2 bg-accented rounded-lg appearance-none cursor-pointer"
                 >
               </div>
 
               <div>
-                <label class="block text-gray-700 dark:text-gray-300 mb-2">
+                <label class="block text-default mb-2">
                   Y Distance: {{ waveSettings.yDistance }}
                 </label>
                 <input
@@ -138,7 +138,7 @@
                   min="-20"
                   max="20"
                   step="1"
-                  class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                  class="w-full h-2 bg-accented rounded-lg appearance-none cursor-pointer"
                 >
               </div>
             </div>
@@ -146,7 +146,7 @@
             <!-- Advanced Controls -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label class="block text-gray-700 dark:text-gray-300 mb-2">
+                <label class="block text-default mb-2">
                   Scale: {{ waveSettings.scaleDistance }}
                 </label>
                 <input
@@ -155,12 +155,12 @@
                   min="0.5"
                   max="2"
                   step="0.1"
-                  class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                  class="w-full h-2 bg-accented rounded-lg appearance-none cursor-pointer"
                 >
               </div>
 
               <div>
-                <label class="block text-gray-700 dark:text-gray-300 mb-2">
+                <label class="block text-default mb-2">
                   Rotate Y: {{ waveSettings.rotateYDistance }}
                 </label>
                 <input
@@ -169,14 +169,14 @@
                   min="0"
                   max="45"
                   step="1"
-                  class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                  class="w-full h-2 bg-accented rounded-lg appearance-none cursor-pointer"
                 >
               </div>
             </div>
 
             <!-- Preset Styles -->
             <div>
-              <label class="block text-gray-700 dark:text-gray-300 mb-2">Preset Styles</label>
+              <label class="block text-default mb-2">Preset Styles</label>
               <div class="grid grid-cols-2 gap-2">
                 <UButton
                   v-for="style in presetStyles"
@@ -194,7 +194,7 @@
         </div>
 
         <!-- Preview Panel -->
-        <div class="bg-white dark:bg-gray-800/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg">
+        <div class="bg-default rounded-xl p-6 border border-default shadow-lg">
           <h2 class="text-2xl font-bold mb-6 flex items-center">
             <UIcon
               name="i-lucide-monitor"
@@ -206,7 +206,7 @@
           <div class="space-y-8">
             <!-- Title Preview -->
             <div>
-              <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3">
+              <h3 class="text-lg font-semibold text-default mb-3">
                 Title Preview
               </h3>
               <div class="p-6 bg-gradient-to-r from-cyan-50 to-teal-50 dark:from-gray-700 dark:to-gray-800 rounded-lg">
@@ -226,7 +226,7 @@
 
             <!-- Subtitle Preview -->
             <div>
-              <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3">
+              <h3 class="text-lg font-semibold text-default mb-3">
                 Subtitle Preview
               </h3>
               <div class="p-6 bg-gradient-to-r from-cyan-50 to-teal-50 dark:from-gray-700 dark:to-gray-800 rounded-lg">
@@ -245,13 +245,13 @@
 
             <!-- Example Usage -->
             <div>
-              <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3">
+              <h3 class="text-lg font-semibold text-default mb-3">
                 Example Usage
               </h3>
               <div class="p-6 bg-gradient-to-r from-cyan-50 to-teal-50 dark:from-gray-700 dark:to-gray-800 rounded-lg">
                 <div class="space-y-6">
-                  <div class="flex items-center justify-between p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
-                    <span class="text-gray-700 dark:text-gray-300">Feature Highlight</span>
+                  <div class="flex items-center justify-between p-4 bg-default rounded-lg shadow">
+                    <span class="text-default">Feature Highlight</span>
                     <MTextShimmerWave
                       text="New!"
                       :duration="1"
@@ -260,8 +260,8 @@
                     />
                   </div>
 
-                  <div class="flex items-center justify-between p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
-                    <span class="text-gray-700 dark:text-gray-300">Performance</span>
+                  <div class="flex items-center justify-between p-4 bg-default rounded-lg shadow">
+                    <span class="text-default">Performance</span>
                     <MTextShimmerWave
                       text="99.9% Uptime"
                       :duration="1.5"
@@ -270,7 +270,7 @@
                     />
                   </div>
 
-                  <div class="text-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow">
+                  <div class="text-center p-4 bg-default rounded-lg shadow">
                     <MTextShimmerWave
                       text="Get Started Today"
                       :duration="1.2"
@@ -288,8 +288,8 @@
       </div>
 
       <!-- Feature Showcase -->
-      <div class="bg-white dark:bg-gray-800/50 rounded-xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg">
-        <h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+      <div class="bg-default rounded-xl p-8 border border-default shadow-lg">
+        <h2 class="text-3xl font-bold text-center mb-8 text-highlighted">
           <MTextShimmerWave
             text="Why Choose Our Wave Effects?"
             :duration="1.8"
@@ -310,14 +310,14 @@
             </div>
             <h3 class="text-lg font-semibold mb-2">
               <MTextShimmerWave
-                text="Lightning Fast"
+                text="Blazing quick"
                 :duration="1"
                 :z-distance="10"
                 class="inline-block text-teal-600 dark:text-teal-400"
               />
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">
-              Optimized for performance with minimal load times
+            <p class="text-muted text-sm">
+              Tuned for speed with minimal load times
             </p>
           </UCard>
 
@@ -338,7 +338,7 @@
                 class="inline-block text-cyan-600 dark:text-cyan-400"
               />
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">
+            <p class="text-muted text-sm">
               Stunning animations that captivate your audience
             </p>
           </UCard>
@@ -354,14 +354,14 @@
             </div>
             <h3 class="text-lg font-semibold mb-2">
               <MTextShimmerWave
-                text="Easy Integration"
+                text="Plug-in ready"
                 :duration="1.1"
                 :z-distance="11"
                 class="inline-block text-green-600 dark:text-green-400"
               />
             </h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">
-              Simple to implement with clean, well-documented code
+            <p class="text-muted text-sm">
+              Quick to add with clean, well-documented code
             </p>
           </UCard>
         </div>

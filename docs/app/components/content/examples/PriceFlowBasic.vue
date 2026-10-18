@@ -1,14 +1,34 @@
 <template>
-  <div class="flex h-24 w-full items-center justify-center">
+  <div class="flex w-full flex-col items-center gap-6">
     <MPriceFlow
-      :value="price"
+      :value="total"
       prefix="Total:"
-      class="cursor-pointer"
-      @click="price = price === 29.99 ? 49.99 : 29.99"
     />
+
+    <div class="flex items-center gap-2">
+      <UButton
+        icon="i-lucide-minus"
+        color="neutral"
+        variant="outline"
+        size="sm"
+        aria-label="Decrease total"
+        :disabled="step === 0"
+        @click="step = step - 1"
+      />
+      <UButton
+        icon="i-lucide-plus"
+        color="neutral"
+        variant="outline"
+        size="sm"
+        aria-label="Increase total"
+        @click="step = step + 1"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const price = ref(29.99)
+const base = 24
+const step = ref(0)
+const total = computed(() => base + step.value)
 </script>

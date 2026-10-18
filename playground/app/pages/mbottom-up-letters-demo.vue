@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="BottomUpLetters"
-      description="Characters rise into place one after another, each settling upward from below. Translated from smoothui's bottom-up-letters."
+      description="Characters rise into place one after another, each settling upward from below."
     />
 
     <UCard>

@@ -5,7 +5,7 @@
       v-if="!attachToParent"
       :spring-config="springConfig"
     >
-      <div class="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center">
+      <div class="w-8 h-8 rounded-full bg-elevated flex items-center justify-center">
         <div class="w-2 h-2 rounded-full" />
       </div>
     </MCursor>
@@ -13,7 +13,7 @@
     <div class="max-w-4xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <div
-          class="relative p-8 border-2 border-dashed border-blue-300 rounded-xl h-64"
+          class="relative p-8 border-2 border-dashed border-primary/30 rounded-xl h-64"
           @mouseover="activeContainer = 'blue'"
           @mouseout="activeContainer = ''"
         >
@@ -22,7 +22,7 @@
             :attach-to-parent="true"
             :spring-config="springConfig"
           >
-            <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
+            <div class="w-8 h-8 rounded-full bg-primary/70 flex items-center justify-center">
               <div class="w-2 h-2 rounded-full" />
             </div>
           </MCursor>
@@ -81,7 +81,7 @@
               :min="50"
               :max="500"
             />
-            <span class="text-sm text-gray-500 ml-2">{{ springConfig.stiffness }}</span>
+            <span class="text-sm text-muted ml-2">{{ springConfig.stiffness }}</span>
           </UFormField>
 
           <UFormField
@@ -93,7 +93,7 @@
               :min="5"
               :max="50"
             />
-            <span class="text-sm text-gray-500 ml-2">{{ springConfig.damping }}</span>
+            <span class="text-sm text-muted ml-2">{{ springConfig.damping }}</span>
           </UFormField>
         </div>
       </div>

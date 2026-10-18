@@ -1,10 +1,10 @@
 <template>
   <div class="w-full max-w-6xl mx-auto px-4 py-12">
     <div class="text-center mb-16">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+      <h1 class="text-4xl md:text-5xl font-bold text-highlighted mb-6">
         Interactive Journey Showcase
       </h1>
-      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+      <p class="text-xl text-muted max-w-3xl mx-auto">
         Experience a guided journey through our platform features with animated progress indicators
       </p>
     </div>
@@ -48,10 +48,10 @@
             >
               Feature 1
             </UBadge>
-            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 class="text-3xl font-bold text-highlighted mb-6">
               Real-time Analytics Dashboard
             </h2>
-            <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
+            <p class="text-lg text-muted mb-6">
               Gain instant insights with our powerful analytics engine. Track performance metrics, user engagement, and conversion rates in real-time.
             </p>
             <ul class="space-y-4 mb-8">
@@ -60,21 +60,21 @@
                   name="i-heroicons-check-circle-solid"
                   class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0"
                 />
-                <span class="text-gray-700 dark:text-gray-300">Live data visualization with customizable charts</span>
+                <span class="text-default">Live data visualization with customizable charts</span>
               </li>
               <li class="flex items-start">
                 <UIcon
                   name="i-heroicons-check-circle-solid"
                   class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0"
                 />
-                <span class="text-gray-700 dark:text-gray-300">Automated reporting and alerts</span>
+                <span class="text-default">Automated reporting and alerts</span>
               </li>
               <li class="flex items-start">
                 <UIcon
                   name="i-heroicons-check-circle-solid"
                   class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0"
                 />
-                <span class="text-gray-700 dark:text-gray-300">Export data in multiple formats</span>
+                <span class="text-default">Export data in multiple formats</span>
               </li>
             </ul>
             <UButton
@@ -86,13 +86,13 @@
             </UButton>
           </div>
           <div class="order-1 lg:order-2">
-            <div class="bg-gray-100 dark:bg-gray-800 rounded-2xl p-6 aspect-video flex items-center justify-center">
+            <div class="bg-muted rounded-2xl p-6 aspect-video flex items-center justify-center">
               <div class="text-center">
                 <UIcon
                   name="i-heroicons-chart-bar"
-                  class="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4"
+                  class="w-16 h-16 text-dimmed mx-auto mb-4"
                 />
-                <p class="text-gray-500 dark:text-gray-400 font-medium">
+                <p class="text-muted font-medium">
                   Analytics Dashboard Preview
                 </p>
               </div>
@@ -113,34 +113,34 @@
             >
               Feature 2
             </UBadge>
-            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 class="text-3xl font-bold text-highlighted mb-6">
               Intelligent Automation
             </h2>
-            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <p class="text-lg text-muted max-w-3xl mx-auto">
               Streamline your workflows with AI-powered automation that learns and adapts to your business needs
             </p>
           </div>
 
-          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-700">
+          <div class="bg-default rounded-2xl shadow-lg p-8 border border-default">
             <div class="flex items-start mb-6">
-              <div class="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-lg mr-4">
+              <div class="bg-primary/10 dark:bg-primary/30 p-3 rounded-lg mr-4">
                 <UIcon
                   name="i-heroicons-cog-8-tooth"
-                  class="w-6 h-6 text-blue-600 dark:text-blue-400"
+                  class="w-6 h-6 text-primary"
                 />
               </div>
               <div>
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                <h3 class="text-xl font-bold text-highlighted mb-2">
                   Workflow Builder
                 </h3>
-                <p class="text-gray-600 dark:text-gray-400">
+                <p class="text-muted">
                   Create complex automation sequences with our intuitive drag-and-drop interface
                 </p>
               </div>
             </div>
           </div>
 
-          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-200 dark:border-gray-700">
+          <div class="bg-default rounded-2xl shadow-lg p-8 border border-default">
             <div class="flex items-start mb-6">
               <div class="bg-green-100 dark:bg-green-900/30 p-3 rounded-lg mr-4">
                 <UIcon
@@ -149,10 +149,10 @@
                 />
               </div>
               <div>
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                <h3 class="text-xl font-bold text-highlighted mb-2">
                   AI Recommendations
                 </h3>
-                <p class="text-gray-600 dark:text-gray-400">
+                <p class="text-muted">
                   Get smart suggestions for optimizing your automated processes
                 </p>
               </div>
@@ -173,33 +173,33 @@
             >
               Feature 3
             </UBadge>
-            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 class="text-3xl font-bold text-highlighted mb-6">
               Seamless Collaboration
             </h2>
-            <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
+            <p class="text-lg text-muted mb-6">
               Work together in real-time with your team members, regardless of their location. Share ideas, provide feedback, and make decisions faster.
             </p>
             <div class="space-y-4 mb-8">
               <div class="flex items-center">
                 <UIcon
                   name="i-heroicons-user-group"
-                  class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-3"
+                  class="w-5 h-5 text-muted mr-3"
                 />
-                <span class="text-gray-700 dark:text-gray-300">Real-time document editing</span>
+                <span class="text-default">Real-time document editing</span>
               </div>
               <div class="flex items-center">
                 <UIcon
                   name="i-heroicons-chat-bubble-left-right"
-                  class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-3"
+                  class="w-5 h-5 text-muted mr-3"
                 />
-                <span class="text-gray-700 dark:text-gray-300">Integrated messaging system</span>
+                <span class="text-default">Integrated messaging system</span>
               </div>
               <div class="flex items-center">
                 <UIcon
                   name="i-heroicons-lock-closed"
-                  class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-3"
+                  class="w-5 h-5 text-muted mr-3"
                 />
-                <span class="text-gray-700 dark:text-gray-300">Enterprise-grade security</span>
+                <span class="text-default">Enterprise-grade security</span>
               </div>
             </div>
             <UButton
@@ -231,7 +231,7 @@
                   size="md"
                   class="mr-3 ring-2 ring-white -ml-2"
                 />
-                <div class="bg-gray-200 dark:bg-gray-700 rounded-full w-8 h-8 flex items-center justify-center -ml-2">
+                <div class="bg-accented rounded-full w-8 h-8 flex items-center justify-center -ml-2">
                   <span class="text-xs font-bold">+5</span>
                 </div>
               </div>
@@ -243,7 +243,7 @@
               </p>
               <div class="bg-black/20 rounded-lg p-4">
                 <div class="flex items-center mb-3">
-                  <span class="text-xs font-mono bg-gray-800 px-2 py-1 rounded mr-2">Sarah</span>
+                  <span class="text-xs font-mono bg-accented px-2 py-1 rounded mr-2">Sarah</span>
                   <span class="text-xs opacity-75">2 minutes ago</span>
                 </div>
                 <p class="text-sm">
@@ -277,7 +277,7 @@
               color="primary"
               variant="solid"
               size="lg"
-              class="font-medium bg-white/10 hover:bg-white/20"
+              class="font-medium bg-default/10 hover:bg-default/20"
             >
               Schedule Demo
             </UButton>

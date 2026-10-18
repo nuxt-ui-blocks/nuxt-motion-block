@@ -5,7 +5,7 @@
         Background Beams
       </h2>
     </template>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">
+    <p class="text-muted mb-4">
       Animated background beams effect
     </p>
     <MBackgroundBeams

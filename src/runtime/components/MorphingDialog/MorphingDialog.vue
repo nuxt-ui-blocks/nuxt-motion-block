@@ -1,106 +1,87 @@
 <template>
-  <UModal
-    v-model:open="isOpen"
-    :title="title"
-    :description="description"
-    :content="content"
-    :overlay="overlay"
-    :scrollable="scrollable"
-    :transition="false"
-    :fullscreen="fullscreen"
-    :portal="portal"
-    :close="false"
-    :close-icon="closeIcon"
-    :dismissible="dismissible"
-    :unmount-on-hide="unmountOnHide"
-    :class="props.class"
-    :ui="ui"
-    :modal="modal"
-    @update:open="handleOpenChange"
-    @enter="$emit('enter')"
-    @after:enter="$emit('after:enter')"
-    @leave="$emit('leave')"
-    @after:leave="$emit('after:leave')"
-    @close:prevent="$emit('close:prevent')"
-  >
-    <template #default>
-      <slot />
-    </template>
+  <slot :is-open="isOpen" />
 
-    <template #content="{ close }">
-      <AnimatePresence>
+  <Teleport
+    :to="teleportTarget"
+    :disabled="!usePortal"
+  >
+    <AnimatePresence :initial="false">
+      <motion.div
+        v-if="isOpen"
+        key="morphing-dialog"
+        ref="wrapperRef"
+        :class="wrapperClasses"
+        role="dialog"
+        aria-modal="true"
+        tabindex="-1"
+        :transition="{ duration: 0 }"
+        @click="handleWrapperClick"
+      >
         <motion.div
-          v-if="isOpen"
+          v-if="overlay"
+          key="overlay"
+          class="absolute inset-0 bg-inverted/40 backdrop-blur-sm"
+          :initial="{ opacity: 0 }"
+          :animate="{ opacity: 1 }"
+          :exit="{ opacity: 0 }"
+          :transition="overlayTransition"
+          @click="handleOverlayClick"
+        />
+
+        <motion.div
+          ref="contentRef"
           :layout-id="layoutId ? `dialog-${uniqueId}` : undefined"
           :class="contentClasses"
           :initial="contentInitial"
           :animate="contentAnimate"
           :exit="contentExit"
           :transition="contentTransition"
+          @click.stop
         >
+          <div
+            v-if="title || description"
+            class="flex flex-col gap-1 border-b border-default p-6"
+          >
+            <h2
+              v-if="title"
+              class="text-lg font-semibold text-highlighted"
+            >
+              {{ title }}
+            </h2>
+            <p
+              v-if="description"
+              class="text-sm text-muted"
+            >
+              {{ description }}
+            </p>
+          </div>
+
           <slot
             name="content"
             :close="close"
+            :is-open="isOpen"
           />
+
+          <button
+            v-if="closeIcon"
+            type="button"
+            aria-label="Close dialog"
+            class="absolute top-4 right-4 flex size-8 items-center justify-center rounded-full text-muted transition-colors hover:bg-muted hover:text-highlighted"
+            @click="close"
+          >
+            <UIcon
+              :name="closeIcon"
+              class="size-5"
+            />
+          </button>
         </motion.div>
-      </AnimatePresence>
-    </template>
-
-    <template
-      v-if="$slots.header"
-      #header="{ close: headerClose }"
-    >
-      <slot
-        name="header"
-        :close="headerClose"
-      />
-    </template>
-
-    <template
-      v-if="$slots.title"
-      #title
-    >
-      <slot name="title" />
-    </template>
-
-    <template
-      v-if="$slots.description"
-      #description
-    >
-      <slot name="description" />
-    </template>
-
-    <template
-      v-if="$slots.actions"
-      #actions
-    >
-      <slot name="actions" />
-    </template>
-
-    <template
-      v-if="$slots.body"
-      #body="{ close: bodyClose }"
-    >
-      <slot
-        name="body"
-        :close="bodyClose"
-      />
-    </template>
-
-    <template
-      v-if="$slots.footer"
-      #footer="{ close: footerClose }"
-    >
-      <slot
-        name="footer"
-        :close="footerClose"
-      />
-    </template>
-  </UModal>
+      </motion.div>
+    </AnimatePresence>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, useId } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, useId, watch } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
 import type { Variant, Transition } from 'motion-v'
 import { provideMorphingDialog } from './useMorphingDialog'
@@ -117,14 +98,12 @@ interface Props {
   layoutId?: boolean
   title?: string
   description?: string
-  content?: object
   overlay?: boolean
   scrollable?: boolean
   fullscreen?: boolean
   portal?: string | boolean
   dismissible?: boolean
   closeIcon?: string
-  unmountOnHide?: boolean
   modal?: boolean
   class?: string
   ui?: Record<string, any>
@@ -134,22 +113,23 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  open: undefined,
   defaultOpen: false,
   layoutId: true,
+  title: undefined,
+  description: undefined,
   overlay: true,
   scrollable: false,
   fullscreen: false,
   portal: true,
   dismissible: true,
+  closeIcon: undefined,
   modal: true,
+  class: undefined,
+  ui: undefined,
   scale: 0.95,
   variants: () => ({}),
-  transition: () => ({
-    type: 'tween',
-    ease: [0.22, 1, 0.36, 1],
-    duration: 0.4,
-  }),
-  ui: () => ({}),
+  transition: () => ({ type: 'spring', bounce: 0.15, duration: 0.4 }),
 })
 
 const emit = defineEmits<{
@@ -161,29 +141,40 @@ const emit = defineEmits<{
   'close:prevent': []
 }>()
 
-const isOpen = ref(props.defaultOpen)
 const uniqueId = useId()
+const isOpen = ref(props.defaultOpen)
 
-watch(() => props.open, (newOpen) => {
-  if (newOpen !== undefined) {
-    isOpen.value = newOpen
-  }
-}, { immediate: true })
+const usePortal = computed(() => props.portal !== false)
+const teleportTarget = computed(() => (typeof props.portal === 'string' ? props.portal : 'body'))
 
 const setIsOpen = (value: boolean) => {
   isOpen.value = value
   emit('update:open', value)
 }
 
-const handleOpenChange = (open: boolean) => {
-  setIsOpen(open)
-}
+const close = () => setIsOpen(false)
 
-provideMorphingDialog({
-  isOpen,
-  setIsOpen,
-  uniqueId,
-})
+provideMorphingDialog({ isOpen, setIsOpen, uniqueId })
+
+const wrapperRef = ref<HTMLElement | null>(null)
+const contentRef = ref<HTMLElement | null>(null)
+let previouslyFocused: HTMLElement | null = null
+
+const wrapperClasses = computed(() => [
+  'fixed inset-0 z-50 flex gap-4 p-4',
+  props.fullscreen ? 'items-stretch p-0' : 'items-center justify-center',
+  props.scrollable && !props.fullscreen ? 'overflow-y-auto' : '',
+  props.ui?.wrapper,
+])
+
+const contentClasses = computed(() => [
+  'relative z-10 overflow-hidden bg-default shadow-xl outline-none',
+  props.fullscreen ? 'h-full w-full' : 'w-full max-w-lg rounded-2xl ring-1 ring-default',
+  props.class,
+  props.ui?.content,
+])
+
+const overlayTransition = computed(() => ({ duration: 0.2 }))
 
 const defaultContentVariants = computed(() => ({
   initial: {
@@ -200,30 +191,75 @@ const defaultContentVariants = computed(() => ({
   },
 }))
 
-const contentInitial = computed(() => ({
-  ...defaultContentVariants.value.initial,
-  ...props.variants?.initial,
-}))
+const contentInitial = computed(() => ({ ...defaultContentVariants.value.initial, ...props.variants?.initial }))
+const contentAnimate = computed(() => ({ ...defaultContentVariants.value.animate, ...props.variants?.animate }))
+const contentExit = computed(() => ({ ...defaultContentVariants.value.exit, ...props.variants?.exit }))
+const contentTransition = computed(() => props.transition)
 
-const contentAnimate = computed(() => ({
-  ...defaultContentVariants.value.animate,
-  ...props.variants?.animate,
-}))
+watch(() => props.open, (value) => {
+  if (value !== undefined) isOpen.value = value
+}, { immediate: true })
 
-const contentExit = computed(() => ({
-  ...defaultContentVariants.value.exit,
-  ...props.variants?.exit,
-}))
+const focusableSelector = 'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
 
-const contentTransition = computed(() => ({
-  ...props.transition,
-}))
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape' && props.dismissible) {
+    event.preventDefault()
+    close()
+  }
+}
 
-const contentClasses = computed(() => [
-  'relative overflow-hidden',
-  'outline-none focus:outline-none',
-  'border-default',
-  'bg-default',
-  'text-default',
-].join(' '))
+let timer: ReturnType<typeof setTimeout> | undefined
+
+watch(isOpen, async (value) => {
+  if (value) {
+    emit('enter')
+  }
+  else {
+    emit('leave')
+  }
+  clearTimeout(timer)
+  const duration = typeof props.transition?.duration === 'number' ? props.transition.duration * 1000 : 400
+  timer = setTimeout(() => {
+    if (value) {
+      emit('after:enter')
+    }
+    else {
+      emit('after:leave')
+    }
+  }, duration)
+
+  if (value) {
+    previouslyFocused = document.activeElement as HTMLElement | null
+    if (props.modal !== false) document.body.classList.add('overflow-hidden')
+    document.addEventListener('keydown', handleKeydown)
+    await nextTick()
+    const el = contentRef.value as unknown as HTMLElement | null
+    const first = el && typeof el.querySelector === 'function'
+      ? (el.querySelector<HTMLElement>(focusableSelector) ?? el)
+      : el
+    first?.focus?.()
+  }
+  else {
+    document.removeEventListener('keydown', handleKeydown)
+    document.body.classList.remove('overflow-hidden')
+    previouslyFocused?.focus?.()
+  }
+})
+
+onBeforeUnmount(() => {
+  clearTimeout(timer)
+  document.removeEventListener('keydown', handleKeydown)
+  document.body.classList.remove('overflow-hidden')
+})
+
+function handleWrapperClick(event: MouseEvent) {
+  if (props.dismissible && event.target === event.currentTarget) {
+    close()
+  }
+}
+
+function handleOverlayClick() {
+  if (props.dismissible) close()
+}
 </script>

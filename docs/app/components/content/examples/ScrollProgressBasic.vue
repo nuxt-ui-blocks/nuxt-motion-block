@@ -2,21 +2,21 @@
   <MScrollProgress class="bg-primary fixed top-0 z-50" />
   <div class="space-y-8 p-8 max-w-4xl mx-auto">
     <div class="text-center mb-12">
-      <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+      <h2 class="text-4xl font-bold text-highlighted mb-4">
         Scroll Progress Indicator
       </h2>
-      <p class="text-gray-600 dark:text-gray-400 text-lg">
+      <p class="text-muted text-lg">
         Track your reading progress with this visual indicator that updates as you scroll
       </p>
     </div>
 
     <UCard>
       <template #header>
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+        <h3 class="text-2xl font-bold text-highlighted">
           Introduction
         </h3>
       </template>
-      <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
+      <p class="text-muted text-lg leading-relaxed">
         The scroll progress indicator is a subtle yet effective way to show users how much of a page
         they've read and how much remains. This can be particularly useful for long articles,
         documentation, or any content where users need to track their progress.
@@ -25,11 +25,11 @@
 
     <UCard>
       <template #header>
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+        <h3 class="text-2xl font-bold text-highlighted">
           Benefits
         </h3>
       </template>
-      <ul class="list-disc pl-6 space-y-3 text-gray-600 dark:text-gray-400 text-lg">
+      <ul class="list-disc pl-6 space-y-3 text-muted text-lg">
         <li class="pl-2">
           Improves user experience by providing visual feedback
         </li>
@@ -50,34 +50,34 @@
 
     <UCard>
       <template #header>
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+        <h3 class="text-2xl font-bold text-highlighted">
           Implementation
         </h3>
       </template>
-      <p class="text-gray-600 dark:text-gray-400 mb-6 text-lg">
+      <p class="text-muted mb-6 text-lg">
         The scroll progress indicator is easy to implement and customize:
       </p>
-      <div class="bg-gray-100 dark:bg-gray-800 p-5 rounded-lg">
-        <pre class="text-sm text-gray-800 dark:text-gray-200 overflow-x-auto">&lt;MScrollProgress class="bg-primary fixed top-0 z-50" /&gt;</pre>
+      <div class="bg-muted p-5 rounded-lg">
+        <pre class="text-sm text-highlighted overflow-x-auto">&lt;MScrollProgress class="bg-primary fixed top-0 z-50" /&gt;</pre>
       </div>
     </UCard>
 
     <UCard>
       <template #header>
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+        <h3 class="text-2xl font-bold text-highlighted">
           Advanced Features
         </h3>
       </template>
       <div class="space-y-4">
-        <p class="text-gray-600 dark:text-gray-400 text-lg">
+        <p class="text-muted text-lg">
           Customize the appearance and behavior to match your design system:
         </p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
-            <h4 class="font-bold text-blue-700 dark:text-blue-300 mb-2">
+          <div class="p-4 bg-primary/5 dark:bg-primary/30 rounded-lg">
+            <h4 class="font-bold text-primary mb-2">
               Colors
             </h4>
-            <p class="text-sm text-blue-600 dark:text-blue-400">
+            <p class="text-sm text-primary">
               Match your brand colors
             </p>
           </div>
@@ -103,11 +103,11 @@
 
     <UCard>
       <template #header>
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+        <h3 class="text-2xl font-bold text-highlighted">
           Conclusion
         </h3>
       </template>
-      <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
+      <p class="text-muted text-lg leading-relaxed">
         Adding a scroll progress indicator to your website or application is a simple way to
         enhance the user experience. It provides valuable feedback and helps users navigate
         through your content more effectively. Try implementing it today to see the difference!

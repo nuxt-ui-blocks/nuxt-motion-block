@@ -6,13 +6,13 @@
         <h3 class="text-2xl font-bold text-white mb-3">
           Basic Glow Effect
         </h3>
-        <p class="text-blue-100 mb-4">
+        <p class="text-primary mb-4">
           This element has a beautiful glow effect
         </p>
         <UButton
           variant="solid"
           size="sm"
-          class="bg-white text-blue-600 hover:bg-gray-100"
+          class="bg-default text-primary hover:bg-muted"
         >
           Get Started
         </UButton>

@@ -6,7 +6,7 @@
       <h3 class="text-2xl font-bold text-white mb-2">
         Shooting Stars
       </h3>
-      <p class="text-gray-300">
+      <p class="text-dimmed">
         Animated shooting stars with trails
       </p>
     </div>

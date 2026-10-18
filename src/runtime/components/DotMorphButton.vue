@@ -36,6 +36,7 @@ import { motion } from 'motion-v'
 import type { ButtonProps } from '#ui/components/Button.vue'
 import { useHoverCapable } from '../composables/useHoverCapable'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
+import { useResolvedColor } from '../composables/useThemeColor'
 import dotMorphButton from '../theme/dot-morph-button'
 
 const props = withDefaults(defineProps<{
@@ -71,7 +72,8 @@ const onMotionChange = (e: MediaQueryListEvent) => {
   shouldReduceMotion.value = e.matches
 }
 
-const dotBackground = computed(() => `var(--color-${props.dotColor}-500)`)
+const resolvedDotColor = useResolvedColor(() => `var(--color-${props.dotColor}-500)`)
+const dotBackground = computed(() => resolvedDotColor.value)
 
 const dotTransition = computed(() => ({
   type: 'spring',

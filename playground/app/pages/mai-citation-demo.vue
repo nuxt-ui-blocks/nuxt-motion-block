@@ -18,8 +18,8 @@ const refs = [
     description: 'The framework this package is built on. No description, to check the tighter card.',
   },
   {
-    url: 'https://motion-primitives.dev',
-    title: 'Motion Primitives',
+    url: 'https://example.com',
+    title: 'Example',
   },
 ]
 
@@ -72,7 +72,7 @@ const longTitle = 'A title long enough that it has to truncate rather than wrap 
       </template>
 
       <div class="space-y-3">
-        <p class="text-sm text-muted-foreground">
+        <p class="text-sm text-muted">
           Description present
           <MAiCitation
             :label="1"
@@ -81,7 +81,7 @@ const longTitle = 'A title long enough that it has to truncate rather than wrap 
             :url="refs[0]!.url"
           />
         </p>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-sm text-muted">
           No description — tighter card
           <MAiCitation
             :label="2"
@@ -89,7 +89,7 @@ const longTitle = 'A title long enough that it has to truncate rather than wrap 
             :url="refs[1]!.url"
           />
         </p>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-sm text-muted">
           Bare title and host only
           <MAiCitation
             :label="3"
@@ -97,7 +97,7 @@ const longTitle = 'A title long enough that it has to truncate rather than wrap 
             :url="refs[2]!.url"
           />
         </p>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-sm text-muted">
           Long title truncates
           <MAiCitation
             :label="4"
@@ -105,7 +105,7 @@ const longTitle = 'A title long enough that it has to truncate rather than wrap 
             :url="'https://example.com/a-very-long-slug-indeed'"
           />
         </p>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-sm text-muted">
           Supplied mark via slot
           <MAiCitation
             :label="5"
@@ -131,7 +131,7 @@ const longTitle = 'A title long enough that it has to truncate rather than wrap 
         </p>
       </template>
 
-      <p class="text-sm text-muted-foreground">
+      <p class="text-sm text-muted">
         Try it here
         <MAiCitation
           :label="1"

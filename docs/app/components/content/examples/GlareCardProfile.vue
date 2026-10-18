@@ -10,11 +10,11 @@
         <h3 class="text-xl font-bold text-white">
           Alex Johnson
         </h3>
-        <p class="text-blue-400">
+        <p class="text-primary">
           Senior Developer
         </p>
       </div>
-      <p class="text-slate-400 text-sm">
+      <p class="text-dimmed text-sm">
         Passionate about creating beautiful and functional user interfaces with modern web technologies.
       </p>
       <div class="flex space-x-2 pt-2">

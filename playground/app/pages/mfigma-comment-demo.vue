@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="FigmaComment"
-      description="Port of smoothui's figma-comment. A comment pin that springs open into a card, animates its avatar, blurs its content in, and closes on outside click."
+      description="A comment pin that springs open into a card, animates its avatar, blurs its content in, and closes on outside click."
     />
 
     <UCard>
@@ -192,13 +192,11 @@
 
       <div class="flex flex-col items-start gap-4">
         <p class="text-muted text-sm">
-          The reference takes its defaults from
-          <code>somePeople(1, 11)[0]</code>, so a bare
-          <code>&lt;FigmaComment /&gt;</code> renders Arjun Mehta's ImageKit
-          portrait and his name — the same values the reference shows out of the
-          box. Pass an empty <code>avatar-url</code> or a url that fails to load
-          and the author initial takes over, which is the path shadcn's
-          <code>AvatarFallback</code> takes.
+          A bare <code>&lt;FigmaComment /&gt;</code> uses a default portrait and
+          the default author name. Pass <code>avatar-url</code> to override it;
+          pass an empty value (or a url that fails to load) and the
+          <code>avatar-icon</code> fallback takes over, then the author initial
+          if no icon is set — the path shadcn's <code>AvatarFallback</code> takes.
         </p>
         <div class="flex flex-wrap items-end gap-10">
           <div class="relative h-16 w-40 rounded-xl border border-default bg-elevated">

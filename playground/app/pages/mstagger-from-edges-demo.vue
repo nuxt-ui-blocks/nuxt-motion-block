@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="StaggerFromEdges"
-      description="Characters resolve inward from both ends, each one offset by its distance to the nearest edge. The mirror of StaggerFromCenter. Translated from smoothui's stagger-from-edges."
+      description="Characters resolve inward from both ends, each one offset by its distance to the nearest edge. The mirror of StaggerFromCenter."
     />
 
     <UCard>

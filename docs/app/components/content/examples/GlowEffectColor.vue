@@ -11,7 +11,7 @@
         <h3 class="text-xl font-bold mb-2">
           Color Shifting Glow
         </h3>
-        <p class="text-blue-100">
+        <p class="text-primary">
           Watch the colors transition smoothly
         </p>
       </div>

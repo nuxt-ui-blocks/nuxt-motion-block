@@ -18,7 +18,7 @@
         <MTweetCard
           author="Sarah Chen"
           handle="@sarahchen"
-          content="Just shipped the new motion primitives library. Spring animations make everything feel so much more alive! 🚀"
+          content="Just shipped the new component library. Spring animations make everything feel so much more alive! 🚀"
           avatar="https://i.pravatar.cc/150?u=sarah"
           time="2h"
           :likes="142"
@@ -95,7 +95,7 @@ const tweets = [
   {
     author: 'Maya Patel',
     handle: '@mayapatel',
-    content: 'Finally, motion primitives that actually feel native to the Vue ecosystem.',
+    content: 'Finally, components that actually feel native to the Vue ecosystem.',
     avatar: 'https://i.pravatar.cc/150?u=maya',
     time: '3d',
     likes: 56,

@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <UPageHeader
       title="ShineText"
-      description="A highlight that sweeps across text. The glyphs are filled with a wide gradient and the gradient is slid behind them, so the shine is the text's own paint rather than an overlay. Translated from smoothui's shine-text."
+      description="A highlight that sweeps across text. The glyphs are filled with a wide gradient and the gradient is slid behind them, so the shine is the text's own paint rather than an overlay."
     />
 
     <UCard>

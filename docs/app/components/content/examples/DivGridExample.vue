@@ -1,14 +1,14 @@
 <template>
-  <div class="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
-    <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">
+  <div class="p-4 bg-elevated rounded-lg">
+    <h3 class="text-lg font-bold mb-4 text-highlighted">
       Div Grid
     </h3>
     <MDivGrid
       :rows="5"
       :cols="10"
       :cell-size="40"
-      border-color="#4b5563"
-      fill-color="rgba(59, 130, 246, 0.3)"
+      border-color="border"
+      fill-color="primary"
       class="mx-auto"
       @cell-click="handleCellClick"
     />

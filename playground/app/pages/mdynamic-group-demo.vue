@@ -232,12 +232,12 @@ function addItem() {
 const categories = ['All', 'Design', 'Dev', 'Content']
 const activeCategory = ref('All')
 const filterItems = [
-  { id: nextId(), name: 'Color Palette', category: 'Design' },
+  { id: nextId(), name: 'Palette options', category: 'Design' },
   { id: nextId(), name: 'Typography Scale', category: 'Design' },
-  { id: nextId(), name: 'API Routes', category: 'Dev' },
-  { id: nextId(), name: 'State Management', category: 'Dev' },
-  { id: nextId(), name: 'Blog Post', category: 'Content' },
-  { id: nextId(), name: 'Case Study', category: 'Content' },
+  { id: nextId(), name: 'API services', category: 'Dev' },
+  { id: nextId(), name: 'Shared state', category: 'Dev' },
+  { id: nextId(), name: 'Article', category: 'Content' },
+  { id: nextId(), name: 'Client story', category: 'Content' },
   { id: nextId(), name: 'Icon System', category: 'Design' },
   { id: nextId(), name: 'Auth Flow', category: 'Dev' },
 ]
