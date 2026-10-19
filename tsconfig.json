@@ -1,9 +1,57 @@
 {
-  "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "noUncheckedIndexedAccess": false
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "allowJs": true,
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "allowArbitraryExtensions": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": false,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitOverride": true,
+    "module": "preserve",
+    "noEmit": true,
+    "lib": [
+      "ESNext",
+      "dom",
+      "dom.iterable",
+      "webworker"
+    ],
+    "libReplacement": false,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "types": [],
+    "moduleResolution": "Bundler",
+    "useDefineForClassFields": true,
+    "noImplicitThis": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "#imports": [
+        "./.nuxt/imports"
+      ],
+      "#app": [
+        "./node_modules/nuxt/dist/app"
+      ],
+      "#app/*": [
+        "./node_modules/nuxt/dist/app/*"
+      ],
+      "#ui": [
+        "./node_modules/@nuxt/ui/dist/runtime"
+      ],
+      "#ui/*": [
+        "./node_modules/@nuxt/ui/dist/runtime/*"
+      ]
+    }
   },
   "include": [
+    ".nuxt/imports.d.ts",
+    ".nuxt/nuxt.d.ts",
     "src/**/*",
     "test/**/*",
     "*.ts"
