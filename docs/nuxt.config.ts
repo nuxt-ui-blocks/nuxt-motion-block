@@ -1,6 +1,8 @@
 export default defineNuxtConfig({
   extends: ['docus'],
 
+  mcp: false,  // MCP is provided via stdio (bin/mcp-server.mjs) instead of docus's built-in HTTP server
+
   modules: ['@nuxt/fonts', '../src/module'],
 
   site: {

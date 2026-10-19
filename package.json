@@ -44,8 +44,13 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "bin",
+    "docs/content"
   ],
+  "bin": {
+    "nuxt-motion-block-mcp": "./bin/mcp-server.mjs"
+  },
   "scripts": {
     "prepack": "nuxt-module-build build",
     "dev": "pnpm dev:prepare && nuxi dev playground",
