@@ -20,12 +20,6 @@ export default defineNuxtConfig({
     ],
   },
 
-  typescript: {
-    tsConfig: {
-      extends: './.nuxt/tsconfig.json',
-    },
-  },
-
   motionBlock: {
     prefix: 'M',
   },
