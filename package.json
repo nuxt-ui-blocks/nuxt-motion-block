@@ -1,6 +1,6 @@
 {
   "name": "nuxt-motion-block",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A streamlined UI library that extends Nuxt UI with motion capabilities powered by motion-v",
   "repository": "nuxt-ui-blocks/nuxt-motion-block",
   "license": "MIT",
