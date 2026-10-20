@@ -5,9 +5,12 @@
     :class="ui.root({ fallback: true, class: [uiProps.ui?.root, uiProps.class] })"
     :style="{
       // Lit from the same corner as the shader, so the character does not
-      // change which way it faces when it falls back.
-      backgroundImage: `radial-gradient(circle at 32% 28%, ${fallbackStops.join(', ')})`,
+      // change which way it faces when it falls back. Scaled down to the
+      // shader's sphere, which leaves glow room inside the box, so a reclaimed
+      // orb keeps the same silhouette as a live one.
+      backgroundImage: fallbackGradient,
       height: dimension,
+      transform: `scale(${SPHERE_FRACTION})`,
       width: dimension,
     }"
   />
@@ -148,6 +151,8 @@ const LIGHT_Z = 0.65
 const BALANCE_BASE = 5
 /** Keeps rendering slightly before the orb scrolls into view. */
 const ROOT_MARGIN = '120px'
+/** The sphere as a fraction of the box, matching `RAD` in the shader. */
+const SPHERE_FRACTION = 0.86
 
 /* The covering triangle is built from gl_VertexID, so there is no vertex
    buffer and no attribute state to manage. */
@@ -391,7 +396,6 @@ const compileShader = (
 // whoever embeds the orb ends up painted over the canvas, which hides the
 // real thing on every machine that can render it.
 const supported = ref(true)
-
 let canvasEl: HTMLCanvasElement | null = null
 function setCanvasEl(el: unknown) {
   canvasEl = el as HTMLCanvasElement | null
@@ -445,6 +449,21 @@ const fallbackStops = computed(() =>
   (props.colors?.length ? props.colors : DEFAULTS.colors).slice(0, MAX_STOPS),
 )
 
+/**
+ * The fallback is one gradient, so the palette is laid out along the radius the
+ * way the shader lays it out across the surface: lightest under the light,
+ * darkest at the rim. Two details matter. The stops run backwards, because a
+ * gradient starts at its centre while the palette starts at the edge. And the
+ * last stop lands at 72% rather than at the element's corner, or the rim keeps
+ * a pale ring the sphere does not have.
+ */
+const fallbackGradient = computed(() => {
+  const stops = [...fallbackStops.value].reverse()
+  const span = Math.max(stops.length - 1, 1)
+  const painted = stops.map((color, i) => `${color} ${((i / span) * 72).toFixed(1)}%`)
+  return `radial-gradient(circle at 34% 30%, ${painted.join(', ')})`
+})
+
 /** `devicePixelContentBoxSize` is not in every lib.dom the toolchain resolves. */
 type PixelBoxEntry = ResizeObserverEntry & {
   devicePixelContentBoxSize?: readonly { blockSize: number, inlineSize: number }[]
@@ -467,6 +486,17 @@ onMounted(() => {
     supported.value = false
     return
   }
+
+  /* A lost context is not an empty canvas: Chrome paints it opaque white, so an
+     orb the browser has reclaimed — too many live contexts on one page, a GPU
+     reset — becomes a white box sitting on top of the painted understudy. Swap
+     to the gradient fallback instead, which is a rounded sphere in the same
+     palette. */
+  const onContextLost = (event: Event) => {
+    event.preventDefault()
+    supported.value = false
+  }
+  canvas.addEventListener('webglcontextlost', onContextLost)
 
   const vs = compileShader(gl, gl.VERTEX_SHADER, VERTEX)
   const fs = compileShader(gl, gl.FRAGMENT_SHADER, FRAGMENT)
@@ -687,6 +717,7 @@ onMounted(() => {
     observer.disconnect()
     seen.disconnect()
     reduce.removeEventListener('change', applyMotionPreference)
+    canvas.removeEventListener('webglcontextlost', onContextLost)
     gl.deleteProgram(program)
     /* Deliberately NOT calling WEBGL_lose_context here. Vue re-runs mount hooks
        in development, and the second pass gets the same canvas back with a

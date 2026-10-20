@@ -258,9 +258,17 @@ When WebGL2 is unavailable — an older browser, a blocklisted driver, or too ma
 contexts — the component renders a CSS `radial-gradient` instead of a canvas.
 That fallback is a flat disc, not a lit sphere. It is `aria-hidden`, lit from the
 same corner as the shader so the character does not appear to change which way
-it faces, and it is deliberately *not* an error state: nothing is logged and
-nothing is thrown. A machine that cannot render the real thing still gets a
-coloured orb rather than a hole in the layout.
+it faces, and it is scaled to the shader's sphere so a reclaimed orb keeps the
+same silhouette as a live one. It is deliberately *not* an error state: nothing
+is logged and nothing is thrown. A machine that cannot render the real thing
+still gets a coloured orb rather than a hole in the layout.
+
+A context lost *after* mount is treated the same way. A browser keeps only about
+sixteen live contexts per page and reclaims the oldest, and a lost canvas is not
+empty — Chrome paints it opaque white, which turns a character into a white box.
+The orb listens for `webglcontextlost` and swaps itself for the same gradient, so
+the face survives the loss. When a page shows many orbs at once, prefer
+`AiOrbFaceMouth`'s `painted` prop over mounting a context per face.
 
 ## Performance
 
