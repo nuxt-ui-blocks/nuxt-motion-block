@@ -27,6 +27,7 @@
         }"
       />
       <AiOrb
+        v-if="!painted"
         :colors="orbColors"
         :flow="orbFlow"
         :glow="0"
@@ -244,6 +245,7 @@ const props = withDefaults(defineProps<AiOrbFaceMouthProps>(), {
   expression: undefined,
   gaze: true,
   mood: undefined,
+  painted: false,
   size: 128,
   state: 'idle',
   talking: undefined,
@@ -615,6 +617,13 @@ export interface AiOrbFaceMouthProps {
   mood?: AiOrbFaceMouthMood
   /** Deprecated alias for `mood`. */
   expression?: AiOrbFaceMouthMood
+  /**
+   * Paint the sphere as a gradient instead of mounting the WebGL orb. A browser
+   * only keeps about sixteen live contexts per page, so a grid of faces — a
+   * gallery, an assistant list — starts losing them and those orbs freeze. The
+   * painted sphere looks the same at small sizes and costs no GPU.
+   */
+  painted?: boolean
   /** Pixels when a number, any CSS length when a string. */
   size?: number | string
   state?: AIState

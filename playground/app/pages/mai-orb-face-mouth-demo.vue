@@ -73,7 +73,9 @@
 
       <p class="mb-6 text-sm text-muted">
         All nine moods at once, which is the quickest way to check that none of
-        them collapse into the same face.
+        them collapse into the same face. The gallery paints its spheres instead
+        of mounting nine WebGL orbs: a browser only keeps about sixteen live
+        contexts per page, and nine more would push the oldest orbs out.
       </p>
 
       <div class="grid grid-cols-2 gap-6 sm:grid-cols-3">
@@ -82,7 +84,7 @@
           :key="option"
           class="flex flex-col items-center gap-2 rounded-2xl bg-(--ui-bg-muted) py-6"
         >
-          <MAiOrbFaceMouth :mood="option" :size="112" />
+          <MAiOrbFaceMouth :mood="option" :size="112" painted />
           <span class="font-mono text-xs text-muted">{{ option }}</span>
         </div>
       </div>

@@ -112,6 +112,12 @@ speaking mouth supplies the motion.
   ::component-prop{name="expression" type="AiOrbFaceMouthMood"}
   Deprecated alias for `mood`.
   ::
+  ::component-prop{name="painted" type="boolean" default="false"}
+  Paint the sphere as a gradient instead of mounting the WebGL orb. A browser
+  keeps only about sixteen live contexts per page, so a grid of faces — a
+  gallery, an assistant list — starts losing them and those orbs freeze. The
+  painted sphere looks the same at small sizes and costs no GPU.
+  ::
   ::component-prop{name="size" type="number | string" default="128"}
   Pixels when a number, any CSS length when a string.
   ::
@@ -220,7 +226,10 @@ with the [`ui` prop](/getting-started/theming), or app-wide under
 - A radial-gradient circle sits directly under the shader as a painted
   understudy. On pages running many WebGL surfaces the browser reclaims the
   oldest contexts, and a reclaimed orb would leave a bare canvas — which turns
-  the character into a pair of floating eyes.
+  the character into a pair of floating eyes. The orb also listens for
+  `webglcontextlost` and swaps itself for the same gradient, because a lost
+  canvas is not empty: Chrome paints it opaque white. Use `painted` to skip the
+  context altogether when a page shows many faces at once.
 - The states carry their own saturation, applied as a `saturate()` filter on the
   root. A faulted assistant visibly cools down next to the rest of the interface
   instead of staying cheerful.
