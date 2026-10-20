@@ -1,6 +1,6 @@
 ---
 title: AI Orb Face Mouth
-description: "A character that wears an orb: mood-driven eyes and mouth, gaze, blinking, talking, and accents."
+description: "A character that wears an orb: nine moods, gaze, blinking, and a mouth that talks over any of them."
 ---
 
 The orb, with a face that has a mouth.
@@ -9,40 +9,7 @@ The orb, with a face that has a mouth.
 is why it has no mouth: a drawn mouth carries so much of an expression that the
 eyes stop mattering. This component is the opposite trade. A **mood** picks one
 eye treatment and one mouth at the same time, and the two are tuned against each
-other so neither can win.
-
-Moods are the public unit because they are how a character is described in
-conversation — happy, confused, asleep — while `state` is how a program is
-described. `AI_ORB_FACE_MOUTH_STATE_MOOD` maps one onto the other, so an
-assistant still gets a face for free.
-
-Talking sits outside that grid: it replaces only the mouth, so any face can
-speak. See [Talking](#talking).
-
-## Usage
-
-Set `mood` and leave the rest alone:
-
-```vue
-<template>
-  <MAiOrbFaceMouth mood="happy" aria-label="Assistant" />
-</template>
-```
-
-Or set `state` and let it pick the mood:
-
-```vue
-<template>
-  <MAiOrbFaceMouth :state="state" :amplitude="amplitude" aria-label="Assistant" />
-</template>
-
-<script setup lang="ts">
-const state = ref<'idle' | 'listening' | 'thinking' | 'streaming' | 'done' | 'error'>('idle')
-const amplitude = useSimulatedAmplitude(state)
-</script>
-```
-
-### Moods
+other so neither can win:
 
 | Mood | Eyes | Mouth | Accent |
 | --- | --- | --- | --- |
@@ -56,28 +23,10 @@ const amplitude = useSimulatedAmplitude(state)
 | `confused` | one eye squinted | wavy line | `?` |
 | `talking` | open ovals | moving mouth | — |
 
-### Talking
-
-`talking` is a modifier, not a face. It swaps only the mouth for a speaking one,
-so the eyes keep whatever the mood says:
-
-```vue
-<template>
-  <MAiOrbFaceMouth mood="thinking" talking />
-  <MAiOrbFaceMouth mood="surprised" talking />
-</template>
-```
-
-The mouth is one wide ellipse scaled up and down in place rather than a set of
-open and shut paths, so a single shape covers every syllable and can layer over
-any mood without a mouth variant per mood.
-
-`mood="talking"` is the standalone version — idle eyes with the speaking mouth —
-for when there is no mood to layer onto. `talking` also defaults to on while
-`state` is `streaming`, because a streaming assistant is answering. It never
-applies while the character is asleep: `sleeping` wins.
-
-### State mapping
+Moods are the public unit because they are how a character is described in
+conversation — happy, confused, asleep — while `state` is how a program is
+described. `AI_ORB_FACE_MOUTH_STATE_MOOD` maps one onto the other, so an
+assistant still gets a face for free:
 
 | State | Mood |
 | --- | --- |
@@ -90,6 +39,85 @@ applies while the character is asleep: `sleeping` wins.
 
 `streaming` also turns `talking` on, so the mapped mood supplies the eyes and the
 speaking mouth supplies the motion.
+
+Talking sits outside the mood grid as a modifier. It replaces only the mouth, so
+the eyes keep whatever the mood says and `happy`, `thinking` and `confused` can
+all speak. `mood="talking"` is the standalone version — idle eyes with the
+speaking mouth — for when there is no mood to layer onto. It never applies while
+the character is asleep: `sleeping` wins.
+
+## Usage
+
+Set `mood` and leave the rest alone: eyes, mouth, brows and accent all come from
+it. The second face below wears the same mood with `talking` on, which is the one
+modifier this component ships.
+
+::code-preview
+---
+label: Preview
+---
+  :::div{class="flex justify-center w-full h-full"}
+    <component-example name="ai-orb-face-mouth-basic" />
+  :::
+#code
+```vue
+<template>
+  <div class="flex w-full max-w-lg flex-col gap-6">
+    <div class="flex flex-wrap items-center justify-center gap-6 rounded-2xl border border-default p-8">
+      <MAiOrbFaceMouth
+        :mood="mood"
+        aria-label="Assistant"
+      />
+      <MAiOrbFaceMouth
+        :colors="orbFaceColors"
+        :mood="mood"
+        :size="96"
+        talking
+        aria-label="Assistant, talking"
+      />
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2">
+      <UButton
+        v-for="value in moods"
+        :key="value"
+        :color="mood === value ? 'primary' : 'neutral'"
+        :label="value"
+        size="sm"
+        :variant="mood === value ? 'solid' : 'outline'"
+        @click="mood = value"
+      />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+type DemoMood = 'idle' | 'happy' | 'excited' | 'thinking' | 'surprised' | 'sleeping' | 'sad' | 'confused' | 'talking'
+
+const moods: DemoMood[] = ['idle', 'happy', 'excited', 'thinking', 'surprised', 'sleeping', 'sad', 'confused', 'talking']
+const mood = ref<DemoMood>('happy')
+
+const orbFaceColors = {
+  body: 'secondary',
+  bodyEdge: 'color-mix(in oklab, var(--ui-secondary), white 78%)',
+  feature: 'color-mix(in oklab, var(--ui-secondary), black 82%)',
+}
+</script>
+```
+::
+
+## Customize
+
+::code-preview
+---
+label: Preview
+---
+  :::div{class="w-full"}
+    <component-example name="ai-orb-face-mouth-custom" />
+  :::
+#code
+  <PlaygroundCode name="AiOrbFaceMouth" />
+::
 
 ## Props
 
@@ -115,8 +143,8 @@ speaking mouth supplies the motion.
   ::component-prop{name="painted" type="boolean" default="false"}
   Paint the sphere as a gradient instead of mounting the WebGL orb. A browser
   keeps only about sixteen live contexts per page, so a grid of faces — a
-  gallery, an assistant list — starts losing them and those orbs freeze. The
-  painted sphere looks the same at small sizes and costs no GPU.
+  gallery, an assistant list — runs out of them. The painted sphere looks the
+  same at small sizes and costs no GPU.
   ::
   ::component-prop{name="size" type="number | string" default="128"}
   Pixels when a number, any CSS length when a string.
