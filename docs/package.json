@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@nuxt/ui": "^4.11.2",
-    "agents": "^0.28.0",
     "better-sqlite3": "^12.4.1",
     "docus": "^5.15.0",
     "motion-v": "^2.4.4",

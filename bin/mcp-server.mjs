@@ -2,7 +2,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
-import { readFile, readdir, stat } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join, relative, sep } from "node:path";
 
@@ -54,7 +54,7 @@ async function collectPages(dir, baseDir = dir) {
   return pages;
 }
 
-const server = new McpServer({ name: "nuxt-motion-block", version: "0.0.3" });
+const server = new McpServer({ name: "nuxt-motion-block", version: "0.0.5" });
 
 server.tool(
   "list-pages",
