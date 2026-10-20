@@ -108,10 +108,28 @@
         />
 
         <!-- Thinking dots -->
-        <g v-if="accent === 'dots'" :fill="resolvedColors.feature">
-          <circle class="aimf-dot" cx="73" cy="34" r="1.8" />
-          <circle class="aimf-dot" cx="79" cy="28.5" r="2.2" />
-          <circle class="aimf-dot" cx="85.5" cy="22.5" r="2.6" />
+        <g
+          v-if="accent === 'dots'"
+          :fill="resolvedColors.feature"
+        >
+          <circle
+            class="aimf-dot"
+            cx="73"
+            cy="34"
+            r="1.8"
+          />
+          <circle
+            class="aimf-dot"
+            cx="79"
+            cy="28.5"
+            r="2.2"
+          />
+          <circle
+            class="aimf-dot"
+            cx="85.5"
+            cy="22.5"
+            r="2.6"
+          />
         </g>
 
         <!-- Sleeping z's -->
@@ -122,9 +140,24 @@
           font-family="system-ui, sans-serif"
           font-weight="700"
         >
-          <text class="aimf-z" x="73.5" y="47" font-size="8.5">z</text>
-          <text class="aimf-z" x="78" y="37" font-size="10.5">z</text>
-          <text class="aimf-z" x="82.5" y="27" font-size="12.5">z</text>
+          <text
+            class="aimf-z"
+            x="73.5"
+            y="47"
+            font-size="8.5"
+          >z</text>
+          <text
+            class="aimf-z"
+            x="78"
+            y="37"
+            font-size="10.5"
+          >z</text>
+          <text
+            class="aimf-z"
+            x="82.5"
+            y="27"
+            font-size="12.5"
+          >z</text>
         </g>
 
         <!-- Confused question mark -->
@@ -170,7 +203,7 @@ import { getAIStateMotion, useAmplitudeValue } from '../composables/useAiState'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import aiOrbFaceMouth from '../theme/ai-orb-face-mouth'
 import { useColorMode } from '#imports'
-import { colorToRgb, resolveColor } from '../utils/theme-color'
+import { colorToRgb, resolveColor, THEME_TOKENS, themeTokenToVar } from '../utils/theme-color'
 
 const VIEWBOX = 100
 const CENTER = VIEWBOX / 2
@@ -259,11 +292,28 @@ const amplitudeValue = useAmplitudeValue(() => props.amplitude)
 const finalColors = computed<AiOrbFaceMouthColors>(() => ({ ...AI_ORB_FACE_MOUTH_DEFAULT_COLORS, ...props.colors }))
 
 const colorMode = useColorMode()
-const resolvedColors = ref<AiOrbFaceMouthColors>({ ...finalColors.value })
+
+/**
+ * A bare theme token (`'secondary'`) names a palette entry rather than a colour,
+ * so on its own it paints as an invalid value and leaves a hole in the sphere.
+ * Keeping the variable form as the fallback means the server-rendered face — and
+ * the first frame before the client resolves the theme — is already a real
+ * colour instead of an empty gradient.
+ */
+const toCssColor = (value: string): string => {
+  const token = value.trim()
+  return (THEME_TOKENS as readonly string[]).includes(token) ? `var(${themeTokenToVar(token)})` : value
+}
+
+const resolvedColors = ref<AiOrbFaceMouthColors>({
+  body: toCssColor(finalColors.value.body),
+  bodyEdge: toCssColor(finalColors.value.bodyEdge),
+  feature: toCssColor(finalColors.value.feature),
+})
 
 const toConcreteColor = (value: string): string => {
   const target = rootEl.value ?? undefined
-  const resolved = resolveColor(value, { target }) ?? value
+  const resolved = resolveColor(value, { target }) ?? toCssColor(value)
   const rgb = colorToRgb(resolved, target)
   return rgb ? `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})` : resolved
 }
@@ -280,10 +330,16 @@ const resolveColors = () => {
 const orbColors = computed(() => [resolvedColors.value.body, resolvedColors.value.bodyEdge])
 const resolvedSize = computed(() => (typeof props.size === 'number' ? `${props.size}px` : props.size))
 
-/** An explicit mood wins, then the deprecated alias, then the state mapping. */
-const mood = computed<AiOrbFaceMouthMood>(() =>
-  props.mood ?? props.expression ?? AI_ORB_FACE_MOUTH_STATE_MOOD[props.state],
-)
+/**
+ * An explicit mood wins, then the deprecated alias, then the state mapping.
+ * The check is membership rather than nullishness because the docs customizer
+ * seeds every string prop with `''`: a falsy or unknown name has to fall back
+ * instead of indexing a mood that is not there.
+ */
+const mood = computed<AiOrbFaceMouthMood>(() => {
+  const requested = props.mood || props.expression || AI_ORB_FACE_MOUTH_STATE_MOOD[props.state]
+  return requested && requested in AI_ORB_FACE_MOUTH_MOODS ? requested : 'idle'
+})
 
 const moodConfig = computed(() => AI_ORB_FACE_MOUTH_MOODS[mood.value])
 const accent = computed(() => moodConfig.value.accent ?? null)
@@ -620,8 +676,8 @@ export interface AiOrbFaceMouthProps {
   /**
    * Paint the sphere as a gradient instead of mounting the WebGL orb. A browser
    * only keeps about sixteen live contexts per page, so a grid of faces — a
-   * gallery, an assistant list — starts losing them and those orbs freeze. The
-   * painted sphere looks the same at small sizes and costs no GPU.
+   * gallery, an assistant list — runs out of them. The painted sphere looks the
+   * same at small sizes and costs no GPU.
    */
   painted?: boolean
   /** Pixels when a number, any CSS length when a string. */
@@ -643,27 +699,27 @@ export interface AiOrbFaceMouthProps {
  */
 export const AI_ORB_FACE_MOUTH_SHAPES = {
   /** Gentle closed smile. */
-  soft: { d: 'M41 63.5 Q50 69 59 63.5', filled: false },
+  'soft': { d: 'M41 63.5 Q50 69 59 63.5', filled: false },
   /** Open smile. */
-  smile: { d: 'M35 59 Q50 78 65 59 Q50 67.5 35 59 Z', filled: true },
+  'smile': { d: 'M35 59 Q50 78 65 59 Q50 67.5 35 59 Z', filled: true },
   /** Wide open laugh. */
-  grin: { d: 'M33.5 57.5 Q50 81 66.5 57.5 Q50 66 33.5 57.5 Z', filled: true },
+  'grin': { d: 'M33.5 57.5 Q50 81 66.5 57.5 Q50 66 33.5 57.5 Z', filled: true },
   /** Level and slightly tilted. Working something out. */
-  flat: { d: 'M42.5 64.8 L57.5 63.8', filled: false },
+  'flat': { d: 'M42.5 64.8 L57.5 63.8', filled: false },
   /** Caught off guard. */
   'open-o': { d: 'M50 61.5 m-4.6 0 a4.6 5.6 0 1 0 9.2 0 a4.6 5.6 0 1 0 -9.2 0', filled: true },
   /** Asleep. */
   'small-o': { d: 'M50 65 m-2.8 0 a2.8 3.4 0 1 0 5.6 0 a2.8 3.4 0 1 0 -5.6 0', filled: true },
   /** Turned down. */
-  frown: { d: 'M40.5 68.5 Q50 59.5 59.5 68.5', filled: false },
+  'frown': { d: 'M40.5 68.5 Q50 59.5 59.5 68.5', filled: false },
   /** Not following. */
-  wavy: { d: 'M40 65 Q45 60.5 50 65 Q55 69.5 60 65', filled: false },
+  'wavy': { d: 'M40 65 Q45 60.5 50 65 Q55 69.5 60 65', filled: false },
   /**
    * The speaking mouth. It is a plain wide ellipse because it is animated by a
    * vertical pulse rather than drawn open and shut: one shape can then cover
    * every syllable, and it layers over any mood.
    */
-  talk: { d: 'M50 63.5 m-6.4 0 a6.4 4.6 0 1 0 12.8 0 a6.4 4.6 0 1 0 -12.8 0', filled: true },
+  'talk': { d: 'M50 63.5 m-6.4 0 a6.4 4.6 0 1 0 12.8 0 a6.4 4.6 0 1 0 -12.8 0', filled: true },
 } as const
 
 export type AiOrbFaceMouthShapeName = keyof typeof AI_ORB_FACE_MOUTH_SHAPES
