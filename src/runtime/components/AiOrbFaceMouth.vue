@@ -96,14 +96,14 @@
           v-for="shape in mouthShapes"
           :key="shape.id"
           class="aimf-mouth"
-          :class="ui.mouth({ class: uiProps.ui?.mouth })"
+          :class="[ui.mouth({ class: uiProps.ui?.mouth }), { 'aimf-mouth--talk': shape.id === 'talk' && shape.id === mouthId }]"
           :d="shape.d"
           :fill="shape.filled ? resolvedColors.feature : 'none'"
           :stroke="shape.filled ? 'none' : resolvedColors.feature"
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="3"
-          :style="{ opacity: shape.id === moodConfig.mouth ? 1 : 0 }"
+          :style="{ opacity: shape.id === mouthId ? 1 : 0 }"
         />
 
         <!-- Thinking dots -->
@@ -246,6 +246,7 @@ const props = withDefaults(defineProps<AiOrbFaceMouthProps>(), {
   mood: undefined,
   size: 128,
   state: 'idle',
+  talking: undefined,
   ui: undefined,
 })
 
@@ -287,6 +288,20 @@ const accent = computed(() => moodConfig.value.accent ?? null)
 const canBlink = computed(() => moodConfig.value.eye === 'open')
 const isThinking = computed(() => mood.value === 'thinking')
 const isSleeping = computed(() => mood.value === 'sleeping')
+
+/**
+ * A speaking assistant is answering, so `streaming` talks on its own. `talking`
+ * still wins where it is set, and nothing talks while asleep.
+ */
+const isTalking = computed(() => (props.talking ?? props.state === 'streaming') && !isSleeping.value)
+
+/**
+ * The mouth is the one part `talking` replaces. Keeping it a swap rather than a
+ * second mouth means every mood can speak without a mouth per mood.
+ */
+const mouthId = computed<AiOrbFaceMouthShapeName>(() =>
+  isTalking.value ? 'talk' : moodConfig.value.mouth,
+)
 
 /**
  * The orb draws its sphere at 86% of its own box, so the box is scaled up by
@@ -603,6 +618,12 @@ export interface AiOrbFaceMouthProps {
   /** Pixels when a number, any CSS length when a string. */
   size?: number | string
   state?: AIState
+  /**
+   * Swap the mouth for a speaking one without changing the rest of the face, so
+   * `happy`, `thinking` and `confused` can all talk. Defaults to on for the
+   * `streaming` state, and never applies while the character is asleep.
+   */
+  talking?: boolean
   ui?: Record<string, any>
 }
 
@@ -628,6 +649,12 @@ export const AI_ORB_FACE_MOUTH_SHAPES = {
   frown: { d: 'M40.5 68.5 Q50 59.5 59.5 68.5', filled: false },
   /** Not following. */
   wavy: { d: 'M40 65 Q45 60.5 50 65 Q55 69.5 60 65', filled: false },
+  /**
+   * The speaking mouth. It is a plain wide ellipse because it is animated by a
+   * vertical pulse rather than drawn open and shut: one shape can then cover
+   * every syllable, and it layers over any mood.
+   */
+  talk: { d: 'M50 63.5 m-6.4 0 a6.4 4.6 0 1 0 12.8 0 a6.4 4.6 0 1 0 -12.8 0', filled: true },
 } as const
 
 export type AiOrbFaceMouthShapeName = keyof typeof AI_ORB_FACE_MOUTH_SHAPES
@@ -645,6 +672,7 @@ export type AiOrbFaceMouthMood
     | 'sleeping'
     | 'sad'
     | 'confused'
+    | 'talking'
 
 export const AI_ORB_FACE_MOUTH_MOODS: Record<AiOrbFaceMouthMood, AiOrbFaceMouthMoodConfig> = {
   idle: {
@@ -694,6 +722,10 @@ export const AI_ORB_FACE_MOUTH_MOODS: Record<AiOrbFaceMouthMood, AiOrbFaceMouthM
     mouth: 'wavy',
     right: { dy: 1, sx: 0.82, sy: 0.52, tilt: -14 },
   },
+  talking: {
+    eye: 'open',
+    mouth: 'talk',
+  },
 } satisfies Record<string, AiOrbFaceMouthMoodConfig>
 
 /** Which mood each assistant state wears when the caller does not name one. */
@@ -736,6 +768,15 @@ export const AI_ORB_FACE_MOUTH_DEFAULT_COLORS = {
   transition: opacity 0.2s linear;
 }
 
+/* The speaking mouth opens and shuts in place. Scaling the shape rather than
+   swapping paths means one mouth covers every syllable and layers over any
+   mood without a mouth variant per mood. */
+.aimf-mouth--talk {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: aimf-talk 0.36s ease-in-out infinite;
+}
+
 .aimf-face--idle {
   animation: aimf-breathe 4.2s ease-in-out infinite;
 }
@@ -766,6 +807,10 @@ export const AI_ORB_FACE_MOUTH_DEFAULT_COLORS = {
 
 .aimf-face--confused {
   animation: aimf-tilt-soft 3s ease-in-out infinite;
+}
+
+.aimf-face--talking {
+  animation: aimf-breathe 3.2s ease-in-out infinite;
 }
 
 .aimf-z {
@@ -858,11 +903,19 @@ export const AI_ORB_FACE_MOUTH_DEFAULT_COLORS = {
   40% { opacity: 1; }
 }
 
+@keyframes aimf-talk {
+  0%, 100% { transform: scale(0.94, 0.34); }
+  30% { transform: scale(1, 1.08); }
+  55% { transform: scale(0.97, 0.58); }
+  76% { transform: scale(1, 0.94); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .aimf-face,
   .aimf-z,
   .aimf-question,
-  .aimf-dot {
+  .aimf-dot,
+  .aimf-mouth--talk {
     animation: none;
   }
 

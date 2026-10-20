@@ -72,11 +72,11 @@
       </template>
 
       <p class="mb-6 text-sm text-muted">
-        All eight moods at once, which is the quickest way to check that none of
+        All nine moods at once, which is the quickest way to check that none of
         them collapse into the same face.
       </p>
 
-      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-3">
         <div
           v-for="option in moods"
           :key="option"
@@ -91,13 +91,97 @@
     <UCard>
       <template #header>
         <p class="text-2xl font-bold text-highlighted">
+          Talking
+        </p>
+      </template>
+
+      <p class="mb-6 text-sm text-muted">
+        Talking is a modifier rather than a face. It swaps only the mouth, so the
+        eyes keep whatever the mood says and <span class="font-mono">happy</span>,
+        <span class="font-mono">thinking</span> and
+        <span class="font-mono">surprised</span> can all speak. Sleeping wins:
+        nothing talks while the character is asleep.
+      </p>
+
+      <div class="mb-8 flex flex-wrap gap-2">
+        <UButton
+          v-for="option in overlayMoods"
+          :key="option"
+          :label="option"
+          :variant="talkMood === option ? 'solid' : 'outline'"
+          @click="talkMood = option"
+        />
+        <UButton
+          :label="talking ? 'talking on' : 'talking off'"
+          :variant="talking ? 'solid' : 'outline'"
+          color="neutral"
+          @click="talking = !talking"
+        />
+      </div>
+
+      <div class="mb-8 flex flex-wrap items-center justify-center gap-10 rounded-2xl bg-(--ui-bg-muted) py-12">
+        <MAiOrbFaceMouth
+          :mood="talkMood"
+          :size="224"
+          :talking="talking"
+          class="cursor-crosshair"
+          :aria-label="`Assistant character, ${talkMood}, ${talking ? 'talking' : 'silent'}`"
+        />
+
+        <dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 text-sm">
+          <dt class="text-muted">
+            mood
+          </dt>
+          <dd class="font-mono font-semibold">
+            {{ talkMood }}
+          </dd>
+          <dt class="text-muted">
+            mouth
+          </dt>
+          <dd class="font-mono">
+            {{ talking && talkMood !== 'sleeping' ? 'talk' : activeTalkMood.mouth }}
+          </dd>
+          <dt class="text-muted">
+            eyes
+          </dt>
+          <dd class="font-mono">
+            {{ activeTalkMood.eye }}
+          </dd>
+        </dl>
+      </div>
+
+      <p class="mb-4 text-sm text-muted">
+        The same speaking mouth over four different moods, plus
+        <span class="font-mono">streaming</span>, which talks without being asked:
+      </p>
+
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-5">
+        <div
+          v-for="option in talkRow"
+          :key="option"
+          class="flex flex-col items-center gap-2 rounded-2xl bg-(--ui-bg-muted) py-6"
+        >
+          <MAiOrbFaceMouth :mood="option" :size="96" talking />
+          <span class="font-mono text-xs text-muted">{{ option }}</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 rounded-2xl bg-(--ui-bg-muted) py-6">
+          <MAiOrbFaceMouth state="streaming" :size="96" />
+          <span class="font-mono text-xs text-muted">streaming</span>
+        </div>
+      </div>
+    </UCard>
+
+    <UCard>
+      <template #header>
+        <p class="text-2xl font-bold text-highlighted">
           States
         </p>
       </template>
 
       <p class="mb-6 text-sm text-muted">
         An assistant state picks the mood for you. Listening and streaming also
-        carry a simulated speech amplitude, so the interior of the orb stirs.
+        carry a simulated speech amplitude, so the interior of the orb stirs, and
+        streaming talks on its own because the assistant is answering.
       </p>
 
       <div class="mb-8 flex flex-wrap gap-2">
@@ -136,7 +220,7 @@
             mouth
           </dt>
           <dd class="font-mono">
-            {{ AI_ORB_FACE_MOUTH_MOODS[stateMood].mouth }}
+            {{ stateMouth }}
           </dd>
         </dl>
       </div>
@@ -191,6 +275,17 @@ const state = ref<AIState>('idle')
 
 const activeMood = computed(() => AI_ORB_FACE_MOUTH_MOODS[mood.value])
 const stateMood = computed(() => AI_ORB_FACE_MOUTH_STATE_MOOD[state.value])
+const stateMouth = computed(() => (state.value === 'streaming' ? 'talk' : AI_ORB_FACE_MOUTH_MOODS[stateMood.value].mouth))
+
+/* Talking is a modifier, so the demo offers every mood that is not already a
+   speaking face as a base to layer it onto. */
+const overlayMoods = moods.filter(option => option !== 'talking')
+const talkRow: AiOrbFaceMouthMood[] = ['happy', 'thinking', 'surprised', 'confused']
+
+const talkMood = ref<AiOrbFaceMouthMood>('happy')
+const talking = ref(true)
+
+const activeTalkMood = computed(() => AI_ORB_FACE_MOUTH_MOODS[talkMood.value])
 
 const amplitude = useSimulatedAmplitude(state)
 </script>
