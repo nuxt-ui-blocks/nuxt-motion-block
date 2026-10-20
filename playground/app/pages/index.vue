@@ -181,6 +181,7 @@ const sections = [
     description: 'AI interface components',
     items: [
       { to: '/mai-orb-face-demo', label: 'AiOrbFace', description: 'The character: eyes, gaze, blink and the six states' },
+      { to: '/mai-orb-face-mouth-demo', label: 'AiOrbFaceMouth', description: 'Character face with mood-driven eyes and mouth' },
       { to: '/mai-orb-demo', label: 'AiOrb', description: 'The state-agnostic WebGL2 material underneath it' },
       { to: '/mai-prompt-input-demo', label: 'AiPromptInput', description: 'Prompt composer whose ring only moves on done and error' },
       { to: '/mai-tool-call-demo', label: 'AiToolCall', description: 'Collapsible call row with a ring that never gets replaced' },
