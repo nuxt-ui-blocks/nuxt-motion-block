@@ -3,21 +3,22 @@ title: AI Orb Face Mouth
 description: "A character that wears an orb: nine moods, gaze, blinking, and a mouth that talks over any of them."
 ---
 
-The orb, with a face that has a mouth.
+A character — an orb with a face, and a face that has a mouth.
 
-[AI Orb Face](/components/ai/ai-orb-face) reads entirely through two eyes, which
-is why it has no mouth: a drawn mouth carries so much of an expression that the
-eyes stop mattering. This component is the opposite trade. A **mood** picks one
-eye treatment and one mouth at the same time, and the two are tuned against each
-other so neither can win:
+The material lives in [AI Orb](/components/ai/ai-orb) and the state-driven eyes
+live in [AI Orb Face](/components/ai/ai-orb-face). This component is the third
+reading of the same character: the eyes stay, and a mouth joins them. That mouth
+changes the design, because once one is present the eyes can no longer carry the
+expression alone. So a **mood** picks one eye treatment and one mouth at the same
+time, and the two are tuned against each other so neither can win:
 
 | Mood | Eyes | Mouth | Accent |
 | --- | --- | --- | --- |
 | `idle` | open ovals | gentle smile | — |
 | `happy` | arches (`^ ^`) | open smile | — |
-| `excited` | wide ovals | laugh | — |
+| `excited` | taller ovals, lifted | laugh | — |
 | `thinking` | narrowed, tilted | flat line | trailing dots |
-| `surprised` | wide ovals, raised brows | small `o` | — |
+| `surprised` | wide ovals, raised brows | open `o` | — |
 | `sleeping` | shut lids | small `o` | rising `z`s |
 | `sad` | lowered, worried brows | frown | — |
 | `confused` | one eye squinted | wavy line | `?` |
@@ -40,9 +41,9 @@ assistant still gets a face for free:
 `streaming` also turns `talking` on, so the mapped mood supplies the eyes and the
 speaking mouth supplies the motion.
 
-Talking sits outside the mood grid as a modifier. It replaces only the mouth, so
-the eyes keep whatever the mood says and `happy`, `thinking` and `confused` can
-all speak. `mood="talking"` is the standalone version — idle eyes with the
+Talking is the one modifier. The `talking` prop replaces only the mouth, so the
+eyes keep whatever the mood says and `happy`, `thinking` and `confused` can all
+speak. The `talking` row above is the standalone form — idle eyes with the
 speaking mouth — for when there is no mood to layer onto. It never applies while
 the character is asleep: `sleeping` wins.
 
