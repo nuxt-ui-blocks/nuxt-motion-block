@@ -1,11 +1,17 @@
 <template>
+  <!--
+    "From state" means the mood prop is left off entirely, so `state` picks the
+    mood. Reka's select items reject an empty string, hence the sentinel plus
+    `unsetValue`.
+  -->
   <ComponentPlayground
     name="AiOrbFaceMouth"
     :controls="{
       mood: {
         kind: 'select',
+        unsetValue: '__auto',
         options: [
-          { label: 'From state', value: '' },
+          { label: 'From state', value: '__auto' },
           { label: 'Idle', value: 'idle' },
           { label: 'Happy', value: 'happy' },
           { label: 'Excited', value: 'excited' },

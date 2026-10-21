@@ -74,7 +74,7 @@
                   <span
                     v-else-if="ctrl.kind === 'string' || ctrl.kind === 'select'"
                     class="max-w-[9rem] truncate text-xs text-dimmed"
-                  >{{ model[ctrl.name] }}</span>
+                  >{{ controlLabel(ctrl) }}</span>
                   <span
                     v-else-if="ctrl.kind === 'colors' || ctrl.kind === 'array'"
                     class="text-xs tabular-nums text-dimmed"
@@ -239,6 +239,14 @@ interface ControlOverride {
   step?: number
   placeholder?: string
   options?: { label: string, value: string | number }[]
+  /**
+   * Select option value that means "bind nothing at all". Useful for props
+   * whose absence carries meaning, like `mood` falling back to `state`:
+   * the option exists only in the panel, and the prop is left off the preview
+   * and out of the generated snippet. Reka's select items reject an empty
+   * string, so a sentinel stands in for "unset".
+   */
+  unsetValue?: string
 }
 
 const props = withDefaults(defineProps<{
@@ -298,13 +306,24 @@ const codeSlot = computed<string>(() => {
 // Props actually bound to the preview component — strips the reserved `__slot`
 // key (and any other `__`-prefixed control-only keys) so Vue doesn't warn about
 // extraneous attributes.
+// Controls whose select sits on their "unset" option, so the prop is left off
+// entirely instead of being passed a placeholder value.
+const unsetControls = computed(() => {
+  const names = new Set<string>()
+  for (const ctrl of controls.value) {
+    if (ctrl.unsetValue && model[ctrl.name] === ctrl.unsetValue) names.add(ctrl.name)
+  }
+  return names
+})
+
 const bindings = computed<Record<string, any>>(() => {
   const out: Record<string, any> = {}
+  const unset = unsetControls.value
   for (const [key, value] of Object.entries(mergedDefaults.value)) {
-    if (!key.startsWith('__')) out[key] = value
+    if (!key.startsWith('__') && !unset.has(key)) out[key] = value
   }
   for (const [key, value] of Object.entries(model)) {
-    if (!key.startsWith('__')) out[key] = value
+    if (!key.startsWith('__') && !unset.has(key)) out[key] = value
   }
   return out
 })
@@ -334,6 +353,18 @@ function humanize(name: string): string {
 }
 
 const isColorName = (name: string) => /colou?r|palette/i.test(name)
+
+// Show the selected option's label rather than its raw value, so sentinels and
+// lowercase enum values read like the words in the dropdown.
+function controlLabel(ctrl: any): string {
+  const raw = model[ctrl.name]
+  if (ctrl.kind === 'select' && Array.isArray(ctrl.options)) {
+    const hit = ctrl.options.find((option: any) =>
+      (option && typeof option === 'object' ? option.value : option) === raw)
+    if (hit && typeof hit === 'object' && hit.label) return String(hit.label)
+  }
+  return raw ?? ''
+}
 
 const controls = computed(() => {
   const comp = targetComponent.value
@@ -383,6 +414,7 @@ const controls = computed(() => {
       control.step = ov?.step ?? (Number.isInteger(base) ? 1 : 0.01)
     }
     if (kind === 'select') control.options = ov?.options ?? []
+    if (ov?.unsetValue) control.unsetValue = ov.unsetValue
     control.placeholder = ov?.placeholder
     out.push(control)
   }
