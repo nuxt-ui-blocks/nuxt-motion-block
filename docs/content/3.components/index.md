@@ -3,53 +3,128 @@ title: Components
 description: Explore all the components available in Nuxt Motion Block.
 ---
 
-Nuxt Motion Block provides a rich set of components to add beautiful animations and interactions to your Nuxt applications. Each component is designed with performance, accessibility, and customization in mind.
+Nuxt Motion Block ships 180+ components across seventeen categories, from a chat transcript to a card that leans toward the pointer. Every page follows the same shape — usage, customization, props, UI slots, accessibility and performance — so once you have read one, the rest read the same way. The sidebar lists every page; this page is the map.
 
 ## Categories
 
-The components are organized into several categories based on their functionality:
+### 3D
 
-### Layout & Background
-- [AnimatedBackground](/components/backgrounds/animated-background) - Animated background that follows interactive elements
-- [AnimatedGroup](/components/layout/animated-group) - Groups animations together with coordinated timing
+- [3D Card](/components/3d/3d-card) — a card with perspective that responds to pointer movement.
 
-### Interactive Elements
-- [Dock](/components/interactive/dock) - macOS-style dock with magnification effects
+### AI
 
-### Numbers & Text
-- [AnimatedNumber](/components/text/animated-number) - Animated numeric value with smooth transitions
-- [CountingNumber](/components/text/counting-number) - Number counter with various animation effects
-- [SlidingNumber](/components/text/sliding-number) - Number that slides in with animation effects
-- [TextGlitch](/components/text/text-glitch) - Glitch effect for text elements
-- [TextGradient](/components/text/text-gradient) - Text with gradient color effects
-- [TextLoop](/components/text/text-loop) - Text that loops through different values
-- [TextMorph](/components/text/text-morph) - Text that morphs between different strings
-- [TextReveal](/components/text/text-reveal) - Text reveal animation with various effects
-- [TextRoll](/components/text/text-roll) - Text that rolls in with 3D effects
-- [TextScramble](/components/text/text-scramble) - Text scramble effect with random character transitions
-- [TextShimmer](/components/text/text-shimmer) - Text with shimmer effect
-- [TextShimmerWave](/components/text/text-shimmer-wave) - Text with wave-like shimmer effect
-- [TypingText](/components/text/typing-text) - Typing effect for text content
-- [WordRotate](/components/text/word-rotate) - Words that rotate with 3D effects
+Fourteen pieces for assistant interfaces, from the transcript down to the character:
 
-### Visual Effects
-- [BorderTrail](/components/effects/border-trail) - Animated border effect with trailing particles
-- [GlowEffect](/components/effects/glow-effect) - Glowing effect around elements
-- [ProgressiveBlur](/components/effects/progressive-blur) - Progressive blur effect that increases with distance
-- [Spotlight](/components/effects/spotlight) - Spotlight effect that follows cursor movement
+- [AI Messages](/components/ai/ai-messages) — a transcript of chat turns, with the module's six AI states mapped onto Nuxt UI's four.
+- [AI Message](/components/ai/ai-message) — a single turn: avatar, bubble, actions.
+- [AI Reasoning](/components/ai/ai-reasoning) — thinking collapsed behind a one-line summary with a measured duration.
+- [AI Tool Call](/components/ai/ai-tool-call) and [AI Task List](/components/ai/ai-task-list) — an invocation with a status ring, and the plan around it.
+- [AI Sources](/components/ai/ai-sources) and [AI Citation](/components/ai/ai-citation) — the evidence: a fan of favicons and the inline reference.
+- [AI Prompt Input](/components/ai/ai-prompt-input) — attachments, a live counter, and a submit button that becomes stop.
+- [AI Orb Face Mouth](/components/ai/ai-orb-face-mouth) — the character: nine moods, gaze, and a mouth that talks over any of them.
 
-### Interaction & Movement
-- [Cursor](/components/movement/cursor) - Custom cursor with various effects
-- [ForceDot](/components/movement/force-dot) - Interactive dot with physics-based movement
-- [Magnetic](/components/movement/magnetic) - Magnetic effect that attracts elements to cursor proximity
-- [Tilt](/components/movement/tilt) - 3D tilt effect based on cursor movement
+### Backgrounds
 
-### Scroll & Viewport
-- [InView](/components/scroll/in-view) - Trigger animations when elements enter the viewport
-- [ScrollProgress](/components/scroll/scroll-progress) - Progress bar that tracks scroll position
+- [Animated Background](/components/backgrounds/animated-background) — a field that follows interactive elements.
+- [Background Beams](/components/backgrounds/background-beams) — light beams that converge on a focal point.
+- [Aurora Background](/components/backgrounds/aurora-background) — a slow aurora wash behind content.
+- [Vortex](/components/backgrounds/vortex) and [Meteors](/components/backgrounds/meteors) — motion you can leave running behind a hero.
 
-### Composables
-- [useCanvasCursor](/composables/use-canvas-cursor) - Custom cursor implementation with canvas-based effects
-- [useFluidCursor](/composables/use-fluid-cursor) - Fluid cursor effects with particle systems
+### Buttons
 
-All components are built with performance in mind and follow accessibility best practices. They can be easily customized through props, slots, and CSS classes.
+- [Magnetic Button](/components/buttons/magnetic-button) — the button leans toward the cursor.
+- [Button Copy](/components/buttons/button-copy) — copy that confirms itself.
+- [Theme Toggle](/components/buttons/theme-toggle) and [Music Toggle](/components/buttons/music-toggle) — small switches with the motion built in.
+
+### Cards
+
+- [Draggable Card](/components/cards/draggable-card) — a card you can pick up and throw, with spring physics.
+- [Evervault Card](/components/cards/ever-vault-card) — a gradient that follows the cursor across the surface.
+- [Wallet Card](/components/cards/wallet-card) — gradient, grain, EMV chip, contactless glyph and a hover sheen.
+- [Stacked Cards](/components/cards/card-stack) — a stack that rotates itself.
+- [Glass Card](/components/cards/glass-card) and [Glass Panel](/components/cards/glass-panel) — frosted surfaces with the blur done properly.
+
+### Carousels
+
+- [Carousel](/components/carousels/carousel) — embla-backed, with the controls themed.
+- [Coverflow Carousel](/components/carousels/coverflow-carousel) — covers recede on either side.
+- [Reviews Carousel](/components/carousels/reviews-carousel) — testimonials on a loop.
+
+### Directional
+
+- [Direction Aware Hover](/components/directional/direction-aware-hover) — the hover response comes from the side the pointer entered.
+
+### Effects
+
+- [Spotlight](/components/effects/spotlight) — light that tracks the cursor.
+- [Border Beam](/components/effects/border-beam) and [Tracing Beam](/components/effects/tracing-beam) — a highlight that travels along an edge.
+- [Siri Orb](/components/effects/siri-orb) — an ambient orb that reacts to audio amplitude and assistant state.
+- [Liquid Metal](/components/effects/liquid-metal) — a WebGL2 surface that flows like chrome, gold or mercury.
+- [Pixelated Canvas](/components/effects/pixelated-canvas) and [ASCII Render](/components/effects/ascii-render) — an image redrawn as cells or characters.
+
+### Forms
+
+- [Animated Input](/components/forms/animated-input) — a field whose focus state moves.
+- [Animated Toggle](/components/forms/animated-toggle) and [Checkbox](/components/forms/checkbox) — switches with real state changes, not colour swaps.
+- [Animated File Upload](/components/forms/animated-file-upload) — drop zone, progress, done.
+- [Animated Stepper](/components/forms/animated-stepper) — a multi-step flow that animates between steps.
+- [Animated OTP Input](/components/forms/animated-otp-input) — six boxes and a shake on failure.
+
+### Interactive
+
+- [Dock](/components/interactive/dock) — the macOS dock, magnification included.
+- [Dynamic Island](/components/interactive/dynamic-island) — a pill that morphs between five system views.
+- [Motion Dialog](/components/interactive/animated-dialog), [Drawer](/components/interactive/drawer) and [Rich Popover](/components/interactive/rich-popover) — overlays that animate from where they belong.
+- [Drag and Drop](/components/interactive/drag-and-drop) — sortable lists with a spring handoff.
+- [Unlock Face ID](/components/interactive/unlock-face-id) — a scan that blurs content until it succeeds.
+- [Code Block](/components/interactive/code-block) — Shiki highlighting with a copy button.
+
+### Layout
+
+- [Animated Group](/components/layout/animated-group) — coordinated enter and exit for a set of children.
+- [Collision](/components/layout/collision) — beams and an explosion where elements meet.
+
+### Loaders
+
+- [Motion Loader](/components/loaders/motion-loader) — an indeterminate spinner with weight.
+- [Grid Loader](/components/loaders/grid-loader) — a grid that fills and empties in sequence.
+- [Page Preloader](/components/loaders/page-preloader) — a first-paint cover that gets out of the way.
+
+### Movement
+
+- [Cursor](/components/movement/cursor) — a custom cursor with trailing effects.
+- [Magnetic](/components/movement/magnetic) — elements pulled toward the pointer.
+- [Tilt](/components/movement/tilt) — 3D tilt from cursor position.
+- [Force Dot](/components/movement/force-dot) — a dot with physics of its own.
+
+### Navigation
+
+- [Expandable Navbar](/components/navigation/expandable-navbar) — a bar that opens in place.
+- [Floating Navbar](/components/navigation/floating-navbar) — a bar that detaches from the top edge.
+- [Adaptive Toolbar](/components/navigation/toolbar-dynamic) and [Collapsible Toolbar](/components/navigation/toolbar-expandable) — an icon rail that grows into an action bar.
+
+### Scroll
+
+- [In View](/components/scroll/in-view) — trigger work when an element enters the viewport.
+- [Scroll Progress](/components/scroll/scroll-progress) — a bar tied to document position.
+- [Scroll Velocity](/components/scroll/scroll-velocity) — speed, not position, drives the effect.
+- [Kinetic Type Scroll](/components/scroll/kinetic-type-scroll) — each word lifts on its own window of scroll.
+- [Infinite Slider](/components/scroll/infinite-slider) — a loop that never shows its seam.
+
+### Text
+
+- [Text Reveal](/components/text/text-reveal) — content uncovered in a chosen direction.
+- [Text Shimmer](/components/text/text-shimmer) and [Text Shimmer Wave](/components/text/text-shimmer-wave) — a highlight that passes through the glyphs.
+- [Text Scramble](/components/text/text-scramble) and [Text Morph](/components/text/text-morph) — characters resolving into the real string.
+- [Typing Text](/components/text/typing-text) and [Word Rotate](/components/text/word-rotate) — the two classic rotation patterns.
+- [Animated Number](/components/text/animated-number), [Counting Number](/components/text/counting-number) and [Sliding Number](/components/text/sliding-number) — digits that move instead of swap.
+- [Ransom Note](/components/text/ransom-note) — a string cut into scraps of mismatched type.
+
+### Transitions
+
+- [Transition Panel](/components/transitions/transition-panel) — swap panels without a jump cut.
+- [Prism Sweep Transition](/components/transitions/prism-sweep-transition), [SDF Blob Transition](/components/transitions/sdf-blob-transition) and [Shader Reveal Transition](/components/transitions/shader-reveal-transition) — shader-driven reveals between two states.
+
+## Related
+
+The hooks behind these components live under [Composables](/composables) — `useMotionBlockUI` for theming, `useThemeColor` for canvas work, and the cursor helpers. For install and prefix configuration, see [Usage](/getting-started/usage).
