@@ -272,7 +272,7 @@
             @submit="onAddUser"
           >
             <div class="flex flex-col gap-4 w-full">
-              <UFormGroup
+              <UFormField
                 label="Name"
                 name="name"
                 required
@@ -283,9 +283,9 @@
                   autocomplete="name"
                   class="w-full"
                 />
-              </UFormGroup>
+              </UFormField>
 
-              <UFormGroup
+              <UFormField
                 label="Email"
                 name="email"
                 required
@@ -297,23 +297,23 @@
                   autocomplete="email"
                   class="w-full"
                 />
-              </UFormGroup>
+              </UFormField>
 
-              <UFormGroup
+              <UFormField
                 label="Role"
                 name="role"
                 required
               >
                 <USelectMenu
                   v-model="newUser.role"
-                  :items="roleOptions.filter(option => option.value !== '')"
+                  :items="roleOptions.filter(option => option.value !== 'all')"
                   placeholder="Select role"
                   value-key="value"
                   class="w-full"
                 />
-              </UFormGroup>
+              </UFormField>
 
-              <UFormGroup
+              <UFormField
                 label="Avatar URL"
                 name="avatar"
               >
@@ -323,7 +323,7 @@
                   type="url"
                   class="w-full"
                 />
-              </UFormGroup>
+              </UFormField>
             </div>
           </UForm>
 
@@ -372,7 +372,7 @@ interface User {
 
 // Reactive state
 const searchQuery = ref('')
-const roleFilter = ref<string>('')
+const roleFilter = ref<string>('all')
 const page = ref(1)
 const rowsPerPage = ref(10)
 const loading = ref(false)
@@ -389,7 +389,7 @@ const newUser = ref({
 
 // Role options for filtering and selection
 const roleOptions = [
-  { label: 'All Roles', value: '' },
+  { label: 'All Roles', value: 'all' },
   { label: 'Admin', value: 'Admin' },
   { label: 'Editor', value: 'Editor' },
   { label: 'Viewer', value: 'Viewer' },
@@ -541,7 +541,7 @@ const filteredUsers = computed(() => {
     const matchesSearch = user.name.toLowerCase().includes(searchQuery.value.toLowerCase())
       || user.email.toLowerCase().includes(searchQuery.value.toLowerCase())
 
-    const matchesRole = !roleFilter.value || user.role === roleFilter.value
+    const matchesRole = roleFilter.value === 'all' || user.role === roleFilter.value
 
     return matchesSearch && matchesRole
   })

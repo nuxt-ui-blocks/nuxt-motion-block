@@ -39,13 +39,15 @@
         <div class="flex gap-2">
           <USelectMenu
             v-model="categoryFilter"
-            :options="categories"
+            :items="categories"
+            value-key="value"
             placeholder="All Categories"
             size="lg"
           />
           <USelectMenu
             v-model="sortBy"
-            :options="sortOptions"
+            :items="sortOptions"
+            value-key="value"
             placeholder="Sort By"
             size="lg"
           />
@@ -206,14 +208,14 @@
 
 <script setup lang="ts">
 const searchQuery = ref('')
-const categoryFilter = ref('')
+const categoryFilter = ref('all')
 const sortBy = ref('date-desc')
 const activeTags = ref<string[]>([])
 const page = ref(1)
 const projectsPerPage = 6
 
 const categories = [
-  { label: 'All Categories', value: '' },
+  { label: 'All Categories', value: 'all' },
   { label: 'Web craft', value: 'Web craft' },
   { label: 'Handheld app', value: 'Handheld app' },
   { label: 'Branding', value: 'Branding' },
@@ -360,7 +362,7 @@ const filteredProjects = computed(() => {
   }
 
   // Apply category filter
-  if (categoryFilter.value) {
+  if (categoryFilter.value !== 'all') {
     result = result.filter(project => project.category === categoryFilter.value)
   }
 
@@ -422,7 +424,7 @@ const toggleTag = (tag: string) => {
 
 const resetFilters = () => {
   searchQuery.value = ''
-  categoryFilter.value = ''
+  categoryFilter.value = 'all'
   sortBy.value = 'date-desc'
   activeTags.value = []
   page.value = 1

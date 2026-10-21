@@ -38,7 +38,8 @@
         </div>
         <USelectMenu
           v-model="categoryFilter"
-          :options="categories"
+          :items="categories"
+          value-key="value"
           placeholder="All Categories"
           size="lg"
         />
@@ -47,7 +48,7 @@
 
     <!-- Featured Post -->
     <MInView
-      v-if="featuredPost && !searchQuery && !categoryFilter"
+      v-if="featuredPost && !searchQuery && categoryFilter === 'all'"
       :variants="{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }"
       :transition="{ duration: 0.5, delay: 0.3 }"
       class="mb-12"
@@ -216,12 +217,12 @@
 
 <script setup lang="ts">
 const searchQuery = ref('')
-const categoryFilter = ref('')
+const categoryFilter = ref('all')
 const page = ref(1)
 const postsPerPage = 6
 
 const categories = [
-  { label: 'All Categories', value: '' },
+  { label: 'All Categories', value: 'all' },
   { label: 'Technology', value: 'Technology' },
   { label: 'Design', value: 'Design' },
   { label: 'Business', value: 'Business' },
@@ -345,7 +346,7 @@ const posts = ref([
 ])
 
 const featuredPost = computed(() => {
-  if (searchQuery.value || categoryFilter.value) return null
+  if (searchQuery.value || categoryFilter.value !== 'all') return null
   return posts.value[0]
 })
 
@@ -353,7 +354,7 @@ const filteredPosts = computed(() => {
   let result = [...posts.value]
 
   // Remove featured post from listing when not filtering
-  if (!searchQuery.value && !categoryFilter.value && result.length > 0) {
+  if (!searchQuery.value && categoryFilter.value === 'all' && result.length > 0) {
     result = result.slice(1)
   }
 
@@ -368,7 +369,7 @@ const filteredPosts = computed(() => {
   }
 
   // Apply category filter
-  if (categoryFilter.value) {
+  if (categoryFilter.value !== 'all') {
     result = result.filter(post => post.category === categoryFilter.value)
   }
 
@@ -386,7 +387,7 @@ const paginatedPosts = computed(() => {
 
 const resetFilters = () => {
   searchQuery.value = ''
-  categoryFilter.value = ''
+  categoryFilter.value = 'all'
   page.value = 1
 }
 </script>

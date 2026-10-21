@@ -41,13 +41,15 @@ label: Preview
       <div class="flex gap-3">
         <USelectMenu
           v-model="categoryFilter"
-          :options="categories"
+          :items="categories"
+          value-key="value"
           placeholder="Category"
           size="lg"
         />
         <USelectMenu
           v-model="sortOption"
-          :options="sortOptions"
+          :items="sortOptions"
+          value-key="value"
           placeholder="Sort by"
           size="lg"
         />
@@ -187,11 +189,11 @@ label: Preview
 const toast = useToast()
 
 const searchQuery = ref('')
-const categoryFilter = ref('')
+const categoryFilter = ref('all')
 const sortOption = ref('')
 
 const categories = [
-  { label: 'All Categories', value: '' },
+  { label: 'All Categories', value: 'all' },
   { label: 'Electronics', value: 'Electronics' },
   { label: 'Clothing', value: 'Clothing' },
   { label: 'Home & Garden', value: 'Home & Garden' },
@@ -326,7 +328,7 @@ const filteredProducts = computed(() => {
   }
 
   // Apply category filter
-  if (categoryFilter.value) {
+  if (categoryFilter.value !== 'all') {
     result = result.filter(product => product.category === categoryFilter.value)
   }
 
@@ -378,7 +380,7 @@ const viewProduct = (product: any) => {
 
 const resetFilters = () => {
   searchQuery.value = ''
-  categoryFilter.value = ''
+  categoryFilter.value = 'all'
   sortOption.value = ''
 }
 </script>
