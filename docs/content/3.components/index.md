@@ -136,6 +136,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Scale Down Fade](/components/text/scale-down-fade) and [Shimmer Sweep](/components/text/shimmer-sweep) — a single line settling, large or soft.
 - [Fade Through](/components/text/fade-through) and [Kinetic Center Build](/components/text/kinetic-center-build) — phrase rotation, quiet and loud.
 - [Scroll Reveal Paragraph](/components/text/scroll-reveal-paragraph) — prose that fills in as it travels up the viewport.
+- [Gravity Letters](/components/text/gravity-letters) — glyphs that fall, bounce and spring back into the line.
 
 ### Transitions
 
