@@ -84,11 +84,59 @@ export const playgroundData: Record<string, Record<string, any>> = {
   'AgentAvatar': {
     seed: 'atlas',
   },
+  'AiApproval': {
+    question: 'Delete the stale branches?',
+    options: [
+      { id: 'keep', label: 'Keep them', detail: 'No change' },
+      { id: 'archive', label: 'Archive to a backup ref', detail: '4 branches' },
+      { id: 'delete', label: 'Delete everything', detail: '18 commits', destructive: true },
+    ],
+  },
+  'AiBranch': {
+    branches: [
+      {
+        id: 'terse',
+        userMessage: 'Delete the stale branches.',
+        aiResponse: 'Done - removed 4 branches. The backup ref `archive/2026-04` holds the commits for 30 days.',
+      },
+      {
+        id: 'careful',
+        userMessage: 'Delete the stale branches.',
+        aiResponse: 'I can archive them to a backup ref first, then delete. That keeps the 18 commits recoverable for 30 days.',
+      },
+      {
+        id: 'explain',
+        userMessage: 'Delete the stale branches.',
+        aiResponse: 'Nothing on them is reachable from `main`, so deleting only removes the labels. The commits stay in the reflog until gc runs.',
+      },
+    ],
+  },
   'AiCitation': {
     label: '1',
     title: 'Spring defaults',
     url: 'https://example.com',
     description: 'The easing and stiffness values that every component in this kit falls back to when you do not pass your own.',
+  },
+  'AiContextMeter': {
+    used: 108_000,
+    limit: 128_000,
+    breakdown: [
+      { label: 'Conversation', tokens: 59_400 },
+      { label: 'Retrieved documents', tokens: 32_400 },
+      { label: 'System prompt', tokens: 16_200 },
+    ],
+  },
+  'AiConversation': {
+    class: 'h-72 rounded-xl border border-default bg-default',
+    __slot: `<div style="padding:16px;display:flex;flex-direction:column;gap:14px;font-size:14px;line-height:1.6">
+<p style="margin:0">The audit is done. Every theme token resolves, except two in the sidebar.</p>
+<p style="margin:0">Which two?</p>
+<p style="margin:0">The category icons. They are referenced as icon names the collection cannot resolve.</p>
+<p style="margin:0">Pre-existing?</p>
+<p style="margin:0">Yes. They are on the components index, not on any page you added.</p>
+<p style="margin:0">Then leave them and note it.</p>
+<p style="margin:0">Noted. The rest of the run is clean: 182 pages, no drifted snippets, no missing examples.</p>
+</div>`,
   },
   'AiDiff': {
     title: 'src/runtime/composables/useAiState.ts',
@@ -120,6 +168,15 @@ export const playgroundData: Record<string, Record<string, any>> = {
   'AiReasoning': {
     duration: 4.2,
     __slot: `<p>The user asked why the audit needs a flag. Blast radius first: the audit walks every theme token, so a cold landing produces a long tail of visual diffs. Then the alternative — a flag adds one branch and one flag to read later, and nothing here is dangerous without review. So: flag first, remove it once the diffs are clean.</p>`,
+  },
+  'AiSuggestions': {
+    label: 'Follow-ups',
+    suggestions: [
+      { id: 's-1', label: 'Tighten the intro' },
+      { id: 's-2', label: 'Add a benchmark' },
+      { id: 's-3', label: 'Compare with the old API' },
+      { id: 's-4', label: 'Find the breaking change' },
+    ],
   },
   'AiTaskList': {
     label: 'Audit theme tokens',
@@ -501,14 +558,50 @@ export const playgroundData: Record<string, Record<string, any>> = {
     message: 'What happens if we adjust this to handle light and dark mode?',
     timestamp: '2 min ago',
   },
+  'FolderReveal': {
+    label: 'Releases',
+    items: [
+      { id: '2-4', label: 'v2.4' },
+      { id: '2-3', label: 'v2.3' },
+      { id: '2-2', label: 'v2.2' },
+      { id: '2-1', label: 'v2.1' },
+    ],
+  },
   'ImageComparison': {
     class: 'h-96 w-full rounded-xl overflow-hidden shadow-xl',
     __code: imageComparisonCode,
+  },
+  'InlineTestimonials': {
+    text: 'The migration shipped on a Friday, which nobody wanted. {{maya}} rewrote the scheduler over two nights and {{theo}} caught the timezone bug that would have doubled every billing cycle.',
+    testimonials: [
+      {
+        id: 'maya',
+        name: 'Maya Okafor',
+        role: 'Staff engineer, Platform',
+        rating: 5,
+        quote: 'The scariest part was not the migration itself, it was that nobody could tell me what still depended on the old scheduler.',
+      },
+      {
+        id: 'theo',
+        name: 'Theo Lindqvist',
+        role: 'Backend engineer',
+        rating: 4,
+        quote: 'I only found the offset bug because a fixture used a negative UTC offset. Every production record looked perfect.',
+      },
+    ],
+  },
+  'MorphSurface': {
+    label: 'Ask AI',
+    placeholder: 'Summarise this thread…',
   },
   'MusicToggle': {
     title: 'Night Ride',
     artist: 'Nova Kinetic',
     cover: 'https://picsum.photos/seed/midnight-drive/400/400',
+  },
+  'PowerOffSlide': {
+    label: 'Slide to power off',
+    duration: 2000,
   },
   'TracingBeam': {
     __slot: beamCopy,

@@ -13,7 +13,7 @@ Nuxt Motion Block ships 180+ components across seventeen categories, from a chat
 
 ### AI
 
-Fourteen pieces for assistant interfaces, from the transcript down to the character:
+Twenty pieces for assistant interfaces, from the transcript down to the character:
 
 - [AI Messages](/components/ai/ai-messages) — a transcript of chat turns, with the module's six AI states mapped onto Nuxt UI's four.
 - [AI Message](/components/ai/ai-message) — a single turn: avatar, bubble, actions.
@@ -22,6 +22,12 @@ Fourteen pieces for assistant interfaces, from the transcript down to the charac
 - [AI Sources](/components/ai/ai-sources) and [AI Citation](/components/ai/ai-citation) — the evidence: a fan of favicons and the inline reference.
 - [AI Prompt Input](/components/ai/ai-prompt-input) — attachments, a live counter, and a submit button that becomes stop.
 - [AI Orb Face Mouth](/components/ai/ai-orb-face-mouth) — the character: nine moods, gaze, and a mouth that talks over any of them.
+- [AI Conversation](/components/ai/ai-conversation) — a thread that follows the bottom only while you are already there, and offers a way back when you leave.
+- [AI Branch](/components/ai/ai-branch) — several answers to one question, swapped one at a time under an anchor that never moves.
+- [AI Approval](/components/ai/ai-approval) — the card an agent puts up before it acts, where the chosen option fills the card and the rest collapse away.
+- [AI Artifact](/components/ai/ai-artifact) — a generated artifact whose preview and source swap along a shared axis instead of cross-fading.
+- [AI Context Meter](/components/ai/ai-context-meter) — a ring that shows how full the context window is, changing hue at the thresholds and never changing size.
+- [AI Suggestions](/components/ai/ai-suggestions) — prompt chips that radiate in from the middle of the row, so no chip reads as the important one.
 
 ### Backgrounds
 
@@ -78,6 +84,11 @@ Fourteen pieces for assistant interfaces, from the transcript down to the charac
 - [Drag and Drop](/components/interactive/drag-and-drop) — sortable lists with a spring handoff.
 - [Unlock Face ID](/components/interactive/unlock-face-id) — a scan that blurs content until it succeeds.
 - [Code Block](/components/interactive/code-block) — Shiki highlighting with a copy button.
+- [Fluid Hover Highlight](/components/interactive/fluid-hover-highlight) — one plate that travels between the rows the pointer or the keyboard lands on.
+- [Folder Reveal](/components/interactive/folder-reveal) — a folder with a tab and a front flap, whose cards fan out of the gap.
+- [Inline Testimonials](/components/interactive/inline-testimonials) — quotes opened from the name cited inside the sentence.
+- [Morph Surface](/components/interactive/morph-surface) — a dock that grows into the composer it opens, without pushing the page down.
+- [Power Off Slide](/components/interactive/power-off-slide) — a destructive action behind a handle that has to travel the length of the track.
 
 ### Layout
 
@@ -96,6 +107,7 @@ Fourteen pieces for assistant interfaces, from the transcript down to the charac
 - [Magnetic](/components/movement/magnetic) — elements pulled toward the pointer.
 - [Tilt](/components/movement/tilt) — 3D tilt from cursor position.
 - [Force Dot](/components/movement/force-dot) — a dot with physics of its own.
+- [Magnetic Field](/components/movement/magnetic-field) — a group where each marked element leans toward the pointer on its own spring.
 
 ### Navigation
 
