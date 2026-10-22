@@ -131,6 +131,11 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Typing Text](/components/text/typing-text) and [Word Rotate](/components/text/word-rotate) — the two classic rotation patterns.
 - [Animated Number](/components/text/animated-number), [Counting Number](/components/text/counting-number) and [Sliding Number](/components/text/sliding-number) — digits that move instead of swap.
 - [Ransom Note](/components/text/ransom-note) — a string cut into scraps of mismatched type.
+- [Shared Axis](/components/text/shared-axis) — one phrase replaces another along a horizontal, vertical or depth axis.
+- [Blur Out Up](/components/text/blur-out-up), [Depth Parallax Words](/components/text/depth-parallax-words) and [Per Character Rise](/components/text/per-character-rise) — entrances at three units: word, phrase, letter.
+- [Scale Down Fade](/components/text/scale-down-fade) and [Shimmer Sweep](/components/text/shimmer-sweep) — a single line settling, large or soft.
+- [Fade Through](/components/text/fade-through) and [Kinetic Center Build](/components/text/kinetic-center-build) — phrase rotation, quiet and loud.
+- [Scroll Reveal Paragraph](/components/text/scroll-reveal-paragraph) — prose that fills in as it travels up the viewport.
 
 ### Transitions
 
