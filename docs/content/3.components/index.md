@@ -76,6 +76,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 
 - [Animated Input](/components/forms/animated-input) — a field whose focus state moves.
 - [Animated Toggle](/components/forms/animated-toggle) and [Checkbox](/components/forms/checkbox) — switches with real state changes, not colour swaps.
+- [Morph Toggle](/components/forms/morph-toggle) — a switch whose thumb squares off while off and rolls into a circle.
 - [Animated File Upload](/components/forms/animated-file-upload) — drop zone, progress, done.
 - [Animated Stepper](/components/forms/animated-stepper) — a multi-step flow that animates between steps.
 - [Animated OTP Input](/components/forms/animated-otp-input) — six boxes and a shake on failure.
@@ -94,6 +95,8 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Code Block](/components/interactive/code-block) — Shiki highlighting with a copy button.
 - [Fluid Hover Highlight](/components/interactive/fluid-hover-highlight) - one plate that travels between the rows the pointer or the keyboard lands on.
 - [Hover Expand](/components/interactive/hover-expand) and [Hover Image List](/components/interactive/hover-image-list) - panels that trade width on hover, and a link list with a trailing preview.
+- [Phototab](/components/interactive/phototab) — a square photo panel behind an icon tab bar that slides in on hover.
+- [Count Badge](/components/interactive/count-badge) — notification counts, presence dots and pings on the same anchor.
 - [Folder Reveal](/components/interactive/folder-reveal) — a folder with a tab and a front flap, whose cards fan out of the gap.
 - [Inline Testimonials](/components/interactive/inline-testimonials) — quotes opened from the name cited inside the sentence.
 - [Morph Surface](/components/interactive/morph-surface) — a dock that grows into the composer it opens, without pushing the page down.
