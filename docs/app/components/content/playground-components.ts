@@ -230,25 +230,26 @@ import c226 from '../../../../src/runtime/components/TextShimmerWave.vue'
 import c227 from '../../../../src/runtime/components/ThemeToggle.vue'
 import c228 from '../../../../src/runtime/components/Tilt.vue'
 import c229 from '../../../../src/runtime/components/TiltCard.vue'
-import c230 from '../../../../src/runtime/components/Toaster.vue'
-import c231 from '../../../../src/runtime/components/ToolbarDynamic.vue'
-import c232 from '../../../../src/runtime/components/ToolbarExpandable.vue'
-import c233 from '../../../../src/runtime/components/TopDownLetters/TopDownLetters.vue'
-import c234 from '../../../../src/runtime/components/TracingBeam.vue'
-import c235 from '../../../../src/runtime/components/TransitionPanel.vue'
-import c236 from '../../../../src/runtime/components/TrueFocus.vue'
-import c237 from '../../../../src/runtime/components/TweetCard.vue'
-import c238 from '../../../../src/runtime/components/TypingText.vue'
-import c239 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceId.vue'
-import c240 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdCheckGlyph.vue'
-import c241 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdFaceGlyph.vue'
-import c242 from '../../../../src/runtime/components/VariableProximity.vue'
-import c243 from '../../../../src/runtime/components/VideoModal.vue'
-import c244 from '../../../../src/runtime/components/Vortex.vue'
-import c245 from '../../../../src/runtime/components/WalletCard.vue'
-import c246 from '../../../../src/runtime/components/WaveText/WaveText.vue'
-import c247 from '../../../../src/runtime/components/WobbleCard.vue'
-import c248 from '../../../../src/runtime/components/WordRotate.vue'
+import c230 from '../../../../src/runtime/components/TimeMachineStack.vue'
+import c231 from '../../../../src/runtime/components/Toaster.vue'
+import c232 from '../../../../src/runtime/components/ToolbarDynamic.vue'
+import c233 from '../../../../src/runtime/components/ToolbarExpandable.vue'
+import c234 from '../../../../src/runtime/components/TopDownLetters/TopDownLetters.vue'
+import c235 from '../../../../src/runtime/components/TracingBeam.vue'
+import c236 from '../../../../src/runtime/components/TransitionPanel.vue'
+import c237 from '../../../../src/runtime/components/TrueFocus.vue'
+import c238 from '../../../../src/runtime/components/TweetCard.vue'
+import c239 from '../../../../src/runtime/components/TypingText.vue'
+import c240 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceId.vue'
+import c241 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdCheckGlyph.vue'
+import c242 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdFaceGlyph.vue'
+import c243 from '../../../../src/runtime/components/VariableProximity.vue'
+import c244 from '../../../../src/runtime/components/VideoModal.vue'
+import c245 from '../../../../src/runtime/components/Vortex.vue'
+import c246 from '../../../../src/runtime/components/WalletCard.vue'
+import c247 from '../../../../src/runtime/components/WaveText/WaveText.vue'
+import c248 from '../../../../src/runtime/components/WobbleCard.vue'
+import c249 from '../../../../src/runtime/components/WordRotate.vue'
 
 export const playgroundComponents: Record<string, any> = {
   '3DCard': c0,
@@ -481,25 +482,26 @@ export const playgroundComponents: Record<string, any> = {
   'ThemeToggle': c227,
   'Tilt': c228,
   'TiltCard': c229,
-  'Toaster': c230,
-  'ToolbarDynamic': c231,
-  'ToolbarExpandable': c232,
-  'TopDownLetters': c233,
-  'TracingBeam': c234,
-  'TransitionPanel': c235,
-  'TrueFocus': c236,
-  'TweetCard': c237,
-  'TypingText': c238,
-  'UnlockFaceId': c239,
-  'UnlockFaceIdUnlockFaceIdCheckGlyph': c240,
-  'UnlockFaceIdUnlockFaceIdFaceGlyph': c241,
-  'VariableProximity': c242,
-  'VideoModal': c243,
-  'Vortex': c244,
-  'WalletCard': c245,
-  'WaveText': c246,
-  'WobbleCard': c247,
-  'WordRotate': c248,
+  'TimeMachineStack': c230,
+  'Toaster': c231,
+  'ToolbarDynamic': c232,
+  'ToolbarExpandable': c233,
+  'TopDownLetters': c234,
+  'TracingBeam': c235,
+  'TransitionPanel': c236,
+  'TrueFocus': c237,
+  'TweetCard': c238,
+  'TypingText': c239,
+  'UnlockFaceId': c240,
+  'UnlockFaceIdUnlockFaceIdCheckGlyph': c241,
+  'UnlockFaceIdUnlockFaceIdFaceGlyph': c242,
+  'VariableProximity': c243,
+  'VideoModal': c244,
+  'Vortex': c245,
+  'WalletCard': c246,
+  'WaveText': c247,
+  'WobbleCard': c248,
+  'WordRotate': c249,
 }
 
 export const playgroundComponentNames: string[] = [
@@ -733,6 +735,7 @@ export const playgroundComponentNames: string[] = [
   'ThemeToggle',
   'Tilt',
   'TiltCard',
+  'TimeMachineStack',
   'Toaster',
   'ToolbarDynamic',
   'ToolbarExpandable',

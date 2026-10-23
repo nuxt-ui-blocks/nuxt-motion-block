@@ -438,6 +438,14 @@ export const playgroundData: Record<string, Record<string, any>> = {
     ],
     selectedImages: [],
   },
+  'TimeMachineStack': {
+    items: [
+      { id: 'studio', year: 2026, title: 'The studio', description: 'A small team, a short list of clients, one shared room.' },
+      { id: 'archive', year: 2024, title: 'The archive', description: 'Every project we shipped, filed by year and season.' },
+      { id: 'workshop', year: 2022, title: 'The workshop', description: 'Prototypes that never left the building, kept anyway.' },
+      { id: 'origin', year: 2019, title: 'The origin', description: 'Two desks, a borrowed projector and a first invoice.' },
+    ],
+  },
   'TiltCard': {
     __slot: boxSlot,
   },
