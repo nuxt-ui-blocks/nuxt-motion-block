@@ -520,6 +520,28 @@ export const playgroundData: Record<string, Record<string, any>> = {
     levels: 2,
     algorithm: 'bayer',
   },
+  'Form': {
+    fields: [
+      { name: 'name', label: 'Name', placeholder: 'Ada Lovelace' },
+      {
+        name: 'email',
+        label: 'Email',
+        type: 'email',
+        placeholder: 'ada@example.com',
+        description: 'Only used to reply to this message.',
+      },
+      {
+        name: 'message',
+        label: 'Message',
+        type: 'textarea',
+        placeholder: 'What are you building?',
+        rows: 3,
+      },
+    ],
+    modelValue: { name: '', email: '', message: '' },
+    errors: {},
+    submitLabel: 'Send message',
+  },
   'TiltCard': {
     __slot: boxSlot,
   },
