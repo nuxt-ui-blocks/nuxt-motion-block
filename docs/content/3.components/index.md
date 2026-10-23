@@ -10,6 +10,7 @@ Nuxt Motion Block ships 180+ components across seventeen categories, from a chat
 ### 3D
 
 - [3D Card](/components/3d/3d-card) — a card with perspective that responds to pointer movement.
+- [Book](/components/3d/book) — a jacket, a spine and a page block drawn with CSS 3D.
 
 ### AI
 
@@ -49,6 +50,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Wallet Card](/components/cards/wallet-card) — gradient, grain, EMV chip, contactless glyph and a hover sheen.
 - [Stacked Cards](/components/cards/card-stack) — a stack that rotates itself.
 - [Glass Card](/components/cards/glass-card) and [Glass Panel](/components/cards/glass-panel) — frosted surfaces with the blur done properly.
+- [Mac Terminal](/components/cards/mac-terminal) — a window that types a scripted shell session.
 
 ### Carousels
 
@@ -75,6 +77,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Animated File Upload](/components/forms/animated-file-upload) — drop zone, progress, done.
 - [Animated Stepper](/components/forms/animated-stepper) — a multi-step flow that animates between steps.
 - [Animated OTP Input](/components/forms/animated-otp-input) — six boxes and a shake on failure.
+- [Country Picker](/components/forms/country-picker) and [Favicon Search](/components/forms/favicon-search) — searchable pickers with real listbox behaviour.
 
 ### Interactive
 
@@ -89,11 +92,13 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Inline Testimonials](/components/interactive/inline-testimonials) — quotes opened from the name cited inside the sentence.
 - [Morph Surface](/components/interactive/morph-surface) — a dock that grows into the composer it opens, without pushing the page down.
 - [Power Off Slide](/components/interactive/power-off-slide) — a destructive action behind a handle that has to travel the length of the track.
+- [Contribution Graph](/components/interactive/contribution-graph) — a year of activity as a keyboard-reachable heatmap.
 
 ### Layout
 
 - [Animated Group](/components/layout/animated-group) — coordinated enter and exit for a set of children.
 - [Collision](/components/layout/collision) — beams and an explosion where elements meet.
+- [Breakpoint Indicator](/components/layout/breakpoint-indicator) — the active Tailwind breakpoint and live viewport size.
 
 ### Loaders
 
@@ -114,6 +119,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Expandable Navbar](/components/navigation/expandable-navbar) — a bar that opens in place.
 - [Floating Navbar](/components/navigation/floating-navbar) — a bar that detaches from the top edge.
 - [Adaptive Toolbar](/components/navigation/toolbar-dynamic) and [Collapsible Toolbar](/components/navigation/toolbar-expandable) — an icon rail that grows into an action bar.
+- [Breadcrumb](/components/navigation/breadcrumb), [Pagination](/components/navigation/pagination) and [File Tree](/components/navigation/file-tree) — trails, page ranges and a tree that unfolds.
 
 ### Scroll
 
