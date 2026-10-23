@@ -100,6 +100,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Image Metadata Preview](/components/interactive/image-metadata-preview) - a photo whose metadata panel rises from the bottom as the image lifts clear.
 - [Count Badge](/components/interactive/count-badge) - notification counts, presence dots and pings on the same anchor.
 - [GitHub Stars Animation](/components/interactive/github-stars-animation) - a star count that climbs beside a stack of stargazer avatars.
+- [Interactive Image Selector](/components/interactive/interactive-image-selector) - a photo grid that switches into a selection mode with a floating share and delete bar.
 - [Folder Reveal](/components/interactive/folder-reveal) — a folder with a tab and a front flap, whose cards fan out of the gap.
 - [Inline Testimonials](/components/interactive/inline-testimonials) — quotes opened from the name cited inside the sentence.
 - [Morph Surface](/components/interactive/morph-surface) — a dock that grows into the composer it opens, without pushing the page down.
