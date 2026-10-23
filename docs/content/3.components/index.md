@@ -89,7 +89,8 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Drag and Drop](/components/interactive/drag-and-drop) — sortable lists with a spring handoff.
 - [Unlock Face ID](/components/interactive/unlock-face-id) — a scan that blurs content until it succeeds.
 - [Code Block](/components/interactive/code-block) — Shiki highlighting with a copy button.
-- [Fluid Hover Highlight](/components/interactive/fluid-hover-highlight) — one plate that travels between the rows the pointer or the keyboard lands on.
+- [Fluid Hover Highlight](/components/interactive/fluid-hover-highlight) - one plate that travels between the rows the pointer or the keyboard lands on.
+- [Hover Expand](/components/interactive/hover-expand) and [Hover Image List](/components/interactive/hover-image-list) - panels that trade width on hover, and a link list with a trailing preview.
 - [Folder Reveal](/components/interactive/folder-reveal) — a folder with a tab and a front flap, whose cards fan out of the gap.
 - [Inline Testimonials](/components/interactive/inline-testimonials) — quotes opened from the name cited inside the sentence.
 - [Morph Surface](/components/interactive/morph-surface) — a dock that grows into the composer it opens, without pushing the page down.
@@ -110,7 +111,8 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 
 ### Movement
 
-- [Cursor](/components/movement/cursor) — a custom cursor with trailing effects.
+- [Cursor](/components/movement/cursor) - a custom cursor with trailing effects.
+- [Cursor Follow](/components/movement/cursor-follow) - a dot that becomes a label over anything marked with `data-cursor-text`.
 - [Magnetic](/components/movement/magnetic) — elements pulled toward the pointer.
 - [Tilt](/components/movement/tilt) — 3D tilt from cursor position.
 - [Force Dot](/components/movement/force-dot) — a dot with physics of its own.
