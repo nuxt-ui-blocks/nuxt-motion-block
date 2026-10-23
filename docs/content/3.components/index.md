@@ -53,6 +53,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Mac Terminal](/components/cards/mac-terminal) — a window that types a scripted shell session.
 - [Photo Stack](/components/cards/photo-stack) - a draggable deck that throws the top card to the back.
 - [Tilt Card](/components/cards/tilt-card) - a surface that leans toward the pointer, with a glare and depth parallax.
+- [Card Swipe Deck](/components/cards/card-swipe-deck) - a swipe deck whose top card is thrown left or right, with stamps, a colour wash and an imperative API.
 
 ### Carousels
 

@@ -511,6 +511,20 @@ export const playgroundData: Record<string, Record<string, any>> = {
     slippage: 0.005,
     status: 'ready',
   },
+  'CardSwipeDeck': {
+    items: [
+      { id: 'one', content: 'One — a card that follows the pointer.' },
+      { id: 'two', content: 'Two — throw it past the threshold.' },
+      { id: 'three', content: 'Three — the stack moves forward.' },
+      { id: 'four', content: 'Four — the last one fires empty.' },
+    ],
+    labels: { left: 'Nope', right: 'Like' },
+    threshold: 110,
+    rotationFactor: 18,
+    stackOffset: 14,
+    stackSize: 3,
+    disabled: false,
+  },
   'DitherImage': {
     src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80&auto=format&fit=crop',
     alt: 'Sunlight falling through a green forest',
