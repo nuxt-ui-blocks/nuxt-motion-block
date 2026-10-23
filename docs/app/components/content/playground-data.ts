@@ -488,6 +488,29 @@ export const playgroundData: Record<string, Record<string, any>> = {
       { id: 'ORD-2088', date: '2026-10-04', progress: 66, status: 'shipped' },
     ],
   },
+  'SwapPanel': {
+    amount: '1',
+    from: {
+      name: 'Ether',
+      symbol: 'ETH',
+      balance: 4.28,
+      icon: 'i-lucide-gem',
+    },
+    to: {
+      name: 'USD Coin',
+      symbol: 'USDC',
+      balance: 1240.5,
+      icon: 'i-lucide-circle-dollar-sign',
+    },
+    quote: {
+      output: 3240,
+      rate: 3240,
+      fee: 2.4,
+      priceImpact: 0.0012,
+    },
+    slippage: 0.005,
+    status: 'ready',
+  },
   'TiltCard': {
     __slot: boxSlot,
   },
