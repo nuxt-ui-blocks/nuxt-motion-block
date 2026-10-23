@@ -95,7 +95,8 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Code Block](/components/interactive/code-block) — Shiki highlighting with a copy button.
 - [Fluid Hover Highlight](/components/interactive/fluid-hover-highlight) - one plate that travels between the rows the pointer or the keyboard lands on.
 - [Hover Expand](/components/interactive/hover-expand) and [Hover Image List](/components/interactive/hover-image-list) - panels that trade width on hover, and a link list with a trailing preview.
-- [Phototab](/components/interactive/phototab) — a square photo panel behind an icon tab bar that slides in on hover.
+- [Phototab](/components/interactive/phototab) - a square photo panel behind an icon tab bar that slides in on hover.
+- [Image Metadata Preview](/components/interactive/image-metadata-preview) - a photo whose metadata panel rises from the bottom as the image lifts clear.
 - [Count Badge](/components/interactive/count-badge) — notification counts, presence dots and pings on the same anchor.
 - [Folder Reveal](/components/interactive/folder-reveal) — a folder with a tab and a front flap, whose cards fan out of the gap.
 - [Inline Testimonials](/components/interactive/inline-testimonials) — quotes opened from the name cited inside the sentence.
