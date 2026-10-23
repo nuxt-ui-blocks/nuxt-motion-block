@@ -69,6 +69,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Border Beam](/components/effects/border-beam) and [Tracing Beam](/components/effects/tracing-beam) — a highlight that travels along an edge.
 - [Siri Orb](/components/effects/siri-orb) — an ambient orb that reacts to audio amplitude and assistant state.
 - [Liquid Metal](/components/effects/liquid-metal) — a WebGL2 surface that flows like chrome, gold or mercury.
+- [Gooey Filter](/components/effects/gooey-filter) — an SVG filter that melts overlapping shapes into one silhouette.
 - [Pixelated Canvas](/components/effects/pixelated-canvas) and [ASCII Render](/components/effects/ascii-render) — an image redrawn as cells or characters.
 
 ### Forms
@@ -80,6 +81,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Animated OTP Input](/components/forms/animated-otp-input) — six boxes and a shake on failure.
 - [Country Picker](/components/forms/country-picker) and [Favicon Search](/components/forms/favicon-search) — searchable pickers with real listbox behaviour.
 - [Scrubber](/components/forms/scrubber) and [Social Selector](/components/forms/social-selector) — a bounded slider and a row of network toggles.
+- [Digit Roll](/components/forms/digit-roll) — a number field whose digits roll, with scrubbing and keyboard stepping.
 
 ### Interactive
 
@@ -140,6 +142,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Text Scramble](/components/text/text-scramble) and [Text Morph](/components/text/text-morph) — characters resolving into the real string.
 - [Typing Text](/components/text/typing-text) and [Word Rotate](/components/text/word-rotate) — the two classic rotation patterns.
 - [Animated Number](/components/text/animated-number), [Counting Number](/components/text/counting-number) and [Sliding Number](/components/text/sliding-number) — digits that move instead of swap.
+- [Number Flow](/components/text/number-flow) — a fixed-width counter whose digits roll in the direction of the change.
 - [Ransom Note](/components/text/ransom-note) — a string cut into scraps of mismatched type.
 - [Shared Axis](/components/text/shared-axis) — one phrase replaces another along a horizontal, vertical or depth axis.
 - [Blur Out Up](/components/text/blur-out-up), [Depth Parallax Words](/components/text/depth-parallax-words) and [Per Character Rise](/components/text/per-character-rise) — entrances at three units: word, phrase, letter.
