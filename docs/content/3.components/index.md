@@ -72,6 +72,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Liquid Metal](/components/effects/liquid-metal) — a WebGL2 surface that flows like chrome, gold or mercury.
 - [Gooey Filter](/components/effects/gooey-filter) — an SVG filter that melts overlapping shapes into one silhouette.
 - [Pixelated Canvas](/components/effects/pixelated-canvas) and [ASCII Render](/components/effects/ascii-render) — an image redrawn as cells or characters.
+- [Dither Image](/components/effects/dither-image) — a photo quantised to a small tonal ramp with an ordered or diffused kernel.
 
 ### Forms
 

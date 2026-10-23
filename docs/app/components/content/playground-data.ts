@@ -511,6 +511,15 @@ export const playgroundData: Record<string, Record<string, any>> = {
     slippage: 0.005,
     status: 'ready',
   },
+  'DitherImage': {
+    src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80&auto=format&fit=crop',
+    alt: 'Sunlight falling through a green forest',
+    width: 420,
+    height: 260,
+    pixelSize: 4,
+    levels: 2,
+    algorithm: 'bayer',
+  },
   'TiltCard': {
     __slot: boxSlot,
   },
