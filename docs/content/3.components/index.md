@@ -51,6 +51,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Stacked Cards](/components/cards/card-stack) — a stack that rotates itself.
 - [Glass Card](/components/cards/glass-card) and [Glass Panel](/components/cards/glass-panel) — frosted surfaces with the blur done properly.
 - [Mac Terminal](/components/cards/mac-terminal) — a window that types a scripted shell session.
+- [Photo Stack](/components/cards/photo-stack) — a draggable deck that throws the top card to the back.
 
 ### Carousels
 
@@ -78,6 +79,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Animated Stepper](/components/forms/animated-stepper) — a multi-step flow that animates between steps.
 - [Animated OTP Input](/components/forms/animated-otp-input) — six boxes and a shake on failure.
 - [Country Picker](/components/forms/country-picker) and [Favicon Search](/components/forms/favicon-search) — searchable pickers with real listbox behaviour.
+- [Scrubber](/components/forms/scrubber) and [Social Selector](/components/forms/social-selector) — a bounded slider and a row of network toggles.
 
 ### Interactive
 
