@@ -244,13 +244,14 @@ import c240 from '../../../../src/runtime/components/TypingText.vue'
 import c241 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceId.vue'
 import c242 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdCheckGlyph.vue'
 import c243 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdFaceGlyph.vue'
-import c244 from '../../../../src/runtime/components/VariableProximity.vue'
-import c245 from '../../../../src/runtime/components/VideoModal.vue'
-import c246 from '../../../../src/runtime/components/Vortex.vue'
-import c247 from '../../../../src/runtime/components/WalletCard.vue'
-import c248 from '../../../../src/runtime/components/WaveText/WaveText.vue'
-import c249 from '../../../../src/runtime/components/WobbleCard.vue'
-import c250 from '../../../../src/runtime/components/WordRotate.vue'
+import c244 from '../../../../src/runtime/components/UserAccountAvatar.vue'
+import c245 from '../../../../src/runtime/components/VariableProximity.vue'
+import c246 from '../../../../src/runtime/components/VideoModal.vue'
+import c247 from '../../../../src/runtime/components/Vortex.vue'
+import c248 from '../../../../src/runtime/components/WalletCard.vue'
+import c249 from '../../../../src/runtime/components/WaveText/WaveText.vue'
+import c250 from '../../../../src/runtime/components/WobbleCard.vue'
+import c251 from '../../../../src/runtime/components/WordRotate.vue'
 
 export const playgroundComponents: Record<string, any> = {
   '3DCard': c0,
@@ -497,13 +498,14 @@ export const playgroundComponents: Record<string, any> = {
   'UnlockFaceId': c241,
   'UnlockFaceIdUnlockFaceIdCheckGlyph': c242,
   'UnlockFaceIdUnlockFaceIdFaceGlyph': c243,
-  'VariableProximity': c244,
-  'VideoModal': c245,
-  'Vortex': c246,
-  'WalletCard': c247,
-  'WaveText': c248,
-  'WobbleCard': c249,
-  'WordRotate': c250,
+  'UserAccountAvatar': c244,
+  'VariableProximity': c245,
+  'VideoModal': c246,
+  'Vortex': c247,
+  'WalletCard': c248,
+  'WaveText': c249,
+  'WobbleCard': c250,
+  'WordRotate': c251,
 }
 
 export const playgroundComponentNames: string[] = [
@@ -751,6 +753,7 @@ export const playgroundComponentNames: string[] = [
   'UnlockFaceId',
   'UnlockFaceIdUnlockFaceIdCheckGlyph',
   'UnlockFaceIdUnlockFaceIdFaceGlyph',
+  'UserAccountAvatar',
   'VariableProximity',
   'VideoModal',
   'Vortex',

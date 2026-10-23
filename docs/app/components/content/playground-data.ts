@@ -477,6 +477,17 @@ export const playgroundData: Record<string, Record<string, any>> = {
       },
     ],
   },
+  'UserAccountAvatar': {
+    user: {
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop&crop=faces',
+      name: 'Maya Chen',
+      email: 'maya@northwind.studio',
+    },
+    orders: [
+      { id: 'ORD-2041', date: '2026-09-28', progress: 100, status: 'delivered' },
+      { id: 'ORD-2088', date: '2026-10-04', progress: 66, status: 'shipped' },
+    ],
+  },
   'TiltCard': {
     __slot: boxSlot,
   },
