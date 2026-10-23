@@ -82,6 +82,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Country Picker](/components/forms/country-picker) and [Favicon Search](/components/forms/favicon-search) — searchable pickers with real listbox behaviour.
 - [Scrubber](/components/forms/scrubber) and [Social Selector](/components/forms/social-selector) — a bounded slider and a row of network toggles.
 - [Digit Roll](/components/forms/digit-roll) — a number field whose digits roll, with scrubbing and keyboard stepping.
+- [Float Input](/components/forms/float-input) — a label that rises into the border as the field fills.
 
 ### Interactive
 
@@ -110,6 +111,8 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Motion Loader](/components/loaders/motion-loader) — an indeterminate spinner with weight.
 - [Grid Loader](/components/loaders/grid-loader) — a grid that fills and empties in sequence.
 - [Page Preloader](/components/loaders/page-preloader) — a first-paint cover that gets out of the way.
+- [AI Loader](/components/loaders/ai-loader) — three waiting indicators on one shared cycle.
+- [Content Skeleton](/components/loaders/content-skeleton) — a pulse layer shaped by the content it stands in for.
 
 ### Movement
 
