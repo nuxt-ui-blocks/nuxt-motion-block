@@ -446,6 +446,37 @@ export const playgroundData: Record<string, Record<string, any>> = {
       { id: 'origin', year: 2019, title: 'The origin', description: 'Two desks, a borrowed projector and a first invoice.' },
     ],
   },
+  'JobListing': {
+    jobs: [
+      {
+        company: 'Northwind',
+        title: 'Senior product designer',
+        salary: '$140k – $170k',
+        location: 'Berlin',
+        remote: 'Hybrid',
+        postedAt: '2d ago',
+        description: 'Own the end-to-end design of our scheduling product, from the first sketch to the component library the team ships with.',
+      },
+      {
+        company: 'Lumen Labs',
+        title: 'Front-end engineer',
+        salary: '$120k – $150k',
+        location: 'Lisbon',
+        remote: 'Yes',
+        postedAt: '5d ago',
+        description: 'Build the interface for a real-time analytics tool used by small studios. Vue, TypeScript and a lot of careful CSS.',
+      },
+      {
+        company: 'Harbor Studio',
+        title: 'Motion designer',
+        salary: '$95k – $120k',
+        location: 'Copenhagen',
+        remote: 'No',
+        postedAt: '1w ago',
+        description: 'Shape how our brand moves across product and film, from the first prototype to the final easing curve.',
+      },
+    ],
+  },
   'TiltCard': {
     __slot: boxSlot,
   },
