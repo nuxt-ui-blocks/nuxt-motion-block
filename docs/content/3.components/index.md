@@ -51,7 +51,8 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Stacked Cards](/components/cards/card-stack) — a stack that rotates itself.
 - [Glass Card](/components/cards/glass-card) and [Glass Panel](/components/cards/glass-panel) — frosted surfaces with the blur done properly.
 - [Mac Terminal](/components/cards/mac-terminal) — a window that types a scripted shell session.
-- [Photo Stack](/components/cards/photo-stack) — a draggable deck that throws the top card to the back.
+- [Photo Stack](/components/cards/photo-stack) - a draggable deck that throws the top card to the back.
+- [Tilt Card](/components/cards/tilt-card) - a surface that leans toward the pointer, with a glare and depth parallax.
 
 ### Carousels
 
@@ -97,7 +98,8 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Hover Expand](/components/interactive/hover-expand) and [Hover Image List](/components/interactive/hover-image-list) - panels that trade width on hover, and a link list with a trailing preview.
 - [Phototab](/components/interactive/phototab) - a square photo panel behind an icon tab bar that slides in on hover.
 - [Image Metadata Preview](/components/interactive/image-metadata-preview) - a photo whose metadata panel rises from the bottom as the image lifts clear.
-- [Count Badge](/components/interactive/count-badge) — notification counts, presence dots and pings on the same anchor.
+- [Count Badge](/components/interactive/count-badge) - notification counts, presence dots and pings on the same anchor.
+- [GitHub Stars Animation](/components/interactive/github-stars-animation) - a star count that climbs beside a stack of stargazer avatars.
 - [Folder Reveal](/components/interactive/folder-reveal) — a folder with a tab and a front flap, whose cards fan out of the gap.
 - [Inline Testimonials](/components/interactive/inline-testimonials) — quotes opened from the name cited inside the sentence.
 - [Morph Surface](/components/interactive/morph-surface) — a dock that grows into the composer it opens, without pushing the page down.
