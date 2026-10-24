@@ -119,6 +119,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Power Off Slide](/components/interactive/power-off-slide) — a destructive action behind a handle that has to travel the length of the track.
 - [Contribution Graph](/components/interactive/contribution-graph) - a year of activity as a keyboard-reachable heatmap.
 - [Vector Editor Toolbar](/components/interactive/vector-editor-toolbar) - drawing tools with variant flyouts, keyboard shortcuts, a travelling active pill and a draggable floating rail.
+- [Pixel Brush Canvas](/components/interactive/pixel-brush-canvas) - a pixel-art canvas with pencil, fill, line and rectangle tools and an undo stack.
 
 ### Layout
 

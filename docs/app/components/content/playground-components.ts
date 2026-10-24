@@ -183,85 +183,86 @@ import c179 from '../../../../src/runtime/components/PhotoStack.vue'
 import c180 from '../../../../src/runtime/components/Phototab.vue'
 import c181 from '../../../../src/runtime/components/PinnedList.vue'
 import c182 from '../../../../src/runtime/components/PixelatedCanvas.vue'
-import c183 from '../../../../src/runtime/components/PowerOffSlide.vue'
-import c184 from '../../../../src/runtime/components/PriceFlow.vue'
-import c185 from '../../../../src/runtime/components/PrismSweepTransition/PrismSweepTransition.vue'
-import c186 from '../../../../src/runtime/components/ProductCard.vue'
-import c187 from '../../../../src/runtime/components/ProgressiveBlur.vue'
-import c188 from '../../../../src/runtime/components/RadioGroup.vue'
-import c189 from '../../../../src/runtime/components/RansomNote/RansomNote.vue'
-import c190 from '../../../../src/runtime/components/ReviewsCarousel.vue'
-import c191 from '../../../../src/runtime/components/RichPopover.vue'
-import c192 from '../../../../src/runtime/components/ScaleDownFade.vue'
-import c193 from '../../../../src/runtime/components/ScrollableCardStack.vue'
-import c194 from '../../../../src/runtime/components/ScrollImageReveal.vue'
-import c195 from '../../../../src/runtime/components/ScrollProgress.vue'
-import c196 from '../../../../src/runtime/components/ScrollRevealParagraph/ScrollRevealParagraph.vue'
-import c197 from '../../../../src/runtime/components/ScrollRevealParagraph/ScrollRevealParagraphWord.vue'
-import c198 from '../../../../src/runtime/components/ScrollVelocity.vue'
-import c199 from '../../../../src/runtime/components/Scrubber.vue'
-import c200 from '../../../../src/runtime/components/SdfBlobTransition/SdfBlobTransition.vue'
-import c201 from '../../../../src/runtime/components/ShaderRevealTransition/ShaderRevealTransition.vue'
-import c202 from '../../../../src/runtime/components/SharedAxis.vue'
-import c203 from '../../../../src/runtime/components/ShimmerSweep.vue'
-import c204 from '../../../../src/runtime/components/ShineText/ShineText.vue'
-import c205 from '../../../../src/runtime/components/ShootingStars.vue'
-import c206 from '../../../../src/runtime/components/ShortSlideDown/ShortSlideDown.vue'
-import c207 from '../../../../src/runtime/components/ShortSlideRight/ShortSlideRight.vue'
-import c208 from '../../../../src/runtime/components/SiriOrb/SiriOrb.vue'
-import c209 from '../../../../src/runtime/components/SlidingNumber.vue'
-import c210 from '../../../../src/runtime/components/SmoothButton.vue'
-import c211 from '../../../../src/runtime/components/SocialHoverCard.vue'
-import c212 from '../../../../src/runtime/components/SocialSelector.vue'
-import c213 from '../../../../src/runtime/components/SoftBlurIn/SoftBlurIn.vue'
-import c214 from '../../../../src/runtime/components/SpinningText.vue'
-import c215 from '../../../../src/runtime/components/Spotlight.vue'
-import c216 from '../../../../src/runtime/components/SpringScaleIn/SpringScaleIn.vue'
-import c217 from '../../../../src/runtime/components/Squircle/Squircle.vue'
-import c218 from '../../../../src/runtime/components/StaggerFromCenter/StaggerFromCenter.vue'
-import c219 from '../../../../src/runtime/components/StaggerFromEdges/StaggerFromEdges.vue'
-import c220 from '../../../../src/runtime/components/StarsBackground.vue'
-import c221 from '../../../../src/runtime/components/SvgClipMask.vue'
-import c222 from '../../../../src/runtime/components/SvgDrawOnScroll.vue'
-import c223 from '../../../../src/runtime/components/SwapPanel.vue'
-import c224 from '../../../../src/runtime/components/SwitchboardCard.vue'
-import c225 from '../../../../src/runtime/components/TextEffect.vue'
-import c226 from '../../../../src/runtime/components/TextGlitch.vue'
-import c227 from '../../../../src/runtime/components/TextGlitchNew.vue'
-import c228 from '../../../../src/runtime/components/TextGradient.vue'
-import c229 from '../../../../src/runtime/components/TextLoop.vue'
-import c230 from '../../../../src/runtime/components/TextMorph.vue'
-import c231 from '../../../../src/runtime/components/TextReveal.vue'
-import c232 from '../../../../src/runtime/components/TextRoll.vue'
-import c233 from '../../../../src/runtime/components/TextScramble.vue'
-import c234 from '../../../../src/runtime/components/TextShimmer.vue'
-import c235 from '../../../../src/runtime/components/TextShimmerWave.vue'
-import c236 from '../../../../src/runtime/components/ThemeToggle.vue'
-import c237 from '../../../../src/runtime/components/Tilt.vue'
-import c238 from '../../../../src/runtime/components/TiltCard.vue'
-import c239 from '../../../../src/runtime/components/TimeMachineStack.vue'
-import c240 from '../../../../src/runtime/components/Toaster.vue'
-import c241 from '../../../../src/runtime/components/ToolbarDynamic.vue'
-import c242 from '../../../../src/runtime/components/ToolbarExpandable.vue'
-import c243 from '../../../../src/runtime/components/TopDownLetters/TopDownLetters.vue'
-import c244 from '../../../../src/runtime/components/TracingBeam.vue'
-import c245 from '../../../../src/runtime/components/TransitionPanel.vue'
-import c246 from '../../../../src/runtime/components/TrueFocus.vue'
-import c247 from '../../../../src/runtime/components/TweetCard.vue'
-import c248 from '../../../../src/runtime/components/TypingText.vue'
-import c249 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceId.vue'
-import c250 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdCheckGlyph.vue'
-import c251 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdFaceGlyph.vue'
-import c252 from '../../../../src/runtime/components/UserAccountAvatar.vue'
-import c253 from '../../../../src/runtime/components/VariableProximity.vue'
-import c254 from '../../../../src/runtime/components/VectorEditorToolbar.vue'
-import c255 from '../../../../src/runtime/components/VideoAmbient.vue'
-import c256 from '../../../../src/runtime/components/VideoModal.vue'
-import c257 from '../../../../src/runtime/components/Vortex.vue'
-import c258 from '../../../../src/runtime/components/WalletCard.vue'
-import c259 from '../../../../src/runtime/components/WaveText/WaveText.vue'
-import c260 from '../../../../src/runtime/components/WobbleCard.vue'
-import c261 from '../../../../src/runtime/components/WordRotate.vue'
+import c183 from '../../../../src/runtime/components/PixelBrushCanvas.vue'
+import c184 from '../../../../src/runtime/components/PowerOffSlide.vue'
+import c185 from '../../../../src/runtime/components/PriceFlow.vue'
+import c186 from '../../../../src/runtime/components/PrismSweepTransition/PrismSweepTransition.vue'
+import c187 from '../../../../src/runtime/components/ProductCard.vue'
+import c188 from '../../../../src/runtime/components/ProgressiveBlur.vue'
+import c189 from '../../../../src/runtime/components/RadioGroup.vue'
+import c190 from '../../../../src/runtime/components/RansomNote/RansomNote.vue'
+import c191 from '../../../../src/runtime/components/ReviewsCarousel.vue'
+import c192 from '../../../../src/runtime/components/RichPopover.vue'
+import c193 from '../../../../src/runtime/components/ScaleDownFade.vue'
+import c194 from '../../../../src/runtime/components/ScrollableCardStack.vue'
+import c195 from '../../../../src/runtime/components/ScrollImageReveal.vue'
+import c196 from '../../../../src/runtime/components/ScrollProgress.vue'
+import c197 from '../../../../src/runtime/components/ScrollRevealParagraph/ScrollRevealParagraph.vue'
+import c198 from '../../../../src/runtime/components/ScrollRevealParagraph/ScrollRevealParagraphWord.vue'
+import c199 from '../../../../src/runtime/components/ScrollVelocity.vue'
+import c200 from '../../../../src/runtime/components/Scrubber.vue'
+import c201 from '../../../../src/runtime/components/SdfBlobTransition/SdfBlobTransition.vue'
+import c202 from '../../../../src/runtime/components/ShaderRevealTransition/ShaderRevealTransition.vue'
+import c203 from '../../../../src/runtime/components/SharedAxis.vue'
+import c204 from '../../../../src/runtime/components/ShimmerSweep.vue'
+import c205 from '../../../../src/runtime/components/ShineText/ShineText.vue'
+import c206 from '../../../../src/runtime/components/ShootingStars.vue'
+import c207 from '../../../../src/runtime/components/ShortSlideDown/ShortSlideDown.vue'
+import c208 from '../../../../src/runtime/components/ShortSlideRight/ShortSlideRight.vue'
+import c209 from '../../../../src/runtime/components/SiriOrb/SiriOrb.vue'
+import c210 from '../../../../src/runtime/components/SlidingNumber.vue'
+import c211 from '../../../../src/runtime/components/SmoothButton.vue'
+import c212 from '../../../../src/runtime/components/SocialHoverCard.vue'
+import c213 from '../../../../src/runtime/components/SocialSelector.vue'
+import c214 from '../../../../src/runtime/components/SoftBlurIn/SoftBlurIn.vue'
+import c215 from '../../../../src/runtime/components/SpinningText.vue'
+import c216 from '../../../../src/runtime/components/Spotlight.vue'
+import c217 from '../../../../src/runtime/components/SpringScaleIn/SpringScaleIn.vue'
+import c218 from '../../../../src/runtime/components/Squircle/Squircle.vue'
+import c219 from '../../../../src/runtime/components/StaggerFromCenter/StaggerFromCenter.vue'
+import c220 from '../../../../src/runtime/components/StaggerFromEdges/StaggerFromEdges.vue'
+import c221 from '../../../../src/runtime/components/StarsBackground.vue'
+import c222 from '../../../../src/runtime/components/SvgClipMask.vue'
+import c223 from '../../../../src/runtime/components/SvgDrawOnScroll.vue'
+import c224 from '../../../../src/runtime/components/SwapPanel.vue'
+import c225 from '../../../../src/runtime/components/SwitchboardCard.vue'
+import c226 from '../../../../src/runtime/components/TextEffect.vue'
+import c227 from '../../../../src/runtime/components/TextGlitch.vue'
+import c228 from '../../../../src/runtime/components/TextGlitchNew.vue'
+import c229 from '../../../../src/runtime/components/TextGradient.vue'
+import c230 from '../../../../src/runtime/components/TextLoop.vue'
+import c231 from '../../../../src/runtime/components/TextMorph.vue'
+import c232 from '../../../../src/runtime/components/TextReveal.vue'
+import c233 from '../../../../src/runtime/components/TextRoll.vue'
+import c234 from '../../../../src/runtime/components/TextScramble.vue'
+import c235 from '../../../../src/runtime/components/TextShimmer.vue'
+import c236 from '../../../../src/runtime/components/TextShimmerWave.vue'
+import c237 from '../../../../src/runtime/components/ThemeToggle.vue'
+import c238 from '../../../../src/runtime/components/Tilt.vue'
+import c239 from '../../../../src/runtime/components/TiltCard.vue'
+import c240 from '../../../../src/runtime/components/TimeMachineStack.vue'
+import c241 from '../../../../src/runtime/components/Toaster.vue'
+import c242 from '../../../../src/runtime/components/ToolbarDynamic.vue'
+import c243 from '../../../../src/runtime/components/ToolbarExpandable.vue'
+import c244 from '../../../../src/runtime/components/TopDownLetters/TopDownLetters.vue'
+import c245 from '../../../../src/runtime/components/TracingBeam.vue'
+import c246 from '../../../../src/runtime/components/TransitionPanel.vue'
+import c247 from '../../../../src/runtime/components/TrueFocus.vue'
+import c248 from '../../../../src/runtime/components/TweetCard.vue'
+import c249 from '../../../../src/runtime/components/TypingText.vue'
+import c250 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceId.vue'
+import c251 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdCheckGlyph.vue'
+import c252 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdFaceGlyph.vue'
+import c253 from '../../../../src/runtime/components/UserAccountAvatar.vue'
+import c254 from '../../../../src/runtime/components/VariableProximity.vue'
+import c255 from '../../../../src/runtime/components/VectorEditorToolbar.vue'
+import c256 from '../../../../src/runtime/components/VideoAmbient.vue'
+import c257 from '../../../../src/runtime/components/VideoModal.vue'
+import c258 from '../../../../src/runtime/components/Vortex.vue'
+import c259 from '../../../../src/runtime/components/WalletCard.vue'
+import c260 from '../../../../src/runtime/components/WaveText/WaveText.vue'
+import c261 from '../../../../src/runtime/components/WobbleCard.vue'
+import c262 from '../../../../src/runtime/components/WordRotate.vue'
 
 export const playgroundComponents: Record<string, any> = {
   '3DCard': c0,
@@ -447,85 +448,86 @@ export const playgroundComponents: Record<string, any> = {
   'Phototab': c180,
   'PinnedList': c181,
   'PixelatedCanvas': c182,
-  'PowerOffSlide': c183,
-  'PriceFlow': c184,
-  'PrismSweepTransition': c185,
-  'ProductCard': c186,
-  'ProgressiveBlur': c187,
-  'RadioGroup': c188,
-  'RansomNote': c189,
-  'ReviewsCarousel': c190,
-  'RichPopover': c191,
-  'ScaleDownFade': c192,
-  'ScrollableCardStack': c193,
-  'ScrollImageReveal': c194,
-  'ScrollProgress': c195,
-  'ScrollRevealParagraph': c196,
-  'ScrollRevealParagraphScrollRevealParagraphWord': c197,
-  'ScrollVelocity': c198,
-  'Scrubber': c199,
-  'SdfBlobTransition': c200,
-  'ShaderRevealTransition': c201,
-  'SharedAxis': c202,
-  'ShimmerSweep': c203,
-  'ShineText': c204,
-  'ShootingStars': c205,
-  'ShortSlideDown': c206,
-  'ShortSlideRight': c207,
-  'SiriOrb': c208,
-  'SlidingNumber': c209,
-  'SmoothButton': c210,
-  'SocialHoverCard': c211,
-  'SocialSelector': c212,
-  'SoftBlurIn': c213,
-  'SpinningText': c214,
-  'Spotlight': c215,
-  'SpringScaleIn': c216,
-  'Squircle': c217,
-  'StaggerFromCenter': c218,
-  'StaggerFromEdges': c219,
-  'StarsBackground': c220,
-  'SvgClipMask': c221,
-  'SvgDrawOnScroll': c222,
-  'SwapPanel': c223,
-  'SwitchboardCard': c224,
-  'TextEffect': c225,
-  'TextGlitch': c226,
-  'TextGlitchNew': c227,
-  'TextGradient': c228,
-  'TextLoop': c229,
-  'TextMorph': c230,
-  'TextReveal': c231,
-  'TextRoll': c232,
-  'TextScramble': c233,
-  'TextShimmer': c234,
-  'TextShimmerWave': c235,
-  'ThemeToggle': c236,
-  'Tilt': c237,
-  'TiltCard': c238,
-  'TimeMachineStack': c239,
-  'Toaster': c240,
-  'ToolbarDynamic': c241,
-  'ToolbarExpandable': c242,
-  'TopDownLetters': c243,
-  'TracingBeam': c244,
-  'TransitionPanel': c245,
-  'TrueFocus': c246,
-  'TweetCard': c247,
-  'TypingText': c248,
-  'UnlockFaceId': c249,
-  'UnlockFaceIdUnlockFaceIdCheckGlyph': c250,
-  'UnlockFaceIdUnlockFaceIdFaceGlyph': c251,
-  'UserAccountAvatar': c252,
-  'VariableProximity': c253,
-  'VectorEditorToolbar': c254,
-  'VideoAmbient': c255,
-  'VideoModal': c256,
-  'Vortex': c257,
-  'WalletCard': c258,
-  'WaveText': c259,
-  'WobbleCard': c260,
-  'WordRotate': c261,
+  'PixelBrushCanvas': c183,
+  'PowerOffSlide': c184,
+  'PriceFlow': c185,
+  'PrismSweepTransition': c186,
+  'ProductCard': c187,
+  'ProgressiveBlur': c188,
+  'RadioGroup': c189,
+  'RansomNote': c190,
+  'ReviewsCarousel': c191,
+  'RichPopover': c192,
+  'ScaleDownFade': c193,
+  'ScrollableCardStack': c194,
+  'ScrollImageReveal': c195,
+  'ScrollProgress': c196,
+  'ScrollRevealParagraph': c197,
+  'ScrollRevealParagraphScrollRevealParagraphWord': c198,
+  'ScrollVelocity': c199,
+  'Scrubber': c200,
+  'SdfBlobTransition': c201,
+  'ShaderRevealTransition': c202,
+  'SharedAxis': c203,
+  'ShimmerSweep': c204,
+  'ShineText': c205,
+  'ShootingStars': c206,
+  'ShortSlideDown': c207,
+  'ShortSlideRight': c208,
+  'SiriOrb': c209,
+  'SlidingNumber': c210,
+  'SmoothButton': c211,
+  'SocialHoverCard': c212,
+  'SocialSelector': c213,
+  'SoftBlurIn': c214,
+  'SpinningText': c215,
+  'Spotlight': c216,
+  'SpringScaleIn': c217,
+  'Squircle': c218,
+  'StaggerFromCenter': c219,
+  'StaggerFromEdges': c220,
+  'StarsBackground': c221,
+  'SvgClipMask': c222,
+  'SvgDrawOnScroll': c223,
+  'SwapPanel': c224,
+  'SwitchboardCard': c225,
+  'TextEffect': c226,
+  'TextGlitch': c227,
+  'TextGlitchNew': c228,
+  'TextGradient': c229,
+  'TextLoop': c230,
+  'TextMorph': c231,
+  'TextReveal': c232,
+  'TextRoll': c233,
+  'TextScramble': c234,
+  'TextShimmer': c235,
+  'TextShimmerWave': c236,
+  'ThemeToggle': c237,
+  'Tilt': c238,
+  'TiltCard': c239,
+  'TimeMachineStack': c240,
+  'Toaster': c241,
+  'ToolbarDynamic': c242,
+  'ToolbarExpandable': c243,
+  'TopDownLetters': c244,
+  'TracingBeam': c245,
+  'TransitionPanel': c246,
+  'TrueFocus': c247,
+  'TweetCard': c248,
+  'TypingText': c249,
+  'UnlockFaceId': c250,
+  'UnlockFaceIdUnlockFaceIdCheckGlyph': c251,
+  'UnlockFaceIdUnlockFaceIdFaceGlyph': c252,
+  'UserAccountAvatar': c253,
+  'VariableProximity': c254,
+  'VectorEditorToolbar': c255,
+  'VideoAmbient': c256,
+  'VideoModal': c257,
+  'Vortex': c258,
+  'WalletCard': c259,
+  'WaveText': c260,
+  'WobbleCard': c261,
+  'WordRotate': c262,
 }
 
 export const playgroundComponentNames: string[] = [
@@ -712,6 +714,7 @@ export const playgroundComponentNames: string[] = [
   'Phototab',
   'PinnedList',
   'PixelatedCanvas',
+  'PixelBrushCanvas',
   'PowerOffSlide',
   'PriceFlow',
   'PrismSweepTransition',
