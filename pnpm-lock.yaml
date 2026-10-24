@@ -11,6 +11,9 @@ importers:
 
   .:
     dependencies:
+      '@modelcontextprotocol/sdk':
+        specifier: ^1.32.0
+        version: 1.32.1(@cfworker/json-schema@4.1.1)(zod@4.6.5)
       '@nuxt/ui':
         specifier: ^4.11.2
         version: 4.11.2(33594171780c10b1c1711fc609267388)
@@ -59,6 +62,9 @@ importers:
       vue:
         specifier: ^3.5.0
         version: 3.5.43(typescript@5.9.3)
+      zod:
+        specifier: ^4.0.0
+        version: 4.6.5
     devDependencies:
       '@nuxt/devtools':
         specifier: ^3.4.2
@@ -114,9 +120,6 @@ importers:
       '@nuxt/ui':
         specifier: ^4.11.2
         version: 4.11.2(c9a9a0ce5921a5402ca98a542cff6b53)
-      agents:
-        specifier: ^0.28.0
-        version: 0.28.1(@ai-sdk/provider@4.0.26)(@babel/core@7.29.7)(@babel/runtime@7.29.10)(@modelcontextprotocol/client@2.3.1)(@modelcontextprotocol/sdk@1.32.1(@cfworker/json-schema@4.1.1)(zod@4.6.5))(@modelcontextprotocol/server@2.3.1)(ai@7.0.137(zod@4.6.5))(react@19.3.1)(rolldown@1.2.11)(vite@8.3.1(@types/node@26.6.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.44.1)(yaml@2.9.1))(zod@4.6.5)
       better-sqlite3:
         specifier: ^12.4.1
         version: 12.5.0
