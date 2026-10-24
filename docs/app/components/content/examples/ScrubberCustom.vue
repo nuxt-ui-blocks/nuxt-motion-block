@@ -1,6 +1,7 @@
 <template>
   <ComponentPlayground
     name="Scrubber"
+    :hide="['value']"
     :defaults="{
       label: 'Exposure',
       min: 0,

@@ -46,27 +46,45 @@ const shouldReduceMotion = useReducedMotion()
 const isReduced = computed(() => shouldReduceMotion.value === true)
 const isHoverDevice = useMediaQuery('(hover: hover) and (pointer: fine)')
 
+/** Coerce loosely-typed input, such as an attribute string, into a finite number. */
+function num(input: unknown, fallback: number) {
+  const next = typeof input === 'number' ? input : Number(input)
+  return Number.isFinite(next) ? next : fallback
+}
+
+const min = computed(() => num(props.min, 0))
+const max = computed(() => num(props.max, 1))
+const step = computed(() => num(props.step, 0.01))
+const decimals = computed(() => Math.min(Math.max(Math.trunc(num(props.decimals, 2)), 0), 20))
+const tickCount = computed(() => Math.max(0, Math.trunc(num(props.ticks, 0))))
+
 const trackRef = ref<HTMLElement | null>(null)
-const internalValue = ref(props.defaultValue)
+const internalValue = ref(num(props.defaultValue, 0))
 const isDragging = ref(false)
 const isHovering = ref(false)
 
 const isControlled = computed(() => props.value !== undefined)
-const value = computed(() => (isControlled.value ? props.value! : internalValue.value))
-let lastValue = props.defaultValue
-const range = computed(() => props.max - props.min)
+const value = computed(() =>
+  num(isControlled.value ? props.value : internalValue.value, num(props.defaultValue, 0)),
+)
+let lastValue = num(props.defaultValue, 0)
+const range = computed(() => max.value - min.value)
 const percentage = computed(() =>
-  range.value > 0 ? ((value.value - props.min) / range.value) * 100 : 0,
+  range.value > 0 ? ((value.value - min.value) / range.value) * 100 : 0,
 )
 const isActive = computed(() => isDragging.value || (isHoverDevice.value && isHovering.value))
-const displayValue = computed(() => value.value.toFixed(props.decimals))
+const displayValue = computed(() => value.value.toFixed(decimals.value))
 
 function clamp(next: number) {
-  return Math.min(Math.max(next, props.min), props.max)
+  return Math.min(Math.max(next, min.value), max.value)
 }
 
 function roundToStep(next: number) {
-  return Math.round((next - props.min) / props.step) * props.step + props.min
+  if (step.value <= 0) {
+    return next
+  }
+
+  return Math.round((next - min.value) / step.value) * step.value + min.value
 }
 
 function setValue(next: number) {
@@ -88,7 +106,7 @@ function valueFromPointer(clientX: number) {
 
   const rect = track.getBoundingClientRect()
   const ratio = Math.min(Math.max((clientX - rect.left) / rect.width, 0), 1)
-  return props.min + ratio * range.value
+  return min.value + ratio * range.value
 }
 
 function onPointerDown(event: PointerEvent) {
@@ -122,17 +140,17 @@ function onKeydown(event: KeyboardEvent) {
   switch (event.key) {
     case 'ArrowRight':
     case 'ArrowUp':
-      next = value.value + props.step
+      next = value.value + step.value
       break
     case 'ArrowLeft':
     case 'ArrowDown':
-      next = value.value - props.step
+      next = value.value - step.value
       break
     case 'Home':
-      next = props.min
+      next = min.value
       break
     case 'End':
-      next = props.max
+      next = max.value
       break
     default:
       return
@@ -153,8 +171,8 @@ const thumbTransition = computed(() =>
     <div
       ref="trackRef"
       :aria-label="props.label"
-      :aria-valuemax="props.max"
-      :aria-valuemin="props.min"
+      :aria-valuemax="max"
+      :aria-valuemin="min"
       :aria-valuenow="Number(displayValue)"
       :aria-valuetext="displayValue"
       class="relative h-9 cursor-pointer touch-none overflow-hidden rounded-lg bg-muted outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default"
@@ -177,14 +195,14 @@ const thumbTransition = computed(() =>
       />
 
       <div
-        v-if="props.ticks > 0"
+        v-if="tickCount > 0"
         class="pointer-events-none absolute inset-0"
       >
         <span
-          v-for="tick in props.ticks"
+          v-for="tick in tickCount"
           :key="tick"
           class="absolute top-1/2 h-1.5 w-px -translate-x-1/2 -translate-y-1/2 rounded-full bg-inverted/25"
-          :style="{ left: `${(tick / (props.ticks + 1)) * 100}%` }"
+          :style="{ left: `${(tick / (tickCount + 1)) * 100}%` }"
         />
       </div>
 
