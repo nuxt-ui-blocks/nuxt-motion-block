@@ -29,10 +29,4 @@ export default defineNuxtConfig({
   ogImage: {
     enabled: false,
   },
-
-  nitro: {
-    prerender: {
-      crawlLinks: false,
-    },
-  },
 })
