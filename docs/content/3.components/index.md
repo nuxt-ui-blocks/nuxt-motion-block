@@ -182,6 +182,8 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 
 - [Transition Panel](/components/transitions/transition-panel) — swap panels without a jump cut.
 - [Prism Sweep Transition](/components/transitions/prism-sweep-transition), [SDF Blob Transition](/components/transitions/sdf-blob-transition) and [Shader Reveal Transition](/components/transitions/shader-reveal-transition) — shader-driven reveals between two states.
+- [Aperture Blur Transition](/components/transitions/aperture-blur-transition) — an iris ring that opens from the centre of the panel and swaps the content behind its glow.
+- [Chroma Blur Transition](/components/transitions/chroma-blur-transition) — a diagonal curtain with a split colour fringe that sweeps across the panel.
 
 ## Related
 
