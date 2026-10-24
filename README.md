@@ -25,7 +25,7 @@ A streamlined UI library that extends Nuxt UI with motion capabilities powered b
 
 ## Features
 
-- 🎨 &nbsp;30+ Motion-Enhanced UI Components
+- 🎨 &nbsp;100+ Motion-Enhanced UI Components
 - ⚡ &nbsp;Powered by motion-v for Smooth Animations
 - 🧩 &nbsp;Seamless Integration with Nuxt UI
 - 🛠️ &nbsp;Auto-Registered Components with Configurable Prefix
