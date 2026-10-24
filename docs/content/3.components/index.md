@@ -78,6 +78,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Dither Image](/components/effects/dither-image) — a photo quantised to a small tonal ramp with an ordered or diffused kernel.
 - [Video Ambient](/components/effects/video-ambient) — a player with an ambient glow sampled from its own frames.
 - [Arcade Pixel](/components/effects/arcade-pixel) — text or sprites drawn through a 5x7 pixel font, with phosphor glow and CRT artefacts.
+- [Gravity Stars](/components/effects/gravity-stars) — a drifting starfield that falls towards the pointer and swirls past it.
 
 ### Forms
 
