@@ -142,6 +142,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 
 - [Cursor](/components/movement/cursor) - a custom cursor with trailing effects.
 - [Cursor Follow](/components/movement/cursor-follow) - a dot that becomes a label over anything marked with `data-cursor-text`.
+- [Cursor Image Trail](/components/movement/cursor-image-trail) — photos that drop in behind the pointer as it travels.
 - [Magnetic](/components/movement/magnetic) — elements pulled toward the pointer.
 - [Tilt](/components/movement/tilt) — 3D tilt from cursor position.
 - [Force Dot](/components/movement/force-dot) — a dot with physics of its own.
@@ -174,6 +175,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Shared Axis](/components/text/shared-axis) — one phrase replaces another along a horizontal, vertical or depth axis.
 - [Blur Out Up](/components/text/blur-out-up), [Depth Parallax Words](/components/text/depth-parallax-words) and [Per Character Rise](/components/text/per-character-rise) — entrances at three units: word, phrase, letter.
 - [Scale Down Fade](/components/text/scale-down-fade) and [Shimmer Sweep](/components/text/shimmer-sweep) — a single line settling, large or soft.
+- [Rolling Text](/components/text/rolling-text) — split-flap characters cycling through a glyph ramp before landing.
 - [Fade Through](/components/text/fade-through) and [Kinetic Center Build](/components/text/kinetic-center-build) — phrase rotation, quiet and loud.
 - [Scroll Reveal Paragraph](/components/text/scroll-reveal-paragraph) — prose that fills in as it travels up the viewport.
 - [Gravity Letters](/components/text/gravity-letters) — glyphs that fall, bounce and spring back into the line.

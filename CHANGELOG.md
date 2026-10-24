@@ -16,8 +16,10 @@
 - **layout:** Add `BreakpointIndicator`, which reports the active Tailwind breakpoint
 - **loaders:** Add `AiLoader` and `ContentSkeleton`
 - **movement:** Add `CursorFollow` and `MagneticField`
+- **movement:** Add `CursorImageTrail`, photos that drop behind the pointer as it travels, scaled by pointer speed and pooled so nothing is allocated mid-gesture
 - **navigation:** Add `Breadcrumb`, `FileTree` and `Pagination`
 - **text:** Add `DepthParallaxWords`, `FadeThrough`, `GravityLetters`, `KineticCenterBuild`, `NumberFlow`, `PerCharacterRise`, `ScaleDownFade`, `ScrollRevealParagraph`, `SharedAxis` and `ShimmerSweep`
+- **text:** Add `RollingText`, split-flap characters that cycle through a glyph ramp before landing, driven by CSS keyframes and replayable on mount, in view, hover or manually
 - **transitions:** Add `ApertureBlurTransition` (a noisy iris ring opening from the centre) and `ChromaBlurTransition` (a diagonal curtain with a split colour fringe), both on the shared shader-transition driver
 - **docs:** Give every new page the same section order, show the real source of the customizable example in `Customize`, and update the component count copy to 260+
 - **webgl:** Add `easeOutCubic` to the shared easing helpers for the aperture sweep
