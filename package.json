@@ -63,7 +63,8 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
     "docs:dev": "pnpm --filter nuxt-motion-block-docs dev",
     "docs:build": "pnpm --filter nuxt-motion-block-docs build",
-    "docs:preview": "pnpm --filter nuxt-motion-block-docs preview"
+    "docs:preview": "pnpm --filter nuxt-motion-block-docs preview",
+    "deploy:docs": "pnpm --dir docs build && npx wrangler pages deploy docs/.output/public --project-name=nuxt-motion-block"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.0",
