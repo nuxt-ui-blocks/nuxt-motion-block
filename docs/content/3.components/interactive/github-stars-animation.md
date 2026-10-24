@@ -89,7 +89,17 @@ label: Preview
     <component-example name="github-stars-animation-custom" />
   :::
 #code
-  <PlaygroundCode name="GitHubStarsAnimation" />
+```vue
+<template>
+  <div class="flex w-full items-center justify-center p-6">
+    <MGitHubStarsAnimation
+      :show-avatars="false"
+      :star-count="24810"
+      count-class-name="text-lg"
+    />
+  </div>
+</template>
+```
 ::
 
 The fetch can be pointed at your own endpoint with `apiEndpoint`; it receives
