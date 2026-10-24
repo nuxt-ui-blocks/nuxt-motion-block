@@ -87,7 +87,8 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Country Picker](/components/forms/country-picker) and [Favicon Search](/components/forms/favicon-search) — searchable pickers with real listbox behaviour.
 - [Scrubber](/components/forms/scrubber) and [Social Selector](/components/forms/social-selector) — a bounded slider and a row of network toggles.
 - [Swap Panel](/components/forms/swap-panel) — a token swap ticket with a quoted output, a countdown ring and a state-aware action button.
-- [Form](/components/forms/form) — a schema-driven form whose fields rise in, shake on error and confirm when fixed.
+- [Form](/components/forms/form) - a schema-driven form whose fields rise in, shake on error and confirm when fixed.
+- [Auth Form](/components/forms/auth-form) - sign-in and sign-up in one form, with live password rules, provider buttons and a submit button that morphs through its states.
 - [Digit Roll](/components/forms/digit-roll) — a number field whose digits roll, with scrubbing and keyboard stepping.
 - [Float Input](/components/forms/float-input) — a label that rises into the border as the field fills.
 
