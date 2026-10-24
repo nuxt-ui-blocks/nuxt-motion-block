@@ -25,4 +25,8 @@ export default defineNuxtConfig({
   motionBlock: {
     prefix: 'M',
   },
+
+  ogImage: {
+    enabled: false,
+  },
 })
