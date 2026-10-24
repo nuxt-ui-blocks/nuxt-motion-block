@@ -84,11 +84,59 @@ export const playgroundData: Record<string, Record<string, any>> = {
   'AgentAvatar': {
     seed: 'atlas',
   },
+  'AiApproval': {
+    question: 'Delete the stale branches?',
+    options: [
+      { id: 'keep', label: 'Keep them', detail: 'No change' },
+      { id: 'archive', label: 'Archive to a backup ref', detail: '4 branches' },
+      { id: 'delete', label: 'Delete everything', detail: '18 commits', destructive: true },
+    ],
+  },
+  'AiBranch': {
+    branches: [
+      {
+        id: 'terse',
+        userMessage: 'Delete the stale branches.',
+        aiResponse: 'Done - removed 4 branches. The backup ref `archive/2026-04` holds the commits for 30 days.',
+      },
+      {
+        id: 'careful',
+        userMessage: 'Delete the stale branches.',
+        aiResponse: 'I can archive them to a backup ref first, then delete. That keeps the 18 commits recoverable for 30 days.',
+      },
+      {
+        id: 'explain',
+        userMessage: 'Delete the stale branches.',
+        aiResponse: 'Nothing on them is reachable from `main`, so deleting only removes the labels. The commits stay in the reflog until gc runs.',
+      },
+    ],
+  },
   'AiCitation': {
     label: '1',
     title: 'Spring defaults',
     url: 'https://example.com',
     description: 'The easing and stiffness values that every component in this kit falls back to when you do not pass your own.',
+  },
+  'AiContextMeter': {
+    used: 108_000,
+    limit: 128_000,
+    breakdown: [
+      { label: 'Conversation', tokens: 59_400 },
+      { label: 'Retrieved documents', tokens: 32_400 },
+      { label: 'System prompt', tokens: 16_200 },
+    ],
+  },
+  'AiConversation': {
+    class: 'h-72 rounded-xl border border-default bg-default',
+    __slot: `<div style="padding:16px;display:flex;flex-direction:column;gap:14px;font-size:14px;line-height:1.6">
+<p style="margin:0">The audit is done. Every theme token resolves, except two in the sidebar.</p>
+<p style="margin:0">Which two?</p>
+<p style="margin:0">The category icons. They are referenced as icon names the collection cannot resolve.</p>
+<p style="margin:0">Pre-existing?</p>
+<p style="margin:0">Yes. They are on the components index, not on any page you added.</p>
+<p style="margin:0">Then leave them and note it.</p>
+<p style="margin:0">Noted. The rest of the run is clean: 182 pages, no drifted snippets, no missing examples.</p>
+</div>`,
   },
   'AiDiff': {
     title: 'src/runtime/composables/useAiState.ts',
@@ -120,6 +168,15 @@ export const playgroundData: Record<string, Record<string, any>> = {
   'AiReasoning': {
     duration: 4.2,
     __slot: `<p>The user asked why the audit needs a flag. Blast radius first: the audit walks every theme token, so a cold landing produces a long tail of visual diffs. Then the alternative — a flag adds one branch and one flag to read later, and nothing here is dangerous without review. So: flag first, remove it once the diffs are clean.</p>`,
+  },
+  'AiSuggestions': {
+    label: 'Follow-ups',
+    suggestions: [
+      { id: 's-1', label: 'Tighten the intro' },
+      { id: 's-2', label: 'Add a benchmark' },
+      { id: 's-3', label: 'Compare with the old API' },
+      { id: 's-4', label: 'Find the breaking change' },
+    ],
   },
   'AiTaskList': {
     label: 'Audit theme tokens',
@@ -360,6 +417,236 @@ export const playgroundData: Record<string, Record<string, any>> = {
   'GlareCard': {
     __slot: cardSlot,
   },
+  'GitHubStarsAnimation': {
+    starCount: 1284,
+    stargazers: [
+      { login: 'averycole', avatar_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=faces', html_url: 'https://github.com/averycole' },
+      { login: 'jordanlee', avatar_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=faces', html_url: 'https://github.com/jordanlee' },
+      { login: 'samrivera', avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=faces', html_url: 'https://github.com/samrivera' },
+      { login: 'morganchen', avatar_url: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&h=80&fit=crop&crop=faces', html_url: 'https://github.com/morganchen' },
+      { login: 'rileyng', avatar_url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=80&h=80&fit=crop&crop=faces', html_url: 'https://github.com/rileyng' },
+    ],
+  },
+  'InteractiveImageSelector': {
+    images: [
+      { id: 1, src: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=400&fit=crop' },
+      { id: 2, src: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400&h=400&fit=crop' },
+      { id: 3, src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop' },
+      { id: 4, src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=400&h=400&fit=crop' },
+      { id: 5, src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=400&fit=crop' },
+      { id: 6, src: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=400&fit=crop' },
+    ],
+    selectedImages: [],
+  },
+  'TimeMachineStack': {
+    items: [
+      { id: 'studio', year: 2026, title: 'The studio', description: 'A small team, a short list of clients, one shared room.' },
+      { id: 'archive', year: 2024, title: 'The archive', description: 'Every project we shipped, filed by year and season.' },
+      { id: 'workshop', year: 2022, title: 'The workshop', description: 'Prototypes that never left the building, kept anyway.' },
+      { id: 'origin', year: 2019, title: 'The origin', description: 'Two desks, a borrowed projector and a first invoice.' },
+    ],
+  },
+  'JobListing': {
+    jobs: [
+      {
+        company: 'Northwind',
+        title: 'Senior product designer',
+        salary: '$140k – $170k',
+        location: 'Berlin',
+        remote: 'Hybrid',
+        postedAt: '2d ago',
+        description: 'Own the end-to-end design of our scheduling product, from the first sketch to the component library the team ships with.',
+      },
+      {
+        company: 'Lumen Labs',
+        title: 'Front-end engineer',
+        salary: '$120k – $150k',
+        location: 'Lisbon',
+        remote: 'Yes',
+        postedAt: '5d ago',
+        description: 'Build the interface for a real-time analytics tool used by small studios. Vue, TypeScript and a lot of careful CSS.',
+      },
+      {
+        company: 'Harbor Studio',
+        title: 'Motion designer',
+        salary: '$95k – $120k',
+        location: 'Copenhagen',
+        remote: 'No',
+        postedAt: '1w ago',
+        description: 'Shape how our brand moves across product and film, from the first prototype to the final easing curve.',
+      },
+    ],
+  },
+  'UserAccountAvatar': {
+    user: {
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop&crop=faces',
+      name: 'Maya Chen',
+      email: 'maya@northwind.studio',
+    },
+    orders: [
+      { id: 'ORD-2041', date: '2026-09-28', progress: 100, status: 'delivered' },
+      { id: 'ORD-2088', date: '2026-10-04', progress: 66, status: 'shipped' },
+    ],
+  },
+  'SwapPanel': {
+    amount: '1',
+    from: {
+      name: 'Ether',
+      symbol: 'ETH',
+      balance: 4.28,
+      icon: 'i-lucide-gem',
+    },
+    to: {
+      name: 'USD Coin',
+      symbol: 'USDC',
+      balance: 1240.5,
+      icon: 'i-lucide-circle-dollar-sign',
+    },
+    quote: {
+      output: 3240,
+      rate: 3240,
+      fee: 2.4,
+      priceImpact: 0.0012,
+    },
+    slippage: 0.005,
+    status: 'ready',
+  },
+  'CardSwipeDeck': {
+    items: [
+      { id: 'one', content: 'One — a card that follows the pointer.' },
+      { id: 'two', content: 'Two — throw it past the threshold.' },
+      { id: 'three', content: 'Three — the stack moves forward.' },
+      { id: 'four', content: 'Four — the last one fires empty.' },
+    ],
+    labels: { left: 'Nope', right: 'Like' },
+    threshold: 110,
+    rotationFactor: 18,
+    stackOffset: 14,
+    stackSize: 3,
+    disabled: false,
+  },
+  'ScrollableCardStack': {
+    items: [
+      {
+        id: 'ana',
+        name: 'Ana Ruiz',
+        handle: '@anaruiz',
+        href: 'https://example.com/people/ana-ruiz',
+        avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+        image: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800&h=500&fit=crop',
+        imageAlt: 'A studio desk with a notebook and a warm lamp',
+      },
+      {
+        id: 'ben',
+        name: 'Ben Osei',
+        handle: '@bosei',
+        href: 'https://example.com/people/ben-osei',
+        avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+        image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=500&fit=crop',
+        imageAlt: 'A speaker on stage in front of a full auditorium',
+      },
+      {
+        id: 'cleo',
+        name: 'Cleo Park',
+        handle: '@cleopark',
+        href: 'https://example.com/people/cleo-park',
+        avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
+        image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=500&fit=crop',
+        imageAlt: 'A long communal table in a bright restaurant',
+      },
+    ],
+    cardHeight: 384,
+    perspective: 1000,
+    transitionDuration: 180,
+  },
+  'VectorEditorToolbar': {
+    tools: [
+      {
+        id: 'select',
+        label: 'Select',
+        icon: 'i-lucide-mouse-pointer',
+        shortcut: 'V',
+      },
+      {
+        id: 'shape',
+        label: 'Shape',
+        icon: 'i-lucide-square',
+        items: [
+          { id: 'rectangle', label: 'Rectangle', icon: 'i-lucide-square', shortcut: 'R' },
+          { id: 'ellipse', label: 'Ellipse', icon: 'i-lucide-circle', shortcut: 'O' },
+          { id: 'polygon', label: 'Polygon', icon: 'i-lucide-triangle', shortcut: 'Y' },
+          { id: 'line', label: 'Line', icon: 'i-lucide-minus', shortcut: 'L' },
+        ],
+      },
+      {
+        id: 'pen',
+        label: 'Pen',
+        icon: 'i-lucide-pencil',
+        items: [
+          { id: 'pen', label: 'Pen', icon: 'i-lucide-pen-tool', shortcut: 'P' },
+          { id: 'brush', label: 'Brush', icon: 'i-lucide-paintbrush', shortcut: 'B' },
+          { id: 'eraser', label: 'Eraser', icon: 'i-lucide-eraser', shortcut: 'E' },
+        ],
+      },
+      {
+        id: 'text',
+        label: 'Text',
+        icon: 'i-lucide-type',
+        shortcut: 'T',
+      },
+      {
+        id: 'hand',
+        label: 'Hand',
+        icon: 'i-lucide-hand',
+        shortcut: 'H',
+      },
+      {
+        id: 'zoom',
+        label: 'Zoom',
+        icon: 'i-lucide-search',
+        shortcut: 'Z',
+      },
+    ],
+    defaultTool: 'select',
+    orientation: 'horizontal',
+    floating: false,
+    shortcutsEnabled: false,
+    ariaLabel: 'Vector editor tools',
+  },
+  'DitherImage': {
+    src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80&auto=format&fit=crop',
+    alt: 'Sunlight falling through a green forest',
+    width: 420,
+    height: 260,
+    pixelSize: 4,
+    levels: 2,
+    algorithm: 'bayer',
+  },
+  'Form': {
+    fields: [
+      { name: 'name', label: 'Name', placeholder: 'Ada Lovelace' },
+      {
+        name: 'email',
+        label: 'Email',
+        type: 'email',
+        placeholder: 'ada@example.com',
+        description: 'Only used to reply to this message.',
+      },
+      {
+        name: 'message',
+        label: 'Message',
+        type: 'textarea',
+        placeholder: 'What are you building?',
+        rows: 3,
+      },
+    ],
+    modelValue: { name: '', email: '', message: '' },
+    errors: {},
+    submitLabel: 'Send message',
+  },
+  'TiltCard': {
+    __slot: boxSlot,
+  },
   'GlassCard': {
     __slot: cardSlot,
   },
@@ -501,14 +788,50 @@ export const playgroundData: Record<string, Record<string, any>> = {
     message: 'What happens if we adjust this to handle light and dark mode?',
     timestamp: '2 min ago',
   },
+  'FolderReveal': {
+    label: 'Releases',
+    items: [
+      { id: '2-4', label: 'v2.4' },
+      { id: '2-3', label: 'v2.3' },
+      { id: '2-2', label: 'v2.2' },
+      { id: '2-1', label: 'v2.1' },
+    ],
+  },
   'ImageComparison': {
     class: 'h-96 w-full rounded-xl overflow-hidden shadow-xl',
     __code: imageComparisonCode,
+  },
+  'InlineTestimonials': {
+    text: 'The migration shipped on a Friday, which nobody wanted. {{maya}} rewrote the scheduler over two nights and {{theo}} caught the timezone bug that would have doubled every billing cycle.',
+    testimonials: [
+      {
+        id: 'maya',
+        name: 'Maya Okafor',
+        role: 'Staff engineer, Platform',
+        rating: 5,
+        quote: 'The scariest part was not the migration itself, it was that nobody could tell me what still depended on the old scheduler.',
+      },
+      {
+        id: 'theo',
+        name: 'Theo Lindqvist',
+        role: 'Backend engineer',
+        rating: 4,
+        quote: 'I only found the offset bug because a fixture used a negative UTC offset. Every production record looked perfect.',
+      },
+    ],
+  },
+  'MorphSurface': {
+    label: 'Ask AI',
+    placeholder: 'Summarise this thread…',
   },
   'MusicToggle': {
     title: 'Night Ride',
     artist: 'Nova Kinetic',
     cover: 'https://picsum.photos/seed/midnight-drive/400/400',
+  },
+  'PowerOffSlide': {
+    label: 'Slide to power off',
+    duration: 2000,
   },
   'TracingBeam': {
     __slot: beamCopy,
