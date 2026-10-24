@@ -35,6 +35,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Animated Background](/components/backgrounds/animated-background) — a field that follows interactive elements.
 - [Background Beams](/components/backgrounds/background-beams) — light beams that converge on a focal point.
 - [Aurora Background](/components/backgrounds/aurora-background) — a slow aurora wash behind content.
+- [Aurora Curtain](/components/backgrounds/aurora-curtain) — a WebGL aurora of folding light ribbons and film grain.
 - [Vortex](/components/backgrounds/vortex) and [Meteors](/components/backgrounds/meteors) — motion you can leave running behind a hero.
 
 ### Buttons
