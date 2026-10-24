@@ -254,12 +254,13 @@ import c250 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdFa
 import c251 from '../../../../src/runtime/components/UserAccountAvatar.vue'
 import c252 from '../../../../src/runtime/components/VariableProximity.vue'
 import c253 from '../../../../src/runtime/components/VectorEditorToolbar.vue'
-import c254 from '../../../../src/runtime/components/VideoModal.vue'
-import c255 from '../../../../src/runtime/components/Vortex.vue'
-import c256 from '../../../../src/runtime/components/WalletCard.vue'
-import c257 from '../../../../src/runtime/components/WaveText/WaveText.vue'
-import c258 from '../../../../src/runtime/components/WobbleCard.vue'
-import c259 from '../../../../src/runtime/components/WordRotate.vue'
+import c254 from '../../../../src/runtime/components/VideoAmbient.vue'
+import c255 from '../../../../src/runtime/components/VideoModal.vue'
+import c256 from '../../../../src/runtime/components/Vortex.vue'
+import c257 from '../../../../src/runtime/components/WalletCard.vue'
+import c258 from '../../../../src/runtime/components/WaveText/WaveText.vue'
+import c259 from '../../../../src/runtime/components/WobbleCard.vue'
+import c260 from '../../../../src/runtime/components/WordRotate.vue'
 
 export const playgroundComponents: Record<string, any> = {
   '3DCard': c0,
@@ -516,12 +517,13 @@ export const playgroundComponents: Record<string, any> = {
   'UserAccountAvatar': c251,
   'VariableProximity': c252,
   'VectorEditorToolbar': c253,
-  'VideoModal': c254,
-  'Vortex': c255,
-  'WalletCard': c256,
-  'WaveText': c257,
-  'WobbleCard': c258,
-  'WordRotate': c259,
+  'VideoAmbient': c254,
+  'VideoModal': c255,
+  'Vortex': c256,
+  'WalletCard': c257,
+  'WaveText': c258,
+  'WobbleCard': c259,
+  'WordRotate': c260,
 }
 
 export const playgroundComponentNames: string[] = [
@@ -779,6 +781,7 @@ export const playgroundComponentNames: string[] = [
   'UserAccountAvatar',
   'VariableProximity',
   'VectorEditorToolbar',
+  'VideoAmbient',
   'VideoModal',
   'Vortex',
   'WalletCard',

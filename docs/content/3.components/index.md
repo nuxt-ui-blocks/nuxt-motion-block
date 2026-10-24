@@ -76,6 +76,7 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Gooey Filter](/components/effects/gooey-filter) — an SVG filter that melts overlapping shapes into one silhouette.
 - [Pixelated Canvas](/components/effects/pixelated-canvas) and [ASCII Render](/components/effects/ascii-render) — an image redrawn as cells or characters.
 - [Dither Image](/components/effects/dither-image) — a photo quantised to a small tonal ramp with an ordered or diffused kernel.
+- [Video Ambient](/components/effects/video-ambient) — a player with an ambient glow sampled from its own frames.
 
 ### Forms
 
