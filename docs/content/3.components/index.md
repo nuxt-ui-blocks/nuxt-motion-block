@@ -28,7 +28,8 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [AI Approval](/components/ai/ai-approval) — the card an agent puts up before it acts, where the chosen option fills the card and the rest collapse away.
 - [AI Artifact](/components/ai/ai-artifact) — a generated artifact whose preview and source swap along a shared axis instead of cross-fading.
 - [AI Context Meter](/components/ai/ai-context-meter) — a ring that shows how full the context window is, changing hue at the thresholds and never changing size.
-- [AI Suggestions](/components/ai/ai-suggestions) — prompt chips that radiate in from the middle of the row, so no chip reads as the important one.
+- [AI Suggestions](/components/ai/ai-suggestions) - prompt chips that radiate in from the middle of the row, so no chip reads as the important one.
+- [Image Generation Panel](/components/ai/image-generation-panel) - a prompt composer, a grid of tiles that resolve from mosaic to sharp, and the batch progress around them.
 
 ### Backgrounds
 
