@@ -3,7 +3,7 @@ title: Components
 description: Explore all the components available in Nuxt Motion Block.
 ---
 
-Nuxt Motion Block ships 180+ components across seventeen categories, from a chat transcript to a card that leans toward the pointer. Every page follows the same shape — usage, customization, props, UI slots, accessibility and performance — so once you have read one, the rest read the same way. The sidebar lists every page; this page is the map.
+Nuxt Motion Block ships 260+ components across seventeen categories, from a chat transcript to a card that leans toward the pointer. Every page follows the same shape — usage, customization, props, UI slots, accessibility and performance — so once you have read one, the rest read the same way. The sidebar lists every page; this page is the map.
 
 ## Categories
 
