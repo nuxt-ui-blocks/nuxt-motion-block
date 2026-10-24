@@ -1,4 +1,10 @@
 export default defineNuxtConfig({
+  nitro: {
+    prerender: {
+      routes: ['/sitemap.xml']
+    }
+  },
+
   modules: [
     '@nuxt/fonts',
     '../src/module',
