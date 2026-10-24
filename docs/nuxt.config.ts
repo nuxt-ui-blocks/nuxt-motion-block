@@ -1,13 +1,21 @@
 export default defineNuxtConfig({
+  modules: [
+    '@nuxt/fonts',
+    '../src/module',
+    '@nuxtjs/sitemap'
+  ],
+
+  sitemap: {
+    zeroRuntime: true
+  },
+
   extends: ['docus'],
 
-  mcp: false,  // MCP is provided via stdio (bin/mcp-server.mjs) instead of docus's built-in HTTP server
-
-  modules: ['@nuxt/fonts', '../src/module'],
+  mcp: false,
 
   site: {
-    name: 'Nuxt Motion Block',
     url: process.env.NUXT_SITE_URL || 'https://nuxt-motion-block.pages.dev',
+    name: 'Nuxt Motion Block',
     description: 'A streamlined UI library that extends Nuxt UI with motion capabilities powered by motion-v.',
   },
 
