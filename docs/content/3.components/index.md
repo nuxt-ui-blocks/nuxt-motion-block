@@ -113,7 +113,8 @@ Twenty pieces for assistant interfaces, from the transcript down to the characte
 - [Inline Testimonials](/components/interactive/inline-testimonials) — quotes opened from the name cited inside the sentence.
 - [Morph Surface](/components/interactive/morph-surface) — a dock that grows into the composer it opens, without pushing the page down.
 - [Power Off Slide](/components/interactive/power-off-slide) — a destructive action behind a handle that has to travel the length of the track.
-- [Contribution Graph](/components/interactive/contribution-graph) — a year of activity as a keyboard-reachable heatmap.
+- [Contribution Graph](/components/interactive/contribution-graph) - a year of activity as a keyboard-reachable heatmap.
+- [Vector Editor Toolbar](/components/interactive/vector-editor-toolbar) - drawing tools with variant flyouts, keyboard shortcuts, a travelling active pill and a draggable floating rail.
 
 ### Layout
 

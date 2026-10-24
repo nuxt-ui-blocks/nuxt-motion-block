@@ -559,6 +559,60 @@ export const playgroundData: Record<string, Record<string, any>> = {
     perspective: 1000,
     transitionDuration: 180,
   },
+  'VectorEditorToolbar': {
+    tools: [
+      {
+        id: 'select',
+        label: 'Select',
+        icon: 'i-lucide-mouse-pointer',
+        shortcut: 'V',
+      },
+      {
+        id: 'shape',
+        label: 'Shape',
+        icon: 'i-lucide-square',
+        items: [
+          { id: 'rectangle', label: 'Rectangle', icon: 'i-lucide-square', shortcut: 'R' },
+          { id: 'ellipse', label: 'Ellipse', icon: 'i-lucide-circle', shortcut: 'O' },
+          { id: 'polygon', label: 'Polygon', icon: 'i-lucide-triangle', shortcut: 'Y' },
+          { id: 'line', label: 'Line', icon: 'i-lucide-minus', shortcut: 'L' },
+        ],
+      },
+      {
+        id: 'pen',
+        label: 'Pen',
+        icon: 'i-lucide-pencil',
+        items: [
+          { id: 'pen', label: 'Pen', icon: 'i-lucide-pen-tool', shortcut: 'P' },
+          { id: 'brush', label: 'Brush', icon: 'i-lucide-paintbrush', shortcut: 'B' },
+          { id: 'eraser', label: 'Eraser', icon: 'i-lucide-eraser', shortcut: 'E' },
+        ],
+      },
+      {
+        id: 'text',
+        label: 'Text',
+        icon: 'i-lucide-type',
+        shortcut: 'T',
+      },
+      {
+        id: 'hand',
+        label: 'Hand',
+        icon: 'i-lucide-hand',
+        shortcut: 'H',
+      },
+      {
+        id: 'zoom',
+        label: 'Zoom',
+        icon: 'i-lucide-search',
+        shortcut: 'Z',
+      },
+    ],
+    defaultTool: 'select',
+    orientation: 'horizontal',
+    floating: false,
+    shortcutsEnabled: false,
+    ariaLabel: 'Vector editor tools',
+  },
   'DitherImage': {
     src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80&auto=format&fit=crop',
     alt: 'Sunlight falling through a green forest',

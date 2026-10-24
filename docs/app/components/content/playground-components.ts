@@ -251,12 +251,13 @@ import c247 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdCh
 import c248 from '../../../../src/runtime/components/UnlockFaceId/UnlockFaceIdFaceGlyph.vue'
 import c249 from '../../../../src/runtime/components/UserAccountAvatar.vue'
 import c250 from '../../../../src/runtime/components/VariableProximity.vue'
-import c251 from '../../../../src/runtime/components/VideoModal.vue'
-import c252 from '../../../../src/runtime/components/Vortex.vue'
-import c253 from '../../../../src/runtime/components/WalletCard.vue'
-import c254 from '../../../../src/runtime/components/WaveText/WaveText.vue'
-import c255 from '../../../../src/runtime/components/WobbleCard.vue'
-import c256 from '../../../../src/runtime/components/WordRotate.vue'
+import c251 from '../../../../src/runtime/components/VectorEditorToolbar.vue'
+import c252 from '../../../../src/runtime/components/VideoModal.vue'
+import c253 from '../../../../src/runtime/components/Vortex.vue'
+import c254 from '../../../../src/runtime/components/WalletCard.vue'
+import c255 from '../../../../src/runtime/components/WaveText/WaveText.vue'
+import c256 from '../../../../src/runtime/components/WobbleCard.vue'
+import c257 from '../../../../src/runtime/components/WordRotate.vue'
 
 export const playgroundComponents: Record<string, any> = {
   '3DCard': c0,
@@ -510,12 +511,13 @@ export const playgroundComponents: Record<string, any> = {
   'UnlockFaceIdUnlockFaceIdFaceGlyph': c248,
   'UserAccountAvatar': c249,
   'VariableProximity': c250,
-  'VideoModal': c251,
-  'Vortex': c252,
-  'WalletCard': c253,
-  'WaveText': c254,
-  'WobbleCard': c255,
-  'WordRotate': c256,
+  'VectorEditorToolbar': c251,
+  'VideoModal': c252,
+  'Vortex': c253,
+  'WalletCard': c254,
+  'WaveText': c255,
+  'WobbleCard': c256,
+  'WordRotate': c257,
 }
 
 export const playgroundComponentNames: string[] = [
@@ -770,6 +772,7 @@ export const playgroundComponentNames: string[] = [
   'UnlockFaceIdUnlockFaceIdFaceGlyph',
   'UserAccountAvatar',
   'VariableProximity',
+  'VectorEditorToolbar',
   'VideoModal',
   'Vortex',
   'WalletCard',
