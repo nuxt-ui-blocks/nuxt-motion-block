@@ -9,9 +9,12 @@ in a single object and links every message to its control. Field errors stay
 with the caller: validate on submit, return a map of messages, and the form
 animates the ones that are present.
 
-The controls are Nuxt UI primitives, so text, email, password, URL and phone
-inputs, textareas, selects and checkboxes inherit the same focus rings,
-disabled states and keyboard behaviour as the rest of the library.
+The form is built on Nuxt UI's `Form` and `FormField` components. Each field is
+wrapped in a `UFormField`, which owns the label, the helper copy, the error
+message and the ids that tie them to the control. The controls themselves are
+Nuxt UI primitives, so text, email, password, URL and phone inputs, textareas,
+selects and checkboxes inherit the same focus rings, disabled states and
+keyboard behaviour as the rest of the library.
 
 ## Usage
 
@@ -108,6 +111,10 @@ function handleSubmit(next: Record<string, string | boolean>) {
 `errors` is keyed by field name. A field with a message gets `aria-invalid`,
 turns its label red and attaches the message to `aria-describedby`. Clear the
 entry to remove the error and reveal the success state.
+
+Helper copy sits under the field label, above the control, so the label and its
+explanation read as one block. Checkbox fields are the exception: their label
+sits inline with the box, so the helper copy moves under the control instead.
 
 ## Customize
 
@@ -297,12 +304,15 @@ the reset button, after clearing its own errors.
 
 ## Accessibility
 
-- Every control has a label tied to it with `for` and `id`, including the
-  checkbox, which uses the Nuxt UI checkbox label.
+- Each control is wrapped in a `UFormField`, which generates a matching `for`
+  and `id` pair, so every control has a label, including the checkbox, which
+  keeps its label inline.
 - `aria-describedby` lists the helper text and the error message together, so a
   screen reader hears both in reading order.
-- A field with an error gets `aria-invalid="true"`, and the message is rendered
-  with `role="alert"` so it is announced when it appears.
+- A field with an error gets `aria-invalid="true"` and the error colour on the
+  label, ring and message. The error text is mirrored into a visually hidden
+  `role="status"` region, so it is announced politely when it appears rather
+  than interrupting the label the user is reading.
 - The success state uses a check icon plus the words from `successMessage`; a
   colour is never the only signal that a field is valid.
 - The form uses native submission, so pressing Enter in a text field submits
@@ -311,8 +321,9 @@ the reset button, after clearing its own errors.
 - The entrance stagger and error shake are decorative. Under
   `prefers-reduced-motion: reduce` the stagger is removed and the shake is not
   started at all; error text still appears.
-- `disabled` is passed to each control, so fields cannot be edited or submitted
-  while the form is busy or read-only.
+- `disabled` is handed to `UForm`, which forwards it to every control through
+  context, so fields cannot be edited or submitted while the form is busy or
+  read-only.
 
 ## Performance
 
@@ -320,8 +331,9 @@ the reset button, after clearing its own errors.
   watcher.
 - One shallow error watcher starts the shake for messages that arrive after a
   submit. Values are copied shallowly on each edit, not deep-cloned.
-- Entrance and message movement are CSS transitions and keyframes. The shake
-  runs through the Web Animations API only when a submit produces an error, so
-  nothing runs on idle.
+- Only the success message animates: it fades in with a CSS transition. Errors
+  appear immediately, because a delayed message is a delayed correction. The
+  shake runs through the Web Animations API only when a submit produces an
+  error, so nothing runs on idle.
 - The component has no timers, observers or network requests. Validation stays
   in the caller, so the bundle carries only the layout and behaviour.

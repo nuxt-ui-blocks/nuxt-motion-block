@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ComponentPublicInstance } from 'vue'
-import { computed, ref, useId, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 export type FormFieldType
   = | 'checkbox'
@@ -20,9 +20,9 @@ export interface FormFieldOption {
 export interface FormFieldConfig {
   /** Browser autocomplete hint for the control. */
   autocomplete?: string
-  /** Helper copy shown under the control. */
+  /** Helper copy shown under the label, or under the control for checkboxes. */
   description?: string
-  /** Label rendered above the control. */
+  /** Label rendered above the control, inline for checkboxes. */
   label: string
   /** Key used in the values and errors objects. */
   name: string
@@ -81,9 +81,7 @@ const SHAKE_FRAMES = [0, -6, 5, -4, 3, -1, 0].map(offset => ({
 const SHAKE_DURATION = 400
 const SHAKE_EASING = 'cubic-bezier(0.36, 0.07, 0.19, 0.97)'
 const STAGGER_DELAY = 40
-const ID_SAFE = /[^\w-]/g
 
-const uid = useId().replace(ID_SAFE, '')
 const internalValues = ref<FormValues>({})
 const submitCount = ref(0)
 const previousErrors = ref<FormErrors>({})
@@ -142,32 +140,6 @@ function errorFor(field: FormFieldConfig) {
 
 function isInvalid(field: FormFieldConfig) {
   return Boolean(errorFor(field))
-}
-
-function fieldId(name: string) {
-  return `${uid}-${name}`
-}
-
-function descriptionId(name: string) {
-  return `${uid}-${name}-description`
-}
-
-function messageId(name: string) {
-  return `${uid}-${name}-message`
-}
-
-function describedBy(field: FormFieldConfig) {
-  const ids: string[] = []
-
-  if (field.description) {
-    ids.push(descriptionId(field.name))
-  }
-
-  if (isInvalid(field)) {
-    ids.push(messageId(field.name))
-  }
-
-  return ids.length > 0 ? ids.join(' ') : undefined
 }
 
 function showSuccess(field: FormFieldConfig) {
@@ -255,135 +227,93 @@ watch(
 </script>
 
 <template>
-  <form
+  <UForm
     :class="['grid gap-4', props.class]"
+    :state="values"
+    :disabled="props.disabled"
+    :loading-auto="false"
     novalidate
     @submit="handleSubmit"
   >
     <div
       v-for="(field, index) in props.fields"
       :key="field.name"
+      :ref="element => setFieldElement(field.name, element)"
       class="form-field"
       :style="{ animationDelay: `${index * STAGGER_DELAY}ms` }"
     >
-      <div
-        :ref="element => setFieldElement(field.name, element)"
-        class="grid gap-1.5"
+      <UFormField
+        :label="field.type === 'checkbox' ? undefined : field.label"
+        :description="field.type === 'checkbox' ? undefined : field.description"
+        :help="field.type === 'checkbox' ? field.description : undefined"
+        :error="errorFor(field)"
+        :name="field.name"
+        :ui="isInvalid(field) ? { label: 'text-error' } : undefined"
       >
-        <template v-if="field.type === 'checkbox'">
-          <UCheckbox
-            :id="fieldId(field.name)"
-            :aria-describedby="describedBy(field)"
-            :aria-invalid="isInvalid(field) ? true : undefined"
-            :color="isInvalid(field) ? 'error' : undefined"
-            :disabled="props.disabled"
-            :label="field.label"
-            :model-value="checkboxValue(field)"
-            :name="field.name"
-            :required="field.required"
-            @update:model-value="updateField(field.name, $event)"
-          />
-        </template>
+        <UCheckbox
+          v-if="field.type === 'checkbox'"
+          :label="field.label"
+          :model-value="checkboxValue(field)"
+          :required="field.required"
+          @update:model-value="updateField(field.name, $event)"
+        />
 
-        <template v-else>
-          <label
-            :for="fieldId(field.name)"
-            class="text-sm font-medium leading-none"
-            :class="isInvalid(field) ? 'text-error' : 'text-highlighted'"
-          >
-            {{ field.label }}
-          </label>
+        <UTextarea
+          v-else-if="field.type === 'textarea'"
+          class="w-full"
+          :autocomplete="field.autocomplete ?? 'off'"
+          :model-value="textValue(field)"
+          :placeholder="field.placeholder"
+          :required="field.required"
+          :rows="field.rows ?? 3"
+          @update:model-value="updateField(field.name, $event)"
+        />
 
-          <div
-            class="form-control"
-            :class="isInvalid(field) ? 'is-invalid' : ''"
-          >
-            <UTextarea
-              v-if="field.type === 'textarea'"
-              :id="fieldId(field.name)"
-              :aria-describedby="describedBy(field)"
-              :aria-invalid="isInvalid(field) ? true : undefined"
-              :autocomplete="field.autocomplete ?? 'off'"
-              :color="isInvalid(field) ? 'error' : undefined"
-              :disabled="props.disabled"
-              :model-value="textValue(field)"
-              :name="field.name"
-              :placeholder="field.placeholder"
-              :required="field.required"
-              :rows="field.rows ?? 3"
-              @update:model-value="updateField(field.name, $event)"
-            />
+        <USelect
+          v-else-if="field.type === 'select'"
+          class="w-full"
+          :items="field.options ?? []"
+          :model-value="textValue(field)"
+          :placeholder="field.placeholder ?? 'Select an option'"
+          :required="field.required"
+          @update:model-value="updateField(field.name, $event)"
+        />
 
-            <USelect
-              v-else-if="field.type === 'select'"
-              :id="fieldId(field.name)"
-              :aria-describedby="describedBy(field)"
-              :aria-invalid="isInvalid(field) ? true : undefined"
-              :color="isInvalid(field) ? 'error' : undefined"
-              :disabled="props.disabled"
-              :items="field.options ?? []"
-              :model-value="textValue(field)"
-              :name="field.name"
-              :placeholder="field.placeholder ?? 'Select an option'"
-              :required="field.required"
-              @update:model-value="updateField(field.name, $event)"
-            />
+        <UInput
+          v-else
+          class="w-full"
+          :autocomplete="field.autocomplete ?? 'off'"
+          :model-value="textValue(field)"
+          :placeholder="field.placeholder"
+          :required="field.required"
+          :type="inputType(field)"
+          @update:model-value="updateField(field.name, $event)"
+        />
+      </UFormField>
 
-            <UInput
-              v-else
-              :id="fieldId(field.name)"
-              :aria-describedby="describedBy(field)"
-              :aria-invalid="isInvalid(field) ? true : undefined"
-              :autocomplete="field.autocomplete ?? 'off'"
-              :color="isInvalid(field) ? 'error' : undefined"
-              :disabled="props.disabled"
-              :model-value="textValue(field)"
-              :name="field.name"
-              :placeholder="field.placeholder"
-              :required="field.required"
-              :type="inputType(field)"
-              @update:model-value="updateField(field.name, $event)"
-            />
-          </div>
-        </template>
-
+      <Transition name="form-message">
         <p
-          v-if="field.description"
-          :id="descriptionId(field.name)"
-          class="text-sm text-muted"
+          v-if="showSuccess(field)"
+          class="mt-2 flex items-center gap-1 text-sm text-success"
         >
-          {{ field.description }}
+          <UIcon
+            name="i-lucide-check"
+            class="size-3.5"
+            aria-hidden="true"
+          />
+          <span>{{ props.successMessage }}</span>
         </p>
+      </Transition>
 
-        <Transition
-          name="form-message"
-          mode="out-in"
-        >
-          <p
-            v-if="isInvalid(field)"
-            :id="messageId(field.name)"
-            class="text-sm text-error"
-            role="alert"
-          >
-            {{ errorFor(field) }}
-          </p>
-
-          <p
-            v-else-if="showSuccess(field)"
-            class="flex items-center gap-1 text-sm text-success"
-          >
-            <UIcon
-              name="i-lucide-check"
-              class="size-3.5"
-              aria-hidden="true"
-            />
-            <span>{{ props.successMessage }}</span>
-          </p>
-        </Transition>
-      </div>
+      <p
+        class="sr-only"
+        role="status"
+      >
+        {{ errorFor(field) ?? '' }}
+      </p>
     </div>
 
-    <div class="mt-1">
+    <div>
       <slot name="actions">
         <UButton
           type="submit"
@@ -394,25 +324,12 @@ watch(
         </UButton>
       </slot>
     </div>
-  </form>
+  </UForm>
 </template>
 
 <style scoped>
 .form-field {
   animation: form-field-in 420ms cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
-.form-control {
-  border-radius: 0.5rem;
-  transition: box-shadow 200ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.form-control:focus-within {
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ui-primary) 30%, transparent);
-}
-
-.form-control.is-invalid:focus-within {
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ui-error) 30%, transparent);
 }
 
 .form-message-enter-active,
@@ -438,10 +355,6 @@ watch(
 @media (prefers-reduced-motion: reduce) {
   .form-field {
     animation: none;
-  }
-
-  .form-control {
-    transition: none;
   }
 
   .form-message-enter-active,
