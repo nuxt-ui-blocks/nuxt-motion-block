@@ -32,7 +32,7 @@
               v-if="tool.id === activeOwnerId"
               :layout-id="pillLayoutId"
               :transition="pillTransition"
-              class="absolute inset-0 rounded-xl bg-elevated"
+              class="absolute inset-0 rounded-xl bg-inverted/10"
             />
 
             <button
@@ -122,7 +122,7 @@
                   :aria-label="item.label"
                   :class="[
                     FLYOUT_ITEM_CLASS,
-                    item.id === resolvedActiveTool ? 'bg-elevated text-highlighted' : '',
+                    item.id === resolvedActiveTool ? 'bg-inverted/10 text-highlighted' : '',
                   ]"
                   :aria-checked="item.id === resolvedActiveTool"
                   @click="selectFlyoutItem(tool, item)"
@@ -238,7 +238,7 @@ defineSlots<{
 
 const LONG_PRESS_MS = 450
 const PANEL_SURFACE
-  = 'rounded-2xl border border-default bg-default/95 shadow-[0_0_0.5px_rgba(0,0,0,0.18),0_8px_24px_-8px_rgba(0,0,0,0.28),0_2px_6px_-2px_rgba(0,0,0,0.12)] backdrop-blur-xl'
+  = 'rounded-2xl border border-default bg-default/80 shadow-[0_0_0.5px_rgba(0,0,0,0.18),0_8px_24px_-8px_rgba(0,0,0,0.28),0_2px_6px_-2px_rgba(0,0,0,0.12)] backdrop-blur-xl'
 const TOOL_CLASS
   = 'absolute inset-0 flex size-9 cursor-pointer items-center justify-center rounded-xl text-muted transition-[color,transform] duration-150 ease-out hover:text-highlighted active:scale-[0.92] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-default focus-visible:outline-none motion-reduce:transition-none motion-reduce:active:scale-100'
 const FLYOUT_ITEM_CLASS

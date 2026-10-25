@@ -10,13 +10,13 @@ track is a different kind of cost: it takes a moment, and it cannot be done by
 reflex.
 
 The track is a fixed 224 px and the handle covers 48 of them, so the thumb
-travels 168 px - enough that the pointer has to be held and aimed. Four fifths of
-the way counts as arrival, so the gesture does not fail on the last few pixels,
-and the thumb springs back if it is released early.
+travels 168 px - enough that the pointer has to be held and aimed. Almost the
+whole rail counts as arrival, so the gesture does not fail on the last few
+pixels, and the thumb springs back if it is released early.
 
-When it lands, the label cross-fades to "Shutting down…" and a sheen sweeps
-across it. The track then returns after `duration`, so the control is usable
-again without a remount.
+When it lands, the track is replaced by a centered "Shutting down…" message.
+The track then returns after `duration`, so the control is usable again without
+a remount.
 
 ## Usage
 
@@ -116,9 +116,13 @@ This component's theme exposes the slots below. Override any of them per instanc
   inside.
   ::
   ::component-slot-row{name="label"}
-  The text that cross-fades to "Shutting down…". `pointer-events-none` keeps it
-  from swallowing the start of a drag, and the `pl-8` offset keeps it clear of the
-  resting handle.
+  The resting instruction on the track. `pointer-events-none` keeps it from
+  swallowing the start of a drag, and the `pl-8` offset keeps it clear of the
+  resting handle. It carries the sheen that reads as power draining.
+  ::
+  ::component-slot-row{name="shutdown"}
+  The centered message that replaces the track once the gesture completes. It
+  keeps the track's 224 × 56 box, so the surrounding layout does not jump.
   ::
   ::component-slot-row{name="handle"}
   The thumb. `touch-none` and `cursor-grab` belong here rather than on the
@@ -139,15 +143,16 @@ This component's theme exposes the slots below. Override any of them per instanc
   navigating with a keyboard.
 - Clicking the handle completes it as well. The drag is the expressive path, not
   the only one.
-- While the track is shutting down, `aria-disabled` is set and the handle refuses
-  further input until it returns, so a double gesture cannot emit twice.
-- A visually hidden `role="status"` announces "Shutting down…". The visible label
-  is not in a live region, so the message is heard once rather than twice.
+- While the track is shut down, the handle leaves the tab order with the track;
+  the control returns after `duration` rather than accepting a second gesture.
+- A visually hidden `role="status"` announces "Shutting down…" when it starts.
+  The visible message is not a live region, so it is heard once rather than
+  twice.
 - `disabled` disables the button itself, not just the styling, so it is skipped
   by keyboard navigation and by assistive technology.
 - Under `prefers-reduced-motion: reduce` dragging is turned off entirely and the
-  thumb jumps to the end; the track still works by click or by key. The label
-  cross-fade loses its duration instead of its text.
+  thumb jumps to the end; the track still works by click or by key. The sheen
+  stops instead of looping.
 
 ## Performance
 
@@ -160,5 +165,5 @@ This component's theme exposes the slots below. Override any of them per instanc
   "powered off" state behind.
 - The sheen is a scoped CSS animation rather than a Motion loop, so it runs on the
   compositor and stops when the rule stops matching.
-- Nothing is laid out per frame. The handle moves by `x`, the label by opacity and
-  `y`, and the track is a fixed box.
+- Nothing is laid out per frame. The handle moves by `x`, the track swaps for
+  the shutdown message once, and the track is a fixed box.

@@ -7,6 +7,8 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
+    "generate": "nuxt generate",
+    "deploy:docs": "nuxt generate && npx wrangler pages deploy dist --project-name=nuxt-motion-block",
     "dev": "nuxt dev",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",

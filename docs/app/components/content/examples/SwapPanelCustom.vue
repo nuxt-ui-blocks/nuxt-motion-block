@@ -8,8 +8,9 @@
       :slippage="0.005"
       :status="status"
       :to="to"
+      :tokens="tokens"
       @flip="flip"
-      @select-token="note = $event === 'from' ? 'Choose a pay token' : 'Choose a receive token'"
+      @select-token="selectToken"
       @submit="submit"
     />
 
@@ -42,6 +43,8 @@ const usdc = {
   icon: 'i-lucide-circle-dollar-sign',
 }
 
+const tokens = [eth, usdc]
+
 const from = computed(() => (isUsdc.value ? usdc : eth))
 const to = computed(() => (isUsdc.value ? eth : usdc))
 
@@ -62,7 +65,7 @@ const error = computed(() => {
 })
 
 const rate = computed(() => (isUsdc.value ? 1 / 3240 : 3240))
-const expiresAt = Date.now() + 30_000
+const expiresAt = ref(Date.now() + 30_000)
 
 const quote = computed(() => {
   const value = Number(amount.value)
@@ -76,7 +79,7 @@ const quote = computed(() => {
     rate: rate.value,
     fee: value * 0.0004,
     priceImpact: 0.004,
-    expiresAt,
+    expiresAt: expiresAt.value,
   }
 })
 
@@ -88,6 +91,22 @@ watch(error, (message) => {
     status.value = 'ready'
   }
 })
+
+watch(amount, () => {
+  expiresAt.value = Date.now() + 30_000
+})
+
+function selectToken(side: 'from' | 'to', token?: { symbol: string }) {
+  if (!token) {
+    return
+  }
+
+  isUsdc.value = side === 'from'
+    ? token.symbol === 'USDC'
+    : token.symbol === 'ETH'
+  note.value = `${token.symbol} selected for the ${side === 'from' ? 'pay' : 'receive'} side.`
+  expiresAt.value = Date.now() + 30_000
+}
 
 let timer: ReturnType<typeof setTimeout> | undefined
 

@@ -1,26 +1,16 @@
 <template>
   <div :class="ui.root({ class: [uiProps.ui?.root, uiProps.class] })">
-    <div :class="ui.track({ class: uiProps.ui?.track })">
-      <AnimatePresence
-        :initial="false"
-        mode="wait"
-      >
-        <motion.span
-          :key="poweredOff ? 'off' : 'on'"
-          :class="ui.label({ class: uiProps.ui?.label })"
-          :initial="labelFrom"
-          :animate="labelTo"
-          :exit="labelExit"
-          :transition="labelTransition"
-        >
-          {{ poweredOff ? offLabel : label }}
-        </motion.span>
-      </AnimatePresence>
+    <div
+      v-if="!poweredOff"
+      :class="ui.track({ class: uiProps.ui?.track })"
+    >
+      <span :class="ui.label({ class: uiProps.ui?.label })">
+        {{ label }}
+      </span>
 
       <motion.button
         type="button"
         :aria-label="label"
-        :aria-disabled="disabled || poweredOff"
         :class="ui.handle({ class: uiProps.ui?.handle })"
         :disabled="disabled"
         :drag="draggable ? 'x' : false"
@@ -42,9 +32,16 @@
       </motion.button>
     </div>
 
+    <p
+      v-else
+      :class="ui.shutdown({ class: uiProps.ui?.shutdown })"
+    >
+      {{ offLabel }}
+    </p>
+
     <!--
-      The icon and the label both change, and neither is announced. This is the
-      one line a screen reader hears when the machine goes down.
+      The track disappears while it shuts down. This is the one line a screen
+      reader hears when the machine goes down.
     -->
     <span
       class="sr-only"
@@ -55,10 +52,10 @@
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref } from 'vue'
-import { AnimatePresence, animate, motion, useMotionValue, useReducedMotion } from 'motion-v'
+import { animate, motion, useMotionValue, useReducedMotion } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import powerOffSlide from '../theme/power-off-slide'
-import { EASE_OUT, SPRING_DEFAULT } from '../utils/motion-tokens'
+import { SPRING_DEFAULT } from '../utils/motion-tokens'
 
 export interface PowerOffSlideProps {
   /** Text printed on the track, and the handle's accessible name. */
@@ -99,8 +96,8 @@ const reducedMotion = useReducedMotion()
 
 /** Track width (224) minus the handle (48) and its two 4px insets. */
 const MAX_DISTANCE = 168
-/** Four fifths of the way: close enough to the end to mean it. */
-const THRESHOLD = 134
+/** Almost the whole rail: the gesture has to be committed, not nudged. */
+const THRESHOLD = 160
 const ARRIVAL_MS = 220
 
 const x = useMotionValue(0)
@@ -171,24 +168,6 @@ onBeforeUnmount(() => {
   clearTimeout(resetTimer)
   clearTimeout(clickTimer)
 })
-
-const labelFrom = computed(() =>
-  reducedMotion.value === true ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 },
-)
-
-const labelTo = { opacity: 1, y: 0 }
-
-const labelExit = computed(() =>
-  reducedMotion.value === true
-    ? { opacity: 0, transition: { duration: 0 } }
-    : { opacity: 0, transition: { duration: 0.12, ease: EASE_OUT }, y: -6 },
-)
-
-const labelTransition = computed(() =>
-  reducedMotion.value === true
-    ? { duration: 0 }
-    : { ...SPRING_DEFAULT, opacity: { duration: 0.12 } },
-)
 </script>
 
 <style scoped>

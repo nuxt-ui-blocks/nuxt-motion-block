@@ -3,13 +3,20 @@ title: Swap Panel
 description: A token swap form with a quoted output, countdown ring and a state-aware action button.
 ---
 
-A compact swap ticket. You type an amount in the pay field, the receive field\nshows the quoted output, and a round button between the rows flips the pair.\nUnder the rows the rate, fee, price impact and slippage sit in one quiet line,\nwith a ring counting down the life of the quote.
+A compact swap ticket. You type an amount in the pay field, the receive field
+shows the quoted output, and a round button between the rows flips the pair.
+Under the rows the rate, fee, price impact and slippage sit in one quiet line,
+with a ring counting down the life of the quote.
 
-The panel is controlled where it matters: `amount` works with `v-model:amount`,\nand every control emits the intent (flip, choose a token, submit) rather than\nowns the swap. That keeps quote fetching, token pickers and submission inside\nyour app while the layout, formatting and states stay here.
+The panel is controlled where it matters: `amount` works with `v-model:amount`,
+and every control emits the intent (flip, choose a token, submit) rather than
+owns the swap. That keeps quote fetching and submission inside your app while
+the layout, formatting and states stay here.
 
 ## Usage
 
-Pass the two tokens and a quote. With `status` left at `idle`, the button reads\n**Review swap**.
+Pass the two tokens, the list they can be picked from, and a quote. With
+`status` left at `idle`, the button reads **Review swap**.
 
 ::code-preview
 ---
@@ -29,36 +36,48 @@ label: Preview
       :to="to"
       :quote="quote"
       :status="status"
+      :tokens="tokens"
       @flip="flip"
+      @select-token="selectToken"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
+
+interface Token {
+  balance: number
+  icon: string
+  name: string
+  symbol: string
+}
 
 const amount = ref('1')
-const isEth = ref(true)
+const pair = ref<[string, string]>(['ETH', 'USDC'])
+const expiresAt = ref(Date.now() + 45_000)
 
-const eth = {
-  name: 'Ether',
-  symbol: 'ETH',
-  balance: 4.28,
-  icon: 'i-lucide-gem',
+const tokens: Token[] = [
+  { name: 'Ether', symbol: 'ETH', balance: 4.28, icon: 'i-lucide-gem' },
+  { name: 'USD Coin', symbol: 'USDC', balance: 1240.5, icon: 'i-lucide-circle-dollar-sign' },
+  { name: 'Dai', symbol: 'DAI', balance: 860, icon: 'i-lucide-landmark' },
+  { name: 'Wrapped Bitcoin', symbol: 'WBTC', balance: 0.42, icon: 'i-lucide-bitcoin' },
+]
+
+const prices: Record<string, number> = {
+  ETH: 3240,
+  USDC: 1,
+  DAI: 1,
+  WBTC: 68_000,
 }
-const usdc = {
-  name: 'USD Coin',
-  symbol: 'USDC',
-  balance: 1240.5,
-  icon: 'i-lucide-circle-dollar-sign',
+
+function tokenFor(symbol: string) {
+  return tokens.find(token => token.symbol === symbol) ?? tokens[0]!
 }
 
-const from = computed(() => (isEth.value ? eth : usdc))
-const to = computed(() => (isEth.value ? usdc : eth))
-
-const rate = computed(() => (isEth.value ? 3240 : 1 / 3240))
-
-const expiresAt = Date.now() + 45_000
+const from = computed(() => tokenFor(pair.value[0]))
+const to = computed(() => tokenFor(pair.value[1]))
+const rate = computed(() => (prices[from.value.symbol] ?? 1) / (prices[to.value.symbol] ?? 1))
 
 const quote = computed(() => {
   const value = Number(amount.value)
@@ -72,25 +91,59 @@ const quote = computed(() => {
     rate: rate.value,
     fee: value * 0.0008,
     priceImpact: 0.0012,
-    expiresAt,
+    expiresAt: expiresAt.value,
   }
 })
 
 const status = computed(() => (amount.value ? 'ready' : 'idle'))
 
+watch(amount, () => {
+  expiresAt.value = Date.now() + 45_000
+})
+
 function flip() {
-  isEth.value = !isEth.value
+  pair.value = [pair.value[1], pair.value[0]]
+}
+
+function selectToken(side: 'from' | 'to', token?: Token) {
+  if (!token) {
+    return
+  }
+
+  const next: [string, string] = [pair.value[0], pair.value[1]]
+
+  if (side === 'from') {
+    if (token.symbol === next[1]) {
+      next[1] = next[0]
+    }
+    next[0] = token.symbol
+  }
+  else {
+    if (token.symbol === next[0]) {
+      next[0] = next[1]
+    }
+    next[1] = token.symbol
+  }
+
+  pair.value = next
+  expiresAt.value = Date.now() + 45_000
 }
 </script>
 ```
-
 ::
 
-`quote.rate` is the price of one `from` token in `to` tokens, and `quote.output`\nis the absolute receive amount. `fee` is expressed in the receive token.\n`priceImpact` and `slippage` are fractions, so `0.005` renders as 0.5%.
+`quote.rate` is the price of one `from` token in `to` tokens, and `quote.output`
+is the absolute receive amount. `fee` is expressed in the receive token.
+`priceImpact` and `slippage` are fractions, so `0.005` renders as 0.5%.
+
+`tokens` turns each chip into a Nuxt UI dropdown menu. Leave it out and the
+chips go back to emitting `select-token` so you can open your own picker.
 
 ## Customize
 
-Use `error` for a balance problem and `status` for the lifecycle. While\n`quoting` the receive row sweeps a shimmer; while `submitting` the button spins\nand disables; `error` turns the button into **Try again**.
+Use `error` for a balance problem and `status` for the lifecycle. While
+`quoting` the receive row sweeps a shimmer; while `submitting` the button spins
+and disables; `error` turns the button into **Try again**.
 
 ::code-preview
 ---
@@ -112,8 +165,9 @@ label: Preview
       :slippage="0.005"
       :status="status"
       :to="to"
+      :tokens="tokens"
       @flip="flip"
-      @select-token="note = $event === 'from' ? 'Choose a pay token' : 'Choose a receive token'"
+      @select-token="selectToken"
       @submit="submit"
     />
 
@@ -146,6 +200,8 @@ const usdc = {
   icon: 'i-lucide-circle-dollar-sign',
 }
 
+const tokens = [eth, usdc]
+
 const from = computed(() => (isUsdc.value ? usdc : eth))
 const to = computed(() => (isUsdc.value ? eth : usdc))
 
@@ -166,7 +222,7 @@ const error = computed(() => {
 })
 
 const rate = computed(() => (isUsdc.value ? 1 / 3240 : 3240))
-const expiresAt = Date.now() + 30_000
+const expiresAt = ref(Date.now() + 30_000)
 
 const quote = computed(() => {
   const value = Number(amount.value)
@@ -180,7 +236,7 @@ const quote = computed(() => {
     rate: rate.value,
     fee: value * 0.0004,
     priceImpact: 0.004,
-    expiresAt,
+    expiresAt: expiresAt.value,
   }
 })
 
@@ -192,6 +248,22 @@ watch(error, (message) => {
     status.value = 'ready'
   }
 })
+
+watch(amount, () => {
+  expiresAt.value = Date.now() + 30_000
+})
+
+function selectToken(side: 'from' | 'to', token?: { symbol: string }) {
+  if (!token) {
+    return
+  }
+
+  isUsdc.value = side === 'from'
+    ? token.symbol === 'USDC'
+    : token.symbol === 'ETH'
+  note.value = `${token.symbol} selected for the ${side === 'from' ? 'pay' : 'receive'} side.`
+  expiresAt.value = Date.now() + 30_000
+}
 
 let timer: ReturnType<typeof setTimeout> | undefined
 
@@ -228,7 +300,10 @@ onBeforeUnmount(() => {
 ```
 ::
 
-The quote ring only starts after mount, so a server-rendered panel does not\ncommit a timestamp it cannot match on the client. It updates every 100ms, stops\nat zero and is cleaned up on unmount. The output figure animates in when the\nnumber changes; the amount itself is never reformatted while you type.
+The quote ring only starts after mount, so a server-rendered panel does not
+commit a timestamp it cannot match on the client. It updates every 100ms, stops
+at zero and is cleaned up on unmount. The output figure animates in when the
+number changes; the amount itself is never reformatted while you type.
 
 ## Props
 
@@ -238,6 +313,10 @@ The quote ring only starts after mount, so a server-rendered panel does not\ncom
   ::
   ::component-prop{name="to" type="SwapToken"}
   Token being received.
+  ::
+  ::component-prop{name="tokens" type="SwapToken[]"}
+  Tokens offered by the built-in chip menus. Omit it to emit `select-token` and
+  open your own picker.
   ::
   ::component-prop{name="amount" type="string"}
   Controlled pay amount. Leave it out to let the panel keep the value.
@@ -269,8 +348,9 @@ The quote ring only starts after mount, so a server-rendered panel does not\ncom
   ::component-prop{name="flip" type="() => void"}
   Fired by the round button between the rows. Swap `from` and `to` in response.
   ::
-  ::component-prop{name="select-token" type="(side: 'from' | 'to') => void"}
-  Fired by either token chip so you can open a picker for that side.
+  ::component-prop{name="select-token" type="(side: 'from' | 'to', token?: SwapToken) => void"}
+  Fired by the chip menus with the chosen token, or by the chips alone when
+  `tokens` is omitted.
   ::
   ::component-prop{name="submit" type="() => void"}
   Fired by the action button. The panel does not submit anything itself.
@@ -279,20 +359,44 @@ The quote ring only starts after mount, so a server-rendered panel does not\ncom
 
 ## Accessibility
 
-- The pay field has a real `<label>` bound to its input and uses\n  `inputmode=\"decimal\"`, so mobile keyboards show digits without forbidding a\n  decimal separator.
-- The receive value is a polite live region labelled **You receive**, so a new\n  quote is announced without moving focus out of the pay field.
-- Token chips are buttons with labels such as \"Change pay token, currently\n  ETH\", and their chevrons are decorative. Each opens the same picker path as a\n  pointer press, with a visible focus ring.
-- The flip control is a button with the label \"Flip pay and receive tokens\".\n  Only its icon rotates, so the hit area and focus ring stay still.
-- A quoting shimmer is replaced by a static tint under `prefers-reduced-motion`.\n  The busy state is also carried by the button label and disabled attribute, not\n  by the shimmer alone.
-- The submit button disables while quoting or submitting and shows **Swapping…**\n  with a spinner while the request is in flight.
-- Errors use `role=\"alert\"` and a written message; the red text is not the only\n  signal.
-- The countdown ring is `aria-hidden` and paired with hidden text that reads\n  \"Quote expires in N seconds\". The ring is not the only way to know the quote\n  is ageing.
-- All formatting uses `Intl.NumberFormat`, so amounts and percentages follow\n  the chosen locale rather than hard-coded separators.
+- The pay field has a real `<label>` bound to its input and uses
+  `inputmode="decimal"`, so mobile keyboards show digits without forbidding a
+  decimal separator.
+- The receive value is a polite live region labelled **You receive**, so a new
+  quote is announced without moving focus out of the pay field.
+- Token chips are menu triggers built on `UDropdownMenu`. They expose
+  `aria-haspopup`, `aria-expanded` and labels such as "Change pay token,
+  currently ETH", and the menu keeps arrow keys, typeahead, `Escape` and focus
+  return working without custom key handling.
+- The selected token is marked with a check in the menu and reads
+  "*Selected*" in its description, so the state is announced as well as drawn.
+- The flip control is a button with the label "Flip pay and receive tokens".
+  Only its icon rotates, so the hit area and focus ring stay still.
+- A quoting shimmer is replaced by a static tint under `prefers-reduced-motion`.
+  The busy state is also carried by the button label and disabled attribute, not
+  by the shimmer alone.
+- The submit button disables while quoting or submitting and shows **Swapping…**
+  with a spinner while the request is in flight.
+- Errors use `role="alert"` and a written message; the red text is not the only
+  signal.
+- The countdown ring is `aria-hidden` and paired with hidden text that reads
+  "Quote expires in N seconds". The ring is not the only way to know the quote
+  is ageing.
+- All formatting uses `Intl.NumberFormat`, so amounts and percentages follow
+  the chosen locale rather than hard-coded separators.
 
 ## Performance
 
-- The receive figure is a keyed span with a CSS entrance animation; a new value\n  replaces the old node and animates once, with no measuring or layout reads.
-- The quoting shimmer is a single compositor-friendly `translateX` animation\n  and is removed entirely in reduced-motion mode.
-- The countdown interval runs only after mount, only while `quote.expiresAt`\n  exists, updates one ref every 100ms, stops itself at zero and is cleared on\n  unmount. No timestamp is rendered during SSR.
-- Number formatters are created once at module scope, not per render or per\n  keystroke.
-- The panel keeps no quote cache and performs no requests; typing emits the\n  value and the parent decides how to quote it.
+- The receive figure is a keyed span with a CSS entrance animation; a new value
+  replaces the old node and animates once, with no measuring or layout reads.
+- The quoting shimmer is a single compositor-friendly `translateX` animation
+  and is removed entirely in reduced-motion mode.
+- The countdown interval runs only after mount, only while `quote.expiresAt`
+  exists, updates one ref every 100ms, stops itself at zero and is cleared on
+  unmount. No timestamp is rendered during SSR.
+- Number formatters are created once at module scope, not per render or per
+  keystroke.
+- The picker delegates positioning, portals and keyboard handling to Nuxt UI,
+  so no extra listbox state or scroll listeners live in the panel.
+- The panel keeps no quote cache and performs no requests; typing emits the
+  value and the parent decides how to quote it.

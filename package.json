@@ -64,7 +64,7 @@
     "docs:dev": "pnpm --filter nuxt-motion-block-docs dev",
     "docs:build": "pnpm --filter nuxt-motion-block-docs build",
     "docs:preview": "pnpm --filter nuxt-motion-block-docs preview",
-    "deploy:docs": "pnpm --dir docs build && npx wrangler pages deploy docs/.output/public --project-name=nuxt-motion-block"
+    "deploy:docs": "pnpm --dir docs generate && npx wrangler pages deploy docs/dist --project-name=nuxt-motion-block"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.0",

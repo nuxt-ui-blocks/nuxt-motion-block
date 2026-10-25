@@ -1,24 +1,13 @@
 export default defineNuxtConfig({
-  nitro: {
-    prerender: {
-      routes: ['/sitemap.xml']
-    }
-  },
+  extends: ['docus'],
 
   modules: [
     '@nuxt/fonts',
     '../src/module',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
   ],
 
-  sitemap: {
-    zeroRuntime: true
-  },
-
-  extends: ['docus'],
-
-  mcp: false,
-
+  ssr: true,
   site: {
     url: process.env.NUXT_SITE_URL || 'https://nuxt-motion-block.pages.dev',
     name: 'Nuxt Motion Block',
@@ -29,6 +18,10 @@ export default defineNuxtConfig({
     preference: 'dark',
     fallback: 'dark',
   },
+
+  nitro: {
+    preset: 'cloudflare-pages',
+  },
   fonts: {
     families: [
       { name: 'Geist', provider: 'google', weights: [400, 500, 600, 700] },
@@ -36,11 +29,19 @@ export default defineNuxtConfig({
     ],
   },
 
+  // The MCP toolkit needs a running server, so it only produces a warning on
+  // `nuxt generate`. The docs are deployed as static files.
+  mcp: false,
+
   motionBlock: {
     prefix: 'M',
   },
 
   ogImage: {
     enabled: false,
+  },
+
+  sitemap: {
+    zeroRuntime: false,
   },
 })
