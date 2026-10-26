@@ -42,7 +42,7 @@ coverage
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
-# Intellij idea
+.claude/
 *.iml
 .idea
 

@@ -13,6 +13,13 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
+    "typecheck": "nuxt typecheck",
+    "deploy:preview": "wrangler pages deploy ./dist --project-name nuxt-motion-block --branch $CF_PAGES_BRANCH"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {

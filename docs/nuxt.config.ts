@@ -9,6 +9,13 @@ export default defineNuxtConfig({
 
   ssr: true,
   site: {
+    url:
+      process.env.NUXT_SITE_URL ||
+      process.env.CF_PAGES_URL ||
+      'https://nuxt-motion-block.pages.dev',
+    name: 'Nuxt Motion Block',
+    description: 'A streamlined UI library that extends Nuxt UI with motion capabilities powered by motion-v.',
+  },
     url: process.env.NUXT_SITE_URL || 'https://nuxt-motion-block.pages.dev',
     name: 'Nuxt Motion Block',
     description: 'A streamlined UI library that extends Nuxt UI with motion capabilities powered by motion-v.',
