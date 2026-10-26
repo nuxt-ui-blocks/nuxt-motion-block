@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, type ComponentPublicInstance } from 'vue'
 import { Motion, MotionConfig, AnimatePresence } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import toolbarDynamic from '../theme/toolbar-dynamic'
@@ -30,7 +30,7 @@ const emit = defineEmits<{
 }>()
 
 const isOpen = ref(false)
-const toolbarRef = ref<HTMLDivElement>()
+const toolbarRef = ref<ComponentPublicInstance>()
 
 const springTransition = {
   type: 'spring' as const,
@@ -50,12 +50,26 @@ function toggle() {
   }
 }
 
+/**
+ * A template ref on a component (`<Motion ref>`) resolves to its public
+ * instance, not a DOM node, so `contains` has to be read off `$el`. Before this
+ * was unwrapped, every outside click threw and the panel could never close.
+ */
+function toolbarElement(): HTMLElement | null {
+  const el = (toolbarRef.value as { $el?: unknown } | undefined)?.$el
+  return el instanceof HTMLElement ? el : null
+}
+
 function handleClickOutside(event: MouseEvent) {
-  if (toolbarRef.value && !toolbarRef.value.contains(event.target as Node)) {
-    if (isOpen.value) {
-      isOpen.value = false
-      emit('close')
-    }
+  const target = event.target
+  if (!(target instanceof Node)) {
+    return
+  }
+
+  const element = toolbarElement()
+  if (element && !element.contains(target) && isOpen.value) {
+    isOpen.value = false
+    emit('close')
   }
 }
 

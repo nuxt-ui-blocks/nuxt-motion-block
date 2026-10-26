@@ -5,33 +5,31 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-A streamlined UI library that extends Nuxt UI with motion capabilities powered by motion-v.
+Copy-paste motion for Vue: springs, gestures, 3D, and scroll, all themed by your Nuxt UI design tokens and powered by `motion-v`.
 
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
-<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/nuxt-motion-block?file=playground%2Fapp.vue) -->
 - [📖 &nbsp;Documentation](https://nuxt-motion-block.pages.dev/)
 - [🌐 &nbsp;Live Preview](https://nuxt-motion-block.pages.dev/)
 
 <p align="center">
   <a href="https://nuxt-motion-block.pages.dev/" target="_blank">
-    <img src="./docs/public/docs-light.png" alt="Light mode" />
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://nuxt-motion-block.pages.dev/docs-dark.png">
+      <source media="(prefers-color-scheme: light)" srcset="https://nuxt-motion-block.pages.dev/docs-light.png">
+      <img src="https://nuxt-motion-block.pages.dev/docs-dark.png" alt="Nuxt Motion Block Documentation Preview" />
+    </picture>
   </a>
 </p>
-<p align="center">
-  <a href="https://nuxt-motion-block.pages.dev/" target="_blank">
-    <img src="./docs/public/docs-dark.png" alt="Dark mode" />
-  </a>
-</p>
 
-## Features
+## ✨ Features
 
-- 🎨 &nbsp;30+ Motion-Enhanced UI Components
-- ⚡ &nbsp;Powered by motion-v for Smooth Animations
-- 🧩 &nbsp;Seamless Integration with Nuxt UI
-- 🛠️ &nbsp;Auto-Registered Components with Configurable Prefix
-- 🌐 &nbsp;Built-in CSS and Tailwind Integration
+- 🎨 &nbsp;**260+ Motion-Enhanced Components**: 3D primitives, AI chat interfaces, animated backgrounds, interactive cards, carousels, text/number effects, and full production templates.
+- ⚡ &nbsp;**Powered by motion-v**: Smooth, performant spring physics, gestures, and layout animations.
+- 🧩 &nbsp;**Theme-Aware Integration**: Inherits Nuxt UI design tokens automatically with zero configuration overrides.
+- 🛠️ &nbsp;**Auto-Registered**: Components register instantly under your configurable prefix (default: `M`).
+- 🌐 &nbsp;**Accessibility First**: Respects `prefers-reduced-motion` and provides full keyboard and screen-reader navigation.
 
-## Quick Setup
+## 🚀 Quick Setup
 
 Install the module to your Nuxt application with one command:
 
@@ -39,40 +37,41 @@ Install the module to your Nuxt application with one command:
 npx nuxi module add nuxt-motion-block
 ```
 
-That's it! You can now use Nuxt Motion Block in your Nuxt app ✨
+That's it! You can now use any Nuxt Motion Block component in your app with zero extra imports.
 
+## 📦 Component Families
 
-## Contribution
+- **AI Interfaces**: Chat surfaces, streaming reasoning traces, tool calls, citations, task lists, and expressive AI orbs.
+- **3D & Depth**: Interactive tilt cards, perspective text, and 3D scenes.
+- **Backgrounds & Visual Effects**: Aurora curtains, spotlight beams, border trails, dither charts, and pixelated canvases.
+- **Forms & Inputs**: Animated OTP inputs, floating labels, countries pickers, and scrubbers.
+- **Text & Number Effects**: Rolling text, scramble reveals, shimmers, and wave typography.
+
+## 💻 Local Development
 
 <details>
-  <summary>Local development</summary>
+  <summary>Developer Workflow</summary>
   
   ```bash
   # Install dependencies
-  npm install
+  pnpm install
   
   # Generate type stubs
   npm run dev:prepare
   
-  # Develop with the playground
+  # Develop with playground
   npm run dev
   
-  # Build the playground
-  npm run dev:build
+  # Run type checking
+  npm run typecheck
   
-  # Run ESLint
-  npm run lint
-  
-  # Run Vitest
+  # Run tests
   npm run test
-  npm run test:watch
-  
-  # Release new version
-  npm run release
   ```
 
 </details>
 
+---
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/nuxt-motion-block/latest.svg?style=flat&colorA=020420&colorB=00DC82

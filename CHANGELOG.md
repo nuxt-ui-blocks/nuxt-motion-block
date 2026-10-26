@@ -5,6 +5,24 @@
 
 ### 🚀 Enhancements
 
+- **components:** Add 68 components across the existing categories — agent-chat surfaces, card decks, form controls, interactive panels, text animations and shader transitions — each with a docs page, a basic example and a customizable one
+- **3d:** Add `Book`, a hardback whose cover swings open on a 3D hinge as the pointer drags it
+- **ai:** Add `AiApproval`, `AiArtifact`, `AiBranch`, `AiContextMeter`, `AiConversation` and `AiSuggestions` for agent chat surfaces, plus `ImageGenerationPanel`, a prompt composer that fills a result grid while it runs
+- **backgrounds:** Add `AuroraCurtain`, a WebGL aurora that hangs behind the content and falls back to a CSS gradient when the browser refuses a context
+- **cards:** Add `CardSwipeDeck` and `ScrollableCardStack` for swipeable and stacked decks, `PhotoStack` and `TiltCard` for pointer-driven depth, and `MacTerminal` for a window chrome with a typed-out session
+- **effects:** Add `ArcadePixel` (a sprite grid with scanlines and a CRT overlay), `DitherImage`, `GravityStars`, `PixelFlowField`, `VideoAmbient` (a glow sampled from a playing video) and `GooeyFilter`
+- **forms:** Add `Form` with per-field validation states, plus `AuthForm`, `CountryPicker`, `DigitRoll`, `FaviconSearch`, `FloatInput`, `MorphToggle`, `Scrubber`, `SocialSelector` and `SwapPanel`
+- **interactive:** Add `ContributionGraph`, `CountBadge`, `FluidHoverHighlight`, `FolderReveal`, `GitHubStarsAnimation`, `HoverExpand`, `HoverImageList`, `ImageMetadataPreview`, `InlineTestimonials`, `InteractiveImageSelector`, `JobListing`, `MorphSurface`, `Phototab`, `PixelBrushCanvas`, `PowerOffSlide`, `TimeMachineStack`, `UserAccountAvatar` and `VectorEditorToolbar`
+- **layout:** Add `BreakpointIndicator`, which reports the active Tailwind breakpoint
+- **loaders:** Add `AiLoader` and `ContentSkeleton`
+- **movement:** Add `CursorFollow` and `MagneticField`
+- **movement:** Add `CursorImageTrail`, photos that drop behind the pointer as it travels, scaled by pointer speed and pooled so nothing is allocated mid-gesture
+- **navigation:** Add `Breadcrumb`, `FileTree` and `Pagination`
+- **text:** Add `DepthParallaxWords`, `FadeThrough`, `GravityLetters`, `KineticCenterBuild`, `NumberFlow`, `PerCharacterRise`, `ScaleDownFade`, `ScrollRevealParagraph`, `SharedAxis` and `ShimmerSweep`
+- **text:** Add `RollingText`, split-flap characters that cycle through a glyph ramp before landing, driven by CSS keyframes and replayable on mount, in view, hover or manually
+- **transitions:** Add `ApertureBlurTransition` (a noisy iris ring opening from the centre) and `ChromaBlurTransition` (a diagonal curtain with a split colour fringe), both on the shared shader-transition driver
+- **docs:** Give every new page the same section order, show the real source of the customizable example in `Customize`, and update the component count copy to 260+
+- **webgl:** Add `easeOutCubic` to the shared easing helpers for the aperture sweep
 - **code-block:** Add a `diff` variant with a `lines` prop and a `bare` chrome-less mode, so the same code surface can render a patch
 - **ai-diff:** Render the diff body through `CodeBlock` and keep the verdict in local state, replaying by remount
 - **theme-color:** Add `theme-color` utilities to map Nuxt UI tokens to CSS variables and resolved colours (and back), so components can follow the active theme instead of hardcoding custom colours

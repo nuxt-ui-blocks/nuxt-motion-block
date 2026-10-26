@@ -1,19 +1,26 @@
 export default defineNuxtConfig({
   extends: ['docus'],
 
-  mcp: false,  // MCP is provided via stdio (bin/mcp-server.mjs) instead of docus's built-in HTTP server
+  modules: [
+    '@nuxt/fonts',
+    '../src/module',
+    '@nuxtjs/sitemap',
+  ],
 
-  modules: ['@nuxt/fonts', '../src/module'],
-
+  ssr: true,
   site: {
-    name: 'Nuxt Motion Block',
     url: process.env.NUXT_SITE_URL || 'https://nuxt-motion-block.pages.dev',
+    name: 'Nuxt Motion Block',
     description: 'A streamlined UI library that extends Nuxt UI with motion capabilities powered by motion-v.',
   },
 
   colorMode: {
     preference: 'dark',
     fallback: 'dark',
+  },
+
+  nitro: {
+    preset: 'cloudflare-pages',
   },
   fonts: {
     families: [
@@ -22,7 +29,19 @@ export default defineNuxtConfig({
     ],
   },
 
+  // The MCP toolkit needs a running server, so it only produces a warning on
+  // `nuxt generate`. The docs are deployed as static files.
+  mcp: false,
+
   motionBlock: {
     prefix: 'M',
+  },
+
+  ogImage: {
+    enabled: false,
+  },
+
+  sitemap: {
+    zeroRuntime: false,
   },
 })

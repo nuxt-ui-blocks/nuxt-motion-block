@@ -1,6 +1,6 @@
 {
   "name": "nuxt-motion-block",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A streamlined UI library that extends Nuxt UI with motion capabilities powered by motion-v",
   "repository": "nuxt-ui-blocks/nuxt-motion-block",
   "license": "MIT",
@@ -63,11 +63,13 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit",
     "docs:dev": "pnpm --filter nuxt-motion-block-docs dev",
     "docs:build": "pnpm --filter nuxt-motion-block-docs build",
-    "docs:preview": "pnpm --filter nuxt-motion-block-docs preview"
+    "docs:preview": "pnpm --filter nuxt-motion-block-docs preview",
+    "deploy:docs": "pnpm --dir docs generate && npx wrangler pages deploy docs/dist --project-name=nuxt-motion-block"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.0",
     "@nuxt/ui": "^4.11.2",
+    "@standard-schema/spec": "^1.1.0",
     "@vueuse/core": "^14.4.0",
     "defu": "^6.1.4",
     "embla-carousel-auto-height": "^8.6.0",
