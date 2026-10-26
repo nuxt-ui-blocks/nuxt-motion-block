@@ -69,6 +69,7 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.0",
     "@nuxt/ui": "^4.11.2",
+    "@standard-schema/spec": "^1.1.0",
     "@vueuse/core": "^14.4.0",
     "defu": "^6.1.4",
     "embla-carousel-auto-height": "^8.6.0",

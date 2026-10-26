@@ -1,18 +1,25 @@
 <script setup lang="ts">
 import type { ComponentPublicInstance } from 'vue'
+import type { StandardSchemaV1 } from '@standard-schema/spec'
 import { computed, ref, watch } from 'vue'
 
 export type FormFieldType
   = | 'checkbox'
     | 'email'
     | 'password'
+    | 'radio'
     | 'select'
+    | 'switch'
     | 'tel'
     | 'text'
     | 'textarea'
     | 'url'
 
 export interface FormFieldOption {
+  /** Optional description shown under the option label. */
+  description?: string
+  /** Optional icon shown with the option. */
+  icon?: string
   label: string
   value: string
 }
@@ -22,18 +29,26 @@ export interface FormFieldConfig {
   autocomplete?: string
   /** Helper copy shown under the label, or under the control for checkboxes. */
   description?: string
+  /** Icon shown inside text, email, password and URL inputs. */
+  icon?: string
   /** Label rendered above the control, inline for checkboxes. */
   label: string
   /** Key used in the values and errors objects. */
   name: string
-  /** Choices for a `select` field. */
+  /** Choices for a `select` or `radio` field. */
   options?: FormFieldOption[]
+  /** Layout for a `radio` field. Defaults to `vertical`. */
+  orientation?: 'horizontal' | 'vertical'
   /** Placeholder text. */
   placeholder?: string
   /** Marks the underlying control as required. */
   required?: boolean
+  /** Show a show/hide toggle on `password` fields. */
+  reveal?: boolean
   /** Textarea height in rows. Defaults to 3. */
   rows?: number
+  /** Icon shown at the end of a text input. */
+  trailingIcon?: string
   /** Control to render. Defaults to `text`. */
   type?: FormFieldType
 }
@@ -43,6 +58,13 @@ export type FormValue = boolean | string
 export type FormValues = Record<string, FormValue>
 
 export type FormErrors = Record<string, string | undefined>
+
+export interface FormError {
+  /** Field name the message belongs to. */
+  name?: string
+  /** Message shown under the control. */
+  message: string
+}
 
 export interface FormProps {
   /** Extra classes for the form element. */
@@ -55,10 +77,18 @@ export interface FormProps {
   fields: FormFieldConfig[]
   /** Controlled values keyed by field name. */
   modelValue?: FormValues
+  /** Any Standard Schema validator, such as Zod or Valibot. */
+  schema?: StandardSchemaV1
   /** Copy shown once a previously invalid field is fixed. */
   successMessage?: string
   /** Label for the default submit button. */
   submitLabel?: string
+  /** Custom validation called with the current values. */
+  validate?: (state: FormValues) => FormError[] | Promise<FormError[]>
+  /** Events that trigger validation. Defaults to input, blur and change. */
+  validateOn?: ('blur' | 'change' | 'focus' | 'input')[]
+  /** Delay before input validation runs, in milliseconds. */
+  validateOnInputDelay?: number
 }
 
 const props = withDefaults(defineProps<FormProps>(), {
@@ -66,8 +96,12 @@ const props = withDefaults(defineProps<FormProps>(), {
   disabled: false,
   errors: () => ({}),
   modelValue: undefined,
+  schema: undefined,
   successMessage: 'Looks good',
   submitLabel: 'Submit',
+  validate: undefined,
+  validateOn: undefined,
+  validateOnInputDelay: 300,
 })
 
 const emit = defineEmits<{
@@ -90,6 +124,26 @@ const fieldElements = new Map<string, HTMLElement>()
 const isControlled = computed(() => props.modelValue !== undefined)
 const values = computed(() => props.modelValue ?? internalValues.value)
 
+const uform = ref<{ errors?: FormError[] } | null>(null)
+const isSchemaValidated = computed(() => Boolean(props.schema || props.validate))
+
+const validationErrors = computed<FormErrors>(() => {
+  const map: FormErrors = {}
+
+  for (const issue of uform.value?.errors ?? []) {
+    if (issue.name && issue.message) {
+      map[issue.name] = issue.message
+    }
+  }
+
+  return map
+})
+
+const resolvedErrors = computed<FormErrors>(() => ({
+  ...validationErrors.value,
+  ...props.errors,
+}))
+
 function setFieldElement(
   name: string,
   element: Element | ComponentPublicInstance | null,
@@ -109,7 +163,15 @@ function valueFor(field: FormFieldConfig): FormValue {
     return current
   }
 
-  return field.type === 'checkbox' ? false : ''
+  return isBooleanField(field) ? false : ''
+}
+
+function isBooleanField(field: FormFieldConfig) {
+  return field.type === 'checkbox' || field.type === 'switch'
+}
+
+function hasInlineLabel(field: FormFieldConfig) {
+  return isBooleanField(field)
 }
 
 function textValue(field: FormFieldConfig) {
@@ -118,7 +180,7 @@ function textValue(field: FormFieldConfig) {
   return typeof current === 'string' ? current : ''
 }
 
-function checkboxValue(field: FormFieldConfig) {
+function booleanValue(field: FormFieldConfig) {
   return Boolean(valueFor(field))
 }
 
@@ -134,8 +196,21 @@ function inputType(field: FormFieldConfig) {
   }
 }
 
+const revealedFields = ref<Record<string, boolean>>({})
+
+function isRevealed(name: string) {
+  return Boolean(revealedFields.value[name])
+}
+
+function toggleReveal(name: string) {
+  revealedFields.value = {
+    ...revealedFields.value,
+    [name]: !revealedFields.value[name],
+  }
+}
+
 function errorFor(field: FormFieldConfig) {
-  return props.errors[field.name]
+  return resolvedErrors.value[field.name]
 }
 
 function isInvalid(field: FormFieldConfig) {
@@ -187,17 +262,35 @@ function shakeField(name: string) {
 function handleSubmit(event: SubmitEvent) {
   event.preventDefault()
 
-  const existingErrors = { ...props.errors }
-  previousErrors.value = existingErrors
+  if (!isSchemaValidated.value) {
+    previousErrors.value = { ...props.errors }
+  }
+
   submitCount.value += 1
 
   for (const field of props.fields) {
-    if (existingErrors[field.name]) {
+    if (isInvalid(field)) {
       shakeField(field.name)
     }
   }
 
   emit('submit', { ...values.value })
+}
+
+function handleValidationError(event: { errors: FormError[] }) {
+  const map: FormErrors = {}
+
+  for (const issue of event.errors) {
+    if (!issue.name) {
+      continue
+    }
+
+    map[issue.name] = issue.message
+    shakeField(issue.name)
+  }
+
+  previousErrors.value = map
+  submitCount.value += 1
 }
 
 function reset(nextValues: FormValues = {}) {
@@ -212,7 +305,7 @@ defineExpose({ reset })
 watch(
   () => props.errors,
   (next, previous) => {
-    if (submitCount.value === 0) {
+    if (submitCount.value === 0 || isSchemaValidated.value) {
       return
     }
 
@@ -228,11 +321,17 @@ watch(
 
 <template>
   <UForm
+    ref="uform"
     :class="['grid gap-4', props.class]"
     :state="values"
     :disabled="props.disabled"
     :loading-auto="false"
+    :schema="props.schema"
+    :validate="props.validate"
+    :validate-on="props.validateOn"
+    :validate-on-input-delay="props.validateOnInputDelay"
     novalidate
+    @error="handleValidationError"
     @submit="handleSubmit"
   >
     <div
@@ -243,18 +342,38 @@ watch(
       :style="{ animationDelay: `${index * STAGGER_DELAY}ms` }"
     >
       <UFormField
-        :label="field.type === 'checkbox' ? undefined : field.label"
-        :description="field.type === 'checkbox' ? undefined : field.description"
-        :help="field.type === 'checkbox' ? field.description : undefined"
+        :label="hasInlineLabel(field) || field.type === 'radio' ? undefined : field.label"
+        :description="hasInlineLabel(field) ? undefined : field.description"
+        :help="hasInlineLabel(field) ? field.description : undefined"
         :error="errorFor(field)"
         :name="field.name"
+        :eager-validation="true"
         :ui="isInvalid(field) ? { label: 'text-error' } : undefined"
       >
         <UCheckbox
           v-if="field.type === 'checkbox'"
           :label="field.label"
-          :model-value="checkboxValue(field)"
+          :model-value="booleanValue(field)"
           :required="field.required"
+          @update:model-value="updateField(field.name, $event)"
+        />
+
+        <USwitch
+          v-else-if="field.type === 'switch'"
+          :label="field.label"
+          :model-value="booleanValue(field)"
+          :required="field.required"
+          @update:model-value="updateField(field.name, $event)"
+        />
+
+        <URadioGroup
+          v-else-if="field.type === 'radio'"
+          :items="field.options ?? []"
+          :legend="field.label"
+          :model-value="textValue(field)"
+          :orientation="field.orientation ?? 'vertical'"
+          :required="field.required"
+          :ui="isInvalid(field) ? { legend: 'text-error' } : undefined"
           @update:model-value="updateField(field.name, $event)"
         />
 
@@ -283,12 +402,29 @@ watch(
           v-else
           class="w-full"
           :autocomplete="field.autocomplete ?? 'off'"
+          :icon="field.icon"
           :model-value="textValue(field)"
           :placeholder="field.placeholder"
           :required="field.required"
-          :type="inputType(field)"
+          :trailing-icon="field.type === 'password' && field.reveal ? undefined : field.trailingIcon"
+          :type="field.type === 'password' && isRevealed(field.name) ? 'text' : inputType(field)"
+          :ui="field.type === 'password' && field.reveal ? { trailing: 'pe-1' } : undefined"
           @update:model-value="updateField(field.name, $event)"
-        />
+        >
+          <template
+            v-if="field.type === 'password' && field.reveal"
+            #trailing
+          >
+            <UButton
+              color="neutral"
+              variant="link"
+              size="sm"
+              :icon="isRevealed(field.name) ? 'i-lucide-eye-off' : 'i-lucide-eye'"
+              :aria-label="isRevealed(field.name) ? 'Hide password' : 'Show password'"
+              @click="toggleReveal(field.name)"
+            />
+          </template>
+        </UInput>
       </UFormField>
 
       <Transition name="form-message">

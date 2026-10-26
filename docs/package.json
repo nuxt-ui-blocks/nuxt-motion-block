@@ -20,7 +20,8 @@
     "better-sqlite3": "^12.4.1",
     "docus": "^5.15.0",
     "motion-v": "^2.4.4",
-    "nuxt": "^4.5.2"
+    "nuxt": "^4.5.2",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@nuxt/fonts": "^0.14.0",
