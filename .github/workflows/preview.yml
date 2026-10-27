@@ -5,23 +5,32 @@ on:
     branches:
       - '**'
 
+concurrency:
+  group: preview-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   preview:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
         with:
-          node-version: '20'
+          version: 10.25.0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
       - name: Install dependencies
-        run: npm ci --prefix docs
+        run: pnpm install --frozen-lockfile
+
       - name: Build docs
-        run: npm run generate --prefix docs
-      - name: Install Wrangler
-        run: npm i -D wrangler@latest
+        run: pnpm --dir docs generate
+
       - name: Deploy preview
+        run: pnpm dlx wrangler@4 pages deploy docs/dist --project-name nuxt-motion-block --branch "${{ github.ref_name }}"
         env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CF_PAGES_BRANCH: ${{ github.ref_name }}
-        run: npm run deploy:preview --prefix docs
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}

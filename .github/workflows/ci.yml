@@ -3,10 +3,10 @@ name: ci
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   lint:
@@ -17,7 +17,7 @@ jobs:
 
       - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version-file: .nvmrc
 
       - run: npm i -g --force corepack@latest && corepack enable
 
@@ -35,7 +35,7 @@ jobs:
 
       - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version-file: .nvmrc
 
       - run: npm i -g --force corepack@latest && corepack enable
 
