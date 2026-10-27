@@ -5,8 +5,11 @@
   "repository": "nuxt-ui-blocks/nuxt-motion-block",
   "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": "^22.19.0 || ^24.11.0 || >=26.0.0"
+  },
   "scripts": {
-    "build": "nuxt build",
+    "build": "nuxt generate",
     "generate": "nuxt generate",
     "deploy:docs": "nuxt generate && npx wrangler pages deploy dist --project-name=nuxt-motion-block",
     "dev": "nuxt dev",
@@ -14,11 +17,15 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck",
-    "deploy:preview": "nuxt generate && wrangler pages deploy ./dist --project-name nuxt-motion-block --branch $CF_PAGES_BRANCH"
+    "deploy:preview": "nuxt generate && wrangler pages deploy ./dist --project-name nuxt-motion-block --branch preview"
   },
   "dependencies": {
+    "@iconify-json/heroicons": "^1.2.3",
+    "@iconify-json/lucide": "^1.2.147",
+    "@iconify-json/simple-icons": "^1.2.101",
+    "@iconify-json/vscode-icons": "^1.2.94",
     "@nuxt/ui": "^4.11.2",
-    "better-sqlite3": "^12.4.1",
+    "better-sqlite3": "^12.11.1",
     "docus": "^5.15.0",
     "motion-v": "^2.4.4",
     "nuxt": "^4.5.2",
