@@ -46,6 +46,19 @@ const vaultCopy = `<div style="display:flex;flex-direction:column;align-items:ce
 
 const cursorDot = `<div style="width:.85rem;height:.85rem;border-radius:9999px;background:color-mix(in oklab, var(--ui-primary) 70%, transparent)"></div>`
 
+const orbitDot = `<div style="width:2.25rem;height:2.25rem;border-radius:9999px;display:flex;align-items:center;justify-content:center;background:color-mix(in oklab, var(--ui-primary) 18%, transparent);color:var(--ui-primary);font-size:.7rem;font-weight:700">M</div>`
+
+const phoneScreenSlot = `<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:1.5rem;text-align:center;background:linear-gradient(to bottom, #171717, #262626);color:#fff">
+  <span style="font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;opacity:.5">Motion Block</span>
+  <p style="font-size:1rem;font-weight:600">Everything in your pocket</p>
+  <p style="font-size:.7rem;opacity:.6">Drop any content into the screen</p>
+</div>`
+
+const browserScreenSlot = `<div style="width:20rem;height:14rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;text-align:center">
+  <p style="font-size:1rem;font-weight:600">nuxt.com</p>
+  <p style="font-size:.75rem;opacity:.65">The page inside is your slot</p>
+</div>`
+
 const squareStrip = `<div style="display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;padding:1rem">
   ${[1, 2, 3, 4, 5, 6].map(n => `<div style="width:2.5rem;height:2.5rem;border-radius:.55rem;display:flex;align-items:center;justify-content:center;background:var(--ui-primary);color:var(--ui-bg);font-weight:700">${n}</div>`).join('')}
 </div>`
@@ -841,5 +854,196 @@ export const playgroundData: Record<string, Record<string, any>> = {
   },
   'Vortex': {
     __slot: sceneCopy,
+  },
+  'AnimatedGridPattern': {
+    __slot: effectCopy,
+  },
+  'FlickeringGrid': {
+    __slot: effectCopy,
+  },
+  'InteractiveGridPattern': {
+    __slot: effectCopy,
+  },
+  'RetroGrid': {
+    __slot: effectCopy,
+  },
+  'BentoCard': {
+    name: 'Analytics',
+    description: 'Every session, charted the moment it happens.',
+    icon: 'i-lucide-chart-line',
+  },
+  'MagicCard': {
+    __slot: cardSlot,
+  },
+  'ShineBorder': {
+    __slot: cardSlot,
+  },
+  'OrbitingCircles': {
+    __slot: orbitDot,
+  },
+  'Particles': {
+    __slot: effectCopy,
+    quantity: 120,
+  },
+  'IconCloud': {
+    images: [
+      'https://cdn.simpleicons.org/vuedotjs/42b883',
+      'https://cdn.simpleicons.org/nuxt/00DC82',
+      'https://cdn.simpleicons.org/typescript/3178C6',
+      'https://cdn.simpleicons.org/tailwindcss/06B6D4',
+      'https://cdn.simpleicons.org/vite/646CFF',
+      'https://cdn.simpleicons.org/eslint/4B32C3',
+      'https://cdn.simpleicons.org/prettier/F7B93E',
+      'https://cdn.simpleicons.org/pnpm/F69220',
+      'https://cdn.simpleicons.org/git/F05032',
+      'https://cdn.simpleicons.org/github/ffffff',
+      'https://cdn.simpleicons.org/nodedotjs/5FA04E',
+      'https://cdn.simpleicons.org/vercel/ffffff',
+    ],
+  },
+  'TextAnimate': {
+    text: 'Interfaces that move with intent.',
+  },
+  'Globe': {
+    data: [
+      { lat: 40.71, lng: -74.01, size: 0.06, label: 'New York' },
+      { lat: 51.51, lng: -0.13, size: 0.06, label: 'London' },
+      { lat: 35.68, lng: 139.69, size: 0.06, label: 'Tokyo' },
+      { lat: -33.87, lng: 151.21, size: 0.06, label: 'Sydney' },
+    ],
+  },
+  'ShimmerButton': {
+    __slot: 'Ship it',
+  },
+  'ShinyButton': {
+    __slot: 'Hover for the shine',
+  },
+  'RainbowButton': {
+    __slot: 'Gradient border',
+  },
+  'PulsatingButton': {
+    __slot: 'Live now',
+  },
+  'RippleButton': {
+    __slot: 'Click anywhere',
+  },
+  'InteractiveHoverButton': {
+    __slot: 'Get started',
+  },
+  'IPhone15Pro': {
+    __slot: phoneScreenSlot,
+  },
+  'Safari': {
+    __slot: browserScreenSlot,
+  },
+  'Android': {
+    __slot: phoneScreenSlot,
+  },
+  'CircularProgress': {
+    value: 68,
+    caption: 'Storage',
+  },
+  'CodeComparison': {
+    before: 'const total = items.filter(item => item.active).map(item => item.price)\nconst tax = total.reduce((sum, price) => sum + price * 0.2, 0)\nconst receipt = { total, tax, paid: total + tax, currency: \'USD\' }',
+    after: 'const total = items.filter(({ active }) => active).map(({ price }) => price)\nconst tax = total.reduce((sum, price) => sum + price * 0.2, 0)\nconst receipt = { total, tax, paid: total + tax, currency: \'USD\' }',
+    beforeLabel: 'Before',
+    afterLabel: 'After',
+  },
+  'ComicText': {
+    text: 'Wham!',
+  },
+  'StripedPattern': {
+    angle: 45,
+    width: 1,
+    gap: 12,
+  },
+  'SparklesText': {
+    text: 'Sparkles',
+    count: 12,
+    size: 16,
+  },
+  'Marquee': {
+    duration: 22,
+    gap: 12,
+    pauseOnHover: true,
+    repeat: 6,
+    reverse: false,
+    vertical: false,
+    __slot: `<span style="display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.1rem;border:1px solid var(--ui-border);border-radius:.6rem;background:var(--ui-bg-elevated);font-size:.85rem;white-space:nowrap">
+  <span style="width:.375rem;height:.375rem;border-radius:9999px;background:var(--ui-primary)"></span>Motion
+</span>`,
+  },
+  'ZoomableImage': {
+    src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+    alt: 'A snow-covered mountain ridge at sunrise',
+    class: 'h-64 w-full rounded-xl',
+  },
+  'ScratchToReveal': {
+    width: 320,
+    height: 200,
+    brushSize: 24,
+    threshold: 45,
+    __slot: `<div style="text-align:center">
+  <p style="font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;opacity:.6">You won</p>
+  <p style="font-size:1.75rem;font-weight:700;margin-top:.25rem">20% off</p>
+  <p style="font-size:.75rem;opacity:.6;margin-top:.25rem">Code SCRATCH20</p>
+</div>`,
+  },
+  'LightRays': {
+    color: '#7dd3fc',
+    count: 24,
+    speed: 1,
+    spread: 0.85,
+    length: 1.15,
+    fade: 0.55,
+    origin: 'top-center',
+    pulsate: true,
+    followMouse: false,
+    class: 'h-72 w-full rounded-xl bg-neutral-950',
+    __slot: `<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;text-align:center">
+  <p style="font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.5)">Stage light</p>
+  <p style="font-size:1.6rem;font-weight:600;color:#fff">Shine from above</p>
+</div>`,
+  },
+  'TextHighlighter': {
+    text: 'move with intent',
+    duration: 0.7,
+    delay: 0.1,
+  },
+  'CoolMode': {
+    emoji: '🎉',
+    particleCount: 12,
+    disabled: false,
+    __slot: `<button style="padding:.7rem 1.6rem;border-radius:.6rem;background:var(--ui-primary);color:var(--ui-bg);font-weight:600;font-size:.9rem;border:none;cursor:pointer">Click me</button>`,
+  },
+  'Lens': {
+    src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=80',
+    alt: 'A snow-covered mountain ridge at sunrise',
+    zoom: 2.4,
+    size: 180,
+    class: 'h-64 w-full rounded-xl',
+  },
+  'VideoText': {
+    src: 'https://media.w3.org/2010/05/video/movie_300.mp4',
+    text: 'Motion',
+    fontSize: 'clamp(3rem, 13vw, 9rem)',
+    blend: 'multiply',
+    autoplay: true,
+    loop: true,
+    class: 'h-64 w-full rounded-xl',
+  },
+  'WarpBackground': {
+    color: '#6366f1',
+    gridColor: '#ffffff',
+    lines: 22,
+    beams: 4,
+    speed: 1,
+    horizon: 0.55,
+    glow: 0.6,
+    class: 'h-72 w-full rounded-xl bg-neutral-950',
+    __slot: `<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;text-align:center">
+  <p style="font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.5)">Warp speed</p>
+  <p style="font-size:1.6rem;font-weight:600;color:#fff">Into the horizon</p>
+</div>`,
   },
 }
