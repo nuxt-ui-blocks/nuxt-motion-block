@@ -911,6 +911,10 @@ export const playgroundData: Record<string, Record<string, any>> = {
       { lat: 35.68, lng: 139.69, size: 0.06, label: 'Tokyo' },
       { lat: -33.87, lng: 151.21, size: 0.06, label: 'Sydney' },
     ],
+    arcs: [
+      { from: [40.71, -74.01], to: [51.51, -0.13] },
+      { from: [35.68, 139.69], to: [-33.87, 151.21] },
+    ],
   },
   'ShimmerButton': {
     __slot: 'Ship it',
