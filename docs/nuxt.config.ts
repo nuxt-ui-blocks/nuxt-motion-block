@@ -9,9 +9,9 @@ export default defineNuxtConfig({
 
   site: {
     url:
-      process.env.NUXT_SITE_URL ||
-      process.env.CF_PAGES_URL ||
-      'https://nuxt-motion-block.pages.dev',
+      process.env.NUXT_SITE_URL
+      || process.env.CF_PAGES_URL
+      || 'https://nuxt-motion-block.pages.dev',
     name: 'Nuxt Motion Block',
     description: 'A streamlined UI library that extends Nuxt UI with motion capabilities powered by motion-v.',
   },
@@ -38,6 +38,19 @@ export default defineNuxtConfig({
     },
   },
 
+  hooks: {
+    // @nuxt/fonts -> fontless leaves an esbuild service running after the
+    // build finishes, which keeps `nuxt generate` alive forever. `close`
+    // runs after Nitro has written the prerendered site.
+    // See https://github.com/nuxt/nuxt/issues/33987
+    close: () => {
+      const args = process.argv.slice(2)
+      if (args.includes('generate') || args.includes('build')) {
+        process.exit(0)
+      }
+    },
+  },
+
   fonts: {
     families: [
       { name: 'Geist', provider: 'google', weights: [400, 500, 600, 700] },
@@ -57,18 +70,5 @@ export default defineNuxtConfig({
 
   sitemap: {
     zeroRuntime: true,
-  },
-
-  hooks: {
-    // @nuxt/fonts -> fontless leaves an esbuild service running after the
-    // build finishes, which keeps `nuxt generate` alive forever. `close`
-    // runs after Nitro has written the prerendered site.
-    // See https://github.com/nuxt/nuxt/issues/33987
-    close: () => {
-      const args = process.argv.slice(2)
-      if (args.includes('generate') || args.includes('build')) {
-        process.exit(0)
-      }
-    },
   },
 })

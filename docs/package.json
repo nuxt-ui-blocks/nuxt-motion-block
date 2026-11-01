@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@nuxt/fonts": "^0.14.0",
+    "cobe": "^2.0.1",
     "eslint": "^9.39.4",
     "typescript": "^5.9.2",
     "vue-tsc": "^3.3.11"
