@@ -2,8 +2,8 @@ import type { ComponentConfig } from '@nuxt/ui'
 
 const defaultTheme = {
   slots: {
-    root: 'relative flex h-full w-full items-center justify-center overflow-hidden',
-    canvas: 'size-full cursor-grab touch-none active:cursor-grabbing',
+    root: 'relative mx-auto aspect-square w-full max-w-150 overflow-hidden',
+    canvas: 'size-full cursor-grab touch-none transition-opacity duration-500 contain-[layout_paint_size] active:cursor-grabbing',
     fallback: 'flex h-full w-full flex-col items-center justify-center gap-2 p-6 text-center text-sm text-muted',
   },
 }
