@@ -33,7 +33,7 @@ label: Preview
         </div>
         <div>
           <h3 class="font-semibold text-highlighted">
-            Motion Primitives
+            Wobble Card
           </h3>
           <p class="text-xs text-muted">
             Hover to tilt the card
