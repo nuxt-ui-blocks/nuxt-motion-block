@@ -1050,4 +1050,34 @@ export const playgroundData: Record<string, Record<string, any>> = {
   <p style="font-size:1.6rem;font-weight:600;color:#fff">Into the horizon</p>
 </div>`,
   },
+  'HexagonPattern': {
+    radius: 40,
+    gap: 0,
+    direction: 'horizontal',
+    strokeDasharray: '0',
+    hexagons: [[1, 1], [4, 4], [2, 2], [3, 4], [5, 4], [8, 2], [6, 3], [8, 5], [10, 10]],
+  },
+  'NoiseTexture': {
+    frequency: 0.4,
+    octaves: 6,
+    slope: 0.15,
+    noiseOpacity: 0.6,
+    class: '[mask-image:radial-gradient(260px_circle_at_center,white,transparent)]',
+  },
+  'LineShadowText': {
+    text: 'Line Shadow',
+    shadowColor: 'black',
+  },
+  'DottedMap': {
+    width: 150,
+    height: 75,
+    mapSamples: 5000,
+    dotRadius: 0.22,
+    pulse: true,
+    markers: [
+      { lat: 37.5665, lng: 126.978, size: 2.4, label: 'Seoul' },
+      { lat: 40.7128, lng: -74.006, size: 2.4, label: 'New York' },
+    ],
+    class: 'h-64 w-full',
+  },
 }
