@@ -138,7 +138,6 @@ const emit = defineEmits<{
   'after:enter': []
   'leave': []
   'after:leave': []
-  'close:prevent': []
 }>()
 
 const uniqueId = useId()
