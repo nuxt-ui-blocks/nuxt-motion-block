@@ -182,16 +182,12 @@ label: Preview
 ## Props
 
 ::component-props
-  ::component-prop{name="variants"}
-  CVariants for controlling the animation states with specific properties for initial, animate, and exit states.
+  ::component-prop{name="variants" type="{ initial: Variant, animate: Variant, exit: Variant }"}
+  Variants for controlling the animation states with specific properties for initial, animate, and exit states.
   ::
   
   ::component-prop{name="springConfig" type="SpringOptions" default=""}
 Configuration for the spring physics used in the cursor's movement.
-  ::
-  
-  ::component-prop{name="trail" type="boolean" default="false"}
-  Enable trailing effect.
   ::
   
   ::component-prop{name="transition" type="Transition" default=""}

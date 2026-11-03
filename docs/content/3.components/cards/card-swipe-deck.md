@@ -504,12 +504,12 @@ clear your own counters in the same handler, as the custom example does.
 
 ## Events
 
-::component-props
-  ::component-prop{name="swipe" type="(id: string, direction: 'left' | 'right') => void"}
+::component-events
+  ::component-event{name="swipe" type="(id: string, direction: 'left' | 'right') => void"}
   Fired when a card is committed, whether by drag, keyboard or the imperative
   API. The card is already on its way out, so the id is the one that was on top.
   ::
-  ::component-prop{name="empty" type="() => void"}
+  ::component-event{name="empty" type="() => void"}
   Fired when the last card commits. It fires as the throw starts, not when the
   exit animation ends.
   ::

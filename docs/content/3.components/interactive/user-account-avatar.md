@@ -127,11 +127,11 @@ Opening a section closes the other one. Reopening a section resets the form to\n
 
 ## Events
 
-::component-props
-  ::component-prop{name="profile-save" type="(user: UserData) => void"}
+::component-events
+  ::component-event{name="profile-save" type="(user: UserData) => void"}
   Fired after **Save Changes** with the updated name and email.
   ::
-  ::component-prop{name="order-view" type="(orderId: string) => void"}
+  ::component-event{name="order-view" type="(orderId: string) => void"}
   Fired when the view button on an order is pressed, with that order's id.
   ::
 ::

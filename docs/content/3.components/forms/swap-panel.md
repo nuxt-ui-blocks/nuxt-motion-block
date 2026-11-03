@@ -341,18 +341,18 @@ number changes; the amount itself is never reformatted while you type.
 
 ## Events
 
-::component-props
-  ::component-prop{name="update:amount" type="(value: string) => void"}
+::component-events
+  ::component-event{name="update:amount" type="(value: string) => void"}
   Fired on each keystroke and when **Max** fills the pay balance.
   ::
-  ::component-prop{name="flip" type="() => void"}
+  ::component-event{name="flip" type="() => void"}
   Fired by the round button between the rows. Swap `from` and `to` in response.
   ::
-  ::component-prop{name="select-token" type="(side: 'from' | 'to', token?: SwapToken) => void"}
+  ::component-event{name="select-token" type="(side: 'from' | 'to', token?: SwapToken) => void"}
   Fired by the chip menus with the chosen token, or by the chips alone when
   `tokens` is omitted.
   ::
-  ::component-prop{name="submit" type="() => void"}
+  ::component-event{name="submit" type="() => void"}
   Fired by the action button. The panel does not submit anything itself.
   ::
 ::

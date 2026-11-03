@@ -598,6 +598,10 @@ which keeps a long form quiet while someone is still typing.
   ::component-prop{name="validateOn" type="('input' | 'blur' | 'change' | 'focus')[]" default="['input', 'blur', 'change']"}
   Events that trigger validation. Submit always validates.
   ::
+  ::component-prop{name="validateOnInputDelay" type="number" default="300"}
+  Debounce in milliseconds for input-triggered validation, forwarded verbatim to
+  `UForm` as `validate-on-input-delay`.
+  ::
   ::component-prop{name="submitLabel" type="string" default="Submit"}
   Label for the default submit button.
   ::
@@ -614,11 +618,11 @@ which keeps a long form quiet while someone is still typing.
 
 ## Events
 
-::component-props
-  ::component-prop{name="update:modelValue" type="(values: Record<string, string | boolean>) => void"}
+::component-events
+  ::component-event{name="update:modelValue" type="(values: Record<string, string | boolean>) => void"}
   Emitted with a shallow copy of the values whenever a control changes.
   ::
-  ::component-prop{name="submit" type="(values: Record<string, string | boolean>) => void"}
+  ::component-event{name="submit" type="(values: Record<string, string | boolean>) => void"}
   Emitted on submit with the current values. The event is always prevented, so
   the page does not reload. With `schema` or `validate`, it fires only after
   validation passes.

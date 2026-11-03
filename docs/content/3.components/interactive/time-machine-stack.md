@@ -238,12 +238,12 @@ does not refetch or remount as it travels from the back to the front.
 
 ## Events
 
-::component-props
-  ::component-prop{name="update:index" type="(index: number) => void"}
+::component-events
+  ::component-event{name="update:index" type="(index: number) => void"}
   Fired with the new front index whenever the wheel, a drag, a key or the
   controls change it.
   ::
-  ::component-prop{name="change" type="(index: number) => void"}
+  ::component-event{name="change" type="(index: number) => void"}
   The same index, for listeners that pair with other `change` events.
   ::
 ::

@@ -96,11 +96,8 @@ label: Preview
 
 ## Slots
 
-::component-slots
-  ::component-slot-row{name="default"}
-  No default slot is used.
-  ::
-::
+`MFigmaComment` exposes no slots. The avatar, author, timestamp and message are
+all props.
 
 ## UI
 

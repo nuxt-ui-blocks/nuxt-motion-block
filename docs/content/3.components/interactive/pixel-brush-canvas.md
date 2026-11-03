@@ -203,14 +203,14 @@ const palette = [
 
 ## Events
 
-::component-props
-  ::component-prop{name="change" type="(pixels: Uint8Array) => void"}
+::component-events
+  ::component-event{name="change" type="(pixels: Uint8Array) => void"}
   Fires with a copy of the pixel buffer after every committed mutation.
   ::
-  ::component-prop{name="update:brush" type="(brush: PixelBrushCanvasBrush) => void"}
+  ::component-event{name="update:brush" type="(brush: PixelBrushCanvasBrush) => void"}
   Fires when a tool is chosen, whether or not `brush` is bound.
   ::
-  ::component-prop{name="update:color" type="(color: number) => void"}
+  ::component-event{name="update:color" type="(color: number) => void"}
   Fires when a swatch is chosen, whether or not `color` is bound.
   ::
 ::

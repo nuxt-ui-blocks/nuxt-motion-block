@@ -246,6 +246,13 @@ Choose from predefined blur intensities or specify a custom pixel value:
   ::component-prop{name="duration" type="number" default="5"}
   Animation duration in seconds.
   ::
+
+  ::component-prop{name="transition" type="Transition" default="undefined"}
+  Replaces the base transition wholesale rather than merging into it. The base is
+  `{ repeat: Infinity, duration, ease: 'linear' }`, so a partial object such as
+  `{ duration: 2 }` drops the infinite repeat and the loop stops after one cycle —
+  pass `repeat: Infinity` yourself if you only meant to change the timing.
+  ::
 ::
 
 ## UI

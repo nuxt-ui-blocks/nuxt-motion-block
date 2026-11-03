@@ -110,15 +110,11 @@ straight through. See the
 
 ## Slots
 
-::component-slots
-  ::component-slot-row{name="label"}
-    Replaced by the component. The `label` / `dragLabel` cross-fade is
-    implemented by overriding this slot, so your own `label` slot content is
-    ignored.
-  ::
-::
+`MAnimatedFileUpload` exposes no slots. The `#label` template on the underlying
+`UFileUpload` is already claimed — it is where the `label` / `dragLabel` cross-fade
+lives — so a `#label` you pass here is ignored.
 
-Other `UFileUpload` slots are **not** forwarded. `leading`, `description`,
+Other `UFileUpload` slots are **not** forwarded either. `leading`, `description`,
 `actions`, `file`, `files`, `files-top`, `files-bottom`, `file-leading`,
 `file-trailing`, `file-name` and `file-size` will not render, because the wrapper
 only passes a single `label` template to the base component. If you need them, use

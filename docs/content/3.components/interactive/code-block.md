@@ -179,6 +179,21 @@ label: Preview
   Render the line-number gutter and pad the code body to clear it. The gutter only
   appears after highlighting has resolved, so it is absent from the server render.
   ::
+  ::component-prop{name="variant" type="'code' | 'diff'" default="'code'"}
+  `code` highlights `code` through Shiki. `diff` skips the highlighter entirely and
+  renders `lines` instead, so the two inputs are not combined: in diff mode `code`
+  is ignored.
+  ::
+  ::component-prop{name="lines" type="CodeBlockDiffLine[]" default="[]"}
+  One entry per row, read only when `variant` is `'diff'`. Each row is
+  `{ content: string, kind?: 'added' | 'removed' | 'context', number?: number }`;
+  an omitted `kind` is treated as `context`, and an omitted `number` drops the line
+  number for that row so tabular data can mix with code.
+  ::
+  ::component-prop{name="bare" type="boolean" default="false"}
+  Drop the container frame — border, rounded corners and background — so a host card
+  can own the chrome. The header, gutter and copy button stay.
+  ::
 ::
 
 ## UI
@@ -221,6 +236,25 @@ This component's theme exposes the slots below. Override any of them per instanc
   ::
   ::component-slot-row{name="body"}
   `code-body`
+  ::
+  ::component-slot-row{name="diffBody"}
+  `overflow-x-auto py-1 font-mono text-xs leading-relaxed`
+  ::
+  ::component-slot-row{name="diffLine"}
+  `flex gap-3 px-3`. The `kind` variant adds a row tint: `added` gets
+  `bg-[oklch(72%_0.17_150_/_0.12)]`, `removed` gets `bg-[oklch(63%_0.21_25_/_0.1)]`,
+  `context` is untinted.
+  ::
+  ::component-slot-row{name="diffLineNumber"}
+  `w-6 shrink-0 select-none text-right tabular-nums text-muted`
+  ::
+  ::component-slot-row{name="diffLinePrefix"}
+  `w-2 shrink-0 select-none`. The `kind` variant colours the `+` / `-` glyph:
+  `added` is `text-[oklch(52%_0.17_150)]`, `removed` is `text-error`, `context` is
+  `text-muted`.
+  ::
+  ::component-slot-row{name="diffLineContent"}
+  `whitespace-pre text-default`
   ::
 ::
 

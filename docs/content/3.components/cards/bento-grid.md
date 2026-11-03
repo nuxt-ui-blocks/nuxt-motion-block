@@ -195,23 +195,44 @@ label: Preview
 
 ## UI
 
-Both parts of the layout have their own theme. Override either per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.bentoGrid` and `ui.bentoCard` in `app.config.ts`.
+Both parts of the layout have their own theme, and they are separate: `ui.bentoGrid`
+holds the grid and its column variants, `ui.bentoCard` holds everything the card
+paints. Setting a card slot on the grid (or the reverse) does nothing. Override
+either per instance with the [`ui` prop](/getting-started/theming), or app-wide
+under `ui.bentoGrid` and `ui.bentoCard` in `app.config.ts`.
+
+### Bento Grid
 
 ::component-props
   ::component-prop{name="ui" type="object"}
-  Per-slot classes merged over the theme defaults.
+  Per-slot classes merged over `ui.bentoGrid`.
   ::
 ::
 
 ::component-slots
   ::component-slot-row{name="root"}
-  `grid w-full auto-rows-[18rem] grid-cols-1 gap-4` on the grid, `group relative flex flex-col justify-end overflow-hidden rounded-xl border border-default bg-default` on the card
+  `grid w-full auto-rows-[18rem] grid-cols-1 gap-4`. The `cols` prop contributes the
+  column classes through this slot, so a `root` override replaces them too.
+  ::
+::
+
+### Bento Card
+
+::component-props
+  ::component-prop{name="ui" type="object"}
+  Per-slot classes merged over `ui.bentoCard`.
+  ::
+::
+
+::component-slots
+  ::component-slot-row{name="root"}
+  `group relative flex flex-col justify-end overflow-hidden rounded-xl border border-default bg-default`
   ::
   ::component-slot-row{name="background"}
   `absolute inset-0 overflow-hidden`
   ::
   ::component-slot-row{name="content"}
-  `pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-transform duration-300 ease-out`
+  `pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-transform duration-300 ease-out`. The `interactive` variant adds `group-hover:-translate-y-10`.
   ::
   ::component-slot-row{name="icon"}
   `size-8 text-highlighted`
@@ -223,7 +244,7 @@ Both parts of the layout have their own theme. Override either per instance with
   `max-w-lg text-sm text-muted`
   ::
   ::component-slot-row{name="cta"}
-  `pointer-events-none absolute bottom-0 z-20 flex w-full transform-gpu flex-row items-center p-4 opacity-0 transition-all duration-300 ease-out`
+  `pointer-events-none absolute bottom-0 z-20 flex w-full transform-gpu flex-row items-center p-4 opacity-0 transition-all duration-300 ease-out`. The `interactive` variant adds `group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto`.
   ::
   ::component-slot-row{name="overlay"}
   `pointer-events-none absolute inset-0 transform-gpu transition-colors duration-300`

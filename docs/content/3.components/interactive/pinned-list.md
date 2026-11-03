@@ -88,11 +88,7 @@ label: Preview
 
 ## Slots
 
-::component-slots
-  ::component-slot-row{name="default"}
-  No default slot is used.
-  ::
-::
+`MPinnedList` exposes no slots. Every row is rendered from its props.
 
 ## UI
 

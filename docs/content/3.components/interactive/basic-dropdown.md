@@ -86,14 +86,14 @@ label: Preview
 
 ## Slots
 
-::component-slots
-  ::component-slot-row{name="item" type="(props: { item: DropdownItem }) => void"}
-  Custom item rendering slot. By default, renders icon, label, and checkmark for selected item.
-  ::
-  ::component-slot-row{name="trailing" type="(props: { open: boolean }) => void"}
-  Custom trailing slot. By default, renders an animated chevron.
-  ::
-::
+`MBasicDropdown` exposes no slots. The `#item` and `#trailing` templates you may
+have seen on `USelect` are already claimed inside this component — the item row
+(icon, label, checkmark) and the chevron are rendered by `MBasicDropdown` itself,
+so passing `#item` or `#trailing` here does nothing.
+
+Restyling goes through the `ui` prop instead: `itemLabel`, `itemLeadingIcon`,
+`itemTrailing`, `itemTrailingIcon`, `checkIcon` and `chevronIcon` cover the painted
+parts of a row and the chevron. Anything structural needs a plain `USelect`.
 
 ## Types
 

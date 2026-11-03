@@ -118,11 +118,8 @@ label: Preview
 
 ## Slots
 
-::component-slots
-  ::component-slot-row{name="default"}
-  No default slot is used by the component; content is rendered from `events` data.
-  ::
-::
+`MAppleInvites` exposes no slots. The whole stack is rendered from the `events`
+array.
 
 ## UI
 

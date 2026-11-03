@@ -183,8 +183,8 @@ panel is capped at `max-w-2xl` and the rows fill whatever they are given.
 
 ## Events
 
-::component-props
-  ::component-prop{name="select" type="(job: JobListingItem) => void"}
+::component-events
+  ::component-event{name="select" type="(job: JobListingItem) => void"}
   Fired with the role that was opened, before the panel appears.
   ::
 ::

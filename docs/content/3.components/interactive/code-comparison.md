@@ -97,6 +97,16 @@ label: Preview
   ::
 ::
 
+## Events
+
+::component-events
+  ::component-event{name="update:modelValue" type="(value: number) => void"}
+  Emitted while the handle is dragged, with the reveal amount as a number from `0`
+  to `100`. Bind it with `v-model` to own the position; the component seeds itself
+  from `modelValue` and follows it when the prop changes.
+  ::
+::
+
 ## UI
 
 This component's theme exposes the slots below. Override any of them per instance with the [`ui` prop](/getting-started/theming), or app-wide under `ui.codeComparison` in `app.config.ts`.

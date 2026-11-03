@@ -266,24 +266,24 @@ exercises the error state.
 
 ## Events
 
-::component-props
-  ::component-prop{name="submit" type="(values: AuthFormValues) => void"}
+::component-events
+  ::component-event{name="submit" type="(values: AuthFormValues) => void"}
   Fired on form submission with the current email and password. The form does
   not send anything itself.
   ::
-  ::component-prop{name="update:modelValue" type="(values: AuthFormValues) => void"}
+  ::component-event{name="update:modelValue" type="(values: AuthFormValues) => void"}
   Fired on every keystroke with the next values. Bind it with `v-model` to own
   the fields.
   ::
-  ::component-prop{name="update:mode" type="(mode: AuthFormMode) => void"}
+  ::component-event{name="update:mode" type="(mode: AuthFormMode) => void"}
   Fired when the sign-in / sign-up switch is used. Bind it with `v-model:mode` to
   control the mode.
   ::
-  ::component-prop{name="magic-link" type="(values: AuthFormValues) => void"}
+  ::component-event{name="magic-link" type="(values: AuthFormValues) => void"}
   Fired by the magic-link button with the current email. The password is always
   empty in this payload.
   ::
-  ::component-prop{name="provider" type="(id: string) => void"}
+  ::component-event{name="provider" type="(id: string) => void"}
   Fired by a provider button with that provider's `id`.
   ::
 ::
