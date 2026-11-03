@@ -94,11 +94,8 @@ label: Preview
 
 ## Slots
 
-::component-slots
-  ::component-slot-row{name="default"}
-  No default slot is used.
-  ::
-::
+`MAppDownloadStack` exposes no slots. The stack, its cards and the labels are all
+rendered from props.
 
 ## UI
 

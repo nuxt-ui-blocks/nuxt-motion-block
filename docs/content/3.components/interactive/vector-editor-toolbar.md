@@ -279,12 +279,12 @@ slot is present, so an inline toolbar without it stays a single row.
 
 ## Events
 
-::component-props
-  ::component-prop{name="update:activeTool" type="(toolId: string) => void"}
+::component-events
+  ::component-event{name="update:activeTool" type="(toolId: string) => void"}
   Fired when a tool or variant is selected. Bind it with
   `v-model:active-tool` to control the selection.
   ::
-  ::component-prop{name="change" type="(toolId: string) => void"}
+  ::component-event{name="change" type="(toolId: string) => void"}
   Fired with the same id as `update:activeTool`, for callers that prefer a
   single change handler over a model binding.
   ::

@@ -108,6 +108,12 @@ label: Preview
   ::component-prop{name="speed" type="number" default="1"}
   Multiplier for the fall speed. Higher values make the meteors fall faster, `2` is twice as fast.
   ::
+
+  ::component-prop{name="angle" type="number" default="215"}
+  Heading of the streaks in degrees, applied as a `rotate()` on each meteor. Each
+  one then travels 500px along that rotated axis while fading out, so the default
+  `215` sends them down and to the right.
+  ::
   
   ::component-prop{name="class" type="string" default="''"}
   CSS classes to apply to the container. The container fills its parent, so give the parent a height.

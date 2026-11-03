@@ -291,8 +291,11 @@ label: Preview
   ::component-prop{name="trailingIcon" type="IconifyIcon"}
   The icon on the right of every trigger. Defaults to Nuxt UI's chevron index.
   ::
-  ::component-prop{name="valueKey" / "labelKey" type="string" default="'value' / 'label'"}
-  Dot-path keys for reading each item's value and label.
+  ::component-prop{name="valueKey" type="string" default="'value'"}
+  Dot-path key for reading each item's value. Its sibling is `labelKey` below.
+  ::
+  ::component-prop{name="labelKey" type="string" default="'label'"}
+  Dot-path key for reading each item's label.
   ::
   ::component-prop{name="expandedValue" type="string | number | null" default="undefined"}
   Deprecated alias for `modelValue`, kept for parity with the pre-Nuxt-UI API.
@@ -328,8 +331,22 @@ All slots are forwarded to the underlying `UAccordion`.
   Same as `content`, but the inner body wrapper — useful with
   `unmountOnHide="false"` to keep padding stable.
   ::
-  ::component-slot-row{name="leading" / "trailing" type="{ item, index, open, ui }"}
-  The leading/trailing icon slots of the trigger.
+  ::component-slot-row{name="leading" type="{ item, index, open, ui }"}
+  The leading icon slot of the trigger.
+  ::
+  ::component-slot-row{name="trailing" type="{ item, index, open, ui }"}
+  The trailing icon slot of the trigger.
+  ::
+::
+
+## Events
+
+::component-events
+  ::component-event{name="update:modelValue" type="(value: string | string[] | undefined) => void"}
+  Emitted with the open panel whenever the open set changes — one value for
+  `type="single"`, an array for `type="multiple"`, and `undefined` when every panel
+  is closed. Bind it with `v-model`. The deprecated `onValueChange` prop is called
+  from the same place.
   ::
 ::
 

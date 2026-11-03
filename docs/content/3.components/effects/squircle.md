@@ -123,7 +123,9 @@ label: Preview
 - The generated path is the only code path on purpose. CSS
   `corner-shape: squircle` is a single fixed shape that ignores `smoothing`
   entirely, so switching to it would make the same props render two different
-  corners depending on browser support.## Props
+  corners depending on browser support.
+
+## Props
 
 ::component-props
   ::component-prop{name="radius" type="number" default="24"}

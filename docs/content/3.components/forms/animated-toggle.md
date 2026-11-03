@@ -62,11 +62,8 @@ label: Preview
 
 ## Slots
 
-::component-slots
-  ::component-slot-row{name="default"}
-  The default slot is not used by this component. All content is rendered internally.
-  ::
-::
+`MAnimatedToggle` exposes no slots. The track and the thumb are rendered
+internally.
 
 ## UI
 

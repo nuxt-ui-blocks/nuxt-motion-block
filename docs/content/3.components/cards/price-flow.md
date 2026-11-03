@@ -138,11 +138,8 @@ No events are emitted by this component.
 
 ## Slots
 
-::component-slots
-  ::component-slot-row{name="default"}
-  No default slot is used.
-  ::
-::
+`MPriceFlow` exposes no slots. Every digit is rendered from props, with each one
+rolling in its own fixed-width column.
 
 ## UI
 

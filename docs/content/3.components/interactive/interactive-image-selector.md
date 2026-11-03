@@ -171,17 +171,17 @@ entrances and bar slide are skipped while the same state changes still happen.
 
 ## Events
 
-::component-props
-  ::component-prop{name="update:selectedImages" type="(selected: number[]) => void"}
+::component-events
+  ::component-event{name="update:selectedImages" type="(selected: number[]) => void"}
   Fired whenever the selection changes, including when selection mode closes.
   ::
-  ::component-prop{name="change" type="(selected: number[]) => void"}
+  ::component-event{name="change" type="(selected: number[]) => void"}
   The same list, for listeners that pair with other `change` events.
   ::
-  ::component-prop{name="delete" type="(deleted: number[]) => void"}
+  ::component-event{name="delete" type="(deleted: number[]) => void"}
   Fired after the chosen photos are removed from the gallery.
   ::
-  ::component-prop{name="share" type="(selected: number[]) => void"}
+  ::component-event{name="share" type="(selected: number[]) => void"}
   Fired when the share button is pressed with at least one photo selected.
   ::
 ::

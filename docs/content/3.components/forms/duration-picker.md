@@ -83,11 +83,7 @@ label: Preview
 
 ## Slots
 
-::component-slots
-  ::component-slot-row{name="default"}
-  The default slot is not used by this component.
-  ::
-::
+`MDurationPicker` exposes no slots. The wheel items are rendered from its props.
 
 ## UI
 

@@ -223,10 +223,6 @@ label: Preview
   When `true`, enables scrollable overlay mode where content scrolls within the overlay.
   ::
   
-  ::component-prop{name="transition" type="boolean" default="true"}
-  Animate the dialog when opening or closing.
-  ::
-  
   ::component-prop{name="fullscreen" type="boolean" default="false"}
   When `true`, the dialog will take up the full screen.
   ::
@@ -245,6 +241,12 @@ label: Preview
   
   ::component-prop{name="dismissible" type="boolean" default="true"}
   When `false`, the dialog will not close when clicking outside or pressing escape.
+  ::
+
+  ::component-prop{name="unmountOnHide" type="boolean" default="true"}
+  Tear the dialog's content down when it closes instead of hiding it. Set it to
+  `false` to keep the content mounted — inputs keep their values and scroll position
+  survives a reopen, at the cost of paying for the content while the dialog is shut.
   ::
   
   ::component-prop{name="ui" type="object" default="undefined"}

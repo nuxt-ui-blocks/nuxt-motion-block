@@ -208,6 +208,15 @@ label: Preview
   ::component-prop{name="staggerDirection" type="number" default="1"}
   Direction of stagger (1 for forward, -1 for reverse).
   ::
+
+  ::component-prop{name="staggerFrom" type="'start' | 'center' | 'edges'" default="'start'"}
+  Where the stagger radiates from. `start` keeps the container-level
+  `staggerChildren` transition, so children arrive in DOM order. `center` gives
+  each child `|i - (n-1)/2| * staggerChildren` and ripples outward from the middle;
+  `edges` gives it `min(i, n-1-i) * staggerChildren`, so both ends lead and the
+  centre arrives last. The last two work by per-child delay, which is why
+  `staggerDirection` only applies to `start`.
+  ::
 ::
 
 ## UI

@@ -313,6 +313,13 @@ label: Preview
   ::component-prop{name="class" type="string" default="''"}
   Merged onto the root element after the theme's classes.
   ::
+  ::component-prop{name="onAnimationStart" type="() => void"}
+  Called as the entrance animation starts. The `animationStart` event fires from the
+  same place, so pick whichever fits the binding you already have.
+  ::
+  ::component-prop{name="onAnimationComplete" type="() => void"}
+  Called as the entrance animation settles. Mirrors the `animationComplete` event.
+  ::
 ::
 
 ## Events
