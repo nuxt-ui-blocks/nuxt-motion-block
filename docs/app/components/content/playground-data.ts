@@ -1080,4 +1080,451 @@ export const playgroundData: Record<string, Record<string, any>> = {
     ],
     class: 'h-64 w-full',
   },
+
+  // ─── Required content props ─────────────────────────────────────────────
+  // These render nothing without a value, so the preview is empty without a seed.
+  'Book': {
+    title: 'The Shape of Motion',
+    color: '#e5a00d',
+    width: 196,
+  },
+  'AiResponse': {
+    text: 'Behind a flag [1]. The audit walks every theme token, so a cold landing means a long tail of unreviewed diffs [2].',
+    citations: [
+      { id: 'c-1', index: 1, title: 'Theme token audit runbook', url: 'https://example.com' },
+      { id: 'c-2', index: 2, title: 'Release checklist, internal' },
+    ],
+  },
+  'AiSources': {
+    defaultOpen: true,
+    sources: [
+      {
+        id: 's-1',
+        snippet: 'Component: add / update / delete a source',
+        title: 'Add a search source',
+        url: 'https://ui.nuxt.com/docs/components/chat',
+      },
+      {
+        id: 's-2',
+        snippet: 'How retrieval-augmented generation is wired into the answer',
+        title: 'Retrieval notes',
+        url: 'https://ai-sdk.dev/docs',
+      },
+      {
+        id: 's-3',
+        snippet: 'Release checklist, internal',
+        title: 'Shipping checklist',
+        url: 'https://example.com',
+      },
+      {
+        id: 's-4',
+        title: 'Token naming convention',
+        url: 'https://nuxt.com/docs',
+      },
+    ],
+  },
+  'PhotoStack': {
+    photos: [
+      {
+        id: 'mara',
+        src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=520&fit=crop',
+        alt: 'Mara Okonkwo',
+        name: 'Mara Okonkwo',
+        role: 'Design engineer',
+      },
+      {
+        id: 'noa',
+        src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=520&fit=crop',
+        alt: 'Noa Bergström',
+        name: 'Noa Bergström',
+        role: 'Frontend lead',
+      },
+      {
+        id: 'ines',
+        src: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=520&fit=crop',
+        alt: 'Ines Duarte',
+        name: 'Ines Duarte',
+        role: 'Solo founder',
+      },
+    ],
+  },
+  'MacTerminal': {
+    title: 'nuxt-motion-block — zsh',
+    maxHeight: 320,
+    lines: [
+      { id: 'install', type: 'command', text: 'pnpm add nuxt-motion-block' },
+      { id: 'install-done', type: 'success', text: '✓ Packages installed in 4.2s' },
+      { id: 'dev', type: 'command', text: 'pnpm dev', delay: 350 },
+      { id: 'dev-ready', type: 'output', text: 'Nuxt 4.5.2  ready in 640 ms' },
+      { id: 'dev-local', type: 'comment', text: 'Local:    http://localhost:3000/' },
+      { id: 'test', type: 'command', text: 'pnpm test', delay: 350 },
+      { id: 'test-done', type: 'success', text: '✓ 42 tests passed in 1.8s' },
+      { id: 'lint', type: 'command', text: 'pnpm lint', delay: 350 },
+    ],
+  },
+  'SocialHoverCard': {
+    placement: 'bottom',
+    profile: {
+      id: 'mara-fjeld',
+      name: 'Mara Fjeld',
+      handle: 'marafjeld',
+      avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+      banner: 'https://picsum.photos/seed/mara-banner/640/160',
+      bio: 'Design engineer building open-source motion components.',
+      url: 'https://example.com/mara',
+      verified: true,
+    },
+  },
+  'AsciiRender': {
+    source: { type: 'image', src: 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&q=80' },
+    alt: 'Snow-covered mountain ridge under a pale sky',
+    columns: 90,
+    fontSize: 8,
+  },
+  'AnimatedStepper': {
+    items: [
+      {
+        title: 'Account',
+        description: 'Email and password',
+        icon: 'i-lucide-user',
+        content: 'Create the account your team will sign in with. Password rules are checked as you type.',
+      },
+      {
+        title: 'Workspace',
+        description: 'Name and region',
+        icon: 'i-lucide-building',
+        content: 'Pick a region close to your users. You can move a workspace later without downtime.',
+      },
+      {
+        title: 'Invite',
+        description: 'Bring teammates in',
+        icon: 'i-lucide-users',
+        content: 'Invite teammates by email. Invites expire after seven days.',
+      },
+    ],
+  },
+  'FaviconSearch': {
+    results: [
+      { id: 'vue', title: 'Vue.js', description: 'The progressive JavaScript framework', url: 'https://vuejs.org' },
+      { id: 'nuxt', title: 'Nuxt', description: 'The full-stack Vue framework', url: 'https://nuxt.com' },
+      { id: 'motion', title: 'Motion for Vue', description: 'A production-ready animation library', url: 'https://motion.dev' },
+      { id: 'ui', title: 'Nuxt UI', description: 'A UI library for Nuxt applications', url: 'https://ui.nuxt.com' },
+    ],
+  },
+  'FloatInput': {
+    icon: 'i-lucide-mail',
+    label: 'Email address',
+    placeholder: 'you@example.com',
+  },
+  'BasicToast': {
+    message: 'Animations synced to the theme.',
+    type: 'success',
+  },
+  'DynamicGroup': {
+    items: [
+      { id: 1, name: 'Ana Ruiz', src: 'https://randomuser.me/api/portraits/women/44.jpg' },
+      { id: 2, name: 'Ben Osei', src: 'https://randomuser.me/api/portraits/men/32.jpg' },
+      { id: 3, name: 'Cleo Park', src: 'https://randomuser.me/api/portraits/women/68.jpg' },
+      { id: 4, name: 'Dmitri Ilves', src: 'https://randomuser.me/api/portraits/men/75.jpg' },
+      { id: 5, name: 'Elin Haugen', src: 'https://randomuser.me/api/portraits/women/90.jpg' },
+      { id: 6, name: 'Farid Nazari', src: 'https://randomuser.me/api/portraits/men/11.jpg' },
+    ],
+  },
+  'EmojiReaction': {
+    reactions: [
+      { count: 12, emoji: '👍', id: 'thumbs-up', label: 'Thumbs up', reacted: false },
+      { count: 4, emoji: '🎉', id: 'party-popper', label: 'Party popper', reacted: false },
+      { count: 9, emoji: '🚀', id: 'rocket', label: 'Rocket', reacted: true },
+    ],
+  },
+  'HoverExpand': {
+    items: [
+      {
+        id: 'lakeside',
+        title: 'Lakeside',
+        description: 'Still water at first light',
+        image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=900&h=700&fit=crop',
+        alt: 'A lake between mountains at sunrise',
+      },
+      {
+        id: 'desert',
+        title: 'Desert',
+        description: 'Dunes after the wind',
+        image: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=900&h=700&fit=crop',
+        alt: 'Rippled sand dunes',
+      },
+      {
+        id: 'forest',
+        title: 'Forest',
+        description: 'Fog between the trunks',
+        image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&h=700&fit=crop',
+        alt: 'Sunlight through a dense forest',
+      },
+      {
+        id: 'coast',
+        title: 'Coast',
+        description: 'Low tide on black rock',
+        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&h=700&fit=crop',
+        alt: 'A sandy beach meeting turquoise water',
+      },
+    ],
+  },
+  'HoverImageList': {
+    items: [
+      {
+        id: 'nuxt',
+        title: 'Nuxt',
+        meta: 'The full-stack Vue framework',
+        href: 'https://nuxt.com',
+        image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=600&fit=crop',
+        alt: 'Code on a dark screen',
+      },
+      {
+        id: 'motion',
+        title: 'Motion for Vue',
+        meta: 'A production-ready animation library',
+        href: 'https://motion.dev',
+        image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&h=600&fit=crop',
+        alt: 'Retro computer hardware',
+      },
+      {
+        id: 'nuxt-ui',
+        title: 'Nuxt UI',
+        meta: 'A UI library for Nuxt applications',
+        href: 'https://ui.nuxt.com',
+        image: 'https://images.unsplash.com/photo-1545235617-9465d2a55698?w=600&h=600&fit=crop',
+        alt: 'A designer working on an interface',
+      },
+    ],
+  },
+  'NotificationBadge': {
+    count: 3,
+    tooltip: '3 unread messages',
+    __slot: `<button type="button" style="display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:9999px;border:1px solid var(--ui-border);background:var(--ui-bg);cursor:pointer"><span style="font-size:1.1rem">🔔</span></button>`,
+  },
+  'Phototab': {
+    defaultTab: 'Coast',
+    height: 420,
+    tabs: [
+      { name: 'Mountains', icon: 'i-lucide-mountain', image: 'https://picsum.photos/seed/mountains/800/800' },
+      { name: 'Coast', icon: 'i-lucide-waves', image: 'https://picsum.photos/seed/coast/800/800' },
+      { name: 'Forest', icon: 'i-lucide-trees', image: 'https://picsum.photos/seed/forest/800/800' },
+      { name: 'City', icon: 'i-lucide-building-2', image: 'https://picsum.photos/seed/city/800/800' },
+    ],
+  },
+  'Breadcrumb': {
+    items: [
+      { label: 'Docs', href: '#' },
+      { label: 'Components', href: '#' },
+      { label: 'Navigation', href: '#' },
+      { label: 'Breadcrumb' },
+    ],
+  },
+  'ExpandableNavbar': {
+    items: [
+      { label: 'Products', to: '#', icon: 'i-lucide-box' },
+      { label: 'Pricing', to: '#', icon: 'i-lucide-tag' },
+      { label: 'Docs', to: '#', icon: 'i-lucide-book-open' },
+    ],
+  },
+  'FileTree': {
+    defaultExpanded: ['src', 'src/components'],
+    showLines: true,
+    items: [
+      {
+        id: 'src',
+        name: 'src',
+        type: 'folder',
+        children: [
+          {
+            id: 'src/components',
+            name: 'components',
+            type: 'folder',
+            children: [
+              { id: 'src/components/button', name: 'Button.vue', type: 'file' },
+              { id: 'src/components/card', name: 'Card.vue', type: 'file' },
+              { id: 'src/components/file-tree', name: 'FileTree.vue', type: 'file', badge: 'modified' },
+            ],
+          },
+          { id: 'src/app', name: 'App.vue', type: 'file' },
+          { id: 'src/main', name: 'main.ts', type: 'file' },
+        ],
+      },
+      {
+        id: 'docs',
+        name: 'docs',
+        type: 'folder',
+        children: [{ id: 'docs/readme', name: 'README.md', type: 'file' }],
+      },
+      { id: 'package', name: 'package.json', type: 'file' },
+    ],
+  },
+  'FloatingNavbar': {
+    links: [
+      { label: 'Features', to: '#' },
+      { label: 'Pricing', to: '#' },
+      { label: 'Docs', to: '#' },
+    ],
+  },
+  'ToolbarExpandable': {
+    items: [
+      { id: 'ada', label: 'Ada', icon: 'i-lucide-user', content: 'Analytical engine notes' },
+      { id: 'linus', label: 'Linus', icon: 'i-lucide-terminal', content: 'Kernel patch series' },
+      { id: 'grace', label: 'Grace', icon: 'i-lucide-ship', content: 'Compiler design notes' },
+    ],
+  },
+  'Pagination': {
+    totalPages: 8,
+  },
+  'KineticTypeScroll': {
+    words: ['Scroll', 'to', 'set', 'the', 'phrase', 'in', 'motion'],
+  },
+  'ScrollImageReveal': {
+    src: 'https://picsum.photos/seed/motion-reveal/900/600',
+    alt: 'A misty mountain ridge at sunrise',
+    mask: 'circle',
+  },
+  'ScrollVelocity': {
+    texts: ['Fast Scroll', 'Medium Speed', 'Slow Motion'],
+  },
+  'SvgDrawOnScroll': {
+    paths: [
+      'M12 78 C 26 40, 40 62, 50 38 C 60 14, 74 44, 88 22',
+      'M14 22 L 50 50 L 86 22',
+      'M50 8 L 50 92',
+      'M10 50 L 90 50',
+    ],
+    viewBox: '0 0 100 100',
+  },
+  'AnimatedAvatarGroup': {
+    avatars: [
+      { src: 'https://randomuser.me/api/portraits/women/44.jpg', alt: 'Ana Ruiz' },
+      { src: 'https://randomuser.me/api/portraits/men/32.jpg', alt: 'Ben Osei' },
+      { src: 'https://randomuser.me/api/portraits/women/68.jpg', alt: 'Cleo Park' },
+      { src: 'https://randomuser.me/api/portraits/men/75.jpg', alt: 'Dmitri Ilves' },
+      { src: 'https://randomuser.me/api/portraits/women/90.jpg', alt: 'Elin Haugen' },
+      { src: 'https://randomuser.me/api/portraits/men/11.jpg', alt: 'Farid Nazari' },
+    ],
+  },
+  'AnimatedList': {
+    items: [
+      { id: 1, label: 'Deploy', text: 'Production build shipped' },
+      { id: 2, label: 'Signup', text: 'New account created' },
+      { id: 3, label: 'Payment', text: 'Invoice #1042 paid' },
+      { id: 4, label: 'Alert', text: 'CPU usage above 80%' },
+    ],
+  },
+  'AnimatedNumber': {
+    value: 128,
+  },
+  'BlurOutUp': {
+    text: 'Every line arrives softly',
+  },
+  'BottomUpLetters': {
+    text: 'Stagger the letters',
+  },
+  'DepthParallaxWords': {
+    text: 'Words at three depths',
+  },
+  'FadeThrough': {
+    phrases: [
+      'One line at a time.',
+      'No overlap, no jitter.',
+      'Quiet by default.',
+    ],
+  },
+  'FocusBlurResolve': {
+    text: 'The headline comes into focus',
+  },
+  'GravityLetters': {
+    text: 'Gravity takes the letters',
+  },
+  'KineticCenterBuild': {
+    phrases: [
+      'Built one word at a time.',
+      'Centred, then locked.',
+      'Never a layout jump.',
+    ],
+  },
+  'LineByLineSlide': {
+    text: 'Every line slides in from the side',
+  },
+  'MaskRevealUp': {
+    text: 'Every line rises\nout of its own mask',
+  },
+  'MicroScaleFade': {
+    text: 'Quiet micro motion',
+  },
+  'PerCharacterRise': {
+    text: 'Character by character',
+  },
+  'PerWordCrossfade': {
+    text: 'Word by word',
+  },
+  'PerspectiveText3D': {
+    text: 'Text on the horizon',
+  },
+  'ScaleDownFade': {
+    text: 'Shrink into place',
+  },
+  'ScrollRevealParagraph': {
+    paragraph: 'This paragraph reveals itself line by line as you scroll past it, ending exactly where the reader lands.',
+  },
+  'SharedAxis': {
+    phrases: [
+      'product tours.',
+      'data dashboards.',
+      'release notes.',
+    ],
+    axis: 'x',
+  },
+  'ShimmerSweep': {
+    text: 'A light sweeps across',
+  },
+  'ShineText': {
+    text: 'Shines on cue',
+  },
+  'ShortSlideDown': {
+    phrases: ['Ship it', 'Then sleep on it', 'Ship it on Friday'],
+  },
+  'ShortSlideRight': {
+    phrases: ['Ship it', 'Measure it', 'Ship it again'],
+  },
+  'SoftBlurIn': {
+    text: 'Soft blur into focus',
+  },
+  'SpinningText': {
+    children: 'Nuxt Motion · Nuxt Motion · Nuxt Motion · Nuxt Motion · ',
+  },
+  'SpringScaleIn': {
+    text: 'Springs into place',
+  },
+  'StaggerFromCenter': {
+    text: 'Outward from the middle',
+  },
+  'StaggerFromEdges': {
+    text: 'Inward from both edges',
+  },
+  'TextGlitchNew': {
+    text: 'Signal interrupted',
+  },
+  'TopDownLetters': {
+    text: 'Letters drop in',
+  },
+  'WaveText': {
+    text: 'Every letter rides the wave',
+  },
+  'TextLoop': {
+    items: ['Modern', 'Innovative', 'Beautiful', 'Interactive'],
+  },
+  'TypingText': {
+    text: 'Deterministic typing, every frame.',
+  },
+  'WordRotate': {
+    words: ['design', 'build', 'create'],
+  },
+  'TransitionPanel': {
+    activeIndex: 0,
+    __slot: `<div style="padding:2rem 1.5rem;min-height:12rem;border-radius:1rem;border:1px solid var(--ui-border);background:var(--ui-bg)"><p style="font-weight:600;margin:0 0 .5rem">Panel one</p><p style="opacity:.7;font-size:.9rem">Change the panel index to cycle the screens.</p></div>`,
+  },
 }
