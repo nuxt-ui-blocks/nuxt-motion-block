@@ -1527,4 +1527,111 @@ export const playgroundData: Record<string, Record<string, any>> = {
     activeIndex: 0,
     __slot: `<div style="padding:2rem 1.5rem;min-height:12rem;border-radius:1rem;border:1px solid var(--ui-border);background:var(--ui-bg)"><p style="font-weight:600;margin:0 0 .5rem">Panel one</p><p style="opacity:.7;font-size:.9rem">Change the panel index to cycle the screens.</p></div>`,
   },
+
+  // ─── Slot-driven components ─────────────────────────────────────────────
+  // Raw HTML injected into the default slot so the panel preview renders content.
+  'TextGradient': {
+    __slot: `<span style="font-size:2rem;font-weight:700">Motion in the margins</span>`,
+  },
+  'MorphToggle': {
+    __slot: `<span style="font-size:1rem">Toggle me</span>`,
+  },
+  'AnimatedBackground': {
+    __slot: `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;height:100%;padding:1rem;text-align:center">
+  <p style="font-weight:700;font-size:1.1rem;margin:0">The background moves, the copy does not</p>
+  <p style="font-size:.8rem;opacity:.7;margin:0">Switch tabs to move the gradient.</p>
+</div>`,
+  },
+  'BackgroundLines': {
+    __slot: `<div style="padding:2.5rem 1.5rem;text-align:center;max-width:20rem">
+  <p style="font-weight:700;font-size:1.2rem;margin:0 0 .4rem">Lines that point somewhere</p>
+  <p style="font-size:.85rem;opacity:.72;margin:0">SVG curves trace across the backdrop and pull your eye toward the action.</p>
+</div>`,
+  },
+  'DrawingCursor': {
+    __slot: `<div style="width:100%;height:12rem;display:flex;align-items:center;justify-content:center;border:1px dashed var(--ui-border-accented);border-radius:1rem">
+  <p style="font-size:.85rem;opacity:.65;margin:0">Move the cursor to draw</p>
+</div>`,
+  },
+  'EmbossSurface': {
+    __slot: `<div style="padding:2rem 1.5rem;text-align:center">
+  <p style="font-weight:700;font-size:1.2rem;margin:0 0 .3rem">Pressed into the glass</p>
+  <p style="font-size:.85rem;opacity:.7;margin:0">The light follows the angle of the panel.</p>
+</div>`,
+  },
+  'GooeyFilter': {
+    __slot: `<div style="display:flex;gap:.6rem;align-items:center;justify-content:center;height:10rem">
+  <div style="width:3.5rem;height:3.5rem;border-radius:9999px;background:var(--ui-primary)"></div>
+  <div style="width:3.5rem;height:3.5rem;border-radius:9999px;background:var(--ui-secondary)"></div>
+  <div style="width:3.5rem;height:3.5rem;border-radius:9999px;background:var(--ui-primary)"></div>
+</div>`,
+  },
+  'AnimatedTooltip': {
+    __slot: `<button type="button" style="padding:.45rem 1.1rem;border-radius:.6rem;border:1px solid var(--ui-border);background:var(--ui-bg);cursor:pointer;font-weight:500">Hover me</button>`,
+    text: 'Spring-loaded hint with an arrow and kbd hints',
+  },
+  'CountBadge': {
+    count: 4,
+    __slot: `<button type="button" style="display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:9999px;border:1px solid var(--ui-border);background:var(--ui-bg);cursor:pointer"><span style="font-size:1.1rem">🔔</span></button>`,
+  },
+  'Dock': {
+    __slot: `<button type="button" style="width:3.5rem;height:3.5rem;border-radius:9999px;border:1px solid var(--ui-border);background:var(--ui-bg);cursor:pointer;font-size:1.1rem">🏠</button><button type="button" style="width:3.5rem;height:3.5rem;border-radius:9999px;border:1px solid var(--ui-border);background:var(--ui-bg);cursor:pointer;font-size:1.1rem">✉️</button><button type="button" style="width:3.5rem;height:3.5rem;border-radius:9999px;border:1px solid var(--ui-border);background:var(--ui-bg);cursor:pointer;font-size:1.1rem">⚙️</button>`,
+  },
+  'Drawer': {
+    __slot: `<button type="button" style="padding:.55rem 1.1rem;border-radius:.6rem;border:0;cursor:pointer;font-weight:500;background:var(--ui-primary);color:var(--ui-bg)">Open drawer</button>`,
+  },
+  'ContentSkeleton': {
+    __slot: `<div style="display:flex;flex-direction:column;gap:.6rem;padding:1rem;width:16rem">
+  <div style="height:1rem;width:80%;border-radius:.4rem;background:var(--ui-border-accented)"></div>
+  <div style="height:1rem;width:100%;border-radius:.4rem;background:var(--ui-border-accented)"></div>
+  <div style="height:1rem;width:60%;border-radius:.4rem;background:var(--ui-border-accented)"></div>
+</div>`,
+  },
+  'InView': {
+    once: false,
+    __slot: `<div style="padding:2rem;text-align:center;font-weight:600">Scroll me — I fade and rise into view</div>`,
+  },
+  'InfiniteSlider': {
+    __slot: `<div style="display:flex;gap:1rem;padding:.5rem 0"><div style="padding:.5rem 1.25rem;border:1px solid var(--ui-border);border-radius:9999px;white-space:nowrap">Alpha</div><div style="padding:.5rem 1.25rem;border:1px solid var(--ui-border);border-radius:9999px;white-space:nowrap">Beta</div><div style="padding:.5rem 1.25rem;border:1px solid var(--ui-border);border-radius:9999px;white-space:nowrap">Gamma</div><div style="padding:.5rem 1.25rem;border:1px solid var(--ui-border);border-radius:9999px;white-space:nowrap">Delta</div></div>`,
+  },
+  'PrismSweepTransition': {
+    __slot: `<div style="padding:2rem 1.5rem;min-height:12rem;display:flex;align-items:center;justify-content:center;border-radius:1rem;background:linear-gradient(135deg,#302b63,#0f0c29);color:#fff;font-weight:700;font-size:1.3rem">Slide the key</div>`,
+  },
+  'SdfBlobTransition': {
+    __slot: `<div style="padding:2rem 1.5rem;min-height:12rem;display:flex;align-items:center;justify-content:center;border-radius:1rem;background:#111827;color:#a5f3fc;font-weight:700;font-size:1.3rem">Blob reveals</div>`,
+  },
+  'ShaderRevealTransition': {
+    __slot: `<div style="padding:2rem 1.5rem;min-height:12rem;display:flex;align-items:center;justify-content:center;border-radius:1rem;background:#0b1020;color:#c4b5fd;font-weight:700;font-size:1.3rem">Reveal</div>`,
+  },
+  'ToolbarDynamic': {
+    __slot: `<button type="button" style="display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;border:0;border-radius:.6rem;cursor:pointer;background:var(--ui-primary);color:var(--ui-bg);font-weight:600"><span>✏️</span><span>Edit</span></button><button type="button" style="display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;border:0;border-radius:.6rem;cursor:pointer;background:transparent;color:var(--ui-text);font-weight:600"><span>📋</span><span>Copy</span></button>`,
+  },
+
+  // ─── Text components that default to an empty string ──────────────────────
+  'TextEffect': {
+    children: 'Words arrive one by one.',
+  },
+  'TextGlitch': {
+    text: 'Frag glitch',
+  },
+  'TextMorph': {
+    text: 'Morphing text',
+  },
+  'TextReveal': {
+    text: 'Revealed line by line',
+  },
+  'TextRoll': {
+    children: 'Rolling over',
+  },
+  'TextScramble': {
+    text: 'Unlock the vault',
+  },
+  'TextShimmerWave': {
+    text: 'Waves of shimmer',
+  },
+
+  'CodeBlock': {
+    code: `const answer = 42\n`,
+    language: 'js',
+  },
 }
