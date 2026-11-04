@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-const variant = ref('orbit')
+const variant = ref<'orbit' | 'newton-cradle' | 'pendulum' | 'hourglass' | 'morph-ring' | 'square-snake' | 'comet' | 'radar' | 'cube-flip' | 'wave-bars' | 'breathing-glow' | 'dot-ring'>('orbit')
 const speed = ref(1)
 
 const variants = [
@@ -45,8 +45,8 @@ const variants = [
 ]
 
 const speedItems = [
-  { label: '0.5×', value: 0.5 },
-  { label: '1×', value: 1 },
-  { label: '2×', value: 2 },
+  { label: '0.5Ã—', value: 0.5 },
+  { label: '1Ã—', value: 1 },
+  { label: '2Ã—', value: 2 },
 ]
 </script>

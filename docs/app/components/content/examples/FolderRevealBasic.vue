@@ -7,7 +7,7 @@
       <template #card="{ item }">
         <div class="flex h-full w-full flex-col gap-0.5 p-2">
           <span class="truncate text-[11px] font-semibold text-highlighted">{{ item.label }}</span>
-          <span class="truncate text-[10px] leading-tight text-muted">{{ item.detail }}</span>
+          <span class="truncate text-[10px] leading-tight text-muted">{{ (item as any).detail }}</span>
         </div>
       </template>
     </MFolderReveal>

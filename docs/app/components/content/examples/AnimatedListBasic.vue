@@ -7,13 +7,22 @@
     class="w-full max-w-md"
   >
     <template #default="{ item }">
-      <div class="flex items-center gap-2 rounded-xl border border-default bg-default px-3 py-2">
+      <div
+        v-if="typeof item === 'object'"
+        class="flex items-center gap-2 rounded-xl border border-default bg-default px-3 py-2"
+      >
         <UBadge
-          :label="item.label"
+          :label="item.label ?? ''"
           color="primary"
           variant="subtle"
         />
         <span class="truncate text-sm text-default">{{ item.text }}</span>
+      </div>
+      <div
+        v-else
+        class="rounded-xl border border-default bg-default px-3 py-2 text-sm text-default"
+      >
+        {{ item }}
       </div>
     </template>
   </MAnimatedList>

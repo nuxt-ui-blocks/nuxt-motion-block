@@ -9,7 +9,7 @@
       <MUnlockFaceId
         :error-message="message"
         :status="status"
-        size="96px"
+        :size="96"
         @scan="verify"
       >
         <div class="flex h-full w-full flex-col items-center justify-center gap-1">

@@ -11,6 +11,6 @@
       ],
     }"
     :hide="['links']"
-    :controls="{ position: { kind: 'select', options: ['fixed', 'inline'] } }"
+    :controls="{ position: { kind: 'select', options: [{ label: 'Fixed', value: 'fixed' }, { label: 'Inline', value: 'inline' }] } }"
   />
 </template>

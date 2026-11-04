@@ -15,7 +15,7 @@ const items = [
   { id: '3', label: 'Option 3', icon: 'i-lucide-triangle' },
 ]
 
-const onChange = (_item) => {
+const onChange = (_item: { id: string | number, label: string, icon?: string }) => {
   // handle selection
 }
 </script>

@@ -32,7 +32,7 @@
         Animate Focus
       </UButton>
       <UButton
-        color="gray"
+        color="neutral"
         variant="outline"
         size="sm"
       >

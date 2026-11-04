@@ -26,7 +26,7 @@
         Start Simulation
       </UButton>
       <UButton
-        color="gray"
+        color="neutral"
         variant="outline"
         size="sm"
       >

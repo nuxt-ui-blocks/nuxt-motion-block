@@ -2,7 +2,7 @@
   <div class="w-full max-w-lg rounded-2xl border border-default p-6">
     <MAiSources :sources="sources">
       <template #favicon="{ source }">
-        <UIcon :name="source.icon" />
+        <UIcon :name="(source as Source).icon" />
       </template>
     </MAiSources>
   </div>

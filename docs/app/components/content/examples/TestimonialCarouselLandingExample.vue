@@ -35,7 +35,7 @@
       >
         <UCard
           class="h-96 flex flex-col justify-center bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-900 border-0"
-          :ui="{ body: { base: 'flex flex-col items-center text-center p-8 sm:p-12' } }"
+          :ui="{ body: 'flex flex-col items-center text-center p-8 sm:p-12' }"
         >
           <div class="mb-6">
             <div class="flex justify-center mb-4">
@@ -86,7 +86,7 @@
           <MAnimatedNumber
             :value="stat.value"
             class="text-3xl font-bold text-gray-900 dark:text-white mb-2"
-            :format="stat.format || ((value) => Math.round(value).toLocaleString())"
+            :format="stat.format || ((value: number) => Math.round(value).toLocaleString())"
           />
           <p class="text-gray-600 dark:text-gray-400">
             {{ stat.label }}
@@ -123,9 +123,9 @@ const testimonials = ref([
 ])
 
 const stats = ref([
-  { value: 98, label: 'Delighted customers', format: value => `${Math.round(value)}%` },
+  { value: 98, label: 'Delighted customers', format: (value: number) => `${Math.round(value)}%` },
   { value: 10000, label: 'Monthly actives' },
-  { value: 4.9, label: 'Average Rating', format: value => `${value.toFixed(1)}/5` },
+  { value: 4.9, label: 'Average Rating', format: (value: number) => `${value.toFixed(1)}/5` },
   { value: 24, label: 'Hours Saved Weekly' },
 ])
 </script>

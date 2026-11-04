@@ -20,19 +20,19 @@
       <div class="flex space-x-2 pt-2">
         <UButton
           icon="i-simple-icons-github"
-          color="gray"
+          color="neutral"
           variant="ghost"
           size="sm"
         />
         <UButton
           icon="i-simple-icons-linkedin"
-          color="gray"
+          color="neutral"
           variant="ghost"
           size="sm"
         />
         <UButton
           icon="i-simple-icons-twitter"
-          color="gray"
+          color="neutral"
           variant="ghost"
           size="sm"
         />

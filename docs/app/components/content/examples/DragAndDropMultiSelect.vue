@@ -76,7 +76,7 @@ const items = ref([
 
 const selected = ref<string[]>([])
 
-function onSelect(item: { id: string, name: string, status: string }, isSelected: boolean) {
+function onSelect(item: any, isSelected: boolean) {
   selected.value = isSelected
     ? [...selected.value, item.id]
     : selected.value.filter(id => id !== item.id)
