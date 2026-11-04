@@ -7,6 +7,19 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
   ],
 
+  // The library is type-checked with `noUncheckedIndexedAccess: false` (see
+  // the repo's root tsconfig.json). The generated `.nuxt/tsconfig.*.json`
+  // would otherwise enable it and report hundreds of pre-existing items that
+  // are not actionable here, so override it the supported way — Nuxt merges
+  // `typescript.tsConfig` into the generated files on every build.
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        noUncheckedIndexedAccess: false,
+      },
+    },
+  },
+
   site: {
     url:
       process.env.NUXT_SITE_URL

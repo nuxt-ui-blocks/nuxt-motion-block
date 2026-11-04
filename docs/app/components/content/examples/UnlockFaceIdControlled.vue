@@ -4,7 +4,7 @@
       <MUnlockFaceId
         :error-message="'Not recognized. Try again.'"
         :status="status"
-        size="128px"
+        :size="128"
       />
 
       <UButton
@@ -30,7 +30,7 @@
     </div>
 
     <p class="text-xs text-muted">
-      status = <span class="font-medium">{{ status }}</span> · controlled, so
+      status = <span class="font-medium">{{ status }}</span> Â· controlled, so
       the component never resolves its own scan
     </p>
   </div>

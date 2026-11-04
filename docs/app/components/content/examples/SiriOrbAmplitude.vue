@@ -30,13 +30,13 @@
 
 <script setup lang="ts">
 const amplitude = ref(0)
-const state = ref('idle')
+const state = ref<'idle' | 'listening' | 'thinking' | 'streaming' | 'done' | 'error'>('idle')
 
 const states = [
   { label: 'idle', value: 'idle' },
   { label: 'listening', value: 'listening' },
   { label: 'thinking', value: 'thinking' },
-  { label: 'speaking', value: 'speaking' },
+  { label: 'streaming', value: 'streaming' },
   { label: 'error', value: 'error' },
 ]
 

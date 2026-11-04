@@ -11,7 +11,7 @@ const props = defineProps({
   ui: { type: Object, default: undefined },
   fromFontVariationSettings: { type: String, default: '\'wght\' 400, \'opsz\' 9' },
   toFontVariationSettings: { type: String, default: '\'wght\' 1000, \'opsz\' 40' },
-  containerRef: { type: Object, default: null },
+  containerRef: { type: Object as PropType<HTMLElement | Record<string, any> | null>, default: null },
   radius: { type: Number, default: 100 },
   falloff: { type: String as PropType<'linear' | 'exponential' | 'gaussian'>, default: 'linear' },
 })
@@ -35,7 +35,7 @@ const fromVars = parseFontVariation(props.fromFontVariationSettings)
 const toVars = parseFontVariation(props.toFontVariationSettings)
 
 function getContainer() {
-  const c = props.containerRef
+  const c = props.containerRef as any
   if (c?.value) return c.value
   if (c instanceof HTMLElement) return c
   return internalContainerRef.value

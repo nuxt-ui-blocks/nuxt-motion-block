@@ -90,7 +90,7 @@
       >
         <UCard
           class="h-full flex flex-col group hover:shadow-xl transition-all duration-300 overflow-hidden"
-          :ui="{ body: { root: 'flex-1 flex flex-col p-6' } }"
+          :ui="{ body: 'flex-1 flex flex-col p-6' }"
         >
           <div class="relative overflow-hidden rounded-lg mb-4">
             <img
@@ -403,12 +403,12 @@ const paginatedProjects = computed(() => {
 
 const getCategoryColor = (category: string) => {
   switch (category) {
-    case 'Web craft': return 'blue'
-    case 'Handheld app': return 'purple'
-    case 'Branding': return 'pink'
-    case 'UI/UX': return 'green'
-    case 'Development': return 'amber'
-    default: return 'gray'
+    case 'Web craft': return 'info'
+    case 'Handheld app': return 'primary'
+    case 'Branding': return 'secondary'
+    case 'UI/UX': return 'success'
+    case 'Development': return 'warning'
+    default: return 'neutral'
   }
 }
 

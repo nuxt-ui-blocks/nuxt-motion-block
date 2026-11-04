@@ -19,15 +19,15 @@
     </div>
 
     <p class="text-xs text-muted">
-      state = <span class="font-medium">{{ state }}</span> · rotation period
+      state = <span class="font-medium">{{ state }}</span> Â· rotation period
       {{ period }}s
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
-const state = ref('idle')
-const states = ['idle', 'listening', 'thinking', 'speaking', 'error']
+const state = ref<'idle' | 'listening' | 'thinking' | 'streaming' | 'done' | 'error'>('idle')
+const states = ['idle', 'listening', 'thinking', 'streaming', 'done', 'error'] as const
 
 // `thinking` runs the ambient gradient 2.4x faster than `idle`; every other
 // state uses animationDuration as-is.

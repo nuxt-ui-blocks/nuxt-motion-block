@@ -29,14 +29,14 @@
     </MDragAndDrop>
 
     <p class="text-xs text-muted">
-      Drag a row onto another to reorder it — the new order is emitted, not applied
+      Drag a row onto another to reorder it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the new order is emitted, not applied
       to your source array.
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
-const items = ref([
+const items = ref<{ id: string | number, [key: string]: any }[]>([
   { id: 'design-tokens', label: 'Style tokens', owner: 'Ana' },
   { id: 'component-audit', label: 'Component audit', owner: 'Ben' },
   { id: 'motion-guidelines', label: 'Motion guidelines', owner: 'Chidi' },
@@ -44,7 +44,7 @@ const items = ref([
   { id: 'docs-rewrite', label: 'Docs rewrite', owner: 'Eli' },
 ])
 
-function onChange(next: { id: string, label: string, owner: string }[]) {
+function onChange(next: Array<{ id: string | number, [key: string]: any }>) {
   items.value = [...next]
 }
 </script>

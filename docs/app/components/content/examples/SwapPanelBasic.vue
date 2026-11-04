@@ -17,8 +17,8 @@
 import { computed, ref, watch } from 'vue'
 
 interface Token {
-  balance: number
-  icon: string
+  balance?: number
+  icon?: string
   name: string
   symbol: string
 }

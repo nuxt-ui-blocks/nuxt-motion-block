@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-const pattern = ref('wave-lr')
+const pattern = ref<'wave-lr' | 'spiral-cw' | 'heartbeat' | 'checkerboard' | 'border' | 'ripple-out'>('wave-lr')
 const mode = ref<'pulse' | 'stagger' | 'sequence'>('pulse')
 const rounded = ref(false)
 const frozen = ref(false)

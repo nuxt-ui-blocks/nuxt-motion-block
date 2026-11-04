@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-const expandedValue = ref<string | string[] | null>(null)
+const expandedValue = ref<string | string[] | undefined>(undefined)
 
 const faqs = [
   {

@@ -454,12 +454,12 @@ const relatedProjects = [
 
 const getCategoryColor = (category: string) => {
   switch (category) {
-    case 'Web craft': return 'blue'
-    case 'Handheld app': return 'purple'
-    case 'Branding': return 'pink'
-    case 'UI/UX': return 'green'
-    case 'Development': return 'amber'
-    default: return 'gray'
+    case 'Web craft': return 'info'
+    case 'Handheld app': return 'primary'
+    case 'Branding': return 'secondary'
+    case 'UI/UX': return 'success'
+    case 'Development': return 'warning'
+    default: return 'neutral'
   }
 }
 </script>

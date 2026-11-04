@@ -8,7 +8,7 @@
       >
         <MSiriOrb
           :size="size"
-          state="speaking"
+          state="streaming"
         />
         <span class="text-xs text-muted">{{ size }}</span>
       </div>
@@ -16,7 +16,7 @@
 
     <p class="text-center text-xs text-muted">
       Blur, contrast, dot size, rim and mask radius all derive from
-      <code>size</code> — there is no separate scale prop to keep in sync.
+      <code>size</code> â€” there is no separate scale prop to keep in sync.
     </p>
   </div>
 </template>

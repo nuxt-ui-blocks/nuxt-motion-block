@@ -22,10 +22,10 @@
 
 <script setup lang="ts">
 const tests = [
-  { label: 'Slide up', text: 'Slide from below', effect: 'slide', direction: 'up' },
-  { label: 'Rotate left', text: 'Rotate in place', effect: 'rotate', direction: 'left' },
-  { label: 'Bounce down', text: 'Bounce into view', effect: 'bounce', direction: 'down' },
-  { label: 'Scale', text: 'Grow into focus', effect: 'scale', direction: 'up' },
-  { label: 'Blur', text: 'Resolve from blur', effect: 'blur', direction: 'up' },
+  { label: 'Slide up', text: 'Slide from below', effect: 'slide' as const, direction: 'up' as const },
+  { label: 'Rotate left', text: 'Rotate in place', effect: 'rotate' as const, direction: 'left' as const },
+  { label: 'Bounce down', text: 'Bounce into view', effect: 'bounce' as const, direction: 'down' as const },
+  { label: 'Scale', text: 'Grow into focus', effect: 'scale' as const, direction: 'up' as const },
+  { label: 'Blur', text: 'Resolve from blur', effect: 'blur' as const, direction: 'up' as const },
 ]
 </script>

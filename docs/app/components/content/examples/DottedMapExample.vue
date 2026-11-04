@@ -14,7 +14,7 @@
           fill="currentColor"
           class="font-medium"
         >
-          {{ String(marker.label) }}
+          {{ String((marker as any).label ?? '') }}
         </text>
       </template>
     </MDottedMap>

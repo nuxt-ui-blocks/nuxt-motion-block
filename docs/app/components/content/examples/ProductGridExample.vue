@@ -52,7 +52,7 @@
       >
         <UCard
           class="h-full flex flex-col group hover:shadow-lg transition-shadow duration-300"
-          :ui="{ body: { base: 'flex-1 flex flex-col' } }"
+          :ui="{ body: 'flex-1 flex flex-col' }"
         >
           <!-- Product Image -->
           <div class="relative overflow-hidden rounded-t-lg">
@@ -64,7 +64,7 @@
             <div class="absolute top-3 right-3">
               <UButton
                 :icon="product.isFavorite ? 'i-heroicons-heart-solid' : 'i-heroicons-heart'"
-                :color="product.isFavorite ? 'red' : 'white'"
+                :color="product.isFavorite ? 'error' : 'neutral'"
                 variant="solid"
                 size="sm"
                 square
@@ -130,7 +130,7 @@
                 Add to Cart
               </UButton>
               <UButton
-                color="gray"
+                color="neutral"
                 variant="ghost"
                 icon="i-heroicons-eye"
                 square
@@ -191,7 +191,22 @@ const sortOptions = [
   { label: 'Newest', value: 'newest' },
 ]
 
-const products = ref([
+interface Product {
+  id: number
+  name: string
+  description: string
+  price: number
+  originalPrice?: number
+  discount?: number
+  category: string
+  image: string
+  rating: number
+  reviews: number
+  isFavorite: boolean
+  badge: { text: string, color: 'error' | 'success' | 'primary' | 'secondary' | 'warning' | 'info' | 'neutral' } | null
+}
+
+const products = ref<Product[]>([
   {
     id: 1,
     name: 'Wireless Bluetooth Headphones',
@@ -204,7 +219,7 @@ const products = ref([
     rating: 4.8,
     reviews: 124,
     isFavorite: false,
-    badge: { text: 'Sale', color: 'red' },
+    badge: { text: 'Sale', color: 'error' },
   },
   {
     id: 2,
@@ -230,7 +245,7 @@ const products = ref([
     rating: 4.3,
     reviews: 56,
     isFavorite: false,
-    badge: { text: 'New', color: 'green' },
+    badge: { text: 'New', color: 'success' },
   },
   {
     id: 4,
@@ -254,7 +269,7 @@ const products = ref([
     rating: 4.5,
     reviews: 78,
     isFavorite: true,
-    badge: { text: 'Eco', color: 'emerald' },
+    badge: { text: 'Eco', color: 'success' },
   },
   {
     id: 6,
@@ -280,7 +295,7 @@ const products = ref([
     rating: 4.4,
     reviews: 67,
     isFavorite: false,
-    badge: { text: 'Sale', color: 'red' },
+    badge: { text: 'Sale', color: 'error' },
   },
   {
     id: 8,
@@ -351,7 +366,7 @@ const addToCart = (product: any) => {
     title: 'Added to cart',
     description: `${product.name} has been added to your cart`,
     icon: 'i-heroicons-shopping-cart',
-    timeout: 3000,
+    duration: 3000,
   })
 }
 

@@ -46,7 +46,7 @@
       >
         <UCard
           class="h-full group hover:shadow-xl transition-all duration-300 border-0"
-          :ui="{ body: { base: 'flex flex-col h-full' } }"
+          :ui="{ body: 'flex flex-col h-full' }"
         >
           <div class="flex-1">
             <div class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6 group-hover:bg-blue-200 dark:group-hover:bg-blue-800/50 transition-colors duration-300">
@@ -97,14 +97,14 @@
           </p>
           <div class="flex flex-col sm:flex-row gap-3 justify-center">
             <UButton
-              color="white"
+              color="neutral"
               variant="solid"
               size="lg"
             >
               Start Free Trial
             </UButton>
             <UButton
-              color="white"
+              color="neutral"
               variant="outline"
               size="lg"
             >

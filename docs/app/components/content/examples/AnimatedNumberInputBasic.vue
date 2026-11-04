@@ -28,7 +28,7 @@
 const seats = ref(4)
 const budget = ref(2500)
 
-const currency = { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }
+const currency: Intl.NumberFormatOptions = { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }
 
 const total = computed(() => new Intl.NumberFormat('en-US', currency).format(seats.value * budget.value))
 </script>

@@ -28,7 +28,7 @@
 <script setup lang="ts">
 type ToastKind = 'success' | 'error' | 'info' | 'warning'
 
-const options: { type: ToastKind, label: string, color: string }[] = [
+const options: { type: ToastKind, label: string, color: 'success' | 'error' | 'info' | 'warning' }[] = [
   { type: 'success', label: 'Success', color: 'success' },
   { type: 'error', label: 'Error', color: 'error' },
   { type: 'info', label: 'Info', color: 'info' },
@@ -36,7 +36,7 @@ const options: { type: ToastKind, label: string, color: string }[] = [
 ]
 
 const copy: Record<ToastKind, string> = {
-  success: 'Deploy finished — build 4821 is live.',
+  success: 'Deploy finished â€” build 4821 is live.',
   error: 'Upload failed: the file is larger than 25 MB.',
   info: 'Three files are staged and ready to sync.',
   warning: 'Your trial ends in two days.',

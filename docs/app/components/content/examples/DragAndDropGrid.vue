@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-const items = ref([
+const items = ref<{ id: string | number, [key: string]: any }[]>([
   { id: 'project-a', name: 'Project A', category: 'Development' },
   { id: 'project-beta', name: 'Project Beta', category: 'Design' },
   { id: 'project-gamma', name: 'Project Gamma', category: 'Marketing' },
@@ -34,7 +34,7 @@ const items = ref([
   { id: 'project-omega', name: 'Project Omega', category: 'Marketing' },
 ])
 
-function onChange(next: { id: string, name: string, category: string }[]) {
+function onChange(next: Array<{ id: string | number, [key: string]: any }>) {
   items.value = [...next]
 }
 </script>

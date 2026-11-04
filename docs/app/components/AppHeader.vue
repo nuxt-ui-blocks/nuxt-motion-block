@@ -15,7 +15,7 @@ onMounted(() => {
 })
 onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 
-const githubUrl = computed(() => appConfig.github?.url || '')
+const githubUrl = computed(() => (typeof appConfig.github === 'object' && appConfig.github ? appConfig.github.url || '' : ''))
 
 const sections = [
   { label: 'Components', to: '/components' },

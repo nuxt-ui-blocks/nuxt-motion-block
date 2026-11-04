@@ -9,7 +9,7 @@
       <div class="grid h-full place-items-center bg-gradient-to-br from-slate-900 to-indigo-950 text-center text-white">
         <div class="space-y-1">
           <p class="text-xs uppercase tracking-widest text-white/50">
-            {{ direction }} · {{ tone }}
+            {{ direction }} Ã‚Â· {{ tone }}
           </p>
           <p class="text-2xl font-semibold">
             Prism sweep
@@ -39,8 +39,8 @@
 </template>
 
 <script setup lang="ts">
-const direction = ref('left')
-const tone = ref('prism')
+const direction = ref<'left' | 'right' | 'up' | 'down'>('left')
+const tone = ref<'aperture' | 'beam' | 'chroma' | 'prism'>('prism')
 const transitionKey = ref(0)
 
 const directions = ['left', 'right', 'up', 'down']
