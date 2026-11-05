@@ -191,7 +191,7 @@ label: Preview
   Amount of blur to apply to the glow effect in pixels.
   ::
   ::component-prop{name="inactiveZone" type="number" default="0.7"}
-  Size of the inactive zone in the centre where the effect is disabled (0�1). Smaller values keep the glow active closer to the middle.
+  Size of the inactive zone in the centre where the effect is disabled (0–1). Smaller values keep the glow active closer to the middle.
   ::
   ::component-prop{name="proximity" type="number" default="0"}
   Distance in pixels from the element edges where the effect activates.

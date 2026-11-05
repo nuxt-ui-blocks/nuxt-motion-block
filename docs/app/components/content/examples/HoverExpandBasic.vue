@@ -1,6 +1,9 @@
 <template>
   <div class="flex w-full justify-center py-4">
-    <MHoverExpand :items="items" class="max-w-3xl" />
+    <MHoverExpand
+      :items="items"
+      class="max-w-3xl"
+    />
   </div>
 </template>
 

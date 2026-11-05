@@ -108,7 +108,7 @@ const props = withDefaults(defineProps<AiBranchProps>(), {
 })
 
 const emit = defineEmits<{
-  select: [branch: AiBranchData, index: number]
+  'select': [branch: AiBranchData, index: number]
   'update:modelValue': [index: number]
 }>()
 

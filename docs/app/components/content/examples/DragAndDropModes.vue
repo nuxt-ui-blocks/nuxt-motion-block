@@ -60,9 +60,9 @@
     </MDragAndDrop>
 
     <p class="text-xs text-muted">
-      <code>mode</code> = {{ mode }} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· <code>layout</code> = {{ layout }}
+      <code>mode</code> = {{ mode }} — <code>layout</code> = {{ layout }}
       <template v-if="mode !== 'sort'">
-        ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â drag onto one of the three zones to {{ mode === 'move' ? 'remove' : 'copy' }} the item.
+        Drag an item onto one of the three zones to {{ mode === 'move' ? 'remove' : 'copy' }} it.
       </template>
     </p>
   </div>

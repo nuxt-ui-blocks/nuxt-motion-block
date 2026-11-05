@@ -95,7 +95,8 @@ const scrollToBottom = (behavior: ScrollBehavior): void => {
   // just without the smoothing.
   if (typeof viewport.scrollTo === 'function') {
     viewport.scrollTo({ behavior, top: viewport.scrollHeight })
-  } else {
+  }
+  else {
     viewport.scrollTop = viewport.scrollHeight
   }
   isPinned.value = true

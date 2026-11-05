@@ -29,7 +29,7 @@
     </MDragAndDrop>
 
     <p class="text-xs text-muted">
-      Drag a row onto another to reorder it ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â the new order is emitted, not applied
+      Drag a row onto another to reorder it — the new order is emitted, not applied
       to your source array.
     </p>
   </div>

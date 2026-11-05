@@ -84,7 +84,11 @@
           :key="option"
           class="flex flex-col items-center gap-2 rounded-2xl bg-(--ui-bg-muted) py-6"
         >
-          <MAiOrbFaceMouth :mood="option" :size="112" painted />
+          <MAiOrbFaceMouth
+            :mood="option"
+            :size="112"
+            painted
+          />
           <span class="font-mono text-xs text-muted">{{ option }}</span>
         </div>
       </div>
@@ -163,11 +167,18 @@
           :key="option"
           class="flex flex-col items-center gap-2 rounded-2xl bg-(--ui-bg-muted) py-6"
         >
-          <MAiOrbFaceMouth :mood="option" :size="96" talking />
+          <MAiOrbFaceMouth
+            :mood="option"
+            :size="96"
+            talking
+          />
           <span class="font-mono text-xs text-muted">{{ option }}</span>
         </div>
         <div class="flex flex-col items-center gap-2 rounded-2xl bg-(--ui-bg-muted) py-6">
-          <MAiOrbFaceMouth state="streaming" :size="96" />
+          <MAiOrbFaceMouth
+            state="streaming"
+            :size="96"
+          />
           <span class="font-mono text-xs text-muted">streaming</span>
         </div>
       </div>
@@ -241,7 +252,11 @@
       </p>
 
       <div class="flex flex-wrap items-center justify-center gap-8 rounded-2xl bg-(--ui-bg-muted) py-12">
-        <MAiOrbFaceMouth :mood="mood" :size="144" aria-label="Assistant character, themed" />
+        <MAiOrbFaceMouth
+          :mood="mood"
+          :size="144"
+          aria-label="Assistant character, themed"
+        />
         <MAiOrbFaceMouth
           :mood="mood"
           :size="144"
