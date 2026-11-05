@@ -1,6 +1,105 @@
 # Changelog
 
 
+## v0.1.0
+
+[compare changes](https://github.com/nuxt-ui-blocks/nuxt-motion-block/compare/v0.0.4...v0.1.0)
+
+### 🚀 Enhancements
+
+- **AiOrbFaceMouth:** Rebuild the face around moods ([ed5fdc1](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/ed5fdc1))
+- **AiOrbFaceMouth:** Add a talking mouth that layers over any mood ([c197061](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/c197061))
+- **AiOrbFaceMouth:** Add painted for grids of faces ([ae71bc2](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/ae71bc2))
+- **components:** Add twelve animated components ([ac187f2](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/ac187f2))
+- **components:** Add eight text motion components ([0240617](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/0240617))
+- **components:** Add gravity letters ([2a730e0](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/2a730e0))
+- **components:** Add nine interface components ([f838ecc](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/f838ecc))
+- **components:** Add photo stack, scrubber and social selector ([95245ce](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/95245ce))
+- **components:** Add hover expand, hover image list and cursor follow ([44d4f69](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/44d4f69))
+- **components:** Add digit roll, number flow and gooey filter ([e35182c](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/e35182c))
+- **components:** Add float input, content skeleton and ai loader ([6cc3a41](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/6cc3a41))
+- **components:** Add count badge, morph toggle and phototab ([be3f7f0](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/be3f7f0))
+- **components:** Add image metadata preview ([5b14bb4](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/5b14bb4))
+- **components:** Add tilt card and github stars animation ([39e6df2](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/39e6df2))
+- **components:** Add interactive image selector ([6d145a7](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/6d145a7))
+- **components:** Add time machine stack ([d0ff0e5](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/d0ff0e5))
+- **components:** Add job listing ([8cce59f](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/8cce59f))
+- **components:** Add user account avatar ([a23ceab](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/a23ceab))
+- **components:** Add swap panel ([46945af](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/46945af))
+- **components:** Add dither image ([fb77671](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/fb77671))
+- **components:** Add form ([545adf1](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/545adf1))
+- **components:** Add card swipe deck ([e063392](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/e063392))
+- **components:** Add scrollable card stack ([c4264da](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/c4264da))
+- **components:** Add vector editor toolbar ([dacbab3](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/dacbab3))
+- **components:** Add auth form ([98ff9ad](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/98ff9ad))
+- **components:** Add aurora curtain ([8717909](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/8717909))
+- **components:** Add video ambient ([c62e890](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/c62e890))
+- **components:** Add arcade pixel ([03eb765](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/03eb765))
+- **components:** Add pixel brush canvas ([bdef3b3](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/bdef3b3))
+- **components:** Add gravity stars ([f7ccd2f](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/f7ccd2f))
+- **components:** Add pixel flow field ([c23146b](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/c23146b))
+- **components:** Add image generation panel ([d5a806c](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/d5a806c))
+- **components:** Add aperture and chroma blur transitions ([9026b61](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/9026b61))
+- **components:** Add cursor image trail and rolling text ([d81c763](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/d81c763))
+- **docs:** Add zeroRuntime sitemap configuration for git-based and local deployment ([1d748a6](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/1d748a6))
+- **swap-panel:** Add built-in token picker built on Nuxt UI dropdown menus ([f229114](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/f229114))
+- **form:** Add standard schema validation and complex field support ([57fb239](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/57fb239))
+- **components:** Add 38 motion components ([#10](https://github.com/nuxt-ui-blocks/nuxt-motion-block/pull/10))
+- **components:** Add hexagon pattern, noise texture, line shadow text and dotted map ([#11](https://github.com/nuxt-ui-blocks/nuxt-motion-block/pull/11))
+
+### 🔥 Performance
+
+- **docs:** Disable crawlLinks prerendering to speed up build ([27ccd92](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/27ccd92))
+
+### 🩹 Fixes
+
+- **AiOrb:** Fall back to the painted sphere when a context is lost ([7c43827](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/7c43827))
+- **AiOrbFaceMouth:** Keep the sphere painted before hydration ([dc9d0a8](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/dc9d0a8))
+- **playground:** Stop select controls from passing an empty value ([a855228](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/a855228))
+- **blocks:** Repair the filter menus in the block examples ([76486e0](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/76486e0))
+- **components:** Tolerate non-numeric scrubber input ([b58ac2d](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/b58ac2d))
+- **deps:** Sync the lockfile with the MCP dependencies ([22e7f7d](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/22e7f7d))
+- **docs:** Disable ogImage generation to fit within CF Pages build limit ([0d113f4](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/0d113f4))
+- **docs:** Add explicit nitro prerender route for sitemap to avoid build hanging ([72a2860](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/72a2860))
+- **form:** Rebuild fields on Nuxt UI Form and FormField ([00ebec4](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/00ebec4))
+- **docs:** Build the docs site to completion and serve assets with correct MIME types ([#8](https://github.com/nuxt-ui-blocks/nuxt-motion-block/pull/8))
+- **components:** Remove two pieces of dead public API ([#13](https://github.com/nuxt-ui-blocks/nuxt-motion-block/pull/13))
+- **docs:** Make `pnpm -C docs typecheck` pass ([#16](https://github.com/nuxt-ui-blocks/nuxt-motion-block/pull/16))
+
+### 📖 Documentation
+
+- **AiOrbFaceMouth:** Follow the component page pattern ([360c761](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/360c761))
+- **AiOrbFaceMouth:** Bring the intro in line with the component ([f7f7585](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/f7f7585))
+- **introduction:** Catch the page up with the library ([f45f53b](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/f45f53b))
+- **components:** Rebuild the index around the seventeen categories ([488c9b9](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/488c9b9))
+- Show the customize example source instead of an empty playground ([68de07e](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/68de07e))
+- Record the component library additions ([478eeed](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/478eeed))
+- **readme:** Update component count to reflect 100+ ported components ([7454bef](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/7454bef))
+- **readme:** Update component count to match 260+ from getting-started ([0d06de9](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/0d06de9))
+- **readme:** Overhaul README with comprehensive features, live preview images, and component families ([6a75a63](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/6a75a63))
+- **components:** Align 30 pages with the real component API ([#12](https://github.com/nuxt-ui-blocks/nuxt-motion-block/pull/12))
+- **playground:** Seed components whose required props render empty ([#14](https://github.com/nuxt-ui-blocks/nuxt-motion-block/pull/14))
+- **playground:** Add slot seeds for slot-driven and empty-by-default components ([#15](https://github.com/nuxt-ui-blocks/nuxt-motion-block/pull/15))
+
+### 🏡 Chore
+
+- Cleanup unused import, bump version to 0.0.5, remove agents dep ([079db2c](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/079db2c))
+- Release 0.0.8 ([d614b8b](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/d614b8b))
+- Release 0.0.9 ([7ce39db](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/7ce39db))
+- **docs:** Revert crawlLinks: false since we are moving to direct pre-built deployment ([2b8e5b3](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/2b8e5b3))
+- **ci:** Remove github actions workflow in favor of local wrangler direct deployment ([bc6af61](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/bc6af61))
+- **scripts:** Add deploy:docs script for local wrangler deployment ([2066811](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/2066811))
+- Make the tree pass `pnpm lint` ([#17](https://github.com/nuxt-ui-blocks/nuxt-motion-block/pull/17))
+
+### 🤖 CI
+
+- **workflow:** Add GitHub Actions workflow for pre-built Cloudflare Pages direct upload ([abd208c](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/abd208c))
+
+### ❤️ Contributors
+
+- Muhammad Khizar ([@MuhammadKhizar7](https://github.com/MuhammadKhizar7))
+- MuhammadKhizar7 <muhammadkhizar7@gmail.com>
+
 ## Unreleased
 
 ### 🚀 Enhancements
