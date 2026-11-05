@@ -125,7 +125,7 @@ const props = withDefaults(defineProps<AiArtifactProps>(), {
 })
 
 const emit = defineEmits<{
-  copy: [text: string]
+  'copy': [text: string]
   'update:pane': [pane: AiArtifactPane]
 }>()
 
@@ -241,7 +241,8 @@ const copy = async (): Promise<void> => {
     resetTimer = setTimeout(() => {
       copied.value = false
     }, COPIED_RESET_MS)
-  } catch {
+  }
+  catch {
     // A blocked clipboard is not worth an error state: the text is already on
     // screen, and shouting about permissions is louder than the failure.
   }

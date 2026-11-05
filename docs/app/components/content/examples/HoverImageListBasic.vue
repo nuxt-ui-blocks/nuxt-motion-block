@@ -1,6 +1,9 @@
 <template>
   <div class="flex w-full justify-center py-4">
-    <MHoverImageList :items="items" class="max-w-xl" />
+    <MHoverImageList
+      :items="items"
+      class="max-w-xl"
+    />
   </div>
 </template>
 
