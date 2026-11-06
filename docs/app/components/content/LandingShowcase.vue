@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import Aurora from './previews/Aurora.vue'
-import Spotlight from './previews/Spotlight.vue'
-import Glow from './previews/Glow.vue'
 import CardStack from './previews/CardStack.vue'
 import Glass from './previews/Glass.vue'
-import Shimmer from './previews/Shimmer.vue'
-import Scramble from './previews/Scramble.vue'
-import Tooltip from './previews/Tooltip.vue'
+import Glow from './previews/Glow.vue'
 import Magnetic from './previews/Magnetic.vue'
+import Scramble from './previews/Scramble.vue'
+import Shimmer from './previews/Shimmer.vue'
+import Spotlight from './previews/Spotlight.vue'
+import Tooltip from './previews/Tooltip.vue'
 
 const tiles = [
   { title: 'Aurora Background', tag: 'Backgrounds', to: '/components/backgrounds/aurora-background', blurb: 'A gradient that drifts behind your content.', preview: Aurora },
@@ -23,33 +23,42 @@ const tiles = [
 </script>
 
 <template>
-  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     <NuxtLink
       v-for="tile in tiles"
       :key="tile.title"
       :to="tile.to"
-      class="group relative flex flex-col overflow-hidden rounded-2xl border border-default/80 bg-elevated/30 transition duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10"
+      class="group relative flex flex-col overflow-hidden rounded-2xl border border-default bg-elevated/20 transition duration-300 hover:-translate-y-0.5 hover:border-primary/40"
     >
-      <div class="relative h-[220px] overflow-hidden">
+      <div class="dark relative h-[220px] overflow-hidden bg-neutral-950">
         <ClientOnly>
           <component :is="tile.preview" />
           <template #fallback>
-            <div class="h-full w-full animate-pulse bg-elevated/40" />
+            <div class="h-full w-full animate-pulse bg-white/5" />
           </template>
         </ClientOnly>
+
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute inset-0 rounded-none ring-1 ring-inset ring-white/10"
+        />
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_120%,transparent_40%,rgba(0,0,0,0.55)_100%)]"
+        />
       </div>
 
-      <div class="flex items-center justify-between gap-3 border-t border-default/70 px-4 py-3">
+      <div class="flex items-start justify-between gap-3 border-t border-default px-4 py-3">
         <div class="min-w-0">
           <div class="flex items-center gap-2">
-            <span class="rounded-full border border-default/70 px-2 py-0.5 text-[11px] font-medium text-muted">{{ tile.tag }}</span>
+            <span class="rounded-full border border-default px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-dimmed">{{ tile.tag }}</span>
             <span class="truncate text-sm font-medium text-highlighted">{{ tile.title }}</span>
           </div>
           <p class="mt-1 truncate text-xs text-muted">{{ tile.blurb }}</p>
         </div>
         <UIcon
-          name="i-lucide-arrow-right"
-          class="size-4 shrink-0 text-muted transition group-hover:translate-x-0.5 group-hover:text-primary"
+          name="i-lucide-arrow-up-right"
+          class="mt-1 size-4 shrink-0 text-dimmed transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
         />
       </div>
     </NuxtLink>

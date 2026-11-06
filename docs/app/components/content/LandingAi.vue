@@ -59,12 +59,16 @@ const built = [
 
 <template>
   <div>
-    <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-3xl font-semibold tracking-tight text-highlighted text-pretty sm:text-4xl">
+    <div class="max-w-2xl">
+      <LandingEyebrow
+        index="02"
+        label="For agents"
+      />
+      <h2 class="mt-5 text-3xl font-semibold tracking-tight text-highlighted text-pretty sm:text-4xl">
         AI interfaces, already animated
       </h2>
       <p class="mt-4 text-lg text-muted text-pretty">
-        Chat, reasoning, tool calls, and agents, wired to Motion for Vue and styled with your Nuxt UI tokens.
+        Chat, reasoning, tool calls and agents, wired to Motion for Vue and styled with your Nuxt UI tokens.
       </p>
     </div>
 

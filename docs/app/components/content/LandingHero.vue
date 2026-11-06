@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
-
 const badgeWords = ['spotlights', 'beams', 'magnetic buttons', 'kinetic text', '3D cards']
 
 let order = 0
@@ -57,22 +55,17 @@ const lines = ['Motion components', 'for Nuxt UI'].map(line =>
               aria-hidden="true"
               class="flex flex-wrap items-end gap-x-[0.28em]"
             >
-              <Motion
+              <span
                 v-for="item in line"
                 :key="item.word"
-                as="span"
-                class="inline-block"
-                :initial="{ opacity: 0, y: '0.5em', filter: 'blur(10px)' }"
-                :animate="{ opacity: 1, y: 0, filter: 'blur(0px)' }"
-                :transition="{ duration: 0.55, delay: 0.15 + item.i * 0.07, ease: [0.22, 1, 0.36, 1] }"
-              >
-                {{ item.word }}
-              </Motion>
+                class="hero-word"
+                :style="{ '--word-index': item.i }"
+              >{{ item.word }}</span>
             </span>
           </h1>
 
           <p class="mt-6 max-w-xl text-lg text-muted text-pretty">
-            Copy-paste motion for Vue: springs, gestures, 3D, and scroll, all themed by your design tokens.
+            292 animated Vue components that inherit your Nuxt UI theme. Springs, staggers, scroll and 3D that feel designed, not bolted on.
           </p>
 
           <div class="mt-8 flex flex-wrap items-center gap-3">
@@ -96,10 +89,41 @@ const lines = ['Motion components', 'for Nuxt UI'].map(line =>
               GitHub
             </UButton>
           </div>
+
+          <div class="mt-5">
+            <CopyCommand command="pnpm add nuxt-motion-block" />
+          </div>
         </div>
 
-        <LandingHeroVisual class="lg:pl-4" />
+        <LandingHeroPanel class="lg:pl-4" />
       </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+.hero-word {
+  display: inline-block;
+  animation: hero-word-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(0.12s + var(--word-index, 0) * 0.07s);
+}
+
+@keyframes hero-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-word {
+    animation: none;
+  }
+}
+</style>

@@ -1,50 +1,84 @@
 <script setup lang="ts">
-const beams = [
-  { initialX: 120, translateX: 120, duration: 8, repeatDelay: 4, delay: 1 },
-  { initialX: 420, translateX: 420, duration: 5, repeatDelay: 5, className: 'h-10' },
-  { initialX: 720, translateX: 720, duration: 7, repeatDelay: 4, delay: 2, className: 'h-16' },
-  { initialX: 980, translateX: 980, duration: 6, repeatDelay: 6, className: 'h-8' },
+const colophon = [
+  { label: 'Maintained by', value: '@MuhammadKhizar7', to: 'https://github.com/MuhammadKhizar7' },
+  { label: 'License', value: 'MIT', to: 'https://github.com/nuxt-ui-blocks/nuxt-motion-block/blob/master/LICENSE' },
+  { label: 'Version', value: '0.1.0' },
+  { label: 'Source', value: 'nuxt-ui-blocks/nuxt-motion-block', to: 'https://github.com/nuxt-ui-blocks/nuxt-motion-block' },
 ]
 </script>
 
 <template>
-  <div class="relative isolate overflow-hidden rounded-3xl border border-default/70 bg-elevated/20">
-    <MCollisionBackgroundBeams
-      style="position: absolute; inset: 0; height: auto; z-index: 0; background-image: none"
-      :beams="beams"
+  <div class="relative isolate overflow-hidden rounded-3xl border border-default bg-elevated/20">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(16,185,129,0.14),transparent_60%)]"
     />
 
-    <div class="absolute inset-x-0 top-0 z-20 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+    <div class="relative z-10 px-6 py-16 sm:px-10 sm:py-20 lg:px-14">
+      <div class="grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16">
+        <div>
+          <LandingEyebrow
+            index="06"
+            label="Start"
+          />
+          <h2 class="mt-5 text-4xl font-semibold tracking-tight text-highlighted text-pretty sm:text-5xl">
+            Make something that moves
+          </h2>
 
-    <div class="relative z-10 px-6 py-20 text-center sm:px-12 sm:py-28">
-      <div class="mx-auto max-w-2xl">
-        <h2 class="text-4xl font-semibold tracking-tight text-highlighted text-pretty sm:text-5xl">
-          Put your interface in motion
-        </h2>
+          <p class="mt-5 max-w-md text-lg text-muted text-pretty">
+            One install, then the components are yours — your theme, your tokens, your taste.
+          </p>
 
-        <p class="mt-5 text-lg text-muted text-pretty">
-          Install Motion Block, drop in a component, and watch your Nuxt UI app come alive. No configuration, no lock-in.
-        </p>
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <MMagnetic>
+              <UButton
+                to="/getting-started"
+                size="xl"
+                trailing-icon="i-lucide-arrow-right"
+              >
+                Get started
+              </UButton>
+            </MMagnetic>
+            <UButton
+              to="https://github.com/nuxt-ui-blocks/nuxt-motion-block"
+              target="_blank"
+              color="neutral"
+              variant="outline"
+              size="xl"
+              icon="i-simple-icons-github"
+            >
+              View on GitHub
+            </UButton>
+          </div>
 
-        <div class="mt-9 flex flex-wrap items-center justify-center gap-4">
-          <UButton
-            to="/getting-started"
-            size="xl"
-            trailing-icon="i-lucide-arrow-right"
-          >
-            Get started
-          </UButton>
-          <UButton
-            to="https://github.com/nuxt-ui-blocks/nuxt-motion-block"
-            target="_blank"
-            color="neutral"
-            variant="outline"
-            size="xl"
-            icon="i-simple-icons-github"
-          >
-            View on GitHub
-          </UButton>
+          <div class="mt-6">
+            <CopyCommand command="pnpm add nuxt-motion-block" />
+          </div>
         </div>
+
+        <dl class="self-end border-t border-default">
+          <div
+            v-for="row in colophon"
+            :key="row.label"
+            class="flex items-baseline justify-between gap-4 border-b border-default py-3"
+          >
+            <dt class="font-mono text-[10px] uppercase tracking-[0.18em] text-dimmed">
+              {{ row.label }}
+            </dt>
+            <dd class="text-right text-sm text-muted">
+              <NuxtLink
+                v-if="row.to"
+                :to="row.to"
+                target="_blank"
+                rel="noopener"
+                class="transition hover:text-highlighted"
+              >
+                {{ row.value }}
+              </NuxtLink>
+              <span v-else>{{ row.value }}</span>
+            </dd>
+          </div>
+        </dl>
       </div>
     </div>
   </div>
