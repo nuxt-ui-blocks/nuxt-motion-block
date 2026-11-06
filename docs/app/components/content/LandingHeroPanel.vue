@@ -104,7 +104,10 @@ async function copy() {
       class="absolute -inset-8 rounded-2xl bg-[#e4572e]/10 blur-3xl"
     />
 
-    <div class="relative overflow-hidden rounded-lg border border-black/40 bg-[#141412] shadow-[0_36px_72px_-28px_rgb(0_0_0/0.55)] dark:border-white/10">
+    <div
+      class="dark relative overflow-hidden rounded-lg border border-black/40 bg-[#141412] shadow-[0_36px_72px_-28px_rgb(0_0_0/0.55)] dark:border-white/10"
+      style="--ui-bg: #141412"
+    >
       <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3">
         <span class="size-2.5 rounded-full bg-[#e4572e]" />
         <span class="size-2.5 rounded-full bg-[#d9a441]" />
