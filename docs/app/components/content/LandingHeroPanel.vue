@@ -29,12 +29,12 @@ const tabs: Tab[] = [
     name: 'MRetroGrid',
     blurb: 'An infinite horizon, in four lines.',
     preview: RetroGrid,
-    code: `<MRetroGrid\n  :angle="58"\n  :cell-size="54"\n  color="rgba(16,185,129,0.7)"\n/>`,
+    code: `<MRetroGrid\n  :angle="58"\n  :cell-size="54"\n  color="rgba(240,106,60,0.8)"\n/>`,
     lines: [
       [{ text: '<MRetroGrid', tone: 'tag' }],
       [{ text: '  :angle', tone: 'attr' }, { text: '=' }, { text: '"58"', tone: 'str' }],
       [{ text: '  :cell-size', tone: 'attr' }, { text: '=' }, { text: '"54"', tone: 'str' }],
-      [{ text: '  color', tone: 'attr' }, { text: '=' }, { text: '"rgba(16,185,129,0.7)"', tone: 'str' }],
+      [{ text: '  color', tone: 'attr' }, { text: '=' }, { text: '"rgba(240,106,60,0.8)"', tone: 'str' }],
       [{ text: '/>', tone: 'tag' }],
     ],
   },
@@ -75,10 +75,10 @@ const current = computed<Tab>(() => tabs.find(tab => tab.id === active.value) ??
 
 function toneClass(tone: Tone = 'plain') {
   return {
-    tag: 'text-emerald-300',
-    attr: 'text-sky-300',
-    str: 'text-amber-200',
-    plain: 'text-neutral-400',
+    tag: 'text-[#f4783e]',
+    attr: 'text-[#e8e6dd]',
+    str: 'text-[#c8b98a]',
+    plain: 'text-[#8a887f]',
   }[tone]
 }
 
@@ -101,33 +101,33 @@ async function copy() {
   <div class="relative mx-auto w-full max-w-lg">
     <div
       aria-hidden="true"
-      class="absolute -inset-8 rounded-2xl bg-primary/10 blur-3xl"
+      class="absolute -inset-8 rounded-2xl bg-[#e4572e]/10 blur-3xl"
     />
 
-    <div class="dark relative overflow-hidden rounded-2xl border border-white/10 bg-neutral-950 shadow-2xl shadow-black/40">
-      <div class="flex items-center gap-2 border-b border-white/10 px-3 py-2.5">
-        <span class="size-2.5 rounded-full bg-red-400/70" />
-        <span class="size-2.5 rounded-full bg-amber-400/70" />
-        <span class="size-2.5 rounded-full bg-emerald-400/70" />
-        <span class="ml-2 font-mono text-xs text-neutral-500">Motion.vue</span>
-        <span class="ml-auto rounded-full border border-white/10 px-2 py-0.5 text-[10px] font-medium text-neutral-400">Nuxt</span>
+    <div class="relative overflow-hidden rounded-lg border border-black/40 bg-[#141412] shadow-[0_36px_72px_-28px_rgb(0_0_0/0.55)] dark:border-white/10">
+      <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+        <span class="size-2.5 rounded-full bg-[#e4572e]" />
+        <span class="size-2.5 rounded-full bg-[#d9a441]" />
+        <span class="size-2.5 rounded-full bg-[#4a9b8e]" />
+        <span class="ml-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a887f]">Motion.vue</span>
+        <span class="ml-auto rounded-sm border border-[#f06a3c]/40 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] text-[#f4783e]">Live</span>
       </div>
 
-      <div class="flex items-center gap-1 border-b border-white/10 px-2 py-2">
+      <div class="flex items-center gap-1 border-b border-white/10 px-2.5 py-2">
         <button
           v-for="tab in tabs"
           :key="tab.id"
           type="button"
-          class="rounded-lg px-2.5 py-1 text-[11px] font-medium transition duration-200"
+          class="rounded-sm px-2.5 py-1.5 text-[11px] font-medium transition duration-200"
           :class="active === tab.id
-            ? 'bg-white/10 text-white'
-            : 'text-neutral-500 hover:bg-white/5 hover:text-neutral-200'"
+            ? 'bg-white/[0.08] text-[#f4f1ea]'
+            : 'text-[#8a887f] hover:bg-white/5 hover:text-[#e8e6dd]'"
           :aria-pressed="active === tab.id"
           @click="active = tab.id"
         >
           {{ tab.label }}
         </button>
-        <span class="ml-auto pr-1 font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-600">
+        <span class="ml-auto pr-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-[#57564f]">
           live
         </span>
       </div>
@@ -150,21 +150,21 @@ async function copy() {
 
         <div
           aria-hidden="true"
-          class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-neutral-950 to-transparent"
+          class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#141412] to-transparent"
         />
-        <p class="pointer-events-none absolute bottom-3 left-4 text-[11px] font-medium text-neutral-400">
+        <p class="pointer-events-none absolute bottom-3 left-4 font-mono text-[10px] uppercase tracking-[0.1em] text-[#a9a79e]">
           {{ current.blurb }}
         </p>
       </div>
 
       <div class="border-t border-white/10 bg-black/40 px-4 py-3">
         <div class="mb-2 flex items-center justify-between gap-3">
-          <span class="truncate font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">
+          <span class="truncate font-mono text-[9px] uppercase tracking-[0.18em] text-[#8a887f]">
             {{ current.name }}
           </span>
           <button
             type="button"
-            class="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-[11px] font-medium text-neutral-400 transition hover:bg-white/5 hover:text-white"
+            class="inline-flex items-center gap-1.5 rounded-sm px-2 py-1 text-[10px] font-medium text-[#8a887f] transition hover:bg-white/5 hover:text-[#f4f1ea]"
             :aria-label="copied ? 'Copied' : 'Copy code'"
             @click="copy"
           >

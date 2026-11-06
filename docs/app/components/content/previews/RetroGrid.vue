@@ -3,7 +3,7 @@
     <MRetroGrid
       :angle="58"
       :cell-size="54"
-      color="rgba(16,185,129,0.7)"
+      color="rgba(240,106,60,0.75)"
     />
     <div
       aria-hidden="true"

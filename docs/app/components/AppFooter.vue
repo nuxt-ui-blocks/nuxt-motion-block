@@ -42,19 +42,25 @@ const columns: FooterColumn[] = [
 </script>
 
 <template>
-  <UFooter class="border-t border-default">
-    <template #top>
-      <!--
-        UFooter only wraps #left/#right in the page container, so #top has to
-        bring its own gutters or it runs flush to the viewport edge.
-      -->
-      <div class="mx-auto grid w-full max-w-(--ui-container) gap-10 px-4 py-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] lg:px-8">
+  <footer class="border-t border-line bg-elevated/40">
+    <div class="mb-shell">
+      <div class="grid gap-12 py-12 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))] lg:gap-10 lg:py-16">
         <div>
-          <p class="font-display text-2xl leading-tight text-highlighted">
-            Motion Block
-          </p>
-          <p class="mt-2 max-w-xs text-sm text-muted text-pretty">
+          <NuxtLink
+            to="/"
+            aria-label="Nuxt Motion Block — home"
+            class="flex items-center gap-2.5"
+          >
+            <AppLogo :size="26" />
+            <span class="font-display text-lg leading-none tracking-tight text-highlighted">
+              Motion&nbsp;<span class="text-primary">Block</span>
+            </span>
+          </NuxtLink>
+          <p class="mt-4 max-w-xs text-sm leading-relaxed text-muted text-pretty">
             292 animated components for Nuxt UI. Springs, staggers, scroll and 3D that inherit your design tokens.
+          </p>
+          <p class="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-dimmed">
+            01 — Motion, it turns out, was always the product.
           </p>
         </div>
 
@@ -82,24 +88,18 @@ const columns: FooterColumn[] = [
           </ul>
         </div>
       </div>
-    </template>
 
-    <template #left>
-      <p class="text-sm text-muted">
-        © 2026 Nuxt Motion Block · MIT
-      </p>
-    </template>
-
-    <template #right>
-      <UButton
-        to="https://github.com/nuxt-ui-blocks/nuxt-motion-block"
-        target="_blank"
-        color="neutral"
-        variant="ghost"
-        size="sm"
-        icon="i-simple-icons-github"
-        aria-label="GitHub repository"
-      />
-    </template>
-  </UFooter>
+      <div class="flex flex-col gap-4 border-t border-line-muted border-line py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+        <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-dimmed">
+          MIT © 2026 Nuxt Motion Block — nuxt-motion-block.pages.dev
+        </p>
+        <ul class="flex flex-wrap items-center gap-5 font-mono text-[10px] uppercase tracking-[0.18em] text-dimmed">
+          <li>Theme-aware</li>
+          <li>Typed</li>
+          <li>Accessible</li>
+          <li>MIT</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
 </template>

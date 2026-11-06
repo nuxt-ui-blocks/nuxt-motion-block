@@ -30,8 +30,9 @@ const maskStyle = {
 
 <template>
   <div
-    class="relative border-y border-default py-4"
+    class="overflow-hidden border-y border-black/30 bg-[#141412] py-3 text-[#f4f1ea] dark:border-white/10"
     :style="maskStyle"
+    aria-hidden="true"
   >
     <MInfiniteSlider :duration="70">
       <div class="flex shrink-0 items-center">
@@ -39,8 +40,8 @@ const maskStyle = {
           v-for="item in items"
           :key="item"
         >
-          <span class="whitespace-nowrap px-6 font-mono text-[11px] uppercase tracking-[0.18em] text-dimmed">{{ item }}</span>
-          <span class="size-1 shrink-0 rounded-full bg-primary/40" />
+          <span class="whitespace-nowrap px-7 font-mono text-[11px] uppercase tracking-[0.18em] text-[#a9a79e]">{{ item }}</span>
+          <span class="h-3 w-[2px] shrink-0 bg-[#f06a3c]" />
         </template>
       </div>
     </MInfiniteSlider>

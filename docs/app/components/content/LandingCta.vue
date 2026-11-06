@@ -1,60 +1,69 @@
+<script setup lang="ts">
+</script>
+
 <template>
-  <div class="relative isolate overflow-hidden rounded-2xl border border-default bg-elevated/20">
+  <section
+    id="install"
+    class="relative isolate overflow-hidden bg-[#e4572e] text-[#141412]"
+  >
     <div
       aria-hidden="true"
-      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(16,185,129,0.14),transparent_60%)]"
+      class="pointer-events-none absolute inset-0 opacity-[0.16]"
+      style="background-image: repeating-linear-gradient(-45deg, #141412 0 2px, transparent 2px 26px)"
+    />
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -right-32 top-[-30%] h-[640px] w-[640px] rounded-full bg-[#141412] opacity-[0.08] blur-[140px]"
     />
 
-    <div class="relative z-10 px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
-      <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_21rem] lg:items-center lg:gap-16">
-        <div>
-          <LandingEyebrow
-            index="06"
-            label="Start"
-          />
+    <div class="mb-shell relative py-20 sm:py-24 lg:py-28">
+      <div class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-[#141412]/75">
+        <span>06</span>
+        <span
+          aria-hidden="true"
+          class="h-px w-8 bg-[#141412]/60"
+        />
+        The install
+      </div>
 
-          <h2 class="mt-5 max-w-xl font-display text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl lg:text-6xl">
-            Make something that moves
-          </h2>
+      <h2 class="display-tight mt-8 font-display text-[clamp(3rem,11vw,7.5rem)] font-semibold leading-[0.92] text-[#141412]">
+        Make something<br>
+        that moves.
+      </h2>
 
-          <p class="mt-5 max-w-md text-lg text-muted text-pretty">
-            One install, then the components are yours — your theme, your tokens, your taste.
+      <div class="mt-12 grid gap-10 lg:grid-cols-12 lg:items-end">
+        <p class="max-w-md text-xl leading-snug text-[#141412]/85 lg:col-span-5">
+          One install, then the components are yours — your theme, your tokens, your taste.
+        </p>
+
+        <div class="lg:col-span-4">
+          <InstallCommand class="drop-shadow-[0_20px_32px_rgb(20_20_18/0.35)]" />
+          <p class="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[#141412]/70">
+            MIT — peers install themselves
           </p>
-
-          <div class="mt-8 flex flex-wrap items-center gap-3">
-            <MMagnetic>
-              <UButton
-                to="/getting-started"
-                size="xl"
-                trailing-icon="i-lucide-arrow-right"
-              >
-                Get started
-              </UButton>
-            </MMagnetic>
-            <UButton
-              to="https://github.com/nuxt-ui-blocks/nuxt-motion-block"
-              target="_blank"
-              color="neutral"
-              variant="outline"
-              size="xl"
-              icon="i-simple-icons-github"
-            >
-              View on GitHub
-            </UButton>
-          </div>
         </div>
 
-        <div>
-          <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-dimmed">
-            Install
-          </p>
-          <InstallCommand class="mt-3" />
-          <p class="mt-3 text-xs leading-relaxed text-muted">
-            Peers: <code class="font-mono text-[11px] text-dimmed">@nuxt/ui</code> and
-            <code class="font-mono text-[11px] text-dimmed">motion-v</code>.
-          </p>
+        <div class="flex flex-col gap-3 lg:col-span-3 lg:items-end">
+          <UButton
+            to="/getting-started"
+            size="xl"
+            class="w-full justify-center rounded-md bg-[#141412] font-medium text-[#f4f1ea] hover:bg-[#000000]"
+            trailing-icon="i-lucide-arrow-right"
+          >
+            Start building
+          </UButton>
+          <UButton
+            to="https://github.com/nuxt-ui-blocks/nuxt-motion-block"
+            target="_blank"
+            size="xl"
+            class="w-full justify-center rounded-md border-2 border-[#141412] bg-transparent font-medium text-[#141412] hover:bg-[#141412] hover:text-[#f4f1ea]"
+            icon="i-simple-icons-github"
+            variant="ghost"
+          >
+            View source
+          </UButton>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>

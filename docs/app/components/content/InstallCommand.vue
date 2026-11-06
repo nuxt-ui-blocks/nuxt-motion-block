@@ -20,11 +20,6 @@ const managers: { id: Manager, label: string, run: (pkg: string) => string }[] =
 
 const STORAGE_KEY = 'motion-block:package-manager'
 
-/**
- * Shared across every instance on the page: pick pnpm in the hero and the
- * feature section follows along. SSR always starts on pnpm, then we sync the
- * stored preference on mount to keep hydration deterministic.
- */
 const manager = useState<Manager>('package-manager', () => 'pnpm')
 
 const command = computed(
@@ -63,9 +58,9 @@ async function copy() {
 </script>
 
 <template>
-  <div class="w-full max-w-md overflow-hidden rounded-xl border border-default bg-elevated/30">
+  <div class="w-full max-w-md overflow-hidden rounded-md border border-black/20 bg-[#141412] text-[#f4f1ea] shadow-[0_16px_40px_-16px_rgb(0_0_0/0.45)] dark:border-white/10">
     <div
-      class="flex items-center gap-0.5 border-b border-default px-1.5 py-1"
+      class="flex items-center gap-1 border-b border-white/10 px-3 pt-2 pb-0"
       role="group"
       :aria-label="label ?? 'Package manager'"
     >
@@ -74,31 +69,41 @@ async function copy() {
         :key="item.id"
         type="button"
         :aria-pressed="manager === item.id"
-        class="rounded-lg px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em] transition-colors duration-150"
+        class="relative px-2 pb-2.5 pt-1 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors duration-150"
         :class="manager === item.id
-          ? 'bg-accented text-highlighted'
-          : 'text-dimmed hover:text-muted'"
+          ? 'text-[#f4f1ea]'
+          : 'text-[#8a887f] hover:text-[#c9c7bd]'"
         @click="manager = item.id"
       >
         {{ item.label }}
+        <span
+          v-if="manager === item.id"
+          aria-hidden="true"
+          class="absolute inset-x-2 bottom-[-1px] h-[2px] bg-[#f06a3c]"
+        />
       </button>
     </div>
 
-    <div class="flex items-center gap-2 pl-3 pr-1.5 py-1.5">
-      <code class="min-w-0 flex-1 truncate font-mono text-xs text-muted">
-        <span class="select-none text-dimmed">$</span>
+    <div class="flex items-center gap-3 px-4 py-3">
+      <span
+        aria-hidden="true"
+        class="select-none font-mono text-xs text-[#f06a3c]"
+      >$</span>
+      <code class="min-w-0 flex-1 truncate font-mono text-xs text-[#e8e6dd]">
         {{ command }}
       </code>
-      <UButton
-        color="neutral"
-        variant="ghost"
-        size="xs"
-        :icon="copied ? 'i-lucide-check' : 'i-lucide-copy'"
+      <button
+        type="button"
+        class="inline-flex shrink-0 items-center gap-1.5 rounded-sm px-2 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-[#a9a79e] transition-colors duration-150 hover:bg-white/5 hover:text-[#f4f1ea] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#f06a3c]"
         :aria-label="copied ? 'Copied' : 'Copy install command'"
         @click="copy"
       >
+        <UIcon
+          :name="copied ? 'i-lucide-check' : 'i-lucide-copy'"
+          class="size-3.5"
+        />
         {{ copied ? 'Copied' : 'Copy' }}
-      </UButton>
+      </button>
     </div>
   </div>
 </template>

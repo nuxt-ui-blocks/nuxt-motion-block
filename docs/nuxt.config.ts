@@ -17,7 +17,9 @@ export default defineNuxtConfig({
   },
 
   colorMode: {
-    preference: 'dark',
+    // Light and dark from day one — follow the OS, can be toggled from the
+    // header by the user. Fall back to dark when the OS says nothing.
+    preference: 'system',
     fallback: 'dark',
   },
 

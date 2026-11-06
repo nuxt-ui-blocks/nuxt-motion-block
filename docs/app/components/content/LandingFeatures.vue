@@ -27,29 +27,35 @@ const variants = {
 <template>
   <div class="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
     <div class="lg:sticky lg:top-24 lg:self-start">
-      <LandingEyebrow
-        index="04"
-        label="Under the hood"
-      />
-      <h2 class="mt-5 font-display text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl">
-        The parts you'd rather not rebuild
+      <div class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-dimmed">
+        <span class="text-primary">04</span>
+        <span
+          aria-hidden="true"
+          class="h-px w-8 bg-primary/50"
+        />
+        The parts
+      </div>
+      <h2 class="display-tight mt-5 font-display text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.0] text-highlighted text-pretty">
+        The parts you'd rather not rebuild.
       </h2>
-      <p class="mt-4 text-lg text-muted text-pretty">
+      <p class="mt-5 max-w-md text-lg leading-relaxed text-muted text-pretty">
         Each component is a Nuxt UI primitive with motion bolted on properly — inheriting your tokens, honoring reduced-motion, and typed before you reach for the docs.
       </p>
 
       <div class="mt-8">
-        <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-dimmed">
+        <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-dimmed">
           One install
         </p>
-        <InstallCommand class="mt-3" />
+        <div class="mt-3">
+          <InstallCommand />
+        </div>
         <p class="mt-3 text-xs text-muted">
           Peer deps install themselves. No config, no plugin order to remember.
         </p>
       </div>
     </div>
 
-    <ul class="border-t border-default">
+    <ul class="border-t border-line">
       <MInView
         v-for="(feature, index) in features"
         :key="feature.title"
@@ -57,12 +63,12 @@ const variants = {
         :transition="{ duration: 0.5, ease: 'easeOut' }"
         as="li"
       >
-        <div class="group flex gap-5 border-b border-default py-7 transition-colors duration-300">
-          <span class="pt-1 font-mono text-[11px] tabular-nums text-dimmed transition-colors group-hover:text-primary">
+        <div class="group grid grid-cols-[2.5rem_1fr] gap-4 border-b border-line py-7 transition-colors duration-300 sm:grid-cols-[3rem_1fr]">
+          <span class="pt-1 font-mono text-[12px] tabular-nums tracking-widest text-dimmed transition-colors group-hover:text-primary">
             {{ String(index + 1).padStart(2, '0') }}
           </span>
           <div>
-            <h3 class="text-lg font-medium text-highlighted">
+            <h3 class="text-lg font-medium leading-snug text-highlighted">
               {{ feature.title }}
             </h3>
             <p class="mt-1.5 text-muted text-pretty">

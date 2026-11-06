@@ -10,57 +10,92 @@ import Spotlight from './previews/Spotlight.vue'
 import Tooltip from './previews/Tooltip.vue'
 
 const tiles = [
-  { title: 'Aurora Background', tag: 'Backgrounds', to: '/components/backgrounds/aurora-background', blurb: 'A gradient that drifts behind your content.', preview: Aurora },
-  { title: 'Spotlight', tag: 'Effects', to: '/components/effects/spotlight', blurb: 'A light that follows the cursor.', preview: Spotlight },
-  { title: 'Glow Effect', tag: 'Effects', to: '/components/effects/glow-effect', blurb: 'An animated glow rim for any surface.', preview: Glow },
-  { title: 'Stacked Cards', tag: 'Cards', to: '/components/cards/card-stack', blurb: 'Cards that fan, swap, and settle.', preview: CardStack },
-  { title: 'Glass Card', tag: 'Cards', to: '/components/cards/glass-card', blurb: 'Frosted surfaces with real depth.', preview: Glass },
-  { title: 'Text Shimmer', tag: 'Text', to: '/components/text/text-shimmer', blurb: 'A light sweep across a headline.', preview: Shimmer },
-  { title: 'Text Scramble', tag: 'Text', to: '/components/text/text-scramble', blurb: 'Characters resolve into words.', preview: Scramble },
-  { title: 'Animated Tooltip', tag: 'Interactive', to: '/components/interactive/animated-tooltip', blurb: 'Springy tooltips for any trigger.', preview: Tooltip },
-  { title: 'Magnetic', tag: 'Movement', to: '/components/movement/magnetic', blurb: 'Elements that lean toward the pointer.', preview: Magnetic },
+  { no: '01', title: 'Aurora background', name: 'MAurora', tag: 'Backgrounds', to: '/components/backgrounds/aurora-background', preview: Aurora },
+  { no: '02', title: 'Spotlight', name: 'MSpotlight', tag: 'Effects', to: '/components/effects/spotlight', preview: Spotlight },
+  { no: '03', title: 'Glow effect', name: 'MGlowEffect', tag: 'Effects', to: '/components/effects/glow-effect', preview: Glow },
+  { no: '04', title: 'Stacked cards', name: 'MCardStack', tag: 'Cards', to: '/components/cards/card-stack', preview: CardStack },
+  { no: '05', title: 'Glass card', name: 'MGlassCard', tag: 'Cards', to: '/components/cards/glass-card', preview: Glass },
+  { no: '06', title: 'Text shimmer', name: 'MTextShimmer', tag: 'Text', to: '/components/text/text-shimmer', preview: Shimmer },
+  { no: '07', title: 'Text scramble', name: 'MTextScramble', tag: 'Text', to: '/components/text/text-scramble', preview: Scramble },
+  { no: '08', title: 'Animated tooltip', name: 'MAnimatedTooltip', tag: 'Interactive', to: '/components/interactive/animated-tooltip', preview: Tooltip },
+  { no: '09', title: 'Magnetic', name: 'MMagnetic', tag: 'Movement', to: '/components/movement/magnetic', preview: Magnetic },
 ]
 </script>
 
 <template>
-  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    <NuxtLink
-      v-for="tile in tiles"
-      :key="tile.title"
-      :to="tile.to"
-      class="group relative flex flex-col overflow-hidden rounded-2xl border border-default bg-elevated/20 transition duration-300 hover:-translate-y-0.5 hover:border-primary/40"
-    >
-      <div class="dark relative h-[220px] overflow-hidden bg-neutral-950">
-        <ClientOnly>
-          <component :is="tile.preview" />
-          <template #fallback>
-            <div class="h-full w-full animate-pulse bg-white/5" />
-          </template>
-        </ClientOnly>
-
-        <div
-          aria-hidden="true"
-          class="pointer-events-none absolute inset-0 rounded-none ring-1 ring-inset ring-white/10"
-        />
-        <div
-          aria-hidden="true"
-          class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_120%,transparent_40%,rgba(0,0,0,0.55)_100%)]"
-        />
-      </div>
-
-      <div class="flex items-start justify-between gap-3 border-t border-default px-4 py-3">
-        <div class="min-w-0">
-          <div class="flex items-center gap-2">
-            <span class="rounded-full border border-default px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-dimmed">{{ tile.tag }}</span>
-            <span class="truncate text-sm font-medium text-highlighted">{{ tile.title }}</span>
+  <section
+    id="bench"
+    class="relative isolate overflow-hidden border-t border-line bg-elevated/40"
+  >
+    <div class="mb-shell py-20 sm:py-24 lg:py-28">
+      <div class="flex flex-wrap items-end justify-between gap-8">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-dimmed">
+            <span class="text-primary">03</span>
+            <span
+              aria-hidden="true"
+              class="h-px w-8 bg-primary/50"
+            />
+            The bench
           </div>
-          <p class="mt-1 truncate text-xs text-muted">{{ tile.blurb }}</p>
+          <h2 class="display-tight mt-5 font-display text-[clamp(2.5rem,5.5vw,4rem)] font-semibold leading-[1.0] text-highlighted">
+            The kit, live.
+          </h2>
+          <p class="mt-5 max-w-md text-lg leading-relaxed text-muted text-pretty">
+            Nine components running on this page right now. No recordings, no mocks — hover, click, scroll.
+          </p>
         </div>
-        <UIcon
-          name="i-lucide-arrow-up-right"
-          class="mt-1 size-4 shrink-0 text-dimmed transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
-        />
+
+        <NuxtLink
+          to="/components"
+          class="group inline-flex items-center gap-2 border border-line-muted px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-dimmed transition hover:border-primary hover:text-highlighted"
+        >
+          All 292
+          <UIcon
+            name="i-lucide-arrow-right"
+            class="size-3.5 transition group-hover:translate-x-0.5"
+          />
+        </NuxtLink>
       </div>
-    </NuxtLink>
-  </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <NuxtLink
+          v-for="tile in tiles"
+          :key="tile.name"
+          :to="tile.to"
+          class="group relative flex flex-col overflow-hidden border border-black/20 bg-[#141412] transition duration-300 ease-out hover:-translate-y-1 hover:border-[#e4572e]/60 dark:border-white/10"
+        >
+          <div class="dark relative h-[230px] overflow-hidden">
+            <ClientOnly>
+              <component :is="tile.preview" />
+              <template #fallback>
+                <div class="h-full w-full animate-pulse bg-white/5" />
+              </template>
+            </ClientOnly>
+            <span class="pointer-events-none absolute left-4 top-4 font-mono text-[10px] tabular-nums uppercase tracking-[0.18em] text-white/45">
+              {{ tile.no }}
+            </span>
+            <span class="pointer-events-none absolute right-4 top-4 rounded-sm border border-white/15 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] text-white/55">
+              {{ tile.tag }}
+            </span>
+          </div>
+
+          <div class="flex items-center justify-between gap-4 border-t border-white/10 bg-[#1a1a18] px-5 py-4">
+            <div class="min-w-0">
+              <p class="truncate text-sm font-medium text-[#f4f1ea]">
+                {{ tile.title }}
+              </p>
+              <p class="mt-0.5 truncate font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a887f]">
+                {{ tile.name }}
+              </p>
+            </div>
+            <UIcon
+              name="i-lucide-arrow-up-right"
+              class="size-4 shrink-0 text-[#f4f1ea]/40 transition group-hover:text-[#f06a3c]"
+            />
+          </div>
+        </NuxtLink>
+      </div>
+    </div>
+  </section>
 </template>
