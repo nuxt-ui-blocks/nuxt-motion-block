@@ -24,7 +24,7 @@ const stats: Stat[] = [
       <dt class="order-2 mt-2 text-sm text-muted">
         {{ stat.label }}
       </dt>
-      <dd class="order-1 font-serif text-5xl leading-none tracking-tight text-highlighted tabular-nums sm:text-6xl">
+      <dd class="order-1 font-display text-5xl leading-none tracking-tight text-highlighted tabular-nums sm:text-6xl">
         <MCountingNumber
           v-if="typeof stat.value === 'number'"
           :to="stat.value"

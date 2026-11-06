@@ -31,7 +31,7 @@ const variants = {
         index="04"
         label="Under the hood"
       />
-      <h2 class="mt-5 font-serif text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl">
+      <h2 class="mt-5 font-display text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl">
         The parts you'd rather not rebuild
       </h2>
       <p class="mt-4 text-lg text-muted text-pretty">

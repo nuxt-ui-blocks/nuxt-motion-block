@@ -13,7 +13,7 @@
             label="Start"
           />
 
-          <h2 class="mt-5 max-w-xl font-serif text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl lg:text-6xl">
+          <h2 class="mt-5 max-w-xl font-display text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl lg:text-6xl">
             Make something that moves
           </h2>
 

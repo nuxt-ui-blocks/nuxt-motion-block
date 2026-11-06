@@ -7,7 +7,7 @@
       />
 
       <div class="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-16">
-        <p class="max-w-3xl font-serif text-3xl leading-[1.15] tracking-tight text-highlighted text-pretty sm:text-4xl lg:text-[3.25rem]">
+        <p class="max-w-3xl font-display text-3xl leading-[1.15] tracking-tight text-highlighted text-pretty sm:text-4xl lg:text-[3.25rem]">
           We kept rebuilding the same eleven animations — the spotlight, the magnetic button, the headline that resolves out of noise.
           One project at a time, until it seemed silly to start over.
           <span class="text-muted">So we packaged them: typed, themed, accessible, MIT.</span>

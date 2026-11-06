@@ -11,7 +11,7 @@ const chips = ['MTilt', 'MTiltCard', 'MPerspectiveText3D', 'MOrbitingCircles', '
             index="05"
             label="Depth"
           />
-          <h2 class="mt-5 max-w-sm font-serif text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl">
+          <h2 class="mt-5 max-w-sm font-display text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl">
             3D that doesn't drop frames
           </h2>
           <p class="mt-4 max-w-md text-lg text-muted text-pretty">
@@ -48,7 +48,7 @@ const chips = ['MTilt', 'MTiltCard', 'MPerspectiveText3D', 'MOrbitingCircles', '
               text="Depth, dimension, motion"
               :rotate-x="16"
               :rotate-y="18"
-              class="px-6 py-4 text-center font-serif text-4xl leading-tight text-highlighted sm:text-5xl lg:text-6xl"
+              class="px-6 py-4 text-center font-display text-4xl leading-tight text-highlighted sm:text-5xl lg:text-6xl"
             />
           </div>
           <p class="absolute bottom-0 right-0 hidden font-mono text-[10px] uppercase tracking-[0.18em] text-dimmed sm:block">

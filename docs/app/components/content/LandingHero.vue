@@ -47,7 +47,7 @@ const lines = ['Motion components', 'for Nuxt UI'].map(line =>
 
           <h1
             aria-label="Motion components for Nuxt UI"
-            class="mt-6 flex flex-col items-start gap-y-1 font-serif text-[2.75rem] leading-[1.03] text-highlighted sm:text-6xl xl:text-7xl"
+            class="mt-6 flex flex-col items-start gap-y-1 font-display text-[2.75rem] leading-[1.03] text-highlighted sm:text-6xl xl:text-7xl"
           >
             <span
               v-for="(line, li) in lines"

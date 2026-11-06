@@ -50,7 +50,7 @@ const columns: FooterColumn[] = [
       -->
       <div class="mx-auto grid w-full max-w-(--ui-container) gap-10 px-4 py-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] lg:px-8">
         <div>
-          <p class="font-serif text-2xl leading-tight text-highlighted">
+          <p class="font-display text-2xl leading-tight text-highlighted">
             Motion Block
           </p>
           <p class="mt-2 max-w-xs text-sm text-muted text-pretty">
