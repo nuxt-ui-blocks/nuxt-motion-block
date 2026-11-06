@@ -152,10 +152,10 @@ const built = [
               :key="state"
               class="flex flex-1 flex-col items-center gap-2"
             >
-              <MAiOrbFace
+              <MAiOrbFaceMouth
                 :state="state"
                 :size="72"
-                :aria-label="state"
+                :aria-label="`Assistant, ${state}`"
                 :colors="orbFaceColors"
               />
               <span class="text-[11px] text-muted">{{ state }}</span>
