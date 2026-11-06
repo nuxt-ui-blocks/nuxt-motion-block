@@ -64,7 +64,7 @@ const built = [
         index="02"
         label="For agents"
       />
-      <h2 class="mt-5 font-serif text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl">
+      <h2 class="mt-5 font-display text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl">
         AI interfaces, already animated
       </h2>
       <p class="mt-4 text-lg text-muted text-pretty">
@@ -155,6 +155,7 @@ const built = [
               <MAiOrbFaceMouth
                 :state="state"
                 :size="72"
+                :painted="true"
                 :aria-label="`Assistant, ${state}`"
                 :colors="orbFaceColors"
               />
