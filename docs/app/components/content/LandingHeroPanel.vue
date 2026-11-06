@@ -101,10 +101,10 @@ async function copy() {
   <div class="relative mx-auto w-full max-w-lg">
     <div
       aria-hidden="true"
-      class="absolute -inset-8 rounded-[2.5rem] bg-primary/10 blur-3xl"
+      class="absolute -inset-8 rounded-2xl bg-primary/10 blur-3xl"
     />
 
-    <div class="dark relative overflow-hidden rounded-3xl border border-white/10 bg-neutral-950 shadow-2xl shadow-black/40">
+    <div class="dark relative overflow-hidden rounded-2xl border border-white/10 bg-neutral-950 shadow-2xl shadow-black/40">
       <div class="flex items-center gap-2 border-b border-white/10 px-3 py-2.5">
         <span class="size-2.5 rounded-full bg-red-400/70" />
         <span class="size-2.5 rounded-full bg-amber-400/70" />
@@ -118,7 +118,7 @@ async function copy() {
           v-for="tab in tabs"
           :key="tab.id"
           type="button"
-          class="rounded-md px-2.5 py-1 text-[11px] font-medium transition duration-200"
+          class="rounded-lg px-2.5 py-1 text-[11px] font-medium transition duration-200"
           :class="active === tab.id
             ? 'bg-white/10 text-white'
             : 'text-neutral-500 hover:bg-white/5 hover:text-neutral-200'"
@@ -164,7 +164,7 @@ async function copy() {
           </span>
           <button
             type="button"
-            class="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-[11px] font-medium text-neutral-400 transition hover:bg-white/5 hover:text-white"
+            class="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-[11px] font-medium text-neutral-400 transition hover:bg-white/5 hover:text-white"
             :aria-label="copied ? 'Copied' : 'Copy code'"
             @click="copy"
           >

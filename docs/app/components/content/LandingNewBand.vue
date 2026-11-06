@@ -11,7 +11,7 @@ const chips = ['MTilt', 'MTiltCard', 'MPerspectiveText3D', 'MOrbitingCircles', '
             index="05"
             label="Depth"
           />
-          <h2 class="mt-5 max-w-sm text-3xl font-semibold tracking-tight text-highlighted text-pretty sm:text-4xl">
+          <h2 class="mt-5 max-w-sm font-serif text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl">
             3D that doesn't drop frames
           </h2>
           <p class="mt-4 max-w-md text-lg text-muted text-pretty">

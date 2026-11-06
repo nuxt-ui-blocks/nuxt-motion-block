@@ -49,8 +49,8 @@ const rootClass = computed(() => [
             class="size-4"
           />
         </span>
-        <span class="text-base font-semibold tracking-tight text-highlighted">
-          Motion<span class="text-primary"> Block</span>
+        <span class="font-serif text-xl leading-none tracking-tight text-highlighted">
+          Motion <span class="text-primary">Block</span>
         </span>
       </NuxtLink>
     </template>

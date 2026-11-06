@@ -27,7 +27,7 @@
             index="03"
             label="Live"
           />
-          <h2 class="mt-5 text-3xl font-semibold tracking-tight text-highlighted text-pretty sm:text-4xl">
+          <h2 class="mt-5 font-serif text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl">
             Live components, not screenshots
           </h2>
           <p class="mt-4 text-lg text-muted text-pretty">

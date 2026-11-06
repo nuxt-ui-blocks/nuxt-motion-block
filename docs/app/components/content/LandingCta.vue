@@ -1,27 +1,19 @@
-<script setup lang="ts">
-const colophon = [
-  { label: 'Maintained by', value: '@MuhammadKhizar7', to: 'https://github.com/MuhammadKhizar7' },
-  { label: 'License', value: 'MIT', to: 'https://github.com/nuxt-ui-blocks/nuxt-motion-block/blob/master/LICENSE' },
-  { label: 'Version', value: '0.1.0' },
-  { label: 'Source', value: 'nuxt-ui-blocks/nuxt-motion-block', to: 'https://github.com/nuxt-ui-blocks/nuxt-motion-block' },
-]
-</script>
-
 <template>
-  <div class="relative isolate overflow-hidden rounded-3xl border border-default bg-elevated/20">
+  <div class="relative isolate overflow-hidden rounded-2xl border border-default bg-elevated/20">
     <div
       aria-hidden="true"
       class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(16,185,129,0.14),transparent_60%)]"
     />
 
-    <div class="relative z-10 px-6 py-16 sm:px-10 sm:py-20 lg:px-14">
-      <div class="grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16">
+    <div class="relative z-10 px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
+      <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_21rem] lg:items-center lg:gap-16">
         <div>
           <LandingEyebrow
             index="06"
             label="Start"
           />
-          <h2 class="mt-5 text-4xl font-semibold tracking-tight text-highlighted text-pretty sm:text-5xl">
+
+          <h2 class="mt-5 max-w-xl font-serif text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl lg:text-6xl">
             Make something that moves
           </h2>
 
@@ -50,35 +42,18 @@ const colophon = [
               View on GitHub
             </UButton>
           </div>
-
-          <div class="mt-6">
-            <CopyCommand command="pnpm add nuxt-motion-block" />
-          </div>
         </div>
 
-        <dl class="self-end border-t border-default">
-          <div
-            v-for="row in colophon"
-            :key="row.label"
-            class="flex items-baseline justify-between gap-4 border-b border-default py-3"
-          >
-            <dt class="font-mono text-[10px] uppercase tracking-[0.18em] text-dimmed">
-              {{ row.label }}
-            </dt>
-            <dd class="text-right text-sm text-muted">
-              <NuxtLink
-                v-if="row.to"
-                :to="row.to"
-                target="_blank"
-                rel="noopener"
-                class="transition hover:text-highlighted"
-              >
-                {{ row.value }}
-              </NuxtLink>
-              <span v-else>{{ row.value }}</span>
-            </dd>
-          </div>
-        </dl>
+        <div>
+          <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-dimmed">
+            Install
+          </p>
+          <InstallCommand class="mt-3" />
+          <p class="mt-3 text-xs leading-relaxed text-muted">
+            Peers: <code class="font-mono text-[11px] text-dimmed">@nuxt/ui</code> and
+            <code class="font-mono text-[11px] text-dimmed">motion-v</code>.
+          </p>
+        </div>
       </div>
     </div>
   </div>

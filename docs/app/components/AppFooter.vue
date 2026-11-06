@@ -62,7 +62,7 @@ const columns: FooterColumn[] = [
           v-for="column in columns"
           :key="column.title"
         >
-          <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-dimmed">
+          <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-dimmed">
             {{ column.title }}
           </p>
           <ul class="mt-4 space-y-2.5">
@@ -86,13 +86,7 @@ const columns: FooterColumn[] = [
 
     <template #left>
       <p class="text-sm text-muted">
-        © 2026 Nuxt Motion Block · MIT · built by
-        <NuxtLink
-          to="https://github.com/MuhammadKhizar7"
-          target="_blank"
-          rel="noopener"
-          class="text-highlighted underline decoration-default underline-offset-4 transition hover:decoration-primary"
-        >@MuhammadKhizar7</NuxtLink>
+        © 2026 Nuxt Motion Block · MIT
       </p>
     </template>
 

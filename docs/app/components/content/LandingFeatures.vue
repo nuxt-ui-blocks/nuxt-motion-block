@@ -31,20 +31,18 @@ const variants = {
         index="04"
         label="Under the hood"
       />
-      <h2 class="mt-5 text-3xl font-semibold tracking-tight text-highlighted text-pretty sm:text-4xl">
+      <h2 class="mt-5 font-serif text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl">
         The parts you'd rather not rebuild
       </h2>
       <p class="mt-4 text-lg text-muted text-pretty">
         Each component is a Nuxt UI primitive with motion bolted on properly — inheriting your tokens, honoring reduced-motion, and typed before you reach for the docs.
       </p>
 
-      <div class="mt-8 rounded-xl border border-default bg-elevated/30 p-4">
+      <div class="mt-8">
         <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-dimmed">
-          One dependency
+          One install
         </p>
-        <div class="mt-3">
-          <CopyCommand command="pnpm add nuxt-motion-block" />
-        </div>
+        <InstallCommand class="mt-3" />
         <p class="mt-3 text-xs text-muted">
           Peer deps install themselves. No config, no plugin order to remember.
         </p>

@@ -64,7 +64,7 @@ const built = [
         index="02"
         label="For agents"
       />
-      <h2 class="mt-5 text-3xl font-semibold tracking-tight text-highlighted text-pretty sm:text-4xl">
+      <h2 class="mt-5 font-serif text-4xl leading-[1.05] text-highlighted text-pretty sm:text-5xl">
         AI interfaces, already animated
       </h2>
       <p class="mt-4 text-lg text-muted text-pretty">
@@ -73,7 +73,7 @@ const built = [
     </div>
 
     <div class="mt-12 grid gap-6 lg:grid-cols-[1.15fr_1fr]">
-      <div class="rounded-3xl border border-default/70 bg-elevated/30 p-5 sm:p-6">
+      <div class="rounded-2xl border border-default/70 bg-elevated/30 p-5 sm:p-6">
         <div class="flex items-center gap-3 border-b border-default/70 pb-4">
           <MAgentAvatar
             seed="reviewer"
@@ -94,7 +94,7 @@ const built = [
         </div>
 
         <div class="mt-5 space-y-5">
-          <div class="rounded-2xl border border-default/70 p-4">
+          <div class="rounded-xl border border-default/70 p-4">
             <MAiMessage
               id="turn-1"
               :parts="userParts"
@@ -118,7 +118,7 @@ const built = [
             </template>
           </MAiToolCall>
 
-          <div class="rounded-2xl border border-default/70 p-4">
+          <div class="rounded-xl border border-default/70 p-4">
             <MAiMessage
               id="turn-2"
               :parts="assistantParts"
@@ -142,7 +142,7 @@ const built = [
       </div>
 
       <div class="flex flex-col gap-6">
-        <div class="rounded-3xl border border-default/70 bg-elevated/30 p-5 sm:p-6">
+        <div class="rounded-2xl border border-default/70 bg-elevated/30 p-5 sm:p-6">
           <p class="text-sm font-medium text-highlighted">
             Expressive faces
           </p>
@@ -163,7 +163,7 @@ const built = [
           </div>
         </div>
 
-        <div class="rounded-3xl border border-default/70 bg-elevated/30 p-5 sm:p-6">
+        <div class="rounded-2xl border border-default/70 bg-elevated/30 p-5 sm:p-6">
           <p class="text-sm font-medium text-highlighted">
             Agent avatars
           </p>
@@ -181,7 +181,7 @@ const built = [
           </div>
         </div>
 
-        <div class="rounded-3xl border border-default/70 bg-elevated/30 p-5 sm:p-6">
+        <div class="rounded-2xl border border-default/70 bg-elevated/30 p-5 sm:p-6">
           <MAiTaskList
             label="Tokenize the palette"
             :tasks="tasks"
