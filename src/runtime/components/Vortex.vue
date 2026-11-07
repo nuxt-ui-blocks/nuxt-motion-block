@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
 import { createNoise3D } from 'simplex-noise' // for 3D noise add this package as dependency make sure add details in docs
-import { useColorMode } from '#imports'
+import { useColorMode } from '../utils/nuxt-shims'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import vortex from '../theme/vortex'

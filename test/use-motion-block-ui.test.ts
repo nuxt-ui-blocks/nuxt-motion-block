@@ -3,7 +3,7 @@ import { defineComponent, h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { useMotionBlockUI } from '../src/runtime/composables/useMotionBlockUI'
 import { codeBlock, dynamicIsland } from '../src/runtime/theme'
-import { appConfig } from './stubs/imports'
+import { useMotionBlockConfig, setMotionBlockConfig } from '../src/runtime/utils/use-motion-block-config'
 
 function withSetup<T>(composable: () => T): { result: T, unmount: () => void } {
   let result!: T
@@ -18,7 +18,7 @@ function withSetup<T>(composable: () => T): { result: T, unmount: () => void } {
 
 describe('useMotionBlockUI', () => {
   beforeEach(() => {
-    appConfig.value = { ui: {} }
+    useMotionBlockConfig().ui = {}
   })
 
   it('returns the raw props when no app.config entry exists', () => {
@@ -60,8 +60,8 @@ describe('useMotionBlockUI', () => {
     unmount()
   })
 
-  it('extends the theme with app.config.ui overrides', () => {
-    appConfig.value = { ui: { dynamicIsland: { slots: { root: 'bg-red-500' } } } }
+  it('extends the theme with ui overrides', () => {
+    setMotionBlockConfig({ ui: { dynamicIsland: { slots: { root: 'bg-red-500' } } } })
     const { result, unmount } = withSetup(() => useMotionBlockUI({
       name: 'dynamicIsland',
       props: {} as any,

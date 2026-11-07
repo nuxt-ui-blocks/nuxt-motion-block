@@ -34,16 +34,17 @@
     "./runtime/utils/theme-color": {
       "types": "./dist/runtime/utils/theme-color.d.ts",
       "import": "./dist/runtime/utils/theme-color.js"
+    },
+    "./vue-plugin": {
+      "types": "./dist/vue-plugin.d.mts",
+      "import": "./dist/vue-plugin.mjs"
     }
   },
   "main": "./dist/module.mjs",
   "typesVersions": {
     "*": {
-      ".": [
-        "./dist/types.d.mts"
-      ],
-      "types": [
-        "./dist/runtime/types/index.d.ts"
+      "vue-plugin": [
+        "./dist/vue-plugin.d.mts"
       ]
     }
   },
@@ -127,5 +128,10 @@
       "unrs-resolver",
       "vue-demi"
     ]
+  },
+  "peerDependenciesMeta": {
+    "nuxt": {
+      "optional": true
+    }
   }
 }

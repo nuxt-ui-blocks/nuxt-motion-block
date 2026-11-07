@@ -41,6 +41,10 @@ Prerequisites: Nuxt 4, [@nuxt/ui](https://ui.nuxt.com) ^4.11.2 and [motion-v](ht
 
 That's it! You can now use any Nuxt Motion Block component in your app with zero extra imports.
 
+### Vue, Laravel, AdonisJS
+
+The same 292 components also work in plain Vue, Laravel (Inertia) and AdonisJS apps — no Nuxt required. See [/getting-started/vue](https://nuxt-motion-block.pages.dev/getting-started/vue) and [/getting-started/laravel](https://nuxt-motion-block.pages.dev/getting-started/laravel).
+
 ## 📦 Component Families
 
 - **AI Interfaces**: Chat surfaces, streaming reasoning traces, tool calls, citations, task lists, and expressive AI orbs.

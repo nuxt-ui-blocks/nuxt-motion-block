@@ -74,7 +74,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { AnimatePresence, motion, useReducedMotion } from 'motion-v'
-import { useToast } from '#imports'
+import { useToast } from '../utils/nuxt-shims'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import toaster from '../theme/toaster'
 

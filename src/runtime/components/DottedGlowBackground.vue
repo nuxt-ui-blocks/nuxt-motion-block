@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch, type StyleValue } from 'vue'
-import { useColorMode } from '#imports'
+import { useColorMode } from '../utils/nuxt-shims'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import dottedGlowBackground from '../theme/dotted-glow-background'
 import { resolveColor, resolveCssColor } from '../utils/theme-color'

@@ -285,7 +285,7 @@ function onMagicLink() {
           size="lg"
           class="w-full"
           required
-          @update:model-value="value => setValue('email', String(value ?? ''))"
+          @update:model-value="(value: unknown) => setValue('email', String(value ?? ''))"
         />
         <p
           v-if="props.fieldErrors.email"
@@ -325,7 +325,7 @@ function onMagicLink() {
             :autocomplete="isSignUp ? 'new-password' : 'current-password'"
             size="lg"
             class="w-full"
-            @update:model-value="value => setValue('password', String(value ?? ''))"
+            @update:model-value="(value: unknown) => setValue('password', String(value ?? ''))"
           >
             <template #trailing>
               <UButton

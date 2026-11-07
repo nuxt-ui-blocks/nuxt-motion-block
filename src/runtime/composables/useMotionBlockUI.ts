@@ -2,11 +2,11 @@
 import { defu } from 'defu'
 import { useComponentProps } from '@nuxt/ui/composables/useComponentProps'
 import { tv } from '@nuxt/ui/utils/tv'
-import { useAppConfig } from '#imports'
+import { useMotionBlockConfig } from '../utils/use-motion-block-config'
 
 export interface UseMotionBlockUIOptions<Props extends object> {
   /**
-   * Component name, used as the `app.config` key (`ui.<name>`).
+   * Component name, used as the `app.config` / Vue-plugin `ui` key (`ui.<name>`).
    */
   name: string
   /**
@@ -21,32 +21,32 @@ export interface UseMotionBlockUIOptions<Props extends object> {
 
 export interface UseMotionBlockUIReturn<Props extends object> {
   /**
-   * Props resolved through `useComponentProps` (explicit prop > UTheme > app.config).
+   * Props resolved through `useComponentProps` (explicit prop > UTheme > config overrides).
    */
   props: Props
   /**
-   * The `tv` instance extended with the user's `app.config.ui.<name>` overrides.
+   * The `tv` instance extended with the user's `ui.<name>` overrides.
    */
   ui: ComputedRef<any>
 }
 
 /**
  * Resolve a component's `ui` slots by merging its `tv` theme with the
- * user-provided `app.config.ui.<name>` overrides.
+ * consumer-provided `ui.<name>` overrides.
  */
 export function useMotionBlockUI<Props extends object>(
   options: UseMotionBlockUIOptions<Props>,
 ): UseMotionBlockUIReturn<Props> {
   const { name, props, theme } = options
   const _props = useComponentProps(name, props)
-  const appConfig = useAppConfig()
+  const motionBlockConfig = useMotionBlockConfig()
 
   // Calling the `tv` instance yields the per-slot resolver functions; slot-level
   // variant props (e.g. `ui.line({ kind })`) are applied where the slots are used.
   const ui = computed(() =>
     tv({
       extend: theme,
-      ...defu({}, (appConfig as any).ui?.[name] ?? {}),
+      ...defu({}, motionBlockConfig.ui[name] ?? {}),
     })(),
   )
 
