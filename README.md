@@ -5,7 +5,7 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-Copy-paste motion for Vue: springs, gestures, 3D, and scroll, all themed by your Nuxt UI design tokens and powered by `motion-v`.
+292 animated Vue components for Nuxt UI — springs, staggers, scroll and 3D that inherit your design tokens. Powered by `motion-v`.
 
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
 - [📖 &nbsp;Documentation](https://nuxt-motion-block.pages.dev/)
@@ -23,7 +23,7 @@ Copy-paste motion for Vue: springs, gestures, 3D, and scroll, all themed by your
 
 ## ✨ Features
 
-- 🎨 &nbsp;**260+ Motion-Enhanced Components**: 3D primitives, AI chat interfaces, animated backgrounds, interactive cards, carousels, text/number effects, and full production templates.
+- 🎨 &nbsp;**292 Motion-Enhanced Components**: 3D primitives, AI chat interfaces, animated backgrounds, interactive cards, carousels, text/number effects, and full production templates.
 - ⚡ &nbsp;**Powered by motion-v**: Smooth, performant spring physics, gestures, and layout animations.
 - 🧩 &nbsp;**Theme-Aware Integration**: Inherits Nuxt UI design tokens automatically with zero configuration overrides.
 - 🛠️ &nbsp;**Auto-Registered**: Components register instantly under your configurable prefix (default: `M`).

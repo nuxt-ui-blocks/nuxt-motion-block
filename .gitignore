@@ -70,3 +70,9 @@ Temporary Items
 playground/.screenshots/
 playground/*.cjs
 playground/package-lock.json
+
+# Skills installed from skills.sh (env, not source)
+.agents/
+.taste-skill/
+shots/
+

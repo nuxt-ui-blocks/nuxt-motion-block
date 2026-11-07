@@ -1,51 +1,69 @@
 <script setup lang="ts">
-const beams = [
-  { initialX: 120, translateX: 120, duration: 8, repeatDelay: 4, delay: 1 },
-  { initialX: 420, translateX: 420, duration: 5, repeatDelay: 5, className: 'h-10' },
-  { initialX: 720, translateX: 720, duration: 7, repeatDelay: 4, delay: 2, className: 'h-16' },
-  { initialX: 980, translateX: 980, duration: 6, repeatDelay: 6, className: 'h-8' },
-]
 </script>
 
 <template>
-  <div class="relative isolate overflow-hidden rounded-3xl border border-default/70 bg-elevated/20">
-    <MCollisionBackgroundBeams
-      style="position: absolute; inset: 0; height: auto; z-index: 0; background-image: none"
-      :beams="beams"
+  <section
+    id="install"
+    class="relative isolate overflow-hidden bg-[#e4572e] text-[#141412]"
+  >
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 opacity-[0.16]"
+      style="background-image: repeating-linear-gradient(-45deg, #141412 0 2px, transparent 2px 26px)"
+    />
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -right-32 top-[-30%] h-[640px] w-[640px] rounded-full bg-[#141412] opacity-[0.08] blur-[140px]"
     />
 
-    <div class="absolute inset-x-0 top-0 z-20 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+    <div class="mb-shell relative py-20 sm:py-24 lg:py-28">
+      <div class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-[#141412]/75">
+        <span>06</span>
+        <span
+          aria-hidden="true"
+          class="h-px w-8 bg-[#141412]/60"
+        />
+        The install
+      </div>
 
-    <div class="relative z-10 px-6 py-20 text-center sm:px-12 sm:py-28">
-      <div class="mx-auto max-w-2xl">
-        <h2 class="text-4xl font-semibold tracking-tight text-highlighted text-pretty sm:text-5xl">
-          Put your interface in motion
-        </h2>
+      <h2 class="display-tight mt-8 font-display text-[clamp(3rem,11vw,7.5rem)] font-semibold leading-[0.92] text-[#141412]">
+        Make something<br>
+        that moves.
+      </h2>
 
-        <p class="mt-5 text-lg text-muted text-pretty">
-          Install Motion Block, drop in a component, and watch your Nuxt UI app come alive. No configuration, no lock-in.
+      <div class="mt-12 grid gap-10 lg:grid-cols-12 lg:items-end">
+        <p class="max-w-md text-xl leading-snug text-[#141412]/85 lg:col-span-5">
+          One install, then the components are yours — your theme, your tokens, your taste.
         </p>
 
-        <div class="mt-9 flex flex-wrap items-center justify-center gap-4">
+        <div class="lg:col-span-4">
+          <InstallCommand class="drop-shadow-[0_20px_32px_rgb(20_20_18/0.35)]" />
+          <p class="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[#141412]/70">
+            MIT — peers install themselves
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-3 lg:col-span-3 lg:items-end">
           <UButton
             to="/getting-started"
             size="xl"
+            class="w-full justify-center rounded-md bg-[#141412] font-medium text-[#f4f1ea] hover:bg-[#000000]"
             trailing-icon="i-lucide-arrow-right"
           >
-            Get started
+            Start building
           </UButton>
           <UButton
             to="https://github.com/nuxt-ui-blocks/nuxt-motion-block"
             target="_blank"
-            color="neutral"
-            variant="outline"
             size="xl"
+            class="w-full justify-center rounded-md border-2 border-[#141412] bg-transparent font-medium text-[#141412] hover:bg-[#141412] hover:text-[#f4f1ea]"
             icon="i-simple-icons-github"
+            variant="ghost"
           >
-            View on GitHub
+            View source
           </UButton>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>

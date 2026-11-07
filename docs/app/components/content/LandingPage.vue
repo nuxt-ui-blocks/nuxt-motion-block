@@ -4,39 +4,20 @@
 
     <LandingMarquee />
 
-    <section class="mx-auto w-full max-w-(--ui-container) px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-      <LandingStats />
-    </section>
+    <LandingManifesto />
 
-    <section class="mx-auto w-full max-w-(--ui-container) px-4 py-24 sm:px-6 sm:py-28 lg:px-8">
-      <LandingAi />
-    </section>
+    <LandingAi />
 
-    <section class="mx-auto w-full max-w-(--ui-container) px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
-      <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-3xl font-semibold tracking-tight text-highlighted text-pretty sm:text-4xl">
-          Live components, not screenshots
-        </h2>
-        <p class="mt-4 text-lg text-muted">
-          Every tile below is running on this page right now. Hover, click, and scroll the real thing.
-        </p>
-      </div>
+    <LandingShowcase />
 
-      <div class="mt-12">
-        <LandingShowcase />
+    <section class="border-t border-line bg-default">
+      <div class="mb-shell py-20 sm:py-24 lg:py-28">
+        <LandingFeatures />
       </div>
     </section>
 
-    <section class="mx-auto w-full max-w-(--ui-container) px-4 py-24 sm:px-6 sm:py-28 lg:px-8">
-      <LandingFeatures />
-    </section>
+    <LandingNewBand />
 
-    <section class="mx-auto w-full max-w-(--ui-container) px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
-      <LandingNewBand />
-    </section>
-
-    <section class="mx-auto w-full max-w-(--ui-container) px-4 pb-24 pt-4 sm:px-6 lg:px-8">
-      <LandingCta />
-    </section>
+    <LandingCta />
   </div>
 </template>

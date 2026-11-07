@@ -6,12 +6,14 @@
 @theme {
   --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'Space Grotesk', 'Geist', ui-sans-serif, system-ui, sans-serif;
 
   --breakpoint-3xl: 1920px;
 }
 
 :root {
-  --ui-radius: 0.5rem;
+  --ui-radius: 0.625rem;
+
   /*
    * Docus/Nuxt UI declare the default font stack on an *unlayered* :root rule,
    * which beats our layered @theme tokens in the cascade. Redeclaring here
@@ -19,6 +21,115 @@
    */
   --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'Space Grotesk', 'Geist', ui-sans-serif, system-ui, sans-serif;
+
+  /* Motion Block — "the field notes":
+     warm paper, near-black ink, one vermilion signal. Neutrals carry the
+     design; the accent is reserved for state, the CTA and the mark. */
+  --mb-paper: #f4f1ea;
+  --mb-paper-2: #fbfaf7;
+  --mb-paper-3: #ece9e0;
+  --mb-ink: #141412;
+  --mb-ink-2: #1e1e1b;
+  --mb-ink-3: #262622;
+  --mb-ink-muted: #57564f;
+  --mb-ink-dim: #8a887f;
+  --mb-signal: #e4572e;           /* vermilion — accent on paper */
+  --mb-signal-hi: #f06a3c;        /* vermilion — accent on ink */
+  --mb-signal-on-ink: #f4783e;    /* for text on ink */
+  --mb-line: rgb(20 20 18 / 0.14);
+  --mb-line-soft: rgb(20 20 18 / 0.18);
+
+  --ui-bg: var(--mb-paper);
+  --ui-bg-muted: var(--mb-paper-3);
+  --ui-bg-elevated: var(--mb-paper-2);
+  --ui-bg-accented: #e4e0d4;
+  --ui-bg-inverted: var(--mb-ink);
+  --ui-border: var(--mb-line);
+  --ui-border-muted: var(--mb-line-soft);
+  --ui-text: #22221f;
+  --ui-text-muted: var(--mb-ink-muted);
+  --ui-text-toned: #33322f;
+  --ui-text-highlighted: var(--mb-ink);
+  --ui-text-inverted: var(--mb-paper);
+  --ui-text-dimmed: var(--mb-ink-dim);
+}
+
+.dark {
+  --mb-paper: #141412;
+  --mb-paper-2: #1c1c1a;
+  --mb-paper-3: #242421;
+  --mb-signal: #f06a3c;
+  --mb-line: rgb(244 241 234 / 0.18);
+  --mb-line-soft: rgb(244 241 234 / 0.09);
+
+  --ui-bg: var(--mb-paper);
+  --ui-bg-muted: var(--mb-paper-3);
+  --ui-bg-elevated: var(--mb-paper-2);
+  --ui-bg-accented: #2c2c29;
+  --ui-bg-inverted: #f4f1ea;
+  --ui-border: var(--mb-line);
+  --ui-border-muted: var(--mb-line-soft);
+  --ui-text: #d8d5cc;
+  --ui-text-muted: #a9a79e;
+  --ui-text-toned: #c3c1b8;
+  --ui-text-highlighted: #f2efe7;
+  --ui-text-inverted: #141412;
+  --ui-text-dimmed: #7c7b73;
+}
+
+/* 12-column shell shared by every landing band */
+@utility mb-shell {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Blueprint grid on paper, visible only at low contrast */
+@utility bg-grid-paper {
+  background-image: linear-gradient(var(--mb-line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--mb-line-soft) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Grid on ink */
+@utility bg-grid-ink {
+  background-image: linear-gradient(rgb(244 241 234 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(244 241 234 / 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Hairline utility used instead of rounded cards in the new layout */
+@utility border-line {
+  border-color: var(--mb-line);
+}
+
+/* Fine crosshair through section edges */
+@utility section-rule {
+  border-top: 1px solid var(--mb-line);
+}
+
+/* Display tracking for the big claim */
+@utility display-tight {
+  letter-spacing: -0.035em;
+}
+
+/* Slash divider used in mono rows (·  /  —  all retired) */
+@utility mb-slash {
+  display: inline-block;
+  width: 0.9em;
+  height: 2px;
+  background: var(--mb-signal);
+  border-radius: 99px;
+  vertical-align: 0.15em;
 }
 
 /*

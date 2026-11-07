@@ -1,0 +1,217 @@
+<script setup lang="ts">
+import type { Component } from 'vue'
+import { computed, ref } from 'vue'
+import Magnetic from './previews/Magnetic.vue'
+import RetroGrid from './previews/RetroGrid.vue'
+import Shimmer from './previews/Shimmer.vue'
+
+type Tone = 'tag' | 'attr' | 'str' | 'plain'
+
+interface Token {
+  text: string
+  tone?: Tone
+}
+
+interface Tab {
+  id: string
+  label: string
+  name: string
+  blurb: string
+  preview: Component
+  code: string
+  lines: Token[][]
+}
+
+const tabs: Tab[] = [
+  {
+    id: 'background',
+    label: 'Background',
+    name: 'MRetroGrid',
+    blurb: 'An infinite horizon, in four lines.',
+    preview: RetroGrid,
+    code: `<MRetroGrid\n  :angle="58"\n  :cell-size="54"\n  color="rgba(240,106,60,0.8)"\n/>`,
+    lines: [
+      [{ text: '<MRetroGrid', tone: 'tag' }],
+      [{ text: '  :angle', tone: 'attr' }, { text: '=' }, { text: '"58"', tone: 'str' }],
+      [{ text: '  :cell-size', tone: 'attr' }, { text: '=' }, { text: '"54"', tone: 'str' }],
+      [{ text: '  color', tone: 'attr' }, { text: '=' }, { text: '"rgba(240,106,60,0.8)"', tone: 'str' }],
+      [{ text: '/>', tone: 'tag' }],
+    ],
+  },
+  {
+    id: 'text',
+    label: 'Text',
+    name: 'MTextShimmer',
+    blurb: 'One prop. A headline with a pulse.',
+    preview: Shimmer,
+    code: `<MTextShimmer\n  text="Shimmering headline"\n  :duration="2.6"\n/>`,
+    lines: [
+      [{ text: '<MTextShimmer', tone: 'tag' }],
+      [{ text: '  text', tone: 'attr' }, { text: '=' }, { text: '"Shimmering headline"', tone: 'str' }],
+      [{ text: '  :duration', tone: 'attr' }, { text: '=' }, { text: '"2.6"', tone: 'str' }],
+      [{ text: '/>', tone: 'tag' }],
+    ],
+  },
+  {
+    id: 'interaction',
+    label: 'Interaction',
+    name: 'MMagnetic',
+    blurb: 'The button leans toward your cursor.',
+    preview: Magnetic,
+    code: `<MMagnetic :intensity="0.8">\n  <UButton>Hover me</UButton>\n</MMagnetic>`,
+    lines: [
+      [{ text: '<MMagnetic', tone: 'tag' }, { text: ' :intensity', tone: 'attr' }, { text: '=' }, { text: '"0.8"', tone: 'str' }, { text: '>', tone: 'tag' }],
+      [{ text: '  <UButton', tone: 'tag' }, { text: '>Hover me</UButton>', tone: 'tag' }],
+      [{ text: '</MMagnetic>', tone: 'tag' }],
+    ],
+  },
+]
+
+const active = ref<string>('background')
+const copied = ref(false)
+let timer: ReturnType<typeof setTimeout> | undefined
+
+const current = computed<Tab>(() => tabs.find(tab => tab.id === active.value) ?? tabs[0]!)
+
+function toneClass(tone: Tone = 'plain') {
+  return {
+    tag: 'text-[#f4783e]',
+    attr: 'text-[#e8e6dd]',
+    str: 'text-[#c8b98a]',
+    plain: 'text-[#8a887f]',
+  }[tone]
+}
+
+async function copy() {
+  try {
+    await navigator.clipboard.writeText(current.value.code)
+    copied.value = true
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      copied.value = false
+    }, 1800)
+  }
+  catch {
+    copied.value = false
+  }
+}
+</script>
+
+<template>
+  <div class="relative mx-auto w-full max-w-lg">
+    <div
+      aria-hidden="true"
+      class="absolute -inset-8 rounded-2xl bg-[#e4572e]/10 blur-3xl"
+    />
+
+    <div
+      class="dark relative overflow-hidden rounded-lg border border-black/40 bg-[#141412] shadow-[0_36px_72px_-28px_rgb(0_0_0/0.55)] dark:border-white/10"
+      style="--ui-bg: #141412"
+    >
+      <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+        <span class="size-2.5 rounded-full bg-[#e4572e]" />
+        <span class="size-2.5 rounded-full bg-[#d9a441]" />
+        <span class="size-2.5 rounded-full bg-[#4a9b8e]" />
+        <span class="ml-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a887f]">Motion.vue</span>
+        <span class="ml-auto rounded-sm border border-[#f06a3c]/40 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] text-[#f4783e]">Live</span>
+      </div>
+
+      <div class="flex items-center gap-1 border-b border-white/10 px-2.5 py-2">
+        <button
+          v-for="tab in tabs"
+          :key="tab.id"
+          type="button"
+          class="rounded-sm px-2.5 py-1.5 text-[11px] font-medium transition duration-200"
+          :class="active === tab.id
+            ? 'bg-white/[0.08] text-[#f4f1ea]'
+            : 'text-[#8a887f] hover:bg-white/5 hover:text-[#e8e6dd]'"
+          :aria-pressed="active === tab.id"
+          @click="active = tab.id"
+        >
+          {{ tab.label }}
+        </button>
+        <span class="ml-auto pr-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-[#57564f]">
+          live
+        </span>
+      </div>
+
+      <div class="relative h-52 overflow-hidden">
+        <ClientOnly>
+          <Transition
+            name="panel"
+            mode="out-in"
+          >
+            <component
+              :is="current.preview"
+              :key="current.id"
+            />
+          </Transition>
+          <template #fallback>
+            <div class="h-full w-full animate-pulse bg-white/5" />
+          </template>
+        </ClientOnly>
+
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#141412] to-transparent"
+        />
+        <p class="pointer-events-none absolute bottom-3 left-4 font-mono text-[10px] uppercase tracking-[0.1em] text-[#a9a79e]">
+          {{ current.blurb }}
+        </p>
+      </div>
+
+      <div class="border-t border-white/10 bg-black/40 px-4 py-3">
+        <div class="mb-2 flex items-center justify-between gap-3">
+          <span class="truncate font-mono text-[9px] uppercase tracking-[0.18em] text-[#8a887f]">
+            {{ current.name }}
+          </span>
+          <button
+            type="button"
+            class="inline-flex items-center gap-1.5 rounded-sm px-2 py-1 text-[10px] font-medium text-[#8a887f] transition hover:bg-white/5 hover:text-[#f4f1ea]"
+            :aria-label="copied ? 'Copied' : 'Copy code'"
+            @click="copy"
+          >
+            <UIcon
+              :name="copied ? 'i-lucide-check' : 'i-lucide-copy'"
+              class="size-3.5"
+            />
+            {{ copied ? 'Copied' : 'Copy' }}
+          </button>
+        </div>
+
+        <pre class="overflow-x-auto"><code class="whitespace-pre font-mono text-[11px] leading-relaxed"><span
+          v-for="(line, index) in current.lines"
+          :key="index"
+        ><span
+          v-for="(token, tokenIndex) in line"
+          :key="tokenIndex"
+          :class="toneClass(token.tone)"
+        >{{ token.text }}</span><br></span></code></pre>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.panel-enter-active,
+.panel-leave-active {
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.panel-enter-from {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.panel-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel-enter-active,
+  .panel-leave-active {
+    transition: none;
+  }
+}
+</style>

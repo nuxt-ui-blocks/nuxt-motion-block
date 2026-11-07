@@ -17,7 +17,9 @@ export default defineNuxtConfig({
   },
 
   colorMode: {
-    preference: 'dark',
+    // Light and dark from day one — follow the OS, can be toggled from the
+    // header by the user. Fall back to dark when the OS says nothing.
+    preference: 'system',
     fallback: 'dark',
   },
 
@@ -68,17 +70,24 @@ export default defineNuxtConfig({
     families: [
       { name: 'Geist', provider: 'google', weights: [400, 500, 600, 700] },
       { name: 'Geist Mono', provider: 'google', weights: [400, 500, 600] },
+      { name: 'Space Grotesk', provider: 'google', weights: [400, 500, 600, 700] },
     ],
   },
 
-  mcp: false,
+  // Docus's HTTP MCP endpoint cannot work on a static deploy: its tools call
+  // `useEvent()`, which requires Nitro's async request context that the
+  // Workers runtime does not propagate (tools/call 500s even with
+  // nodejs_compat). A bare boolean is also silently ignored: defu(false,
+  // defaults) keeps the toolkit enabled, so disable it the supported way.
+  // Agents use the stdio server instead; see 5.ai-agents.md.
+  mcp: { enabled: false },
 
   motionBlock: {
     prefix: 'M',
   },
 
   ogImage: {
-    enabled: false,
+    enabled: true,
   },
 
   sitemap: {

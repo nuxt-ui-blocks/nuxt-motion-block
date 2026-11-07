@@ -1,19 +1,9 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed } from 'vue'
 
 const appConfig = useAppConfig()
 const { forced: forcedColorMode } = useDocusColorMode()
 const { subNavigationMode } = useSubNavigation()
-
-const scrolled = ref(false)
-function onScroll() {
-  scrolled.value = window.scrollY > 8
-}
-onMounted(() => {
-  onScroll()
-  window.addEventListener('scroll', onScroll, { passive: true })
-})
-onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 
 const githubUrl = computed(() => (typeof appConfig.github === 'object' && appConfig.github ? appConfig.github.url || '' : ''))
 
@@ -23,61 +13,50 @@ const sections = [
   { label: 'Blocks', to: '/blocks' },
   { label: 'Templates', to: '/templates' },
 ]
-
-const rootClass = computed(() => [
-  'group/header sticky z-50 mx-auto mt-4 h-(--ui-header-height) w-[calc(100%-1.5rem)] max-w-6xl rounded-full border border-default bg-default/70 backdrop-blur-xl transition-[top,box-shadow,background-color] duration-300 ease-out',
-  scrolled.value
-    ? 'top-2 bg-default/85 shadow-lg shadow-black/[0.06]'
-    : 'top-4 shadow-sm shadow-black/[0.03]',
-])
 </script>
 
 <template>
   <UHeader
-    :ui="{ root: rootClass, center: 'flex-1 justify-center' }"
+    :ui="{
+      root: 'sticky top-0 z-50 w-full border-b border-line bg-default/90 backdrop-blur-xl transition-colors duration-300',
+      container: 'mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8',
+      center: 'hidden flex-1 min-w-0 justify-center lg:flex',
+    }"
     :class="{ 'flex flex-col': subNavigationMode === 'header' }"
   >
     <template #left>
       <NuxtLink
         to="/"
-        aria-label="Nuxt Motion Block"
-        class="group/logo flex items-center gap-2"
+        aria-label="Nuxt Motion Block — home"
+        class="group flex items-center gap-2.5"
       >
-        <span class="grid size-7 place-items-center rounded-lg bg-gradient-to-br from-primary to-primary/40 text-inverted shadow-sm transition-transform duration-300 group-hover/header:scale-110">
-          <UIcon
-            name="i-lucide-blocks"
-            class="size-4"
-          />
-        </span>
-        <span class="text-base font-semibold tracking-tight text-highlighted">
-          Motion<span class="text-primary">Block</span>
+        <AppLogo :size="26" />
+        <span class="font-display text-lg leading-none tracking-tight text-highlighted">
+          Motion&nbsp;<span class="text-primary">Block</span>
         </span>
       </NuxtLink>
     </template>
 
-    <nav class="hidden items-center gap-0.5 lg:flex">
-      <UButton
+    <nav class="flex items-center gap-0.5">
+      <NuxtLink
         v-for="section in sections"
         :key="section.to"
         :to="section.to"
-        color="neutral"
-        variant="ghost"
-        size="sm"
+        class="rounded-sm px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted transition-colors duration-200 hover:text-highlighted"
       >
         {{ section.label }}
-      </UButton>
+      </NuxtLink>
     </nav>
+
     <template #right>
       <UContentSearchButton
         :collapsed="false"
         class="hidden lg:inline-flex lg:w-56"
       />
-
       <UContentSearchButton class="lg:hidden" />
 
       <ClientOnly v-if="!forcedColorMode">
         <UColorModeButton />
-
         <template #fallback>
           <div class="size-8 animate-pulse rounded-md bg-neutral-200 dark:bg-neutral-800" />
         </template>
@@ -104,13 +83,6 @@ const rootClass = computed(() => [
 
     <template #body>
       <AppHeaderBody />
-    </template>
-
-    <template
-      v-if="subNavigationMode === 'header'"
-      #bottom
-    >
-      <AppHeaderBottom />
     </template>
   </UHeader>
 
