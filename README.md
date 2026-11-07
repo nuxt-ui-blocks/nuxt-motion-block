@@ -31,19 +31,35 @@
 
 ## 🚀 Quick Setup
 
-Install the module to your Nuxt application with one command:
+Pick the install that matches your app (all four are covered out of the box, no Nuxt required except for the module path):
+
+| Framework | Install | Entry point |
+| --------- | ------- | ----------- |
+| **Nuxt 4** | `npx nuxi module add nuxt-motion-block` | auto-imported as `M*` |
+| **Vue 3 + Vite** | `pnpm add nuxt-motion-block @nuxt/ui motion-v` + `app.use(motionBlock)` | `nuxt-motion-block/vue-plugin` |
+| **Laravel + Inertia** | same as Vue (Laravel Vite plugin alongside) | s/o above |
+| **AdonisJS + Inertia** | same as Vue (Adonis Vite plugin instead of Laravel's) | s/o above |
+
+### Nuxt
 
 ```bash
 npx nuxi module add nuxt-motion-block
 ```
 
-Prerequisites: Nuxt 4, [@nuxt/ui](https://ui.nuxt.com) ^4.11.2 and [motion-v](https://motion.dev) ^2.4.4 (they are registered automatically by `nuxi module add`).
+Prerequisites: Nuxt 4, [@nuxt/ui](https://ui.nuxt.com) ^4.11.2 and [motion-v](https://motion.dev) ^2.4.4 (they are registered automatically by `nuxi module add`). You can now use any Nuxt Motion Block component in your app with zero extra imports.
 
-That's it! You can now use any Nuxt Motion Block component in your app with zero extra imports.
+### Vue / Laravel / AdonisJS
 
-### Vue, Laravel, AdonisJS
+```bash
+pnpm add nuxt-motion-block @nuxt/ui motion-v
+```
 
-The same 292 components also work in plain Vue, Laravel (Inertia) and AdonisJS apps — no Nuxt required. See [/getting-started/vue](https://nuxt-motion-block.pages.dev/getting-started/vue) and [/getting-started/laravel](https://nuxt-motion-block.pages.dev/getting-started/laravel).
+```ts
+import motionBlock from 'nuxt-motion-block/vue-plugin'
+app.use(motionBlock)
+```
+
+See [/getting-started/vue](https://nuxt-motion-block.pages.dev/getting-started/vue) and [/getting-started/laravel](https://nuxt-motion-block.pages.dev/getting-started/laravel) for the complete wiring (all docs pages cross-reference each other).
 
 ## 📦 Component Families
 

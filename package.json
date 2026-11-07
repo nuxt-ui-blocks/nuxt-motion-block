@@ -67,7 +67,7 @@
     "nuxt-motion-block-mcp": "./bin/mcp-server.mjs"
   },
   "scripts": {
-    "prepack": "nuxt-module-build build",
+    "prepack": "node scripts/generate-registry.mjs && nuxt-module-build build",
     "dev": "pnpm dev:prepare && nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
