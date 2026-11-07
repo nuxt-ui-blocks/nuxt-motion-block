@@ -5,6 +5,8 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
+**Current version: v0.2.0** — see the [changelog](./CHANGELOG.md) for release notes. Supports Nuxt 4, Vue 3 + Vite, Laravel + Inertia and AdonisJS + Inertia.
+
 292 animated Vue components for Nuxt UI — springs, staggers, scroll and 3D that inherit your design tokens. Powered by `motion-v`.
 
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)

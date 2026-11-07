@@ -13,7 +13,7 @@
         <div class="lg:col-span-6 xl:col-span-6">
           <p class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-dimmed">
             <span class="h-[3px] w-8 rounded-full bg-primary" />
-            Nuxt Motion — v0.1
+            Nuxt Motion — v0.2
           </p>
 
           <h1
