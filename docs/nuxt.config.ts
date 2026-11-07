@@ -74,7 +74,13 @@ export default defineNuxtConfig({
     ],
   },
 
-  mcp: true,
+  // Docus's HTTP MCP endpoint cannot work on a static deploy: its tools call
+  // `useEvent()`, which requires Nitro's async request context that the
+  // Workers runtime does not propagate (tools/call 500s even with
+  // nodejs_compat). A bare boolean is also silently ignored: defu(false,
+  // defaults) keeps the toolkit enabled, so disable it the supported way.
+  // Agents use the stdio server instead; see 5.ai-agents.md.
+  mcp: { enabled: false },
 
   motionBlock: {
     prefix: 'M',
