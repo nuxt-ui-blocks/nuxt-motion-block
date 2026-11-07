@@ -3,7 +3,7 @@ title: Variable Proximity
 description: Text effect that responds to mouse proximity with variable font properties.
 ---
 
-The VariableProximity component creates a text effect that responds to mouse proximity with variable font properties. It requires a font with variable axes (like Inter) to work properly.
+VariableProximity creates a text effect that responds to mouse proximity with variable font properties. It requires a font with variable axes (like Inter) to work properly.
 
 ## Usage
 

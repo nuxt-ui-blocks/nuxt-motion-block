@@ -1,9 +1,9 @@
 ---
 title: Background Lines
-description: Animated SVG background with customizable colored lines that move across the screen.
+description: Animated SVG background with customizable coloured lines that move across the screen.
 ---
 
-The BackgroundLines component creates an animated SVG background with customizable colored lines that move across the screen. It features smooth animations with configurable colors, duration, and timing for dynamic visual effects.
+BackgroundLines creates an animated SVG background with customizable coloured lines that move across the screen. It features smooth animations with configurable colors, duration, and timing for dynamic visual effects.
 
 ## Usage
 
@@ -27,7 +27,7 @@ label: Preview
           Background Lines
         </h2>
         <p class="text-lg mb-6 text-center max-w-md text-dimmed">
-          Animated SVG lines with customizable colors
+          Animated SVG lines with customizable colours
         </p>
         <button class="px-6 py-3 bg-default/10 backdrop-blur-sm rounded-full hover:bg-default/20 transition-colors">
           Explore

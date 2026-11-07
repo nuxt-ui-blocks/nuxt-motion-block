@@ -3,7 +3,7 @@ title: Progressive Blur
 description: Component that creates a progressive blur effect in a specified direction.
 ---
 
-The ProgressiveBlur component creates a progressive blur effect in a specified direction. It's perfect for creating visually appealing overlays and transitions with smooth gradient blur effects.
+ProgressiveBlur creates a progressive blur effect in a specified direction.
 
 ## Usage
 

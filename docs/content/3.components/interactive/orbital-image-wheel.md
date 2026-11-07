@@ -168,7 +168,7 @@ label: Preview
 ## Props
 
 ::component-props
-  ::component-prop{name="items" type="OrbitalImageWheelItem[]"}
+  ::component-prop{name="items" type="OrbitalImageWheelItem[]" required}
   The ring's contents. Each item needs `id`, `image` and `alt`; `label` overrides
   the button's accessible name when `alt` is not descriptive enough.
   ::

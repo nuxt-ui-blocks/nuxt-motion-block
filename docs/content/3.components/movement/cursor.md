@@ -3,7 +3,7 @@ title: Cursor
 description: Custom animated cursor with various styles and interactive effects.
 ---
 
-The Cursor component creates a custom animated cursor with various styles and interactive effects. It replaces the default browser cursor with a customizable animated element that can have different appearances and behaviors.
+Cursor creates a custom animated cursor with various styles and interactive effects. It replaces the default browser cursor with a customizable animated element that can have different appearances and behaviours.
 
 ## Usage
 

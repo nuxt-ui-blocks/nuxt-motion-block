@@ -3,7 +3,7 @@ title: Word Rotate
 description: Component that rotates through different words with smooth transitions.
 ---
 
-The WordRotate component rotates through different words with smooth transitions. It's perfect for creating dynamic text elements that cycle through different options with engaging animations.
+The WordRotate component rotates through different words with smooth transitions.
 
 ## Usage
 

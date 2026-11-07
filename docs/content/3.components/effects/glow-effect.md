@@ -1,9 +1,9 @@
 ---
 title: Glow Effect
-description: Component that adds a dynamic glow effect with customizable colors and animations.
+description: Component that adds a dynamic glow effect with customizable colours and animations.
 ---
 
-The GlowEffect component adds a dynamic glow effect with customizable colors and animations. It's perfect for creating eye-catching elements with vibrant, animated glows.
+The GlowEffect component adds a dynamic glow effect with customizable colours and animations.
 
 ## Usage
 
@@ -131,7 +131,7 @@ label: Preview
           Color Shift
         </h3>
         <p class="text-muted">
-          Smooth transitions between multiple colors
+          Smooth transitions between multiple colours
         </p>
       </div>
     </div>

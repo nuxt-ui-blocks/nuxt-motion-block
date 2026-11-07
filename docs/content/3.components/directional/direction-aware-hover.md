@@ -3,7 +3,7 @@ title: Direction Aware Hover
 description: Card that reveals content based on the direction of mouse entry with smooth animations.
 ---
 
-The DirectionAwareHover component creates a card that reveals content based on the direction of mouse entry with smooth animations.
+DirectionAwareHover creates a card that reveals content based on the direction of mouse entry with smooth animations.
 
 ## Usage
 

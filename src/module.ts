@@ -42,6 +42,9 @@ const module: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
       prefix: options.prefix,
       global: false,
       watch: false,
+      // Without this, utility .ts files next to the SFCs are also registered
+      // as M* components (index barrels, constants, composables-alikes).
+      extensions: ['vue'],
     })
 
     // Add composables

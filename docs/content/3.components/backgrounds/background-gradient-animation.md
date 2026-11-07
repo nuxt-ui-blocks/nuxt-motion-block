@@ -3,7 +3,7 @@ title: Background Gradient Animation
 description: Animated background with customizable gradient colors and interactive effects.
 ---
 
-The BackgroundGradientAnimation component creates an animated background with customizable gradient colors and interactive effects. It features multiple animated radial gradients that blend together to create a dynamic, visually appealing background.
+BackgroundGradientAnimation creates an animated background with customizable gradient colors and interactive effects. It features multiple animated radial gradients that blend together to create a dynamic, visually appealing background.
 
 ## Usage
 

@@ -3,7 +3,7 @@ title: Project Gallery
 description: A visually appealing project gallery with filtering, sorting, and animated transitions.
 ---
 
-A visually appealing project gallery with filtering, sorting, and animated transitions. Perfect for showcasing portfolios, case studies, and creative work.
+A visually appealing project gallery with filtering, sorting, and animated transitions.
 
 ## Usage
 
@@ -443,3 +443,5 @@ const resetFilters = () => {
   page.value = 1
 }
 </script>
+```
+::

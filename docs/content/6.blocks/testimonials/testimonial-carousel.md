@@ -3,7 +3,7 @@ title: Testimonial Carousel
 description: A responsive testimonial section with carousel support for mobile.
 ---
 
-A responsive testimonial section with carousel support for mobile. Perfect for showcasing customer reviews and feedback with smooth animations.
+A responsive testimonial section with carousel support for mobile.
 
 ## Usage
 

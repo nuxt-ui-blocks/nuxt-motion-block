@@ -3,7 +3,7 @@ title: Evervault Card
 description: Cybersecurity-inspired card with dynamic gradient effects that follow cursor movement.
 ---
 
-The Evervault Card component creates a cybersecurity-inspired card with dynamic gradient effects that follow cursor movement. It features a unique visual effect with animated text patterns and gradient overlays.
+Evervault Card creates a cybersecurity-inspired card with dynamic gradient effects that follow cursor movement. It features a unique visual effect with animated text patterns and gradient overlays.
 
 ## Usage
 

@@ -3,7 +3,7 @@ title: 3D Card
 description: Interactive 3D card with perspective effects that respond to mouse movement.
 ---
 
-The 3D Card component creates an interactive card with 3D perspective effects that respond to mouse movement. It's perfect for creating engaging UI elements that add depth and interactivity to your application.
+3D Card creates an interactive card with 3D perspective effects that respond to mouse movement.
 
 ## Usage
 

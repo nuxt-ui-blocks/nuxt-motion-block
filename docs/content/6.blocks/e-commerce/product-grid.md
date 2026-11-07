@@ -3,7 +3,7 @@ title: Product Grid
 description: A responsive product grid with animated cards, filtering options, and interactive elements.
 ---
 
-A responsive product grid with animated cards, filtering options, and interactive elements. Perfect for e-commerce websites and product catalogs.
+A responsive product grid with animated cards, filtering options, and interactive elements.
 
 ## Usage
 
@@ -239,7 +239,7 @@ const products = ref([
   {
     id: 3,
     name: 'Cotton T-Shirt',
-    description: 'Comfortable and breathable cotton t-shirt available in multiple colors.',
+    description: 'Comfortable and breathable cotton t-shirt available in multiple colours.',
     price: 24.99,
     originalPrice: 29.99,
     discount: 17,

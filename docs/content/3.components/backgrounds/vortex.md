@@ -1,9 +1,9 @@
 ---
 title: Vortex
-description: Animated particle vortex effect with customizable colors, speed, and density.
+description: Animated particle vortex effect with customizable colours, speed, and density.
 ---
 
-The Vortex component creates an animated particle vortex effect using canvas-based rendering. It features customizable particle count, colors, speed, and radius with smooth animations and glow effects.
+Vortex creates an animated particle vortex effect using canvas-based rendering. It features customizable particle count, colors, speed, and radius with smooth animations and glow effects.
 
 ::warning
 This component requires the `simplex-noise` package to be installed in your project.

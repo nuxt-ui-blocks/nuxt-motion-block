@@ -143,7 +143,7 @@ label: Preview
       <template #body>
         <div class="p-4">
           <p class="text-muted">
-            The dialog opens with the “{{ active.label }}” animation. Pick another
+            The dialog opens with the "{{ active.label }}" animation. Pick another
             preset above, then open it again.
           </p>
         </div>

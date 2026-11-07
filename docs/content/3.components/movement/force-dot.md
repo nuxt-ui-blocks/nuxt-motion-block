@@ -3,7 +3,7 @@ title: Force Dot
 description: Interactive particle system with physics-based animations.
 ---
 
-The ForceDot component creates an interactive particle system with physics-based animations. Dots respond to mouse movement with attraction or repulsion forces, creating dynamic visual effects.
+ForceDot creates an interactive particle system with physics-based animations. Dots respond to mouse movement with attraction or repulsion forces, creating dynamic visual effects.
 
 ## Usage
 

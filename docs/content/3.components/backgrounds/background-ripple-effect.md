@@ -3,7 +3,7 @@ title: Background Ripple Effect
 description: Interactive background ripple effect with customizable grid size and cell dimensions.
 ---
 
-The BackgroundRippleEffect component creates an interactive background ripple effect with a grid of cells that respond to clicks. It's perfect for creating engaging backgrounds with visual feedback.
+BackgroundRippleEffect creates an interactive background ripple effect with a grid of cells that respond to clicks.
 
 ## Usage
 

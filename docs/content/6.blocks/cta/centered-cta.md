@@ -3,7 +3,7 @@ title: Centered CTA
 description: A centered call-to-action section with animated background elements.
 ---
 
-A centered call-to-action section with animated background elements. Perfect for driving user engagement and conversions at key points in your website.
+A centered call-to-action section with animated background elements.
 
 ## Usage
 

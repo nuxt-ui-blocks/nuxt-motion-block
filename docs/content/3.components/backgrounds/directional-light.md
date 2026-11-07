@@ -1,9 +1,9 @@
 ---
 title: Directional Light
-description: SVG-based directional light effect with customizable colors and positioning.
+description: SVG-based directional light effect with customizable colours and positioning.
 ---
 
-The DirectionalLight component creates an SVG-based directional light effect that can be used to add ambient lighting to your UI. It features customizable colors, positioning, and smooth animations.
+DirectionalLight creates an SVG-based directional light effect that can be used to add ambient lighting to your UI. It features customizable colours, positioning, and smooth animations.
 
 ## Usage
 
@@ -215,15 +215,6 @@ label: Preview
           </UCard>
         </div>
       </div>
-    </div>
-  </div>
-</template>
-```vue
-<template>
-  <div class="relative h-64 w-full overflow-hidden rounded-lg border bg-gradient-to-br from-purple-50 to-pink-100 dark:from-slate-900 dark:to-slate-800">
-    <MDirectionalLight fill="#EC4899" class="left-1/2 top-1/2" />
-    <div class="relative z-10 h-full flex items-center justify-center">
-      <h3 class="text-xl font-bold text-highlighted">Pink Directional Light</h3>
     </div>
   </div>
 </template>

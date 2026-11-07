@@ -1,9 +1,9 @@
 ---
 title: Text Glitch
-description: Glitch effect for text elements.
+description: A glitch with chromatic aberration and jitter — headlines and labels that read like a broken signal.
 ---
 
-The TextGlitch component creates a glitch effect for text elements. It's perfect for creating eye-catching headings and animated text effects with a digital distortion style.
+TextGlitch creates a glitch effect for text elements.
 
 The effect is built from stacked copies of the same string: one crisp main layer, plus one coloured layer per intensity step that flickers, clips and offsets horizontally, and an optional set of scan lines that sweep the block while the glitch is active. A `trigger` prop decides whether that churn is bound to hover, a repeating interval, the viewport, or your own code.
 

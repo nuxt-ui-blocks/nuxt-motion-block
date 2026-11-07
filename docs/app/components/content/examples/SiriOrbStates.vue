@@ -19,7 +19,7 @@
     </div>
 
     <p class="text-xs text-muted">
-      state = <span class="font-medium">{{ state }}</span> Â· rotation period
+      state = <span class="font-medium">{{ state }}</span> · rotation period
       {{ period }}s
     </p>
   </div>

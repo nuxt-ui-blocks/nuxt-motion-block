@@ -3,7 +3,7 @@ title: Wobble Card
 description: Card with a wobble effect that responds to cursor movement.
 ---
 
-The WobbleCard component creates a card with a wobble effect that responds to cursor movement. It's perfect for creating interactive cards with fluid, organic animations.
+WobbleCard creates a card with a wobble effect that responds to cursor movement.
 
 The card tilts in 3D toward the cursor. `intensity` controls how far it tilts, and `speed` controls how quickly it settles back when the cursor leaves.
 

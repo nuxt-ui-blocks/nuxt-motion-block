@@ -3,7 +3,7 @@ title: Text Glitch New
 description: Text with a glitch effect that creates a digital distortion appearance.
 ---
 
-The TextGlitchNew component creates text with a glitch effect that creates a digital distortion appearance. It features customizable speed, shadow effects, and hover activation options for dynamic text animations.
+TextGlitchNew creates text with a glitch effect that creates a digital distortion appearance. It features customizable speed, shadow effects, and hover activation options for dynamic text animations.
 
 The distortion comes from two pseudo-element copies of the string — one tinted red, one cyan — drawn behind the real text and clipped by a looping `clip-path` animation. `speed` scales the two animation durations, `enable-shadows` toggles the coloured offsets, and `enableOnHover` holds the whole thing still until the pointer arrives.
 

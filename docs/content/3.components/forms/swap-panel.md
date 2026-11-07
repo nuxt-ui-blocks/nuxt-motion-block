@@ -308,10 +308,10 @@ number changes; the amount itself is never reformatted while you type.
 ## Props
 
 ::component-props
-  ::component-prop{name="from" type="SwapToken"}
+  ::component-prop{name="from" type="SwapToken" required}
   Token being paid. Takes `name`, `symbol` and optional `balance` and `icon`.
   ::
-  ::component-prop{name="to" type="SwapToken"}
+  ::component-prop{name="to" type="SwapToken" required}
   Token being received.
   ::
   ::component-prop{name="tokens" type="SwapToken[]"}

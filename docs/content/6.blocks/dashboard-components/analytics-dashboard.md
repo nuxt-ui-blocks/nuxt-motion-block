@@ -3,7 +3,7 @@ title: Analytics Dashboard
 description: A modern analytics dashboard with animated statistics, interactive charts, and real-time data visualization.
 ---
 
-A modern analytics dashboard with animated statistics, interactive charts, and real-time data visualization. Perfect for admin panels and business intelligence applications.
+A modern analytics dashboard with animated statistics, interactive charts, and real-time data visualization.
 
 ## Usage
 

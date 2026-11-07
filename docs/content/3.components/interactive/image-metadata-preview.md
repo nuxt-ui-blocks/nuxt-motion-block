@@ -121,11 +121,11 @@ async function handleShare() {
 ## Props
 
 ::component-props
-  ::component-prop{name="imageSrc" type="string"}
+  ::component-prop{name="imageSrc" type="string" required}
   Image to preview. Rendered at a fixed 300 by 437 pixels so the frame does not
   reflow while the file loads.
   ::
-  ::component-prop{name="metadata" type="ImageMetadata"}
+  ::component-prop{name="metadata" type="ImageMetadata" required}
   Fields listed in the panel: `created`, `updated`, `by` and `source`.
   ::
   ::component-prop{name="alt" type="string" default="'Image preview'"}

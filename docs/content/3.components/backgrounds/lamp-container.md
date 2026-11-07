@@ -3,7 +3,7 @@ title: Lamp Container
 description: Animated lamp effect container with customizable gradient colors and lighting effects.
 ---
 
-The LampContainer component creates an animated lamp effect with gradient lighting, glow effects, and customizable colors. It's perfect for creating eye-catching hero sections and visual dividers.
+LampContainer creates an animated lamp effect with gradient lighting, glow effects, and customizable colours.
 
 ## Usage
 

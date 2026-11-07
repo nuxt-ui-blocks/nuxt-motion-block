@@ -3,7 +3,7 @@ title: Glare Card
 description: Interactive card with dynamic glare effects that respond to mouse movement.
 ---
 
-The Glare Card component creates an interactive card with dynamic glare effects that respond to mouse movement. As you move your cursor over the card, a realistic light reflection effect follows your movement, creating an engaging 3D-like experience.
+Glare Card creates an interactive card with dynamic glare effects that respond to mouse movement. As you move your cursor over the card, a realistic light reflection effect follows your movement, creating an engaging 3D-like experience.
 
 ## Usage
 

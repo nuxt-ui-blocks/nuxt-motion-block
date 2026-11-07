@@ -37,6 +37,8 @@ Install the module to your Nuxt application with one command:
 npx nuxi module add nuxt-motion-block
 ```
 
+Prerequisites: Nuxt 4, [@nuxt/ui](https://ui.nuxt.com) ^4.11.2 and [motion-v](https://motion.dev) ^2.4.4 (they are registered automatically by `nuxi module add`).
+
 That's it! You can now use any Nuxt Motion Block component in your app with zero extra imports.
 
 ## 📦 Component Families
@@ -55,18 +57,18 @@ That's it! You can now use any Nuxt Motion Block component in your app with zero
   ```bash
   # Install dependencies
   pnpm install
-  
+
   # Generate type stubs
-  npm run dev:prepare
-  
+  pnpm dev:prepare
+
   # Develop with playground
-  npm run dev
-  
+  pnpm dev
+
   # Run type checking
-  npm run typecheck
-  
+  pnpm test:types
+
   # Run tests
-  npm run test
+  pnpm test
   ```
 
 </details>

@@ -1,29 +1,30 @@
 ---
 title: Composables
+description: The composables Nuxt Motion Block auto-imports — theme colors, canvas cursors and ui slot resolution.
 ---
 
-Composables are reusable functions that encapsulate reactive logic and can be shared across components. They follow the Vue 3 Composition API pattern and provide a clean way to organize and share logic in your Nuxt application.
 
-## What are Composables?
+Every file under `runtime/composables/` is registered with Nuxt's `imports:dirs`, so the composables below can be called from your components without an import line. Only the four listed here are part of the documented API; the rest of that directory is internal and can change between releases.
 
-Composables in Nuxt Motion Block are utility functions that help you implement complex interactions and behaviors with minimal code. They abstract away the complexity of animations, event handling, and DOM manipulations.
+## Available composables
 
-## Getting Started
+- [useMotionBlockUI](/composables/use-motion-block-ui) - merges a component's `tv` theme with your `app.config.ts` `ui` overrides, in the same precedence Nuxt UI uses: explicit prop > `UTheme` > `app.config`.
+- [useThemeColor](/composables/use-theme-color) - reads a theme token as a resolved color, SSR-safe. When the value is a plain literal it passes through unchanged, so server and first client render agree; use the `useResolved*` helpers when you need the computed style property instead of the raw token.
+- [useCanvasCursor](/composables/use-canvas-cursor) - the wave-trail pointer effect behind the canvas components. It owns the requestAnimationFrame loop and cancels it on unmount.
+- [useFluidCursor](/composables/use-fluid-cursor) - a WebGL fluid simulation bound to a canvas ref. Pass `{ color }` to tint the dye; without it, it reads the current theme's primary color.
 
-To use any composable, simply import it in your component:
+## Calling them
 
 ```vue
-<script setup>
-import { useFluidCursor } from '#components'
+<script setup lang="ts">
+const canvasRef = useTemplateRef<HTMLCanvasElement>('canvas')
+useCanvasCursor(canvasRef)
 </script>
 ```
 
-Or if you have auto-imports configured:
+`useFluidCursor` and `useCanvasCursor` expect a canvas to attach to. Pass a template ref (as above) or a plain ref; both read `.value` on mount. `useMotionBlockUI` and `useThemeColor` are plain functions — call them inside `<script setup>` and use their return values in the template.
 
-```vue
-<script setup>
-const { cursor } = useFluidCursor()
-</script>
-```
+## Next steps
 
-Browse the sections to explore all available composables and learn how to integrate them into your projects.
+- [Theming](/getting-started/theming) - the `ui` prop and `app.config.ts` overrides that `useMotionBlockUI` resolves.
+- [Getting started](/getting-started) - installing the module.

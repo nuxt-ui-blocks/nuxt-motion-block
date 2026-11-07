@@ -1,9 +1,9 @@
 ---
 title: Tracing Beam
-description: A beam that follows the user's scroll position.
+description: A beam that follows the user's scroll position down the page — a scroll-linked highlight for articles and docs.
 ---
 
-The Tracing Beam component creates a visual beam that follows the user's scroll position, connecting different sections of a page.
+Tracing Beam creates a visual beam that follows the user's scroll position, connecting different sections of a page.
 
 ## Usage
 

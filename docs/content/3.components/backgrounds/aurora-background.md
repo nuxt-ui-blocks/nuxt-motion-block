@@ -3,7 +3,7 @@ title: Aurora Background
 description: Animated background with aurora-like gradient effects.
 ---
 
-The AuroraBackground component creates an animated background with aurora-like gradient effects. It features smooth color transitions and animated patterns that create a mesmerizing visual experience.
+AuroraBackground creates an animated background with aurora-like gradient effects. It features smooth color transitions and animated patterns that create a mesmerizing visual experience.
 
 ## Usage
 

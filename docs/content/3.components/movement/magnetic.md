@@ -3,7 +3,7 @@ title: Magnetic
 description: Component that creates a magnetic effect, attracting elements toward the cursor.
 ---
 
-The Magnetic component creates a magnetic effect, attracting elements toward the cursor. It's perfect for creating interactive buttons and elements that respond to cursor proximity with smooth, physics-based animations.
+Magnetic creates a magnetic effect, attracting elements toward the cursor.
 
 ## Usage
 

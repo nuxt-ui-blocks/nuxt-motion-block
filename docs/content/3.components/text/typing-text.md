@@ -1,9 +1,9 @@
 ---
 title: Typing Text
-description: Typing effect for text content.
+description: Type-on animation for text content — characters appear one by one with per-character timing and caret control.
 ---
 
-The TypingText component creates a typing effect for text content. It's perfect for creating dynamic text entrances that simulate typing on a keyboard.
+TypingText creates a typing effect for text content.
 
 ## Usage
 

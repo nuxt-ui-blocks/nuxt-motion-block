@@ -3,7 +3,7 @@ title: Div Grid
 description: Grid of div elements with customizable size, colors, and interactive behavior.
 ---
 
-The DivGrid component creates a grid of div elements with customizable size, colors, and interactive behavior. It's perfect for creating background patterns and interactive grids.
+DivGrid creates a grid of div elements with customizable size, colors, and interactive behavior.
 
 ## Usage
 

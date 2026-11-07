@@ -18,7 +18,7 @@ label: Preview
 ```vue
 <template>
   <UHeader 
-    title="MotionBlocks" 
+    title="Nuxt Motion Block" 
     class="sticky top-0 z-50 bg-white dark:bg-gray-900 rounded-full border-b border-gray-200 dark:border-gray-800"
   >
     <!-- Desktop Navigation -->

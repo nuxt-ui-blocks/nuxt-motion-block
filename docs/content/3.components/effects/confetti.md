@@ -1,6 +1,6 @@
 ---
 title: Confetti
-description: A canvas burst of paper pieces, fired on demand.
+description: A canvas burst of paper pieces, fired on demand — the celebration primitive behind milestones.
 ---
 
 Confetti draws its own paper pieces on a canvas, so a burst costs nothing until you ask for one. Mount the component once, then call `fire()` from a ref when something deserves celebrating.

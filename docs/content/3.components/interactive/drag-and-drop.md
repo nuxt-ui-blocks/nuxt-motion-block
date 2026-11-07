@@ -406,7 +406,7 @@ function selectAll() {
 ## Props
 
 ::component-props
-  ::component-prop{name="items" type="DragItem[]"}
+  ::component-prop{name="items" type="DragItem[]" required}
   The items to render. Each needs an `id` — used as the `layout-id` and the
   selection key — and may carry anything else your slot reads. The type allows
   `string | number`, but `id` is bound straight to `layout-id`, so prefer a

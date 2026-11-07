@@ -3,7 +3,7 @@ title: Animated Background
 description: Animated background that follows interactive elements.
 ---
 
-The AnimatedBackground component creates animated background effects that follow interactive elements. It's perfect for creating dynamic navigation menus, tab interfaces, or any interactive element group where you want to highlight the active element with a smooth animation.
+AnimatedBackground creates animated background effects that follow interactive elements.
 
 ## Usage
 

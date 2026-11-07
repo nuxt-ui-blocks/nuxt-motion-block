@@ -1,9 +1,9 @@
 ---
 title: Text Shimmer Wave
-description: Text with a wave-like shimmer animation effect.
+description: Text with a wave-like shimmer that sweeps across the glyphs — a loading or AI-thinking indicator.
 ---
 
-The TextShimmerWave component creates text with a wave-like shimmer animation effect. It's perfect for creating eye-catching headings and text elements with dynamic 3D transformations.
+TextShimmerWave creates text with a wave-like shimmer animation effect.
 
 Each character is its own `motion-v` element inside a shared `perspective` container, and the wave comes from staggering those characters: the delay is `index × duration / spread / length`, so the bump travels from left to right. Every character animates `translateZ`, `translateX`, `translateY`, `scale`, `rotateY`, and its colour together, and `duration` sets how long one character takes to complete the cycle.
 
@@ -639,7 +639,7 @@ This component's theme exposes the slots below. Override any of them per instanc
 
 ## Accessibility
 
-The text is split into one element per character for animation, so the DOM reads as a run of single-letter spans rather than words. Screen readers still read the string in order, but character-by-character grouping can affect pronunciation and selection — for long or important copy, prefer [TextShimmer](/components/text-shimmer), which keeps the text in a single node.
+The text is split into one element per character for animation, so the DOM reads as a run of single-letter spans rather than words. Screen readers still read the string in order, but character-by-character grouping can affect pronunciation and selection — for long or important copy, prefer [TextShimmer](/components/text/text-shimmer), which keeps the text in a single node.
 
 The root carries no `aria-label`, and there is no `prefers-reduced-motion` handling: the loop runs regardless. For reduced-motion contexts, fall back to static text.
 

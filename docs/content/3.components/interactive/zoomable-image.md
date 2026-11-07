@@ -46,7 +46,7 @@ label: Preview
 ## Props
 
 ::component-props
-  ::component-prop{name="src" type="string"}
+  ::component-prop{name="src" type="string" required}
   Image to show. The same source is used for the thumbnail and the overlay, so there is nothing to preload twice.
   ::
 

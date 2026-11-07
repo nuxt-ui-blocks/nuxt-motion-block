@@ -193,7 +193,7 @@ label: Preview
 ## Props
 
 ::component-props
-  ::component-prop{name="activeIndex" type="number"}
+  ::component-prop{name="activeIndex" type="number" required}
   The index of the child currently in view. Changing it is what plays the
   transition.
   ::

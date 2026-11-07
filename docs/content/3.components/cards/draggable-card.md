@@ -3,7 +3,7 @@ title: Draggable Card
 description: Interactive card that can be dragged around with 3D tilt effects.
 ---
 
-The DraggableCard component creates an interactive card that can be dragged around with 3D tilt effects. It combines drag functionality with dynamic 3D transformations for a playful, engaging user experience.
+DraggableCard creates an interactive card that can be dragged around with 3D tilt effects. It combines drag functionality with dynamic 3D transformations for a playful, engaging user experience.
 
 ## Usage
 

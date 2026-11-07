@@ -3,7 +3,7 @@ title: Text Shimmer
 description: Text with shimmer effect that moves across the content.
 ---
 
-The TextShimmer component creates text with a shimmer effect that moves across the content. It's perfect for creating eye-catching headings and text elements with a sparkling animation.
+TextShimmer creates text with a shimmer effect that moves across the content.
 
 The effect is a moving highlight painted into the text: the element uses `background-clip: text` with two layers — a base colour plus a narrow gradient band — and animates `background-position` from right to left on a linear loop. `spread` widens that band, `duration` sets the loop time, and `as` chooses the element so the shimmer can be a real heading instead of a styled paragraph.
 

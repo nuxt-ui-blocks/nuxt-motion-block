@@ -48,7 +48,7 @@ label: Preview
 ## Props
 
 ::component-props
-  ::component-prop{name="src" type="string"}
+  ::component-prop{name="src" type="string" required}
   Image to magnify. The same file is used for the base image and for the lens, so nothing is fetched twice.
   ::
 

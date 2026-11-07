@@ -3,7 +3,7 @@ title: Animated Spotlight
 description: Animated spotlight effect with customizable gradients and movement.
 ---
 
-The AnimatedSpotlight component creates an animated spotlight effect with customizable gradients and movement. It's perfect for adding dynamic lighting effects to your UI.
+AnimatedSpotlight creates an animated spotlight effect with customizable gradients and movement.
 
 ## Usage
 

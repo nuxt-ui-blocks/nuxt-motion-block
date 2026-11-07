@@ -90,7 +90,7 @@ label: Preview
 ## Props
 
 ::component-props
-  ::component-prop{name="reviews" type="Review[]"}
+  ::component-prop{name="reviews" type="Review[]" required}
   The reviews to render. Each needs `author`, `rating` and `content`; `avatar` is
   optional and the row falls back to text-only when it is absent.
   ::

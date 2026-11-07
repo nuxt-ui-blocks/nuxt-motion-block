@@ -36,7 +36,7 @@ const options: { type: ToastKind, label: string, color: 'success' | 'error' | 'i
 ]
 
 const copy: Record<ToastKind, string> = {
-  success: 'Deploy finished â€” build 4821 is live.',
+  success: 'Deploy finished — build 4821 is live.',
   error: 'Upload failed: the file is larger than 25 MB.',
   info: 'Three files are staged and ready to sync.',
   warning: 'Your trial ends in two days.',

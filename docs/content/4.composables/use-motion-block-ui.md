@@ -44,7 +44,7 @@ Call the returned `ui` instance per slot (`ui.root(...)`, `ui.header(...)`) rath
   ::
 
   ::field{name="props" type="object"}
-  The component's raw props. They are passed through `useComponentProps`, so an explicit prop wins over the `UTheme` component prop and the `app.config` value.
+  The component's raw props. They are passed through `useComponentProps`, so an explicit prop wins over Nuxt UI's `UTheme` component prop (a per-instance theme override) and the `app.config` value.
   ::
 
   ::field{name="theme" type="object"}

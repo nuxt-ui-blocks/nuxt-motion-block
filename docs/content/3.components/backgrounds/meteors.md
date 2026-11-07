@@ -3,7 +3,7 @@ title: Meteors
 description: Animated meteor shower effect with customizable density and timing.
 ---
 
-The Meteors component creates an animated meteor shower effect with customizable density and timing. It's perfect for adding dynamic background animations to your UI.
+Meteors creates an animated meteor shower effect with customizable density and timing.
 
 ## Usage
 

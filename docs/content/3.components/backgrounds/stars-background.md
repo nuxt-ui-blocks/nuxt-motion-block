@@ -3,7 +3,7 @@ title: Stars Background
 description: Animated starfield background with customizable density and twinkling effects.
 ---
 
-The StarsBackground component creates an animated starfield background with customizable star density and twinkling effects. It's perfect for adding a cosmic background to your UI.
+StarsBackground creates an animated starfield background with customizable star density and twinkling effects.
 
 ## Usage
 

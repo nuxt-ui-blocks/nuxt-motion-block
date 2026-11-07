@@ -1,9 +1,9 @@
 ---
 title: Sliding Number
-description: Number that slides in with animation effects.
+description: A number whose digits slide in with animation effects — transitions between values without layout shift.
 ---
 
-The SlidingNumber component creates animated numbers that slide in with smooth animation effects. Each digit animates independently, creating a visually appealing counting experience.
+SlidingNumber creates animated numbers that slide in with smooth animation effects. Each digit animates independently, creating a visually appealing counting experience.
 
 ## Usage
 

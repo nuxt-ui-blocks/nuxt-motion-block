@@ -3,7 +3,7 @@ title: Focus Cards
 description: Interactive card grid with hover effects that expand and focus on individual cards.
 ---
 
-The FocusCards component creates an interactive grid of cards that expand and focus when hovered. It's perfect for showcasing portfolios, products, or any collection of items with engaging hover effects.
+FocusCards creates an interactive grid of cards that expand and focus when hovered.
 
 ## Usage
 

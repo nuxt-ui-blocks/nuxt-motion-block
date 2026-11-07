@@ -1,6 +1,6 @@
 ---
 title: Wallet Card
-description: A realistic card surface — gradient, printed grain, EMV chip, contactless glyph and a hover sheen — showing balance, a masked card number and optional holder details.
+description: A realistic bank-card surface with gradient, grain, EMV chip, contactless glyph and a hover sheen — balance, masked number and optional holder details.
 ---
 
 The Wallet Card renders a payment card as a physical object: a gradient surface with a faint printed grain, an inset edge highlight, an EMV chip, a contactless glyph and an optional network mark. It shows the balance, a masked card number and optional holder / expiry details, and fades a soft sheen across the surface on hover. It uses `motion-v` only for a small spring entrance.
