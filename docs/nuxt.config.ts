@@ -74,14 +74,14 @@ export default defineNuxtConfig({
     ],
   },
 
-  mcp: false,
+  mcp: true,
 
   motionBlock: {
     prefix: 'M',
   },
 
   ogImage: {
-    enabled: false,
+    enabled: true,
   },
 
   sitemap: {
