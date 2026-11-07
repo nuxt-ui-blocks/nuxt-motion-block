@@ -35,6 +35,10 @@
       "types": "./dist/runtime/utils/theme-color.d.ts",
       "import": "./dist/runtime/utils/theme-color.js"
     },
+    "./runtime/tailwind.css": {
+      "style": "./dist/runtime/tailwind.css",
+      "default": "./dist/runtime/tailwind.css"
+    },
     "./vue-plugin": {
       "types": "./dist/vue-plugin.d.mts",
       "import": "./dist/vue-plugin.mjs"
@@ -43,6 +47,12 @@
   "main": "./dist/module.mjs",
   "typesVersions": {
     "*": {
+      ".": [
+        "./dist/types.d.mts"
+      ],
+      "types": [
+        "./dist/runtime/types/index.d.ts"
+      ],
       "vue-plugin": [
         "./dist/vue-plugin.d.mts"
       ]
