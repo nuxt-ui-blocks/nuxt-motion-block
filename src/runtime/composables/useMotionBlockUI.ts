@@ -32,10 +32,11 @@ export interface UseMotionBlockUIReturn<Props extends object> {
 
 /**
  * Resolve a component's `ui` slots by merging its `tv` theme with the
- * consumer-provided `ui.<name>` overrides. Overrides are seeded once at app
- * start — in Nuxt the module plugin copies `app.config.ui` before any
- * component mounts — so `app.config.ui` mutations after startup are not
- * observed.
+ * consumer-provided `ui.<name>` overrides. Overrides come from
+ * `useMotionBlockConfig()` — a `reactive` store seeded by the Nuxt module
+ * (from `app.config.ui`) at app start, or by the Vue plugin's `install()`
+ * (`app.use(motionBlock, { ui })`). Writes to the reactive store are
+ * observed by the resolved `tv` instance.
  */
 export function useMotionBlockUI<Props extends object>(
   options: UseMotionBlockUIOptions<Props>,

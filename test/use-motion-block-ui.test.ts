@@ -60,7 +60,8 @@ describe('useMotionBlockUI', () => {
     unmount()
   })
 
-  it('extends the theme with ui overrides', () => {
+  it('reflects ui overrides mutated through the reactive store', () => {
+    const config = useMotionBlockConfig()
     setMotionBlockConfig({ ui: { dynamicIsland: { slots: { root: 'bg-red-500' } } } })
     const { result, unmount } = withSetup(() => useMotionBlockUI({
       name: 'dynamicIsland',
@@ -68,9 +69,14 @@ describe('useMotionBlockUI', () => {
       theme: dynamicIsland,
     }))
 
-    const root = result.ui.value.root({ class: 'x' })
-    expect(root).toContain('bg-red-500')
-    expect(root).toContain('h-[200px]')
+    const before = result.ui.value.root({ class: 'x' })
+    expect(before).toContain('bg-red-500')
+
+    // Write through the reactive store (the same path a Vue user would take)
+    config.ui.dynamicIsland.slots.root = 'bg-lime-500'
+    const after = result.ui.value.root({ class: 'x' })
+    expect(after).toContain('bg-lime-500')
+    expect(after).toContain('h-[200px]')
     unmount()
   })
 })
