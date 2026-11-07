@@ -1,5 +1,5 @@
 import { onMounted, ref, toValue, watch, type MaybeRefOrGetter, type Ref } from 'vue'
-import { useColorMode } from '#imports'
+import { useColorMode } from '../utils/nuxt-shims'
 import { colorToRgb, resolveColor, resolveThemeColor, themeTokenToVar, THEME_TOKENS, type RGB } from '../utils/theme-color'
 
 export interface UseThemeColorOptions {

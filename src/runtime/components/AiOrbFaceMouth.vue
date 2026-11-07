@@ -202,7 +202,7 @@ import type { AIAmplitude, AIState } from '../composables/useAiState'
 import { getAIStateMotion, useAmplitudeValue } from '../composables/useAiState'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import aiOrbFaceMouth from '../theme/ai-orb-face-mouth'
-import { useColorMode } from '#imports'
+import { useColorMode } from '../utils/nuxt-shims'
 import { colorToRgb, resolveColor, THEME_TOKENS, themeTokenToVar } from '../utils/theme-color'
 
 const VIEWBOX = 100

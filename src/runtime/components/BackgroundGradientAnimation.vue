@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { useColorMode } from '#imports'
+import { useColorMode } from '../utils/nuxt-shims'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import { backgroundGradientAnimation } from '../theme'

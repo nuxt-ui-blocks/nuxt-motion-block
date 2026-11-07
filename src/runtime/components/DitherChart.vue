@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
-import { useColorMode } from '#imports'
+import { useColorMode } from '../utils/nuxt-shims'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import ditherChart from '../theme/dither-chart'
 import { resolveColor, resolveThemeColor } from '../utils/theme-color'

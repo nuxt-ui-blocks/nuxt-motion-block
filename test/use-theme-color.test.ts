@@ -4,6 +4,14 @@ import { mount } from '@vue/test-utils'
 import { useThemeColor } from '../src/runtime/composables/useThemeColor'
 import { colorMode } from './stubs/imports'
 
+// The composable reads the shim indirection so consumer builds don't pick up Nuxt aliases;
+// in tests we want the controllable stub instead of @vueuse/core's DOM-backed useColorMode.
+vi.mock('../src/runtime/utils/nuxt-shims', () => ({
+  useColorMode: () => colorMode,
+  useToast: {},
+  defineShortcuts: () => {},
+}))
+
 const mocks = vi.hoisted(() => ({
   resolveThemeColor: vi.fn(),
 }))

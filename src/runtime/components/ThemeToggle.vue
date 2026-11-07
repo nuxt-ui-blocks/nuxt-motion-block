@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useColorMode } from '#imports'
+import { useColorMode } from '../utils/nuxt-shims'
 import { motion, AnimatePresence } from 'motion-v'
 import type { ButtonProps } from '#ui/components/Button.vue'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'

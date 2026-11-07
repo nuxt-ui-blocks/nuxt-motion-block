@@ -34,6 +34,14 @@
     "./runtime/utils/theme-color": {
       "types": "./dist/runtime/utils/theme-color.d.ts",
       "import": "./dist/runtime/utils/theme-color.js"
+    },
+    "./runtime/tailwind.css": {
+      "style": "./dist/runtime/tailwind.css",
+      "default": "./dist/runtime/tailwind.css"
+    },
+    "./vue-plugin": {
+      "types": "./dist/vue-plugin.d.mts",
+      "import": "./dist/vue-plugin.mjs"
     }
   },
   "main": "./dist/module.mjs",
@@ -44,6 +52,9 @@
       ],
       "types": [
         "./dist/runtime/types/index.d.ts"
+      ],
+      "vue-plugin": [
+        "./dist/vue-plugin.d.mts"
       ]
     }
   },
@@ -56,7 +67,7 @@
     "nuxt-motion-block-mcp": "./bin/mcp-server.mjs"
   },
   "scripts": {
-    "prepack": "nuxt-module-build build",
+    "prepack": "node scripts/generate-registry.mjs && nuxt-module-build build",
     "dev": "pnpm dev:prepare && nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
@@ -127,5 +138,10 @@
       "unrs-resolver",
       "vue-demi"
     ]
+  },
+  "peerDependenciesMeta": {
+    "nuxt": {
+      "optional": true
+    }
   }
 }

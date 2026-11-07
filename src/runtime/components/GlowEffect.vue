@@ -13,7 +13,7 @@ import { Motion } from 'motion-v'
 import type { Transition } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import glowEffect from '../theme/glow-effect'
-import { useColorMode } from '#imports'
+import { useColorMode } from '../utils/nuxt-shims'
 import { resolveColor } from '../utils/theme-color'
 
 // Define props

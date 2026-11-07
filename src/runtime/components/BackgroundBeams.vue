@@ -103,7 +103,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { motion } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import backgroundBeams from '../theme/background-beams'
-import { useColorMode } from '#imports'
+import { useColorMode } from '../utils/nuxt-shims'
 import { colorToRgb, resolveColor } from '../utils/theme-color'
 
 interface Props {

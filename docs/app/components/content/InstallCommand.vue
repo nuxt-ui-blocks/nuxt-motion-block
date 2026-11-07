@@ -2,6 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 
 type Tab = 'pnpm' | 'npm' | 'yarn' | 'bun' | 'agents'
+type Variant = 'nuxt' | 'vue'
 
 interface CommandTab {
   id: 'pnpm' | 'npm' | 'yarn' | 'bun'
@@ -18,20 +19,45 @@ interface PromptTab {
 
 const props = withDefaults(defineProps<{
   package?: string
+  packages?: string
   label?: string
+  variant?: Variant
 }>(), {
-  package: 'nuxt-motion-block',
+  package: undefined,
+  packages: undefined,
   label: undefined,
+  variant: 'nuxt',
 })
 
-const agentsPrompt = [
-  `Add Nuxt Motion Block to this Nuxt 4 project.`,
-  `1. Run \`npx nuxi module add nuxt-motion-block\`.`,
-  `2. Register the modules in \`nuxt.config.ts\`: \`modules: ['@nuxt/ui', 'motion-v/nuxt', 'nuxt-motion-block']\`.`,
-  `3. Pin \`@nuxt/ui >= 4.11.2\` and \`motion-v >= 2.4.4\`.`,
-  `4. Components are auto-imported with an M prefix (\`<MAnimatedBackground>\`, \`<MTextGlitch>\`).`,
-  `5. Before using a component, read its page with the \`list-pages\` / \`get-page\` tools from the \`nuxt-motion-block\` MCP server (\`npx nuxt-motion-block-mcp\`), or at \`https://nuxt-motion-block.pages.dev/raw/components/<category>/<name>.md\`. Do not guess its props, events or slots.`,
-].join('\n')
+const VARIANTS: Record<Variant, { packages: string, agents: string[] }> = {
+  nuxt: {
+    packages: 'nuxt-motion-block',
+    agents: [
+      `Add Nuxt Motion Block to this Nuxt 4 project.`,
+      `1. Run \`npx nuxi module add nuxt-motion-block\`.`,
+      `2. Register the modules in \`nuxt.config.ts\`: \`modules: ['@nuxt/ui', 'motion-v/nuxt', 'nuxt-motion-block']\`.`,
+      `3. Pin \`@nuxt/ui >= 4.11.2\` and \`motion-v >= 2.4.4\`.`,
+      `4. Components are auto-imported with an M prefix (\`<MAnimatedBackground>\`, \`<MTextGlitch>\`).`,
+      `5. Before using a component, read its page with the \`list-pages\` / \`get-page\` tools from the \`nuxt-motion-block\` MCP server (\`npx nuxt-motion-block-mcp\`), or at \`https://nuxt-motion-block.pages.dev/raw/components/<category>/<name>.md\`. Do not guess its props, events or slots.`,
+    ],
+  },
+  vue: {
+    packages: 'nuxt-motion-block @nuxt/ui motion-v',
+    agents: [
+      `Add Nuxt Motion Block to this Vue app (works for Laravel, AdonisJS and plain Vite too).`,
+      `1. Run \`pnpm add nuxt-motion-block @nuxt/ui motion-v tailwindcss\`.`,
+      `2. Add \`ui()\` from \`@nuxt/ui/vite\` to \`vite.config.ts\` and register the plugins in your entry: \`app.use(ui).use(motionBlock)\`.`,
+      `3. Pin \`@nuxt/ui >= 4.11.2\` and \`motion-v >= 2.4.4\`.`,
+      `4. All components are globally registered with an M prefix (\`<MAnimatedBackground>\`, \`<MTextGlitch>\`). For \`ui.<name>\` slot overrides matching Nuxt UI, pass \`ui\` to the plugin: \`app.use(motionBlock, { ui })\`.`,
+      `5. Before using a component, read its page with the \`list-pages\` / \`get-page\` tools from the \`nuxt-motion-block\` MCP server (\`npx nuxt-motion-block-mcp\`), or at \`https://nuxt-motion-block.pages.dev/raw/components/<category>/<name>.md\`. Do not guess its props, events or slots.`,
+    ],
+  },
+}
+
+const activeVariant = computed(() => VARIANTS[props.variant])
+const packages = computed(() => props.packages ?? props.package ?? activeVariant.value.packages)
+
+const agentsPrompt = computed(() => activeVariant.value.agents.join('\n'))
 
 const tabs: (CommandTab | PromptTab)[] = [
   { id: 'pnpm', label: 'pnpm', kind: 'command', run: pkg => `pnpm add ${pkg}` },
@@ -49,7 +75,7 @@ const active = computed(() => tabs.find(t => t.id === tab.value)!)
 
 const command = computed(() =>
   active.value.kind === 'command'
-    ? (active.value as CommandTab).run(props.package)
+    ? (active.value as CommandTab).run(packages.value)
     : '',
 )
 
@@ -71,7 +97,7 @@ watch(tab, (value) => {
 
 async function copy() {
   try {
-    await navigator.clipboard.writeText(active.value.kind === 'prompt' ? agentsPrompt : command.value)
+    await navigator.clipboard.writeText(active.value.kind === 'prompt' ? agentsPrompt.value : command.value)
     copied.value = true
     clearTimeout(timer)
     timer = setTimeout(() => {

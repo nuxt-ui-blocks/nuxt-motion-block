@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { defineShortcuts } from '#imports'
+import { defineShortcuts } from '../utils/nuxt-shims'
 import { motion, AnimatePresence } from 'motion-v'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import pinnedList from '../theme/pinned-list'

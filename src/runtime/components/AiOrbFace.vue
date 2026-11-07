@@ -114,7 +114,7 @@ import type { AIAmplitude, AIState } from '../composables/useAiState'
 import { getAIStateMotion, useAmplitudeValue } from '../composables/useAiState'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import aiOrbFace from '../theme/ai-orb-face'
-import { useColorMode } from '#imports'
+import { useColorMode } from '../utils/nuxt-shims'
 import { colorToRgb, resolveColor } from '../utils/theme-color'
 
 const VIEWBOX = 100

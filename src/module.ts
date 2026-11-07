@@ -1,4 +1,4 @@
-import { defineNuxtModule, createResolver, addComponentsDir } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, addComponentsDir, addPlugin } from '@nuxt/kit'
 import type { NuxtModule } from '@nuxt/schema'
 
 // Module options TypeScript interface definition
@@ -51,6 +51,9 @@ const module: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
     nuxt.hook('imports:dirs', (dirs) => {
       dirs.push(resolver.resolve('./runtime/composables'))
     })
+
+    // Seed the shared motion-block config from `app.config.ui` (used by `useMotionBlockUI`).
+    addPlugin({ src: resolver.resolve('./runtime/plugins/app-config') })
 
     nuxt.options.css.push(resolver.resolve('./runtime/tailwind.css'))
   },

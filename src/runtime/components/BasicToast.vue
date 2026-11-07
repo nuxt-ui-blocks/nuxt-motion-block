@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, watch } from 'vue'
-import { useToast } from '#imports'
+import { useToast } from '../utils/nuxt-shims'
 
 export interface Props {
   /** How long the toast stays up, in milliseconds. `0` keeps it until dismissed. */

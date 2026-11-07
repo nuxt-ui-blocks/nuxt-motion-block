@@ -34,7 +34,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { motion } from 'motion-v'
 import type { Transition, RepeatType } from 'motion-v'
-import { useColorMode } from '#imports'
+import { useColorMode } from '../utils/nuxt-shims'
 import { useMotionBlockUI } from '../composables/useMotionBlockUI'
 import backgroundLines from '../theme/background-lines'
 import { colorToRgb, resolveColor } from '../utils/theme-color'
