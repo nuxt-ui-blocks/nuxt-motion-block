@@ -1,7 +1,20 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 
-type Manager = 'pnpm' | 'npm' | 'yarn' | 'bun'
+type Tab = 'pnpm' | 'npm' | 'yarn' | 'bun' | 'agents'
+
+interface CommandTab {
+  id: 'pnpm' | 'npm' | 'yarn' | 'bun'
+  label: string
+  kind: 'command'
+  run: (pkg: string) => string
+}
+
+interface PromptTab {
+  id: 'agents'
+  label: string
+  kind: 'prompt'
+}
 
 const props = withDefaults(defineProps<{
   package?: string
@@ -11,19 +24,33 @@ const props = withDefaults(defineProps<{
   label: undefined,
 })
 
-const managers: { id: Manager, label: string, run: (pkg: string) => string }[] = [
-  { id: 'pnpm', label: 'pnpm', run: pkg => `pnpm add ${pkg}` },
-  { id: 'npm', label: 'npm', run: pkg => `npm install ${pkg}` },
-  { id: 'yarn', label: 'yarn', run: pkg => `yarn add ${pkg}` },
-  { id: 'bun', label: 'bun', run: pkg => `bun add ${pkg}` },
+const agentsPrompt = [
+  `Add Nuxt Motion Block to this Nuxt 4 project.`,
+  `1. Run \`npx nuxi module add nuxt-motion-block\`.`,
+  `2. Register the modules in \`nuxt.config.ts\`: \`modules: ['@nuxt/ui', 'motion-v/nuxt', 'nuxt-motion-block']\`.`,
+  `3. Pin \`@nuxt/ui >= 4.11.2\` and \`motion-v >= 2.4.4\`.`,
+  `4. Components are auto-imported with an M prefix (\`<MAnimatedBackground>\`, \`<MTextGlitch>\`).`,
+  `5. Before using a component, read its page with the \`list-pages\` / \`get-page\` tools from the \`nuxt-motion-block\` MCP server (\`npx nuxt-motion-block-mcp\`), or at \`https://nuxt-motion-block.pages.dev/raw/components/<category>/<name>.md\`. Do not guess its props, events or slots.`,
+].join('\n')
+
+const tabs: (CommandTab | PromptTab)[] = [
+  { id: 'pnpm', label: 'pnpm', kind: 'command', run: pkg => `pnpm add ${pkg}` },
+  { id: 'npm', label: 'npm', kind: 'command', run: pkg => `npm install ${pkg}` },
+  { id: 'yarn', label: 'yarn', kind: 'command', run: pkg => `yarn add ${pkg}` },
+  { id: 'bun', label: 'bun', kind: 'command', run: pkg => `bun add ${pkg}` },
+  { id: 'agents', label: 'Agents', kind: 'prompt' },
 ]
 
 const STORAGE_KEY = 'motion-block:package-manager'
 
-const manager = useState<Manager>('package-manager', () => 'pnpm')
+const tab = useState<Tab>('package-manager', () => 'pnpm')
 
-const command = computed(
-  () => managers.find(m => m.id === manager.value)?.run(props.package) ?? '',
+const active = computed(() => tabs.find(t => t.id === tab.value)!)
+
+const command = computed(() =>
+  active.value.kind === 'command'
+    ? (active.value as CommandTab).run(props.package)
+    : '',
 )
 
 const copied = ref(false)
@@ -31,12 +58,12 @@ let timer: ReturnType<typeof setTimeout> | undefined
 
 onMounted(() => {
   const stored = window.localStorage.getItem(STORAGE_KEY)
-  if (stored && managers.some(m => m.id === stored)) {
-    manager.value = stored as Manager
+  if (stored && tabs.some(t => t.id === stored)) {
+    tab.value = stored as Tab
   }
 })
 
-watch(manager, (value) => {
+watch(tab, (value) => {
   if (import.meta.client) {
     window.localStorage.setItem(STORAGE_KEY, value)
   }
@@ -44,7 +71,7 @@ watch(manager, (value) => {
 
 async function copy() {
   try {
-    await navigator.clipboard.writeText(command.value)
+    await navigator.clipboard.writeText(active.value.kind === 'prompt' ? agentsPrompt : command.value)
     copied.value = true
     clearTimeout(timer)
     timer = setTimeout(() => {
@@ -61,30 +88,34 @@ async function copy() {
   <div class="w-full max-w-md overflow-hidden rounded-md border border-black/20 bg-[#141412] text-[#f4f1ea] shadow-[0_16px_40px_-16px_rgb(0_0_0/0.45)] dark:border-white/10">
     <div
       class="flex items-center gap-1 border-b border-white/10 px-3 pt-2 pb-0"
-      role="group"
-      :aria-label="label ?? 'Package manager'"
+      role="tablist"
+      :aria-label="label ?? 'Install Nuxt Motion Block'"
     >
       <button
-        v-for="item in managers"
+        v-for="item in tabs"
         :key="item.id"
         type="button"
-        :aria-pressed="manager === item.id"
+        role="tab"
+        :aria-selected="tab === item.id"
         class="relative px-2 pb-2.5 pt-1 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors duration-150"
-        :class="manager === item.id
+        :class="tab === item.id
           ? 'text-[#f4f1ea]'
           : 'text-[#8a887f] hover:text-[#c9c7bd]'"
-        @click="manager = item.id"
+        @click="tab = item.id"
       >
         {{ item.label }}
         <span
-          v-if="manager === item.id"
+          v-if="tab === item.id"
           aria-hidden="true"
           class="absolute inset-x-2 bottom-[-1px] h-[2px] bg-[#f06a3c]"
         />
       </button>
     </div>
 
-    <div class="flex items-center gap-3 px-4 py-3">
+    <div
+      v-if="active.kind === 'command'"
+      class="flex items-center gap-3 px-4 py-3"
+    >
       <span
         aria-hidden="true"
         class="select-none font-mono text-xs text-[#f06a3c]"
@@ -104,6 +135,33 @@ async function copy() {
         />
         {{ copied ? 'Copied' : 'Copy' }}
       </button>
+    </div>
+
+    <div
+      v-else
+      class="px-4 py-3"
+    >
+      <pre class="max-h-32 overflow-y-auto whitespace-pre-wrap font-mono text-[10px] leading-[1.45] text-[#c9c7bd]">{{ agentsPrompt }}</pre>
+      <div class="mt-3 flex items-center justify-between gap-3 border-t border-white/10 pt-3">
+        <NuxtLink
+          to="/getting-started/ai-agents"
+          class="font-mono text-[9px] uppercase tracking-[0.18em] text-[#a9a79e] transition hover:text-[#f4f1ea]"
+        >
+          Full guide →
+        </NuxtLink>
+        <button
+          type="button"
+          class="inline-flex shrink-0 items-center gap-1.5 rounded-sm px-2 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-[#a9a79e] transition-colors duration-150 hover:bg-white/5 hover:text-[#f4f1ea] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#f06a3c]"
+          :aria-label="copied ? 'Copied' : 'Copy agent prompt'"
+          @click="copy"
+        >
+          <UIcon
+            :name="copied ? 'i-lucide-check' : 'i-lucide-copy'"
+            class="size-3.5"
+          />
+          {{ copied ? 'Copied' : 'Copy' }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
