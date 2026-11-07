@@ -3,7 +3,7 @@ title: Spotlight
 description: Component that creates a spotlight effect following the cursor.
 ---
 
-The Spotlight component creates a spotlight effect following the cursor. It's perfect for creating engaging hover effects and interactive elements that respond to cursor movement.
+Spotlight creates a spotlight effect following the cursor.
 
 ## Usage
 

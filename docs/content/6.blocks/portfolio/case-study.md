@@ -3,7 +3,7 @@ title: Case Study
 description: A comprehensive case study layout with project overview, challenges, solutions, and results.
 ---
 
-A comprehensive case study layout with project overview, challenges, solutions, and results. Perfect for showcasing detailed project work and outcomes.
+A comprehensive case study layout with project overview, challenges, solutions, and results.
 
 ## Usage
 
@@ -473,3 +473,5 @@ const getCategoryColor = (category: string) => {
   }
 }
 </script>
+```
+::

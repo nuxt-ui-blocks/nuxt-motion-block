@@ -1,6 +1,6 @@
 ---
 title: Text Roll
-description: Text whose letters roll in on a 3D axis.
+description: Text whose letters roll in from a 3D axis — each glyph rotates into place with a spring.
 ---
 
 The TextRoll component gives each letter a 3D flip: it enters by rotating around the X axis and exits the same way, so the line appears to roll into place. It is a strong choice for a headline or label that should feel physical rather than a simple fade.

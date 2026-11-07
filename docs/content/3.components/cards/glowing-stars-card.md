@@ -1,9 +1,9 @@
 ---
 title: Glowing Stars Card
-description: Card component with animated glowing stars effect and customizable colors.
+description: Card component with animated glowing stars effect and customizable colours.
 ---
 
-The GlowingStarsCard component creates a card with an animated glowing stars effect. It features interactive stars that glow on hover and automatically animate at random intervals.
+GlowingStarsCard creates a card with an animated glowing stars effect. It features interactive stars that glow on hover and automatically animate at random intervals.
 
 ## Usage
 

@@ -117,10 +117,10 @@ const glow = ref(true)
 ## Props
 
 ::component-props
-  ::component-prop{name="src" type="string"}
+  ::component-prop{name="src" type="string" required}
   Video source URL.
   ::
-  ::component-prop{name="alt" type="string"}
+  ::component-prop{name="alt" type="string" required}
   Describes the video for assistive technology. Rendered as the video's
   `aria-label`.
   ::

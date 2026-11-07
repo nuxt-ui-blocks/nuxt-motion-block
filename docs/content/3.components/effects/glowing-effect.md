@@ -1,9 +1,9 @@
 ---
 title: Glowing Effect
-description: Interactive glowing effect with customizable colors, blur, and proximity detection.
+description: Interactive glowing effect with customizable colours, blur, and proximity detection.
 ---
 
-The `MGlowingEffect` component creates an interactive glow that tracks your pointer. As the cursor moves across the element, a conic/radial gradient sweeps to face it. `proximity` defines how far outside the element the effect stays active, `inactiveZone` suppresses the glow when the pointer is very near the centre, and `movementDuration` controls how smoothly the angle eases. Use `colors` to recolour the trail, `variant="white"` for a monochrome halo, or `blur` to soften it.
+MGlowingEffect creates an interactive glow that tracks your pointer. As the cursor moves across the element, a conic/radial gradient sweeps to face it. `proximity` defines how far outside the element the effect stays active, `inactiveZone` suppresses the glow when the pointer is very near the centre, and `movementDuration` controls how smoothly the angle eases. Use `colors` to recolour the trail, `variant="white"` for a monochrome halo, or `blur` to soften it.
 
 ## Usage
 
@@ -16,7 +16,7 @@ label: Preview
   :::
 #code
 ```vue
-﻿<template>
+<template>
   <div class="relative w-full max-w-xl rounded-2xl border border-default bg-gradient-to-br from-muted/40 to-accented/30 p-6 shadow-sm">
     <MGlowingEffect
       :glow="true"
@@ -79,7 +79,7 @@ label: Preview
   :::
 #code
 ```vue
-﻿<template>
+<template>
   <div class="grid w-full max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
     <div class="relative rounded-2xl border border-default bg-accented/40 p-5">
       <MGlowingEffect

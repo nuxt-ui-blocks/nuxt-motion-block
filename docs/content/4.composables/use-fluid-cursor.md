@@ -1,9 +1,9 @@
 ---
 title: useFluidCursor
-description: Fluid cursor effects with particle systems.
+description: A WebGL fluid simulation bound to a canvas ref — the swirling pointer effect behind MFluidCursor, with a color option.
 ---
 
-The useFluidCursor composable provides advanced fluid simulation cursor effects using WebGL. It creates realistic fluid dynamics for cursor interactions with customizable colors and physics.
+The useFluidCursor composable provides advanced fluid simulation cursor effects using WebGL. It creates realistic fluid dynamics for cursor interactions with customizable colours and physics.
 
 ## Usage
 

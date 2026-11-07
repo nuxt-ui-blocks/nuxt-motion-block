@@ -1,9 +1,9 @@
 ---
 title: Border Trail
-description: Animated border effect with trailing particles.
+description: An animated border with a trail of particles that travels along its edge — for frames, cards and callouts.
 ---
 
-The BorderTrail component creates an animated border effect with trailing particles. It's perfect for adding visual interest to cards, buttons, or any container element.
+BorderTrail creates an animated border effect with trailing particles.
 
 ## Usage
 

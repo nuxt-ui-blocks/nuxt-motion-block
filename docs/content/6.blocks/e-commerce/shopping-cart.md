@@ -3,7 +3,7 @@ title: Shopping Cart
 description: A modern shopping cart with animated item transitions, quantity controls, and promotional code support.
 ---
 
-A modern shopping cart with animated item transitions, quantity controls, and promotional code support. Perfect for e-commerce checkout flows.
+A modern shopping cart with animated item transitions, quantity controls, and promotional code support.
 
 ## Usage
 

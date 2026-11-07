@@ -1,6 +1,6 @@
 ---
 title: Interactive Grid Pattern
-description: A grid of cells that lights up under the pointer.
+description: A grid of cells that lights up under the pointer — an interactive background for heros and empty states.
 ---
 
 The Interactive Grid Pattern renders its lattice as real SVG cells rather than a pattern fill, so each cell can answer the pointer on its own. Hovering a cell fills it; leaving empties it again.

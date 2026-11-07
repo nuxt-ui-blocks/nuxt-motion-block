@@ -3,7 +3,7 @@ title: Gradient Hero
 description: A modern hero section with animated gradient background and staggered content animations.
 ---
 
-A modern hero section with animated gradient background and staggered content animations. Perfect for landing pages and marketing websites.
+A modern hero section with animated gradient background and staggered content animations.
 
 ## Usage
 

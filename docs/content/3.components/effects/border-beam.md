@@ -461,7 +461,7 @@ when you push the props around.
 
 `size` is an arc length in pixels, but a small box has a small perimeter, so the
 comet's share of the border is clamped between 2% and 45%. Below that it vanishes
-into a dot; above it it wraps most of the way round and stops reading as a comet.
+into a dot; above it wraps most of the way round and stops reading as a comet.
 
 `beams` phase-offsets along the loop — each beam starts at `index / count` of a
 lap, so `beams: 3` gives three comets evenly spaced with none of them overlapping.

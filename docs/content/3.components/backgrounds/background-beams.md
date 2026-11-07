@@ -3,7 +3,7 @@ title: Background Beams
 description: Animated SVG background with customizable beam paths and gradient colors.
 ---
 
-The BackgroundBeams component creates an animated SVG background with customizable beam paths and gradient colors. It's perfect for creating dynamic background effects with smooth animations.
+BackgroundBeams creates an animated SVG background with customizable beam paths and gradient colors.
 
 ## Usage
 

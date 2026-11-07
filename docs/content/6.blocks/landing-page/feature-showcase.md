@@ -3,7 +3,7 @@ title: Feature Showcase
 description: A modern feature showcase section with animated cards and interactive elements.
 ---
 
-A modern feature showcase section with animated cards and interactive elements. Perfect for highlighting product features on landing pages.
+A modern feature showcase section with animated cards and interactive elements.
 
 ## Usage
 

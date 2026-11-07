@@ -90,10 +90,10 @@ label: Preview
 ## Props
 
 ::component-props
-  ::component-prop{name="used" type="number"}
+  ::component-prop{name="used" type="number" required}
   Tokens currently in the window. Clamped to `0..limit`.
   ::
-  ::component-prop{name="limit" type="number"}
+  ::component-prop{name="limit" type="number" required}
   Total size of the window, in tokens. Zero renders an empty ring rather than a
   full one - there is no window to be full of.
   ::

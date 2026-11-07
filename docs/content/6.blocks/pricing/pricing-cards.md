@@ -3,7 +3,7 @@ title: Pricing Cards
 description: A responsive pricing section with billing period toggle and feature comparisons.
 ---
 
-A responsive pricing section with billing period toggle and feature comparisons. Perfect for showcasing subscription plans and packages.
+A responsive pricing section with billing period toggle and feature comparisons.
 
 ## Usage
 

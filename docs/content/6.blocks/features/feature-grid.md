@@ -3,7 +3,7 @@ title: Feature Grid
 description: A responsive grid layout to showcase product features with animations.
 ---
 
-A responsive grid layout to showcase product features with animations. Perfect for highlighting key capabilities and benefits.
+A responsive grid layout to showcase product features with animations.
 
 ## Usage
 

@@ -147,7 +147,7 @@ label: Preview
 ## Props
 
 ::component-props
-  ::component-prop{name="layers" type="ParallaxLayerConfig[]"}
+  ::component-prop{name="layers" type="ParallaxLayerConfig[]" required}
   The layer stack, in back-to-front paint order. Each entry is `{ id, depth }` plus optional `blur` and `opacity`. A `depth` of `0` stays fixed.
   ::
 
@@ -182,7 +182,7 @@ label: Preview
 ## Slots
 
 ::component-slots
-  ::component-slot-row{name="layer"="{ layer, index }"}
+  ::component-slot-row{name="layer" ="{ layer, index }"}
   Content for one layer, scoped with its `layer` config and its `index`. Since
   every layer shares the same geometry, branch on `layer.id` (or `index`) to
   decide what each one renders.

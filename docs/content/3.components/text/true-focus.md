@@ -3,7 +3,7 @@ title: True Focus
 description: Text focus effect with animated borders and blur transitions.
 ---
 
-The TrueFocus component creates a text focus effect with animated borders and blur transitions. It highlights individual words with customizable borders, glow effects, and animation timing.
+TrueFocus creates a text focus effect with animated borders and blur transitions. It highlights individual words with customizable borders, glow effects, and animation timing.
 
 ## Usage
 

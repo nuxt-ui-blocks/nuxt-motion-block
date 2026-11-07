@@ -72,7 +72,7 @@ label: Preview
 ```vue
 <template>
   <div class="flex w-full flex-col items-center gap-4">
-    <UButtonGroup size="sm">
+    <UFieldGroup size="sm">
       <UButton
         label="Monthly"
         :color="yearly ? 'neutral' : 'primary'"
@@ -85,7 +85,7 @@ label: Preview
         :variant="yearly ? 'solid' : 'outline'"
         @click="yearly = true"
       />
-    </UButtonGroup>
+    </UFieldGroup>
 
     <div class="flex flex-col items-center gap-1">
       <MPriceFlow :value="yearly ? 229 : 19" />

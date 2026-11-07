@@ -3,7 +3,7 @@ title: Text Loop
 description: Text that loops through different values with smooth transitions.
 ---
 
-The TextLoop component cycles through a list of values, swapping one for the next with a smooth transition. It is perfect for rotating words in a headline, alternating labels, or any short content that needs to change automatically.
+The TextLoop component cycles through a list of values, swapping one for the next with a smooth transition.
 
 ## Usage
 

@@ -3,7 +3,7 @@ title: Text Gradient
 description: Text with animated gradient effects and various animation styles.
 ---
 
-The TextGradient component creates text with animated gradient effects and various animation styles. It's perfect for creating eye-catching headings and text elements with dynamic color transitions.
+TextGradient creates text with animated gradient effects and various animation styles.
 
 The gradient itself is a `linear-gradient` (or `radial-gradient`) painted into a `background-clip: text` box, so the fill is the text. `colors` and `direction` shape the gradient, `size` sets how much of it is in view, and `animation` decides whether it stays still, drifts, swells, or cycles. Everything animates through `motion-v` variants, which makes it smooth on the GPU and easy to pause.
 

@@ -172,7 +172,7 @@ panel is capped at `max-w-2xl` and the rows fill whatever they are given.
 ## Props
 
 ::component-props
-  ::component-prop{name="jobs" type="JobListingItem[]"}
+  ::component-prop{name="jobs" type="JobListingItem[]" required}
   Roles to show. Each one needs `company`, `title`, `salary`, `location`,
   `remote`, `postedAt` and `description`.
   ::

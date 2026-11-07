@@ -209,7 +209,7 @@ does not refetch or remount as it travels from the back to the front.
 ## Props
 
 ::component-props
-  ::component-prop{name="items" type="TimeMachineStackItem[]"}
+  ::component-prop{name="items" type="TimeMachineStackItem[]" required}
   Panels from front to back. Each entry needs a stable `id`; anything else is
   passed to the item slot.
   ::

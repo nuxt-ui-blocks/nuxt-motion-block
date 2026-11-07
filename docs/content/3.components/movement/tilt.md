@@ -3,7 +3,7 @@ title: Tilt
 description: Component that creates a 3D tilt effect based on cursor movement.
 ---
 
-The Tilt component creates a 3D tilt effect based on cursor movement. It's perfect for creating interactive cards and elements that respond to cursor proximity with realistic 3D transformations.
+Tilt creates a 3D tilt effect based on cursor movement.
 
 ## Usage
 

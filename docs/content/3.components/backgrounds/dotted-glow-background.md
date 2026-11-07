@@ -1,9 +1,9 @@
 ---
 title: Dotted Glow Background
-description: Animated dotted background with glowing effects and customizable colors.
+description: Animated dotted background with glowing effects and customizable colours.
 ---
 
-The DottedGlowBackground component creates an animated dotted background with glowing effects and customizable colors. It's perfect for creating visually appealing backgrounds with subtle animations.
+DottedGlowBackground creates an animated dotted background with glowing effects and customizable colours.
 
 ## Usage
 

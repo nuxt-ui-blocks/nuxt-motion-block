@@ -71,7 +71,7 @@ label: Preview
 ## Props
 
 ::component-props
-  ::component-prop{name="tabs" type="PhototabTab[]"}
+  ::component-prop{name="tabs" type="PhototabTab[]" required}
   Tabs to display. Each entry takes `name`, `image` and an optional `icon`
   (Iconify name).
   ::

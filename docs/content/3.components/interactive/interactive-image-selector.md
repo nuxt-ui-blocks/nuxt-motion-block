@@ -155,7 +155,7 @@ entrances and bar slide are skipped while the same state changes still happen.
 ## Props
 
 ::component-props
-  ::component-prop{name="images" type="ImageData[]"}
+  ::component-prop{name="images" type="ImageData[]" required}
   Gallery entries. Each one takes a numeric `id` and a `src` URL.
   ::
   ::component-prop{name="selectedImages" type="number[]"}

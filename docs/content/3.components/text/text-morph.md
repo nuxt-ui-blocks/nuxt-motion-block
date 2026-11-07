@@ -1,6 +1,6 @@
 ---
 title: Text Morph
-description: Text that morphs between different strings.
+description: Text that morphs between different strings — a smooth character-by-character crossfade for changing labels.
 ---
 
 The TextMorph component animates from one string to another: each character is its own `span`, and whenever `text` changes the old characters animate out while the new ones animate in, giving a smooth morph in place. It is the component to reach for when the same string changes in place — a rotating word in a headline, a live label, or a value that updates.

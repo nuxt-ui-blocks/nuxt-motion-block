@@ -3,7 +3,7 @@ title: Article Page
 description: A complete article page with featured image, author information, table of contents, and related articles.
 ---
 
-A complete article page with featured image, author information, table of contents, and related articles. Perfect for blog posts and documentation pages.
+A complete article page with featured image, author information, table of contents, and related articles.
 
 ## Usage
 
@@ -515,3 +515,5 @@ const addComment = () => {
   newComment.value = ''
 }
 </script>
+```
+::

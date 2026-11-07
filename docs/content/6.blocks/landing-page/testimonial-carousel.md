@@ -3,7 +3,7 @@ title: Testimonial Carousel
 description: An elegant testimonial carousel with animated transitions and customer ratings.
 ---
 
-An elegant testimonial carousel with animated transitions and customer ratings. Perfect for showcasing customer feedback on landing pages.
+An elegant testimonial carousel with animated transitions and customer ratings.
 
 ## Usage
 
@@ -141,3 +141,5 @@ const stats = ref([
   { value: 24, label: "Hours Saved Weekly" }
 ])
 </script>
+```
+::

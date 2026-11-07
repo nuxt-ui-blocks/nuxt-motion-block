@@ -46,7 +46,7 @@ label: Preview
 ## Props
 
 ::component-props
-  ::component-prop{name="src" type="string"}
+  ::component-prop{name="src" type="string" required}
   Video to show through the letters. It is always muted, which is what lets it autoplay.
   ::
 

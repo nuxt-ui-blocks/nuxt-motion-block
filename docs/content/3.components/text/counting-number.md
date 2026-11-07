@@ -1,9 +1,9 @@
 ---
 title: Counting Number
-description: Number counter with various animation effects.
+description: A number counter with various animation effects — counting up and down, with per-digit timing control.
 ---
 
-The CountingNumber component creates animated number counters with various animation effects. It's perfect for displaying statistics, metrics, and any numerical data that benefits from a counting animation.
+CountingNumber creates animated number counters with various animation effects.
 
 ## Usage
 

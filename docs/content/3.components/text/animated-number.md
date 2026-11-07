@@ -1,6 +1,6 @@
 ---
 title: Animated Number
-description: Animated numeric value with smooth transitions.
+description: An animated numeric value with smooth transitions — spring-damped updates for live counters and metrics.
 ---
 
 The AnimatedNumber component animates numeric values with smooth transitions. A single `useSpring` eases the displayed figure from its previous value to the new one, so counters, statistics, and dashboards settle rather than jump.

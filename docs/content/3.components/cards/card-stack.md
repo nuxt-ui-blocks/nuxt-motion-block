@@ -3,7 +3,7 @@ title: Stacked Cards
 description: Animated stack of cards that automatically rotate with smooth transitions.
 ---
 
-The CardStack component creates an animated stack of cards that automatically rotate with smooth transitions. It's perfect for showcasing a series of items with a visually appealing card stack effect.
+CardStack creates an animated stack of cards that automatically rotate with smooth transitions.
 
 ## Usage
 

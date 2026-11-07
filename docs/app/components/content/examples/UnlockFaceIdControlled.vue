@@ -30,7 +30,7 @@
     </div>
 
     <p class="text-xs text-muted">
-      status = <span class="font-medium">{{ status }}</span> Â· controlled, so
+      status = <span class="font-medium">{{ status }}</span> · controlled, so
       the component never resolves its own scan
     </p>
   </div>

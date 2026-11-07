@@ -3,7 +3,7 @@ title: Pixelated Canvas
 description: Interactive pixelated image rendering with distortion effects and customizable cell sizes.
 ---
 
-The PixelatedCanvas component creates an interactive pixelated rendering of images with distortion effects that respond to mouse movement. It features customizable cell sizes, shapes, colors, and interactive behaviors.
+PixelatedCanvas creates an interactive pixelated rendering of images with distortion effects that respond to mouse movement. It features customizable cell sizes, shapes, colors, and interactive behaviours.
 
 ## Usage
 

@@ -1,9 +1,9 @@
 ---
 title: Boxes Core
-description: Animated grid of boxes with hover effects and customizable colors.
+description: Animated grid of boxes with hover effects and customizable colours.
 ---
 
-The BoxesCore component creates an animated grid of boxes with hover effects and customizable colors. It's perfect for creating dynamic background patterns and visual effects.
+BoxesCore creates an animated grid of boxes with hover effects and customizable colours.
 
 ## Usage
 

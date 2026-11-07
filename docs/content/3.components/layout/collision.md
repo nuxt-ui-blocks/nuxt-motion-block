@@ -3,7 +3,7 @@ title: Collision
 description: Collision detection system with animated beams and explosion effects.
 ---
 
-The Collision component system creates animated beams that travel across the screen and explode when they collide with a target element. It features realistic physics-based animations, customizable colors, and smooth transitions.
+The Collision component system creates animated beams that travel across the screen and explode when they collide with a target element. It features realistic physics-based animations, customizable colours, and smooth transitions.
 
 ## Usage
 

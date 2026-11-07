@@ -3,7 +3,7 @@ title: Animated Group
 description: Animate multiple elements in sequence with staggered delays.
 ---
 
-The AnimatedGroup component allows you to animate multiple elements in sequence with staggered delays. It's perfect for creating cascading animations, loading sequences, and other staggered effects.
+The AnimatedGroup component allows you to animate multiple elements in sequence with staggered delays.
 
 ## Usage
 

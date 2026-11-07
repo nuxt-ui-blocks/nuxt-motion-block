@@ -3,7 +3,7 @@ title: Blog Listing
 description: A modern blog listing page with animated cards, filtering options, and pagination.
 ---
 
-A modern blog listing page with animated cards, filtering options, and pagination. Perfect for content-heavy websites and publication platforms.
+A modern blog listing page with animated cards, filtering options, and pagination.
 
 ## Usage
 
@@ -333,8 +333,8 @@ const posts = ref([
   },
   {
     id: 7,
-    title: 'The Psychology of Color in Design',
-    excerpt: 'Understanding how color influences user behavior and emotions in digital design.',
+    title: 'The Psychology of Colour in Design',
+    excerpt: 'Understanding how color influences user behaviour and emotions in digital design.',
     category: 'Design',
     date: 'April 12, 2023',
     readTime: 7,
@@ -343,7 +343,7 @@ const posts = ref([
       name: 'Daniel Taylor',
       avatar: 'https://randomuser.me/api/portraits/men/78.jpg'
     },
-    slug: 'the-psychology-of-color-in-design'
+    slug: 'the-psychology-of-colour-in-design'
   },
   {
     id: 8,
@@ -418,3 +418,5 @@ const resetFilters = () => {
   page.value = 1
 }
 </script>
+```
+::

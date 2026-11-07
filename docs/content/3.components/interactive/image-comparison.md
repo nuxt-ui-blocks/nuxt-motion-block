@@ -3,7 +3,7 @@ title: Image compare
 description: Interactive image comparison component with slider controls for before/after visualization.
 ---
 
-The ImageComparison component creates an interactive image comparison slider that allows users to compare two images side by side. It supports multiple comparison modes, keyboard navigation, and touch controls for a seamless user experience.
+ImageComparison creates an interactive image comparison slider that allows users to compare two images side by side. It supports multiple comparison modes, keyboard navigation, and touch controls for a seamless user experience.
 
 ## Usage
 

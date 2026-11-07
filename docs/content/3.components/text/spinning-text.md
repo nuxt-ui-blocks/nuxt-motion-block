@@ -1,9 +1,9 @@
 ---
 title: Spinning Text
-description: Text that spins with 3D effects.
+description: Text that spins around a 3D axis — a springy rotation for headlines, badges and attention-grabbing labels.
 ---
 
-The SpinningText component creates text that spins with 3D effects. It's perfect for creating eye-catching headings and animated text elements.
+SpinningText creates text that spins with 3D effects.
 
 ## Usage
 

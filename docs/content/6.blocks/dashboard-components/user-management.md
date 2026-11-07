@@ -3,7 +3,7 @@ title: User Management Table
 description: An interactive user management table with animated actions, search functionality, and bulk operations.
 ---
 
-An interactive user management table with animated actions, search functionality, and bulk operations. Perfect for admin panels and user management systems.
+An interactive user management table with animated actions, search functionality, and bulk operations.
 
 ## Usage
 
@@ -371,3 +371,5 @@ const getRoleColor = (role: string) => {
   }
 }
 </script>
+```
+::

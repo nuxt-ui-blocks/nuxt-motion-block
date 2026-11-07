@@ -1,9 +1,9 @@
 ---
 title: Shooting Stars
-description: Animated shooting stars effect with customizable colors, speed, and timing.
+description: Animated shooting stars effect with customizable colours, speed, and timing.
 ---
 
-The ShootingStars component creates an animated shooting stars effect with customizable colors, speed, and timing. It's perfect for adding dynamic background animations to your UI.
+ShootingStars creates an animated shooting stars effect with customizable colours, speed, and timing.
 
 ## Usage
 
