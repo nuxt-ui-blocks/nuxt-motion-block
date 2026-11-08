@@ -1,6 +1,25 @@
 # Changelog
 
 
+## v0.2.0
+
+[compare changes](https://github.com/nuxt-ui-blocks/nuxt-motion-block/compare/v0.1.0...v0.2.0)
+
+### 🚀 Enhancements
+
+- **docs:** Redesign the docs site as an interactive motion book ([#18](https://github.com/nuxt-ui-blocks/nuxt-motion-block/pull/18))
+- Vue, Laravel and AdonisJS support via vue-plugin entry ([#20](https://github.com/nuxt-ui-blocks/nuxt-motion-block/pull/20))
+
+### 📖 Documentation
+
+- Repair broken pages, align with source, voice consistency pass ([#19](https://github.com/nuxt-ui-blocks/nuxt-motion-block/pull/19))
+- Bump version mentions for 0.2.0 release ([d6ee0f1](https://github.com/nuxt-ui-blocks/nuxt-motion-block/commit/d6ee0f1))
+
+### ❤️ Contributors
+
+- MuhammadKhizar7 <muhammadkhizar7@gmail.com>
+- Muhammad Khizar ([@MuhammadKhizar7](https://github.com/MuhammadKhizar7))
+
 ## v0.1.0
 
 [compare changes](https://github.com/nuxt-ui-blocks/nuxt-motion-block/compare/v0.0.4...v0.1.0)

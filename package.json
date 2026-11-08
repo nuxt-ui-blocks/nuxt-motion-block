@@ -1,6 +1,6 @@
 {
   "name": "nuxt-motion-block",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A streamlined UI library that extends Nuxt UI with motion capabilities powered by motion-v",
   "repository": "nuxt-ui-blocks/nuxt-motion-block",
   "license": "MIT",
@@ -137,7 +137,10 @@
       "sharp",
       "unrs-resolver",
       "vue-demi"
-    ]
+    ],
+    "overrides": {
+      "caniuse-lite": "1.0.30001823"
+    }
   },
   "peerDependenciesMeta": {
     "nuxt": {
