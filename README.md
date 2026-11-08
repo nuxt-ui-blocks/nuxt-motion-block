@@ -53,15 +53,59 @@ Prerequisites: Nuxt 4, [@nuxt/ui](https://ui.nuxt.com) ^4.11.2 and [motion-v](ht
 ### Vue / Laravel / AdonisJS
 
 ```bash
-pnpm add nuxt-motion-block @nuxt/ui motion-v
+pnpm add nuxt-motion-block @nuxt/ui motion-v tailwindcss
 ```
 
 ```ts
+import ui from '@nuxt/ui/vue-plugin'
 import motionBlock from 'nuxt-motion-block/vue-plugin'
+
+app.use(ui)
 app.use(motionBlock)
 ```
 
 See [/getting-started/vue](https://nuxt-motion-block.pages.dev/getting-started/vue) and [/getting-started/laravel](https://nuxt-motion-block.pages.dev/getting-started/laravel) for the complete wiring (all docs pages cross-reference each other).
+
+### Commands (pnpm / npm / yarn / bun)
+
+| Manager | Nuxt 4 | Vue 3 + Vite / Laravel / AdonisJS |
+| ------- | ------ | ---------------------------------- |
+| pnpm | `npx nuxi module add nuxt-motion-block` | `pnpm add nuxt-motion-block @nuxt/ui motion-v tailwindcss` |
+| npm | `npx nuxi module add nuxt-motion-block` | `npm install nuxt-motion-block @nuxt/ui motion-v tailwindcss` |
+| yarn | `npx nuxi module add nuxt-motion-block` | `yarn add nuxt-motion-block @nuxt/ui motion-v tailwindcss` |
+| bun | `bunx nuxi module add nuxt-motion-block` | `bun add nuxt-motion-block @nuxt/ui motion-v tailwindcss` |
+
+`nuxi module add` also registers `@nuxt/ui` and `motion-v` in `nuxt.config.ts` for you. If you would rather add the module by hand, install the peers yourself (`pnpm add nuxt-motion-block @nuxt/ui motion-v`) and register all three modules yourself. Plain-Vue apps wire it up through `vite.config.ts` plus `app.use(ui).use(motionBlock)` — see the guides linked above or paste the prompt below into your AI agent.
+
+
+## AI Agents
+
+Paste this into Claude Code, Cursor, Amp, opencode or any other AI coding agent and it will install Nuxt Motion Block for you.
+
+**Nuxt 4**
+
+```text
+Add Nuxt Motion Block to this Nuxt 4 project.
+1. Run `npx nuxi module add nuxt-motion-block`.
+2. Register the modules in `nuxt.config.ts`: `modules: ['@nuxt/ui', 'motion-v/nuxt', 'nuxt-motion-block']`.
+3. Pin `@nuxt/ui >= 4.11.2` and `motion-v >= 2.4.4`.
+4. Components are auto-imported with an M prefix (`<MAnimatedBackground>`, `<MTextGlitch>`).
+5. Before using a component, read its page with the `list-pages` / `get-page` tools from the `nuxt-motion-block` MCP server (`npx nuxt-motion-block-mcp`), or at `https://nuxt-motion-block.pages.dev/raw/components/<category>/<name>.md`. Do not guess its props, events or slots.
+```
+
+**Vue 3 / Laravel / AdonisJS**
+
+```text
+Add Nuxt Motion Block to this Vue app (works for Laravel, AdonisJS and plain Vite too).
+1. Run `pnpm add nuxt-motion-block @nuxt/ui motion-v tailwindcss`.
+2. Add `ui()` from `@nuxt/ui/vite` to `vite.config.ts` and register the plugins in your entry: `app.use(ui).use(motionBlock)`.
+3. Pin `@nuxt/ui >= 4.11.2` and `motion-v >= 2.4.4`.
+4. All components are globally registered with an M prefix (`<MAnimatedBackground>`, `<MTextGlitch>`). For `ui.<name>` slot overrides matching Nuxt UI, pass `ui` to the plugin: `app.use(motionBlock, { ui })`.
+5. Before using a component, read its page with the `list-pages` / `get-page` tools from the `nuxt-motion-block` MCP server (`npx nuxt-motion-block-mcp`), or at `https://nuxt-motion-block.pages.dev/raw/components/<category>/<name>.md`. Do not guess its props, events or slots.
+```
+
+Full guide: [Installing with an AI agent](https://nuxt-motion-block.pages.dev/getting-started/ai-agents).
+
 
 ## 📦 Component Families
 
